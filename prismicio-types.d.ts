@@ -186,6 +186,61 @@ export type AllDocumentTypes =
   | PostCategoryDocument
   | PostsDocument;
 
+/**
+ * Primary content in *HeaderBlock → Default → Primary*
+ */
+export interface HeaderBlockSliceDefaultPrimary {
+  /**
+   * Title field in *HeaderBlock → Default → Primary*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: header_block.default.primary.title
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  title: prismic.KeyTextField;
+
+  /**
+   * Subtitle field in *HeaderBlock → Default → Primary*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: header_block.default.primary.subtitle
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  subtitle: prismic.KeyTextField;
+}
+
+/**
+ * Default variation for HeaderBlock Slice
+ *
+ * - **API ID**: `default`
+ * - **Description**: Default
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type HeaderBlockSliceDefault = prismic.SharedSliceVariation<
+  "default",
+  Simplify<HeaderBlockSliceDefaultPrimary>,
+  never
+>;
+
+/**
+ * Slice variation for *HeaderBlock*
+ */
+type HeaderBlockSliceVariation = HeaderBlockSliceDefault;
+
+/**
+ * HeaderBlock Shared Slice
+ *
+ * - **API ID**: `header_block`
+ * - **Description**: HeaderBlock
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type HeaderBlockSlice = prismic.SharedSlice<
+  "header_block",
+  HeaderBlockSliceVariation
+>;
+
 declare module "@prismicio/client" {
   interface CreateClient {
     (
@@ -214,6 +269,10 @@ declare module "@prismicio/client" {
       PostsDocument,
       PostsDocumentData,
       AllDocumentTypes,
+      HeaderBlockSlice,
+      HeaderBlockSliceDefaultPrimary,
+      HeaderBlockSliceVariation,
+      HeaderBlockSliceDefault,
     };
   }
 }

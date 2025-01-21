@@ -1,4 +1,3 @@
-import Link from "next/link";
 import {GradientBackground} from '@/components/gradient';
 import {Container} from '@/components/container';
 import {Heading, Lead, Subheading} from '@/components/text';

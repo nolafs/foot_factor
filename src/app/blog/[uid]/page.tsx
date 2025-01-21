@@ -8,32 +8,35 @@ import { createClient } from '@/prismicio'
 import { ChevronLeftIcon } from '@heroicons/react/16/solid'
 import { PrismicNextImage } from '@prismicio/next'
 import dayjs from 'dayjs'
-import type { Metadata } from 'next'
+import type {Metadata} from 'next'
 import { notFound } from 'next/navigation'
 import {PrismicRichText} from '@prismicio/react';
 
-export async function generateMetadata({
-  params,
-}: {
-  params: { uid: string }
-}): Promise<Metadata> {
 
 
+type Props = {
+  params: Promise<{ uid: string }>
+  searchParams: Promise<Record<string, string | string[] | undefined>>;
+}
+
+export async function generateMetadata(
+    {params}: Props,
+): Promise<Metadata> {
+
+  const id = (await params).uid
   const client = createClient();
-  let post = await client.getByUID('posts', params.uid, {
+  const post = await client.getByUID('posts', id, {
     fetchLinks: ['post_category.name', 'post_category.uid'],
   }).catch(() => notFound());
 
   return post ? { title: post.data.title } : {}
 }
 
-export default async function BlogPost({
-  params,
-}: {
-  params: { uid: string }
-}) {
+
+export default async function Page({params}: Props) {
   const client = createClient();
-  let post = await client.getByUID('posts', params.uid, {
+  const id = (await params).uid;
+  const post = await client.getByUID('posts', id, {
     fetchLinks: ['post_category.name', 'author.name'],
   }).then(response => response.data).catch(() => notFound());
 
@@ -89,4 +92,14 @@ export default async function BlogPost({
       </Container>
     </main>
   )
+}
+
+export async function generateStaticParams() {
+  const client = createClient();
+
+  const pages = await client.getAllByType('posts');
+
+  return pages.map(page => {
+    return {uid: page.uid};
+  });
 }

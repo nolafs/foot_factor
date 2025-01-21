@@ -2,9 +2,12 @@ import { Button } from '@/components/button'
 import { Container } from '@/components/container'
 import { GradientBackground } from '@/components/gradient'
 import { Link } from '@/components/link'
-import * as prismic from '@prismicio/client';
 import { Heading, Lead, Subheading } from '@/components/text'
 
+type Props = {
+  params: Promise<{ uid: string }>
+  searchParams: Promise<Record<string, string | string[] | undefined>>;
+}
 
 import { Menu, MenuButton, MenuItem, MenuItems } from '@headlessui/react'
 import {
@@ -101,7 +104,7 @@ async function FeaturedPosts() {
 
 async function Categories({ selected }: { selected?: string }) {
   const client = createClient();
-  let categories = await client.getByType('post_category').then((response) => response.results).catch(() => []);
+  const categories = await client.getByType('post_category').then((response) => response.results).catch(() => []);
 
   if (categories.length === 0) {
     return
@@ -111,7 +114,7 @@ async function Categories({ selected }: { selected?: string }) {
     <div className="flex flex-wrap items-center justify-between gap-2">
       <Menu>
         <MenuButton className="flex items-center justify-between gap-2 font-medium">
-          {categories.find((item) => item?.uid === selected)?.data.name ||
+          {categories.find((item) => item?.uid === selected)?.data.name ??
             'All categories'}
           <ChevronUpDownIcon className="size-4 fill-slate-900" />
         </MenuButton>
@@ -153,7 +156,7 @@ async function Categories({ selected }: { selected?: string }) {
 
 async function Posts({ page, category }: { page: number; category?: string }) {
   const client = createClient();
-  let posts = await client.getByType('posts', {
+  const posts = await client.getByType('posts', {
     pageSize: 10,
     page: 0,
     orderings: [
@@ -221,7 +224,7 @@ async function Pagination({
   category?: string
 }) {
   function url(page: number) {
-    let params = new URLSearchParams()
+    const params = new URLSearchParams()
 
     if (category) params.set('category', category)
     if (page > 1) params.set('page', page.toString())
@@ -231,7 +234,7 @@ async function Pagination({
 
   const client = createClient();
 
-  let totalPosts = await client.getByType('posts', {
+  const totalPosts = await client.getByType('posts', {
     pageSize: 10,
     page: 0,
     orderings: [
@@ -244,11 +247,11 @@ async function Pagination({
     return response.total_pages
   }).catch(() => 0);
 
-  let hasPreviousPage = page - 1
-  let previousPageUrl = hasPreviousPage ? url(page - 1) : undefined
-  let hasNextPage = page * postsPerPage < totalPosts
-  let nextPageUrl = hasNextPage ? url(page + 1) : undefined
-  let pageCount = Math.ceil(totalPosts / postsPerPage)
+  const hasPreviousPage = page - 1
+  const previousPageUrl = hasPreviousPage ? url(page - 1) : undefined
+  const hasNextPage = page * postsPerPage < totalPosts
+  const nextPageUrl = hasNextPage ? url(page + 1) : undefined
+  const pageCount = Math.ceil(totalPosts / postsPerPage)
 
   if (pageCount < 2) {
     return
@@ -289,20 +292,16 @@ async function Pagination({
   )
 }
 
-export default async function Blog({
-  searchParams,
-}: {
-  searchParams: { [key: string]: string | string[] | undefined }
-}) {
+export default async function Blog({ searchParams }: Props) {
 
-  const params = await searchParams;
+  const params = (await searchParams);
 
-  let page =
+  const page =
       params.page && typeof params.page === 'string' && parseInt(params.page) > 1
           ? parseInt(params.page)
           : 1;
 
-  let category =
+  const category =
     typeof params.category === 'string'
       ? params.category
       : undefined
