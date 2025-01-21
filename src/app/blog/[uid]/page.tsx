@@ -78,8 +78,7 @@ export default async function Page({params}: Props) {
                   className="mb-10 aspect-[3/2] w-full rounded-2xl object-cover shadow-xl"
                   imgixParams={{fm: 'webp', fit: 'crop', crop: ['focalpoint'], width: 2016, height: 1344, q: 70}} />
 
-              {post.content && <PrismicRichText field={post.content}/>
-              }
+              <div className={'prose md:prose-lg lg:prose-xl'}>{post.content && <PrismicRichText field={post.content}/>}</div>
               <div className="mt-10">
                 <Button variant="outline" href="/blog">
                   <ChevronLeftIcon className="size-4" />

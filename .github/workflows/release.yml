@@ -42,10 +42,10 @@ jobs:
           
 
       - name: Install dependencies
-        run: npm install
+        run: yarn install
 
       - name: Run Lint
-        run: npm run lint
+        run: yarn run lint
 
   version:
     needs: test
