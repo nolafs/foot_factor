@@ -12,7 +12,7 @@ import {repositoryName} from "./../slicemachine.config.json";
 const writeClient = prismic.createWriteClient(
     repositoryName,
     {
-      writeToken: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0eXBlIjoibWFjaGluZTJtYWNoaW5lIiwiZGJpZCI6ImZvb3RmYWN0b3ItMDAxMjUzOTQtNTU1Ni00YmE1LTk4Y2MtYWRkMjkzMWJhMDUyXzUiLCJkYXRlIjoxNzM3Mzg3NjI5LCJkb21haW4iOiJmb290ZmFjdG9yIiwiYXBwTmFtZSI6Ik1pZ3JhdGlvbiIsImlhdCI6MTczNzM4NzYyOX0.v0KVUT_1UQGw3WUYTXGX33miRzcWf1eBpHGv_2hSLR8',
+      writeToken: process.env.PRISMIC_WRITE_TOKEN!
     },
 );
 
