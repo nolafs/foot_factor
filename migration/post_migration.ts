@@ -5,7 +5,6 @@ import axios from "axios";
 import * as prismic from "@prismicio/client";
 import https from "https";
 import {htmlAsRichText} from "@prismicio/migrate";
-
 import {repositoryName} from "./../slicemachine.config.json";
 
 // Prismic setup
