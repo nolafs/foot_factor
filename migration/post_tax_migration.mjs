@@ -1,4 +1,3 @@
-"use strict";
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
     function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
@@ -35,16 +34,15 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
         if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
 };
-Object.defineProperty(exports, "__esModule", { value: true });
 process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0';
-require("dotenv/config");
-var axios_1 = require("axios");
-var prismic = require("@prismicio/client");
-var https = require("https");
-var slicemachine_config_json_1 = require("./../slicemachine.config.json");
+import "dotenv/config";
+import axios from "axios";
+import * as prismic from "@prismicio/client";
+import * as https from "https";
+import { repositoryName } from "./../slicemachine.config.json";
 var DOMAIN = 'https://footfactor.com/';
 // Prismic setup
-var writeClient = prismic.createWriteClient(slicemachine_config_json_1.repositoryName, {
+var writeClient = prismic.createWriteClient(repositoryName, {
     writeToken: process.env.PRISMIC_WRITE_TOKEN
 });
 var migration = prismic.createMigration();
@@ -55,7 +53,7 @@ var fetchPostsCategories = function () { return __awaiter(void 0, void 0, void 0
         switch (_a.label) {
             case 0:
                 _a.trys.push([0, 2, , 3]);
-                return [4 /*yield*/, axios_1.default.get("".concat(DOMAIN, "/wp-json/wp/v2/categories"), {
+                return [4 /*yield*/, axios.get("".concat(DOMAIN, "/wp-json/wp/v2/categories"), {
                         httpsAgent: new https.Agent({ rejectUnauthorized: false })
                     })];
             case 1:
@@ -84,7 +82,7 @@ var fetchAllTags = function () { return __awaiter(void 0, void 0, void 0, functi
                 _a.label = 2;
             case 2:
                 _a.trys.push([2, 4, , 5]);
-                return [4 /*yield*/, axios_1.default.get("".concat(DOMAIN, "/wp-json/wp/v2/tags?page=").concat(page, "&per_page=").concat(perPage), {
+                return [4 /*yield*/, axios.get("".concat(DOMAIN, "/wp-json/wp/v2/tags?page=").concat(page, "&per_page=").concat(perPage), {
                         httpsAgent: new https.Agent({ rejectUnauthorized: false })
                     })];
             case 3:

@@ -8,6 +8,7 @@ import {htmlAsRichText} from "@prismicio/migrate";
 
 import {repositoryName} from "./../slicemachine.config.json";
 
+const DOMAIN = 'https://footfactor.com/'
 
 // Prismic setup
 const writeClient = prismic.createWriteClient(
@@ -26,7 +27,7 @@ const migration = prismic.createMigration();
 
 const fetchPosts = async () => {
   try {
-    const response = await axios.get("https://myankle.co.uk/wp-json/wp/v2/posts?page=1&per_page=5&_embed", {
+    const response = await axios.get(`${DOMAIN}/wp-json/wp/v2/posts?page=1&per_page=1&_embed`, {
       httpsAgent: new https.Agent({rejectUnauthorized: false})
     });
     return response.data;

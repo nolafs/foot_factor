@@ -61,7 +61,7 @@ interface AuthorDocumentData {
    * - **Tab**: Main
    * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
    */
-  link: prismic.LinkField;
+  link: prismic.LinkField<string, string, unknown, prismic.FieldState, never>;
 }
 
 /**
@@ -140,6 +140,21 @@ export type PostTagsDocument<Lang extends string = string> = prismic.PrismicDocu
   'post_tags',
   Lang
 >;
+
+/**
+ * Item in *Posts → Tags*
+ */
+export interface PostsDocumentDataTagsItem {
+  /**
+   * Tag field in *Posts → Tags*
+   *
+   * - **Field Type**: Content Relationship
+   * - **Placeholder**: *None*
+   * - **API ID Path**: posts.tags[].tag
+   * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
+   */
+  tag: prismic.ContentRelationshipField<'post_tags'>;
+}
 
 /**
  * Content for Posts documents
@@ -233,6 +248,17 @@ interface PostsDocumentData {
    * - **Documentation**: https://prismic.io/docs/field#rich-text-title
    */
   content: prismic.RichTextField;
+
+  /**
+   * Tags field in *Posts*
+   *
+   * - **Field Type**: Group
+   * - **Placeholder**: *None*
+   * - **API ID Path**: posts.tags[]
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#group
+   */
+  tags: prismic.GroupField<Simplify<PostsDocumentDataTagsItem>>;
 }
 
 /**
@@ -327,6 +353,7 @@ declare module '@prismicio/client' {
       PostTagsDocumentData,
       PostsDocument,
       PostsDocumentData,
+      PostsDocumentDataTagsItem,
       AllDocumentTypes,
       HeaderBlockSlice,
       HeaderBlockSliceDefaultPrimary,

@@ -3,7 +3,7 @@ process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0';
 import "dotenv/config";
 import axios from "axios";
 import * as prismic from "@prismicio/client";
-import https from "https";
+import * as https from "https";
 import {repositoryName} from "./../slicemachine.config.json";
 
 const DOMAIN = 'https://footfactor.com/'
