@@ -82,11 +82,11 @@ export function Footer({ navigation, footerCta, secondaryNavigation, social, cop
                 <div className="flex space-x-6 md:order-2">
                   <ul role="list" className="flex gap-8">
                     {secondaryNavigation?.items?.map(item => (
-                      <li key={item.label}>
+                      <li key={item.link.text}>
                         <PrismicNextLink
                           field={item.link}
                           className="font-medium text-white/50 transition-all hover:text-primary">
-                          {item.label}
+                          {item.link.text}
                         </PrismicNextLink>
                       </li>
                     ))}

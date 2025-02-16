@@ -42,13 +42,6 @@
           "label": "Secondary Navigation",
           "repeat": true,
           "fields": {
-            "label": {
-              "type": "Text",
-              "config": {
-                "label": "Label",
-                "placeholder": ""
-              }
-            },
             "link": {
               "type": "Link",
               "config": {
