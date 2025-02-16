@@ -61,10 +61,10 @@ export async function generateMetadata(
   }
 
   return {
-    title: 'My Ankle - Articles',
+    title: 'Foot Factor - Articles',
     description: asText(page?.data.excerpt)! ?? "Looking for resources on ankle pain? You're in the right place.",
     openGraph: {
-      title: 'My Ankle - Articles',
+      title: 'Foot Factor',
       images: [
         {
           url: image ?? (parentOpenGraph?.images ? (parentOpenGraph.images[0] as OGImage).url : ''),

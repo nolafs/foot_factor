@@ -7,8 +7,6 @@ import Link from 'next/link';
 import SocialList from '../features/social-list/social-list';
 import { Container } from '@/components/ui/container';
 import type { NavigationBarDocumentData, NavigationElementDocument } from '../../../prismicio-types';
-import { CallToAction } from '@/components/features/cta/callToAction';
-import { BorderRow } from '@/components/ui/border-row';
 import Image from 'next/image';
 import {StaticImport} from 'next/dist/shared/lib/get-img-props';
 
@@ -25,14 +23,11 @@ export function Footer({ navigation, footerCta, secondaryNavigation, social, cop
   const copyRightDate = new Date().getFullYear();
   return (
     <footer>
-      <div className="relative bg-[#2E5F9A] bg-gradient-to-b from-[#3f7bc6] from-10% via-[#2E5F9A] via-[60%] to-[#2E5F9A]">
-        <div className="absolute inset-2 z-0 rounded-4xl border-transparent bg-white/5 shadow-md ring-1 ring-[#8fde5d]/15 after:absolute after:inset-0 after:rounded-4xl after:shadow-[inset_0_0_2px_1px_#ffffff4d]" />
+      <div className="relative bg-blue-950 pt-16 sm:pt-24 md:pt-24">
 
         <Container className={'relative z-10 block pb-10'}>
-          {footerCta && <CallToAction {...footerCta} dark={true} />}
 
           <div>
-            <BorderRow>
               <div className="mt-10 grid grid-cols-2 gap-y-10 pb-10 lg:grid-cols-6 lg:gap-8">
                 <div className="col-span-2 flex flex-col justify-between">
                   <Link href="/" className={'grow'}>
@@ -83,8 +78,6 @@ export function Footer({ navigation, footerCta, secondaryNavigation, social, cop
                   })}
                 </div>
               </div>
-            </BorderRow>
-            <BorderRow>
               <div className="py-2 text-sm md:flex md:items-center md:justify-between">
                 <div className="flex space-x-6 md:order-2">
                   <ul role="list" className="flex gap-8">
@@ -103,7 +96,6 @@ export function Footer({ navigation, footerCta, secondaryNavigation, social, cop
                   &copy; {copyRightDate} {copyright}
                 </p>
               </div>
-            </BorderRow>
           </div>
         </Container>
       </div>
