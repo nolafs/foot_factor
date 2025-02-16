@@ -43,6 +43,7 @@ var prismic = require("@prismicio/client");
 var https_1 = require("https");
 var migrate_1 = require("@prismicio/migrate");
 var slicemachine_config_json_1 = require("./../slicemachine.config.json");
+var DOMAIN = 'https://footfactor.com/';
 // Prismic setup
 var writeClient = prismic.createWriteClient(slicemachine_config_json_1.repositoryName, {
     writeToken: process.env.PRISMIC_WRITE_TOKEN
@@ -56,7 +57,7 @@ var fetchPosts = function () { return __awaiter(void 0, void 0, void 0, function
         switch (_a.label) {
             case 0:
                 _a.trys.push([0, 2, , 3]);
-                return [4 /*yield*/, axios_1.default.get("https://myankle.co.uk/wp-json/wp/v2/posts?page=1&per_page=5&_embed", {
+                return [4 /*yield*/, axios_1.default.get("".concat(DOMAIN, "/wp-json/wp/v2/posts?page=1&per_page=1&_embed"), {
                         httpsAgent: new https_1.default.Agent({ rejectUnauthorized: false })
                     })];
             case 1:
@@ -221,6 +222,7 @@ posts.forEach(function (post) { return __awaiter(void 0, void 0, void 0, functio
             lang: "en-gb",
             uid: slug,
             tags: tagsSlug,
+            alternate_language_id: "en-gb",
             // eslint-disable-next-line @typescript-eslint/ban-ts-comment
             // @ts-expect-error
             data: data,
@@ -229,8 +231,7 @@ posts.forEach(function (post) { return __awaiter(void 0, void 0, void 0, functio
     });
 }); });
 console.log("Migrating write documents...");
-/*
+console.log("Migration", migration);
 await writeClient.migrate(migration, {
-  reporter: (event) => console.log(event),
+    reporter: function (event) { return console.log(event); },
 });
-*/

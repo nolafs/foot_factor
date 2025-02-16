@@ -27,7 +27,7 @@ const migration = prismic.createMigration();
 
 const fetchPosts = async () => {
   try {
-    const response = await axios.get(`${DOMAIN}/wp-json/wp/v2/posts?page=1&per_page=1&_embed`, {
+    const response = await axios.get(`${DOMAIN}/wp-json/wp/v2/posts?page=1&per_page=100&_embed`, {
       httpsAgent: new https.Agent({rejectUnauthorized: false})
     });
     return response.data;
@@ -146,9 +146,7 @@ posts.forEach(async (post: any) => {
   const excerptRichText = htmlAsRichText(excerpt.rendered).result;
 
 
-
-
-  const featuredMedia: any = _embedded['wp:featuredmedia'][0];
+  const featuredMedia = _embedded?.['wp:featuredmedia']?.[0] ?? null;
   const categorySlug = _embedded?.['wp:term']?.[0]?.[0]?.slug || "uncategorized";
   const tagsSlug = _embedded?.['wp:term']?.[1]?.map((tag: any) => tag.slug) || [];
 
@@ -182,17 +180,17 @@ posts.forEach(async (post: any) => {
     },
     tags: tagList,
     author: async () => {
-      const existingBarDocument = await client.getByUID("author", "foot-factory");
+      const existingBarDocument = await client.getByUID("author", "foot-factor");
       return existingBarDocument;
     },
     excerpt: excerptRichText,
-    feature_image: migration.createAsset(
+    feature_image: featuredMedia ? migration.createAsset(
         featuredMedia.source_url,
         featuredMedia.source_url.split("/").pop(),
         {
           alt: featuredMedia.title.rendered,
         }
-    ),
+    ) : undefined,
   }
 
 
@@ -201,6 +199,7 @@ posts.forEach(async (post: any) => {
     lang: "en-gb",
     uid: slug,
     tags: tagsSlug,
+    alternate_language_id: "en-gb",
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-expect-error
     data: data,
@@ -210,6 +209,8 @@ posts.forEach(async (post: any) => {
 });
 
 console.log("Migrating write documents...");
+
+console.log("Migration", migration);
 
 
 await writeClient.migrate(migration, {

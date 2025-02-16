@@ -1,5 +1,5 @@
 {
-  "format": "custom",
+  "format": "page",
   "id": "posts",
   "label": "Posts",
   "repeatable": true,
@@ -24,8 +24,8 @@
         "type": "Boolean",
         "config": {
           "label": "Featured",
-          "placeholder_false": "false",
-          "placeholder_true": "true",
+          "placeholder_false": "Off",
+          "placeholder_true": "On",
           "default_value": true
         }
       },
@@ -92,6 +92,53 @@
                 "select": "document",
                 "repeat": false,
                 "customtypes": ["post_tags"]
+              }
+            }
+          }
+        }
+      },
+      "slices": {
+        "type": "Slices",
+        "fieldset": "Slice Zone",
+        "config": {
+          "choices": {}
+        }
+      }
+    },
+    "SEO & Meta Data": {
+      "meta_title": {
+        "type": "Text",
+        "config": {
+          "label": "Meta Title",
+          "placeholder": ""
+        }
+      },
+      "meta_description": {
+        "type": "Text",
+        "config": {
+          "label": "Meta Description",
+          "placeholder": ""
+        }
+      },
+      "meta_image": {
+        "type": "Image",
+        "config": {
+          "label": "Meta Image",
+          "constraint": {},
+          "thumbnails": []
+        }
+      },
+      "keywords": {
+        "type": "Group",
+        "config": {
+          "label": "Keywords",
+          "repeat": true,
+          "fields": {
+            "word": {
+              "type": "Text",
+              "config": {
+                "label": "Word",
+                "placeholder": ""
               }
             }
           }

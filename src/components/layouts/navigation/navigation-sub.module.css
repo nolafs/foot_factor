@@ -1,0 +1,13 @@
+.sticky {
+  @apply bg-white pt-0 sm:pt-0;
+  background-color: white !important;
+
+}
+
+.sticky > div {
+    @apply py-5 !important;
+}
+
+.sticky  #nav_content {
+    padding-top: 0 !important;
+}
