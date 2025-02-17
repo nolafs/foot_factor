@@ -1,5 +1,5 @@
 'use client';
-import { type PostsDocumentData, type VideoDocumentData } from '../../../../prismicio-types';
+import { type PostsDocumentData} from '../../../../prismicio-types';
 import { type Author } from '@/types';
 import cn from 'clsx';
 import { Link } from '@/components/ui/link';
@@ -10,7 +10,7 @@ import React from 'react';
 type PostAsideProps = {
   as?: keyof JSX.IntrinsicElements;
   uid?: string;
-  post: Partial<PostsDocumentData> | Partial<VideoDocumentData>;
+  post: Partial<PostsDocumentData>;
   author?: Author;
   url?: string;
   classNames?: string;
@@ -77,7 +77,6 @@ export const PostAside = ({
         <div>
           <div className="mb-2 text-sm font-medium text-gray-500">Share:</div>
           {'title' in post && post.title && <SharePage slug={uid} title={post?.title} />}
-          {'name' in post && post.name && <SharePage slug={uid} title={post?.name} />}
         </div>
       )}
     </Component>

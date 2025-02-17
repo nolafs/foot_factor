@@ -2,6 +2,8 @@
   "id": "page",
   "label": "Page",
   "repeatable": true,
+  "status": true,
+  "format": "page",
   "json": {
     "Page": {
       "uid": {
@@ -13,7 +15,7 @@
       },
       "slices": {
         "type": "Slices",
-        "fieldset": "Slice zone",
+        "fieldset": "Slice Zone",
         "config": {
           "choices": {
             "alternate_grid": {
@@ -26,7 +28,7 @@
                 "eyebrow_headline": {
                   "type": "StructuredText",
                   "config": {
-                    "multi": "paragraph, preformatted, strong, em, hyperlink, image, embed, list-item, o-list-item, o-list-item",
+                    "multi": "paragraph,preformatted,strong,em,hyperlink,image,embed,list-item,o-list-item,o-list-item",
                     "allowTargetBlank": true,
                     "label": "Eyebrow headline"
                   }
@@ -34,14 +36,14 @@
                 "title": {
                   "type": "StructuredText",
                   "config": {
-                    "single": "heading1, heading2, heading3, heading4, heading5, heading6",
+                    "single": "heading1,heading2,heading3,heading4,heading5,heading6",
                     "label": "title"
                   }
                 },
                 "description": {
                   "type": "StructuredText",
                   "config": {
-                    "multi": "paragraph, preformatted, strong, em, hyperlink, image, embed, list-item, o-list-item, o-list-item",
+                    "multi": "paragraph,preformatted,strong,em,hyperlink,image,embed,list-item,o-list-item,o-list-item",
                     "allowTargetBlank": true,
                     "label": "description"
                   }
@@ -82,7 +84,7 @@
                 "description": {
                   "type": "StructuredText",
                   "config": {
-                    "multi": "paragraph, preformatted, strong, em, hyperlink, image, embed, list-item, o-list-item, o-list-item",
+                    "multi": "paragraph,preformatted,strong,em,hyperlink,image,embed,list-item,o-list-item,o-list-item",
                     "allowTargetBlank": true,
                     "label": "description"
                   }
@@ -107,21 +109,22 @@
                 "title": {
                   "type": "StructuredText",
                   "config": {
-                    "single": "heading1, heading2, heading3, heading4, heading5, heading6",
+                    "single": "heading1,heading2,heading3,heading4,heading5,heading6",
                     "label": "Title"
                   }
                 },
                 "paragraph": {
                   "type": "StructuredText",
                   "config": {
-                    "multi": "paragraph, preformatted, heading1, heading2, heading3, heading4, heading5, heading6, strong, em, hyperlink, image, embed, list-item, o-list-item, o-list-item",
+                    "multi": "paragraph,preformatted,heading1,heading2,heading3,heading4,heading5,heading6,strong,em,hyperlink,image,embed,list-item,o-list-item,o-list-item",
                     "label": "Paragraph"
                   }
                 },
                 "button_link": {
                   "type": "Link",
                   "config": {
-                    "label": "Button Link"
+                    "label": "Button Link",
+                    "select": null
                   }
                 },
                 "button_label": {
@@ -144,7 +147,7 @@
                 "eyebrow_headline": {
                   "type": "StructuredText",
                   "config": {
-                    "multi": "paragraph, preformatted, heading1, heading2, heading3, heading4, heading5, heading6, strong, em, hyperlink, image, embed, list-item, o-list-item, o-list-item",
+                    "multi": "paragraph,preformatted,heading1,heading2,heading3,heading4,heading5,heading6,strong,em,hyperlink,image,embed,list-item,o-list-item,o-list-item",
                     "allowTargetBlank": true,
                     "label": "Eyebrow headline"
                   }
@@ -152,14 +155,14 @@
                 "title": {
                   "type": "StructuredText",
                   "config": {
-                    "single": "heading1, heading2, heading3, heading4, heading5, heading6",
+                    "single": "heading1,heading2,heading3,heading4,heading5,heading6",
                     "label": "Title"
                   }
                 },
                 "description": {
                   "type": "StructuredText",
                   "config": {
-                    "multi": "paragraph, preformatted, heading1, heading2, heading3, heading4, heading5, heading6, strong, em, hyperlink, image, embed, list-item, o-list-item, o-list-item",
+                    "multi": "paragraph,preformatted,heading1,heading2,heading3,heading4,heading5,heading6,strong,em,hyperlink,image,embed,list-item,o-list-item,o-list-item",
                     "allowTargetBlank": true,
                     "label": "Description"
                   }
@@ -187,7 +190,7 @@
                 "content": {
                   "type": "StructuredText",
                   "config": {
-                    "multi": "paragraph, preformatted, heading1, heading2, heading3, heading4, heading5, heading6, strong, em, hyperlink, image, embed, list-item, o-list-item, o-list-item",
+                    "multi": "paragraph,preformatted,heading1,heading2,heading3,heading4,heading5,heading6,strong,em,hyperlink,image,embed,list-item,o-list-item,o-list-item",
                     "allowTargetBlank": true,
                     "label": "Content"
                   }
@@ -195,7 +198,7 @@
                 "additional_info": {
                   "type": "StructuredText",
                   "config": {
-                    "multi": "paragraph, preformatted, heading3, heading6, strong, em, hyperlink, image, embed, list-item, o-list-item, o-list-item",
+                    "multi": "paragraph,preformatted,heading3,heading6,strong,em,hyperlink,image,embed,list-item,o-list-item,o-list-item",
                     "allowTargetBlank": true,
                     "label": "Additional Info",
                     "placeholder": "eg. name of person in testimonial"
@@ -231,7 +234,8 @@
                   "config": {
                     "allowTargetBlank": true,
                     "label": "Call to Action Link",
-                    "placeholder": "Could be a signup link, or a link to customer stories"
+                    "placeholder": "Could be a signup link, or a link to customer stories",
+                    "select": null
                   }
                 }
               },
@@ -249,7 +253,8 @@
                   "config": {
                     "allowTargetBlank": true,
                     "label": "link",
-                    "placeholder": "Could be a link to use case, press article, signup..."
+                    "placeholder": "Could be a link to use case, press article, signup...",
+                    "select": null
                   }
                 }
               }
@@ -280,7 +285,7 @@
                 "description": {
                   "type": "StructuredText",
                   "config": {
-                    "multi": "paragraph, strong, em, hyperlink",
+                    "multi": "paragraph,strong,em,hyperlink",
                     "allowTargetBlank": true,
                     "label": "Description"
                   }
@@ -306,7 +311,7 @@
                 "text": {
                   "type": "StructuredText",
                   "config": {
-                    "multi": "paragraph, preformatted, strong, em, hyperlink, list-item, o-list-item",
+                    "multi": "paragraph,preformatted,strong,em,hyperlink,list-item,o-list-item",
                     "allowTargetBlank": true,
                     "label": "Text",
                     "placeholder": "The answer to the question"
@@ -342,7 +347,7 @@
                   "config": {
                     "label": "Description",
                     "placeholder": "These are some awesome tutorials from our awesome clients ...",
-                    "multi": "paragraph, strong, em, hyperlink",
+                    "multi": "paragraph,strong,em,hyperlink",
                     "allowTargetBlank": true
                   }
                 },
@@ -414,7 +419,7 @@
                 "eyebrow_headline": {
                   "type": "StructuredText",
                   "config": {
-                    "multi": "paragraph, preformatted, heading1, heading2, heading3, heading4, heading5, heading6, strong, em, hyperlink, image, embed, list-item, o-list-item, o-list-item",
+                    "multi": "paragraph,preformatted,heading1,heading2,heading3,heading4,heading5,heading6,strong,em,hyperlink,image,embed,list-item,o-list-item,o-list-item",
                     "allowTargetBlank": true,
                     "label": "Eyebrow headline"
                   }
@@ -422,14 +427,14 @@
                 "title": {
                   "type": "StructuredText",
                   "config": {
-                    "single": "heading1, heading2, heading3, heading4, heading5, heading6",
+                    "single": "heading1,heading2,heading3,heading4,heading5,heading6",
                     "label": "Title"
                   }
                 },
                 "description": {
                   "type": "StructuredText",
                   "config": {
-                    "multi": "paragraph, preformatted, heading1, heading2, heading3, heading4, heading5, heading6, strong, em, hyperlink, image, embed, list-item, o-list-item, o-list-item",
+                    "multi": "paragraph,preformatted,heading1,heading2,heading3,heading4,heading5,heading6,strong,em,hyperlink,image,embed,list-item,o-list-item,o-list-item",
                     "allowTargetBlank": true,
                     "label": "Description"
                   }
@@ -450,7 +455,7 @@
                 "description": {
                   "type": "StructuredText",
                   "config": {
-                    "multi": "paragraph, preformatted, heading1, heading2, heading3, heading4, heading5, heading6, strong, em, hyperlink, image, embed, list-item, o-list-item, o-list-item",
+                    "multi": "paragraph,preformatted,heading1,heading2,heading3,heading4,heading5,heading6,strong,em,hyperlink,image,embed,list-item,o-list-item,o-list-item",
                     "allowTargetBlank": true,
                     "label": "Description"
                   }
@@ -483,7 +488,7 @@
                 "description": {
                   "type": "StructuredText",
                   "config": {
-                    "multi": "paragraph, strong, em, hyperlink",
+                    "multi": "paragraph,strong,em,hyperlink",
                     "allowTargetBlank": true,
                     "label": "Description",
                     "placeholder": "Choose the version that works for you ..."
@@ -520,7 +525,8 @@
                   "config": {
                     "allowTargetBlank": true,
                     "label": "Call To Action",
-                    "placeholder": "Link to Signup / More info..."
+                    "placeholder": "Link to Signup / More info...",
+                    "select": null
                   }
                 },
                 "call_to_action_text": {
@@ -543,7 +549,7 @@
                 "eyebrow_headline": {
                   "type": "StructuredText",
                   "config": {
-                    "multi": "paragraph, preformatted, heading1, heading2, heading3, heading4, heading5, heading6, strong, em, hyperlink, image, embed, list-item, o-list-item, o-list-item",
+                    "multi": "paragraph,preformatted,heading1,heading2,heading3,heading4,heading5,heading6,strong,em,hyperlink,image,embed,list-item,o-list-item,o-list-item",
                     "allowTargetBlank": true,
                     "label": "Eyebrow headline"
                   }
@@ -551,21 +557,22 @@
                 "title": {
                   "type": "StructuredText",
                   "config": {
-                    "single": "heading1, heading2, heading3, heading4, heading5, heading6",
+                    "single": "heading1,heading2,heading3,heading4,heading5,heading6",
                     "label": "Title"
                   }
                 },
                 "paragraph": {
                   "type": "StructuredText",
                   "config": {
-                    "multi": "paragraph, preformatted, heading1, heading2, heading3, heading4, heading5, heading6, strong, em, hyperlink, image, embed, list-item, o-list-item, o-list-item",
+                    "multi": "paragraph,preformatted,heading1,heading2,heading3,heading4,heading5,heading6,strong,em,hyperlink,image,embed,list-item,o-list-item,o-list-item",
                     "label": "Paragraph"
                   }
                 },
                 "button_link": {
                   "type": "Link",
                   "config": {
-                    "label": "Button Link"
+                    "label": "Button Link",
+                    "select": null
                   }
                 },
                 "button_label": {
@@ -588,7 +595,7 @@
                 "testimonial": {
                   "type": "StructuredText",
                   "config": {
-                    "multi": "paragraph, preformatted, strong, em, hyperlink, image, embed, list-item, o-list-item, o-list-item",
+                    "multi": "paragraph,preformatted,strong,em,hyperlink,image,embed,list-item,o-list-item,o-list-item",
                     "label": "testimonial"
                   }
                 },
@@ -634,7 +641,7 @@
                 "description": {
                   "type": "StructuredText",
                   "config": {
-                    "multi": "paragraph, strong, em, hyperlink",
+                    "multi": "paragraph,strong,em,hyperlink",
                     "allowTargetBlank": true,
                     "label": "Description",
                     "placeholder": "These are some awesome videos ..."
@@ -645,7 +652,7 @@
                 "video_title": {
                   "type": "StructuredText",
                   "config": {
-                    "multi": "paragraph, strong",
+                    "multi": "paragraph,strong",
                     "label": "Video title",
                     "placeholder": "My awesome video"
                   }
@@ -708,4 +715,3 @@
     }
   }
 }
-

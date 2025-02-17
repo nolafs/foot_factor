@@ -140,7 +140,7 @@ export default async function RootLayout({ children }: Readonly<{ children: Reac
           {/* Footer consent */}
           <Footer
             navigation={navigation.data}
-            secondaryNavigation={{ items: settings.data.secondary_navigation }}
+            secondaryNavigation={settings.data.secondary_navigation }
             social={social}
             logo={logo}
             copyright={settings.data.copyright_line}

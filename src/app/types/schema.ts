@@ -1,3 +1,4 @@
+import { PostsDocument } from 'prismicio-types';
 import {
   WithContext,
   MedicalWebPage,
@@ -8,7 +9,8 @@ import {
   CollectionPage,
   MedicalScholarlyArticle,
 } from 'schema-dts';
-import { DownloadDocument, PostsDocument, VideoDocument } from '../../prismicio-types';
+
+//Todo: Edit schema for Foot Factory
 
 const JSONLD: WithContext<MedicalWebPage> = {
   '@context': 'https://schema.org',
@@ -127,6 +129,7 @@ export const BLOGJSONLD = (featurePosts: PostsDocument[]): WithContext<Blog> => 
   };
 };
 
+/*
 export const VIDEO_BLOG_JSONLD = (videoPosts: VideoDocument[]): WithContext<Blog> => {
   return {
     '@context': 'https://schema.org',
@@ -212,5 +215,7 @@ export const DOWNLOADS_JSONLD = (downloads: DownloadDocument[]): WithContext<Col
     })) as unknown as MedicalScholarlyArticle[],
   };
 };
+
+ */
 
 export default JSONLD;

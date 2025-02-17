@@ -6,13 +6,17 @@ import Link from 'next/link';
 
 import SocialList from '../features/social-list/social-list';
 import { Container } from '@/components/ui/container';
-import type { NavigationBarDocumentData, NavigationElementDocument } from '../../../prismicio-types';
+import type {
+  NavigationBarDocumentData,
+  NavigationElementDocument,
+  SettingsDocumentDataSecondaryNavigationItem
+} from '../../../prismicio-types';
 import Image from 'next/image';
 import {StaticImport} from 'next/dist/shared/lib/get-img-props';
 
 export interface FooterProps {
   navigation: NavigationBarDocumentData;
-  secondaryNavigation?: NavigationProps;
+  secondaryNavigation?: SettingsDocumentDataSecondaryNavigationItem [];
   social?: SocialLinkItemType[] | undefined;
   copyright: string | undefined | null;
   footerCta?: Cta | undefined;
@@ -81,7 +85,7 @@ export function Footer({ navigation, footerCta, secondaryNavigation, social, cop
               <div className="py-2 text-sm md:flex md:items-center md:justify-between">
                 <div className="flex space-x-6 md:order-2">
                   <ul role="list" className="flex gap-8">
-                    {secondaryNavigation?.items?.map(item => (
+                    {secondaryNavigation?.map(item => (
                       <li key={item.link.text}>
                         <PrismicNextLink
                           field={item.link}

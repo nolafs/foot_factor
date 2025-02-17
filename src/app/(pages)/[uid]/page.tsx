@@ -22,20 +22,18 @@ export async function generateMetadata(
   const parentMeta = await parent;
   const parentOpenGraph: ResolvedOpenGraph | null = parentMeta.openGraph ?? null;
 
-  if (image) {
-    image = `${page.data.meta_image.url}?w=1200&h=630&fit=crop&fm=webp&q=80`;
+  if (page.data.social_cards && page.data.social_cards.length > 0 && page.data.social_cards[0]?.social_card_image) {
+
+    image = `${page.data.social_cards[0]?.social_card_image.url}?w=1200&h=630&fit=crop&fm=webp&q=80`;
   }
 
   if (parentMeta?.title) {
     pageTitle = parentMeta.title.absolute;
   }
 
-  if (page.data?.title) {
-    pageTitle = page.data.title;
-  }
 
   return {
-    title: `My Ankle - ${pageTitle}`,
+    title: `Foot Factor - ${pageTitle}`,
     description: page.data.meta_description ?? parentMeta.description,
     openGraph: {
       title: page.data.meta_title ?? parentMeta.title ?? undefined,
