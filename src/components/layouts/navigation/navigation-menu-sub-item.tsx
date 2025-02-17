@@ -91,7 +91,7 @@ export const NavigationMenuSubItem = ({item}: { item: NavigationElementDocumentD
           </div>
         </div>
         </div>
-        <div className="bg-accent w-full">
+        <div className="bg-gray-900 w-full">
             <div className="grid grid-cols-2 divide-x divide-gray-900/5 border-x border-gray-900/5">
               {item.cta.map((item, idx) => (
                   <PrismicNextLink
