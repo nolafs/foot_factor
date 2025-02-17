@@ -2272,7 +2272,7 @@
     aria-hidden "^1.2.4"
     react-remove-scroll "^2.6.3"
 
-"@radix-ui/react-navigation-menu@^1.2.4":
+"@radix-ui/react-navigation-menu@^1.2.5":
   version "1.2.5"
   resolved "https://registry.yarnpkg.com/@radix-ui/react-navigation-menu/-/react-navigation-menu-1.2.5.tgz#c882e2067f1101a9a5f18e05b73b68b2e158a272"
   integrity sha512-myMHHQUZ3ZLTi8W381/Vu43Ia0NqakkQZ2vzynMmTUtQQ9kNkjzhOwkZC9TAM5R07OZUVIQyHC06f/9JZJpvvA==

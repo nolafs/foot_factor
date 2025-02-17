@@ -780,6 +780,26 @@ export interface NavigationElementDocumentDataSubsItem {
   label: prismic.KeyTextField;
 
   /**
+   * Subtitle field in *Navigation Element → Subs*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: navigation_element.subs[].subtitle
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  subtitle: prismic.KeyTextField;
+
+  /**
+   * Image field in *Navigation Element → Subs*
+   *
+   * - **Field Type**: Image
+   * - **Placeholder**: *None*
+   * - **API ID Path**: navigation_element.subs[].image
+   * - **Documentation**: https://prismic.io/docs/field#image
+   */
+  image: prismic.ImageField<never>;
+
+  /**
    * Description field in *Navigation Element → Subs*
    *
    * - **Field Type**: Rich Text

@@ -12,10 +12,12 @@ import React, { useState } from 'react';
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '@/components/ui/collapsible';
 import { Sheet, SheetContent, SheetTitle, SheetTrigger } from '@/components/ui/sheet';
 import { SearchButton } from '@/components/features/search/search-button';
+import {ImageField} from '@prismicio/client';
+import {PrismicImage} from '@prismicio/react';
 
 interface NavigationSubProps {
   navigation: NavigationBarDocumentData;
-  logo: React.ComponentProps<typeof Image>['src'];
+  logo: ImageField
 }
 
 export const NavigationMobileMenu = ({ logo, navigation }: NavigationSubProps) => {
@@ -40,7 +42,7 @@ export const NavigationMobileMenu = ({ logo, navigation }: NavigationSubProps) =
             <div className="flex items-center justify-between">
               <Link href="/public">
                 <span className="sr-only">My Ankle</span>
-                <Image src={logo} className="inline" alt="logo" width={110} height={32} />
+                <PrismicImage field={logo} className="inline"  width={110} height={32} />
               </Link>
             </div>
           </SheetTitle>

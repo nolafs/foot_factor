@@ -1,57 +1,59 @@
-import type { Cta, NavigationProps, SocialLinkItemType } from '@/types';
-import { PrismicNextLink } from '@prismicio/next';
+import type {Cta, LinkPrismicType, NavigationProps, SocialLinkItemType} from '@/types';
+import {PrismicNextImage, PrismicNextLink} from '@prismicio/next';
 import React from 'react';
-
 import Link from 'next/link';
-
 import SocialList from '../features/social-list/social-list';
 import { Container } from '@/components/ui/container';
 import type {
   NavigationBarDocumentData,
-  NavigationElementDocument,
-  SettingsDocumentDataSecondaryNavigationItem
+  NavigationElementDocument, SettingsDocumentData,
 } from '../../../prismicio-types';
-import Image from 'next/image';
-import {StaticImport} from 'next/dist/shared/lib/get-img-props';
+
+
 
 export interface FooterProps {
   navigation: NavigationBarDocumentData;
-  secondaryNavigation?: SettingsDocumentDataSecondaryNavigationItem [];
-  social?: SocialLinkItemType[] | undefined;
-  copyright: string | undefined | null;
-  footerCta?: Cta | undefined;
-  logo: StaticImport;
+  settings: SettingsDocumentData;
 }
 
-export function Footer({ navigation, footerCta, secondaryNavigation, social, copyright, logo }: FooterProps) {
+export function Footer({ navigation, settings }: FooterProps) {
   const copyRightDate = new Date().getFullYear();
+  const footerCta: Cta = {
+    label: settings?.footer_cta_lable ?? '',
+    heading: settings?.footer_cta_heading ?? '',
+    body: settings?.footer_cta_body ?? '',
+    links: settings?.footer_cta_links ?? [],
+  };
+
+  const social: SocialLinkItemType[] | undefined = settings?.social_media?.map(item => ({
+    type: item.type,
+    name: item.name,
+    url: item.url as LinkPrismicType,
+  }));
+
+
   return (
     <footer>
       <div className="relative bg-blue-950 pt-16 sm:pt-24 md:pt-24">
 
         <Container className={'relative z-10 block pb-10'}>
-
-          <div>
               <div className="mt-10 grid grid-cols-2 gap-y-10 pb-10 lg:grid-cols-6 lg:gap-8">
                 <div className="col-span-2 flex flex-col justify-between">
                   <Link href="/" className={'grow'}>
                     <h2 id="footer-heading" className="sr-only">
                       Foot Factor
                     </h2>
-                    <Image src={logo} className="inline !max-w-[250px]"  alt="logo" />
+                    <PrismicNextImage field={settings.footer_logo} className="inline !max-w-[250px]" />
                   </Link>
-                  <div className={'mt-12 shrink'}>
-                    {social && <SocialList items={social} icons={true} variantList={1} variantButton={3} />}
-                  </div>
                 </div>
-                <div className="col-span-2 grid grid-cols-2 gap-x-8 gap-y-12 lg:col-span-4 lg:grid-cols-subgrid">
+                <div className={"col-span-2 grid grid-cols-2 gap-x-5 gap-y-12 lg:col-span-4  lg:grid-cols-3"}>
                   {navigation?.navigation_items.map(item => {
                     const navigationItem = item.navigation_item as unknown as NavigationElementDocument;
                     return (
                       <div key={navigationItem.data.label}>
                         {navigationItem.data.subs[0]?.label ? (
                           <>
-                            <div className={'mb-10'}>
+                            <div className={'mb-10 mt-3'}>
                               <PrismicNextLink
                                 field={navigationItem.data.link}
                                 className="text-base font-medium text-white transition-all hover:text-white/80">
@@ -71,21 +73,27 @@ export function Footer({ navigation, footerCta, secondaryNavigation, social, cop
                             </ul>
                           </>
                         ) : (
+                            <div className={'mb-10 mt-3'}>
                           <PrismicNextLink
                             field={navigationItem.data.link}
                             className="text-base font-medium text-white transition-all hover:text-white/80">
                             {navigationItem.data.label}
                           </PrismicNextLink>
+                            </div>
                         )}
                       </div>
                     );
                   })}
                 </div>
               </div>
+              <div className={'flex justify-between items-center py-10'}>
+                <div>review</div>
+                <div> {social && <SocialList items={social} icons={true} variantList={1} variantButton={3}/>}</div>
+              </div>
               <div className="py-2 text-sm md:flex md:items-center md:justify-between">
                 <div className="flex space-x-6 md:order-2">
                   <ul role="list" className="flex gap-8">
-                    {secondaryNavigation?.map(item => (
+                    {settings.secondary_navigation?.map(item => (
                       <li key={item.link.text}>
                         <PrismicNextLink
                           field={item.link}
@@ -97,10 +105,10 @@ export function Footer({ navigation, footerCta, secondaryNavigation, social, cop
                   </ul>
                 </div>
                 <p className="mt-8 leading-5 text-white/60 md:order-1 md:mt-0">
-                  &copy; {copyRightDate} {copyright}
+                  &copy; {copyRightDate} {settings.copyright_line}
                 </p>
               </div>
-          </div>
+
         </Container>
       </div>
     </footer>

@@ -1,13 +1,12 @@
 'use client';
-import style from './navigation-sub.module.css';
-import React, { useEffect } from 'react';
 
-import Image from 'next/image';
+import {motion, useMotionValueEvent, useScroll} from "framer-motion";
+import React, {useState} from 'react';
 import Link from 'next/link';
 import {
   type NavigationBarDocumentData,
   type NavigationBarDocumentDataNavigationItemsItem,
-  type NavigationElementDocument,
+  type NavigationElementDocument, SettingsDocumentData,
 } from '../../../../prismicio-types';
 import { PrismicNextLink } from '@prismicio/next';
 import { PrismicImage, PrismicRichText } from '@prismicio/react';
@@ -23,67 +22,72 @@ import {
 import { NavigationMobileMenu } from '@/components/layouts/navigation/navigation-mobile-menu';
 import cn from 'clsx';
 import { SearchButton } from '@/components/features/search/search-button';
-import type { StaticImport } from 'next/dist/shared/lib/get-img-props';
+import {NavigationMenuSubItem} from '@/components/layouts/navigation/navigation-menu-sub-item';
+
+
+const parentVariants = {
+  visible: {opacity: 1, y: 0},
+  hidden: {opacity: 1, y: "-10rem"},
+};
 
 interface NavigationSubProps {
   navigation: NavigationBarDocumentData;
-  logo: string | StaticImport;
+  settings: SettingsDocumentData;
 }
 
-export default function NavigationMenuSub({ navigation, logo }: NavigationSubProps) {
-  const [scroll, setScroll] = React.useState(false);
+export default function NavigationMenuSub({ navigation, settings }: NavigationSubProps) {
 
-  useEffect(() => {
-    if (typeof window === 'undefined') return;
+  const {scrollY} = useScroll();
+  const [hidden, setHidden] = useState(false);
+  const [prevScroll, setPrevScroll] = useState(0);
 
-    const elementId = document.getElementById('navbar');
 
-    document.addEventListener('scroll', () => {
-      if (window.scrollY > 5) {
-        elementId?.classList.add(style.sticky!);
-        setScroll(true);
-      } else {
-        elementId?.classList.remove(style.sticky!);
-        setScroll(false);
-      }
-    });
+  function update(latest: number, prev: number): void {
+    if (latest < prev) {
+      setHidden(false);
+      console.log("visible");
+    } else if (latest > 100 && latest > prev) {
+      setHidden(true);
+      console.log("hidden");
+    }
+  }
 
-    return () => {
-      document.removeEventListener('scroll', () => {
-        if (window.scrollY > 5) {
-          elementId?.classList.add(style.sticky!);
-          setScroll(true);
-        } else {
-          elementId?.classList.remove(style.sticky!);
-          setScroll(false);
-        }
-      });
-    };
-  }, []);
+  useMotionValueEvent(scrollY, "change", (latest: number) => {
+    update(latest, prevScroll);
+    setPrevScroll(latest);
+  });
+
 
   return (
-    <header id={'navbar'} className="fixed top-0 z-40 w-screen bg-transparent transition-all delay-150 duration-300">
-      <div className="mx-auto flex w-full max-w-2xl items-center justify-between px-6 pt-6 transition-all delay-150 duration-300 sm:px-2 md:pt-16 lg:max-w-7xl lg:px-0">
-        <div className="flex lg:flex-1">
+    <motion.header id={'navbar'}
+                   className="fixed top-0 z-40 w-screen mt-10"
+                   animate={hidden ? "hidden" : "visible"}
+                   variants={parentVariants}
+                   transition={{
+                     ease: [0.1, 0.25, 0.3, 1],
+                     duration: 0.6,
+                     staggerChildren: 0.05,
+                   }}
+    >
+      <div className="relative mx-auto flex w-full max-w-2xl bg-white rounded-md items-center justify-between shadow-md px-6 py-4  lg:max-w-7xl">
+        <div className="flex lg:flex-shrink">
           <div className="relative z-40">
             <Link href="/">
-              <span className="sr-only">My Ankle</span>
-              <Image
-                src={logo}
+              <span className="sr-only">{settings.site_name}</span>
+              <PrismicImage
+                field={settings.logo}
                 className={cn(
-                  'inline origin-left scale-100 transition-all delay-150 duration-300',
-                  scroll ? 'md:scale-100' : 'md:scale-[1.50]',
+                  'inline w-full !max-w-[150px] origin-left',
                 )}
-                alt="logo"
-                width={110}
-                height={32}
+
               />
             </Link>
           </div>
         </div>
         <div className="grid grid-cols-2 gap-2 lg:hidden">
-          <NavigationMobileMenu navigation={navigation} logo={logo} />
+          <NavigationMobileMenu navigation={navigation} logo={settings.logo} />
         </div>
+        <div className={'grow flex item-center justify-center'}>
         <NavigationMenu className={'hidden lg:block'}>
           <NavigationMenuList>
             {navigation?.navigation_items.map((item: NavigationBarDocumentDataNavigationItemsItem, idx) => {
@@ -94,50 +98,7 @@ export default function NavigationMenuSub({ navigation, logo }: NavigationSubPro
                   <NavigationMenuTrigger className={'text-lg'}>{navigationItem.data.label}</NavigationMenuTrigger>
 
                   <NavigationMenuContent>
-                    <div id={'nav-content'} className={cn('relative block w-screen', scroll ? 'pt-14' : 'pt-24')}>
-                      <div
-                        className={cn(
-                          'mx-auto grid max-w-7xl gap-x-6 px-6 py-8 lg:px-8 xl:gap-x-10',
-                          `grid-cols-${navigationItem.data.subs.length}`,
-                        )}>
-                        {navigationItem.data.subs.map((item, idx) => (
-                          <div
-                            key={`main-nav-item-${idx}`}
-                            className="group relative rounded-lg p-6 text-sm/6 transition-all duration-500 ease-in-out hover:bg-accent/20">
-                            <div className="mb-2 flex size-11 items-center justify-center rounded-lg bg-accent transition-all duration-300 ease-in-out group-hover:bg-white">
-                              <PrismicImage
-                                field={item.icon}
-                                className="size-6 invert transition-all duration-300 ease-in-out group-hover:invert-0"
-                              />
-                            </div>
-                            <PrismicNextLink
-                              field={item.link}
-                              className="text-base font-medium text-gray-400 transition-all hover:text-primary">
-                              {item.label}
-                              <span className="absolute inset-0" />
-                            </PrismicNextLink>
-                            <div className="mt-1 text-gray-600">
-                              <PrismicRichText field={item.description} />
-                            </div>
-                          </div>
-                        ))}
-                      </div>
-                      <div className="bg-accent">
-                        <div className="mx-auto max-w-7xl px-6 lg:px-8">
-                          <div className="grid grid-cols-2 divide-x divide-gray-900/5 border-x border-gray-900/5">
-                            {navigationItem.data.cta.map((item, idx) => (
-                              <PrismicNextLink
-                                key={`cta-${idx}`}
-                                field={item.url}
-                                className="flex items-center justify-center gap-x-2.5 p-3 text-lg font-semibold text-white transition-all duration-500 hover:bg-gray-900/30">
-                                <PrismicImage field={item.icon} className="size-5 flex-none text-gray-400 invert" />
-                                {item.text}
-                              </PrismicNextLink>
-                            ))}
-                          </div>
-                        </div>
-                      </div>
-                    </div>
+                    <NavigationMenuSubItem item={navigationItem.data} />
                   </NavigationMenuContent>
                 </NavigationMenuItem>
               ) : (
@@ -152,10 +113,11 @@ export default function NavigationMenuSub({ navigation, logo }: NavigationSubPro
             })}
           </NavigationMenuList>
         </NavigationMenu>
-        <div className="relative z-40 hidden lg:flex lg:flex-1 lg:justify-end">
+        </div>
+        <div className="relative z-40 hidden lg:flex lg:flex-shrink lg:justify-end">
           <SearchButton />
         </div>
       </div>
-    </header>
+    </motion.header>
   );
 }

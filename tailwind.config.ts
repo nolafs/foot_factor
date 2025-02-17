@@ -4,6 +4,20 @@ import { fontFamily } from "tailwindcss/defaultTheme";
 export default {
     darkMode: ["class"],
     content: ["./src/**/*.tsx"],
+	safelist: [
+		'bg-white',
+		'max-w-[60px]',
+		'max-w-[100px]',
+		'max-w-auto',
+		{
+			pattern: /grid-cols-\d+/,
+			variants: ['sm', 'md', 'lg', 'xl', '2xl'],
+		},
+		{
+			pattern: /col-span-\d+/,
+			variants: ['sm', 'md', 'lg', 'xl', '2xl'],
+		},
+	],
   theme: {
   	extend: {
   		fontFamily: {

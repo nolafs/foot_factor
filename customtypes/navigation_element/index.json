@@ -51,6 +51,21 @@
                 "placeholder": ""
               }
             },
+            "subtitle": {
+              "type": "Text",
+              "config": {
+                "label": "Subtitle",
+                "placeholder": ""
+              }
+            },
+            "image": {
+              "type": "Image",
+              "config": {
+                "label": "Image",
+                "constraint": {},
+                "thumbnails": []
+              }
+            },
             "description": {
               "type": "StructuredText",
               "config": {

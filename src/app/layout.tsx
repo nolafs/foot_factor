@@ -111,18 +111,7 @@ export default async function RootLayout({ children }: Readonly<{ children: Reac
   });
   const settings = await client.getSingle('settings');
 
-  const social: SocialLinkItemType[] | undefined = settings.data?.social_media?.map(item => ({
-    type: item.type,
-    name: item.name,
-    url: item.url as LinkPrismicType,
-  }));
 
-  const footerCta: Cta = {
-    label: settings.data?.footer_cta_lable ?? '',
-    heading: settings.data?.footer_cta_heading ?? '',
-    body: settings.data?.footer_cta_body ?? '',
-    links: settings.data?.footer_cta_links ?? [],
-  };
 
   return (
     <html lang="en" className={`${GeistSans.variable}`}>
@@ -131,7 +120,7 @@ export default async function RootLayout({ children }: Readonly<{ children: Reac
         <NextTopLoader color={'hsl(var(--accent))'} height={5} showSpinner={false} shadow={false} zIndex={99999} />
 
         <SearchProvider>
-          <NavigationMenuSub navigation={navigation.data} logo={logo} />
+          <NavigationMenuSub navigation={navigation.data} settings={settings.data} />
 
           {/* Content */}
 
@@ -140,11 +129,7 @@ export default async function RootLayout({ children }: Readonly<{ children: Reac
           {/* Footer consent */}
           <Footer
             navigation={navigation.data}
-            secondaryNavigation={settings.data.secondary_navigation }
-            social={social}
-            logo={logo}
-            copyright={settings.data.copyright_line}
-            footerCta={footerCta}
+            settings={settings.data }
           />
 
           {/* Cookie consent */}
