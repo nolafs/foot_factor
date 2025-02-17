@@ -1,13 +1,23 @@
 import cn from 'clsx';
 import {PrismicImage, PrismicRichText} from '@prismicio/react';
 import {PrismicNextLink} from '@prismicio/next';
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {NavigationElementDocumentData} from '../../../../prismicio-types';
 import { motion } from 'framer-motion';
 
 export const NavigationMenuSubItem = ({item}: { item: NavigationElementDocumentData}) => {
 
   const [activeItem, setActiveItem] = useState<number | null>(null);
+
+  // set default item active
+  useEffect( () => {
+    item.subs.forEach((subItem, idx) => {
+      if (subItem.default) {
+        setActiveItem(idx)
+      }
+    })
+  }, [])
+
 
   return (
       <div id={'nav-content'} className={cn('relative block w-full')}>
@@ -89,7 +99,7 @@ export const NavigationMenuSubItem = ({item}: { item: NavigationElementDocumentD
                       field={item.url}
                       className="flex items-center justify-center gap-x-2.5 p-3 text-lg font-medium text-white transition-all duration-500 hover:bg-gray-900/30">
                     <PrismicImage field={item.icon} className="size-5 flex-none text-gray-400 invert"/>
-                    {item.text}
+                    {item.url.text}
                   </PrismicNextLink>
               ))}
             </div>

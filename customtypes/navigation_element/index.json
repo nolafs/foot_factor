@@ -107,19 +107,12 @@
             "url": {
               "type": "Link",
               "config": {
-                "label": "Url",
+                "label": "Link",
                 "placeholder": "",
                 "select": null,
                 "allowTargetBlank": true,
                 "allowText": true,
                 "repeat": false
-              }
-            },
-            "text": {
-              "type": "Text",
-              "config": {
-                "label": "Text",
-                "placeholder": ""
               }
             },
             "icon": {

@@ -836,7 +836,7 @@ export interface NavigationElementDocumentDataSubsItem {
  */
 export interface NavigationElementDocumentDataCtaItem {
   /**
-   * Url field in *Navigation Element → CTA*
+   * Link field in *Navigation Element → CTA*
    *
    * - **Field Type**: Link
    * - **Placeholder**: *None*
@@ -844,16 +844,6 @@ export interface NavigationElementDocumentDataCtaItem {
    * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
    */
   url: prismic.LinkField<string, string, unknown, prismic.FieldState, never>;
-
-  /**
-   * Text field in *Navigation Element → CTA*
-   *
-   * - **Field Type**: Text
-   * - **Placeholder**: *None*
-   * - **API ID Path**: navigation_element.cta[].text
-   * - **Documentation**: https://prismic.io/docs/field#key-text
-   */
-  text: prismic.KeyTextField;
 
   /**
    * Icon field in *Navigation Element → CTA*
