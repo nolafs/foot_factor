@@ -2211,6 +2211,17 @@ export interface SettingsDocumentDataSecondaryNavigationItem {
  */
 interface SettingsDocumentData {
   /**
+   * Logo field in *Settings*
+   *
+   * - **Field Type**: Image
+   * - **Placeholder**: *None*
+   * - **API ID Path**: settings.logo
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#image
+   */
+  logo: prismic.ImageField<never>;
+
+  /**
    * Site Name field in *Settings*
    *
    * - **Field Type**: Text
@@ -2252,18 +2263,7 @@ interface SettingsDocumentData {
    * - **Tab**: Main
    * - **Documentation**: https://prismic.io/docs/field#group
    */
-  social_media: prismic.GroupField<Simplify<SettingsDocumentDataSocialMediaItem>>;
-
-  /**
-   * Logo field in *Settings*
-   *
-   * - **Field Type**: Image
-   * - **Placeholder**: *None*
-   * - **API ID Path**: settings.logo
-   * - **Tab**: Main
-   * - **Documentation**: https://prismic.io/docs/field#image
-   */
-  logo: prismic.ImageField<never> /**
+  social_media: prismic.GroupField<Simplify<SettingsDocumentDataSocialMediaItem>> /**
    * Canonical Url field in *Settings*
    *
    * - **Field Type**: Text
