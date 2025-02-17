@@ -130,7 +130,7 @@ export default function NavigationSub({ navigation, logo }: NavigationSubProps) 
                             field={item.url}
                             className="flex items-center justify-center gap-x-2.5 p-3 text-sm/6 font-semibold text-gray-900 hover:bg-gray-100">
                             <PrismicImage field={item.icon} className="size-5 flex-none text-gray-400" />
-                            {item.text}
+                            {item.url.text}
                           </PrismicNextLink>
                         ))}
                       </div>
