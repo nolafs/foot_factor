@@ -1,0 +1,90 @@
+{
+  "id": "megamenu",
+  "type": "SharedSlice",
+  "name": "Megamenu",
+  "description": "Megamenu",
+  "variations": [
+    {
+      "id": "default",
+      "name": "Default",
+      "docURL": "...",
+      "version": "initial",
+      "description": "Default",
+      "imageUrl": "",
+      "primary": {
+        "subs": {
+          "type": "Group",
+          "config": {
+            "label": "Subs",
+            "repeat": true,
+            "fields": {
+              "default": {
+                "type": "Boolean",
+                "config": {
+                  "label": "Default",
+                  "placeholder_false": "On",
+                  "placeholder_true": "Off",
+                  "default_value": false
+                }
+              },
+              "icon": {
+                "type": "Image",
+                "config": {
+                  "label": "Icon",
+                  "constraint": {
+                    "width": 100,
+                    "height": 100
+                  },
+                  "thumbnails": []
+                }
+              },
+              "label": {
+                "type": "Text",
+                "config": {
+                  "label": "Label",
+                  "placeholder": ""
+                }
+              },
+              "subtitle": {
+                "type": "Text",
+                "config": {
+                  "label": "Subtitle",
+                  "placeholder": ""
+                }
+              },
+              "image": {
+                "type": "Image",
+                "config": {
+                  "label": "Image",
+                  "constraint": {},
+                  "thumbnails": []
+                }
+              },
+              "description": {
+                "type": "StructuredText",
+                "config": {
+                  "label": "Description",
+                  "placeholder": "",
+                  "allowTargetBlank": true,
+                  "multi": "paragraph,preformatted,heading1,heading2,heading3,heading4,heading5,heading6,strong,em,hyperlink,image,embed,list-item,o-list-item,rtl"
+                }
+              },
+              "link": {
+                "type": "Link",
+                "config": {
+                  "label": "Link",
+                  "placeholder": "",
+                  "select": null,
+                  "allowTargetBlank": true,
+                  "allowText": true,
+                  "repeat": false
+                }
+              }
+            }
+          }
+        }
+      },
+      "items": {}
+    }
+  ]
+}

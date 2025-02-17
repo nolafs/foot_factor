@@ -52,8 +52,6 @@ export const NavigationMobileMenu = ({ logo, navigation }: NavigationSubProps) =
                 {navigation?.navigation_items.map((item: NavigationBarDocumentDataNavigationItemsItem, idx) => {
                   const navigationItem = item.navigation_item as unknown as NavigationElementDocument | NavigationMegaMenuItemDocument;
 
-                  console.log('navigation item', navigationItem);
-
                   return navigationItem.data?.subs[0]?.label !== null ? (
                     <Collapsible key={`main-mobile-nav-${idx}`} className="-mx-3">
                       <CollapsibleTrigger asChild>

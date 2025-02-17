@@ -112,8 +112,6 @@ export default function NavigationMenuSub({ navigation, settings }: NavigationSu
                     </NavigationMenuItem>
                 );
               } else if (navigationItem.type === 'navigation_mega_menu_item') {
-                // Handle NavigationMegaMenuItemDocument
-                console.log("This is a NavigationMegaMenuItemDocument");
 
                 if (!navigationItem.data) {
                   return null;
@@ -124,7 +122,7 @@ export default function NavigationMenuSub({ navigation, settings }: NavigationSu
                       <NavigationMenuTrigger className={'text-lg'}>{navigationItem.data.label}</NavigationMenuTrigger>
 
                       <NavigationMenuContent>
-                        <SliceZone slices={navigationItem.data.slices} components={components}/>
+                        <SliceZone slices={navigationItem.data.slices} components={components} context={{subs: navigationItem.data.subs}}/>
                       </NavigationMenuContent>
                     </NavigationMenuItem>
                 ) : (

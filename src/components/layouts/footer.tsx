@@ -48,11 +48,6 @@ export function Footer({ navigation, settings }: FooterProps) {
                 </div>
                 <div className={"col-span-2 grid grid-cols-2 gap-x-5 gap-y-12 lg:col-span-4  lg:grid-cols-3"}>
                   {navigation?.navigation_items.map(item => {
-
-                    console.log('item', item);
-
-
-
                     const navigationItem = item.navigation_item as unknown as NavigationElementDocument | NavigationMegaMenuItemDocument;
 
                     if (navigationItem.type === 'navigation_element') {
@@ -91,9 +86,6 @@ export function Footer({ navigation, settings }: FooterProps) {
                           </div>
                       );
                     } else if (navigationItem.type === 'navigation_mega_menu_item') {
-
-                      console.log('TEST' ,navigationItem.data)
-
                       if (!navigationItem.data) {
                         return null;
                       }
