@@ -4,9 +4,9 @@ import React from 'react';
 import Link from 'next/link';
 import SocialList from '../features/social-list/social-list';
 import { Container } from '@/components/ui/container';
-import type {
+import {
   NavigationBarDocumentData,
-  NavigationElementDocument, SettingsDocumentData,
+  NavigationElementDocument, NavigationMegaMenuItemDocument, SettingsDocumentData,
 } from '../../../prismicio-types';
 
 
@@ -48,66 +48,115 @@ export function Footer({ navigation, settings }: FooterProps) {
                 </div>
                 <div className={"col-span-2 grid grid-cols-2 gap-x-5 gap-y-12 lg:col-span-4  lg:grid-cols-3"}>
                   {navigation?.navigation_items.map(item => {
-                    const navigationItem = item.navigation_item as unknown as NavigationElementDocument;
-                    return (
-                      <div key={navigationItem.data.label}>
-                        {navigationItem.data.subs[0]?.label ? (
-                          <>
-                            <div className={'mb-10 mt-3'}>
-                              <PrismicNextLink
-                                field={navigationItem.data.link}
-                                className="text-base font-medium text-white transition-all hover:text-white/80">
-                                {navigationItem.data.label}
-                              </PrismicNextLink>
-                            </div>
-                            <ul role="list" className="flex flex-col gap-2">
-                              {navigationItem.data.subs.map(subItem => (
-                                <li key={subItem.label}>
+
+                    console.log('item', item);
+
+
+
+                    const navigationItem = item.navigation_item as unknown as NavigationElementDocument | NavigationMegaMenuItemDocument;
+
+                    if (navigationItem.type === 'navigation_element') {
+                      return (
+                          <div key={navigationItem.data.label}>
+                            {navigationItem.data.subs[0]?.label ? (
+                                <>
+                                  <div className={'mb-10 mt-3'}>
+                                    <PrismicNextLink
+                                        field={navigationItem.data.link}
+                                        className="text-base font-medium text-white transition-all hover:text-white/80">
+                                      {navigationItem.data.label}
+                                    </PrismicNextLink>
+                                  </div>
+                                  <ul role="list" className="flex flex-col gap-2">
+                                    {navigationItem.data.subs.map(subItem => (
+                                        <li key={subItem.label}>
+                                          <PrismicNextLink
+                                              field={subItem.link}
+                                              className="text-sm font-medium text-white/60 transition-all hover:text-white">
+                                            {subItem.label}
+                                          </PrismicNextLink>
+                                        </li>
+                                    ))}
+                                  </ul>
+                                </>
+                            ) : (
+                                <div className={'mb-10 mt-3'}>
                                   <PrismicNextLink
-                                    field={subItem.link}
-                                    className="text-sm font-medium text-white/60 transition-all hover:text-white">
-                                    {subItem.label}
+                                      field={navigationItem.data.link}
+                                      className="text-base font-medium text-white transition-all hover:text-white/80">
+                                    {navigationItem.data.label}
                                   </PrismicNextLink>
-                                </li>
-                              ))}
-                            </ul>
-                          </>
-                        ) : (
-                            <div className={'mb-10 mt-3'}>
-                          <PrismicNextLink
-                            field={navigationItem.data.link}
-                            className="text-base font-medium text-white transition-all hover:text-white/80">
-                            {navigationItem.data.label}
-                          </PrismicNextLink>
-                            </div>
-                        )}
-                      </div>
-                    );
+                                </div>
+                            )}
+                          </div>
+                      );
+                    } else if (navigationItem.type === 'navigation_mega_menu_item') {
+
+                      console.log('TEST' ,navigationItem.data)
+
+                      if (!navigationItem.data) {
+                        return null;
+                      }
+
+                      return (
+                          <div key={navigationItem.data.link.text}>
+                            {navigationItem.data.subs[0]?.label ? (
+                                <>
+                                  <div className={'mb-10 mt-3'}>
+                                    <PrismicNextLink
+                                        field={navigationItem.data.link}
+                                        className="text-base font-medium text-white transition-all hover:text-white/80">
+                                    </PrismicNextLink>
+                                  </div>
+                                  <ul role="list" className="flex flex-col gap-2">
+                                    {navigationItem.data.subs.map(subItem => (
+                                        <li key={subItem.label}>
+                                          <PrismicNextLink
+                                              field={subItem.link}
+                                              className="text-sm font-medium text-white/60 transition-all hover:text-white">
+                                            {subItem.label}
+                                          </PrismicNextLink>
+                                        </li>
+                                    ))}
+                                  </ul>
+                                </>
+                            ) : (
+                                <div className={'mb-10 mt-3'}>
+                                  <PrismicNextLink
+                                      field={navigationItem.data.link}
+                                      className="text-base font-medium text-white transition-all hover:text-white/80">
+                                    {navigationItem.data.link.text}
+                                  </PrismicNextLink>
+                                </div>
+                            )}
+                          </div>
+                      );
+                    }
                   })}
                 </div>
               </div>
-              <div className={'flex justify-between items-center py-10'}>
-                <div>review</div>
-                <div> {social && <SocialList items={social} icons={true} variantList={1} variantButton={3}/>}</div>
-              </div>
-              <div className="py-2 text-sm md:flex md:items-center md:justify-between">
-                <div className="flex space-x-6 md:order-2">
-                  <ul role="list" className="flex gap-8">
-                    {settings.secondary_navigation?.map(item => (
-                      <li key={item.link.text}>
-                        <PrismicNextLink
+          <div className={'flex justify-between items-center py-10'}>
+            <div>review</div>
+            <div> {social && <SocialList items={social} icons={true} variantList={1} variantButton={3}/>}</div>
+          </div>
+          <div className="py-2 text-sm md:flex md:items-center md:justify-between">
+            <div className="flex space-x-6 md:order-2">
+              <ul role="list" className="flex gap-8">
+                {settings.secondary_navigation?.map(item => (
+                    <li key={item.link.text}>
+                      <PrismicNextLink
                           field={item.link}
                           className="font-medium text-white/50 transition-all hover:text-primary">
-                          {item.link.text}
-                        </PrismicNextLink>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-                <p className="mt-8 leading-5 text-white/60 md:order-1 md:mt-0">
-                  &copy; {copyRightDate} {settings.copyright_line}
-                </p>
-              </div>
+                        {item.link.text}
+                      </PrismicNextLink>
+                    </li>
+                ))}
+              </ul>
+            </div>
+            <p className="mt-8 leading-5 text-white/60 md:order-1 md:mt-0">
+              &copy; {copyRightDate} {settings.copyright_line}
+            </p>
+          </div>
 
         </Container>
       </div>

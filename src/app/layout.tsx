@@ -107,6 +107,10 @@ export default async function RootLayout({ children }: Readonly<{ children: Reac
       'navigation_element.link',
       'navigation_element.subs',
       'navigation_element.cta',
+      'navigation_mega_menu_item.subs',
+      'navigation_mega_menu_item.label',
+      'navigation_mega_menu_item.link',
+      'navigation_mega_menu_item.slices'
     ],
   });
   const settings = await client.getSingle('settings');

@@ -721,7 +721,7 @@ export interface NavigationBarDocumentDataNavigationItemsItem {
    * - **API ID Path**: navigation_bar.navigation_items[].navigation_item
    * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
    */
-  navigation_item: prismic.ContentRelationshipField<'navigation_element'>;
+  navigation_item: prismic.ContentRelationshipField<'navigation_element' | 'navigation_mega_menu_item'>;
 }
 
 /**
@@ -917,6 +917,137 @@ interface NavigationElementDocumentData {
 export type NavigationElementDocument<Lang extends string = string> = prismic.PrismicDocumentWithUID<
   Simplify<NavigationElementDocumentData>,
   'navigation_element',
+  Lang
+>;
+
+/**
+ * Item in *Navigation Mega Menu Item → Subs*
+ */
+export interface NavigationMegaMenuItemDocumentDataSubsItem {
+  /**
+   * Image field in *Navigation Mega Menu Item → Subs*
+   *
+   * - **Field Type**: Image
+   * - **Placeholder**: *None*
+   * - **API ID Path**: navigation_mega_menu_item.subs[].image
+   * - **Documentation**: https://prismic.io/docs/field#image
+   */
+  image: prismic.ImageField<never>;
+
+  /**
+   * Icon field in *Navigation Mega Menu Item → Subs*
+   *
+   * - **Field Type**: Image
+   * - **Placeholder**: *None*
+   * - **API ID Path**: navigation_mega_menu_item.subs[].icon
+   * - **Documentation**: https://prismic.io/docs/field#image
+   */
+  icon: prismic.ImageField<never>;
+
+  /**
+   * Label field in *Navigation Mega Menu Item → Subs*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: navigation_mega_menu_item.subs[].label
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  label: prismic.KeyTextField;
+
+  /**
+   * Subtitle field in *Navigation Mega Menu Item → Subs*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: navigation_mega_menu_item.subs[].subtitle
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  subtitle: prismic.KeyTextField;
+
+  /**
+   * Description field in *Navigation Mega Menu Item → Subs*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: navigation_mega_menu_item.subs[].description
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  description: prismic.RichTextField;
+
+  /**
+   * Link field in *Navigation Mega Menu Item → Subs*
+   *
+   * - **Field Type**: Link
+   * - **Placeholder**: *None*
+   * - **API ID Path**: navigation_mega_menu_item.subs[].link
+   * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
+   */
+  link: prismic.LinkField<string, string, unknown, prismic.FieldState, never>;
+}
+
+type NavigationMegaMenuItemDocumentDataSlicesSlice = MegamenuSlice;
+
+/**
+ * Content for Navigation Mega Menu Item documents
+ */
+interface NavigationMegaMenuItemDocumentData {
+  /**
+   * Label field in *Navigation Mega Menu Item*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: navigation_mega_menu_item.label
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  label: prismic.KeyTextField;
+
+  /**
+   * Link field in *Navigation Mega Menu Item*
+   *
+   * - **Field Type**: Link
+   * - **Placeholder**: *None*
+   * - **API ID Path**: navigation_mega_menu_item.link
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
+   */
+  link: prismic.LinkField<string, string, unknown, prismic.FieldState, never>;
+
+  /**
+   * Subs field in *Navigation Mega Menu Item*
+   *
+   * - **Field Type**: Group
+   * - **Placeholder**: *None*
+   * - **API ID Path**: navigation_mega_menu_item.subs[]
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#group
+   */
+  subs: prismic.GroupField<Simplify<NavigationMegaMenuItemDocumentDataSubsItem>>;
+
+  /**
+   * Slice Zone field in *Navigation Mega Menu Item*
+   *
+   * - **Field Type**: Slice Zone
+   * - **Placeholder**: *None*
+   * - **API ID Path**: navigation_mega_menu_item.slices[]
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#slices
+   */
+  slices: prismic.SliceZone<NavigationMegaMenuItemDocumentDataSlicesSlice>;
+}
+
+/**
+ * Navigation Mega Menu Item document from Prismic
+ *
+ * - **API ID**: `navigation_mega_menu_item`
+ * - **Repeatable**: `true`
+ * - **Documentation**: https://prismic.io/docs/custom-types
+ *
+ * @typeParam Lang - Language API ID of the document.
+ */
+export type NavigationMegaMenuItemDocument<Lang extends string = string> = prismic.PrismicDocumentWithUID<
+  Simplify<NavigationMegaMenuItemDocumentData>,
+  'navigation_mega_menu_item',
   Lang
 >;
 
@@ -2635,6 +2766,7 @@ export type AllDocumentTypes =
   | LegalDocument
   | NavigationBarDocument
   | NavigationElementDocument
+  | NavigationMegaMenuItemDocument
   | PageDocument
   | PostCategoryDocument
   | PostTagsDocument
@@ -3383,6 +3515,124 @@ type HeroSliceVariation = HeroSliceDefault | HeroSliceSimple | HeroSliceHeroSear
  * - **Documentation**: https://prismic.io/docs/slice
  */
 export type HeroSlice = prismic.SharedSlice<'hero', HeroSliceVariation>;
+
+/**
+ * Item in *Megamenu → Default → Primary → Subs*
+ */
+export interface MegamenuSliceDefaultPrimarySubsItem {
+  /**
+   * Default field in *Megamenu → Default → Primary → Subs*
+   *
+   * - **Field Type**: Boolean
+   * - **Placeholder**: *None*
+   * - **Default Value**: false
+   * - **API ID Path**: megamenu.default.primary.subs[].default
+   * - **Documentation**: https://prismic.io/docs/field#boolean
+   */
+  default: prismic.BooleanField;
+
+  /**
+   * Icon field in *Megamenu → Default → Primary → Subs*
+   *
+   * - **Field Type**: Image
+   * - **Placeholder**: *None*
+   * - **API ID Path**: megamenu.default.primary.subs[].icon
+   * - **Documentation**: https://prismic.io/docs/field#image
+   */
+  icon: prismic.ImageField<never>;
+
+  /**
+   * Label field in *Megamenu → Default → Primary → Subs*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: megamenu.default.primary.subs[].label
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  label: prismic.KeyTextField;
+
+  /**
+   * Subtitle field in *Megamenu → Default → Primary → Subs*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: megamenu.default.primary.subs[].subtitle
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  subtitle: prismic.KeyTextField;
+
+  /**
+   * Image field in *Megamenu → Default → Primary → Subs*
+   *
+   * - **Field Type**: Image
+   * - **Placeholder**: *None*
+   * - **API ID Path**: megamenu.default.primary.subs[].image
+   * - **Documentation**: https://prismic.io/docs/field#image
+   */
+  image: prismic.ImageField<never>;
+
+  /**
+   * Description field in *Megamenu → Default → Primary → Subs*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: megamenu.default.primary.subs[].description
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  description: prismic.RichTextField;
+
+  /**
+   * Link field in *Megamenu → Default → Primary → Subs*
+   *
+   * - **Field Type**: Link
+   * - **Placeholder**: *None*
+   * - **API ID Path**: megamenu.default.primary.subs[].link
+   * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
+   */
+  link: prismic.LinkField<string, string, unknown, prismic.FieldState, never>;
+}
+
+/**
+ * Primary content in *Megamenu → Default → Primary*
+ */
+export interface MegamenuSliceDefaultPrimary {
+  /**
+   * Subs field in *Megamenu → Default → Primary*
+   *
+   * - **Field Type**: Group
+   * - **Placeholder**: *None*
+   * - **API ID Path**: megamenu.default.primary.subs[]
+   * - **Documentation**: https://prismic.io/docs/field#group
+   */
+  subs: prismic.GroupField<Simplify<MegamenuSliceDefaultPrimarySubsItem>>;
+}
+
+/**
+ * Default variation for Megamenu Slice
+ *
+ * - **API ID**: `default`
+ * - **Description**: Default
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type MegamenuSliceDefault = prismic.SharedSliceVariation<
+  'default',
+  Simplify<MegamenuSliceDefaultPrimary>,
+  never
+>;
+
+/**
+ * Slice variation for *Megamenu*
+ */
+type MegamenuSliceVariation = MegamenuSliceDefault;
+
+/**
+ * Megamenu Shared Slice
+ *
+ * - **API ID**: `megamenu`
+ * - **Description**: Megamenu
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type MegamenuSlice = prismic.SharedSlice<'megamenu', MegamenuSliceVariation>;
 
 /**
  * Item in *Section → Default → Primary → Images*
@@ -4183,6 +4433,10 @@ declare module '@prismicio/client' {
       NavigationElementDocumentData,
       NavigationElementDocumentDataSubsItem,
       NavigationElementDocumentDataCtaItem,
+      NavigationMegaMenuItemDocument,
+      NavigationMegaMenuItemDocumentData,
+      NavigationMegaMenuItemDocumentDataSubsItem,
+      NavigationMegaMenuItemDocumentDataSlicesSlice,
       PageDocument,
       PageDocumentData,
       PageDocumentDataSlicesAlternateGridSlicePrimary,
@@ -4257,6 +4511,11 @@ declare module '@prismicio/client' {
       HeroSliceDefault,
       HeroSliceSimple,
       HeroSliceHeroSearch,
+      MegamenuSlice,
+      MegamenuSliceDefaultPrimarySubsItem,
+      MegamenuSliceDefaultPrimary,
+      MegamenuSliceVariation,
+      MegamenuSliceDefault,
       SectionSlice,
       SectionSliceDefaultPrimaryImagesItem,
       SectionSliceDefaultPrimary,

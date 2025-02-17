@@ -18,7 +18,7 @@
                 "label": "Navigation Item",
                 "select": "document",
                 "repeat": false,
-                "customtypes": ["navigation_element"]
+                "customtypes": ["navigation_element", "navigation_mega_menu_item"]
               }
             }
           }

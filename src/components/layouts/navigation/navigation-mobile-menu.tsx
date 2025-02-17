@@ -4,7 +4,7 @@ import { Bars3Icon } from '@heroicons/react/24/outline';
 import {
   type NavigationBarDocumentData,
   type NavigationBarDocumentDataNavigationItemsItem,
-  type NavigationElementDocument,
+  type NavigationElementDocument, NavigationMegaMenuItemDocument,
 } from '../../../../prismicio-types';
 import { ChevronDownIcon } from '@heroicons/react/20/solid';
 import { PrismicNextLink } from '@prismicio/next';
@@ -50,7 +50,9 @@ export const NavigationMobileMenu = ({ logo, navigation }: NavigationSubProps) =
             <div className="-my-6">
               <div className="space-y-2 divide-y divide-gray-500/20 py-6">
                 {navigation?.navigation_items.map((item: NavigationBarDocumentDataNavigationItemsItem, idx) => {
-                  const navigationItem = item.navigation_item as unknown as NavigationElementDocument;
+                  const navigationItem = item.navigation_item as unknown as NavigationElementDocument | NavigationMegaMenuItemDocument;
+
+                  console.log('navigation item', navigationItem);
 
                   return navigationItem.data?.subs[0]?.label !== null ? (
                     <Collapsible key={`main-mobile-nav-${idx}`} className="-mx-3">
@@ -59,7 +61,7 @@ export const NavigationMobileMenu = ({ logo, navigation }: NavigationSubProps) =
                           className={
                             'hover:bg-gray-50" flex w-full items-center justify-between rounded-lg py-2 pl-3 pr-3.5 text-xl font-semibold text-gray-900'
                           }>
-                          {navigationItem.data.label}
+                          {navigationItem.data?.label}
                           <ChevronDownIcon
                             aria-hidden="true"
                             className="size-5 flex-none group-data-[open]:rotate-180"
@@ -67,7 +69,7 @@ export const NavigationMobileMenu = ({ logo, navigation }: NavigationSubProps) =
                         </div>
                       </CollapsibleTrigger>
                       <CollapsibleContent className="mt-2 flex flex-col space-y-2">
-                        {navigationItem.data.subs.map(item => (
+                        {navigationItem.data?.subs?.map(item => (
                           <PrismicNextLink
                             key={`main-mobile-nav-${item.label}}`}
                             field={item.link}

@@ -6,10 +6,10 @@ import Link from 'next/link';
 import {
   type NavigationBarDocumentData,
   type NavigationBarDocumentDataNavigationItemsItem,
-  type NavigationElementDocument, SettingsDocumentData,
+  type NavigationElementDocument, NavigationMegaMenuItemDocument, SettingsDocumentData,
 } from '../../../../prismicio-types';
 import { PrismicNextLink } from '@prismicio/next';
-import { PrismicImage, PrismicRichText } from '@prismicio/react';
+import {PrismicImage, PrismicRichText, SliceZone} from '@prismicio/react';
 import {
   NavigationMenu,
   NavigationMenuContent,
@@ -23,6 +23,7 @@ import { NavigationMobileMenu } from '@/components/layouts/navigation/navigation
 import cn from 'clsx';
 import { SearchButton } from '@/components/features/search/search-button';
 import {NavigationMenuSubItem} from '@/components/layouts/navigation/navigation-menu-sub-item';
+import {components} from '@/slices';
 
 
 const parentVariants = {
@@ -91,25 +92,52 @@ export default function NavigationMenuSub({ navigation, settings }: NavigationSu
         <NavigationMenu className={'hidden lg:block'}>
           <NavigationMenuList>
             {navigation?.navigation_items.map((item: NavigationBarDocumentDataNavigationItemsItem, idx) => {
-              const navigationItem = item.navigation_item as unknown as NavigationElementDocument;
+              const navigationItem = item.navigation_item as unknown as NavigationElementDocument | NavigationMegaMenuItemDocument;
+              if (navigationItem.type === 'navigation_element') {
+                return navigationItem.data?.subs[0]?.label !== null ? (
+                    <NavigationMenuItem key={`main-nav-${idx}`}>
+                      <NavigationMenuTrigger className={'text-lg'}>{navigationItem.data.label}</NavigationMenuTrigger>
 
-              return navigationItem.data?.subs[0]?.label !== null ? (
-                <NavigationMenuItem key={`main-nav-${idx}`}>
-                  <NavigationMenuTrigger className={'text-lg'}>{navigationItem.data.label}</NavigationMenuTrigger>
+                      <NavigationMenuContent>
+                        <NavigationMenuSubItem item={navigationItem.data}/>
+                      </NavigationMenuContent>
+                    </NavigationMenuItem>
+                ) : (
+                    <NavigationMenuItem key={`main-nav-${idx}`}>
+                      <PrismicNextLink field={navigationItem.data.link} passHref legacyBehavior>
+                        <NavigationMenuLink className={cn(navigationMenuTriggerStyle(), '!text-lg font-bold')}>
+                          {navigationItem.data.label}
+                        </NavigationMenuLink>
+                      </PrismicNextLink>
+                    </NavigationMenuItem>
+                );
+              } else if (navigationItem.type === 'navigation_mega_menu_item') {
+                // Handle NavigationMegaMenuItemDocument
+                console.log("This is a NavigationMegaMenuItemDocument");
 
-                  <NavigationMenuContent>
-                    <NavigationMenuSubItem item={navigationItem.data} />
-                  </NavigationMenuContent>
-                </NavigationMenuItem>
-              ) : (
-                <NavigationMenuItem key={`main-nav-${idx}`}>
-                  <PrismicNextLink field={navigationItem.data.link} passHref legacyBehavior>
-                    <NavigationMenuLink className={cn(navigationMenuTriggerStyle(), '!text-lg font-bold')}>
-                      {navigationItem.data.label}
-                    </NavigationMenuLink>
-                  </PrismicNextLink>
-                </NavigationMenuItem>
-              );
+                if (!navigationItem.data) {
+                  return null;
+                }
+
+                return navigationItem.data?.link !== null ? (
+                    <NavigationMenuItem key={`main-nav-${idx}`}>
+                      <NavigationMenuTrigger className={'text-lg'}>{navigationItem.data.label}</NavigationMenuTrigger>
+
+                      <NavigationMenuContent>
+                        <SliceZone slices={navigationItem.data.slices} components={components}/>
+                      </NavigationMenuContent>
+                    </NavigationMenuItem>
+                ) : (
+                    <NavigationMenuItem key={`main-nav-${idx}`}>
+                      <PrismicNextLink field={navigationItem.data.link} passHref legacyBehavior>
+                        <NavigationMenuLink className={cn(navigationMenuTriggerStyle(), '!text-lg font-bold')}>
+                          {navigationItem.data.link}
+                        </NavigationMenuLink>
+                      </PrismicNextLink>
+                    </NavigationMenuItem>
+                );
+              }
+
             })}
           </NavigationMenuList>
         </NavigationMenu>
