@@ -760,6 +760,17 @@ export type NavigationBarDocument<Lang extends string = string> = prismic.Prismi
  */
 export interface NavigationElementDocumentDataSubsItem {
   /**
+   * Default field in *Navigation Element → Subs*
+   *
+   * - **Field Type**: Boolean
+   * - **Placeholder**: *None*
+   * - **Default Value**: false
+   * - **API ID Path**: navigation_element.subs[].default
+   * - **Documentation**: https://prismic.io/docs/field#boolean
+   */
+  default: prismic.BooleanField;
+
+  /**
    * Icon field in *Navigation Element → Subs*
    *
    * - **Field Type**: Image

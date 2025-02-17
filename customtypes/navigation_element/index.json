@@ -36,6 +36,15 @@
           "label": "Subs",
           "repeat": true,
           "fields": {
+            "default": {
+              "type": "Boolean",
+              "config": {
+                "label": "Default",
+                "placeholder_false": "Off",
+                "placeholder_true": "On",
+                "default_value": false
+              }
+            },
             "icon": {
               "type": "Image",
               "config": {
