@@ -9,7 +9,7 @@ import {
   type NavigationElementDocument, NavigationMegaMenuItemDocument, SettingsDocumentData,
 } from '../../../../prismicio-types';
 import { PrismicNextLink } from '@prismicio/next';
-import {PrismicImage, PrismicRichText, SliceZone} from '@prismicio/react';
+import {PrismicImage, SliceZone} from '@prismicio/react';
 import {
   NavigationMenu,
   NavigationMenuContent,
@@ -24,6 +24,8 @@ import cn from 'clsx';
 import { SearchButton } from '@/components/features/search/search-button';
 import {NavigationMenuSubItem} from '@/components/layouts/navigation/navigation-menu-sub-item';
 import {components} from '@/slices';
+import {Button} from '@/components/ui/button';
+import {ArrowRightCircle, CircleArrowRight} from 'lucide-react';
 
 
 const parentVariants = {
@@ -70,7 +72,7 @@ export default function NavigationMenuSub({ navigation, settings }: NavigationSu
                      staggerChildren: 0.05,
                    }}
     >
-      <div className="relative mx-auto flex w-full max-w-2xl bg-white rounded-md items-center justify-between shadow-md px-6 py-4  lg:max-w-7xl">
+      <div className="relative mx-auto flex w-full max-w-2xl bg-white rounded-lg items-center justify-between shadow-md px-6 py-4  lg:max-w-7xl">
         <div className="flex lg:flex-shrink">
           <div className="relative z-40">
             <Link href="/">
@@ -122,7 +124,9 @@ export default function NavigationMenuSub({ navigation, settings }: NavigationSu
                       <NavigationMenuTrigger className={'text-lg'}>{navigationItem.data.label}</NavigationMenuTrigger>
 
                       <NavigationMenuContent>
+                        <div className={'flex flex-row gap-5 p-10'}>
                         <SliceZone slices={navigationItem.data.slices} components={components} context={{subs: navigationItem.data.subs}}/>
+                        </div>
                       </NavigationMenuContent>
                     </NavigationMenuItem>
                 ) : (
@@ -140,8 +144,9 @@ export default function NavigationMenuSub({ navigation, settings }: NavigationSu
           </NavigationMenuList>
         </NavigationMenu>
         </div>
-        <div className="relative z-40 hidden lg:flex lg:flex-shrink lg:justify-end">
+        <div className="relative z-40 hidden lg:flex lg:flex-shrink lg:justify-end space-x-2">
           <SearchButton />
+          <Button variant={'default'} size={'sm'} className={'bg-accent'}>Book now <CircleArrowRight className={'h-5 w-5'} /> </Button>
         </div>
       </div>
     </motion.header>

@@ -191,6 +191,14 @@
           "repeat": true,
           "variants": ["Primary", "Secondary"]
         }
+      },
+      "google_rating": {
+        "type": "Image",
+        "config": {
+          "label": "Google Rating",
+          "constraint": {},
+          "thumbnails": []
+        }
       }
     }
   }

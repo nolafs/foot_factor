@@ -73,7 +73,7 @@ export const SocialLink = ({ item, className, icons, iconsClass }: SocialLinkPro
   if (icons) {
     return (
       <button
-        className={cn('h-5 w-5 text-gray-400 hover:text-accent', className)}
+        className={cn(className)}
         onClick={() => {
           if (item?.url) {
             openSocialMediaLink(item.url);
@@ -86,7 +86,7 @@ export const SocialLink = ({ item, className, icons, iconsClass }: SocialLinkPro
   } else {
     return (
       <ButtonSimple
-        className={cn('h-5 w-5 text-gray-400 hover:text-accent', className)}
+        className={cn('h-5 w-5 border-secondary rounded-full text-gray-400 hover:text-accent', className)}
         onClick={() => {
           if (item?.url) {
             openSocialMediaLink(item.url);

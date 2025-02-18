@@ -7,14 +7,18 @@ export default function HomePage() {
       <main className="overflow-hidden">
         <GradientBackground/>
         <Container>
-          <Subheading className="mt-16">Home</Subheading>
+          <Subheading className="mt-36">Home</Subheading>
           <Heading as="h1" className="mt-2">
             FootFactor
           </Heading>
           <Lead className="mt-6 max-w-3xl">
             Your First Step to a Pain-Free Life Starts Here
           </Lead>
+          <div className={'min-h-svh'}>
+            content here
+          </div>
         </Container>
+
       </main>
-    );
+  );
 }

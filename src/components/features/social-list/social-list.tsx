@@ -16,12 +16,12 @@ const VARIANTS_BUTTON = [
   'w-[26px] h-[26px]',
   'h-[32px] w-[32px] !text-white !hover:text-white/80',
   '',
-  '!text-white !hover:text-white/80',
+  'h-10 w-10 p-2.5 flex flex-col justify-center items-center border border-secondary rounded-full text-secondary hover:text-accent hover:border-accent',
 ];
 
 const VARIANTS_LIST = [
   'flex space-x-6 justify-center items-center md:justify-end md:items-end',
-  'flex flex-row space-x-10',
+  'flex flex-row space-x-7',
   'flex gap-4',
 ];
 

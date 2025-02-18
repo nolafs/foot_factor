@@ -8,6 +8,7 @@ import {
   NavigationBarDocumentData,
   NavigationElementDocument, NavigationMegaMenuItemDocument, SettingsDocumentData,
 } from '../../../prismicio-types';
+import {field} from 'fp-ts';
 
 
 
@@ -128,7 +129,7 @@ export function Footer({ navigation, settings }: FooterProps) {
                 </div>
               </div>
           <div className={'flex justify-between items-center py-10'}>
-            <div>review</div>
+            <div>{settings.google_rating && <PrismicNextImage field={settings.google_rating}/>}</div>
             <div> {social && <SocialList items={social} icons={true} variantList={1} variantButton={3}/>}</div>
           </div>
           <div className="py-2 text-sm md:flex md:items-center md:justify-between">
@@ -138,7 +139,7 @@ export function Footer({ navigation, settings }: FooterProps) {
                     <li key={item.link.text}>
                       <PrismicNextLink
                           field={item.link}
-                          className="font-medium text-white/50 transition-all hover:text-primary">
+                          className="font-medium text-white/50 transition-all hover:text-secondary">
                         {item.link.text}
                       </PrismicNextLink>
                     </li>

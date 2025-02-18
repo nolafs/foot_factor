@@ -5,6 +5,7 @@ import cn from 'clsx';
 import {PrismicNextLink} from '@prismicio/next';
 import {motion} from 'framer-motion';
 import {NavigationElementDocumentData, NavigationElementDocumentDataSubsItem} from '../../../prismicio-types';
+import ButtonSliceVariation from '@/components/ui/button-slice-variation';
 
 /**
  * Props for `Megamenu`.
@@ -22,11 +23,32 @@ const Megamenu: FC<MegaMenuProps> = ({slice, context}) => {
   console.log('MEGA SLICE', slice);
   console.log('CONTEXT', context );
 
+  if(slice.variation === 'megaVideo') {
+
+    return (
+    <div className={cn('relative shrink')}>
+      <div className={'flex flex-col space-y-3'}>
+        <h2 className={'font-bold'}>{slice.primary.header}</h2>
+        <div> {slice.primary?.video?.html ? (
+          <div
+              dangerouslySetInnerHTML={{__html: slice.primary.video.html}}
+              className={
+                'g:rounded-3xl aspect-h-9 aspect-w-16 w-full overflow-hidden rounded-xl md:rounded-2xl'
+              }></div>) : ('Sorry, no video found')}
+        </div>
+        <div className={'text-sm'}><PrismicRichText field={slice.primary.description}/></div>
+        <div>
+          <ButtonSliceVariation link={slice.primary.link}   />
+        </div>
+      </div>
+    </div>
+    )
+  }
+
+
   return (
-      <div id={'nav-content'} className={cn('relative block w-full')}>
-        <div className={'p-10'}>
-          <div className={'grid grid-cols-8 gap-5 w-full'}>
-            <div className={'col-span-5'}>
+      <div id={'nav-content'} className={cn('relative block w-full grow')}>
+
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 {context.subs.map((item, idx) => (
                     <div
@@ -51,9 +73,6 @@ const Megamenu: FC<MegaMenuProps> = ({slice, context}) => {
                     </div>
                 ))}
               </div>
-            </div>
-          </div>
-        </div>
       </div>
   );
 };

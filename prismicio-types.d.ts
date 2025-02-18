@@ -2535,6 +2535,17 @@ interface SettingsDocumentData {
   footer_cta_links: prismic.Repeatable<
     prismic.LinkField<string, string, unknown, prismic.FieldState, 'Primary' | 'Secondary'>
   >;
+
+  /**
+   * Google Rating field in *Settings*
+   *
+   * - **Field Type**: Image
+   * - **Placeholder**: *None*
+   * - **API ID Path**: settings.google_rating
+   * - **Tab**: Footer
+   * - **Documentation**: https://prismic.io/docs/field#image
+   */
+  google_rating: prismic.ImageField<never>;
 }
 
 /**
@@ -3526,9 +3537,67 @@ export type HeroSlice = prismic.SharedSlice<'hero', HeroSliceVariation>;
 export type MegamenuSliceDefault = prismic.SharedSliceVariation<'default', Record<string, never>, never>;
 
 /**
+ * Primary content in *Megamenu → Mega video → Primary*
+ */
+export interface MegamenuSliceMegaVideoPrimary {
+  /**
+   * Header field in *Megamenu → Mega video → Primary*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: megamenu.megaVideo.primary.header
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  header: prismic.KeyTextField;
+
+  /**
+   * Video field in *Megamenu → Mega video → Primary*
+   *
+   * - **Field Type**: Embed
+   * - **Placeholder**: *None*
+   * - **API ID Path**: megamenu.megaVideo.primary.video
+   * - **Documentation**: https://prismic.io/docs/field#embed
+   */
+  video: prismic.EmbedField;
+
+  /**
+   * Description field in *Megamenu → Mega video → Primary*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: megamenu.megaVideo.primary.description
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  description: prismic.RichTextField;
+
+  /**
+   * Link field in *Megamenu → Mega video → Primary*
+   *
+   * - **Field Type**: Link
+   * - **Placeholder**: *None*
+   * - **API ID Path**: megamenu.megaVideo.primary.link
+   * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
+   */
+  link: prismic.LinkField<string, string, unknown, prismic.FieldState, 'Primary' | 'Secondary' | 'Accent' | 'Link'>;
+}
+
+/**
+ * Mega video variation for Megamenu Slice
+ *
+ * - **API ID**: `megaVideo`
+ * - **Description**: Default
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type MegamenuSliceMegaVideo = prismic.SharedSliceVariation<
+  'megaVideo',
+  Simplify<MegamenuSliceMegaVideoPrimary>,
+  never
+>;
+
+/**
  * Slice variation for *Megamenu*
  */
-type MegamenuSliceVariation = MegamenuSliceDefault;
+type MegamenuSliceVariation = MegamenuSliceDefault | MegamenuSliceMegaVideo;
 
 /**
  * Megamenu Shared Slice
@@ -4417,8 +4486,10 @@ declare module '@prismicio/client' {
       HeroSliceSimple,
       HeroSliceHeroSearch,
       MegamenuSlice,
+      MegamenuSliceMegaVideoPrimary,
       MegamenuSliceVariation,
       MegamenuSliceDefault,
+      MegamenuSliceMegaVideo,
       SectionSlice,
       SectionSliceDefaultPrimaryImagesItem,
       SectionSliceDefaultPrimary,
