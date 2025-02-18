@@ -98,8 +98,8 @@ export default function NavigationMenuSub({ navigation, settings }: NavigationSu
               if (navigationItem.type === 'navigation_element') {
                 return navigationItem.data?.subs[0]?.label !== null ? (
                     <NavigationMenuItem key={`main-nav-${idx}`}>
-                      <NavigationMenuTrigger className={'text-lg'}>{navigationItem.data.label}</NavigationMenuTrigger>
-
+                      <NavigationMenuTrigger  className={'text-lg'}>
+                        <PrismicNextLink field={navigationItem.data.link}>{navigationItem.data.label}</PrismicNextLink> </NavigationMenuTrigger>
                       <NavigationMenuContent>
                         <NavigationMenuSubItem item={navigationItem.data}/>
                       </NavigationMenuContent>
