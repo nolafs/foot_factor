@@ -72,7 +72,8 @@ export default function NavigationMenuSub({ navigation, settings }: NavigationSu
                      staggerChildren: 0.05,
                    }}
     >
-      <div className="relative mx-auto flex w-full max-w-2xl bg-white rounded-lg items-center justify-between shadow-md px-6 py-4  lg:max-w-7xl">
+      <div className={'relative mx-auto flex justify-center w-full max-w-9xl lg:px-8'}>
+      <div className="relative flex w-full bg-white rounded-lg items-center justify-between shadow-md px-6 py-4">
         <div className="flex lg:flex-shrink">
           <div className="relative z-40">
             <Link href="/">
@@ -148,6 +149,7 @@ export default function NavigationMenuSub({ navigation, settings }: NavigationSu
           <SearchButton />
           <Button variant={'default'} size={'sm'} className={'bg-accent'}>Book now <CircleArrowRight className={'h-5 w-5'} /> </Button>
         </div>
+      </div>
       </div>
     </motion.header>
   );

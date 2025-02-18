@@ -20,6 +20,11 @@ export default {
 	],
   theme: {
   	extend: {
+			maxWidth: {
+				'8xl': '90rem', // 1440px
+				'9xl': '96rem', // 1536px
+				'10xl': '120rem', // 1920px
+			},
   		fontFamily: {
   			sans: [
   				'var(--font-geist-sans)',
