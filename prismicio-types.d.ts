@@ -3357,6 +3357,16 @@ export interface HeroSliceDefaultPrimary {
    * - **Documentation**: https://prismic.io/docs/field#image
    */
   image: prismic.ImageField<never>;
+
+  /**
+   * Google Rating field in *Hero → Default → Primary*
+   *
+   * - **Field Type**: Image
+   * - **Placeholder**: *None*
+   * - **API ID Path**: hero.default.primary.google_rating
+   * - **Documentation**: https://prismic.io/docs/field#image
+   */
+  google_rating: prismic.ImageField<never>;
 }
 
 /**

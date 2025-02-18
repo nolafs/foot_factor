@@ -1,24 +1,65 @@
-import {GradientBackground} from '@/components/gradient';
-import {Container} from '@/components/container';
-import {Heading, Lead, Subheading} from '@/components/text';
+import React from 'react';
+import {components} from '@/slices';
+import {SliceZone} from '@prismicio/react';
+import {notFound} from 'next/navigation';
+import {createClient} from '@/prismicio';
+import {BentoSection} from '@/components/features/resources/bentoList';
+import {filter} from '@prismicio/client';
+import {SliderResource} from '@/components/features/resources/slider-resource';
+import SliderVideo from '@/components/features/resources/slider-video';
 
-export default function HomePage() {
+import Animate from '@/lib/animation';
+import JSONLD from '@/types/schema';
+
+export default async function HomePage() {
+  const client = createClient();
+  const page = await client.getSingle('home').catch(() => notFound());
+
+  const resentPosts = await client
+      .getByType('posts', {
+        pageSize: 5,
+        page: 0,
+        filters: [filter.at('my.posts.featured', true)],
+        fetchLinks: ['author.name', 'author.profile_image', 'post_category.name'],
+        orderings: [
+          {
+            field: 'my.posts.publishing_date',
+            direction: 'desc',
+          },
+        ],
+      })
+      .then(response => {
+        return response.results;
+      });
+
+
+  const jsonLd = JSONLD;
+
   return (
-      <main className="overflow-hidden">
-        <GradientBackground/>
-        <Container>
-          <Subheading className="mt-36">Home</Subheading>
-          <Heading as="h1" className="mt-2">
-            FootFactor
-          </Heading>
-          <Lead className="mt-6 max-w-3xl">
-            Your First Step to a Pain-Free Life Starts Here
-          </Lead>
-          <div className={'min-h-svh'}>
-            content here
-          </div>
-        </Container>
+      <main className={'min-h-svh w-full overflow-hidden'}>
+        {/* SliceZone 1 */}
+        {page.data.slices2 && <SliceZone slices={page.data.slices2} components={components}/>}
 
+        <div className="bg-gradient-to-b from-white from-50% to-gray-100 pb-24">
+          {resentPosts.length && (
+              <Animate>
+                <BentoSection
+                    heading={page.data.latest_articles_heading}
+                    subheading={'Resent Articles'}
+                    body={page.data.latest_articles_body}
+                    links={page.data.latest_articles_links}
+                    listings={resentPosts}
+                    dark={false}
+                />
+              </Animate>
+          )}
+        </div>
+
+        {/* SliceZone 2 */}
+        {page.data.slices && <SliceZone slices={page.data.slices} components={components}/>}
+
+        {/* Add JSON-LD to your page */}
+        <script type="application/ld+json" dangerouslySetInnerHTML={{__html: JSON.stringify(jsonLd)}}/>
       </main>
   );
 }

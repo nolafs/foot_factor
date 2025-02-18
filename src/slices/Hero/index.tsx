@@ -55,6 +55,7 @@ const Hero = ({ slice }: HeroProps): JSX.Element => {
       subheading={slice.primary.subheading}
       image={slice.primary.image}
       links={slice.primary.links}
+      rating={slice.primary.google_rating}
     />
   );
 };

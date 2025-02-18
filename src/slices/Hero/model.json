@@ -48,6 +48,14 @@
             "constraint": {},
             "thumbnails": []
           }
+        },
+        "google_rating": {
+          "type": "Image",
+          "config": {
+            "label": "Google Rating",
+            "constraint": {},
+            "thumbnails": []
+          }
         }
       },
       "items": {}
