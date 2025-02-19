@@ -75,7 +75,7 @@ export const NavigationMobileMenu = ({ logo, navigation, siteName}: NavigationSu
             <Bars3Icon aria-hidden="true" className="size-6" />
           </button>
         </SheetTrigger>
-        <SheetContent side="right" className="w-[90%] overflow-y-auto bg-blue-950 px-0 py-6 shadow-none border-none">
+        <SheetContent side="right" className="w-[90%] overflow-y-auto text-white bg-blue-950 px-0 py-6 shadow-none border-none">
           <SheetTitle>
             <div className="flex items-center justify-between px-5">
               <Link href="/public">
