@@ -34,7 +34,7 @@ export async function generateMetadata(
   }
 
   return {
-    title: (page.data.meta_title?.toString() || `${settings.data.site_name} - Contact us`) ?? 'Contact us',
+    title: (page.data.meta_title?.toString() ?? `${settings.data.site_name} - Contact us`) ?? 'Contact us',
     description: page.data.meta_description ?? parentMeta.description ?? 'Contact us for more information',
     openGraph: {
       title: page.data.meta_title ?? parentMeta.title ?? undefined,
