@@ -38,7 +38,7 @@ const Hero = ({ slice }: HeroProps): JSX.Element => {
   }
 
   if (slice.variation === 'simple') {
-    return (
+    return (<div className={'bg-[#f9f8ed] pb-24 pt-24 md:pb-24 md:pt-40 mb-24'}>
       <Container>
         <Subheading className="mt-16">{slice.primary.label}</Subheading>
         <Heading as="h1" className="mt-2">
@@ -46,6 +46,7 @@ const Hero = ({ slice }: HeroProps): JSX.Element => {
         </Heading>
         <Lead className="mt-6 max-w-3xl">{slice.primary.subheading}</Lead>
       </Container>
+        </div>
     );
   }
 

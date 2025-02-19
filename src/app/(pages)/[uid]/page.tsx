@@ -53,9 +53,7 @@ export default async function Page({ params }: { params: Promise<Params> }) {
 
   return (
     <main className={'w-full overflow-hidden'}>
-      <div className="mb-24 mt-24 md:mb-24 md:mt-40">
         <SliceZone slices={page.data.slices} components={components} />
-      </div>
     </main>
   );
 }
