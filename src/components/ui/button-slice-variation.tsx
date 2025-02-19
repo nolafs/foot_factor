@@ -1,11 +1,11 @@
-import { type LinkField } from '@prismicio/client';
-import { PrismicNextLink } from '@prismicio/next';
+import {ImageField, type LinkField} from '@prismicio/client';
+import {PrismicNextImage, PrismicNextLink} from '@prismicio/next';
 import ArrowLongRightIcon from '@heroicons/react/24/outline/ArrowLongRightIcon';
 import cn from 'clsx';
 import { buttonVariants } from '@/components/ui/button';
 import React from 'react';
 
-export const ButtonSliceVariation = ({ link }: { link: LinkField }) => {
+export const ButtonSliceVariation = ({ link, icon }: { link: LinkField, icon?: ImageField }) => {
   // create key from link name
 
   if (!link.text) {
@@ -24,19 +24,19 @@ export const ButtonSliceVariation = ({ link }: { link: LinkField }) => {
         <PrismicNextLink
           field={link}
           className={cn(buttonVariants({ variant: 'default', size: 'lg' }), '!bg-accent text-white hover:!bg-black')}>
-          {link.text}
+          {icon && <PrismicNextImage field={icon} className={'h-5 w-5 aspect-1 mr-2 invert'} />} {link.text}
         </PrismicNextLink>
       )}
 
       {link.variant === 'Primary' && (
         <PrismicNextLink field={link} className={cn(buttonVariants({ variant: 'default', size: 'lg' }))}>
-          {link.text}
+          {icon && <PrismicNextImage field={icon} className={'h-5 w-5 aspect-1 mr-2 invert'}/>} {link.text}
         </PrismicNextLink>
       )}
 
       {link.variant === 'Secondary' && (
         <PrismicNextLink field={link} className={cn(buttonVariants({ variant: 'secondary', size: 'lg' }))}>
-          {link.text}
+          {icon && <PrismicNextImage field={icon} className={'h-5 w-5 aspect-1 mr-2 '}/>} {link.text}
         </PrismicNextLink>
       )}
     </>

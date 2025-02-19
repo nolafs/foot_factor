@@ -38,7 +38,8 @@
                 "select": null,
                 "allowTargetBlank": true,
                 "allowText": true,
-                "repeat": false
+                "repeat": false,
+                "variants": ["Primary", "Secondary", "Link", "Accent"]
               }
             },
             "icon": {

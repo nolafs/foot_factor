@@ -15,6 +15,8 @@ import { SearchButton } from '@/components/features/search/search-button';
 import {ImageField, KeyTextField, LinkField} from '@prismicio/client';
 import {usePathname} from "next/navigation";
 import cn from 'clsx';
+import {buttonVariants} from '@/components/ui/button';
+import ButtonSliceVariation from '@/components/ui/button-slice-variation';
 
 
 interface NavigationSubProps {
@@ -122,12 +124,11 @@ export const NavigationMobileMenu = ({ logo, navigation, siteName}: NavigationSu
             })}
             <div className="w-full border-t mt-10 border-gray-300/20"/>
 
-            <div className={'flex flex-col mt-10 py-5'}>
+            <div className={'flex flex-col mt-10 px-5 space-y-3 py-5'}>
               {navigation.cta_links.map((item, idx) => {
                 return (
-                    <ButtonIcon key={`main-mobile-cta-nav-${idx}`} link={item.link}
-                                label={item.link?.text || ''} icon={item.icon}
-                                classNames={'!text-base opacity-60 !py-2'}/>
+                    <ButtonSliceVariation key={`main-mobile-cta-nav-${idx}`} link={item.link} icon={item.icon}
+                                     />
                 )
               })}
             </div>

@@ -736,7 +736,7 @@ export interface NavigationBarDocumentDataCtaLinksItem {
    * - **API ID Path**: navigation_bar.cta_links[].link
    * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
    */
-  link: prismic.LinkField<string, string, unknown, prismic.FieldState, never>;
+  link: prismic.LinkField<string, string, unknown, prismic.FieldState, 'Primary' | 'Secondary' | 'Link' | 'Accent'>;
 
   /**
    * Icon field in *Navigation Bar → CTA Links*
