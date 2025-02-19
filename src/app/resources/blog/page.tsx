@@ -16,9 +16,9 @@ import { Badge } from '@/components/ui/badge';
 import { Pagination } from '@/components/ui/pagination';
 import type { ResolvedOpenGraph } from 'next/dist/lib/metadata/types/opengraph-types';
 import type { Author, OGImage } from '@/types';
-import Filter from '../../components/features/blog/postsFilter';
+import Filter from '../../../components/features/blog/postsFilter';
 import AuthorLink from '@/components/features/author/author-link';
-import { type PostCategoryDocument, type PostTagsDocument } from '../../../prismicio-types';
+import { type PostCategoryDocument, type PostTagsDocument } from '../../../../prismicio-types';
 
 type Props = {
   params: Promise<{ uid: string }>;
@@ -164,7 +164,7 @@ async function Posts({ page, category, tags }: { page: number; category?: string
             </div>
             <div className="mt-4">
               <Link
-                href={`/blog/${post.uid}`}
+                href={`/resources/blog/${post.uid}`}
                 className="flex items-center gap-1 text-sm/5 font-medium group-hover:text-accent">
                 <span className="absolute inset-0" />
                 Read more <span className={'sr-only'}>About {post.data.title}</span>

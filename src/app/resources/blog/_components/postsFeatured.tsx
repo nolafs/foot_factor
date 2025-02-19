@@ -65,7 +65,7 @@ export async function FeaturedPosts() {
                   {dayjs(post.data.publishing_date).format('dddd, MMMM D, YYYY')}
                 </div>
                 <div className="mt-2 text-base/7 font-medium">
-                  <Link href={`/blog/${post.uid}`}>
+                  <Link href={`/resources/blog/${post.uid}`}>
                     <span className="absolute inset-0" />
                     {post.data.title}
                   </Link>

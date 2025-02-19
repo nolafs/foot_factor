@@ -15,7 +15,7 @@ import { SearchButton } from '@/components/features/search/search-button';
 import {ImageField, KeyTextField, LinkField} from '@prismicio/client';
 import {usePathname} from "next/navigation";
 import cn from 'clsx';
-import {buttonVariants} from '@/components/ui/button';
+
 import ButtonSliceVariation from '@/components/ui/button-slice-variation';
 
 
@@ -25,14 +25,13 @@ interface NavigationSubProps {
   logo: ImageField;
 }
 
-const ButtonIcon = ({label, link, icon, children, classNames}: { label: KeyTextField | string, link?: LinkField, icon: ImageField, children?: ReactNode, classNames?: string}) => {
+const ButtonIcon = ({label, link, icon, children, trigger, classNames}: { label: KeyTextField | string, link?: LinkField, icon: ImageField,trigger?:boolean, children?: ReactNode, classNames?: string}) => {
   const [active, setActive] = useState<boolean>(false);
   const path = usePathname();
 
   useEffect(() => {
     if(link && 'url' in link){
-      console.log('link',label,  path === link.url);
-      setActive(prevState => path === link.url);
+      setActive(prevState => path.split('/')[1] === link.url?.split('/')[1]);
     }
   }, [link, path]);
 
@@ -48,7 +47,7 @@ const ButtonIcon = ({label, link, icon, children, classNames}: { label: KeyTextF
       </div>
   )}
 
-  if(link) {
+  if(!trigger) {
     return (
         <PrismicNextLink field={link} >
         {linkContent()}
@@ -93,7 +92,7 @@ export const NavigationMobileMenu = ({ logo, navigation, siteName}: NavigationSu
                   <div key={`main-mobile-nav-${idx}`}>
                     <Collapsible>
                       <CollapsibleTrigger className={'group w-full'}>
-                        <ButtonIcon label={navigationItem.data.label} icon={navigationItem.data.icon}>
+                        <ButtonIcon label={navigationItem.data.label} link={navigationItem.data.link} trigger={true} icon={navigationItem.data.icon}>
                           <ChevronDownIcon
                               aria-hidden="true"
                               className="size-5 flex-none group-data-[open]:rotate-180"
