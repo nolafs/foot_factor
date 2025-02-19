@@ -20,10 +20,10 @@ import cn from 'clsx';
 interface NavigationSubProps {
   navigation: NavigationBarDocumentData;
   siteName?: KeyTextField | string;
-  logo: ImageField
+  logo: ImageField;
 }
 
-const ButtonIcon = ({label, link, icon, children}: { label: KeyTextField | string, link?: LinkField, icon: ImageField, children?: ReactNode}) => {
+const ButtonIcon = ({label, link, icon, children, classNames}: { label: KeyTextField | string, link?: LinkField, icon: ImageField, children?: ReactNode, classNames?: string}) => {
   const [active, setActive] = useState<boolean>(false);
   const path = usePathname();
 
@@ -35,7 +35,7 @@ const ButtonIcon = ({label, link, icon, children}: { label: KeyTextField | strin
   }, [link, path]);
 
   const linkContent = () => { return (
-      <div className={'flex text-xl font-semibold text-white items-center gap-x-4 py-4 w-full pr-5'}>
+      <div className={cn('flex text-xl font-semibold text-white items-center gap-x-4 py-4 w-full pr-5', classNames)}>
         <span className={cn('w-6 h-4 rounded-r-full', active ? 'bg-white' : 'bg-transparent')}></span>
         <span className={'flex-grow-0'}>
       <PrismicNextImage field={icon} fallbackAlt={''}
@@ -121,6 +121,16 @@ export const NavigationMobileMenu = ({ logo, navigation, siteName}: NavigationSu
               );
             })}
             <div className="w-full border-t mt-10 border-gray-300/20"/>
+
+            <div className={'flex flex-col mt-10 py-5'}>
+              {navigation.cta_links.map((item, idx) => {
+                return (
+                    <ButtonIcon key={`main-mobile-cta-nav-${idx}`} link={item.link}
+                                label={item.link?.text || ''} icon={item.icon}
+                                classNames={'!text-base opacity-60 !py-2'}/>
+                )
+              })}
+            </div>
 
           </div>
         </SheetContent>

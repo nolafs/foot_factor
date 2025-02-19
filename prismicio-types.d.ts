@@ -725,6 +725,31 @@ export interface NavigationBarDocumentDataNavigationItemsItem {
 }
 
 /**
+ * Item in *Navigation Bar → CTA Links*
+ */
+export interface NavigationBarDocumentDataCtaLinksItem {
+  /**
+   * Link field in *Navigation Bar → CTA Links*
+   *
+   * - **Field Type**: Link
+   * - **Placeholder**: *None*
+   * - **API ID Path**: navigation_bar.cta_links[].link
+   * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
+   */
+  link: prismic.LinkField<string, string, unknown, prismic.FieldState, never>;
+
+  /**
+   * Icon field in *Navigation Bar → CTA Links*
+   *
+   * - **Field Type**: Image
+   * - **Placeholder**: *None*
+   * - **API ID Path**: navigation_bar.cta_links[].icon
+   * - **Documentation**: https://prismic.io/docs/field#image
+   */
+  icon: prismic.ImageField<never>;
+}
+
+/**
  * Content for Navigation Bar documents
  */
 interface NavigationBarDocumentData {
@@ -738,6 +763,17 @@ interface NavigationBarDocumentData {
    * - **Documentation**: https://prismic.io/docs/field#group
    */
   navigation_items: prismic.GroupField<Simplify<NavigationBarDocumentDataNavigationItemsItem>>;
+
+  /**
+   * CTA Links field in *Navigation Bar*
+   *
+   * - **Field Type**: Group
+   * - **Placeholder**: *None*
+   * - **API ID Path**: navigation_bar.cta_links[]
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#group
+   */
+  cta_links: prismic.GroupField<Simplify<NavigationBarDocumentDataCtaLinksItem>>;
 }
 
 /**
@@ -4435,6 +4471,7 @@ declare module '@prismicio/client' {
       NavigationBarDocument,
       NavigationBarDocumentData,
       NavigationBarDocumentDataNavigationItemsItem,
+      NavigationBarDocumentDataCtaLinksItem,
       NavigationElementDocument,
       NavigationElementDocumentData,
       NavigationElementDocumentDataSubsItem,
