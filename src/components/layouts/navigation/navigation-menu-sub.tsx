@@ -74,7 +74,7 @@ export default function NavigationMenuSub({ navigation, settings }: NavigationSu
     >
       <div className={'relative mx-auto flex justify-center w-full max-w-9xl lg:px-8'}>
       <div className="relative flex w-full bg-white md:rounded-lg items-center justify-between shadow-md px-6 py-4">
-        <div className="flex shrink sm:grow  md:flex-shrink">
+        <div className="flex flex-0">
           <div className="relative z-40">
             <Link href="/">
               <span className="sr-only">{settings.site_name}</span>
