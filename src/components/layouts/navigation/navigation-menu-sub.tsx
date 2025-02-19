@@ -63,7 +63,7 @@ export default function NavigationMenuSub({ navigation, settings }: NavigationSu
 
   return (
     <motion.header id={'navbar'}
-                   className="fixed top-0 z-40 w-screen mt-10"
+                   className="fixed top-0 z-40 w-screen lg:mt-10"
                    animate={hidden ? "hidden" : "visible"}
                    variants={parentVariants}
                    transition={{
@@ -73,8 +73,8 @@ export default function NavigationMenuSub({ navigation, settings }: NavigationSu
                    }}
     >
       <div className={'relative mx-auto flex justify-center w-full max-w-9xl lg:px-8'}>
-      <div className="relative flex w-full bg-white rounded-lg items-center justify-between shadow-md px-6 py-4">
-        <div className="flex lg:flex-shrink">
+      <div className="relative flex w-full bg-white md:rounded-lg items-center justify-between shadow-md px-6 py-4">
+        <div className="flex grow lg:flex-shrink">
           <div className="relative z-40">
             <Link href="/">
               <span className="sr-only">{settings.site_name}</span>
@@ -88,11 +88,11 @@ export default function NavigationMenuSub({ navigation, settings }: NavigationSu
             </Link>
           </div>
         </div>
-        <div className="grid grid-cols-2 gap-2 lg:hidden">
-          <NavigationMobileMenu navigation={navigation} logo={settings.logo} />
+        <div className="self-end grid grid-cols-2 gap-2 lg:hidden">
+          <NavigationMobileMenu navigation={navigation} logo={settings.footer_logo} siteName={settings.site_name} />
         </div>
-        <div className={'grow flex item-center justify-center'}>
-        <NavigationMenu className={'hidden lg:block'}>
+        <div className={'hidden lg:flex item-center justify-center'}>
+        <NavigationMenu>
           <NavigationMenuList>
             {navigation?.navigation_items.map((item: NavigationBarDocumentDataNavigationItemsItem, idx) => {
               const navigationItem = item.navigation_item as unknown as NavigationElementDocument | NavigationMegaMenuItemDocument;

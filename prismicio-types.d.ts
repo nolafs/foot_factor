@@ -861,6 +861,17 @@ export interface NavigationElementDocumentDataCtaItem {
  */
 interface NavigationElementDocumentData {
   /**
+   * Icon field in *Navigation Element*
+   *
+   * - **Field Type**: Image
+   * - **Placeholder**: *None*
+   * - **API ID Path**: navigation_element.icon
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#image
+   */
+  icon: prismic.ImageField<never>;
+
+  /**
    * Label field in *Navigation Element*
    *
    * - **Field Type**: Text
@@ -991,6 +1002,17 @@ type NavigationMegaMenuItemDocumentDataSlicesSlice = MegamenuSlice;
  * Content for Navigation Mega Menu Item documents
  */
 interface NavigationMegaMenuItemDocumentData {
+  /**
+   * Icon field in *Navigation Mega Menu Item*
+   *
+   * - **Field Type**: Image
+   * - **Placeholder**: *None*
+   * - **API ID Path**: navigation_mega_menu_item.icon
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#image
+   */
+  icon: prismic.ImageField<never>;
+
   /**
    * Label field in *Navigation Mega Menu Item*
    *

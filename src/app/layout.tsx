@@ -107,9 +107,11 @@ export default async function RootLayout({ children }: Readonly<{ children: Reac
       'navigation_element.link',
       'navigation_element.subs',
       'navigation_element.cta',
+      'navigation_element.icon',
       'navigation_mega_menu_item.subs',
       'navigation_mega_menu_item.label',
       'navigation_mega_menu_item.link',
+      'navigation_mega_menu_item.icon',
       'navigation_mega_menu_item.slices'
     ],
   });
