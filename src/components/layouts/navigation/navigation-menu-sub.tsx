@@ -72,7 +72,7 @@ export default function NavigationMenuSub({ navigation, settings }: NavigationSu
                      staggerChildren: 0.05,
                    }}
     >
-      <div className={'mx-auto flex justify-center w-full max-w-9xl'}>
+      <div className={'mx-auto flex justify-center w-full max-w-[1792px]'}>
       <div className="relative w-full bg-white md:rounded-lg  border border-gray-200 border-opacity-40 px-6 py-4">
         <div className="flex w-full items-center justify-between">
 
@@ -131,7 +131,7 @@ export default function NavigationMenuSub({ navigation, settings }: NavigationSu
                         <NavigationMenuTrigger className={'text-lg'}>{navigationItem.data.label}</NavigationMenuTrigger>
 
                         <NavigationMenuContent>
-                          <div className={'flex flex-row gap-5 pt-5 h-full'}>
+                          <div className={'flex flex-row gap-5 pt-10 h-full w-full'}>
                           <SliceZone slices={navigationItem.data.slices} components={components} context={{subs: navigationItem.data.subs}}/>
                           </div>
                         </NavigationMenuContent>

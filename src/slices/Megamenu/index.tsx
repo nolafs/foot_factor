@@ -47,11 +47,11 @@ const Megamenu: FC<MegaMenuProps> = ({slice, context}) => {
 
   if (slice.variation === 'imageButtonRow') {
 
-    return (<div className={'flex flex-col w-full h-full'}>
+    return (<div><div className={'flex flex-col w-full h-full flex-1 justify-items-stretch'}>
        <div className={`grid grid-cols-${slice.primary.links.length} gap-x-2 h-full`}>
           {slice.primary.links.map((item, idx) => (
-              <div key={`main-nav-item-${idx}`} className={'group'}>
-                <PrismicNextLink field={item.link} className={'relative isolate block w-full overflow-hidden rounded-xl text-shadow text-shadow-blur-5   text-shadow-cyan-950/50'}>
+              <div key={`main-nav-item-${idx}`} className={'group h-full'}>
+                <PrismicNextLink field={item.link} className={'relative isolate block w-full h-full overflow-hidden rounded-xl text-shadow text-shadow-blur-5   text-shadow-cyan-950/50'}>
                   <PrismicImage field={item.image}
 
                                 className={'w-full h-full object-cover object-center transition duration-300 ease-in-out group-hover:scale-110'}
@@ -70,22 +70,22 @@ const Megamenu: FC<MegaMenuProps> = ({slice, context}) => {
           ))}
        </div>
         </div>
+        </div>
     );
 
   }
 
   return (
       <div id={'nav-content'} className={cn('flex flex-col w-full h-full max-w-[512px]')}>
-              <div className="grid grid-cols-1 gap-4 ">
-                {context.subs.map((item, idx) => (
+              <div className="flex flex-col gap-y-3">
+                {context.subs && context.subs.map((item, idx) => (
                     <div
                         key={`main-nav-item-${idx}`}
-                        className="group relative flex item-center gap-x-5 mb-2 rounded-lg p-2 text-sm/6 transition-all duration-500 ease-in-out hover:bg-black">
-                      <div
-                          className="aspect-1 flex size-8 items-center justify-center">
+                        className="group relative flex item-center justify-center gap-x-5 rounded-lg p-5 transition-all duration-500 ease-in-out hover:bg-primary">
+                      <div className={'flex justify-center items-center '}>
                         <PrismicImage
                             field={item.icon}
-                            className="size-8 invert-0 transition-all duration-300 ease-in-out group-hover:invert"
+                            className="size-10 invert-0 transition-all duration-300 ease-in-out group-hover:invert"
                         />
                       </div>
                       <PrismicNextLink
@@ -93,8 +93,8 @@ const Megamenu: FC<MegaMenuProps> = ({slice, context}) => {
                           className={'flex flex-col space-y-1'}
                       >
                         <div
-                            className={'text-base font-medium text-gray-800 transition-all group-hover:text-white'}>{item.label}</div>
-                        <div className={'text-gray-400 transition-all group-hover:text-white'}>{item.subtitle}</div>
+                            className={'text-xl md:text-2xl lg:text-3xl font-medium leading-9 text-primary transition-all group-hover:text-accent'}>{item.label}</div>
+                        <div className={'text-secondary text-sm/6 transition-all group-hover:text-white'}>{item.subtitle}</div>
                         <span className="absolute inset-0"/>
                       </PrismicNextLink>
                     </div>

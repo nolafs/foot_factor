@@ -2465,6 +2465,51 @@ type HeroSliceVariation = HeroSliceDefault | HeroSliceSimple | HeroSliceHeroSear
 export type HeroSlice = prismic.SharedSlice<'hero', HeroSliceVariation>;
 
 /**
+ * Item in *Megamenu → Default → Primary → subs*
+ */
+export interface MegamenuSliceDefaultPrimarySubsItem {
+  /**
+   * Icon field in *Megamenu → Default → Primary → subs*
+   *
+   * - **Field Type**: Image
+   * - **Placeholder**: *None*
+   * - **API ID Path**: megamenu.default.primary.subs[].icon
+   * - **Documentation**: https://prismic.io/docs/field#image
+   */
+  icon: prismic.ImageField<never>;
+
+  /**
+   * Link field in *Megamenu → Default → Primary → subs*
+   *
+   * - **Field Type**: Link
+   * - **Placeholder**: *None*
+   * - **API ID Path**: megamenu.default.primary.subs[].link
+   * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
+   */
+  link: prismic.LinkField<string, string, unknown, prismic.FieldState, never>;
+
+  /**
+   * Subtitle field in *Megamenu → Default → Primary → subs*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: megamenu.default.primary.subs[].subtitle
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  subtitle: prismic.KeyTextField;
+
+  /**
+   * Label field in *Megamenu → Default → Primary → subs*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: megamenu.default.primary.subs[].label
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  label: prismic.KeyTextField;
+}
+
+/**
  * Item in *Megamenu → Image Button Row → Primary → Links*
  */
 export interface MegamenuSliceImageButtonRowPrimaryLinksItem {
@@ -2500,13 +2545,32 @@ export interface MegamenuSliceImageButtonRowPrimaryLinksItem {
 }
 
 /**
+ * Primary content in *Megamenu → Default → Primary*
+ */
+export interface MegamenuSliceDefaultPrimary {
+  /**
+   * subs field in *Megamenu → Default → Primary*
+   *
+   * - **Field Type**: Group
+   * - **Placeholder**: *None*
+   * - **API ID Path**: megamenu.default.primary.subs[]
+   * - **Documentation**: https://prismic.io/docs/field#group
+   */
+  subs: prismic.GroupField<Simplify<MegamenuSliceDefaultPrimarySubsItem>>;
+}
+
+/**
  * Default variation for Megamenu Slice
  *
  * - **API ID**: `default`
  * - **Description**: Default
  * - **Documentation**: https://prismic.io/docs/slice
  */
-export type MegamenuSliceDefault = prismic.SharedSliceVariation<'default', Record<string, never>, never>;
+export type MegamenuSliceDefault = prismic.SharedSliceVariation<
+  'default',
+  Simplify<MegamenuSliceDefaultPrimary>,
+  never
+>;
 
 /**
  * Primary content in *Megamenu → Mega video → Primary*
@@ -3461,6 +3525,8 @@ declare module '@prismicio/client' {
       HeroSliceSimple,
       HeroSliceHeroSearch,
       MegamenuSlice,
+      MegamenuSliceDefaultPrimarySubsItem,
+      MegamenuSliceDefaultPrimary,
       MegamenuSliceMegaVideoPrimary,
       MegamenuSliceImageButtonRowPrimaryLinksItem,
       MegamenuSliceImageButtonRowPrimary,
