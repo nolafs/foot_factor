@@ -92,14 +92,19 @@ export function Footer({ navigation, settings }: FooterProps) {
                       }
 
                       return (
-                          <div key={navigationItem.data.link.text}>
+                          <div key={navigationItem.data.label}>
                             {navigationItem.data.subs[0]?.label ? (
                                 <>
                                   <div className={'mb-10 mt-3'}>
-                                    <PrismicNextLink
-                                        field={navigationItem.data.link}
-                                        className="text-base font-medium text-white transition-all hover:text-white/80">
-                                    </PrismicNextLink>
+                                    {navigationItem.data?.link?.text ? (
+                                        <PrismicNextLink
+                                            field={navigationItem.data.link}
+                                            className="text-base font-medium text-white transition-all hover:text-white/80">
+                                        </PrismicNextLink>
+                                    ) : (
+                                        <span className={'className="text-base font-medium text-white transition-all hover:text-white/80"'}>{navigationItem.data.label}</span>
+                                    )}
+
                                   </div>
                                   <ul role="list" className="flex flex-col gap-2">
                                     {navigationItem.data.subs.map(subItem => (

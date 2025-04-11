@@ -1,10 +1,11 @@
 import React, { type FC} from 'react';
-import {Content} from '@prismicio/client';
+import {Content, filter} from '@prismicio/client';
 import {PrismicImage, PrismicRichText, SliceComponentProps} from '@prismicio/react';
 import cn from 'clsx';
 import {PrismicNextLink} from '@prismicio/next';
 import {NavigationElementDocumentDataSubsItem} from '../../../prismicio-types';
 import ButtonSliceVariation from '@/components/ui/button-slice-variation';
+import BlogArticle from '@/slices/Megamenu/component/blog-article';
 
 /**
  * Props for `Megamenu`.
@@ -14,13 +15,21 @@ export type MegaMenuProps = SliceComponentProps<
     { subs: NavigationElementDocumentDataSubsItem[] } // Typing the context
 >;
 
+const splitArray = (array: NavigationElementDocumentDataSubsItem[], chunkSize: number) => {
+  const result: NavigationElementDocumentDataSubsItem[][] = [];
+  const length = array.length;
+  const sliceSize = Math.ceil(length / chunkSize);
+  for (let i = 0; i < array.length; i += sliceSize) {
+    result.push(array.slice(i, i + sliceSize));
+  }
+  return result;
+}
+
 /**
  * Component for "Megamenu" Slices.
  */
 const Megamenu: FC<MegaMenuProps> = ({slice, context}) => {
   // Access the context here.
-  console.log('MEGA SLICE', slice);
-  console.log('CONTEXT', context );
 
   if(slice.variation === 'megaVideo') {
 
@@ -42,6 +51,12 @@ const Megamenu: FC<MegaMenuProps> = ({slice, context}) => {
       </div>
     </div>
     )
+  }
+
+  if(slice.variation === 'blog') {
+
+    return (<BlogArticle />)
+
   }
 
   if (slice.variation === 'imageButtonRow') {
@@ -71,18 +86,23 @@ const Megamenu: FC<MegaMenuProps> = ({slice, context}) => {
         </div>
         </div>
     );
-
   }
 
-  return (context?.subs && context?.subs.length > 0) ? (
-      <div id={'nav-content'} className={cn('block w-full xl:max-w-[512px]')}>
-              <div className="flex flex-col justify-between w-full h-full">
 
-                {context.subs.map((item, idx) => (
+  const numberOfColumns = slice.primary.columns || 1;
+  const chunkedArray = splitArray(context?.subs || [], numberOfColumns);
+  const largestChunkSize = Math.max(...chunkedArray.map(chunk => chunk.length));
+
+  return (context?.subs && context?.subs.length > 0) ? (
+
+        chunkedArray.map((item, idx) => (
+              <div id={'nav-content'} key={'nav-content-sub' + idx} className={cn('flex w-full xl:max-w-[512px]')}>
+              <div className={cn("flex flex-col  w-full h-full gap-y-2", (largestChunkSize === item.length) ? 'justify-between' : 'justify-start')}>
+                {item.map((item, idx) => (
                     <div
                         key={`main-nav-item-${idx}`}
-                        className="group relative flex item-center justify-center gap-x-5 rounded-lg p-5 transition-all duration-500 ease-in-out hover:bg-primary">
-                      <div className={'flex justify-center items-center '}>
+                        className="group relative flex item-center justify-center  gap-x-5 rounded-lg p-5 transition-all duration-500 ease-in-out hover:bg-primary">
+                      <div className={'flex w-2/12 h-full items-center justify-center'}>
                         <PrismicImage
                             field={item.icon}
                             className="size-10 invert-0 transition-all duration-300 ease-in-out group-hover:invert"
@@ -90,17 +110,18 @@ const Megamenu: FC<MegaMenuProps> = ({slice, context}) => {
                       </div>
                       <PrismicNextLink
                           field={item.link}
-                          className={'flex flex-col space-y-1'}
+                          className={'flex flex-col w-10/12  space-y-1'}
                       >
                         <div
                             className={'text-xl md:text-2xl lg:text-3xl font-medium leading-9 text-primary transition-all group-hover:text-accent'}>{item.label}</div>
                         <div className={'text-secondary text-sm/6 transition-all group-hover:text-white'}>{item.subtitle}</div>
-                        <span className="absolute inset-0"/>
                       </PrismicNextLink>
                     </div>
                 ))}
               </div>
-      </div>
+              </div>
+          ))
+
   ): null;
 };
 

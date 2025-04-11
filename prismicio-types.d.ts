@@ -2465,51 +2465,6 @@ type HeroSliceVariation = HeroSliceDefault | HeroSliceSimple | HeroSliceHeroSear
 export type HeroSlice = prismic.SharedSlice<'hero', HeroSliceVariation>;
 
 /**
- * Item in *Megamenu → Default → Primary → subs*
- */
-export interface MegamenuSliceDefaultPrimarySubsItem {
-  /**
-   * Icon field in *Megamenu → Default → Primary → subs*
-   *
-   * - **Field Type**: Image
-   * - **Placeholder**: *None*
-   * - **API ID Path**: megamenu.default.primary.subs[].icon
-   * - **Documentation**: https://prismic.io/docs/field#image
-   */
-  icon: prismic.ImageField<never>;
-
-  /**
-   * Link field in *Megamenu → Default → Primary → subs*
-   *
-   * - **Field Type**: Link
-   * - **Placeholder**: *None*
-   * - **API ID Path**: megamenu.default.primary.subs[].link
-   * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
-   */
-  link: prismic.LinkField<string, string, unknown, prismic.FieldState, never>;
-
-  /**
-   * Subtitle field in *Megamenu → Default → Primary → subs*
-   *
-   * - **Field Type**: Text
-   * - **Placeholder**: *None*
-   * - **API ID Path**: megamenu.default.primary.subs[].subtitle
-   * - **Documentation**: https://prismic.io/docs/field#key-text
-   */
-  subtitle: prismic.KeyTextField;
-
-  /**
-   * Label field in *Megamenu → Default → Primary → subs*
-   *
-   * - **Field Type**: Text
-   * - **Placeholder**: *None*
-   * - **API ID Path**: megamenu.default.primary.subs[].label
-   * - **Documentation**: https://prismic.io/docs/field#key-text
-   */
-  label: prismic.KeyTextField;
-}
-
-/**
  * Item in *Megamenu → Image Button Row → Primary → Links*
  */
 export interface MegamenuSliceImageButtonRowPrimaryLinksItem {
@@ -2549,14 +2504,14 @@ export interface MegamenuSliceImageButtonRowPrimaryLinksItem {
  */
 export interface MegamenuSliceDefaultPrimary {
   /**
-   * subs field in *Megamenu → Default → Primary*
+   * Columns field in *Megamenu → Default → Primary*
    *
-   * - **Field Type**: Group
+   * - **Field Type**: Number
    * - **Placeholder**: *None*
-   * - **API ID Path**: megamenu.default.primary.subs[]
-   * - **Documentation**: https://prismic.io/docs/field#group
+   * - **API ID Path**: megamenu.default.primary.columns
+   * - **Documentation**: https://prismic.io/docs/field#number
    */
-  subs: prismic.GroupField<Simplify<MegamenuSliceDefaultPrimarySubsItem>>;
+  columns: prismic.NumberField;
 }
 
 /**
@@ -2659,9 +2614,37 @@ export type MegamenuSliceImageButtonRow = prismic.SharedSliceVariation<
 >;
 
 /**
+ * Primary content in *Megamenu → Blog → Primary*
+ */
+export interface MegamenuSliceBlogPrimary {
+  /**
+   * Columns field in *Megamenu → Blog → Primary*
+   *
+   * - **Field Type**: Number
+   * - **Placeholder**: *None*
+   * - **API ID Path**: megamenu.blog.primary.columns
+   * - **Documentation**: https://prismic.io/docs/field#number
+   */
+  columns: prismic.NumberField;
+}
+
+/**
+ * Blog variation for Megamenu Slice
+ *
+ * - **API ID**: `blog`
+ * - **Description**: Default
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type MegamenuSliceBlog = prismic.SharedSliceVariation<'blog', Simplify<MegamenuSliceBlogPrimary>, never>;
+
+/**
  * Slice variation for *Megamenu*
  */
-type MegamenuSliceVariation = MegamenuSliceDefault | MegamenuSliceMegaVideo | MegamenuSliceImageButtonRow;
+type MegamenuSliceVariation =
+  | MegamenuSliceDefault
+  | MegamenuSliceMegaVideo
+  | MegamenuSliceImageButtonRow
+  | MegamenuSliceBlog;
 
 /**
  * Megamenu Shared Slice
@@ -3525,15 +3508,16 @@ declare module '@prismicio/client' {
       HeroSliceSimple,
       HeroSliceHeroSearch,
       MegamenuSlice,
-      MegamenuSliceDefaultPrimarySubsItem,
       MegamenuSliceDefaultPrimary,
       MegamenuSliceMegaVideoPrimary,
       MegamenuSliceImageButtonRowPrimaryLinksItem,
       MegamenuSliceImageButtonRowPrimary,
+      MegamenuSliceBlogPrimary,
       MegamenuSliceVariation,
       MegamenuSliceDefault,
       MegamenuSliceMegaVideo,
       MegamenuSliceImageButtonRow,
+      MegamenuSliceBlog,
       SectionSlice,
       SectionSliceDefaultPrimaryImagesItem,
       SectionSliceDefaultPrimary,

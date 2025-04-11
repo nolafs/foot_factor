@@ -12,49 +12,11 @@
       "description": "Default",
       "imageUrl": "",
       "primary": {
-        "subs": {
-          "type": "Group",
+        "columns": {
+          "type": "Number",
           "config": {
-            "label": "subs",
-            "repeat": true,
-            "fields": {
-              "icon": {
-                "type": "Image",
-                "config": {
-                  "label": "Icon",
-                  "constraint": {
-                    "width": 200,
-                    "height": 200
-                  },
-                  "thumbnails": []
-                }
-              },
-              "link": {
-                "type": "Link",
-                "config": {
-                  "label": "Link",
-                  "placeholder": "",
-                  "select": null,
-                  "allowTargetBlank": true,
-                  "allowText": true,
-                  "repeat": false
-                }
-              },
-              "subtitle": {
-                "type": "Text",
-                "config": {
-                  "label": "Subtitle",
-                  "placeholder": ""
-                }
-              },
-              "label": {
-                "type": "Text",
-                "config": {
-                  "label": "Label",
-                  "placeholder": ""
-                }
-              }
-            }
+            "label": "Columns",
+            "placeholder": ""
           }
         }
       },
@@ -155,6 +117,24 @@
                 }
               }
             }
+          }
+        }
+      },
+      "items": {}
+    },
+    {
+      "id": "blog",
+      "name": "Blog",
+      "docURL": "...",
+      "version": "initial",
+      "description": "Default",
+      "imageUrl": "",
+      "primary": {
+        "columns": {
+          "type": "Number",
+          "config": {
+            "label": "Columns",
+            "placeholder": ""
           }
         }
       },
