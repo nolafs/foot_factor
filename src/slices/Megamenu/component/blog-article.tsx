@@ -33,16 +33,20 @@ export const BlogArticle = ({}: BlogArticleProps) => {
         setResentPosts(resentPosts);
       }
 
-      fetchPosts()
+      fetchPosts();
       console.log('resentPosts', resentPosts);
     }, []);
+
+  if (!resentPosts.length) {
+    return null;
+  }
 
   return (
       <div className={''}>
           {resentPosts.length && (
               <>
                   <h2 className="text-3xl font-medium tracking-tight">Featured Article</h2>
-                  <div className="mt-2 grid grid-cols-2 gap-3">
+                  <div className="mt-2 grid grid-cols-2 gap-3 px-2">
                       {resentPosts.map(post => (
                           <PostFeatureCard key={post.uid} post={post} showExcerpt={false} showAuthor={false} />
                       ))}
