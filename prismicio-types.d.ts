@@ -725,31 +725,6 @@ export interface NavigationBarDocumentDataNavigationItemsItem {
 }
 
 /**
- * Item in *Navigation Bar → CTA Links*
- */
-export interface NavigationBarDocumentDataCtaLinksItem {
-  /**
-   * Link field in *Navigation Bar → CTA Links*
-   *
-   * - **Field Type**: Link
-   * - **Placeholder**: *None*
-   * - **API ID Path**: navigation_bar.cta_links[].link
-   * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
-   */
-  link: prismic.LinkField<string, string, unknown, prismic.FieldState, 'Primary' | 'Secondary' | 'Link' | 'Accent'>;
-
-  /**
-   * Icon field in *Navigation Bar → CTA Links*
-   *
-   * - **Field Type**: Image
-   * - **Placeholder**: *None*
-   * - **API ID Path**: navigation_bar.cta_links[].icon
-   * - **Documentation**: https://prismic.io/docs/field#image
-   */
-  icon: prismic.ImageField<never>;
-}
-
-/**
  * Content for Navigation Bar documents
  */
 interface NavigationBarDocumentData {
@@ -763,17 +738,6 @@ interface NavigationBarDocumentData {
    * - **Documentation**: https://prismic.io/docs/field#group
    */
   navigation_items: prismic.GroupField<Simplify<NavigationBarDocumentDataNavigationItemsItem>>;
-
-  /**
-   * CTA Links field in *Navigation Bar*
-   *
-   * - **Field Type**: Group
-   * - **Placeholder**: *None*
-   * - **API ID Path**: navigation_bar.cta_links[]
-   * - **Tab**: Main
-   * - **Documentation**: https://prismic.io/docs/field#group
-   */
-  cta_links: prismic.GroupField<Simplify<NavigationBarDocumentDataCtaLinksItem>>;
 }
 
 /**
@@ -868,31 +832,6 @@ export interface NavigationElementDocumentDataSubsItem {
 }
 
 /**
- * Item in *Navigation Element → CTA*
- */
-export interface NavigationElementDocumentDataCtaItem {
-  /**
-   * Link field in *Navigation Element → CTA*
-   *
-   * - **Field Type**: Link
-   * - **Placeholder**: *None*
-   * - **API ID Path**: navigation_element.cta[].url
-   * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
-   */
-  url: prismic.LinkField<string, string, unknown, prismic.FieldState, never>;
-
-  /**
-   * Icon field in *Navigation Element → CTA*
-   *
-   * - **Field Type**: Image
-   * - **Placeholder**: *None*
-   * - **API ID Path**: navigation_element.cta[].icon
-   * - **Documentation**: https://prismic.io/docs/field#image
-   */
-  icon: prismic.ImageField<never>;
-}
-
-/**
  * Content for Navigation Element documents
  */
 interface NavigationElementDocumentData {
@@ -939,17 +878,6 @@ interface NavigationElementDocumentData {
    * - **Documentation**: https://prismic.io/docs/field#group
    */
   subs: prismic.GroupField<Simplify<NavigationElementDocumentDataSubsItem>>;
-
-  /**
-   * CTA field in *Navigation Element*
-   *
-   * - **Field Type**: Group
-   * - **Placeholder**: *None*
-   * - **API ID Path**: navigation_element.cta[]
-   * - **Tab**: Main
-   * - **Documentation**: https://prismic.io/docs/field#group
-   */
-  cta: prismic.GroupField<Simplify<NavigationElementDocumentDataCtaItem>>;
 }
 
 /**
@@ -1482,28 +1410,18 @@ export type PostsDocument<Lang extends string = string> = prismic.PrismicDocumen
 >;
 
 /**
- * Item in *Settings → Contact Form Enquiries*
+ * Item in *Settings → Secondary Navigation*
  */
-export interface SettingsDocumentDataContactFormEnquiriesItem {
+export interface SettingsDocumentDataSecondaryNavigationItem {
   /**
-   * Label field in *Settings → Contact Form Enquiries*
+   * Link field in *Settings → Secondary Navigation*
    *
-   * - **Field Type**: Text
+   * - **Field Type**: Link
    * - **Placeholder**: *None*
-   * - **API ID Path**: settings.contact_form_enquiries[].label
-   * - **Documentation**: https://prismic.io/docs/field#key-text
+   * - **API ID Path**: settings.secondary_navigation[].link
+   * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
    */
-  label: prismic.KeyTextField;
-
-  /**
-   * Value field in *Settings → Contact Form Enquiries*
-   *
-   * - **Field Type**: Text
-   * - **Placeholder**: *None*
-   * - **API ID Path**: settings.contact_form_enquiries[].value
-   * - **Documentation**: https://prismic.io/docs/field#key-text
-   */
-  value: prismic.KeyTextField;
+  link: prismic.LinkField<string, string, unknown, prismic.FieldState, never>;
 }
 
 /**
@@ -1542,18 +1460,28 @@ export interface SettingsDocumentDataSocialMediaItem {
 }
 
 /**
- * Item in *Settings → Secondary Navigation*
+ * Item in *Settings → Contact Form Enquiries*
  */
-export interface SettingsDocumentDataSecondaryNavigationItem {
+export interface SettingsDocumentDataContactFormEnquiriesItem {
   /**
-   * Link field in *Settings → Secondary Navigation*
+   * Label field in *Settings → Contact Form Enquiries*
    *
-   * - **Field Type**: Link
+   * - **Field Type**: Text
    * - **Placeholder**: *None*
-   * - **API ID Path**: settings.secondary_navigation[].link
-   * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
+   * - **API ID Path**: settings.contact_form_enquiries[].label
+   * - **Documentation**: https://prismic.io/docs/field#key-text
    */
-  link: prismic.LinkField<string, string, unknown, prismic.FieldState, never>;
+  label: prismic.KeyTextField;
+
+  /**
+   * Value field in *Settings → Contact Form Enquiries*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: settings.contact_form_enquiries[].value
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  value: prismic.KeyTextField;
 }
 
 /**
@@ -1583,37 +1511,15 @@ interface SettingsDocumentData {
   site_name: prismic.KeyTextField;
 
   /**
-   * Copyright Line field in *Settings*
+   * Favicon field in *Settings*
    *
-   * - **Field Type**: Text
+   * - **Field Type**: Image
    * - **Placeholder**: *None*
-   * - **API ID Path**: settings.copyright_line
+   * - **API ID Path**: settings.favicon
    * - **Tab**: Main
-   * - **Documentation**: https://prismic.io/docs/field#key-text
+   * - **Documentation**: https://prismic.io/docs/field#image
    */
-  copyright_line: prismic.KeyTextField;
-
-  /**
-   * Contact Form Enquiries field in *Settings*
-   *
-   * - **Field Type**: Group
-   * - **Placeholder**: *None*
-   * - **API ID Path**: settings.contact_form_enquiries[]
-   * - **Tab**: Main
-   * - **Documentation**: https://prismic.io/docs/field#group
-   */
-  contact_form_enquiries: prismic.GroupField<Simplify<SettingsDocumentDataContactFormEnquiriesItem>>;
-
-  /**
-   * Social Media field in *Settings*
-   *
-   * - **Field Type**: Group
-   * - **Placeholder**: *None*
-   * - **API ID Path**: settings.social_media[]
-   * - **Tab**: Main
-   * - **Documentation**: https://prismic.io/docs/field#group
-   */
-  social_media: prismic.GroupField<Simplify<SettingsDocumentDataSocialMediaItem>> /**
+  favicon: prismic.ImageField<never> /**
    * Canonical Url field in *Settings*
    *
    * - **Field Type**: Text
@@ -1676,6 +1582,17 @@ interface SettingsDocumentData {
    * - **Documentation**: https://prismic.io/docs/field#image
    */;
   footer_logo: prismic.ImageField<never>;
+
+  /**
+   * Copyright Line field in *Settings*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: settings.copyright_line
+   * - **Tab**: Footer
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  copyright_line: prismic.KeyTextField;
 
   /**
    * Secondary Navigation field in *Settings*
@@ -1743,7 +1660,25 @@ interface SettingsDocumentData {
    * - **Tab**: Footer
    * - **Documentation**: https://prismic.io/docs/field#image
    */
-  google_rating: prismic.ImageField<never>;
+  google_rating: prismic.ImageField<never> /**
+   * Social Media field in *Settings*
+   *
+   * - **Field Type**: Group
+   * - **Placeholder**: *None*
+   * - **API ID Path**: settings.social_media[]
+   * - **Tab**: Social Media
+   * - **Documentation**: https://prismic.io/docs/field#group
+   */;
+  social_media: prismic.GroupField<Simplify<SettingsDocumentDataSocialMediaItem>> /**
+   * Contact Form Enquiries field in *Settings*
+   *
+   * - **Field Type**: Group
+   * - **Placeholder**: *None*
+   * - **API ID Path**: settings.contact_form_enquiries[]
+   * - **Tab**: Booking & Contact
+   * - **Documentation**: https://prismic.io/docs/field#group
+   */;
+  contact_form_enquiries: prismic.GroupField<Simplify<SettingsDocumentDataContactFormEnquiriesItem>>;
 }
 
 /**
@@ -2530,6 +2465,41 @@ type HeroSliceVariation = HeroSliceDefault | HeroSliceSimple | HeroSliceHeroSear
 export type HeroSlice = prismic.SharedSlice<'hero', HeroSliceVariation>;
 
 /**
+ * Item in *Megamenu → Image Button Row → Primary → Links*
+ */
+export interface MegamenuSliceImageButtonRowPrimaryLinksItem {
+  /**
+   * Image field in *Megamenu → Image Button Row → Primary → Links*
+   *
+   * - **Field Type**: Image
+   * - **Placeholder**: *None*
+   * - **API ID Path**: megamenu.imageButtonRow.primary.links[].image
+   * - **Documentation**: https://prismic.io/docs/field#image
+   */
+  image: prismic.ImageField<never>;
+
+  /**
+   * Link field in *Megamenu → Image Button Row → Primary → Links*
+   *
+   * - **Field Type**: Link
+   * - **Placeholder**: *None*
+   * - **API ID Path**: megamenu.imageButtonRow.primary.links[].link
+   * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
+   */
+  link: prismic.LinkField<string, string, unknown, prismic.FieldState, never>;
+
+  /**
+   * Description field in *Megamenu → Image Button Row → Primary → Links*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: megamenu.imageButtonRow.primary.links[].description
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  description: prismic.KeyTextField;
+}
+
+/**
  * Default variation for Megamenu Slice
  *
  * - **API ID**: `default`
@@ -2597,9 +2567,37 @@ export type MegamenuSliceMegaVideo = prismic.SharedSliceVariation<
 >;
 
 /**
+ * Primary content in *Megamenu → Image Button Row → Primary*
+ */
+export interface MegamenuSliceImageButtonRowPrimary {
+  /**
+   * Links field in *Megamenu → Image Button Row → Primary*
+   *
+   * - **Field Type**: Group
+   * - **Placeholder**: *None*
+   * - **API ID Path**: megamenu.imageButtonRow.primary.links[]
+   * - **Documentation**: https://prismic.io/docs/field#group
+   */
+  links: prismic.GroupField<Simplify<MegamenuSliceImageButtonRowPrimaryLinksItem>>;
+}
+
+/**
+ * Image Button Row variation for Megamenu Slice
+ *
+ * - **API ID**: `imageButtonRow`
+ * - **Description**: Default
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type MegamenuSliceImageButtonRow = prismic.SharedSliceVariation<
+  'imageButtonRow',
+  Simplify<MegamenuSliceImageButtonRowPrimary>,
+  never
+>;
+
+/**
  * Slice variation for *Megamenu*
  */
-type MegamenuSliceVariation = MegamenuSliceDefault | MegamenuSliceMegaVideo;
+type MegamenuSliceVariation = MegamenuSliceDefault | MegamenuSliceMegaVideo | MegamenuSliceImageButtonRow;
 
 /**
  * Megamenu Shared Slice
@@ -3405,11 +3403,9 @@ declare module '@prismicio/client' {
       NavigationBarDocument,
       NavigationBarDocumentData,
       NavigationBarDocumentDataNavigationItemsItem,
-      NavigationBarDocumentDataCtaLinksItem,
       NavigationElementDocument,
       NavigationElementDocumentData,
       NavigationElementDocumentDataSubsItem,
-      NavigationElementDocumentDataCtaItem,
       NavigationMegaMenuItemDocument,
       NavigationMegaMenuItemDocumentData,
       NavigationMegaMenuItemDocumentDataSubsItem,
@@ -3429,9 +3425,9 @@ declare module '@prismicio/client' {
       PostsDocumentDataKeywordsItem,
       SettingsDocument,
       SettingsDocumentData,
-      SettingsDocumentDataContactFormEnquiriesItem,
-      SettingsDocumentDataSocialMediaItem,
       SettingsDocumentDataSecondaryNavigationItem,
+      SettingsDocumentDataSocialMediaItem,
+      SettingsDocumentDataContactFormEnquiriesItem,
       AllDocumentTypes,
       CallToActionSlice,
       CallToActionSliceDefaultPrimary,
@@ -3466,9 +3462,12 @@ declare module '@prismicio/client' {
       HeroSliceHeroSearch,
       MegamenuSlice,
       MegamenuSliceMegaVideoPrimary,
+      MegamenuSliceImageButtonRowPrimaryLinksItem,
+      MegamenuSliceImageButtonRowPrimary,
       MegamenuSliceVariation,
       MegamenuSliceDefault,
       MegamenuSliceMegaVideo,
+      MegamenuSliceImageButtonRow,
       SectionSlice,
       SectionSliceDefaultPrimaryImagesItem,
       SectionSliceDefaultPrimary,

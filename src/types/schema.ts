@@ -4,11 +4,10 @@ import {
   ContactPage,
   Blog,
   BlogPosting,
-  VideoObject,
   CollectionPage,
   MedicalScholarlyArticle,
 } from 'schema-dts';
-import { DownloadDocument, PostsDocument, VideoDocument } from '../../prismicio-types';
+import { DownloadDocument, PostsDocument } from '../../prismicio-types';
 
 const JSONLD: WithContext<MedicalWebPage> = {
   '@context': 'https://schema.org',
@@ -127,49 +126,6 @@ export const BLOGJSONLD = (featurePosts: PostsDocument[]): WithContext<Blog> => 
   };
 };
 
-export const VIDEO_BLOG_JSONLD = (videoPosts: VideoDocument[]): WithContext<Blog> => {
-  return {
-    '@context': 'https://schema.org',
-    '@type': 'Blog',
-    mainEntityOfPage: {
-      '@type': 'WebPage',
-      '@id': 'https://myankle.co.uk/videos',
-    },
-    name: 'MyAnkle.co.uk – Video Library',
-    url: 'https://myankle.co.uk/videos',
-    description:
-      'Explore expert-led videos on ankle conditions, treatments, and recovery advice from leading orthopaedic specialists.',
-    publisher: {
-      '@type': 'Organization',
-      name: 'MyAnkle.co.uk',
-      logo: {
-        '@type': 'ImageObject',
-        url: 'https://myankle.co.uk/share-img.png',
-      },
-    },
-    hasPart: videoPosts.map(video => ({
-      '@type': 'VideoObject',
-      name: video.data.name ?? '',
-      description: video.data.description || '',
-      uploadDate: video.data.publishing_date ?? '',
-      thumbnailUrl: video.data.poster?.url ?? '',
-      contentUrl: video.data.video_url || '', // Ensure this is an actual video file or page URL
-      embedUrl: video.data.video_url.url || '', // If it's an embedded video (YouTube/Vimeo)
-      author: {
-        '@type': 'Person',
-        name: 'Mr. Andrew Goldberg OBE',
-      },
-      publisher: {
-        '@type': 'Organization',
-        name: 'MyAnkle.co.uk',
-        logo: {
-          '@type': 'ImageObject',
-          url: 'https://myankle.co.uk/logo.png',
-        },
-      },
-    })) as unknown as VideoObject[],
-  };
-};
 
 export const DOWNLOADS_JSONLD = (downloads: DownloadDocument[]): WithContext<CollectionPage> => {
   return {

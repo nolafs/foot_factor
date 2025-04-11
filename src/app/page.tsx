@@ -5,11 +5,10 @@ import {notFound} from 'next/navigation';
 import {createClient} from '@/prismicio';
 import {BentoSection} from '@/components/features/resources/bentoList';
 import {filter} from '@prismicio/client';
-import {SliderResource} from '@/components/features/resources/slider-resource';
-import SliderVideo from '@/components/features/resources/slider-video';
 
 import Animate from '@/lib/animation';
 import JSONLD from '@/types/schema';
+import Script from 'next/script';
 
 export default async function HomePage() {
   const client = createClient();
@@ -59,7 +58,7 @@ export default async function HomePage() {
         {page.data.slices && <SliceZone slices={page.data.slices} components={components}/>}
 
         {/* Add JSON-LD to your page */}
-        <script type="application/ld+json" dangerouslySetInnerHTML={{__html: JSON.stringify(jsonLd)}}/>
+        <Script type="application/ld+json" dangerouslySetInnerHTML={{__html: JSON.stringify(jsonLd)}}/>
       </main>
   );
 }

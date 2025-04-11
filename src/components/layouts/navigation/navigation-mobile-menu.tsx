@@ -123,14 +123,6 @@ export const NavigationMobileMenu = ({ logo, navigation, siteName}: NavigationSu
             })}
             <div className="w-full border-t mt-10 border-gray-300/20"/>
 
-            <div className={'flex flex-col mt-10 px-5 space-y-3 py-5'}>
-              {navigation.cta_links.map((item, idx) => {
-                return (
-                    <ButtonSliceVariation key={`main-mobile-cta-nav-${idx}`} link={item.link} icon={item.icon}
-                                     />
-                )
-              })}
-            </div>
 
           </div>
         </SheetContent>

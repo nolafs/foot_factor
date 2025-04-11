@@ -3,8 +3,8 @@ import {Content} from '@prismicio/client';
 import {PrismicImage, PrismicRichText, SliceComponentProps} from '@prismicio/react';
 import cn from 'clsx';
 import {PrismicNextLink} from '@prismicio/next';
-import {motion} from 'framer-motion';
-import {NavigationElementDocumentData, NavigationElementDocumentDataSubsItem} from '../../../prismicio-types';
+import {NavigationElementDocumentDataSubsItem} from '../../../prismicio-types';
+import Linķ from 'next/link';
 import ButtonSliceVariation from '@/components/ui/button-slice-variation';
 
 /**
@@ -45,20 +45,47 @@ const Megamenu: FC<MegaMenuProps> = ({slice, context}) => {
     )
   }
 
+  if (slice.variation === 'imageButtonRow') {
+
+    return (<div className={'flex flex-col w-full h-full'}>
+       <div className={`grid grid-cols-${slice.primary.links.length} gap-x-2 h-full`}>
+          {slice.primary.links.map((item, idx) => (
+              <div key={`main-nav-item-${idx}`} className={'group'}>
+                <PrismicNextLink field={item.link} className={'relative isolate block w-full overflow-hidden rounded-xl text-shadow text-shadow-blur-5   text-shadow-cyan-950/50'}>
+                  <PrismicImage field={item.image}
+
+                                className={'w-full h-full object-cover object-center transition duration-300 ease-in-out group-hover:scale-110'}
+                  />
+                  <div className={'absolute top-0 left-0 h-full w-full bg-gradient-to-b from-cyan-950/0 to-cyan-950 z-1 transition duration-300 ease-in-out  group-hover:opacity-60'}></div>
+                  <div className={' absolute bottom-0 left-0 p-5 z-2 text-white overflow-hidden'}>
+                    <span className={'text-base md:text-xl lg:text-2xl  text-white font-bold font-heading'}>{item.link.text}</span>
+                    {item.description &&
+                    <div className={'max-h-0  group-hover:max-h-[300px] text-sm opacity-0 group-hover:opacity-100 transition-all duration-300 ease-in-out'}>
+                      {item.description}
+                    </div>
+                    }
+                  </div>
+                </PrismicNextLink>
+              </div>
+          ))}
+       </div>
+        </div>
+    );
+
+  }
 
   return (
-      <div id={'nav-content'} className={cn('relative block w-full grow')}>
-
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+      <div id={'nav-content'} className={cn('flex flex-col w-full h-full max-w-[512px]')}>
+              <div className="grid grid-cols-1 gap-4 ">
                 {context.subs.map((item, idx) => (
                     <div
                         key={`main-nav-item-${idx}`}
                         className="group relative flex item-center gap-x-5 mb-2 rounded-lg p-2 text-sm/6 transition-all duration-500 ease-in-out hover:bg-black">
                       <div
-                          className="aspect-1 flex size-8 items-center justify-center rounded-lg bg-black transition-all duration-300 ease-in-out group-hover:bg-white">
+                          className="aspect-1 flex size-8 items-center justify-center">
                         <PrismicImage
                             field={item.icon}
-                            className="size-6 invert transition-all duration-300 ease-in-out group-hover:invert-0"
+                            className="size-8 invert-0 transition-all duration-300 ease-in-out group-hover:invert"
                         />
                       </div>
                       <PrismicNextLink

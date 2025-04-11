@@ -12,12 +12,14 @@ const NavigationMenu = React.forwardRef<
   <NavigationMenuPrimitive.Root
     ref={ref}
     className={cn(
-      "flex max-w-max flex-1 items-center justify-center",
+      "flex flex-col items-center justify-center w-full overflow-hidden",
       className
     )}
     {...props}
   >
-    {children}
+    <div className="flex justify-between w-full">
+      {children}
+    </div>
     <NavigationMenuViewport />
   </NavigationMenuPrimitive.Root>
 ))
@@ -41,7 +43,7 @@ NavigationMenuList.displayName = NavigationMenuPrimitive.List.displayName
 const NavigationMenuItem = NavigationMenuPrimitive.Item
 
 const navigationMenuTriggerStyle = cva(
-  "group inline-flex h-10 w-max items-center justify-center rounded-md bg-background px-4 py-2 text-sm font-medium transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground focus:outline-none disabled:pointer-events-none disabled:opacity-50 data-[active]:bg-accent/50 data-[state=open]:bg-accent/50"
+  "group inline-flex h-10 w-max items-center justify-center rounded-full bg-background text-gray-500 text-sm lg:text-lg px-4 py-2 font-medium leading-normal transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground focus:outline-none disabled:pointer-events-none disabled:opacity-50 data-[active]:bg-accent/50 data-[state=open]:bg-accent/50"
 )
 
 const NavigationMenuTrigger = React.forwardRef<
@@ -83,10 +85,10 @@ const NavigationMenuViewport = React.forwardRef<
   React.ElementRef<typeof NavigationMenuPrimitive.Viewport>,
   React.ComponentPropsWithoutRef<typeof NavigationMenuPrimitive.Viewport>
 >(({ className, ...props }, ref) => (
-  <div className={cn("absolute left-0 top-full w-full flex justify-center")}>
+  <div className={cn("relative w-full overflow-hidden")}>
     <NavigationMenuPrimitive.Viewport
       className={cn(
-        "origin-top-center relative mt-1.5 h-[var(--radix-navigation-menu-viewport-height)] w-full overflow-hidden rounded-md border bg-popover text-popover-foreground shadow-lg data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-90 md:min-w-full",
+        "origin-center relative h-0 data-[state=open]:h-[var(--radix-navigation-menu-viewport-height)] data-[state=closed]:h-[0] transition-all mt-2 w-full overflow-hidden bg-popover text-popover-foreground data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:slide-out-to-top data-[state=open]:slide-in-from-top  md:min-w-full",
         className
       )}
       ref={ref}

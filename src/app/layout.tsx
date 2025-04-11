@@ -1,5 +1,5 @@
 import '@/styles/globals.css';
-import {GeistSans} from "geist/font/sans";
+import { Poppins, Exo_2 } from 'next/font/google';
 import { type Metadata, type ResolvingMetadata } from 'next';
 import { PrismicPreview } from '@prismicio/next';
 import { repositoryName } from '@/prismicio';
@@ -7,16 +7,24 @@ import CookieConsent from '@/components/features/cookie-consent/cookie-consent';
 import { GoogleAnalytics } from '@next/third-parties/google';
 import Footer from '@/components/layouts/footer';
 import { createClient } from '@/prismicio';
-import logo from '@/assets/logo.svg';
 import NextTopLoader from 'nextjs-toploader';
-import type { SocialLinkItemType } from '@/types/socialLinkItem.type';
-import type { Cta, LinkPrismicType } from '@/types';
 import NavigationMenuSub from '@/components/layouts/navigation/navigation-menu-sub';
 import BackToTop from '@/components/ui/BackToTop';
-import { Suspense } from 'react';
+import React, { Suspense } from 'react';
 import { SearchProvider } from '@/components/features/search/search-context';
 import { SearchOverlay } from '@/components/features/search/search-overlay';
 
+const poppins = Poppins({
+  subsets: ['latin'],
+  variable: '--font-poppins',
+  weight: ['400', '500', '600', '700'],
+})
+
+const exo2 = Exo_2({
+  subsets: ['latin'],
+  variable: '--font-exo-2',
+  weight: ['400', '500', '600', '700'],
+});
 
 type Props = {
   params: Promise<{ uid: string }>;
@@ -33,7 +41,7 @@ function isURL(string: string | null | undefined): boolean {
 export async function generateMetadata({}: Props, parent: ResolvingMetadata): Promise<Metadata> {
   const client = createClient();
   const settings = await client.getSingle('settings');
-  const defaultImages = ['/share-img.png'];
+  const defaultImages = [];
 
   if (settings?.data.share_image?.url) {
     defaultImages[0] = settings?.data.share_image?.url;
@@ -51,42 +59,12 @@ export async function generateMetadata({}: Props, parent: ResolvingMetadata): Pr
         'application/rss+xml': `${process.env.NEXT_PUBLIC_BASE_URL}feed.xml`,
       },
     },
-    title: settings?.data.meta_title ?? (await parent).title ?? 'Bespoke Orthotics London | Biomechanics Analysis | Foot Factor UK',
+    title: settings?.data.meta_title ?? (await parent).title ?? 'Foot Factor UK',
     description: settings?.data.meta_description ?? (await parent).description,
     keywords: settings?.data.meta_keywords ?? (await parent).keywords ?? '',
     openGraph: {
       images: [...defaultImages],
     },
-    icons: [
-      {
-        rel: 'icon',
-        type: 'image/png',
-        sizes: '32x32',
-        url: '/favicon-32x32.png',
-      },
-      {
-        rel: 'icon',
-        type: 'image/png',
-        sizes: '48x48',
-        url: '/favicon-48x48.png',
-      },
-      {
-        rel: 'icon',
-        type: 'image/svg+xml',
-        url: '/favicon.svg',
-      },
-      {
-        rel: 'icon',
-        type: 'image/png',
-        sizes: '16x16',
-        url: '/favicon.ico',
-      },
-      {
-        rel: 'apple-touch-icon',
-        sizes: '180x180',
-        url: '/apple-touch-icon.png',
-      },
-    ],
     robots: {
       index: true,
       follow: true,
@@ -120,7 +98,7 @@ export default async function RootLayout({ children }: Readonly<{ children: Reac
 
 
   return (
-    <html lang="en" className={`${GeistSans.variable}`}>
+    <html lang="en" className={`${poppins.variable} ${exo2.variable}`}>
       <body className={'min-h-screen text-gray-950 antialiased'}>
         {/* Loading-bar */}
         <NextTopLoader color={'hsl(var(--accent))'} height={5} showSpinner={false} shadow={false} zIndex={99999} />
@@ -144,6 +122,7 @@ export default async function RootLayout({ children }: Readonly<{ children: Reac
             <BackToTop />
           </Suspense>
 
+          {/* Prismic preview */}
           <PrismicPreview repositoryName={repositoryName} />
 
           <SearchOverlay />

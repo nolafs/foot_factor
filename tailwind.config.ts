@@ -27,9 +27,10 @@ export default {
 			},
   		fontFamily: {
   			sans: [
-  				'var(--font-geist-sans)',
+  				'var(--font-poppins)',
                     ...fontFamily.sans
-                ]
+                ],
+				heading: ['var(--font-exo-2)', ...fontFamily.sans],
   		},
   		borderRadius: {
   			lg: 'var(--radius)',
@@ -77,8 +78,11 @@ export default {
   				'4': 'hsl(var(--chart-4))',
   				'5': 'hsl(var(--chart-5))'
   			}
-  		}
+  		},
   	}
   },
-  plugins: [require('@tailwindcss/aspect-ratio'), require('@tailwindcss/typography'), require('@tailwindcss/forms'), require("tailwindcss-animate")],
+	corePlugins: {
+		aspectRatio: false,
+	},
+  plugins: [require('@tailwindcss/aspect-ratio'), require('@tailwindcss/typography'), require('@tailwindcss/forms'), require("tailwindcss-animate"), require("@designbycode/tailwindcss-text-shadow")],
 } satisfies Config;

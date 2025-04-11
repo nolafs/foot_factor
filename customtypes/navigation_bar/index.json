@@ -23,38 +23,6 @@
             }
           }
         }
-      },
-      "cta_links": {
-        "type": "Group",
-        "config": {
-          "label": "CTA Links",
-          "repeat": true,
-          "fields": {
-            "link": {
-              "type": "Link",
-              "config": {
-                "label": "Link",
-                "placeholder": "",
-                "select": null,
-                "allowTargetBlank": true,
-                "allowText": true,
-                "repeat": false,
-                "variants": ["Primary", "Secondary", "Link", "Accent"]
-              }
-            },
-            "icon": {
-              "type": "Image",
-              "config": {
-                "label": "Icon",
-                "constraint": {
-                  "width": 100,
-                  "height": 100
-                },
-                "thumbnails": []
-              }
-            }
-          }
-        }
       }
     }
   }

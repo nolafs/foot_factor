@@ -108,37 +108,6 @@
             }
           }
         }
-      },
-      "cta": {
-        "type": "Group",
-        "config": {
-          "label": "CTA",
-          "repeat": true,
-          "fields": {
-            "url": {
-              "type": "Link",
-              "config": {
-                "label": "Link",
-                "placeholder": "",
-                "select": null,
-                "allowTargetBlank": true,
-                "allowText": true,
-                "repeat": false
-              }
-            },
-            "icon": {
-              "type": "Image",
-              "config": {
-                "label": "Icon",
-                "constraint": {
-                  "width": 50,
-                  "height": 50
-                },
-                "thumbnails": []
-              }
-            }
-          }
-        }
       }
     }
   }

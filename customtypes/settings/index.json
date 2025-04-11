@@ -21,69 +21,15 @@
           "placeholder": ""
         }
       },
-      "copyright_line": {
-        "type": "Text",
+      "favicon": {
+        "type": "Image",
         "config": {
-          "label": "Copyright Line",
-          "placeholder": ""
-        }
-      },
-      "contact_form_enquiries": {
-        "type": "Group",
-        "config": {
-          "label": "Contact Form Enquiries",
-          "repeat": true,
-          "fields": {
-            "label": {
-              "type": "Text",
-              "config": {
-                "label": "Label",
-                "placeholder": ""
-              }
-            },
-            "value": {
-              "type": "Text",
-              "config": {
-                "label": "Value",
-                "placeholder": ""
-              }
-            }
-          }
-        }
-      },
-      "social_media": {
-        "type": "Group",
-        "config": {
-          "label": "Social Media",
-          "repeat": true,
-          "fields": {
-            "type": {
-              "type": "Select",
-              "config": {
-                "label": "Type",
-                "placeholder": "",
-                "options": ["facebook", "instagram", "twitter", "gitHub", "youtube", "tiktok", "linkedin"]
-              }
-            },
-            "name": {
-              "type": "Text",
-              "config": {
-                "label": "Name",
-                "placeholder": ""
-              }
-            },
-            "url": {
-              "type": "Link",
-              "config": {
-                "label": "Url",
-                "placeholder": "",
-                "select": null,
-                "allowTargetBlank": true,
-                "allowText": true,
-                "repeat": false
-              }
-            }
-          }
+          "label": "Favicon",
+          "constraint": {
+            "width": 500,
+            "height": 500
+          },
+          "thumbnails": []
         }
       }
     },
@@ -101,7 +47,7 @@
           "label": "Share Image",
           "constraint": {
             "width": 1200,
-            "height": 650
+            "height": 630
           },
           "thumbnails": []
         }
@@ -135,6 +81,13 @@
           "label": "Footer Logo",
           "constraint": {},
           "thumbnails": []
+        }
+      },
+      "copyright_line": {
+        "type": "Text",
+        "config": {
+          "label": "Copyright Line",
+          "placeholder": ""
         }
       },
       "secondary_navigation": {
@@ -198,6 +151,68 @@
           "label": "Google Rating",
           "constraint": {},
           "thumbnails": []
+        }
+      }
+    },
+    "Social Media": {
+      "social_media": {
+        "type": "Group",
+        "config": {
+          "label": "Social Media",
+          "repeat": true,
+          "fields": {
+            "type": {
+              "type": "Select",
+              "config": {
+                "label": "Type",
+                "placeholder": "",
+                "options": ["facebook", "instagram", "twitter", "gitHub", "youtube", "tiktok", "linkedin"]
+              }
+            },
+            "name": {
+              "type": "Text",
+              "config": {
+                "label": "Name",
+                "placeholder": ""
+              }
+            },
+            "url": {
+              "type": "Link",
+              "config": {
+                "label": "Url",
+                "placeholder": "",
+                "select": null,
+                "allowTargetBlank": true,
+                "allowText": true,
+                "repeat": false
+              }
+            }
+          }
+        }
+      }
+    },
+    "Booking & Contact": {
+      "contact_form_enquiries": {
+        "type": "Group",
+        "config": {
+          "label": "Contact Form Enquiries",
+          "repeat": true,
+          "fields": {
+            "label": {
+              "type": "Text",
+              "config": {
+                "label": "Label",
+                "placeholder": ""
+              }
+            },
+            "value": {
+              "type": "Text",
+              "config": {
+                "label": "Value",
+                "placeholder": ""
+              }
+            }
+          }
         }
       }
     }
