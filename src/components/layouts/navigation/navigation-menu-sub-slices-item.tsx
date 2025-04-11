@@ -101,19 +101,6 @@ export const NavigationMenuSubItem = ({item}: { item: NavigationElementDocumentD
           </div>
         </div>
         </div>
-        <div className="bg-gray-900 w-full">
-            <div className="grid grid-cols-2 divide-x divide-gray-900/5 border-x border-gray-900/5">
-              {item.cta.map((item, idx) => (
-                  <PrismicNextLink
-                      key={`cta-${idx}`}
-                      field={item.url}
-                      className="flex items-center justify-center gap-x-2.5 p-3 text-lg font-medium text-white transition-all duration-500 hover:bg-gray-900/30">
-                    <PrismicImage field={item.icon} className="size-5 flex-none text-gray-400 invert"/>
-                    {item.url.text}
-                  </PrismicNextLink>
-              ))}
-            </div>
-        </div>
       </div>
   )
 }

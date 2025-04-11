@@ -1,10 +1,9 @@
-import React, {FC} from 'react';
+import React, { type FC} from 'react';
 import {Content} from '@prismicio/client';
 import {PrismicImage, PrismicRichText, SliceComponentProps} from '@prismicio/react';
 import cn from 'clsx';
 import {PrismicNextLink} from '@prismicio/next';
 import {NavigationElementDocumentDataSubsItem} from '../../../prismicio-types';
-import Linķ from 'next/link';
 import ButtonSliceVariation from '@/components/ui/button-slice-variation';
 
 /**
@@ -75,10 +74,11 @@ const Megamenu: FC<MegaMenuProps> = ({slice, context}) => {
 
   }
 
-  return (
+  return (context?.subs && context?.subs.length > 0) ? (
       <div id={'nav-content'} className={cn('block w-full xl:max-w-[512px]')}>
               <div className="flex flex-col justify-between w-full h-full">
-                {context.subs && context.subs.map((item, idx) => (
+
+                {context.subs.map((item, idx) => (
                     <div
                         key={`main-nav-item-${idx}`}
                         className="group relative flex item-center justify-center gap-x-5 rounded-lg p-5 transition-all duration-500 ease-in-out hover:bg-primary">
@@ -101,7 +101,7 @@ const Megamenu: FC<MegaMenuProps> = ({slice, context}) => {
                 ))}
               </div>
       </div>
-  );
+  ): null;
 };
 
 export default Megamenu;

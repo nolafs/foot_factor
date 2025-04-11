@@ -11,7 +11,6 @@ import { type KeyTextField, type LinkField, type Repeatable, type RichTextField 
 import { PrismicRichText } from 'node_modules/@prismicio/react/dist/PrismicRichText';
 import {
   type AuthorDocumentData,
-  type VideoDocument,
   type DownloadDocument,
   type PostCategoryDocument,
 } from '../../../../prismicio-types';
@@ -26,7 +25,7 @@ export interface SliderResourcesProps {
   subheading: KeyTextField | string;
   body: RichTextField;
   links: Repeatable<LinkField>;
-  listings: VideoDocument[] | DownloadDocument[];
+  listings: any[] | DownloadDocument[];
   variation?: 'resource' | 'video';
 }
 

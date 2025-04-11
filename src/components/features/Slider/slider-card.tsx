@@ -6,7 +6,7 @@ import dynamic from 'next/dynamic';
 import type { PostCategoryDocument } from '../../../../prismicio-types';
 // dynamic import
 const SliderResourceCard = dynamic(() => import('@/components/features/Slider/slider-resource-card'));
-const SliderVideoCard = dynamic(() => import('@/components/features/Slider/slider-video-card'));
+
 
 export function SliderCard({
   name,
@@ -73,9 +73,6 @@ export function SliderCard({
       {...props}
       className="relative flex aspect-[9/16] w-72 shrink-0 snap-start scroll-ml-[var(--scroll-padding)] flex-col justify-end overflow-hidden rounded-3xl sm:aspect-[3/4] sm:w-96">
       {variation === 'resource' && <SliderResourceCard img={img} name={name} title={title} file={file} />}
-      {variation === 'video' && (
-        <SliderVideoCard poster={img} category={category} slug={slug} name={name} title={title} video={video} />
-      )}
     </motion.div>
   );
 }

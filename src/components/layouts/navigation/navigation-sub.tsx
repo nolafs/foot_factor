@@ -121,21 +121,6 @@ export default function NavigationSub({ navigation, logo }: NavigationSubProps) 
                       </div>
                     ))}
                   </div>
-                  <div className="bg-gray-50">
-                    <div className="mx-auto max-w-7xl px-6 lg:px-8">
-                      <div className="grid grid-cols-2 divide-x divide-gray-900/5 border-x border-gray-900/5">
-                        {navigationItem.data.cta.map((item, idx) => (
-                          <PrismicNextLink
-                            key={`cta-${idx}`}
-                            field={item.url}
-                            className="flex items-center justify-center gap-x-2.5 p-3 text-sm/6 font-semibold text-gray-900 hover:bg-gray-100">
-                            <PrismicImage field={item.icon} className="size-5 flex-none text-gray-400" />
-                            {item.url.text}
-                          </PrismicNextLink>
-                        ))}
-                      </div>
-                    </div>
-                  </div>
                 </PopoverPanel>
               </Popover>
             ) : (

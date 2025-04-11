@@ -58,7 +58,7 @@ export default async function HomePage() {
         {page.data.slices && <SliceZone slices={page.data.slices} components={components}/>}
 
         {/* Add JSON-LD to your page */}
-        <Script type="application/ld+json" dangerouslySetInnerHTML={{__html: JSON.stringify(jsonLd)}}/>
+        <Script id={'ld-json-home'} type="application/ld+json" dangerouslySetInnerHTML={{__html: JSON.stringify(jsonLd)}}/>
       </main>
   );
 }
