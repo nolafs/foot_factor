@@ -76,8 +76,8 @@ const Megamenu: FC<MegaMenuProps> = ({slice, context}) => {
   }
 
   return (
-      <div id={'nav-content'} className={cn('flex flex-col w-full h-full max-w-[512px]')}>
-              <div className="flex flex-col gap-y-3">
+      <div id={'nav-content'} className={cn('block w-full xl:max-w-[512px]')}>
+              <div className="flex flex-col justify-between w-full h-full">
                 {context.subs && context.subs.map((item, idx) => (
                     <div
                         key={`main-nav-item-${idx}`}
