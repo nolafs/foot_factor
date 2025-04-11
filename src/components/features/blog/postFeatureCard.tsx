@@ -18,7 +18,7 @@ export const PostFeatureCard = ({post, showExcerpt = true, showAuthor = true}: P
   return (
       <div
           key={post.uid}
-          className="relative flex flex-col rounded-3xl bg-white p-2 shadow-md shadow-black/5 ring-1 ring-black/5">
+          className="relative flex flex-col rounded-3xl bg-white p-2  ring-1 ring-black/5">
           {post.data.category && 'data' in post.data.category && (
               <div className="m absolute ml-3 mt-3">
                   <Badge>{(post.data.category.data as { name: string }).name}</Badge>
