@@ -89,7 +89,7 @@ const Megamenu: FC<MegaMenuProps> = ({slice, context}) => {
   }
 
 
-  const numberOfColumns = slice.primary.columns || 1;
+  const numberOfColumns = slice.primary.columns ?? 1;
   const chunkedArray = splitArray(context?.subs || [], numberOfColumns);
   const largestChunkSize = Math.max(...chunkedArray.map(chunk => chunk.length));
 

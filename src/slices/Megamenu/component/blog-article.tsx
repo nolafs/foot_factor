@@ -4,10 +4,8 @@ import {filter} from '@prismicio/client';
 import {createClient} from '@/prismicio';
 import PostFeatureCard from '@/components/features/blog/postFeatureCard';
 
-interface BlogArticleProps {
-}
 
-export const BlogArticle = ({}: BlogArticleProps) => {
+export const BlogArticle = () => {
 
     const [resentPosts, setResentPosts] = React.useState<any[]>([]);
 
@@ -33,7 +31,7 @@ export const BlogArticle = ({}: BlogArticleProps) => {
         setResentPosts(resentPosts);
       }
 
-      fetchPosts();
+      void fetchPosts();
       console.log('resentPosts', resentPosts);
     }, []);
 
@@ -42,7 +40,7 @@ export const BlogArticle = ({}: BlogArticleProps) => {
   }
 
   return (
-      <div className={''}>
+      <div>
           {resentPosts.length && (
               <>
                   <h2 className="text-3xl font-medium tracking-tight">Featured Article</h2>

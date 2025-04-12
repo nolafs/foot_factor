@@ -5,7 +5,7 @@ import React, { useCallback, useLayoutEffect, useRef } from 'react';
 import dynamic from 'next/dynamic';
 import type { PostCategoryDocument } from '../../../../prismicio-types';
 // dynamic import
-const SliderResourceCard = dynamic(() => import('@/components/features/Slider/slider-resource-card'));
+const SliderResourceCard = dynamic(() => import('@/components/features/slider/slider-resource-card'));
 
 
 export function SliderCard({

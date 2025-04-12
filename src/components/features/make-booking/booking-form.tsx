@@ -72,10 +72,10 @@ const FormSchema = z.object({
   message: z.string().min(1, {
     message: 'Message is required',
   }).optional(),
-  terms: z.boolean().refine((val) => val === true, {
+  terms: z.boolean().refine((val) => val, {
     message: 'You must accept the terms and conditions.',
   }).optional(),
-  privacy: z.boolean().refine((val) => val === true, {
+  privacy: z.boolean().refine((val) => val, {
     message: 'You must accept the privacy policy.',
   }).optional(),
 })
@@ -210,7 +210,7 @@ export const BookingForm = ({booking}: BookingFormProps) => {
                               {booking.appointment_type.map((appointment, index) => (
                                 <SelectItem
                                     key={index}
-                                    value={appointment.value || ''}
+                                    value={appointment.value ?? ''}
                                     className={'text-sm'}
                                 >
                                   {appointment.label}
@@ -284,7 +284,7 @@ export const BookingForm = ({booking}: BookingFormProps) => {
                           name="referralName"
                           render={({field}) => (
                               <FormItem>
-                                  <FormLabel>Referrer's Name</FormLabel>
+                                  <FormLabel>Referrer&apos;s Name</FormLabel>
                                   <FormControl>
                                       <Input
                                           {...field}
@@ -298,7 +298,7 @@ export const BookingForm = ({booking}: BookingFormProps) => {
                           name="referralSurname"
                           render={({field}) => (
                               <FormItem>
-                                  <FormLabel>Referrer's Surname</FormLabel>
+                                  <FormLabel>Referrer&apos;s Surname</FormLabel>
                                   <FormControl>
                                       <Input
                                           {...field}
@@ -313,7 +313,7 @@ export const BookingForm = ({booking}: BookingFormProps) => {
                           name="referralEmail"
                           render={({field}) => (
                               <FormItem>
-                                  <FormLabel>Referrer's Email</FormLabel>
+                                  <FormLabel>Referrer&apos;s Email</FormLabel>
                                   <FormControl>
                                       <Input
                                           {...field}
@@ -328,7 +328,7 @@ export const BookingForm = ({booking}: BookingFormProps) => {
                           name="referralTelephone"
                           render={({field}) => (
                               <FormItem>
-                                  <FormLabel>Referrer's Telephone</FormLabel>
+                                  <FormLabel>Referrer&apos;s Telephone</FormLabel>
                                   <FormControl>
                                       <Input
                                           {...field}
