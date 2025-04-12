@@ -710,6 +710,119 @@ export type LegalDocument<Lang extends string = string> = prismic.PrismicDocumen
 >;
 
 /**
+ * Item in *Make Booking → Appointment Type*
+ */
+export interface MakeBookingDocumentDataAppointmentTypeItem {
+  /**
+   * Label field in *Make Booking → Appointment Type*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: make_booking.appointment_type[].label
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  label: prismic.KeyTextField;
+
+  /**
+   * Value field in *Make Booking → Appointment Type*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: make_booking.appointment_type[].value
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  value: prismic.KeyTextField;
+}
+
+/**
+ * Item in *Make Booking → Call To Actions*
+ */
+export interface MakeBookingDocumentDataCallToActionsItem {
+  /**
+   * Header field in *Make Booking → Call To Actions*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: make_booking.call_to_actions[].header
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  header: prismic.KeyTextField;
+
+  /**
+   * Body field in *Make Booking → Call To Actions*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: make_booking.call_to_actions[].body
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  body: prismic.RichTextField;
+
+  /**
+   * Link field in *Make Booking → Call To Actions*
+   *
+   * - **Field Type**: Link
+   * - **Placeholder**: *None*
+   * - **API ID Path**: make_booking.call_to_actions[].link
+   * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
+   */
+  link: prismic.LinkField<string, string, unknown, prismic.FieldState, never>;
+}
+
+/**
+ * Content for Make Booking documents
+ */
+interface MakeBookingDocumentData {
+  /**
+   * Header field in *Make Booking*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: make_booking.header
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  header: prismic.KeyTextField;
+
+  /**
+   * Appointment Type field in *Make Booking*
+   *
+   * - **Field Type**: Group
+   * - **Placeholder**: *None*
+   * - **API ID Path**: make_booking.appointment_type[]
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#group
+   */
+  appointment_type: prismic.GroupField<Simplify<MakeBookingDocumentDataAppointmentTypeItem>>;
+
+  /**
+   * Call To Actions field in *Make Booking*
+   *
+   * - **Field Type**: Group
+   * - **Placeholder**: *None*
+   * - **API ID Path**: make_booking.call_to_actions[]
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#group
+   */
+  call_to_actions: prismic.GroupField<Simplify<MakeBookingDocumentDataCallToActionsItem>>;
+}
+
+/**
+ * Make Booking document from Prismic
+ *
+ * - **API ID**: `make_booking`
+ * - **Repeatable**: `false`
+ * - **Documentation**: https://prismic.io/docs/custom-types
+ *
+ * @typeParam Lang - Language API ID of the document.
+ */
+export type MakeBookingDocument<Lang extends string = string> = prismic.PrismicDocumentWithoutUID<
+  Simplify<MakeBookingDocumentData>,
+  'make_booking',
+  Lang
+>;
+
+/**
  * Item in *Navigation Bar → Navigation Items*
  */
 export interface NavigationBarDocumentDataNavigationItemsItem {
@@ -1703,6 +1816,7 @@ export type AllDocumentTypes =
   | FaqDocument
   | HomeDocument
   | LegalDocument
+  | MakeBookingDocument
   | NavigationBarDocument
   | NavigationElementDocument
   | NavigationMegaMenuItemDocument
@@ -3447,6 +3561,10 @@ declare module '@prismicio/client' {
       LegalDocument,
       LegalDocumentData,
       LegalDocumentDataSlicesSlice,
+      MakeBookingDocument,
+      MakeBookingDocumentData,
+      MakeBookingDocumentDataAppointmentTypeItem,
+      MakeBookingDocumentDataCallToActionsItem,
       NavigationBarDocument,
       NavigationBarDocumentData,
       NavigationBarDocumentDataNavigationItemsItem,

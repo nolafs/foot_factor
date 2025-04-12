@@ -1,0 +1,77 @@
+{
+  "format": "custom",
+  "id": "make_booking",
+  "label": "Make Booking",
+  "repeatable": false,
+  "status": true,
+  "json": {
+    "Main": {
+      "header": {
+        "type": "Text",
+        "config": {
+          "label": "Header",
+          "placeholder": ""
+        }
+      },
+      "appointment_type": {
+        "type": "Group",
+        "config": {
+          "label": "Appointment Type",
+          "repeat": true,
+          "fields": {
+            "label": {
+              "type": "Text",
+              "config": {
+                "label": "Label",
+                "placeholder": ""
+              }
+            },
+            "value": {
+              "type": "Text",
+              "config": {
+                "label": "Value",
+                "placeholder": ""
+              }
+            }
+          }
+        }
+      },
+      "call_to_actions": {
+        "type": "Group",
+        "config": {
+          "label": "Call To Actions",
+          "repeat": true,
+          "fields": {
+            "header": {
+              "type": "Text",
+              "config": {
+                "label": "Header",
+                "placeholder": ""
+              }
+            },
+            "body": {
+              "type": "StructuredText",
+              "config": {
+                "label": "Body",
+                "placeholder": "",
+                "allowTargetBlank": true,
+                "multi": "paragraph,preformatted,heading1,heading2,heading3,heading4,heading5,heading6,strong,em,hyperlink,image,embed,list-item,o-list-item,rtl"
+              }
+            },
+            "link": {
+              "type": "Link",
+              "config": {
+                "label": "Link",
+                "placeholder": "",
+                "select": null,
+                "allowTargetBlank": true,
+                "allowText": true,
+                "repeat": false
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

@@ -4,6 +4,7 @@ import {motion, useMotionValueEvent, useScroll} from "framer-motion";
 import React, {useState} from 'react';
 import Link from 'next/link';
 import {
+  type MakeBookingDocumentData,
   type NavigationBarDocumentData,
   type NavigationBarDocumentDataNavigationItemsItem,
   type NavigationElementDocument, NavigationMegaMenuItemDocument, SettingsDocumentData,
@@ -17,7 +18,7 @@ import {
   NavigationMenuLink,
   NavigationMenuList,
   NavigationMenuTrigger,
-  navigationMenuTriggerStyle, NavigationMenuViewport,
+  navigationMenuTriggerStyle,
 } from '@/components/ui/navigation-menu';
 import { NavigationMobileMenu } from '@/components/layouts/navigation/navigation-mobile-menu';
 import cn from 'clsx';
@@ -25,7 +26,8 @@ import { SearchButton } from '@/components/features/search/search-button';
 import {NavigationMenuSubItem} from '@/components/layouts/navigation/navigation-menu-sub-item';
 import {components} from '@/slices';
 import {Button} from '@/components/ui/button';
-import {ArrowRightCircle, CircleArrowRight} from 'lucide-react';
+import {CircleArrowRight} from 'lucide-react';
+import MakeBookingDialog from '@/components/features/make-booking/make-booking-dialog';
 
 
 const parentVariants = {
@@ -36,9 +38,10 @@ const parentVariants = {
 interface NavigationSubProps {
   navigation: NavigationBarDocumentData;
   settings: SettingsDocumentData;
+  booking?: MakeBookingDocumentData;
 }
 
-export default function NavigationMenuSub({ navigation, settings }: NavigationSubProps) {
+export default function NavigationMenuSub({ navigation, settings, booking }: NavigationSubProps) {
 
   const {scrollY} = useScroll();
   const [hidden, setHidden] = useState(false);
@@ -99,9 +102,8 @@ export default function NavigationMenuSub({ navigation, settings }: NavigationSu
           <div className={'hidden lg:flex w-full'}>
                   <NavigationMenu>
 
-                    <div className="flex grow-0">
-                      <div className="relative z-40">
-                        <Link href="/">
+                    <div className="flex flex-1">
+                        <Link href="/" className={'w-full'}>
                           <span className="sr-only">{settings.site_name}</span>
                           <PrismicImage
                               field={settings.logo}
@@ -111,7 +113,6 @@ export default function NavigationMenuSub({ navigation, settings }: NavigationSu
 
                           />
                         </Link>
-                      </div>
                     </div>
 
                     <NavigationMenuList>
@@ -164,10 +165,9 @@ export default function NavigationMenuSub({ navigation, settings }: NavigationSu
 
               })}
             </NavigationMenuList>
-            <div className="relative z-40 hidden lg:flex grow-0 lg:justify-end space-x-2">
+            <div className="relative z-40 hidden lg:flex flex-1 lg:justify-end space-x-2">
               <SearchButton/>
-              <Button variant={'default'} size={'sm'} className={'bg-accent'}>Book now <CircleArrowRight
-                  className={'h-5 w-5'}/> </Button>
+              <MakeBookingDialog makeBooking={booking} />
             </div>
           </NavigationMenu>
           </div>

@@ -94,6 +94,7 @@ export default async function RootLayout({ children }: Readonly<{ children: Reac
     ],
   });
   const settings = await client.getSingle('settings');
+  const makeBooking = await client.getSingle('make_booking');
 
 
 
@@ -104,7 +105,7 @@ export default async function RootLayout({ children }: Readonly<{ children: Reac
         <NextTopLoader color={'hsl(var(--accent))'} height={5} showSpinner={false} shadow={false} zIndex={99999} />
 
         <SearchProvider>
-          <NavigationMenuSub navigation={navigation.data} settings={settings.data} />
+          <NavigationMenuSub navigation={navigation.data} settings={settings.data} booking={makeBooking.data} />
 
           {/* Content */}
 

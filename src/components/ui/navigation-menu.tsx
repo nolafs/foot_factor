@@ -17,7 +17,7 @@ const NavigationMenu = React.forwardRef<
     )}
     {...props}
   >
-    <div className="flex justify-between w-full">
+    <div className="flex items-center justify-stretch w-full">
       {children}
     </div>
     <NavigationMenuViewport />
