@@ -31,6 +31,7 @@ import {
 import {CalendarIcon} from 'lucide-react';
 import cn from 'clsx';
 import {MakeBookingDocumentData} from '../../../../prismicio-types';
+import { Textarea } from '@/components/ui/textarea';
 
 
 const FormSchema = z.object({
@@ -48,6 +49,27 @@ const FormSchema = z.object({
   email: z.string().email({
     message: 'Email is invalid',
   }).optional(),
+  appointmentType: z.string().min(1, {
+    message: 'Appointment type is required',
+  }).optional(),
+  telephone: z.string().min(1, {
+    message: 'Telephone is required',
+  }).optional(),
+  referralName: z.string().min(1, {
+    message: 'Name is required',
+  }).optional(),
+  referralSurname: z.string().min(1, {
+    message: 'Surname is required',
+  }).optional(),
+  referralEmail: z.string().email( {
+    message: 'Email is invalid',
+  }).optional(),
+  referralTelephone: z.string().email({
+    message: 'Email is invalid',
+  }).optional(),
+  message: z.string().min(1, {
+    message: 'Message is required',
+  }).optional(),
 })
 
 interface BookingFormProps {
@@ -56,6 +78,7 @@ interface BookingFormProps {
 
 export const BookingForm = ({booking}: BookingFormProps) => {
 
+  const [isReferralPatient, setIsReferralPatient] = React.useState(false);
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
     defaultValues: {
@@ -66,6 +89,10 @@ export const BookingForm = ({booking}: BookingFormProps) => {
 
   const onSubmit = (data: z.infer<typeof FormSchema>) => {
     console.log(data);
+  }
+
+  const onChangeReferralPatient = (value: boolean) => {
+    setIsReferralPatient(value);
   }
 
   return (
@@ -187,27 +214,11 @@ export const BookingForm = ({booking}: BookingFormProps) => {
                         </FormItem>
                     )}
                 />
-                <div className="flex flex-col space-y-2">
-                  <FormField
-                      control={form.control}
-                      name="referralPatient"
-                      render={({field}) => (
-                          <FormItem className="flex items-center space-x-3">
-                            <FormControl>
-                              <Switch
-                                  checked={field.value}
-                                  onCheckedChange={field.onChange}
-                              />
-                            </FormControl>
-                            <FormLabel className="font-normal">
-                              Referral patient?
-                            </FormLabel>
-                          </FormItem>
-                      )}/>
-                </div>
+
                   <FormField
                       control={form.control}
                       name="email"
+
                       render={({field}) => (
                           <FormItem>
                               <FormLabel>Email</FormLabel>
@@ -219,6 +230,124 @@ export const BookingForm = ({booking}: BookingFormProps) => {
                               <FormMessage />
                           </FormItem>
                       )} />
+
+                <FormField
+                    control={form.control}
+                    name="telephone"
+
+                    render={({field}) => (
+                        <FormItem>
+                          <FormLabel>Telephone</FormLabel>
+                          <FormControl>
+                            <Input
+                                {...field}
+                            />
+                          </FormControl>
+                          <FormMessage/>
+                        </FormItem>
+                    )}/>
+
+                <div className="flex flex-col space-y-2">
+                  <FormField
+                      control={form.control}
+                      name="referralPatient"
+                      render={({field}) => (
+                          <FormItem className="flex items-center space-x-3">
+                            <FormControl>
+                              <Switch
+                                  checked={field.value}
+                                  onCheckedChange={(checked) => {
+                                    field.onChange(checked); // Update the form state
+                                    onChangeReferralPatient(checked); // Pass the boolean value
+                                  }}
+                              />
+                            </FormControl>
+                            <FormLabel className="font-normal">
+                              Referral patient?
+                            </FormLabel>
+                          </FormItem>
+                      )}/>
+                </div>
+
+                {isReferralPatient && (<div>
+                    <div className={'grid grid-cols-1 md:grid-cols-2 gap-x-5'}>
+                      <FormField
+                          control={form.control}
+                          name="referralName"
+                          render={({field}) => (
+                              <FormItem>
+                                  <FormLabel>Referrer's Name</FormLabel>
+                                  <FormControl>
+                                      <Input
+                                          {...field}
+                                      />
+                                  </FormControl>
+                                  <FormMessage />
+                              </FormItem>
+                          )} />
+                      <FormField
+                          control={form.control}
+                          name="referralSurname"
+                          render={({field}) => (
+                              <FormItem>
+                                  <FormLabel>Referrer's Surname</FormLabel>
+                                  <FormControl>
+                                      <Input
+                                          {...field}
+                                      />
+                                  </FormControl>
+                                  <FormMessage />
+                              </FormItem>
+                          )} />
+                    </div>
+                      <FormField
+                          control={form.control}
+                          name="referralEmail"
+                          render={({field}) => (
+                              <FormItem>
+                                  <FormLabel>Referrer's Email</FormLabel>
+                                  <FormControl>
+                                      <Input
+                                          {...field}
+                                      />
+                                  </FormControl>
+                                  <FormMessage />
+                              </FormItem>
+                          )} />
+
+                      <FormField
+                          control={form.control}
+                          name="referralTelephone"
+                          render={({field}) => (
+                              <FormItem>
+                                  <FormLabel>Referrer's Telephone</FormLabel>
+                                  <FormControl>
+                                      <Input
+                                          {...field}
+                                      />
+                                  </FormControl>
+                                  <FormMessage />
+                              </FormItem>
+                          )} />
+                    </div> )}
+
+                <FormField
+                    control={form.control}
+                    name="message"
+                    render={({field}) => (
+                        <FormItem>
+                          <FormLabel>Bio</FormLabel>
+                          <FormControl>
+                            <Textarea
+                                placeholder="Message"
+                                className="resize-none"
+                                {...field}
+                            />
+                          </FormControl>
+                          <FormMessage/>
+                        </FormItem>
+                    )}
+                />
 
                   <Button type="submit">Submit</Button>
               </form>
