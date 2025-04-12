@@ -94,8 +94,11 @@ export default function NavigationMenuSub({ navigation, settings, booking }: Nav
             </div>
           </div>
 
-          <div className="self-end grid grid-cols-2 gap-2 lg:hidden">
+          <div className="flex justify-end shrink  lg:hidden">
+          <div className="flex items-center gap-x-2">
+            {booking && <MakeBookingDialog makeBooking={booking}/>}
             <NavigationMobileMenu navigation={navigation} logo={settings.footer_logo} siteName={settings.site_name} />
+          </div>
           </div>
 
 
@@ -167,7 +170,8 @@ export default function NavigationMenuSub({ navigation, settings, booking }: Nav
             </NavigationMenuList>
             <div className="relative z-40 hidden lg:flex flex-1 lg:justify-end space-x-2">
               <SearchButton/>
-              <MakeBookingDialog makeBooking={booking} />
+              {booking && <MakeBookingDialog makeBooking={booking}/>}
+
             </div>
           </NavigationMenu>
           </div>

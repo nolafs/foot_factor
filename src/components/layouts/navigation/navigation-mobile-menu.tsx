@@ -17,6 +17,7 @@ import {usePathname} from "next/navigation";
 import cn from 'clsx';
 
 import ButtonSliceVariation from '@/components/ui/button-slice-variation';
+import MakeBookingDialog from '@/components/features/make-booking/make-booking-dialog';
 
 
 interface NavigationSubProps {

@@ -13,6 +13,7 @@ import {CircleArrowRight} from 'lucide-react';
 import {PrismicRichText} from '@prismicio/react';
 import {PrismicNextLink} from '@prismicio/next';
 import BookingForm from './booking-form';
+import {ScrollArea} from '@/components/ui/scroll-area';
 
 interface MakeBookingDialogProps {
     buttonLabel?: string
@@ -25,11 +26,11 @@ export const MakeBookingDialog = ({makeBooking, buttonLabel = 'Book now'}: MakeB
       <Dialog>
           <DialogTrigger className={buttonVariants({variant: 'default', size: 'sm'})}>{buttonLabel} <CircleArrowRight
               className={'h-5 w-5'}/></DialogTrigger>
-          <DialogContent className={'w-full max-w-7xl '}>
+          <DialogContent className={'w-full max-w-7xl max-h-[975px] h-full'}>
               <DialogHeader>
                   <DialogTitle className={'font-heading text-2xl md:text-4xl lg:text-5xl'}>{makeBooking?.header || 'Make Booking'}</DialogTitle>
-
-
+              </DialogHeader>
+                     <ScrollArea className={'h-full max-h-[850px]'}>
                      <div className={'grid grid-cols-1 md:grid-cols-2 gap-5'}>
                        <div>
                         <BookingForm booking={makeBooking} />
@@ -62,8 +63,8 @@ export const MakeBookingDialog = ({makeBooking, buttonLabel = 'Book now'}: MakeB
                           ))}
                         </div>
                      </div>
+                     </ScrollArea>
 
-              </DialogHeader>
           </DialogContent>
       </Dialog>
   )
