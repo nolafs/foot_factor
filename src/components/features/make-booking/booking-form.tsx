@@ -32,6 +32,8 @@ import {CalendarIcon} from 'lucide-react';
 import cn from 'clsx';
 import {MakeBookingDocumentData} from '../../../../prismicio-types';
 import { Textarea } from '@/components/ui/textarea';
+import {Checkbox} from '@/components/ui/checkbox';
+import Link from 'next/link';
 
 
 const FormSchema = z.object({
@@ -69,6 +71,12 @@ const FormSchema = z.object({
   }).optional(),
   message: z.string().min(1, {
     message: 'Message is required',
+  }).optional(),
+  terms: z.boolean().refine((val) => val === true, {
+    message: 'You must accept the terms and conditions.',
+  }).optional(),
+  privacy: z.boolean().refine((val) => val === true, {
+    message: 'You must accept the privacy policy.',
   }).optional(),
 })
 
@@ -349,7 +357,58 @@ export const BookingForm = ({booking}: BookingFormProps) => {
                     )}
                 />
 
-                  <Button type="submit">Submit</Button>
+                <FormField
+                    control={form.control}
+                    name="terms"
+                    render={({field}) => (
+                        <FormItem
+                            className="flex flex-row items-start space-x-3 space-y-0 rounded-md border p-4">
+                          <FormControl>
+                            <Checkbox
+                                checked={field.value}
+                                onCheckedChange={field.onChange}
+                            />
+                          </FormControl>
+                          <div className="space-y-1 leading-none">
+                            <FormLabel>
+                             Agree to terms and conditions
+                            </FormLabel>
+                            <FormDescription>
+                              Please read our{" "}
+                              <Link className={'underline'} href="/examples/forms">terms and conditions</Link> page.
+                            </FormDescription>
+                          </div>
+                        </FormItem>
+                    )}
+                />
+
+                <FormField
+                    control={form.control}
+                    name="privacy"
+                    render={({field}) => (
+                        <FormItem
+                            className="flex flex-row items-start space-x-3 space-y-0 rounded-md border p-4">
+                          <FormControl>
+                            <Checkbox
+                                checked={field.value}
+                                onCheckedChange={field.onChange}
+                            />
+                          </FormControl>
+                          <div className="space-y-1 leading-none">
+                            <FormLabel>
+                              Agree to our privacy policy
+                            </FormLabel>
+                            <FormDescription>
+                              Please read our {" "}
+                              <Link className={'underline'} href="/examples/forms">Privacy Policy</Link> page.
+                            </FormDescription>
+                          </div>
+                        </FormItem>
+                    )}
+                />
+                <div className={'flex justify-end mt-8'}>
+                  <Button type="submit" size={'lg'}>Submit</Button>
+                </div>
               </form>
               </Form>
 
