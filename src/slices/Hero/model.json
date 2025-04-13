@@ -13,10 +13,12 @@
       "imageUrl": "",
       "primary": {
         "heading": {
-          "type": "Text",
+          "type": "StructuredText",
           "config": {
             "label": "Heading",
-            "placeholder": ""
+            "placeholder": "",
+            "allowTargetBlank": true,
+            "multi": "heading1,strong,em"
           }
         },
         "subheading": {
@@ -24,6 +26,15 @@
           "config": {
             "label": "Subheading",
             "placeholder": ""
+          }
+        },
+        "lead": {
+          "type": "StructuredText",
+          "config": {
+            "label": "Lead",
+            "placeholder": "",
+            "allowTargetBlank": true,
+            "multi": "paragraph,strong,em,list-item,o-list-item,hyperlink,heading2,heading3,heading4,heading5,heading6"
           }
         },
         "links": {
@@ -37,7 +48,8 @@
             "repeat": true,
             "variants": [
               "Primary",
-              "Secondary"
+              "Secondary",
+              "Outline"
             ]
           }
         },
@@ -45,14 +57,6 @@
           "type": "Image",
           "config": {
             "label": "Image",
-            "constraint": {},
-            "thumbnails": []
-          }
-        },
-        "google_rating": {
-          "type": "Image",
-          "config": {
-            "label": "Google Rating",
             "constraint": {},
             "thumbnails": []
           }
@@ -116,25 +120,38 @@
       "items": {}
     },
     {
-      "id": "heroSearch",
-      "name": "Hero Search",
+      "id": "heroMaster",
+      "name": "Master",
       "docURL": "...",
       "version": "initial",
       "description": "Default",
       "imageUrl": "",
       "primary": {
         "heading": {
-          "type": "Text",
+          "type": "StructuredText",
           "config": {
             "label": "Heading",
-            "placeholder": ""
+            "placeholder": "",
+            "allowTargetBlank": true,
+            "multi": "paragraph,preformatted,heading1,heading2,heading3,heading4,heading5,heading6,strong,em,hyperlink,image,embed,list-item,o-list-item,rtl"
           }
         },
-        "subheading": {
-          "type": "Text",
+        "lead": {
+          "type": "StructuredText",
           "config": {
-            "label": "Subheading",
-            "placeholder": ""
+            "label": "Lead",
+            "placeholder": "",
+            "allowTargetBlank": true,
+            "multi": "paragraph,preformatted,heading1,heading2,heading3,heading4,heading5,heading6,strong,em,hyperlink,image,embed,list-item,o-list-item,rtl"
+          }
+        },
+        "has_booking": {
+          "type": "Boolean",
+          "config": {
+            "label": "Has booking",
+            "placeholder_false": "false",
+            "placeholder_true": "true",
+            "default_value": false
           }
         },
         "links": {
@@ -149,8 +166,7 @@
             "variants": [
               "Primary",
               "Secondary",
-              "Accent",
-              "Link"
+              "Outline"
             ]
           }
         },
@@ -162,29 +178,12 @@
             "thumbnails": []
           }
         },
-        "full_width_image": {
-          "type": "Boolean",
+        "google_rating": {
+          "type": "Image",
           "config": {
-            "label": "Full Width Image",
-            "placeholder_false": "false",
-            "placeholder_true": "true",
-            "default_value": false
-          }
-        },
-        "search_cta": {
-          "type": "Group",
-          "config": {
-            "label": "Search CTA",
-            "repeat": true,
-            "fields": {
-              "message": {
-                "type": "Text",
-                "config": {
-                  "label": "Message",
-                  "placeholder": ""
-                }
-              }
-            }
+            "label": "Google Rating",
+            "constraint": {},
+            "thumbnails": []
           }
         }
       },

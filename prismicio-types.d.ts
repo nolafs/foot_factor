@@ -432,126 +432,19 @@ export type FaqDocument<Lang extends string = string> = prismic.PrismicDocumentW
   Lang
 >;
 
-type HomeDocumentDataSlicesSlice = SectionSlice | TestimonialSlice | FaqsSlice | CallToActionSlice;
-
-type HomeDocumentDataSlices2Slice = TestimonialSlice | CallToActionSlice | SectionSlice | HeroSlice;
+type HomeDocumentDataSlicesSlice = HeroSlice | SectionSlice | TestimonialSlice | FaqsSlice | CallToActionSlice;
 
 /**
  * Content for Home documents
  */
 interface HomeDocumentData {
   /**
-   * Latest Video Heading field in *Home*
-   *
-   * - **Field Type**: Text
-   * - **Placeholder**: *None*
-   * - **API ID Path**: home.latest_video_heading
-   * - **Tab**: Listings
-   * - **Documentation**: https://prismic.io/docs/field#key-text
-   */
-  latest_video_heading: prismic.KeyTextField;
-
-  /**
-   * Latest Video Body field in *Home*
-   *
-   * - **Field Type**: Rich Text
-   * - **Placeholder**: *None*
-   * - **API ID Path**: home.latest_video_body
-   * - **Tab**: Listings
-   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
-   */
-  latest_video_body: prismic.RichTextField;
-
-  /**
-   * Latest Video Links field in *Home*
-   *
-   * - **Field Type**: Link
-   * - **Placeholder**: *None*
-   * - **API ID Path**: home.latest_video_links
-   * - **Tab**: Listings
-   * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
-   */
-  latest_video_links: prismic.Repeatable<
-    prismic.LinkField<string, string, unknown, prismic.FieldState, 'Primary' | 'Secondary' | 'Accent' | 'Link'>
-  >;
-
-  /**
-   * Latest Articles Heading field in *Home*
-   *
-   * - **Field Type**: Text
-   * - **Placeholder**: *None*
-   * - **API ID Path**: home.latest_articles_heading
-   * - **Tab**: Listings
-   * - **Documentation**: https://prismic.io/docs/field#key-text
-   */
-  latest_articles_heading: prismic.KeyTextField;
-
-  /**
-   * Latest Articles Body field in *Home*
-   *
-   * - **Field Type**: Rich Text
-   * - **Placeholder**: *None*
-   * - **API ID Path**: home.latest_articles_body
-   * - **Tab**: Listings
-   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
-   */
-  latest_articles_body: prismic.RichTextField;
-
-  /**
-   * Latest Articles Links field in *Home*
-   *
-   * - **Field Type**: Link
-   * - **Placeholder**: *None*
-   * - **API ID Path**: home.latest_articles_links
-   * - **Tab**: Listings
-   * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
-   */
-  latest_articles_links: prismic.Repeatable<
-    prismic.LinkField<string, string, unknown, prismic.FieldState, 'Primary' | 'Secondary' | 'Accent' | 'Link'>
-  >;
-
-  /**
-   * Latest Download Heading field in *Home*
-   *
-   * - **Field Type**: Text
-   * - **Placeholder**: *None*
-   * - **API ID Path**: home.latest_download_heading
-   * - **Tab**: Listings
-   * - **Documentation**: https://prismic.io/docs/field#key-text
-   */
-  latest_download_heading: prismic.KeyTextField;
-
-  /**
-   * Latest Download Body field in *Home*
-   *
-   * - **Field Type**: Rich Text
-   * - **Placeholder**: *None*
-   * - **API ID Path**: home.latest_download_body
-   * - **Tab**: Listings
-   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
-   */
-  latest_download_body: prismic.RichTextField;
-
-  /**
-   * Latest Download Links field in *Home*
-   *
-   * - **Field Type**: Link
-   * - **Placeholder**: *None*
-   * - **API ID Path**: home.latest_download_links
-   * - **Tab**: Listings
-   * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
-   */
-  latest_download_links: prismic.Repeatable<
-    prismic.LinkField<string, string, unknown, prismic.FieldState, 'Primary' | 'Secondary' | 'Accent' | 'Link'>
-  >;
-
-  /**
    * Slice Zone field in *Home*
    *
    * - **Field Type**: Slice Zone
    * - **Placeholder**: *None*
    * - **API ID Path**: home.slices[]
-   * - **Tab**: Listings
+   * - **Tab**: Main
    * - **Documentation**: https://prismic.io/docs/field#slices
    */
   slices: prismic.SliceZone<HomeDocumentDataSlicesSlice> /**
@@ -585,16 +478,7 @@ interface HomeDocumentData {
    * - **Tab**: SEO & Metadata
    * - **Documentation**: https://prismic.io/docs/field#image
    */
-  meta_image: prismic.ImageField<never> /**
-   * Slice Zone field in *Home*
-   *
-   * - **Field Type**: Slice Zone
-   * - **Placeholder**: *None*
-   * - **API ID Path**: home.slices2[]
-   * - **Tab**: Top Section
-   * - **Documentation**: https://prismic.io/docs/field#slices
-   */;
-  slices2: prismic.SliceZone<HomeDocumentDataSlices2Slice>;
+  meta_image: prismic.ImageField<never>;
 }
 
 /**
@@ -2341,33 +2225,18 @@ type FaqsSliceVariation = FaqsSliceDefault | FaqsSliceGrid | FaqsSliceColumn | F
 export type FaqsSlice = prismic.SharedSlice<'faqs', FaqsSliceVariation>;
 
 /**
- * Item in *Hero → Hero Search → Primary → Search CTA*
- */
-export interface HeroSliceHeroSearchPrimarySearchCtaItem {
-  /**
-   * Message field in *Hero → Hero Search → Primary → Search CTA*
-   *
-   * - **Field Type**: Text
-   * - **Placeholder**: *None*
-   * - **API ID Path**: hero.heroSearch.primary.search_cta[].message
-   * - **Documentation**: https://prismic.io/docs/field#key-text
-   */
-  message: prismic.KeyTextField;
-}
-
-/**
  * Primary content in *Hero → Default → Primary*
  */
 export interface HeroSliceDefaultPrimary {
   /**
    * Heading field in *Hero → Default → Primary*
    *
-   * - **Field Type**: Text
+   * - **Field Type**: Rich Text
    * - **Placeholder**: *None*
    * - **API ID Path**: hero.default.primary.heading
-   * - **Documentation**: https://prismic.io/docs/field#key-text
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
    */
-  heading: prismic.KeyTextField;
+  heading: prismic.RichTextField;
 
   /**
    * Subheading field in *Hero → Default → Primary*
@@ -2380,6 +2249,16 @@ export interface HeroSliceDefaultPrimary {
   subheading: prismic.KeyTextField;
 
   /**
+   * Lead field in *Hero → Default → Primary*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: hero.default.primary.lead
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  lead: prismic.RichTextField;
+
+  /**
    * Links field in *Hero → Default → Primary*
    *
    * - **Field Type**: Link
@@ -2387,7 +2266,9 @@ export interface HeroSliceDefaultPrimary {
    * - **API ID Path**: hero.default.primary.links
    * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
    */
-  links: prismic.Repeatable<prismic.LinkField<string, string, unknown, prismic.FieldState, 'Primary' | 'Secondary'>>;
+  links: prismic.Repeatable<
+    prismic.LinkField<string, string, unknown, prismic.FieldState, 'Primary' | 'Secondary' | 'Outline'>
+  >;
 
   /**
    * Image field in *Hero → Default → Primary*
@@ -2398,16 +2279,6 @@ export interface HeroSliceDefaultPrimary {
    * - **Documentation**: https://prismic.io/docs/field#image
    */
   image: prismic.ImageField<never>;
-
-  /**
-   * Google Rating field in *Hero → Default → Primary*
-   *
-   * - **Field Type**: Image
-   * - **Placeholder**: *None*
-   * - **API ID Path**: hero.default.primary.google_rating
-   * - **Documentation**: https://prismic.io/docs/field#image
-   */
-  google_rating: prismic.ImageField<never>;
 }
 
 /**
@@ -2484,90 +2355,90 @@ export interface HeroSliceSimplePrimary {
 export type HeroSliceSimple = prismic.SharedSliceVariation<'simple', Simplify<HeroSliceSimplePrimary>, never>;
 
 /**
- * Primary content in *Hero → Hero Search → Primary*
+ * Primary content in *Hero → Master → Primary*
  */
-export interface HeroSliceHeroSearchPrimary {
+export interface HeroSliceHeroMasterPrimary {
   /**
-   * Heading field in *Hero → Hero Search → Primary*
+   * Heading field in *Hero → Master → Primary*
    *
-   * - **Field Type**: Text
+   * - **Field Type**: Rich Text
    * - **Placeholder**: *None*
-   * - **API ID Path**: hero.heroSearch.primary.heading
-   * - **Documentation**: https://prismic.io/docs/field#key-text
+   * - **API ID Path**: hero.heroMaster.primary.heading
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
    */
-  heading: prismic.KeyTextField;
+  heading: prismic.RichTextField;
 
   /**
-   * Subheading field in *Hero → Hero Search → Primary*
+   * Lead field in *Hero → Master → Primary*
    *
-   * - **Field Type**: Text
+   * - **Field Type**: Rich Text
    * - **Placeholder**: *None*
-   * - **API ID Path**: hero.heroSearch.primary.subheading
-   * - **Documentation**: https://prismic.io/docs/field#key-text
+   * - **API ID Path**: hero.heroMaster.primary.lead
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
    */
-  subheading: prismic.KeyTextField;
+  lead: prismic.RichTextField;
 
   /**
-   * Links field in *Hero → Hero Search → Primary*
+   * Has booking field in *Hero → Master → Primary*
+   *
+   * - **Field Type**: Boolean
+   * - **Placeholder**: *None*
+   * - **Default Value**: false
+   * - **API ID Path**: hero.heroMaster.primary.has_booking
+   * - **Documentation**: https://prismic.io/docs/field#boolean
+   */
+  has_booking: prismic.BooleanField;
+
+  /**
+   * Links field in *Hero → Master → Primary*
    *
    * - **Field Type**: Link
    * - **Placeholder**: *None*
-   * - **API ID Path**: hero.heroSearch.primary.links
+   * - **API ID Path**: hero.heroMaster.primary.links
    * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
    */
   links: prismic.Repeatable<
-    prismic.LinkField<string, string, unknown, prismic.FieldState, 'Primary' | 'Secondary' | 'Accent' | 'Link'>
+    prismic.LinkField<string, string, unknown, prismic.FieldState, 'Primary' | 'Secondary' | 'Outline'>
   >;
 
   /**
-   * Image field in *Hero → Hero Search → Primary*
+   * Image field in *Hero → Master → Primary*
    *
    * - **Field Type**: Image
    * - **Placeholder**: *None*
-   * - **API ID Path**: hero.heroSearch.primary.image
+   * - **API ID Path**: hero.heroMaster.primary.image
    * - **Documentation**: https://prismic.io/docs/field#image
    */
   image: prismic.ImageField<never>;
 
   /**
-   * Full Width Image field in *Hero → Hero Search → Primary*
+   * Google Rating field in *Hero → Master → Primary*
    *
-   * - **Field Type**: Boolean
+   * - **Field Type**: Image
    * - **Placeholder**: *None*
-   * - **Default Value**: false
-   * - **API ID Path**: hero.heroSearch.primary.full_width_image
-   * - **Documentation**: https://prismic.io/docs/field#boolean
+   * - **API ID Path**: hero.heroMaster.primary.google_rating
+   * - **Documentation**: https://prismic.io/docs/field#image
    */
-  full_width_image: prismic.BooleanField;
-
-  /**
-   * Search CTA field in *Hero → Hero Search → Primary*
-   *
-   * - **Field Type**: Group
-   * - **Placeholder**: *None*
-   * - **API ID Path**: hero.heroSearch.primary.search_cta[]
-   * - **Documentation**: https://prismic.io/docs/field#group
-   */
-  search_cta: prismic.GroupField<Simplify<HeroSliceHeroSearchPrimarySearchCtaItem>>;
+  google_rating: prismic.ImageField<never>;
 }
 
 /**
- * Hero Search variation for Hero Slice
+ * Master variation for Hero Slice
  *
- * - **API ID**: `heroSearch`
+ * - **API ID**: `heroMaster`
  * - **Description**: Default
  * - **Documentation**: https://prismic.io/docs/slice
  */
-export type HeroSliceHeroSearch = prismic.SharedSliceVariation<
-  'heroSearch',
-  Simplify<HeroSliceHeroSearchPrimary>,
+export type HeroSliceHeroMaster = prismic.SharedSliceVariation<
+  'heroMaster',
+  Simplify<HeroSliceHeroMasterPrimary>,
   never
 >;
 
 /**
  * Slice variation for *Hero*
  */
-type HeroSliceVariation = HeroSliceDefault | HeroSliceSimple | HeroSliceHeroSearch;
+type HeroSliceVariation = HeroSliceDefault | HeroSliceSimple | HeroSliceHeroMaster;
 
 /**
  * Hero Shared Slice
@@ -3557,7 +3428,6 @@ declare module '@prismicio/client' {
       HomeDocument,
       HomeDocumentData,
       HomeDocumentDataSlicesSlice,
-      HomeDocumentDataSlices2Slice,
       LegalDocument,
       LegalDocumentData,
       LegalDocumentDataSlicesSlice,
@@ -3619,12 +3489,11 @@ declare module '@prismicio/client' {
       HeroSlice,
       HeroSliceDefaultPrimary,
       HeroSliceSimplePrimary,
-      HeroSliceHeroSearchPrimarySearchCtaItem,
-      HeroSliceHeroSearchPrimary,
+      HeroSliceHeroMasterPrimary,
       HeroSliceVariation,
       HeroSliceDefault,
       HeroSliceSimple,
-      HeroSliceHeroSearch,
+      HeroSliceHeroMaster,
       MegamenuSlice,
       MegamenuSliceDefaultPrimary,
       MegamenuSliceMegaVideoPrimary,

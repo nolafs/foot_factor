@@ -1,5 +1,5 @@
 import '@/styles/globals.css';
-import { Poppins, Exo_2 } from 'next/font/google';
+import { Poppins, Exo_2, PT_Serif } from 'next/font/google';
 import { type Metadata, type ResolvingMetadata } from 'next';
 import { PrismicPreview } from '@prismicio/next';
 import { repositoryName } from '@/prismicio';
@@ -13,6 +13,7 @@ import BackToTop from '@/components/ui/BackToTop';
 import React, { Suspense } from 'react';
 import { SearchProvider } from '@/components/features/search/search-context';
 import { SearchOverlay } from '@/components/features/search/search-overlay';
+import { BookingProvider } from '@/lib/context/booking.context';
 
 const poppins = Poppins({
   subsets: ['latin'],
@@ -24,6 +25,12 @@ const exo2 = Exo_2({
   subsets: ['latin'],
   variable: '--font-exo-2',
   weight: ['400', '500', '600', '700'],
+});
+
+const ptSerif = PT_Serif({
+  subsets: ['latin'],
+  variable: '--font-pt-serif',
+  weight: ['400'],
 });
 
 type Props = {
@@ -99,12 +106,13 @@ export default async function RootLayout({ children }: Readonly<{ children: Reac
 
 
   return (
-    <html lang="en" className={`${poppins.variable} ${exo2.variable}`}>
+    <html lang="en" className={`${poppins.variable} ${exo2.variable} ${ptSerif.variable}`}>
       <body className={'min-h-screen text-gray-950 antialiased'}>
         {/* Loading-bar */}
         <NextTopLoader color={'hsl(var(--accent))'} height={5} showSpinner={false} shadow={false} zIndex={99999} />
 
         <SearchProvider>
+          <BookingProvider initialData={makeBooking.data}>
           <NavigationMenuSub navigation={navigation.data} settings={settings.data} booking={makeBooking.data} />
 
           {/* Content */}
@@ -125,7 +133,7 @@ export default async function RootLayout({ children }: Readonly<{ children: Reac
 
           {/* Prismic preview */}
           <PrismicPreview repositoryName={repositoryName} />
-
+          </BookingProvider>
           <SearchOverlay />
         </SearchProvider>
       </body>

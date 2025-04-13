@@ -1,9 +1,8 @@
+'use client';
 import React from 'react';
-import {MakeBookingDocumentData} from '../../../../prismicio-types';
 import {
     Dialog,
     DialogContent,
-    DialogDescription,
     DialogHeader,
     DialogTitle,
     DialogTrigger
@@ -14,29 +13,38 @@ import {PrismicRichText} from '@prismicio/react';
 import {PrismicNextLink} from '@prismicio/next';
 import BookingForm from './booking-form';
 import {ScrollArea} from '@/components/ui/scroll-area';
+import { useBooking } from '@/lib/context/booking.context';
 
 interface MakeBookingDialogProps {
     buttonLabel?: string
-    makeBooking: MakeBookingDocumentData
+    size?: 'sm' | 'md' | 'lg'
 }
 
-export const MakeBookingDialog = ({makeBooking, buttonLabel = 'Book now'}: MakeBookingDialogProps) => {
+export const MakeBookingDialog = ({ buttonLabel = 'Book now', size = 'sm'}: MakeBookingDialogProps) => {
+
+  const { bookingData } = useBooking();
+
+  const mappedSize = size === 'md' ? 'lg' : size
+
+  if (!bookingData) {
+    return null;
+  }
 
   return (
       <Dialog>
-          <DialogTrigger className={buttonVariants({variant: 'default', size: 'sm'})}>{buttonLabel} <CircleArrowRight
+          <DialogTrigger className={buttonVariants({variant: 'default', size: mappedSize})}>{buttonLabel} <CircleArrowRight
               className={'h-5 w-5'}/></DialogTrigger>
           <DialogContent className={'w-full max-w-7xl max-h-[975px] h-full'}>
               <DialogHeader>
-                  <DialogTitle className={'font-heading text-2xl md:text-4xl lg:text-5xl'}>{makeBooking?.header ?? 'Make Booking'}</DialogTitle>
+                  <DialogTitle className={'font-heading text-2xl md:text-4xl lg:text-5xl'}>{bookingData?.header ?? 'Make Booking'}</DialogTitle>
               </DialogHeader>
                      <ScrollArea className={'h-full max-h-[850px]'}>
                      <div className={'grid grid-cols-1 md:grid-cols-2 gap-5'}>
                        <div>
-                        <BookingForm booking={makeBooking} />
+                        <BookingForm booking={bookingData} />
                        </div>
                         <div className={'flex flex-col space-y-5'}>
-                          {makeBooking?.call_to_actions.map((action, index) => (
+                          {bookingData?.call_to_actions.map((action, index) => (
                               <div
                                   key={index}
                                   className="flex flex-col space-y-2 sm:p-5 lg:p-8 rounded-xl text-primary-foreground bg-primary"

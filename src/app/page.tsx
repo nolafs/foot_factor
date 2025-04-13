@@ -3,10 +3,9 @@ import {components} from '@/slices';
 import {SliceZone} from '@prismicio/react';
 import {notFound} from 'next/navigation';
 import {createClient} from '@/prismicio';
-import {BentoSection} from '@/components/features/resources/bentoList';
 import {filter} from '@prismicio/client';
 
-import Animate from '@/lib/animation';
+
 import JSONLD from '@/types/schema';
 import Script from 'next/script';
 
@@ -36,27 +35,8 @@ export default async function HomePage() {
 
   return (
       <main className={'min-h-svh w-full overflow-hidden'}>
-        {/* SliceZone 1 */}
-        {page.data.slices2 && <SliceZone slices={page.data.slices2} components={components}/>}
-
-        <div className="bg-gradient-to-b from-white from-50% to-gray-100 pb-24">
-          {resentPosts.length && (
-              <Animate>
-                <BentoSection
-                    heading={page.data.latest_articles_heading}
-                    subheading={'Resent Articles'}
-                    body={page.data.latest_articles_body}
-                    links={page.data.latest_articles_links}
-                    listings={resentPosts}
-                    dark={false}
-                />
-              </Animate>
-          )}
-        </div>
-
-        {/* SliceZone 2 */}
+        {/* SliceZone */}
         {page.data.slices && <SliceZone slices={page.data.slices} components={components}/>}
-
         {/* Add JSON-LD to your page */}
         <Script id={'ld-json-home'} type="application/ld+json" dangerouslySetInnerHTML={{__html: JSON.stringify(jsonLd)}}/>
       </main>

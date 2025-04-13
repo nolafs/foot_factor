@@ -25,8 +25,6 @@ import cn from 'clsx';
 import { SearchButton } from '@/components/features/search/search-button';
 import {NavigationMenuSubItem} from '@/components/layouts/navigation/navigation-menu-sub-item';
 import {components} from '@/slices';
-import {Button} from '@/components/ui/button';
-import {CircleArrowRight} from 'lucide-react';
 import MakeBookingDialog from '@/components/features/make-booking/make-booking-dialog';
 
 
@@ -38,10 +36,9 @@ const parentVariants = {
 interface NavigationSubProps {
   navigation: NavigationBarDocumentData;
   settings: SettingsDocumentData;
-  booking?: MakeBookingDocumentData;
 }
 
-export default function NavigationMenuSub({ navigation, settings, booking }: NavigationSubProps) {
+export default function NavigationMenuSub({ navigation, settings }: NavigationSubProps) {
 
   const {scrollY} = useScroll();
   const [hidden, setHidden] = useState(false);
@@ -96,7 +93,7 @@ export default function NavigationMenuSub({ navigation, settings, booking }: Nav
 
           <div className="flex justify-end shrink  lg:hidden">
           <div className="flex items-center gap-x-2">
-            {booking && <MakeBookingDialog makeBooking={booking}/>}
+            <MakeBookingDialog />
             <NavigationMobileMenu navigation={navigation} logo={settings.footer_logo} siteName={settings.site_name} />
           </div>
           </div>
@@ -170,7 +167,7 @@ export default function NavigationMenuSub({ navigation, settings, booking }: Nav
             </NavigationMenuList>
             <div className="relative z-40 hidden lg:flex flex-1 lg:justify-end space-x-2">
               <SearchButton/>
-              {booking && <MakeBookingDialog makeBooking={booking}/>}
+              <MakeBookingDialog />
 
             </div>
           </NavigationMenu>

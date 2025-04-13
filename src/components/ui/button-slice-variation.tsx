@@ -28,6 +28,14 @@ export const ButtonSliceVariation = ({ link, icon }: { link: LinkField, icon?: I
         </PrismicNextLink>
       )}
 
+      {link.variant === 'Outline' && (
+          <PrismicNextLink
+              field={link}
+              className={cn(buttonVariants({variant: 'outline', size: 'lg'}), 'text-secondary border-secondary !bg-transparent hover:!bg-secondary hover:!text-white')}>
+            {icon && <PrismicNextImage field={icon} className={'h-5 w-5 aspect-1 mr-2 invert'}/>} {link.text}
+          </PrismicNextLink>
+      )}
+
       {link.variant === 'Primary' && (
         <PrismicNextLink field={link} className={cn(buttonVariants({ variant: 'default', size: 'lg' }))}>
           {icon && <PrismicNextImage field={icon} className={'h-5 w-5 aspect-1 mr-2 invert'}/>} {link.text}

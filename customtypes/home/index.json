@@ -5,96 +5,15 @@
   "repeatable": false,
   "status": true,
   "json": {
-    "Listings": {
-      "latest_video_heading": {
-        "type": "Text",
-        "config": {
-          "label": "Latest Video Heading",
-          "placeholder": ""
-        }
-      },
-      "latest_video_body": {
-        "type": "StructuredText",
-        "config": {
-          "label": "Latest Video Body",
-          "placeholder": "",
-          "allowTargetBlank": true,
-          "multi": "paragraph,preformatted,heading1,heading2,heading3,heading4,heading5,heading6,strong,em,hyperlink,image,embed,list-item,o-list-item,rtl"
-        }
-      },
-      "latest_video_links": {
-        "type": "Link",
-        "config": {
-          "label": "Latest Video Links",
-          "placeholder": "",
-          "select": null,
-          "allowTargetBlank": true,
-          "allowText": true,
-          "repeat": true,
-          "variants": ["Primary", "Secondary", "Accent", "Link"]
-        }
-      },
-      "latest_articles_heading": {
-        "type": "Text",
-        "config": {
-          "label": "Latest Articles Heading",
-          "placeholder": ""
-        }
-      },
-      "latest_articles_body": {
-        "type": "StructuredText",
-        "config": {
-          "label": "Latest Articles Body",
-          "placeholder": "",
-          "allowTargetBlank": true,
-          "multi": "paragraph,preformatted,heading1,heading2,heading3,heading4,heading5,heading6,strong,em,hyperlink,image,embed,list-item,o-list-item,rtl"
-        }
-      },
-      "latest_articles_links": {
-        "type": "Link",
-        "config": {
-          "label": "Latest Articles Links",
-          "placeholder": "",
-          "select": null,
-          "allowTargetBlank": true,
-          "allowText": true,
-          "repeat": true,
-          "variants": ["Primary", "Secondary", "Accent", "Link"]
-        }
-      },
-      "latest_download_heading": {
-        "type": "Text",
-        "config": {
-          "label": "Latest Download Heading",
-          "placeholder": ""
-        }
-      },
-      "latest_download_body": {
-        "type": "StructuredText",
-        "config": {
-          "label": "Latest Download Body",
-          "placeholder": "",
-          "allowTargetBlank": true,
-          "multi": "paragraph,preformatted,heading1,heading2,heading3,heading4,heading5,heading6,strong,em,hyperlink,image,embed,list-item,o-list-item,rtl"
-        }
-      },
-      "latest_download_links": {
-        "type": "Link",
-        "config": {
-          "label": "Latest Download Links",
-          "placeholder": "",
-          "select": null,
-          "allowTargetBlank": true,
-          "allowText": true,
-          "repeat": true,
-          "variants": ["Primary", "Secondary", "Accent", "Link"]
-        }
-      },
+    "Main": {
       "slices": {
         "type": "Slices",
         "fieldset": "Slice Zone",
         "config": {
           "choices": {
+            "hero": {
+              "type": "SharedSlice"
+            },
             "section": {
               "type": "SharedSlice"
             },
@@ -136,28 +55,6 @@
           "thumbnails": []
         },
         "type": "Image"
-      }
-    },
-    "Top Section": {
-      "slices2": {
-        "type": "Slices",
-        "fieldset": "Slice Zone",
-        "config": {
-          "choices": {
-            "testimonial": {
-              "type": "SharedSlice"
-            },
-            "call_to_action": {
-              "type": "SharedSlice"
-            },
-            "section": {
-              "type": "SharedSlice"
-            },
-            "hero": {
-              "type": "SharedSlice"
-            }
-          }
-        }
       }
     }
   }

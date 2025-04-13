@@ -67,6 +67,13 @@
   body {
     @apply bg-background text-foreground;
   }
+
+  header{
+
+    b, i, strong{
+      @apply font-accent text-accent font-normal italic;
+    }
+  }
 }
 
 @layer utilities {

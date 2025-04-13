@@ -31,6 +31,7 @@ export default {
                     ...fontFamily.sans
                 ],
 				heading: ['var(--font-exo-2)', ...fontFamily.sans],
+				accent: ['var(--font-pt-serif)', ...fontFamily.serif],
   		},
   		borderRadius: {
   			lg: 'var(--radius)',
