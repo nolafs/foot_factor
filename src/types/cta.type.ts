@@ -4,7 +4,7 @@ export type Cta = {
   label?: KeyTextField | string;
   heading: KeyTextField | string;
   body?: RichTextField;
-  links: LinkField[];
+  links?: LinkField[];
   image?: ImageField;
   dark?: boolean;
 };

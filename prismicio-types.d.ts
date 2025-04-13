@@ -689,6 +689,17 @@ interface MakeBookingDocumentData {
    * - **Documentation**: https://prismic.io/docs/field#group
    */
   call_to_actions: prismic.GroupField<Simplify<MakeBookingDocumentDataCallToActionsItem>>;
+
+  /**
+   * Telephone field in *Make Booking*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: make_booking.telephone
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  telephone: prismic.KeyTextField;
 }
 
 /**
@@ -1603,17 +1614,6 @@ interface SettingsDocumentData {
   secondary_navigation: prismic.GroupField<Simplify<SettingsDocumentDataSecondaryNavigationItem>>;
 
   /**
-   * Footer Cta Lable field in *Settings*
-   *
-   * - **Field Type**: Text
-   * - **Placeholder**: *None*
-   * - **API ID Path**: settings.footer_cta_lable
-   * - **Tab**: Footer
-   * - **Documentation**: https://prismic.io/docs/field#key-text
-   */
-  footer_cta_lable: prismic.KeyTextField;
-
-  /**
    * Footer Cta Heading field in *Settings*
    *
    * - **Field Type**: Text
@@ -1672,10 +1672,43 @@ interface SettingsDocumentData {
    * - **Field Type**: Group
    * - **Placeholder**: *None*
    * - **API ID Path**: settings.contact_form_enquiries[]
-   * - **Tab**: Booking & Contact
+   * - **Tab**: Contact
    * - **Documentation**: https://prismic.io/docs/field#group
    */;
   contact_form_enquiries: prismic.GroupField<Simplify<SettingsDocumentDataContactFormEnquiriesItem>>;
+
+  /**
+   * Address field in *Settings*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: settings.address
+   * - **Tab**: Contact
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  address: prismic.RichTextField;
+
+  /**
+   * Telephone field in *Settings*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: settings.telephone
+   * - **Tab**: Contact
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  telephone: prismic.KeyTextField;
+
+  /**
+   * Email field in *Settings*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: settings.email
+   * - **Tab**: Contact
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  email: prismic.KeyTextField;
 }
 
 /**

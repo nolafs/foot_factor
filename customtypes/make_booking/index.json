@@ -71,6 +71,13 @@
             }
           }
         }
+      },
+      "telephone": {
+        "type": "Text",
+        "config": {
+          "label": "Telephone",
+          "placeholder": ""
+        }
       }
     }
   }

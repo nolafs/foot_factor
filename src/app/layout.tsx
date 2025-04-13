@@ -113,7 +113,7 @@ export default async function RootLayout({ children }: Readonly<{ children: Reac
 
         <SearchProvider>
           <BookingProvider initialData={makeBooking.data}>
-          <NavigationMenuSub navigation={navigation.data} settings={settings.data} booking={makeBooking.data} />
+          <NavigationMenuSub navigation={navigation.data} settings={settings.data}  />
 
           {/* Content */}
 

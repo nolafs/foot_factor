@@ -1,4 +1,4 @@
-import type {Cta, LinkPrismicType, NavigationProps, SocialLinkItemType} from '@/types';
+import type {Cta, LinkPrismicType, SocialLinkItemType} from '@/types';
 import {PrismicNextImage, PrismicNextLink} from '@prismicio/next';
 import React from 'react';
 import Link from 'next/link';
@@ -8,7 +8,7 @@ import {
   NavigationBarDocumentData,
   NavigationElementDocument, NavigationMegaMenuItemDocument, SettingsDocumentData,
 } from '../../../prismicio-types';
-import {field} from 'fp-ts';
+
 
 
 
@@ -19,11 +19,10 @@ export interface FooterProps {
 
 export function Footer({ navigation, settings }: FooterProps) {
   const copyRightDate = new Date().getFullYear();
+
   const footerCta: Cta = {
-    label: settings?.footer_cta_lable ?? '',
     heading: settings?.footer_cta_heading ?? '',
     body: settings?.footer_cta_body ?? '',
-    links: settings?.footer_cta_links ?? [],
   };
 
   const social: SocialLinkItemType[] | undefined = settings?.social_media?.map(item => ({
@@ -35,8 +34,7 @@ export function Footer({ navigation, settings }: FooterProps) {
 
   return (
     <footer>
-      <div className="relative bg-blue-950 pt-16 sm:pt-24 md:pt-24">
-
+      <div className="relative bg-primary pt-16 sm:pt-24 md:pt-24">
         <Container className={'relative z-10 block pb-10'}>
               <div className="mt-10 grid grid-cols-2 gap-y-10 pb-10 lg:grid-cols-6 lg:gap-8">
                 <div className="col-span-2 flex flex-col justify-between">

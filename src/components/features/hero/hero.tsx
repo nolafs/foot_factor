@@ -24,12 +24,11 @@ export  function Hero({ heading, subheading, lead,  links, image, hasBooking, ra
 
   return (
       <div className="relative isolate overflow-hidden">
-
           <>
             <div
                 className="absolute top-0 z-10 h-full w-full bg-primary opacity-40"/>
             {image && (
-                <div className="z-1 absolute inset-0 overflow-hidden h-full lg:max-h-svh">
+                <div className="z-1 absolute inset-0 overflow-hidden h-full">
                   <PrismicNextImage
                       loading={'lazy'}
                       field={image}

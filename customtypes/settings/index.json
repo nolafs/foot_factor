@@ -110,13 +110,6 @@
           }
         }
       },
-      "footer_cta_lable": {
-        "type": "Text",
-        "config": {
-          "label": "Footer Cta Lable",
-          "placeholder": ""
-        }
-      },
       "footer_cta_heading": {
         "type": "Text",
         "config": {
@@ -191,7 +184,7 @@
         }
       }
     },
-    "Booking & Contact": {
+    "Contact": {
       "contact_form_enquiries": {
         "type": "Group",
         "config": {
@@ -213,6 +206,29 @@
               }
             }
           }
+        }
+      },
+      "address": {
+        "type": "StructuredText",
+        "config": {
+          "label": "Address",
+          "placeholder": "",
+          "allowTargetBlank": true,
+          "multi": "paragraph,preformatted,heading1,heading2,heading3,heading4,heading5,heading6,strong,em,hyperlink,image,embed,list-item,o-list-item,rtl"
+        }
+      },
+      "telephone": {
+        "type": "Text",
+        "config": {
+          "label": "Telephone",
+          "placeholder": ""
+        }
+      },
+      "email": {
+        "type": "Text",
+        "config": {
+          "label": "Email",
+          "placeholder": ""
         }
       }
     }
