@@ -5,6 +5,7 @@ export type Cta = {
   heading: KeyTextField | string;
   body?: RichTextField;
   links?: LinkField[];
+  telephone?: string;
   image?: ImageField;
   dark?: boolean;
 };

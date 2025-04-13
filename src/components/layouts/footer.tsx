@@ -8,6 +8,7 @@ import {
   NavigationBarDocumentData,
   NavigationElementDocument, NavigationMegaMenuItemDocument, SettingsDocumentData,
 } from '../../../prismicio-types';
+import {CallToActionBooking} from "@/components/features/cta/callToAction-booking";
 
 
 
@@ -23,6 +24,7 @@ export function Footer({ navigation, settings }: FooterProps) {
   const footerCta: Cta = {
     heading: settings?.footer_cta_heading ?? '',
     body: settings?.footer_cta_body ?? '',
+    telephone: settings?.telephone ?? ''
   };
 
   const social: SocialLinkItemType[] | undefined = settings?.social_media?.map(item => ({
@@ -34,6 +36,7 @@ export function Footer({ navigation, settings }: FooterProps) {
 
   return (
     <footer>
+      <CallToActionBooking {...footerCta}  />
       <div className="relative bg-primary pt-16 sm:pt-24 md:pt-24">
         <Container className={'relative z-10 block pb-10'}>
               <div className="mt-10 grid grid-cols-2 gap-y-10 pb-10 lg:grid-cols-6 lg:gap-8">

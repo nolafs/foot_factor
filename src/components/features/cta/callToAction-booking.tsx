@@ -1,27 +1,34 @@
-import { Subheading } from '@/components/ui/text';
 import { type Cta } from '@/types';
 import { PrismicRichText } from '@prismicio/react';
-import { PrismicNextLink } from '@prismicio/next';
 import cn from 'clsx';
 import { buttonVariants } from '@/components/ui/button';
 import {Container} from "@/components/ui/container";
+import MakeBookingDialog from "@/components/features/make-booking/make-booking-dialog";
+import {Wave} from "@/components/wave";
 
-export function CallToActionBooking({ label, heading, body }: Cta) {
+export function CallToActionBooking({ label, heading, body, telephone }: Cta) {
   return (
-    <div className="relative w-full pb-16 pt-20 text-center sm:py-24">
-      <Container>
-      <hgroup>
-        <Subheading>{label}</Subheading>
-        <p
-          className={cn('mx-auto mt-6 max-w-2xl text-3xl font-medium tracking-tight text-gray-950 sm:text-5xl'
-          )}>
-          {heading}
-        </p>
-      </hgroup>
-      <div
-        className={'mx-auto mt-6 max-w-xs text-sm/6 text-gray-500'}>
-        <PrismicRichText field={body} />
-      </div>
+    <div className="relative bg-secondary w-full pb-16 pt-20 text-center sm:py-24 overflow-hidden">
+        <div className={'absolute w-full h-full top-0 left-0 flex items-center justify-center'}>
+            <Wave />
+        </div>
+
+      <Container className={'relative z-2'}>
+          <hgroup>
+            <h2
+              className={cn('mx-auto mt-6 max-w-2xl text-3xl font-heading font-medium tracking-tight text-background sm:text-5xl'
+              )}>
+              {heading}
+            </h2>
+          </hgroup>
+          <div
+            className={'mx-auto mt-6  text-xl/6 text-gray-300'}>
+            <PrismicRichText field={body} />
+          </div>
+          <div className={'flex justify-center gap-5 mt-6'}>
+              <MakeBookingDialog size={'lg'} />
+              <a href={`tel:${ telephone }`} className={buttonVariants({variant: 'outline', size: 'lg'})} >Call us</a>
+          </div>
       </Container>
     </div>
   );

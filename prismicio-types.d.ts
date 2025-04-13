@@ -689,17 +689,6 @@ interface MakeBookingDocumentData {
    * - **Documentation**: https://prismic.io/docs/field#group
    */
   call_to_actions: prismic.GroupField<Simplify<MakeBookingDocumentDataCallToActionsItem>>;
-
-  /**
-   * Telephone field in *Make Booking*
-   *
-   * - **Field Type**: Text
-   * - **Placeholder**: *None*
-   * - **API ID Path**: make_booking.telephone
-   * - **Tab**: Main
-   * - **Documentation**: https://prismic.io/docs/field#key-text
-   */
-  telephone: prismic.KeyTextField;
 }
 
 /**
@@ -1634,19 +1623,6 @@ interface SettingsDocumentData {
    * - **Documentation**: https://prismic.io/docs/field#rich-text-title
    */
   footer_cta_body: prismic.RichTextField;
-
-  /**
-   * Footer Cta Links field in *Settings*
-   *
-   * - **Field Type**: Link
-   * - **Placeholder**: *None*
-   * - **API ID Path**: settings.footer_cta_links
-   * - **Tab**: Footer
-   * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
-   */
-  footer_cta_links: prismic.Repeatable<
-    prismic.LinkField<string, string, unknown, prismic.FieldState, 'Primary' | 'Secondary'>
-  >;
 
   /**
    * Google Rating field in *Settings*
