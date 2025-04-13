@@ -6,9 +6,11 @@ import {Container} from "@/components/ui/container";
 import MakeBookingDialog from "@/components/features/make-booking/make-booking-dialog";
 import {Wave} from "@/components/wave";
 
+import {Phone} from 'lucide-react'
+
 export function CallToActionBooking({ label, heading, body, telephone }: Cta) {
   return (
-    <div className="relative bg-secondary w-full pb-16 pt-20 text-center sm:py-24 overflow-hidden">
+    <div className="relative bg-primary-500 w-full pb-16 pt-20 text-center sm:py-24 overflow-hidden">
         <div className={'absolute w-full h-full top-0 left-0 flex items-center justify-center'}>
             <Wave />
         </div>
@@ -27,7 +29,7 @@ export function CallToActionBooking({ label, heading, body, telephone }: Cta) {
           </div>
           <div className={'flex justify-center gap-5 mt-6'}>
               <MakeBookingDialog size={'lg'} />
-              <a href={`tel:${ telephone }`} className={buttonVariants({variant: 'outline', size: 'lg'})} >Call us</a>
+              <a href={`tel:${ telephone }`} className={buttonVariants({variant: 'outline', size: 'lg'})} >Call us <Phone /></a>
           </div>
       </Container>
     </div>

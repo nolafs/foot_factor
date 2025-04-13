@@ -31,7 +31,7 @@ export const ButtonSliceVariation = ({ link, icon }: { link: LinkField, icon?: I
       {link.variant === 'Outline' && (
           <PrismicNextLink
               field={link}
-              className={cn(buttonVariants({variant: 'outline', size: 'lg'}), 'text-secondary border-secondary !bg-transparent hover:!bg-secondary hover:!text-white')}>
+              className={cn(buttonVariants({variant: 'outline', size: 'lg'}))}>
             {icon && <PrismicNextImage field={icon} className={'h-5 w-5 aspect-1 mr-2 invert'}/>} {link.text}
           </PrismicNextLink>
       )}
