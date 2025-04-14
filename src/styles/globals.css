@@ -70,7 +70,7 @@
 
   header, .content-master{
     b, i, strong, em{
-      @apply !font-accent text-accent font-normal italic;
+      @apply !font-accent !text-accent font-normal italic;
     }
   }
 }

@@ -29,6 +29,7 @@ const exo2 = Exo_2({
 
 const ptSerif = PT_Serif({
   subsets: ['latin'],
+  style: ['normal', 'italic'],
   variable: '--font-pt-serif',
   weight: ['400'],
 });
