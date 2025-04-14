@@ -1,6 +1,9 @@
 {
   "format": "page",
   "id": "orthotics",
+  "label": "Orthotics",
+  "repeatable": true,
+  "status": true,
   "json": {
     "Main": {
       "uid": {
@@ -10,11 +13,27 @@
         }
       },
       "slices": {
-        "config": {
-          "choices": {}
-        },
+        "type": "Slices",
         "fieldset": "Slice Zone",
-        "type": "Slices"
+        "config": {
+          "choices": {
+            "faqs": {
+              "type": "SharedSlice"
+            },
+            "call_to_action": {
+              "type": "SharedSlice"
+            },
+            "section": {
+              "type": "SharedSlice"
+            },
+            "testimonial": {
+              "type": "SharedSlice"
+            },
+            "hero": {
+              "type": "SharedSlice"
+            }
+          }
+        }
       }
     },
     "SEO & Metadata": {
@@ -44,8 +63,5 @@
         "type": "Image"
       }
     }
-  },
-  "label": "Orthotics",
-  "repeatable": true,
-  "status": true
+  }
 }

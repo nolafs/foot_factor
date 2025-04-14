@@ -787,7 +787,7 @@ export type NavigationMegaMenuItemDocument<Lang extends string = string> = prism
   Lang
 >;
 
-type OrthoticsDocumentDataSlicesSlice = never;
+type OrthoticsDocumentDataSlicesSlice = FaqsSlice | CallToActionSlice | SectionSlice | TestimonialSlice | HeroSlice;
 
 /**
  * Content for Orthotics documents
