@@ -14,6 +14,7 @@ import {PrismicNextLink} from '@prismicio/next';
 import BookingForm from './booking-form';
 import {ScrollArea} from '@/components/ui/scroll-area';
 import { useBooking } from '@/lib/context/booking.context';
+import { cn } from '@/lib/utils';
 
 interface MakeBookingDialogProps {
     buttonLabel?: string
@@ -32,8 +33,7 @@ export const MakeBookingDialog = ({ buttonLabel = 'Book now', size = 'sm'}: Make
 
   return (
       <Dialog>
-          <DialogTrigger className={buttonVariants({variant: 'default', size: mappedSize})}>{buttonLabel} <CircleArrowRight
-              className={'h-5 w-5'}/></DialogTrigger>
+          <DialogTrigger className={buttonVariants({variant: 'default', size: mappedSize})}>{buttonLabel} <CircleArrowRight size={mappedSize === 'sm' ? 5 : 30}/></DialogTrigger>
           <DialogContent className={'w-full max-w-7xl max-h-[975px] h-full'}>
               <DialogHeader>
                   <DialogTitle className={'font-heading text-2xl md:text-4xl lg:text-5xl'}>{bookingData?.header ?? 'Make Booking'}</DialogTitle>
