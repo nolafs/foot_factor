@@ -21,9 +21,6 @@
             "testimonial": {
               "type": "SharedSlice"
             },
-            "section": {
-              "type": "SharedSlice"
-            },
             "hero": {
               "type": "SharedSlice"
             },

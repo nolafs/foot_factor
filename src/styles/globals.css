@@ -68,10 +68,9 @@
     @apply bg-background text-foreground;
   }
 
-  header{
-
-    b, i, strong{
-      @apply font-accent text-accent font-normal italic;
+  header, .content-master{
+    b, i, strong, em{
+      @apply !font-accent text-accent font-normal italic;
     }
   }
 }

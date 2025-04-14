@@ -1,4 +1,4 @@
-import SectionTitle from '../section-title/section-title';
+import SectionTitle from '@/components/features/section/section-title/section-title';
 import { type KeyTextField, type RichTextField } from '@prismicio/client';
 import FaqItem from './faq-item';
 import type {FAQ} from '@/types/faq.type';

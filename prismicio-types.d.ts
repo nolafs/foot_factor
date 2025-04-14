@@ -432,7 +432,7 @@ export type FaqDocument<Lang extends string = string> = prismic.PrismicDocumentW
   Lang
 >;
 
-type HomeDocumentDataSlicesSlice = HeroSlice | SectionSlice | TestimonialSlice | FaqsSlice | CallToActionSlice;
+type HomeDocumentDataSlicesSlice = SectionSlice | HeroSlice | TestimonialSlice | FaqsSlice | CallToActionSlice;
 
 /**
  * Content for Home documents
@@ -1034,13 +1034,7 @@ export type NavigationMegaMenuItemDocument<Lang extends string = string> = prism
   Lang
 >;
 
-type PageDocumentDataSlicesSlice =
-  | TestimonialSlice
-  | SectionSlice
-  | HeroSlice
-  | MegamenuSlice
-  | CallToActionSlice
-  | FaqsSlice;
+type PageDocumentDataSlicesSlice = TestimonialSlice | HeroSlice | MegamenuSlice | CallToActionSlice | FaqsSlice;
 
 /**
  * Item in *Page → Social Cards - Facebook & Twitter*
@@ -2641,211 +2635,6 @@ type MegamenuSliceVariation =
 export type MegamenuSlice = prismic.SharedSlice<'megamenu', MegamenuSliceVariation>;
 
 /**
- * Item in *Section → Default → Primary → Images*
- */
-export interface SectionSliceDefaultPrimaryImagesItem {
-  /**
-   * Image field in *Section → Default → Primary → Images*
-   *
-   * - **Field Type**: Image
-   * - **Placeholder**: *None*
-   * - **API ID Path**: section.default.primary.images[].image
-   * - **Documentation**: https://prismic.io/docs/field#image
-   */
-  image: prismic.ImageField<never>;
-}
-
-/**
- * Item in *Section → Section numbers → Primary → Images*
- */
-export interface SectionSliceSectionNumbersPrimaryImagesItem {
-  /**
-   * Image field in *Section → Section numbers → Primary → Images*
-   *
-   * - **Field Type**: Image
-   * - **Placeholder**: *None*
-   * - **API ID Path**: section.sectionNumbers.primary.images[].image
-   * - **Documentation**: https://prismic.io/docs/field#image
-   */
-  image: prismic.ImageField<never>;
-}
-
-/**
- * Item in *Section → Section numbers → Primary → Numbers*
- */
-export interface SectionSliceSectionNumbersPrimaryNumbersItem {
-  /**
-   * Heading field in *Section → Section numbers → Primary → Numbers*
-   *
-   * - **Field Type**: Text
-   * - **Placeholder**: *None*
-   * - **API ID Path**: section.sectionNumbers.primary.numbers[].heading
-   * - **Documentation**: https://prismic.io/docs/field#key-text
-   */
-  heading: prismic.KeyTextField;
-
-  /**
-   * Decimals field in *Section → Section numbers → Primary → Numbers*
-   *
-   * - **Field Type**: Number
-   * - **Placeholder**: *None*
-   * - **API ID Path**: section.sectionNumbers.primary.numbers[].decimals
-   * - **Documentation**: https://prismic.io/docs/field#number
-   */
-  decimals: prismic.NumberField;
-
-  /**
-   * Prefix field in *Section → Section numbers → Primary → Numbers*
-   *
-   * - **Field Type**: Text
-   * - **Placeholder**: *None*
-   * - **API ID Path**: section.sectionNumbers.primary.numbers[].prefix
-   * - **Documentation**: https://prismic.io/docs/field#key-text
-   */
-  prefix: prismic.KeyTextField;
-
-  /**
-   * Suffix field in *Section → Section numbers → Primary → Numbers*
-   *
-   * - **Field Type**: Text
-   * - **Placeholder**: *None*
-   * - **API ID Path**: section.sectionNumbers.primary.numbers[].suffix
-   * - **Documentation**: https://prismic.io/docs/field#key-text
-   */
-  suffix: prismic.KeyTextField;
-
-  /**
-   * Class Names field in *Section → Section numbers → Primary → Numbers*
-   *
-   * - **Field Type**: Text
-   * - **Placeholder**: *None*
-   * - **API ID Path**: section.sectionNumbers.primary.numbers[].class_names
-   * - **Documentation**: https://prismic.io/docs/field#key-text
-   */
-  class_names: prismic.KeyTextField;
-
-  /**
-   * Start field in *Section → Section numbers → Primary → Numbers*
-   *
-   * - **Field Type**: Number
-   * - **Placeholder**: *None*
-   * - **API ID Path**: section.sectionNumbers.primary.numbers[].start
-   * - **Documentation**: https://prismic.io/docs/field#number
-   */
-  start: prismic.NumberField;
-
-  /**
-   * End field in *Section → Section numbers → Primary → Numbers*
-   *
-   * - **Field Type**: Number
-   * - **Placeholder**: *None*
-   * - **API ID Path**: section.sectionNumbers.primary.numbers[].end
-   * - **Documentation**: https://prismic.io/docs/field#number
-   */
-  end: prismic.NumberField;
-}
-
-/**
- * Item in *Section → Section List → Primary → List*
- */
-export interface SectionSliceSectionListPrimaryListItem {
-  /**
-   * Icon field in *Section → Section List → Primary → List*
-   *
-   * - **Field Type**: Image
-   * - **Placeholder**: *None*
-   * - **API ID Path**: section.sectionList.primary.list[].icon
-   * - **Documentation**: https://prismic.io/docs/field#image
-   */
-  icon: prismic.ImageField<never>;
-
-  /**
-   * Icon width field in *Section → Section List → Primary → List*
-   *
-   * - **Field Type**: Select
-   * - **Placeholder**: *None*
-   * - **API ID Path**: section.sectionList.primary.list[].icon_width
-   * - **Documentation**: https://prismic.io/docs/field#select
-   */
-  icon_width: prismic.SelectField<'60' | '100' | 'auto'>;
-
-  /**
-   * Heading field in *Section → Section List → Primary → List*
-   *
-   * - **Field Type**: Text
-   * - **Placeholder**: *None*
-   * - **API ID Path**: section.sectionList.primary.list[].heading
-   * - **Documentation**: https://prismic.io/docs/field#key-text
-   */
-  heading: prismic.KeyTextField;
-
-  /**
-   * Body field in *Section → Section List → Primary → List*
-   *
-   * - **Field Type**: Rich Text
-   * - **Placeholder**: *None*
-   * - **API ID Path**: section.sectionList.primary.list[].body
-   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
-   */
-  body: prismic.RichTextField;
-
-  /**
-   * Link field in *Section → Section List → Primary → List*
-   *
-   * - **Field Type**: Link
-   * - **Placeholder**: *None*
-   * - **API ID Path**: section.sectionList.primary.list[].link
-   * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
-   */
-  link: prismic.LinkField<string, string, unknown, prismic.FieldState, never>;
-}
-
-/**
- * Item in *Section → Section List Image → Primary → List*
- */
-export interface SectionSliceSectionListImagePrimaryListItem {
-  /**
-   * Image field in *Section → Section List Image → Primary → List*
-   *
-   * - **Field Type**: Image
-   * - **Placeholder**: *None*
-   * - **API ID Path**: section.sectionListImage.primary.list[].icon
-   * - **Documentation**: https://prismic.io/docs/field#image
-   */
-  icon: prismic.ImageField<never>;
-
-  /**
-   * Heading field in *Section → Section List Image → Primary → List*
-   *
-   * - **Field Type**: Text
-   * - **Placeholder**: *None*
-   * - **API ID Path**: section.sectionListImage.primary.list[].heading
-   * - **Documentation**: https://prismic.io/docs/field#key-text
-   */
-  heading: prismic.KeyTextField;
-
-  /**
-   * Body field in *Section → Section List Image → Primary → List*
-   *
-   * - **Field Type**: Rich Text
-   * - **Placeholder**: *None*
-   * - **API ID Path**: section.sectionListImage.primary.list[].body
-   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
-   */
-  body: prismic.RichTextField;
-
-  /**
-   * Link field in *Section → Section List Image → Primary → List*
-   *
-   * - **Field Type**: Link
-   * - **Placeholder**: *None*
-   * - **API ID Path**: section.sectionListImage.primary.list[].link
-   * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
-   */
-  link: prismic.LinkField<string, string, unknown, prismic.FieldState, never>;
-}
-
-/**
  * Primary content in *Section → Default → Primary*
  */
 export interface SectionSliceDefaultPrimary {
@@ -2860,26 +2649,6 @@ export interface SectionSliceDefaultPrimary {
   heading: prismic.KeyTextField;
 
   /**
-   * Subheading field in *Section → Default → Primary*
-   *
-   * - **Field Type**: Text
-   * - **Placeholder**: *None*
-   * - **API ID Path**: section.default.primary.subheading
-   * - **Documentation**: https://prismic.io/docs/field#key-text
-   */
-  subheading: prismic.KeyTextField;
-
-  /**
-   * Lead field in *Section → Default → Primary*
-   *
-   * - **Field Type**: Text
-   * - **Placeholder**: *None*
-   * - **API ID Path**: section.default.primary.lead
-   * - **Documentation**: https://prismic.io/docs/field#key-text
-   */
-  lead: prismic.KeyTextField;
-
-  /**
    * Body field in *Section → Default → Primary*
    *
    * - **Field Type**: Rich Text
@@ -2890,37 +2659,15 @@ export interface SectionSliceDefaultPrimary {
   body: prismic.RichTextField;
 
   /**
-   * Images field in *Section → Default → Primary*
-   *
-   * - **Field Type**: Group
-   * - **Placeholder**: *None*
-   * - **API ID Path**: section.default.primary.images[]
-   * - **Documentation**: https://prismic.io/docs/field#group
-   */
-  images: prismic.GroupField<Simplify<SectionSliceDefaultPrimaryImagesItem>>;
-
-  /**
-   * Links field in *Section → Default → Primary*
-   *
-   * - **Field Type**: Link
-   * - **Placeholder**: *None*
-   * - **API ID Path**: section.default.primary.links
-   * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
-   */
-  links: prismic.Repeatable<
-    prismic.LinkField<string, string, unknown, prismic.FieldState, 'Primary' | 'Secondary' | 'Link' | 'Accent'>
-  >;
-
-  /**
-   * Animation field in *Section → Default → Primary*
+   * Animated field in *Section → Default → Primary*
    *
    * - **Field Type**: Boolean
    * - **Placeholder**: *None*
-   * - **Default Value**: false
-   * - **API ID Path**: section.default.primary.animation
+   * - **Default Value**: true
+   * - **API ID Path**: section.default.primary.animated
    * - **Documentation**: https://prismic.io/docs/field#boolean
    */
-  animation: prismic.BooleanField;
+  animated: prismic.BooleanField;
 }
 
 /**
@@ -2933,306 +2680,9 @@ export interface SectionSliceDefaultPrimary {
 export type SectionSliceDefault = prismic.SharedSliceVariation<'default', Simplify<SectionSliceDefaultPrimary>, never>;
 
 /**
- * Primary content in *Section → Section numbers → Primary*
- */
-export interface SectionSliceSectionNumbersPrimary {
-  /**
-   * Heading field in *Section → Section numbers → Primary*
-   *
-   * - **Field Type**: Text
-   * - **Placeholder**: *None*
-   * - **API ID Path**: section.sectionNumbers.primary.heading
-   * - **Documentation**: https://prismic.io/docs/field#key-text
-   */
-  heading: prismic.KeyTextField;
-
-  /**
-   * Body field in *Section → Section numbers → Primary*
-   *
-   * - **Field Type**: Rich Text
-   * - **Placeholder**: *None*
-   * - **API ID Path**: section.sectionNumbers.primary.body
-   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
-   */
-  body: prismic.RichTextField;
-
-  /**
-   * Images field in *Section → Section numbers → Primary*
-   *
-   * - **Field Type**: Group
-   * - **Placeholder**: *None*
-   * - **API ID Path**: section.sectionNumbers.primary.images[]
-   * - **Documentation**: https://prismic.io/docs/field#group
-   */
-  images: prismic.GroupField<Simplify<SectionSliceSectionNumbersPrimaryImagesItem>>;
-
-  /**
-   * Numbers field in *Section → Section numbers → Primary*
-   *
-   * - **Field Type**: Group
-   * - **Placeholder**: *None*
-   * - **API ID Path**: section.sectionNumbers.primary.numbers[]
-   * - **Documentation**: https://prismic.io/docs/field#group
-   */
-  numbers: prismic.GroupField<Simplify<SectionSliceSectionNumbersPrimaryNumbersItem>>;
-}
-
-/**
- * Section numbers variation for Section Slice
- *
- * - **API ID**: `sectionNumbers`
- * - **Description**: Default
- * - **Documentation**: https://prismic.io/docs/slice
- */
-export type SectionSliceSectionNumbers = prismic.SharedSliceVariation<
-  'sectionNumbers',
-  Simplify<SectionSliceSectionNumbersPrimary>,
-  never
->;
-
-/**
- * Primary content in *Section → Section List → Primary*
- */
-export interface SectionSliceSectionListPrimary {
-  /**
-   * Heading field in *Section → Section List → Primary*
-   *
-   * - **Field Type**: Text
-   * - **Placeholder**: *None*
-   * - **API ID Path**: section.sectionList.primary.heading
-   * - **Documentation**: https://prismic.io/docs/field#key-text
-   */
-  heading: prismic.KeyTextField;
-
-  /**
-   * Subheading field in *Section → Section List → Primary*
-   *
-   * - **Field Type**: Text
-   * - **Placeholder**: *None*
-   * - **API ID Path**: section.sectionList.primary.subheading
-   * - **Documentation**: https://prismic.io/docs/field#key-text
-   */
-  subheading: prismic.KeyTextField;
-
-  /**
-   * Lead field in *Section → Section List → Primary*
-   *
-   * - **Field Type**: Text
-   * - **Placeholder**: *None*
-   * - **API ID Path**: section.sectionList.primary.lead
-   * - **Documentation**: https://prismic.io/docs/field#key-text
-   */
-  lead: prismic.KeyTextField;
-
-  /**
-   * Body field in *Section → Section List → Primary*
-   *
-   * - **Field Type**: Rich Text
-   * - **Placeholder**: *None*
-   * - **API ID Path**: section.sectionList.primary.body
-   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
-   */
-  body: prismic.RichTextField;
-
-  /**
-   * List Title field in *Section → Section List → Primary*
-   *
-   * - **Field Type**: Text
-   * - **Placeholder**: *None*
-   * - **API ID Path**: section.sectionList.primary.list_title
-   * - **Documentation**: https://prismic.io/docs/field#key-text
-   */
-  list_title: prismic.KeyTextField;
-
-  /**
-   * List field in *Section → Section List → Primary*
-   *
-   * - **Field Type**: Group
-   * - **Placeholder**: *None*
-   * - **API ID Path**: section.sectionList.primary.list[]
-   * - **Documentation**: https://prismic.io/docs/field#group
-   */
-  list: prismic.GroupField<Simplify<SectionSliceSectionListPrimaryListItem>>;
-}
-
-/**
- * Section List variation for Section Slice
- *
- * - **API ID**: `sectionList`
- * - **Description**: Default
- * - **Documentation**: https://prismic.io/docs/slice
- */
-export type SectionSliceSectionList = prismic.SharedSliceVariation<
-  'sectionList',
-  Simplify<SectionSliceSectionListPrimary>,
-  never
->;
-
-/**
- * Primary content in *Section → Section Embed → Primary*
- */
-export interface SectionSliceSectionEmbedPrimary {
-  /**
-   * Heading field in *Section → Section Embed → Primary*
-   *
-   * - **Field Type**: Text
-   * - **Placeholder**: *None*
-   * - **API ID Path**: section.sectionEmbed.primary.heading
-   * - **Documentation**: https://prismic.io/docs/field#key-text
-   */
-  heading: prismic.KeyTextField;
-
-  /**
-   * Subheading field in *Section → Section Embed → Primary*
-   *
-   * - **Field Type**: Text
-   * - **Placeholder**: *None*
-   * - **API ID Path**: section.sectionEmbed.primary.subheading
-   * - **Documentation**: https://prismic.io/docs/field#key-text
-   */
-  subheading: prismic.KeyTextField;
-
-  /**
-   * Lead field in *Section → Section Embed → Primary*
-   *
-   * - **Field Type**: Text
-   * - **Placeholder**: *None*
-   * - **API ID Path**: section.sectionEmbed.primary.lead
-   * - **Documentation**: https://prismic.io/docs/field#key-text
-   */
-  lead: prismic.KeyTextField;
-
-  /**
-   * Body field in *Section → Section Embed → Primary*
-   *
-   * - **Field Type**: Rich Text
-   * - **Placeholder**: *None*
-   * - **API ID Path**: section.sectionEmbed.primary.body
-   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
-   */
-  body: prismic.RichTextField;
-
-  /**
-   * Video field in *Section → Section Embed → Primary*
-   *
-   * - **Field Type**: Embed
-   * - **Placeholder**: *None*
-   * - **API ID Path**: section.sectionEmbed.primary.video
-   * - **Documentation**: https://prismic.io/docs/field#embed
-   */
-  video: prismic.EmbedField;
-
-  /**
-   * Links field in *Section → Section Embed → Primary*
-   *
-   * - **Field Type**: Link
-   * - **Placeholder**: *None*
-   * - **API ID Path**: section.sectionEmbed.primary.links
-   * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
-   */
-  links: prismic.Repeatable<prismic.LinkField<string, string, unknown, prismic.FieldState, never>>;
-}
-
-/**
- * Section Embed variation for Section Slice
- *
- * - **API ID**: `sectionEmbed`
- * - **Description**: Default
- * - **Documentation**: https://prismic.io/docs/slice
- */
-export type SectionSliceSectionEmbed = prismic.SharedSliceVariation<
-  'sectionEmbed',
-  Simplify<SectionSliceSectionEmbedPrimary>,
-  never
->;
-
-/**
- * Primary content in *Section → Section List Image → Primary*
- */
-export interface SectionSliceSectionListImagePrimary {
-  /**
-   * Heading field in *Section → Section List Image → Primary*
-   *
-   * - **Field Type**: Text
-   * - **Placeholder**: *None*
-   * - **API ID Path**: section.sectionListImage.primary.heading
-   * - **Documentation**: https://prismic.io/docs/field#key-text
-   */
-  heading: prismic.KeyTextField;
-
-  /**
-   * Subheading field in *Section → Section List Image → Primary*
-   *
-   * - **Field Type**: Text
-   * - **Placeholder**: *None*
-   * - **API ID Path**: section.sectionListImage.primary.subheading
-   * - **Documentation**: https://prismic.io/docs/field#key-text
-   */
-  subheading: prismic.KeyTextField;
-
-  /**
-   * Lead field in *Section → Section List Image → Primary*
-   *
-   * - **Field Type**: Text
-   * - **Placeholder**: *None*
-   * - **API ID Path**: section.sectionListImage.primary.lead
-   * - **Documentation**: https://prismic.io/docs/field#key-text
-   */
-  lead: prismic.KeyTextField;
-
-  /**
-   * Body field in *Section → Section List Image → Primary*
-   *
-   * - **Field Type**: Rich Text
-   * - **Placeholder**: *None*
-   * - **API ID Path**: section.sectionListImage.primary.body
-   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
-   */
-  body: prismic.RichTextField;
-
-  /**
-   * List Title field in *Section → Section List Image → Primary*
-   *
-   * - **Field Type**: Text
-   * - **Placeholder**: *None*
-   * - **API ID Path**: section.sectionListImage.primary.list_title
-   * - **Documentation**: https://prismic.io/docs/field#key-text
-   */
-  list_title: prismic.KeyTextField;
-
-  /**
-   * List field in *Section → Section List Image → Primary*
-   *
-   * - **Field Type**: Group
-   * - **Placeholder**: *None*
-   * - **API ID Path**: section.sectionListImage.primary.list[]
-   * - **Documentation**: https://prismic.io/docs/field#group
-   */
-  list: prismic.GroupField<Simplify<SectionSliceSectionListImagePrimaryListItem>>;
-}
-
-/**
- * Section List Image variation for Section Slice
- *
- * - **API ID**: `sectionListImage`
- * - **Description**: Default
- * - **Documentation**: https://prismic.io/docs/slice
- */
-export type SectionSliceSectionListImage = prismic.SharedSliceVariation<
-  'sectionListImage',
-  Simplify<SectionSliceSectionListImagePrimary>,
-  never
->;
-
-/**
  * Slice variation for *Section*
  */
-type SectionSliceVariation =
-  | SectionSliceDefault
-  | SectionSliceSectionNumbers
-  | SectionSliceSectionList
-  | SectionSliceSectionEmbed
-  | SectionSliceSectionListImage;
+type SectionSliceVariation = SectionSliceDefault;
 
 /**
  * Section Shared Slice
@@ -3506,22 +2956,9 @@ declare module '@prismicio/client' {
       MegamenuSliceImageButtonRow,
       MegamenuSliceBlog,
       SectionSlice,
-      SectionSliceDefaultPrimaryImagesItem,
       SectionSliceDefaultPrimary,
-      SectionSliceSectionNumbersPrimaryImagesItem,
-      SectionSliceSectionNumbersPrimaryNumbersItem,
-      SectionSliceSectionNumbersPrimary,
-      SectionSliceSectionListPrimaryListItem,
-      SectionSliceSectionListPrimary,
-      SectionSliceSectionEmbedPrimary,
-      SectionSliceSectionListImagePrimaryListItem,
-      SectionSliceSectionListImagePrimary,
       SectionSliceVariation,
       SectionSliceDefault,
-      SectionSliceSectionNumbers,
-      SectionSliceSectionList,
-      SectionSliceSectionEmbed,
-      SectionSliceSectionListImage,
       TestimonialSlice,
       TestimonialSliceDefaultPrimary,
       TestimonialSliceTestimonialsPrimaryItemsItem,

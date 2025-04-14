@@ -1,6 +1,6 @@
 import { PrismicRichText, type SliceComponentProps } from '@prismicio/react';
 import { Bounded } from '@/components/ui/bounded';
-import { SectionFaqs } from '@/components/features/section-faqs/section-faqs';
+import { SectionFaqs } from '@/components/features/section/section-faqs/section-faqs';
 import { createClient } from '@/prismicio';
 import { Heading, Subheading } from '@/components/ui/text';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
