@@ -79,314 +79,67 @@ export type AuthorDocument<Lang extends string = string> = prismic.PrismicDocume
   Lang
 >;
 
-type ContactDocumentDataSlicesSlice = never;
-
-type ContactDocumentDataSlices2Slice = TestimonialSlice | CallToActionSlice | FaqsSlice;
+type ConditionDocumentDataSlicesSlice = FaqsSlice | SectionSlice | HeroSlice;
 
 /**
- * Content for Contact documents
+ * Content for Condition documents
  */
-interface ContactDocumentData {
+interface ConditionDocumentData {
   /**
-   * Heading field in *Contact*
-   *
-   * - **Field Type**: Text
-   * - **Placeholder**: *None*
-   * - **API ID Path**: contact.heading
-   * - **Tab**: Main
-   * - **Documentation**: https://prismic.io/docs/field#key-text
-   */
-  heading: prismic.KeyTextField;
-
-  /**
-   * Subtitle field in *Contact*
-   *
-   * - **Field Type**: Text
-   * - **Placeholder**: *None*
-   * - **API ID Path**: contact.subtitle
-   * - **Tab**: Main
-   * - **Documentation**: https://prismic.io/docs/field#key-text
-   */
-  subtitle: prismic.KeyTextField;
-
-  /**
-   * Lead field in *Contact*
-   *
-   * - **Field Type**: Text
-   * - **Placeholder**: *None*
-   * - **API ID Path**: contact.lead
-   * - **Tab**: Main
-   * - **Documentation**: https://prismic.io/docs/field#key-text
-   */
-  lead: prismic.KeyTextField;
-
-  /**
-   * Email Address field in *Contact*
-   *
-   * - **Field Type**: Text
-   * - **Placeholder**: *None*
-   * - **API ID Path**: contact.email_address
-   * - **Tab**: Main
-   * - **Documentation**: https://prismic.io/docs/field#key-text
-   */
-  email_address: prismic.KeyTextField;
-
-  /**
-   * Phone Number field in *Contact*
-   *
-   * - **Field Type**: Text
-   * - **Placeholder**: *None*
-   * - **API ID Path**: contact.phone_number
-   * - **Tab**: Main
-   * - **Documentation**: https://prismic.io/docs/field#key-text
-   */
-  phone_number: prismic.KeyTextField;
-
-  /**
-   * Form Image field in *Contact*
-   *
-   * - **Field Type**: Image
-   * - **Placeholder**: *None*
-   * - **API ID Path**: contact.form_image
-   * - **Tab**: Main
-   * - **Documentation**: https://prismic.io/docs/field#image
-   */
-  form_image: prismic.ImageField<never>;
-
-  /**
-   * Form Heading field in *Contact*
-   *
-   * - **Field Type**: Text
-   * - **Placeholder**: *None*
-   * - **API ID Path**: contact.form_heading
-   * - **Tab**: Main
-   * - **Documentation**: https://prismic.io/docs/field#key-text
-   */
-  form_heading: prismic.KeyTextField;
-
-  /**
-   * Form Body field in *Contact*
-   *
-   * - **Field Type**: Text
-   * - **Placeholder**: *None*
-   * - **API ID Path**: contact.form_body
-   * - **Tab**: Main
-   * - **Documentation**: https://prismic.io/docs/field#key-text
-   */
-  form_body: prismic.KeyTextField;
-
-  /**
-   * Slice Zone field in *Contact*
+   * Slice Zone field in *Condition*
    *
    * - **Field Type**: Slice Zone
    * - **Placeholder**: *None*
-   * - **API ID Path**: contact.slices[]
+   * - **API ID Path**: condition.slices[]
    * - **Tab**: Main
    * - **Documentation**: https://prismic.io/docs/field#slices
    */
-  slices: prismic.SliceZone<ContactDocumentDataSlicesSlice> /**
-   * Meta Title field in *Contact*
+  slices: prismic.SliceZone<ConditionDocumentDataSlicesSlice> /**
+   * Meta Title field in *Condition*
    *
    * - **Field Type**: Text
    * - **Placeholder**: A title of the page used for social media and search engines
-   * - **API ID Path**: contact.meta_title
+   * - **API ID Path**: condition.meta_title
    * - **Tab**: SEO & Metadata
    * - **Documentation**: https://prismic.io/docs/field#key-text
    */;
   meta_title: prismic.KeyTextField;
 
   /**
-   * Meta Description field in *Contact*
+   * Meta Description field in *Condition*
    *
    * - **Field Type**: Text
    * - **Placeholder**: A brief summary of the page
-   * - **API ID Path**: contact.meta_description
+   * - **API ID Path**: condition.meta_description
    * - **Tab**: SEO & Metadata
    * - **Documentation**: https://prismic.io/docs/field#key-text
    */
   meta_description: prismic.KeyTextField;
 
   /**
-   * Meta Image field in *Contact*
+   * Meta Image field in *Condition*
    *
    * - **Field Type**: Image
    * - **Placeholder**: *None*
-   * - **API ID Path**: contact.meta_image
+   * - **API ID Path**: condition.meta_image
    * - **Tab**: SEO & Metadata
    * - **Documentation**: https://prismic.io/docs/field#image
    */
-  meta_image: prismic.ImageField<never> /**
-   * Slice Zone field in *Contact*
-   *
-   * - **Field Type**: Slice Zone
-   * - **Placeholder**: *None*
-   * - **API ID Path**: contact.slices2[]
-   * - **Tab**: Bottom
-   * - **Documentation**: https://prismic.io/docs/field#slices
-   */;
-  slices2: prismic.SliceZone<ContactDocumentDataSlices2Slice>;
+  meta_image: prismic.ImageField<never>;
 }
 
 /**
- * Contact document from Prismic
+ * Condition document from Prismic
  *
- * - **API ID**: `contact`
- * - **Repeatable**: `false`
- * - **Documentation**: https://prismic.io/docs/custom-types
- *
- * @typeParam Lang - Language API ID of the document.
- */
-export type ContactDocument<Lang extends string = string> = prismic.PrismicDocumentWithoutUID<
-  Simplify<ContactDocumentData>,
-  'contact',
-  Lang
->;
-
-/**
- * Item in *Download → Tags*
- */
-export interface DownloadDocumentDataTagsItem {
-  /**
-   * Tag field in *Download → Tags*
-   *
-   * - **Field Type**: Content Relationship
-   * - **Placeholder**: *None*
-   * - **API ID Path**: download.tags[].tag
-   * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
-   */
-  tag: prismic.ContentRelationshipField<'post_tags'>;
-}
-
-type DownloadDocumentDataSlicesSlice = never;
-
-/**
- * Content for Download documents
- */
-interface DownloadDocumentData {
-  /**
-   * name field in *Download*
-   *
-   * - **Field Type**: Text
-   * - **Placeholder**: *None*
-   * - **API ID Path**: download.name
-   * - **Tab**: Main
-   * - **Documentation**: https://prismic.io/docs/field#key-text
-   */
-  name: prismic.KeyTextField;
-
-  /**
-   * Feature Image field in *Download*
-   *
-   * - **Field Type**: Image
-   * - **Placeholder**: *None*
-   * - **API ID Path**: download.feature_image
-   * - **Tab**: Main
-   * - **Documentation**: https://prismic.io/docs/field#image
-   */
-  feature_image: prismic.ImageField<never>;
-
-  /**
-   * Featured field in *Download*
-   *
-   * - **Field Type**: Boolean
-   * - **Placeholder**: *None*
-   * - **Default Value**: false
-   * - **API ID Path**: download.featured
-   * - **Tab**: Main
-   * - **Documentation**: https://prismic.io/docs/field#boolean
-   */
-  featured: prismic.BooleanField;
-
-  /**
-   * Publishing Date field in *Download*
-   *
-   * - **Field Type**: Date
-   * - **Placeholder**: *None*
-   * - **API ID Path**: download.publishing_date
-   * - **Tab**: Main
-   * - **Documentation**: https://prismic.io/docs/field#date
-   */
-  publishing_date: prismic.DateField;
-
-  /**
-   * Category field in *Download*
-   *
-   * - **Field Type**: Content Relationship
-   * - **Placeholder**: *None*
-   * - **API ID Path**: download.category
-   * - **Tab**: Main
-   * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
-   */
-  category: prismic.ContentRelationshipField<'post_category'>;
-
-  /**
-   * Author field in *Download*
-   *
-   * - **Field Type**: Content Relationship
-   * - **Placeholder**: *None*
-   * - **API ID Path**: download.author
-   * - **Tab**: Main
-   * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
-   */
-  author: prismic.ContentRelationshipField<'author'>;
-
-  /**
-   * Description field in *Download*
-   *
-   * - **Field Type**: Rich Text
-   * - **Placeholder**: *None*
-   * - **API ID Path**: download.description
-   * - **Tab**: Main
-   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
-   */
-  description: prismic.RichTextField;
-
-  /**
-   * File field in *Download*
-   *
-   * - **Field Type**: Link to Media
-   * - **Placeholder**: *None*
-   * - **API ID Path**: download.file
-   * - **Tab**: Main
-   * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
-   */
-  file: prismic.LinkToMediaField<prismic.FieldState, never>;
-
-  /**
-   * Tags field in *Download*
-   *
-   * - **Field Type**: Group
-   * - **Placeholder**: *None*
-   * - **API ID Path**: download.tags[]
-   * - **Tab**: Main
-   * - **Documentation**: https://prismic.io/docs/field#group
-   */
-  tags: prismic.GroupField<Simplify<DownloadDocumentDataTagsItem>>;
-
-  /**
-   * Slice Zone field in *Download*
-   *
-   * - **Field Type**: Slice Zone
-   * - **Placeholder**: *None*
-   * - **API ID Path**: download.slices[]
-   * - **Tab**: Main
-   * - **Documentation**: https://prismic.io/docs/field#slices
-   */
-  slices: prismic.SliceZone<DownloadDocumentDataSlicesSlice>;
-}
-
-/**
- * Download document from Prismic
- *
- * - **API ID**: `download`
+ * - **API ID**: `condition`
  * - **Repeatable**: `true`
  * - **Documentation**: https://prismic.io/docs/custom-types
  *
  * @typeParam Lang - Language API ID of the document.
  */
-export type DownloadDocument<Lang extends string = string> = prismic.PrismicDocumentWithUID<
-  Simplify<DownloadDocumentData>,
-  'download',
+export type ConditionDocument<Lang extends string = string> = prismic.PrismicDocumentWithUID<
+  Simplify<ConditionDocumentData>,
+  'condition',
   Lang
 >;
 
@@ -1034,7 +787,71 @@ export type NavigationMegaMenuItemDocument<Lang extends string = string> = prism
   Lang
 >;
 
-type PageDocumentDataSlicesSlice = TestimonialSlice | HeroSlice | MegamenuSlice | CallToActionSlice | FaqsSlice;
+type OrthoticsDocumentDataSlicesSlice = never;
+
+/**
+ * Content for Orthotics documents
+ */
+interface OrthoticsDocumentData {
+  /**
+   * Slice Zone field in *Orthotics*
+   *
+   * - **Field Type**: Slice Zone
+   * - **Placeholder**: *None*
+   * - **API ID Path**: orthotics.slices[]
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#slices
+   */
+  slices: prismic.SliceZone<OrthoticsDocumentDataSlicesSlice> /**
+   * Meta Title field in *Orthotics*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: A title of the page used for social media and search engines
+   * - **API ID Path**: orthotics.meta_title
+   * - **Tab**: SEO & Metadata
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */;
+  meta_title: prismic.KeyTextField;
+
+  /**
+   * Meta Description field in *Orthotics*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: A brief summary of the page
+   * - **API ID Path**: orthotics.meta_description
+   * - **Tab**: SEO & Metadata
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  meta_description: prismic.KeyTextField;
+
+  /**
+   * Meta Image field in *Orthotics*
+   *
+   * - **Field Type**: Image
+   * - **Placeholder**: *None*
+   * - **API ID Path**: orthotics.meta_image
+   * - **Tab**: SEO & Metadata
+   * - **Documentation**: https://prismic.io/docs/field#image
+   */
+  meta_image: prismic.ImageField<never>;
+}
+
+/**
+ * Orthotics document from Prismic
+ *
+ * - **API ID**: `orthotics`
+ * - **Repeatable**: `true`
+ * - **Documentation**: https://prismic.io/docs/custom-types
+ *
+ * @typeParam Lang - Language API ID of the document.
+ */
+export type OrthoticsDocument<Lang extends string = string> = prismic.PrismicDocumentWithUID<
+  Simplify<OrthoticsDocumentData>,
+  'orthotics',
+  Lang
+>;
+
+type PageDocumentDataSlicesSlice = SectionSlice | TestimonialSlice | HeroSlice | CallToActionSlice | FaqsSlice;
 
 /**
  * Item in *Page → Social Cards - Facebook & Twitter*
@@ -1400,6 +1217,103 @@ export type PostsDocument<Lang extends string = string> = prismic.PrismicDocumen
   Lang
 >;
 
+type ServicesDocumentDataSlicesSlice = FaqsSlice | SectionSlice;
+
+/**
+ * Content for Services documents
+ */
+interface ServicesDocumentData {
+  /**
+   * Heading field in *Services*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: services.heading
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  heading: prismic.KeyTextField;
+
+  /**
+   * Lead field in *Services*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: services.lead
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  lead: prismic.KeyTextField;
+
+  /**
+   * Wave field in *Services*
+   *
+   * - **Field Type**: Select
+   * - **Placeholder**: *None*
+   * - **API ID Path**: services.wave
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#select
+   */
+  wave: prismic.SelectField<'default' | '1' | '2' | '3' | '4' | '5' | '6' | '7' | '8'>;
+
+  /**
+   * Slice Zone field in *Services*
+   *
+   * - **Field Type**: Slice Zone
+   * - **Placeholder**: *None*
+   * - **API ID Path**: services.slices[]
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#slices
+   */
+  slices: prismic.SliceZone<ServicesDocumentDataSlicesSlice> /**
+   * Meta Title field in *Services*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: A title of the page used for social media and search engines
+   * - **API ID Path**: services.meta_title
+   * - **Tab**: SEO & Metadata
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */;
+  meta_title: prismic.KeyTextField;
+
+  /**
+   * Meta Description field in *Services*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: A brief summary of the page
+   * - **API ID Path**: services.meta_description
+   * - **Tab**: SEO & Metadata
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  meta_description: prismic.KeyTextField;
+
+  /**
+   * Meta Image field in *Services*
+   *
+   * - **Field Type**: Image
+   * - **Placeholder**: *None*
+   * - **API ID Path**: services.meta_image
+   * - **Tab**: SEO & Metadata
+   * - **Documentation**: https://prismic.io/docs/field#image
+   */
+  meta_image: prismic.ImageField<never>;
+}
+
+/**
+ * Services document from Prismic
+ *
+ * - **API ID**: `services`
+ * - **Repeatable**: `true`
+ * - **Documentation**: https://prismic.io/docs/custom-types
+ *
+ * @typeParam Lang - Language API ID of the document.
+ */
+export type ServicesDocument<Lang extends string = string> = prismic.PrismicDocumentWithUID<
+  Simplify<ServicesDocumentData>,
+  'services',
+  Lang
+>;
+
 /**
  * Item in *Settings → Secondary Navigation*
  */
@@ -1698,8 +1612,7 @@ export type SettingsDocument<Lang extends string = string> = prismic.PrismicDocu
 
 export type AllDocumentTypes =
   | AuthorDocument
-  | ContactDocument
-  | DownloadDocument
+  | ConditionDocument
   | FaqDocument
   | HomeDocument
   | LegalDocument
@@ -1707,10 +1620,12 @@ export type AllDocumentTypes =
   | NavigationBarDocument
   | NavigationElementDocument
   | NavigationMegaMenuItemDocument
+  | OrthoticsDocument
   | PageDocument
   | PostCategoryDocument
   | PostTagsDocument
   | PostsDocument
+  | ServicesDocument
   | SettingsDocument;
 
 /**
@@ -2680,9 +2595,90 @@ export interface SectionSliceDefaultPrimary {
 export type SectionSliceDefault = prismic.SharedSliceVariation<'default', Simplify<SectionSliceDefaultPrimary>, never>;
 
 /**
+ * Primary content in *Section → Content with Lead & Buttons → Primary*
+ */
+export interface SectionSliceContentWithLeadButtonsPrimary {
+  /**
+   * Heading field in *Section → Content with Lead & Buttons → Primary*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: section.contentWithLeadButtons.primary.heading
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  heading: prismic.KeyTextField;
+
+  /**
+   * Subheading field in *Section → Content with Lead & Buttons → Primary*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: section.contentWithLeadButtons.primary.subheading
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  subheading: prismic.RichTextField;
+
+  /**
+   * Body field in *Section → Content with Lead & Buttons → Primary*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: section.contentWithLeadButtons.primary.body
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  body: prismic.RichTextField;
+
+  /**
+   * Links field in *Section → Content with Lead & Buttons → Primary*
+   *
+   * - **Field Type**: Link
+   * - **Placeholder**: *None*
+   * - **API ID Path**: section.contentWithLeadButtons.primary.links
+   * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
+   */
+  links: prismic.Repeatable<
+    prismic.LinkField<string, string, unknown, prismic.FieldState, 'Primary' | 'Secondary' | 'Outline'>
+  >;
+
+  /**
+   * Has Booking field in *Section → Content with Lead & Buttons → Primary*
+   *
+   * - **Field Type**: Boolean
+   * - **Placeholder**: *None*
+   * - **Default Value**: false
+   * - **API ID Path**: section.contentWithLeadButtons.primary.has_booking
+   * - **Documentation**: https://prismic.io/docs/field#boolean
+   */
+  has_booking: prismic.BooleanField;
+
+  /**
+   * Booking Label field in *Section → Content with Lead & Buttons → Primary*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: section.contentWithLeadButtons.primary.booking_label
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  booking_label: prismic.KeyTextField;
+}
+
+/**
+ * Content with Lead & Buttons variation for Section Slice
+ *
+ * - **API ID**: `contentWithLeadButtons`
+ * - **Description**: Default
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type SectionSliceContentWithLeadButtons = prismic.SharedSliceVariation<
+  'contentWithLeadButtons',
+  Simplify<SectionSliceContentWithLeadButtonsPrimary>,
+  never
+>;
+
+/**
  * Slice variation for *Section*
  */
-type SectionSliceVariation = SectionSliceDefault;
+type SectionSliceVariation = SectionSliceDefault | SectionSliceContentWithLeadButtons;
 
 /**
  * Section Shared Slice
@@ -2865,14 +2861,9 @@ declare module '@prismicio/client' {
     export type {
       AuthorDocument,
       AuthorDocumentData,
-      ContactDocument,
-      ContactDocumentData,
-      ContactDocumentDataSlicesSlice,
-      ContactDocumentDataSlices2Slice,
-      DownloadDocument,
-      DownloadDocumentData,
-      DownloadDocumentDataTagsItem,
-      DownloadDocumentDataSlicesSlice,
+      ConditionDocument,
+      ConditionDocumentData,
+      ConditionDocumentDataSlicesSlice,
       FaqDocument,
       FaqDocumentData,
       HomeDocument,
@@ -2895,6 +2886,9 @@ declare module '@prismicio/client' {
       NavigationMegaMenuItemDocumentData,
       NavigationMegaMenuItemDocumentDataSubsItem,
       NavigationMegaMenuItemDocumentDataSlicesSlice,
+      OrthoticsDocument,
+      OrthoticsDocumentData,
+      OrthoticsDocumentDataSlicesSlice,
       PageDocument,
       PageDocumentData,
       PageDocumentDataSlicesSlice,
@@ -2908,6 +2902,9 @@ declare module '@prismicio/client' {
       PostsDocumentDataTagsItem,
       PostsDocumentDataSlicesSlice,
       PostsDocumentDataKeywordsItem,
+      ServicesDocument,
+      ServicesDocumentData,
+      ServicesDocumentDataSlicesSlice,
       SettingsDocument,
       SettingsDocumentData,
       SettingsDocumentDataSecondaryNavigationItem,
@@ -2957,8 +2954,10 @@ declare module '@prismicio/client' {
       MegamenuSliceBlog,
       SectionSlice,
       SectionSliceDefaultPrimary,
+      SectionSliceContentWithLeadButtonsPrimary,
       SectionSliceVariation,
       SectionSliceDefault,
+      SectionSliceContentWithLeadButtons,
       TestimonialSlice,
       TestimonialSliceDefaultPrimary,
       TestimonialSliceTestimonialsPrimaryItemsItem,

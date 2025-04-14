@@ -1,4 +1,3 @@
-import { createClient } from '@/prismicio';
 import React from 'react';
 import { GradientBackground } from '@/components/ui/gradient';
 import { type OGImage } from '@/types';

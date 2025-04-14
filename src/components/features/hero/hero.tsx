@@ -1,12 +1,11 @@
 import { Container } from '@/components/ui/container';
 import { type ImageField, type KeyTextField, type LinkField, type RichTextField } from '@prismicio/client';
 import { PrismicNextImage } from '@prismicio/next';
-import ButtonSliceVariation from '@/components/ui/button-slice-variation';
 import React from 'react';
 import cn from 'clsx';
 import {PrismicRichText} from '@prismicio/react';
 import {Badge} from '@/components/ui/badge';
-import MakeBookingDialog from '@/components/features/make-booking/make-booking-dialog';
+import ButtonRow from '@/components/ui/button-row';
 
 export interface HeroProps {
   heading: RichTextField;
@@ -58,17 +57,7 @@ export  function Hero({ heading, subheading, lead,  links, image, hasBooking, ra
             </p>
 
 
-            <div className="mt-12 flex flex-col gap-x-3 gap-y-4 sm:flex-row">
-              {hasBooking && <MakeBookingDialog size={'lg'}/> }
-              {links?.map(link => (
-                  <ButtonSliceVariation
-                      key={
-                        link.text ? link?.text.toLowerCase().replace(/ /g, '-') : Math.random().toString(36).substring(2, 15)
-                      }
-                      link={link}
-                  />
-              ))}
-            </div>
+            <ButtonRow hasBooking={hasBooking} links={links}/>
 
             {rating && (<div className={'mt-48'}><PrismicNextImage field={rating} /></div>)}
             <div>

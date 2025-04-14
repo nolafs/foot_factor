@@ -14,21 +14,21 @@ export const repositoryName = process.env.NEXT_PUBLIC_PRISMIC_ENVIRONMENT ?? con
  */
 // TODO: Update the routes array to match your project's route structure.
 const routes: prismic.ClientConfig['routes'] = [
+  {type: 'settings', path: '/'},
+  {type: 'navigation_bar', path: '/'},
   { type: 'home', path: '/', uid: 'home' },
-  { type: 'contact', path: '/contact' },
-  { type: 'page', path: '/:uid' },
+  { type: 'page', path: '/:uid'},
+  { type: 'page', uid: 'conditions', path: '/conditions'},
+  { type: 'condition', path: '/conditions/:uid'},
+  { type: 'services', path: '/services/:uid' },
+  { type: 'orthotics', path: '/services/orthotics/:uid'},
   { type: 'posts', path: '/resources/blog/:uid' },
-  { type: 'settings', path: '/' },
-  { type: 'navigation_bar', path: '/' },
-  { type: 'legal', path: '/legal/:uid' },
+  { type: 'legal', path: '/legal/:uid' }
+
+
+
 ];
 
-/**
- * Creates a Prismic client for the project's repository. The client is used to
- * query content from the Prismic API.
- *
- * @param config - Configuration for the Prismic client.
- */
 /**
  * Creates a Prismic client for the project's repository. The client is used to
  * query content from the Prismic API.

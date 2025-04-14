@@ -18,13 +18,13 @@
         "fieldset": "Slice Zone",
         "config": {
           "choices": {
+            "section": {
+              "type": "SharedSlice"
+            },
             "testimonial": {
               "type": "SharedSlice"
             },
             "hero": {
-              "type": "SharedSlice"
-            },
-            "megamenu": {
               "type": "SharedSlice"
             },
             "call_to_action": {

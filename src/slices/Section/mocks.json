@@ -33,5 +33,69 @@
 			}
 		},
 		"items": []
+	},
+	{
+		"__TYPE__": "SharedSliceContent",
+		"variation": "contentWithLeadButtons",
+		"primary": {
+			"heading": {
+				"__TYPE__": "FieldContent",
+				"value": "oxygen",
+				"type": "Text"
+			},
+			"body": {
+				"__TYPE__": "StructuredTextContent",
+				"value": [
+					{
+						"type": "paragraph",
+						"content": {
+							"text": "Nisi et excepteur dolor."
+						}
+					}
+				]
+			},
+			"links": {
+				"__TYPE__": "RepeatableContent",
+				"type": "Link",
+				"value": [
+					{
+						"__TYPE__": "LinkContent",
+						"key": "8e13e41e-f59d-4c1a-8e80-749c497c3a10",
+						"value": {
+							"__TYPE__": "ExternalLink",
+							"url": "http://twitter.com",
+							"text": "dust",
+							"variant": "Primary"
+						}
+					}
+				]
+			},
+			"subheading": {
+				"__TYPE__": "StructuredTextContent",
+				"value": [
+					{
+						"type": "paragraph",
+						"content": {
+							"text": "Sint qui voluptate cillum ad non laboris nulla proident."
+						}
+					}
+				]
+			},
+			"has_booking": {
+				"__TYPE__": "BooleanContent",
+				"value": false
+			},
+			"booking_label": {
+				"__TYPE__": "FieldContent",
+				"value": "greatest",
+				"type": "Text"
+			}
+		},
+		"items": [
+			{
+				"__TYPE__": "GroupItemContent",
+				"value": []
+			}
+		]
 	}
 ]

@@ -7,7 +7,8 @@ import {
   CollectionPage,
   MedicalScholarlyArticle,
 } from 'schema-dts';
-import { DownloadDocument, PostsDocument } from '../../prismicio-types';
+import {PostsDocument} from '../../prismicio-types';
+
 
 const JSONLD: WithContext<MedicalWebPage> = {
   '@context': 'https://schema.org',
@@ -127,46 +128,5 @@ export const BLOGJSONLD = (featurePosts: PostsDocument[]): WithContext<Blog> => 
 };
 
 
-export const DOWNLOADS_JSONLD = (downloads: DownloadDocument[]): WithContext<CollectionPage> => {
-  return {
-    '@context': 'https://schema.org',
-    '@type': 'CollectionPage',
-    mainEntityOfPage: {
-      '@type': 'WebPage',
-      '@id': 'https://myankle.co.uk/downloads',
-    },
-    name: 'MyAnkle.co.uk – Downloadable Guides & Resources',
-    url: 'https://myankle.co.uk/downloads',
-    description:
-      'Access free, expert-written guides and brochures on ankle conditions, treatments, and recovery advice.',
-    publisher: {
-      '@type': 'Organization',
-      name: 'MyAnkle.co.uk',
-      logo: {
-        '@type': 'ImageObject',
-        url: 'https://myankle.co.uk/logo.png',
-      },
-    },
-    hasPart: downloads.map(doc => ({
-      '@type': 'MedicalScholarlyArticle',
-      name: doc.data.name ?? '',
-      description: doc.data.description || '',
-      url: doc.data.file || '', // The direct link to the PDF/Resource file
-      datePublished: doc.data.publishing_date ?? '',
-      author: {
-        '@type': 'Person',
-        name: 'Mr. Andrew Goldberg OBE',
-      },
-      publisher: {
-        '@type': 'Organization',
-        name: 'MyAnkle.co.uk',
-        logo: {
-          '@type': 'ImageObject',
-          url: 'https://myankle.co.uk/logo.png',
-        },
-      },
-    })) as unknown as MedicalScholarlyArticle[],
-  };
-};
 
 export default JSONLD;

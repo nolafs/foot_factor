@@ -1,12 +1,12 @@
 import React from 'react';
 import { type Repeatable, type RichTextField, type LinkField, type KeyTextField } from '@prismicio/client';
 import { SliderResources } from '@/components/features/slider/slider-resources';
-import type { DownloadDocument } from '../../../../prismicio-types';
+
 
 interface SliderProps {
   heading: KeyTextField | string;
   subheading: KeyTextField | string;
-  listings: DownloadDocument[];
+  listings: any[];
   body: RichTextField;
   links: Repeatable<LinkField>;
 }
