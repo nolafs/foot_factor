@@ -2332,26 +2332,6 @@ export interface HeroSliceSimplePrimary {
    * - **Documentation**: https://prismic.io/docs/field#key-text
    */
   subheading: prismic.KeyTextField;
-
-  /**
-   * Links field in *Hero → Simple → Primary*
-   *
-   * - **Field Type**: Link
-   * - **Placeholder**: *None*
-   * - **API ID Path**: hero.simple.primary.links
-   * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
-   */
-  links: prismic.Repeatable<prismic.LinkField<string, string, unknown, prismic.FieldState, 'Primary' | 'Secondary'>>;
-
-  /**
-   * Image field in *Hero → Simple → Primary*
-   *
-   * - **Field Type**: Image
-   * - **Placeholder**: *None*
-   * - **API ID Path**: hero.simple.primary.image
-   * - **Documentation**: https://prismic.io/docs/field#image
-   */
-  image: prismic.ImageField<never>;
 }
 
 /**

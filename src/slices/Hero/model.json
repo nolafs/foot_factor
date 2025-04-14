@@ -92,29 +92,6 @@
             "label": "Subheading",
             "placeholder": ""
           }
-        },
-        "links": {
-          "type": "Link",
-          "config": {
-            "label": "Links",
-            "placeholder": "",
-            "select": null,
-            "allowTargetBlank": true,
-            "allowText": true,
-            "repeat": true,
-            "variants": [
-              "Primary",
-              "Secondary"
-            ]
-          }
-        },
-        "image": {
-          "type": "Image",
-          "config": {
-            "label": "Image",
-            "constraint": {},
-            "thumbnails": []
-          }
         }
       },
       "items": {}
