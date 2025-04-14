@@ -1,5 +1,5 @@
 interface WaveProps {
-    waveType?: 'default' | 'type_1' | 'type_2' | 'type_3' | 'type_4' | 'type_5' | 'type_6' | 'type_7' | 'type_8' | string | undefined;
+    waveType?: 'default' | 'type_1' | 'type_2' | 'type_3' | 'type_4' | 'type_5' | 'type_6' | 'type_7' | 'type_8' | undefined;
     className?: string;
 }
 
