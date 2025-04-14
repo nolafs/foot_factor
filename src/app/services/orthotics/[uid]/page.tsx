@@ -3,49 +3,28 @@ import { notFound } from 'next/navigation';
 import { SliceZone } from '@prismicio/react';
 import { createClient } from '@/prismicio';
 import { components } from '@/slices';
-import type { OGImage } from '@/types';
-import type { ResolvedOpenGraph } from 'next/dist/lib/metadata/types/opengraph-types';
 import React from 'react';
-import HeroSimple from '@/components/features/hero/hero-simple';
+import { asImageSrc, isFilled } from '@prismicio/client';
+
 
 type Params = { uid: string };
 
-export async function generateMetadata(
-  { params }: { params: Promise<Params> },
-  parent: ResolvingMetadata,
-): Promise<Metadata> {
+export async function generateMetadata({params}: { params: Promise<Params> }): Promise<Metadata> {
+  const {uid} = await params;
   const client = createClient();
-  const { uid } = await params;
-  const page = await client.getByUID('page', uid).catch(() => notFound());
-
-  let image = null;
-  let pageTitle = '';
-  const parentMeta = await parent;
-  const parentOpenGraph: ResolvedOpenGraph | null = parentMeta.openGraph ?? null;
-
-  if (page.data.social_cards && page.data.social_cards.length > 0 && page.data.social_cards[0]?.social_card_image) {
-
-    image = `${page.data.social_cards[0]?.social_card_image.url}?w=1200&h=630&fit=crop&fm=webp&q=80`;
-  }
-
-  if (parentMeta?.title) {
-    pageTitle = parentMeta.title.absolute;
-  }
-
+  const page = await client.getByUID('orthotics', uid).catch(() => notFound());
 
   return {
-    title: `Foot Factor - ${pageTitle}`,
-    description: page.data.meta_description ?? parentMeta.description,
+    title: page.data.meta_title,
+    description: page.data.meta_description,
     openGraph: {
-      title: page.data.meta_title ?? parentMeta.title ?? undefined,
-      images: [
-        {
-          url: image ?? (parentOpenGraph?.images ? (parentOpenGraph.images[0] as OGImage).url : ''),
-        },
-      ],
+      title: isFilled.keyText(page.data.meta_title) ? page.data.meta_title : undefined,
+      description: isFilled.keyText(page.data.meta_description) ? page.data.meta_description : undefined,
+      images: isFilled.image(page.data.meta_image) ? [asImageSrc(page.data.meta_image)] : undefined,
     },
   };
 }
+
 
 export default async function Page({ params }: { params: Promise<Params> }) {
   const client = createClient();
