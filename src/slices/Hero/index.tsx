@@ -4,6 +4,7 @@ import { Hero as HeroComponent } from '@/components/features/hero/hero';
 import { Heading, Lead, Subheading } from '@/components/ui/text';
 import React from 'react';
 import { Container } from '@/components/ui/container';
+import { Wave } from '@/components/wave';
 
 
 /**
@@ -18,9 +19,14 @@ const Hero = ({ slice }: HeroProps): JSX.Element => {
 
 
   if (slice.variation === 'simple') {
-    return (<div className={'bg-[#f9f8ed] pb-24 pt-24 md:pb-24 md:pt-40 mb-24'}>
-      <Container>
+    return (<div className={'relative bg-gradient-to-r from-primary-300 to-slate-primary/0  pb-24 pt-24 md:pb-40 md:pt-52 mb-24 overflow-hidden'}>
+      <div className={'absolute w-full h-full top-0 left-0 flex items-center justify-center'}>
+      <Wave waveType={ slice.primary.wave_type === 'default' ? 'type_1' : 'type_' + slice.primary.wave_type} />
+      </div>
+      <Container className={'relative z-20'}>
+        {slice.primary.label && slice.primary.label.length && (
         <Subheading className="mt-16">{slice.primary.label}</Subheading>
+        )}
         <Heading as="h1" className="mt-2">
           {slice.primary.heading}
         </Heading>

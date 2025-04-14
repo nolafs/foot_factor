@@ -2332,6 +2332,17 @@ export interface HeroSliceSimplePrimary {
    * - **Documentation**: https://prismic.io/docs/field#key-text
    */
   subheading: prismic.KeyTextField;
+
+  /**
+   * Wave type field in *Hero → Simple → Primary*
+   *
+   * - **Field Type**: Select
+   * - **Placeholder**: *None*
+   * - **Default Value**: default
+   * - **API ID Path**: hero.simple.primary.wave_type
+   * - **Documentation**: https://prismic.io/docs/field#select
+   */
+  wave_type: prismic.SelectField<'default' | '1' | '2' | '3' | '4' | '5' | '6' | '7' | '8', 'filled'>;
 }
 
 /**

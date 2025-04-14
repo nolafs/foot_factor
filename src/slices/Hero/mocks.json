@@ -91,6 +91,11 @@
 				"__TYPE__": "FieldContent",
 				"type": "Text",
 				"value": "News"
+			},
+			"wave_type": {
+				"__TYPE__": "FieldContent",
+				"value": "default",
+				"type": "Select"
 			}
 		},
 		"items": [
