@@ -2676,6 +2676,51 @@ export interface SectionSliceContentWithImageColumnListPrimaryListItem {
 }
 
 /**
+ * Item in *Section → Content with Image Full  → Primary → List*
+ */
+export interface SectionSliceContentWithImageFullPrimaryListItem {
+  /**
+   * Heading field in *Section → Content with Image Full  → Primary → List*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: section.contentWithImageFull.primary.list[].heading
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  heading: prismic.KeyTextField;
+
+  /**
+   * Body field in *Section → Content with Image Full  → Primary → List*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: section.contentWithImageFull.primary.list[].body
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  body: prismic.RichTextField;
+
+  /**
+   * Image field in *Section → Content with Image Full  → Primary → List*
+   *
+   * - **Field Type**: Image
+   * - **Placeholder**: *None*
+   * - **API ID Path**: section.contentWithImageFull.primary.list[].image
+   * - **Documentation**: https://prismic.io/docs/field#image
+   */
+  image: prismic.ImageField<never>;
+
+  /**
+   * Color field in *Section → Content with Image Full  → Primary → List*
+   *
+   * - **Field Type**: Select
+   * - **Placeholder**: *None*
+   * - **API ID Path**: section.contentWithImageFull.primary.list[].color
+   * - **Documentation**: https://prismic.io/docs/field#select
+   */
+  color: prismic.SelectField<'default' | 'Accent'>;
+}
+
+/**
  * Primary content in *Section → Default → Primary*
  */
 export interface SectionSliceDefaultPrimary {
@@ -2909,13 +2954,82 @@ export type SectionSliceContentWithImageColumnList = prismic.SharedSliceVariatio
 >;
 
 /**
+ * Primary content in *Section → Content with Image Full  → Primary*
+ */
+export interface SectionSliceContentWithImageFullPrimary {
+  /**
+   * Heading field in *Section → Content with Image Full  → Primary*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: section.contentWithImageFull.primary.heading
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  heading: prismic.KeyTextField;
+
+  /**
+   * List field in *Section → Content with Image Full  → Primary*
+   *
+   * - **Field Type**: Group
+   * - **Placeholder**: *None*
+   * - **API ID Path**: section.contentWithImageFull.primary.list[]
+   * - **Documentation**: https://prismic.io/docs/field#group
+   */
+  list: prismic.GroupField<Simplify<SectionSliceContentWithImageFullPrimaryListItem>>;
+
+  /**
+   * Body field in *Section → Content with Image Full  → Primary*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: section.contentWithImageFull.primary.body
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  body: prismic.RichTextField;
+
+  /**
+   * Image field in *Section → Content with Image Full  → Primary*
+   *
+   * - **Field Type**: Image
+   * - **Placeholder**: *None*
+   * - **API ID Path**: section.contentWithImageFull.primary.image
+   * - **Documentation**: https://prismic.io/docs/field#image
+   */
+  image: prismic.ImageField<never>;
+
+  /**
+   * Color field in *Section → Content with Image Full  → Primary*
+   *
+   * - **Field Type**: Select
+   * - **Placeholder**: *None*
+   * - **API ID Path**: section.contentWithImageFull.primary.color
+   * - **Documentation**: https://prismic.io/docs/field#select
+   */
+  color: prismic.SelectField<'default' | 'Primary' | 'Accent'>;
+}
+
+/**
+ * Content with Image Full  variation for Section Slice
+ *
+ * - **API ID**: `contentWithImageFull`
+ * - **Description**: Default
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type SectionSliceContentWithImageFull = prismic.SharedSliceVariation<
+  'contentWithImageFull',
+  Simplify<SectionSliceContentWithImageFullPrimary>,
+  never
+>;
+
+/**
  * Slice variation for *Section*
  */
 type SectionSliceVariation =
   | SectionSliceDefault
   | SectionSliceContentWithLeadButtons
   | SectionSliceContentWithImageColumn
-  | SectionSliceContentWithImageColumnList;
+  | SectionSliceContentWithImageColumnList
+  | SectionSliceContentWithImageFull;
 
 /**
  * Section Shared Slice
@@ -3201,11 +3315,14 @@ declare module '@prismicio/client' {
       SectionSliceContentWithImageColumnPrimary,
       SectionSliceContentWithImageColumnListPrimaryListItem,
       SectionSliceContentWithImageColumnListPrimary,
+      SectionSliceContentWithImageFullPrimaryListItem,
+      SectionSliceContentWithImageFullPrimary,
       SectionSliceVariation,
       SectionSliceDefault,
       SectionSliceContentWithLeadButtons,
       SectionSliceContentWithImageColumn,
       SectionSliceContentWithImageColumnList,
+      SectionSliceContentWithImageFull,
       TestimonialSlice,
       TestimonialSliceDefaultPrimary,
       TestimonialSliceTestimonialsPrimaryItemsItem,
