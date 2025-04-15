@@ -75,7 +75,18 @@ export default {
   			},
   			accent: {
   				DEFAULT: 'hsl(var(--accent))',
-  				foreground: 'hsl(var(--accent-foreground))'
+  				foreground: 'hsl(var(--accent-foreground))',
+					'50': '#f9f8ed',
+					'100': '#f0ecd1',
+					'200': '#e2d9a6',
+					'300': '#d2bf72',
+					'400': '#c3a74c',
+					'500': '#b4933e',
+					'600': '#9b7533',
+					'700': '#7c582c',
+					'800': '#69492a',
+					'900': '#5a3e29',
+					'950': '#342114',
   			},
   			destructive: {
   				DEFAULT: 'hsl(var(--destructive))',

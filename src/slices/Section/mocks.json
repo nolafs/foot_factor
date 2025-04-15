@@ -59,8 +59,8 @@
 				"type": "Link",
 				"value": [
 					{
-						"__TYPE__": "LinkContent",
 						"key": "8e13e41e-f59d-4c1a-8e80-749c497c3a10",
+						"__TYPE__": "LinkContent",
 						"value": {
 							"__TYPE__": "ExternalLink",
 							"url": "http://twitter.com",
@@ -89,6 +89,257 @@
 				"__TYPE__": "FieldContent",
 				"value": "greatest",
 				"type": "Text"
+			}
+		},
+		"items": [
+			{
+				"__TYPE__": "GroupItemContent",
+				"value": []
+			}
+		]
+	},
+	{
+		"__TYPE__": "SharedSliceContent",
+		"variation": "contentWithImageColumn",
+		"primary": {
+			"heading": {
+				"__TYPE__": "FieldContent",
+				"type": "Text",
+				"value": "Foot Care"
+			},
+			"body": {
+				"__TYPE__": "StructuredTextContent",
+				"value": [
+					{
+						"type": "paragraph",
+						"content": {
+							"text": "Best for: Returning clients or those referred specifically for orthotic support.",
+							"spans": [
+								{
+									"type": "strong",
+									"start": 0,
+									"end": 80
+								}
+							]
+						},
+						"direction": "ltr"
+					},
+					{
+						"type": "heading4",
+						"content": {
+							"text": "What to Expect:",
+							"spans": [
+								{
+									"type": "strong",
+									"start": 0,
+									"end": 15
+								}
+							]
+						},
+						"direction": "ltr"
+					},
+					{
+						"type": "list-item",
+						"content": {
+							"text": "Conversation about your lifestyle, sport, or comfort needs",
+							"spans": []
+						},
+						"direction": "ltr"
+					},
+					{
+						"type": "list-item",
+						"content": {
+							"text": "Biomechanical and postural assessment",
+							"spans": []
+						},
+						"direction": "ltr"
+					},
+					{
+						"type": "list-item",
+						"content": {
+							"text": "Gait analysis with pressure plate scanning",
+							"spans": []
+						},
+						"direction": "ltr"
+					},
+					{
+						"type": "list-item",
+						"content": {
+							"text": "Foot moulding using thermoformable materials",
+							"spans": []
+						},
+						"direction": "ltr"
+					},
+					{
+						"type": "list-item",
+						"content": {
+							"text": "Orthotics manufactured and fitted during your visit",
+							"spans": []
+						},
+						"direction": "ltr"
+					},
+					{
+						"type": "heading4",
+						"content": {
+							"text": "Our Orthotics:",
+							"spans": [
+								{
+									"type": "strong",
+									"start": 0,
+									"end": 14
+								}
+							]
+						},
+						"direction": "ltr"
+					},
+					{
+						"type": "list-item",
+						"content": {
+							"text": "Designed and made on-site",
+							"spans": []
+						},
+						"direction": "ltr"
+					},
+					{
+						"type": "list-item",
+						"content": {
+							"text": "Tailored to your specific needs",
+							"spans": []
+						},
+						"direction": "ltr"
+					},
+					{
+						"type": "list-item",
+						"content": {
+							"text": "Suitable for daily wear, work, or specific sports (running, skiing, tennis, etc.)",
+							"spans": []
+						},
+						"direction": "ltr"
+					},
+					{
+						"type": "list-item",
+						"content": {
+							"text": "Durable, high-performance materials with your choice of density and flexibility",
+							"spans": []
+						},
+						"direction": "ltr"
+					}
+				]
+			},
+			"animated": {
+				"__TYPE__": "BooleanContent",
+				"value": true
+			},
+			"image": {
+				"origin": {
+					"id": "main",
+					"url": "https://images.unsplash.com/photo-1571126770897-2d612d1f7b89",
+					"width": 3456,
+					"height": 3456
+				},
+				"url": "https://images.unsplash.com/photo-1571126770897-2d612d1f7b89",
+				"width": 3456,
+				"height": 3456,
+				"edit": {
+					"zoom": 1,
+					"crop": {
+						"x": 0,
+						"y": 0
+					},
+					"background": "transparent"
+				},
+				"credits": null,
+				"alt": null,
+				"__TYPE__": "ImageContent",
+				"thumbnails": {}
+			},
+			"color": {
+				"__TYPE__": "FieldContent",
+				"type": "Select",
+				"value": "default"
+			}
+		},
+		"items": [
+			{
+				"__TYPE__": "GroupItemContent",
+				"value": []
+			}
+		]
+	},
+	{
+		"__TYPE__": "SharedSliceContent",
+		"variation": "contentWithImageColumnList",
+		"primary": {
+			"heading": {
+				"__TYPE__": "FieldContent",
+				"value": "about",
+				"type": "Text"
+			},
+			"list": {
+				"__TYPE__": "GroupContentType",
+				"value": [
+					{
+						"__TYPE__": "GroupItemContent",
+						"value": [
+							[
+								"heading",
+								{
+									"__TYPE__": "FieldContent",
+									"value": "attempt",
+									"type": "Text"
+								}
+							],
+							[
+								"body",
+								{
+									"__TYPE__": "StructuredTextContent",
+									"value": [
+										{
+											"type": "paragraph",
+											"content": {
+												"text": "Eiusmod ad adipisicing qui in cillum adipisicing excepteur mollit ex labore. Nulla amet ad culpa eu nostrud ullamco quis ipsum. Adipisicing incididunt eu amet amet labore non."
+											}
+										}
+									]
+								}
+							],
+							[
+								"image",
+								{
+									"origin": {
+										"id": "main",
+										"url": "https://images.unsplash.com/photo-1589652717521-10c0d092dea9",
+										"width": 4752,
+										"height": 3168
+									},
+									"url": "https://images.unsplash.com/photo-1589652717521-10c0d092dea9",
+									"width": 4752,
+									"height": 3168,
+									"edit": {
+										"zoom": 1,
+										"crop": {
+											"x": 0,
+											"y": 0
+										},
+										"background": "transparent"
+									},
+									"credits": null,
+									"alt": null,
+									"__TYPE__": "ImageContent",
+									"thumbnails": {}
+								}
+							],
+							[
+								"color",
+								{
+									"__TYPE__": "FieldContent",
+									"value": "Accent",
+									"type": "Select"
+								}
+							]
+						]
+					}
+				]
 			}
 		},
 		"items": [

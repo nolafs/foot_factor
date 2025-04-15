@@ -1,0 +1,59 @@
+{
+  "id": "media_section",
+  "type": "SharedSlice",
+  "name": "MediaSection",
+  "description": "MediaSection",
+  "variations": [
+    {
+      "id": "default",
+      "name": "Default",
+      "docURL": "...",
+      "version": "initial",
+      "description": "Default",
+      "imageUrl": "",
+      "primary": {
+        "image": {
+          "type": "Image",
+          "config": {
+            "label": "Image",
+            "constraint": {},
+            "thumbnails": []
+          }
+        },
+        "color": {
+          "type": "Select",
+          "config": {
+            "label": "Color",
+            "placeholder": "",
+            "options": [
+              "White",
+              "Primary",
+              "Accent"
+            ],
+            "default_value": "White"
+          }
+        }
+      },
+      "items": {}
+    },
+    {
+      "id": "fullWidthImage",
+      "name": "Full Width Image",
+      "docURL": "...",
+      "version": "initial",
+      "description": "Default",
+      "imageUrl": "",
+      "primary": {
+        "image": {
+          "type": "Image",
+          "config": {
+            "label": "Image",
+            "constraint": {},
+            "thumbnails": []
+          }
+        }
+      },
+      "items": {}
+    }
+  ]
+}
