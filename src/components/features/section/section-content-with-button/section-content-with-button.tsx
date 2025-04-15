@@ -13,12 +13,14 @@ interface SectionDefaultProps {
     hasBooking?: boolean;
     bookingLabel?: KeyTextField | string
     links?: LinkField[];
+    variation?: 'contentWithLeadButtons'
+    slice_type?: string;
 }
 
-export const SectionContentWithButton = ({heading, body, subheading, links, hasBooking, bookingLabel}: SectionDefaultProps) => {
+export const SectionContentWithButton = ({heading, body, subheading, links, hasBooking, bookingLabel, variation, slice_type}: SectionDefaultProps) => {
 
     return (
-      <section className={'w-full'}>
+      <section className={'w-full'} data-slice-type={slice_type} data-slice-variation={variation}>
         <Container className={'lg:py-28 py-16 md:py-24'}>
             <div className={'flex gap-5 md:gap-8'}>
                 <div className={'w-full sm:w-full md:w-1/4 lg:w-5/12'}>

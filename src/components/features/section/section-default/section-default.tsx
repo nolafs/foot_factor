@@ -14,9 +14,11 @@ interface SectionDefaultProps {
     heading?: KeyTextField | string;
     body?: RichTextField;
     animated?: boolean;
+    variation?: 'default';
+    slice_type?: string;
 }
 
-export const SectionDefault = ({heading, body, animated}: SectionDefaultProps) => {
+export const SectionDefault = ({heading, body, animated, slice_type, variation}: SectionDefaultProps) => {
 
     const container = useRef<HTMLDivElement | null>(null);
     const wrapperRef  = useRef<HTMLDivElement | null>(null);
@@ -54,7 +56,7 @@ export const SectionDefault = ({heading, body, animated}: SectionDefaultProps) =
     }, {scope: wrapperRef});
 
     return (
-      <section ref={wrapperRef} className={'w-full'}>
+      <section ref={wrapperRef} className={'w-full'} data-slice-type={slice_type} data-slice-variation={variation}>
         <Container className={'lg:py-28 py-16 md:py-24'}>
             <div className={'flex gap-5 md:gap-8'}>
                 <div className={'w-full sm:w-full md:w-1/4 lg:w-5/12'}>

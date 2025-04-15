@@ -54,6 +54,32 @@
         }
       },
       "items": {}
+    },
+    {
+      "id": "sectionVideo",
+      "name": "Section Video",
+      "docURL": "...",
+      "version": "initial",
+      "description": "Default",
+      "imageUrl": "",
+      "primary": {
+        "poster": {
+          "type": "Image",
+          "config": {
+            "label": "Poster",
+            "constraint": {},
+            "thumbnails": []
+          }
+        },
+        "video": {
+          "type": "Embed",
+          "config": {
+            "label": "Video",
+            "placeholder": ""
+          }
+        }
+      },
+      "items": {}
     }
   ]
 }

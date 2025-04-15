@@ -394,8 +394,8 @@
 			},
 			"color": {
 				"__TYPE__": "FieldContent",
-				"value": "Accent",
-				"type": "Select"
+				"type": "Select",
+				"value": "Primary"
 			}
 		},
 		"items": [

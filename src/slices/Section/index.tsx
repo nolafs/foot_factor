@@ -39,12 +39,27 @@ const Section: FC<SectionProps> = ({ slice }) => {
               body={item.body}
               image={item.image}
               color={item.color}
-
+              variation={slice.variation}
+              slice_type={slice.slice_type}
           />)
 
     )}
     </section>
     )
+  }
+
+  if (slice.variation === 'contentWithImageFull') {
+    return (
+        <SectionContentColumnWithImage
+            heading={slice.primary.heading}
+            body={slice.primary.body}
+            image={slice.primary.image}
+            color={slice.primary.color}
+            style='full'
+            variation={slice.variation}
+            slice_type={slice.slice_type}
+        />
+    );
   }
 
   if (slice.variation === 'contentWithImageColumn') {
@@ -54,6 +69,8 @@ const Section: FC<SectionProps> = ({ slice }) => {
             body={slice.primary.body}
             image={slice.primary.image}
             color={slice.primary.color}
+            variation={slice.variation}
+            slice_type={slice.slice_type}
 
         />
     );
@@ -69,13 +86,21 @@ const Section: FC<SectionProps> = ({ slice }) => {
             links={slice.primary.links}
             hasBooking={slice.primary.has_booking}
             bookingLabel={slice.primary.booking_label}
+            variation={slice.variation}
+            slice_type={slice.slice_type}
         />
     );
   }
 
   if(slice.variation === 'default') {
     return (
-        <SectionDefault heading={slice.primary.heading} body={slice.primary.body} animated={slice.primary.animated}/>
+        <SectionDefault
+            heading={slice.primary.heading}
+            body={slice.primary.body}
+            animated={slice.primary.animated}
+            variation={slice.variation}
+            slice_type={slice.slice_type}
+        />
     );
   }
 };

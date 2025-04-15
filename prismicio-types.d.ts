@@ -2426,9 +2426,50 @@ export type MediaSectionSliceFullWidthImage = prismic.SharedSliceVariation<
 >;
 
 /**
+ * Primary content in *MediaSection → Section Video → Primary*
+ */
+export interface MediaSectionSliceSectionVideoPrimary {
+  /**
+   * Poster field in *MediaSection → Section Video → Primary*
+   *
+   * - **Field Type**: Image
+   * - **Placeholder**: *None*
+   * - **API ID Path**: media_section.sectionVideo.primary.poster
+   * - **Documentation**: https://prismic.io/docs/field#image
+   */
+  poster: prismic.ImageField<never>;
+
+  /**
+   * Video field in *MediaSection → Section Video → Primary*
+   *
+   * - **Field Type**: Embed
+   * - **Placeholder**: *None*
+   * - **API ID Path**: media_section.sectionVideo.primary.video
+   * - **Documentation**: https://prismic.io/docs/field#embed
+   */
+  video: prismic.EmbedField;
+}
+
+/**
+ * Section Video variation for MediaSection Slice
+ *
+ * - **API ID**: `sectionVideo`
+ * - **Description**: Default
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type MediaSectionSliceSectionVideo = prismic.SharedSliceVariation<
+  'sectionVideo',
+  Simplify<MediaSectionSliceSectionVideoPrimary>,
+  never
+>;
+
+/**
  * Slice variation for *MediaSection*
  */
-type MediaSectionSliceVariation = MediaSectionSliceDefault | MediaSectionSliceFullWidthImage;
+type MediaSectionSliceVariation =
+  | MediaSectionSliceDefault
+  | MediaSectionSliceFullWidthImage
+  | MediaSectionSliceSectionVideo;
 
 /**
  * MediaSection Shared Slice
@@ -3240,9 +3281,11 @@ declare module '@prismicio/client' {
       MediaSectionSlice,
       MediaSectionSliceDefaultPrimary,
       MediaSectionSliceFullWidthImagePrimary,
+      MediaSectionSliceSectionVideoPrimary,
       MediaSectionSliceVariation,
       MediaSectionSliceDefault,
       MediaSectionSliceFullWidthImage,
+      MediaSectionSliceSectionVideo,
       MegamenuSlice,
       MegamenuSliceDefaultPrimary,
       MegamenuSliceMegaVideoPrimary,
