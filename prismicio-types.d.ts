@@ -2676,51 +2676,6 @@ export interface SectionSliceContentWithImageColumnListPrimaryListItem {
 }
 
 /**
- * Item in *Section → Content with Image Full  → Primary → List*
- */
-export interface SectionSliceContentWithImageFullPrimaryListItem {
-  /**
-   * Heading field in *Section → Content with Image Full  → Primary → List*
-   *
-   * - **Field Type**: Text
-   * - **Placeholder**: *None*
-   * - **API ID Path**: section.contentWithImageFull.primary.list[].heading
-   * - **Documentation**: https://prismic.io/docs/field#key-text
-   */
-  heading: prismic.KeyTextField;
-
-  /**
-   * Body field in *Section → Content with Image Full  → Primary → List*
-   *
-   * - **Field Type**: Rich Text
-   * - **Placeholder**: *None*
-   * - **API ID Path**: section.contentWithImageFull.primary.list[].body
-   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
-   */
-  body: prismic.RichTextField;
-
-  /**
-   * Image field in *Section → Content with Image Full  → Primary → List*
-   *
-   * - **Field Type**: Image
-   * - **Placeholder**: *None*
-   * - **API ID Path**: section.contentWithImageFull.primary.list[].image
-   * - **Documentation**: https://prismic.io/docs/field#image
-   */
-  image: prismic.ImageField<never>;
-
-  /**
-   * Color field in *Section → Content with Image Full  → Primary → List*
-   *
-   * - **Field Type**: Select
-   * - **Placeholder**: *None*
-   * - **API ID Path**: section.contentWithImageFull.primary.list[].color
-   * - **Documentation**: https://prismic.io/docs/field#select
-   */
-  color: prismic.SelectField<'default' | 'Accent'>;
-}
-
-/**
  * Primary content in *Section → Default → Primary*
  */
 export interface SectionSliceDefaultPrimary {
@@ -2966,16 +2921,6 @@ export interface SectionSliceContentWithImageFullPrimary {
    * - **Documentation**: https://prismic.io/docs/field#key-text
    */
   heading: prismic.KeyTextField;
-
-  /**
-   * List field in *Section → Content with Image Full  → Primary*
-   *
-   * - **Field Type**: Group
-   * - **Placeholder**: *None*
-   * - **API ID Path**: section.contentWithImageFull.primary.list[]
-   * - **Documentation**: https://prismic.io/docs/field#group
-   */
-  list: prismic.GroupField<Simplify<SectionSliceContentWithImageFullPrimaryListItem>>;
 
   /**
    * Body field in *Section → Content with Image Full  → Primary*
@@ -3315,7 +3260,6 @@ declare module '@prismicio/client' {
       SectionSliceContentWithImageColumnPrimary,
       SectionSliceContentWithImageColumnListPrimaryListItem,
       SectionSliceContentWithImageColumnListPrimary,
-      SectionSliceContentWithImageFullPrimaryListItem,
       SectionSliceContentWithImageFullPrimary,
       SectionSliceVariation,
       SectionSliceDefault,
