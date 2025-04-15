@@ -83,7 +83,7 @@ export function Youtube({
 
   return (
     <VideoPlayerWrapper handlePlay={handlePlay} handlePause={handlePause} handleReplay={handleReplay}>
-      <div className={cn('aspect-w-16 aspect-h-9 relative z-20 overflow-hidden')}>
+      <div className={cn('aspect-w-16 aspect-h-9 w-full h-full relative z-20 overflow-hidden')}>
         <VideoFrame active={frame}>
           {showPlayer && (
             <ReactPlayer

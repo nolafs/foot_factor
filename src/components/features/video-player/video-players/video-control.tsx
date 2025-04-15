@@ -1,6 +1,5 @@
 'use client';
 import Image from 'next/image';
-import placeholder from '../../assets/placeholder.png';
 import { useState } from 'react';
 import cn from 'clsx';
 import { PrismicNextImage } from '@prismicio/next';
@@ -28,29 +27,51 @@ export function VideoControl({ poster, handlePlay, width, height, title, loading
     <button onClick={play} className={cn(showPlayer ? 'hidden' : 'block')} aria-label={`Play ${title}`}>
       <div className={'sr-only'}>Play ${title}</div>
       <div className={'fill-secondary absolute left-0 top-0 flex h-full w-full flex-col items-center justify-center'}>
-        <div className={'flex h-16 w-16 items-center justify-center rounded-full bg-white shadow'}>
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <div className={'flex h-16 w-16 items-center justify-center rounded-full'}>
+          <svg width="179" height="178" viewBox="0 0 179 178" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <g filter="url(#filter0_dd_8928_4595)">
+              <circle cx="89.5" cy="85" r="64" fill="white"/>
+            </g>
             <path
-              d="M19.5 11.13L5.50001 3.04999C5.34799 2.96222 5.17554 2.91602 5.00001 2.91602C4.82447 2.91602 4.65203 2.96222 4.50001 3.04999C4.3474 3.13809 4.22079 3.26496 4.13299 3.41774C4.04518 3.57051 3.99931 3.74378 4.00001 3.91999V20.08C3.99931 20.2562 4.04518 20.4295 4.13299 20.5822C4.22079 20.735 4.3474 20.8619 4.50001 20.95C4.65203 21.0378 4.82447 21.084 5.00001 21.084C5.17554 21.084 5.34799 21.0378 5.50001 20.95L19.5 12.87C19.6539 12.7828 19.7819 12.6563 19.871 12.5035C19.96 12.3506 20.007 12.1769 20.007 12C20.007 11.8231 19.96 11.6494 19.871 11.4965C19.7819 11.3437 19.6539 11.2172 19.5 11.13ZM6.00001 18.35V5.64999L17 12L6.00001 18.35Z"
-              fill="#2C67DC"
-            />
+                d="M113.5 82.6801L76.1668 61.1334C75.7614 60.8993 75.3015 60.7761 74.8334 60.7761C74.3653 60.7761 73.9055 60.8993 73.5001 61.1334C73.0932 61.3683 72.7555 61.7066 72.5214 62.114C72.2872 62.5215 72.1649 62.9835 72.1668 63.4534V106.547C72.1649 107.017 72.2872 107.479 72.5214 107.886C72.7555 108.293 73.0932 108.632 73.5001 108.867C73.9055 109.101 74.3653 109.224 74.8334 109.224C75.3015 109.224 75.7614 109.101 76.1668 108.867L113.5 87.3201C113.91 87.0875 114.252 86.7502 114.489 86.3426C114.727 85.935 114.852 85.4718 114.852 85.0001C114.852 84.5283 114.727 84.0651 114.489 83.6575C114.252 83.2499 113.91 82.9126 113.5 82.6801ZM77.5001 101.933V68.0667L106.833 85.0001L77.5001 101.933Z"
+                fill="#D1BF73"/>
+            <defs>
+              <filter id="filter0_dd_8928_4595" x="0.5" y="0" width="178" height="178" filterUnits="userSpaceOnUse"
+                      color-interpolation-filters="sRGB">
+                <feFlood flood-opacity="0" result="BackgroundImageFix"/>
+                <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"
+                               result="hardAlpha"/>
+                <feOffset dy="4"/>
+                <feGaussianBlur stdDeviation="12.5"/>
+                <feComposite in2="hardAlpha" operator="out"/>
+                <feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.1 0"/>
+                <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_8928_4595"/>
+                <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"
+                               result="hardAlpha"/>
+                <feMorphology radius="4" operator="erode" in="SourceAlpha" result="effect2_dropShadow_8928_4595"/>
+                <feOffset dy="4"/>
+                <feGaussianBlur stdDeviation="5"/>
+                <feColorMatrix type="matrix" values="0 0 0 0 0.164706 0 0 0 0 0.2 0 0 0 0 0.258824 0 0 0 0.22 0"/>
+                <feBlend mode="normal" in2="effect1_dropShadow_8928_4595" result="effect2_dropShadow_8928_4595"/>
+                <feBlend mode="normal" in="SourceGraphic" in2="effect2_dropShadow_8928_4595" result="shape"/>
+              </filter>
+            </defs>
           </svg>
+
         </div>
       </div>
-      {poster ? (
+      {poster && (
         <PrismicNextImage
           field={poster}
           width={width}
           height={height}
           fallbackAlt=""
           loading={loading}
-          className={'z-10 h-auto w-full object-fill'}
+          className={'z-10 h-full w-full object-center object-cover'}
           imgixParams={{ fit: 'fill', fm: 'webp' }}
           quality={80}
         />
-      ) : (
-        <Image width={width} height={height} loading={'lazy'} src={placeholder} quality={80} alt={title} />
-      )}
+      ) }
     </button>
   );
 }

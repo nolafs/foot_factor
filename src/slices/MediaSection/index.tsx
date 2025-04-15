@@ -1,6 +1,8 @@
 import { FC } from 'react';
-import { Content } from '@prismicio/client';
+import {Content, isFilled} from '@prismicio/client';
 import { SliceComponentProps } from '@prismicio/react';
+
+import VideoPlayer from '@/components/features/video-player/video-player';
 
 /**
  * Props for `MediaSection`.
@@ -12,11 +14,13 @@ export type MediaSectionProps = SliceComponentProps<Content.MediaSectionSlice>;
  */
 const MediaSection: FC<MediaSectionProps> = ({ slice }) => {
 
-
-
   if(slice.variation === 'sectionVideo') {
-    <section data-slice-type={slice.slice_type} data-slice-variation={slice.variation}>
-    </section>
+    if(isFilled.embed(slice.primary.video))
+    return (<section data-slice-type={slice.slice_type} data-slice-variation={slice.variation}>
+      <div className={'w-full max-w-full'}>
+        <VideoPlayer id={slice.id}  video={slice.primary.video} image={slice.primary.poster}  loading={'lazy'} />
+      </div>
+    </section>)
   }
 
 

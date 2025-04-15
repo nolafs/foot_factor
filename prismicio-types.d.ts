@@ -185,7 +185,13 @@ export type FaqDocument<Lang extends string = string> = prismic.PrismicDocumentW
   Lang
 >;
 
-type HomeDocumentDataSlicesSlice = SectionSlice | HeroSlice | TestimonialSlice | FaqsSlice | CallToActionSlice;
+type HomeDocumentDataSlicesSlice =
+  | MediaSectionSlice
+  | SectionSlice
+  | HeroSlice
+  | TestimonialSlice
+  | FaqsSlice
+  | CallToActionSlice;
 
 /**
  * Content for Home documents
