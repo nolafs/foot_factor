@@ -1,0 +1,42 @@
+[
+	{
+		"__TYPE__": "SharedSliceContent",
+		"variation": "default",
+		"primary": {
+			"heading": {
+				"__TYPE__": "FieldContent",
+				"value": "felt",
+				"type": "Text"
+			},
+			"lead": {
+				"__TYPE__": "StructuredTextContent",
+				"value": [
+					{
+						"type": "heading3",
+						"content": {
+							"text": "Stiff"
+						}
+					}
+				]
+			},
+			"link": {
+				"key": "e6b1ce1a-3bd7-43e3-8a23-9608cfa0aa0e",
+				"__TYPE__": "LinkContent",
+				"value": {
+					"__TYPE__": "ExternalLink",
+					"url": "http://twitter.com",
+					"text": "angry"
+				}
+			},
+			"list": {
+				"key": "bb23ac6e-437b-4aea-bc02-bd3898464932",
+				"__TYPE__": "LinkContent",
+				"value": {
+					"__TYPE__": "DocumentLink",
+					"id": "mock_document_id"
+				}
+			}
+		},
+		"items": []
+	}
+]

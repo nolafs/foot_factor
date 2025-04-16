@@ -2365,6 +2365,74 @@ type HeroSliceVariation = HeroSliceDefault | HeroSliceSimple | HeroSliceHeroMast
 export type HeroSlice = prismic.SharedSlice<'hero', HeroSliceVariation>;
 
 /**
+ * Primary content in *List → Blog → Primary*
+ */
+export interface ListSliceDefaultPrimary {
+  /**
+   * Heading field in *List → Blog → Primary*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: list.default.primary.heading
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  heading: prismic.KeyTextField;
+
+  /**
+   * Lead field in *List → Blog → Primary*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: list.default.primary.lead
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  lead: prismic.RichTextField;
+
+  /**
+   * Link field in *List → Blog → Primary*
+   *
+   * - **Field Type**: Link
+   * - **Placeholder**: *None*
+   * - **API ID Path**: list.default.primary.link
+   * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
+   */
+  link: prismic.LinkField<string, string, unknown, prismic.FieldState, never>;
+
+  /**
+   * List field in *List → Blog → Primary*
+   *
+   * - **Field Type**: Content Relationship
+   * - **Placeholder**: *None*
+   * - **API ID Path**: list.default.primary.list
+   * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
+   */
+  list: prismic.ContentRelationshipField<'posts'>;
+}
+
+/**
+ * Blog variation for List Slice
+ *
+ * - **API ID**: `default`
+ * - **Description**: Default
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type ListSliceDefault = prismic.SharedSliceVariation<'default', Simplify<ListSliceDefaultPrimary>, never>;
+
+/**
+ * Slice variation for *List*
+ */
+type ListSliceVariation = ListSliceDefault;
+
+/**
+ * List Shared Slice
+ *
+ * - **API ID**: `list`
+ * - **Description**: List
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type ListSlice = prismic.SharedSlice<'list', ListSliceVariation>;
+
+/**
  * Primary content in *MediaSection → Default → Primary*
  */
 export interface MediaSectionSliceDefaultPrimary {
@@ -3377,6 +3445,10 @@ declare module '@prismicio/client' {
       HeroSliceDefault,
       HeroSliceSimple,
       HeroSliceHeroMaster,
+      ListSlice,
+      ListSliceDefaultPrimary,
+      ListSliceVariation,
+      ListSliceDefault,
       MediaSectionSlice,
       MediaSectionSliceDefaultPrimary,
       MediaSectionSliceFullWidthImagePrimary,
