@@ -55,7 +55,10 @@ const Megamenu: FC<MegaMenuProps> = ({slice, context}) => {
 
   if(slice.variation === 'blog') {
 
-    return (<BlogArticle />)
+    return (<div>
+      <h2 className="text-3xl font-medium tracking-tight">Featured Article</h2>
+      <BlogArticle size={2} />
+    </div>)
 
   }
 

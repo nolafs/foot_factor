@@ -5,7 +5,7 @@ import {createClient} from '@/prismicio';
 import PostFeatureCard from '@/components/features/blog/postFeatureCard';
 
 
-export const BlogArticle = () => {
+export const BlogArticle = ({size = 2}: {size: number} ) => {
 
     const [resentPosts, setResentPosts] = React.useState<any[]>([]);
 
@@ -14,7 +14,7 @@ export const BlogArticle = () => {
         const client = createClient();
         const resentPosts = await client
             .getByType('posts', {
-              pageSize: 2,
+              pageSize: size,
               page: 0,
               filters: [filter.at('my.posts.featured', true)],
               fetchLinks: ['author.name', 'author.profile_image', 'post_category.name'],
@@ -40,18 +40,18 @@ export const BlogArticle = () => {
   }
 
   return (
-      <div>
-          {resentPosts.length && (
-              <>
-                  <h2 className="text-3xl font-medium tracking-tight">Featured Article</h2>
-                  <div className="mt-2 grid grid-cols-2 gap-3 px-2">
+
+          resentPosts.length && (
+
+
+                  <div className={`mt-2 grid grid-cols-1 grid-cols-${size} gap-3 px-2`}>
                       {resentPosts.map(post => (
                           <PostFeatureCard key={post.uid} post={post} showExcerpt={false} showAuthor={false} />
                       ))}
                   </div>
-              </>
-          )}
-      </div>
+
+          )
+
   )
 }
 

@@ -32,5 +32,5 @@ export function Subheading({ className, as: Element = 'h2', dark = false, ...pro
 }
 
 export function Lead({ className, ...props }: React.ComponentPropsWithoutRef<'p'>) {
-  return <p className={clsx(className, 'text-xl font-medium text-primary-500 sm:text-2xl')} {...props} />;
+  return <p className={clsx(className, 'text-lg sm:text-xl font-medium text-primary-500')} {...props} />;
 }

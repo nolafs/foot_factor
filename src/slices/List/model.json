@@ -20,12 +20,10 @@
           }
         },
         "lead": {
-          "type": "StructuredText",
+          "type": "Text",
           "config": {
             "label": "Lead",
-            "placeholder": "",
-            "allowTargetBlank": true,
-            "multi": "heading3,heading4,heading5,heading6,strong,em"
+            "placeholder": ""
           }
         },
         "link": {
@@ -37,17 +35,6 @@
             "allowTargetBlank": true,
             "allowText": true,
             "repeat": false
-          }
-        },
-        "list": {
-          "type": "Link",
-          "config": {
-            "label": "List",
-            "select": "document",
-            "repeat": false,
-            "customtypes": [
-              "posts"
-            ]
           }
         }
       },

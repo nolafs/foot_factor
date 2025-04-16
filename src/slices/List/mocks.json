@@ -5,19 +5,8 @@
 		"primary": {
 			"heading": {
 				"__TYPE__": "FieldContent",
-				"value": "felt",
-				"type": "Text"
-			},
-			"lead": {
-				"__TYPE__": "StructuredTextContent",
-				"value": [
-					{
-						"type": "heading3",
-						"content": {
-							"text": "Stiff"
-						}
-					}
-				]
+				"type": "Text",
+				"value": "Articles"
 			},
 			"link": {
 				"key": "e6b1ce1a-3bd7-43e3-8a23-9608cfa0aa0e",
@@ -28,13 +17,10 @@
 					"text": "angry"
 				}
 			},
-			"list": {
-				"key": "bb23ac6e-437b-4aea-bc02-bd3898464932",
-				"__TYPE__": "LinkContent",
-				"value": {
-					"__TYPE__": "DocumentLink",
-					"id": "mock_document_id"
-				}
+			"lead": {
+				"__TYPE__": "FieldContent",
+				"type": "Text",
+				"value": "With our integrated CRM, project management, collaboration and invoicing capabilities, you can manage your business in one secure platform."
 			}
 		},
 		"items": []

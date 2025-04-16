@@ -186,6 +186,7 @@ export type FaqDocument<Lang extends string = string> = prismic.PrismicDocumentW
 >;
 
 type HomeDocumentDataSlicesSlice =
+  | ListSlice
   | MediaSectionSlice
   | SectionSlice
   | HeroSlice
@@ -2381,12 +2382,12 @@ export interface ListSliceDefaultPrimary {
   /**
    * Lead field in *List → Blog → Primary*
    *
-   * - **Field Type**: Rich Text
+   * - **Field Type**: Text
    * - **Placeholder**: *None*
    * - **API ID Path**: list.default.primary.lead
-   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   * - **Documentation**: https://prismic.io/docs/field#key-text
    */
-  lead: prismic.RichTextField;
+  lead: prismic.KeyTextField;
 
   /**
    * Link field in *List → Blog → Primary*
@@ -2397,16 +2398,6 @@ export interface ListSliceDefaultPrimary {
    * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
    */
   link: prismic.LinkField<string, string, unknown, prismic.FieldState, never>;
-
-  /**
-   * List field in *List → Blog → Primary*
-   *
-   * - **Field Type**: Content Relationship
-   * - **Placeholder**: *None*
-   * - **API ID Path**: list.default.primary.list
-   * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
-   */
-  list: prismic.ContentRelationshipField<'posts'>;
 }
 
 /**
