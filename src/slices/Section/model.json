@@ -280,11 +280,24 @@
       "description": "Default",
       "imageUrl": "",
       "primary": {
+        "image": {
+          "type": "Image",
+          "config": {
+            "label": "Image",
+            "constraint": {
+              "width": 1000,
+              "height": 780
+            },
+            "thumbnails": []
+          }
+        },
         "heading": {
-          "type": "Text",
+          "type": "StructuredText",
           "config": {
             "label": "Heading",
-            "placeholder": ""
+            "placeholder": "",
+            "allowTargetBlank": true,
+            "multi": "strong,em"
           }
         },
         "body": {
@@ -304,7 +317,7 @@
             "select": null,
             "allowTargetBlank": true,
             "allowText": true,
-            "repeat": false,
+            "repeat": true,
             "variants": [
               "Primary",
               "Secondary",

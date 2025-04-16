@@ -5,8 +5,10 @@ import SectionDefault from '@/components/features/section/section-default/sectio
 import SectionContentWithButton
   from '@/components/features/section/section-content-with-button/section-content-with-button';
 import SectionContentColumnWithImage
-  from '@/components/features/section/section-content-column-with-image/section-content-with-button';
+  from '@/components/features/section/section-content-column-with-image/section-content-column-with-image';
 import { Container } from '@/components/ui/container';
+import SectionContentImageFloatText
+  from '@/components/features/section/section-content-float-with-image/section-content-float-image';
 
 /**
  * Props for `Section`.
@@ -85,6 +87,21 @@ const Section: FC<SectionProps> = ({ slice }) => {
             subheading={slice.primary.subheading}
             body={slice.primary.body}
             links={slice.primary.links}
+            hasBooking={slice.primary.has_booking}
+            bookingLabel={slice.primary.booking_label}
+            variation={slice.variation}
+            slice_type={slice.slice_type}
+        />
+    );
+  }
+
+  if (slice.variation === 'contentImageFloatText') {
+    return (
+        <SectionContentImageFloatText
+            heading={slice.primary.heading}
+            body={slice.primary.body}
+            links={slice.primary.links}
+            image={slice.primary.image}
             hasBooking={slice.primary.has_booking}
             bookingLabel={slice.primary.booking_label}
             variation={slice.variation}

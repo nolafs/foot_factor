@@ -409,11 +409,6 @@
 		"__TYPE__": "SharedSliceContent",
 		"variation": "contentImageFloatText",
 		"primary": {
-			"heading": {
-				"__TYPE__": "FieldContent",
-				"value": "save",
-				"type": "Text"
-			},
 			"body": {
 				"__TYPE__": "StructuredTextContent",
 				"value": [
@@ -430,14 +425,20 @@
 				"value": false
 			},
 			"links": {
-				"key": "73d3edf9-39f9-4eac-b9ee-8ad66b5ea348",
-				"__TYPE__": "LinkContent",
-				"value": {
-					"__TYPE__": "ExternalLink",
-					"url": "https://prismic.io",
-					"text": "sometime",
-					"variant": "Primary"
-				}
+				"__TYPE__": "RepeatableContent",
+				"type": "Link",
+				"value": [
+					{
+						"key": "4d103e30-2581-4160-9737-be14b9cb7ba9",
+						"__TYPE__": "LinkContent",
+						"value": {
+							"__TYPE__": "ExternalLink",
+							"url": "https://prismic.io",
+							"text": "inch",
+							"variant": "Outline"
+						}
+					}
+				]
 			},
 			"has_booking": {
 				"__TYPE__": "BooleanContent",
@@ -447,6 +448,40 @@
 				"__TYPE__": "FieldContent",
 				"value": "well",
 				"type": "Text"
+			},
+			"heading": {
+				"__TYPE__": "StructuredTextContent",
+				"value": [
+					{
+						"type": "paragraph",
+						"content": {
+							"text": "Ipsum ea laborum cupidatat non ea excepteur ad reprehenderit ullamco mollit esse fugiat sint. In anim proident deserunt."
+						}
+					}
+				]
+			},
+			"image": {
+				"origin": {
+					"id": "main",
+					"url": "https://images.unsplash.com/photo-1596195689404-24d8a8d1c6ea",
+					"width": 5000,
+					"height": 4613
+				},
+				"url": "https://images.unsplash.com/photo-1596195689404-24d8a8d1c6ea?rect=0%2C357%2C5000%2C3900&w=1000&h=780",
+				"width": 1000,
+				"height": 780,
+				"edit": {
+					"zoom": 1,
+					"crop": {
+						"x": 0,
+						"y": 357
+					},
+					"background": "transparent"
+				},
+				"credits": null,
+				"alt": null,
+				"__TYPE__": "ImageContent",
+				"thumbnails": {}
 			}
 		},
 		"items": [

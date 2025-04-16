@@ -3018,14 +3018,24 @@ export type SectionSliceContentWithImageFull = prismic.SharedSliceVariation<
  */
 export interface SectionSliceContentImageFloatTextPrimary {
   /**
+   * Image field in *Section → Content image float text → Primary*
+   *
+   * - **Field Type**: Image
+   * - **Placeholder**: *None*
+   * - **API ID Path**: section.contentImageFloatText.primary.image
+   * - **Documentation**: https://prismic.io/docs/field#image
+   */
+  image: prismic.ImageField<never>;
+
+  /**
    * Heading field in *Section → Content image float text → Primary*
    *
-   * - **Field Type**: Text
+   * - **Field Type**: Rich Text
    * - **Placeholder**: *None*
    * - **API ID Path**: section.contentImageFloatText.primary.heading
-   * - **Documentation**: https://prismic.io/docs/field#key-text
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
    */
-  heading: prismic.KeyTextField;
+  heading: prismic.RichTextField;
 
   /**
    * Body field in *Section → Content image float text → Primary*
@@ -3045,7 +3055,9 @@ export interface SectionSliceContentImageFloatTextPrimary {
    * - **API ID Path**: section.contentImageFloatText.primary.links
    * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
    */
-  links: prismic.LinkField<string, string, unknown, prismic.FieldState, 'Primary' | 'Secondary' | 'Outline'>;
+  links: prismic.Repeatable<
+    prismic.LinkField<string, string, unknown, prismic.FieldState, 'Primary' | 'Secondary' | 'Outline'>
+  >;
 
   /**
    * Has Booking field in *Section → Content image float text → Primary*
