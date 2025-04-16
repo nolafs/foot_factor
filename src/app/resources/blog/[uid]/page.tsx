@@ -118,7 +118,7 @@ export default async function Page({ params }: Props) {
       ],
     })
     .then(response => response.data)
-    //.catch(() => notFound());
+    .catch(() => notFound());
 
   if (post.author && 'data' in post.author) {
     const authorData = post.author.data as {
