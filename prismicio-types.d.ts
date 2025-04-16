@@ -3303,6 +3303,98 @@ export type SectionSliceContentImageFloatText = prismic.SharedSliceVariation<
 >;
 
 /**
+ * Primary content in *Section → Content image float right → Primary*
+ */
+export interface SectionSliceContentImageFloatRightPrimary {
+  /**
+   * Image field in *Section → Content image float right → Primary*
+   *
+   * - **Field Type**: Image
+   * - **Placeholder**: *None*
+   * - **API ID Path**: section.contentImageFloatRight.primary.image
+   * - **Documentation**: https://prismic.io/docs/field#image
+   */
+  image: prismic.ImageField<never>;
+
+  /**
+   * Heading field in *Section → Content image float right → Primary*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: section.contentImageFloatRight.primary.heading
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  heading: prismic.RichTextField;
+
+  /**
+   * Body field in *Section → Content image float right → Primary*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: section.contentImageFloatRight.primary.body
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  body: prismic.RichTextField;
+
+  /**
+   * Links field in *Section → Content image float right → Primary*
+   *
+   * - **Field Type**: Link
+   * - **Placeholder**: *None*
+   * - **API ID Path**: section.contentImageFloatRight.primary.links
+   * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
+   */
+  links: prismic.Repeatable<
+    prismic.LinkField<string, string, unknown, prismic.FieldState, 'Primary' | 'Secondary' | 'Outline'>
+  >;
+
+  /**
+   * Has Booking field in *Section → Content image float right → Primary*
+   *
+   * - **Field Type**: Boolean
+   * - **Placeholder**: *None*
+   * - **Default Value**: false
+   * - **API ID Path**: section.contentImageFloatRight.primary.has_booking
+   * - **Documentation**: https://prismic.io/docs/field#boolean
+   */
+  has_booking: prismic.BooleanField;
+
+  /**
+   * Booking Label field in *Section → Content image float right → Primary*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: section.contentImageFloatRight.primary.booking_label
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  booking_label: prismic.KeyTextField;
+
+  /**
+   * Animated field in *Section → Content image float right → Primary*
+   *
+   * - **Field Type**: Boolean
+   * - **Placeholder**: *None*
+   * - **Default Value**: true
+   * - **API ID Path**: section.contentImageFloatRight.primary.animated
+   * - **Documentation**: https://prismic.io/docs/field#boolean
+   */
+  animated: prismic.BooleanField;
+}
+
+/**
+ * Content image float right variation for Section Slice
+ *
+ * - **API ID**: `contentImageFloatRight`
+ * - **Description**: Default
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type SectionSliceContentImageFloatRight = prismic.SharedSliceVariation<
+  'contentImageFloatRight',
+  Simplify<SectionSliceContentImageFloatRightPrimary>,
+  never
+>;
+
+/**
  * Slice variation for *Section*
  */
 type SectionSliceVariation =
@@ -3311,7 +3403,8 @@ type SectionSliceVariation =
   | SectionSliceContentWithImageColumn
   | SectionSliceContentWithImageColumnList
   | SectionSliceContentWithImageFull
-  | SectionSliceContentImageFloatText;
+  | SectionSliceContentImageFloatText
+  | SectionSliceContentImageFloatRight;
 
 /**
  * Section Shared Slice
@@ -3608,6 +3701,7 @@ declare module '@prismicio/client' {
       SectionSliceContentWithImageColumnListPrimary,
       SectionSliceContentWithImageFullPrimary,
       SectionSliceContentImageFloatTextPrimary,
+      SectionSliceContentImageFloatRightPrimary,
       SectionSliceVariation,
       SectionSliceDefault,
       SectionSliceContentWithLeadButtons,
@@ -3615,6 +3709,7 @@ declare module '@prismicio/client' {
       SectionSliceContentWithImageColumnList,
       SectionSliceContentWithImageFull,
       SectionSliceContentImageFloatText,
+      SectionSliceContentImageFloatRight,
       TestimonialSlice,
       TestimonialSliceDefaultPrimary,
       TestimonialSliceTestimonialsPrimaryItemsItem,

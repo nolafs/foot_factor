@@ -490,5 +490,91 @@
 				"value": []
 			}
 		]
+	},
+	{
+		"__TYPE__": "SharedSliceContent",
+		"variation": "contentImageFloatRight",
+		"primary": {
+			"image": {
+				"origin": {
+					"id": "main",
+					"url": "https://images.unsplash.com/photo-1551739440-5dd934d3a94a",
+					"width": 3456,
+					"height": 4320
+				},
+				"url": "https://images.unsplash.com/photo-1551739440-5dd934d3a94a?rect=0%2C812%2C3456%2C2696&w=1000&h=780",
+				"width": 1000,
+				"height": 780,
+				"edit": {
+					"zoom": 1,
+					"crop": {
+						"x": 0,
+						"y": 812
+					},
+					"background": "transparent"
+				},
+				"credits": null,
+				"alt": null,
+				"__TYPE__": "ImageContent",
+				"thumbnails": {}
+			},
+			"heading": {
+				"__TYPE__": "StructuredTextContent",
+				"value": [
+					{
+						"type": "paragraph",
+						"content": {
+							"text": "Ipsum exercitation voluptate proident cillum culpa ipsum esse nisi adipisicing. Excepteur nisi veniam occaecat cillum consequat ea id commodo aliquip commodo. Pariatur nisi ullamco non non sit non velit irure sunt ullamco nisi sunt."
+						}
+					}
+				]
+			},
+			"body": {
+				"__TYPE__": "StructuredTextContent",
+				"value": [
+					{
+						"type": "paragraph",
+						"content": {
+							"text": "Cillum mollit amet dolore sint occaecat reprehenderit nulla sint sint cupidatat adipisicing et enim. Adipisicing esse duis anim aliquip in voluptate aliquip amet dolore tempor anim ad."
+						}
+					}
+				]
+			},
+			"links": {
+				"__TYPE__": "RepeatableContent",
+				"type": "Link",
+				"value": [
+					{
+						"key": "3ea1dcc8-a4b8-40a3-8aaf-7e65af0b7975",
+						"__TYPE__": "LinkContent",
+						"value": {
+							"__TYPE__": "ExternalLink",
+							"url": "http://google.com",
+							"text": "acres",
+							"variant": "Primary"
+						}
+					}
+				]
+			},
+			"has_booking": {
+				"__TYPE__": "BooleanContent",
+				"value": false
+			},
+			"booking_label": {
+				"__TYPE__": "FieldContent",
+				"value": "fire",
+				"type": "Text"
+			},
+			"animated": {
+				"__TYPE__": "BooleanContent",
+				"value": false
+			}
+		},
+		"items": [
+			{
+				"__TYPE__": "GroupItemContent",
+				"value": []
+			}
+		]
 	}
 ]

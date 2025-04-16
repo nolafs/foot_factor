@@ -352,6 +352,87 @@
         }
       },
       "items": {}
+    },
+    {
+      "id": "contentImageFloatRight",
+      "name": "Content image float right",
+      "docURL": "...",
+      "version": "initial",
+      "description": "Default",
+      "imageUrl": "",
+      "primary": {
+        "image": {
+          "type": "Image",
+          "config": {
+            "label": "Image",
+            "constraint": {
+              "width": 1000,
+              "height": 780
+            },
+            "thumbnails": []
+          }
+        },
+        "heading": {
+          "type": "StructuredText",
+          "config": {
+            "label": "Heading",
+            "placeholder": "",
+            "allowTargetBlank": true,
+            "multi": "strong,em"
+          }
+        },
+        "body": {
+          "type": "StructuredText",
+          "config": {
+            "label": "Body",
+            "placeholder": "",
+            "allowTargetBlank": true,
+            "multi": "paragraph,preformatted,heading1,heading2,heading3,heading4,heading5,heading6,strong,em,hyperlink,image,embed,list-item,o-list-item,rtl"
+          }
+        },
+        "links": {
+          "type": "Link",
+          "config": {
+            "label": "Links",
+            "placeholder": "",
+            "select": null,
+            "allowTargetBlank": true,
+            "allowText": true,
+            "repeat": true,
+            "variants": [
+              "Primary",
+              "Secondary",
+              "Outline"
+            ]
+          }
+        },
+        "has_booking": {
+          "type": "Boolean",
+          "config": {
+            "label": "Has Booking",
+            "placeholder_false": "false",
+            "placeholder_true": "true",
+            "default_value": false
+          }
+        },
+        "booking_label": {
+          "type": "Text",
+          "config": {
+            "label": "Booking Label",
+            "placeholder": ""
+          }
+        },
+        "animated": {
+          "type": "Boolean",
+          "config": {
+            "label": "Animated",
+            "placeholder_false": "false",
+            "placeholder_true": "true",
+            "default_value": true
+          }
+        }
+      },
+      "items": {}
     }
   ]
 }
