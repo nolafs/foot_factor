@@ -39,6 +39,62 @@
         }
       },
       "items": {}
+    },
+    {
+      "id": "pricingTable",
+      "name": "Pricing Table",
+      "docURL": "...",
+      "version": "initial",
+      "description": "Default",
+      "imageUrl": "",
+      "primary": {
+        "heading": {
+          "type": "Text",
+          "config": {
+            "label": "Heading",
+            "placeholder": ""
+          }
+        },
+        "lead": {
+          "type": "Text",
+          "config": {
+            "label": "Lead",
+            "placeholder": ""
+          }
+        },
+        "link": {
+          "type": "Link",
+          "config": {
+            "label": "Link",
+            "placeholder": "",
+            "select": null,
+            "allowTargetBlank": true,
+            "allowText": true,
+            "repeat": false
+          }
+        },
+        "services": {
+          "type": "Group",
+          "config": {
+            "label": "Services",
+            "repeat": true,
+            "fields": {
+              "service": {
+                "type": "Link",
+                "config": {
+                  "label": "Service",
+                  "select": "document",
+                  "repeat": false,
+                  "customtypes": [
+                    "services"
+                  ]
+                }
+              }
+            }
+          }
+        }
+      },
+      "items": {}
     }
   ]
 }

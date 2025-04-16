@@ -4,9 +4,9 @@ import React from 'react';
 import Link from 'next/link';
 import SocialList from '../features/social-list/social-list';
 import { Container } from '@/components/ui/container';
-import {
+import { type
   NavigationBarDocumentData,
-  NavigationElementDocument, NavigationMegaMenuItemDocument, SettingsDocumentData,
+  type NavigationElementDocument, type NavigationMegaMenuItemDocument, type SettingsDocumentData,
 } from '../../../prismicio-types';
 import {CallToActionBooking} from "@/components/features/cta/callToAction-booking";
 

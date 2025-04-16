@@ -1,7 +1,8 @@
 import { createClient } from '@/prismicio';
 import { Menu, MenuButton, MenuItem, MenuItems } from '@headlessui/react';
 import { CheckIcon, ChevronUpDownIcon } from '@heroicons/react/16/solid';
-import { Link } from '@/components/ui/link';
+import Link from 'next/link';
+
 
 import React from 'react';
 

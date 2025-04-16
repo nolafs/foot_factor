@@ -25,12 +25,11 @@ export const SectionDefault = ({heading, body, animated, slice_type, variation}:
 
     useGSAP(() => {
 
-      if(!animated) return;
-      if(!container.current) return;
-      if(!wrapperRef.current) return;
+      if (!animated || !container.current || !wrapperRef.current) return;
 
-      const splits = new SplitText('.text-animation', {type: "words,chars, lines"});
+      const splits = new SplitText(container.current, {type: "words,chars, lines"});
 
+      const tl =
       gsap
           .timeline({
             scrollTrigger: {
@@ -52,6 +51,11 @@ export const SectionDefault = ({heading, body, animated, slice_type, variation}:
               },
               0
           );
+
+      return () => {
+        tl.kill();
+        splits.revert();
+      }
 
     }, {scope: wrapperRef});
 

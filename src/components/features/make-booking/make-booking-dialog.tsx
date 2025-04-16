@@ -19,9 +19,10 @@ import { cn } from '@/lib/utils';
 interface MakeBookingDialogProps {
     buttonLabel?: string
     size?: 'sm' | 'md' | 'lg'
+    className?: string
 }
 
-export const MakeBookingDialog = ({ buttonLabel = 'Book now', size = 'sm'}: MakeBookingDialogProps) => {
+export const MakeBookingDialog = ({ buttonLabel = 'Book now', size = 'sm', className}: MakeBookingDialogProps) => {
 
   const { bookingData } = useBooking();
 
@@ -33,7 +34,7 @@ export const MakeBookingDialog = ({ buttonLabel = 'Book now', size = 'sm'}: Make
 
   return (
       <Dialog>
-          <DialogTrigger className={buttonVariants({variant: 'default', size: mappedSize})}>{buttonLabel} <CircleArrowRight size={mappedSize === 'sm' ? 5 : 30}/></DialogTrigger>
+          <DialogTrigger className={cn(buttonVariants({variant: 'default', size: mappedSize}), className)}>{buttonLabel} <CircleArrowRight size={mappedSize === 'sm' ? 5 : 30}/></DialogTrigger>
           <DialogContent className={'w-full max-w-7xl max-h-[975px] h-full'}>
               <DialogHeader>
                   <DialogTitle className={'font-heading text-2xl md:text-4xl lg:text-5xl'}>{bookingData?.header ?? 'Make Booking'}</DialogTitle>

@@ -75,6 +75,58 @@
         },
         "type": "Image"
       }
+    },
+    "Pricing Table": {
+      "price_heading": {
+        "type": "Text",
+        "config": {
+          "label": "Heading",
+          "placeholder": ""
+        }
+      },
+      "price_lead": {
+        "type": "Text",
+        "config": {
+          "label": "Lead",
+          "placeholder": ""
+        }
+      },
+      "price": {
+        "type": "Number",
+        "config": {
+          "label": "Price",
+          "placeholder": ""
+        }
+      },
+      "price_features": {
+        "type": "StructuredText",
+        "config": {
+          "label": "Features",
+          "placeholder": "",
+          "allowTargetBlank": true,
+          "multi": "paragraph,strong,list-item,o-list-item"
+        }
+      },
+      "has_booking": {
+        "type": "Boolean",
+        "config": {
+          "label": "Has Booking",
+          "placeholder_false": "false",
+          "placeholder_true": "true",
+          "default_value": false
+        }
+      },
+      "telephone": {
+        "type": "Link",
+        "config": {
+          "label": "Telephone",
+          "placeholder": "",
+          "select": null,
+          "allowTargetBlank": true,
+          "allowText": true,
+          "repeat": false
+        }
+      }
     }
   }
 }

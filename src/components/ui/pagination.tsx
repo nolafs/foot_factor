@@ -1,11 +1,12 @@
 import { createClient } from '@/prismicio';
-import { Button } from '@/components/button';
+import { Button } from '@/components/ui/button';
 import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/16/solid';
-import { Link } from '@/components/ui/link';
+
 import { clsx } from 'clsx';
 import React from 'react';
 import { filter } from '@prismicio/client';
 import type { PostCategoryDocument, PostTagsDocument } from '../../../prismicio-types';
+import Link from 'next/link';
 
 type PaginationData = {
   page: number;
@@ -104,9 +105,13 @@ export async function Pagination({
 
   return (
     <div className="mt-6 flex items-center justify-between gap-2">
-      <Button variant="outline" href={previousPageUrl} disabled={data.page === 0}>
+      <Button variant="outline" asChild disabled={data.page === 0}>
+      <Link href={previousPageUrl ?? ''}>
+
         <ChevronLeftIcon className="size-4" />
         Previous
+
+      </Link>
       </Button>
 
       <div className="flex gap-2 max-sm:hidden">
@@ -126,9 +131,11 @@ export async function Pagination({
         ))}
       </div>
 
-      <Button variant="outline" href={nextPageUrl} disabled={page === data.totalPages}>
-        Next
+      <Button variant="outline" asChild disabled={page === data.totalPages}>
+        <Link href={nextPageUrl ?? ''} >
+              Next
         <ChevronRightIcon className="size-4" />
+        </Link>
       </Button>
     </div>
   );

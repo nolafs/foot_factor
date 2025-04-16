@@ -1,6 +1,6 @@
 import { Container } from '@/components/ui/container';
 import { GradientBackground } from '@/components/ui/gradient';
-import { Link } from '@/components/ui/link';
+
 import { Heading, Lead, Subheading } from '@/components/ui/text';
 import { ChevronRightIcon } from '@heroicons/react/16/solid';
 import dayjs from 'dayjs';
@@ -19,6 +19,7 @@ import type { Author, OGImage } from '@/types';
 import Filter from '../../../components/features/blog/postsFilter';
 import AuthorLink from '@/components/features/author/author-link';
 import { type PostCategoryDocument, type PostTagsDocument } from '../../../../prismicio-types';
+import Link from 'next/link';
 
 type Props = {
   params: Promise<{ uid: string }>;

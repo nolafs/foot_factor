@@ -1303,7 +1303,72 @@ interface ServicesDocumentData {
    * - **Tab**: SEO & Metadata
    * - **Documentation**: https://prismic.io/docs/field#image
    */
-  meta_image: prismic.ImageField<never>;
+  meta_image: prismic.ImageField<never> /**
+   * Heading field in *Services*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: services.price_heading
+   * - **Tab**: Pricing Table
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */;
+  price_heading: prismic.KeyTextField;
+
+  /**
+   * Lead field in *Services*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: services.price_lead
+   * - **Tab**: Pricing Table
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  price_lead: prismic.KeyTextField;
+
+  /**
+   * Price field in *Services*
+   *
+   * - **Field Type**: Number
+   * - **Placeholder**: *None*
+   * - **API ID Path**: services.price
+   * - **Tab**: Pricing Table
+   * - **Documentation**: https://prismic.io/docs/field#number
+   */
+  price: prismic.NumberField;
+
+  /**
+   * Features field in *Services*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: services.price_features
+   * - **Tab**: Pricing Table
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  price_features: prismic.RichTextField;
+
+  /**
+   * Has Booking field in *Services*
+   *
+   * - **Field Type**: Boolean
+   * - **Placeholder**: *None*
+   * - **Default Value**: false
+   * - **API ID Path**: services.has_booking
+   * - **Tab**: Pricing Table
+   * - **Documentation**: https://prismic.io/docs/field#boolean
+   */
+  has_booking: prismic.BooleanField;
+
+  /**
+   * Telephone field in *Services*
+   *
+   * - **Field Type**: Link
+   * - **Placeholder**: *None*
+   * - **API ID Path**: services.telephone
+   * - **Tab**: Pricing Table
+   * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
+   */
+  telephone: prismic.LinkField<string, string, unknown, prismic.FieldState, never>;
 }
 
 /**
@@ -2366,6 +2431,21 @@ type HeroSliceVariation = HeroSliceDefault | HeroSliceSimple | HeroSliceHeroMast
 export type HeroSlice = prismic.SharedSlice<'hero', HeroSliceVariation>;
 
 /**
+ * Item in *List → Pricing Table → Primary → Services*
+ */
+export interface ListSlicePricingTablePrimaryServicesItem {
+  /**
+   * Service field in *List → Pricing Table → Primary → Services*
+   *
+   * - **Field Type**: Content Relationship
+   * - **Placeholder**: *None*
+   * - **API ID Path**: list.pricingTable.primary.services[].service
+   * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
+   */
+  service: prismic.ContentRelationshipField<'services'>;
+}
+
+/**
  * Primary content in *List → Blog → Primary*
  */
 export interface ListSliceDefaultPrimary {
@@ -2410,9 +2490,67 @@ export interface ListSliceDefaultPrimary {
 export type ListSliceDefault = prismic.SharedSliceVariation<'default', Simplify<ListSliceDefaultPrimary>, never>;
 
 /**
+ * Primary content in *List → Pricing Table → Primary*
+ */
+export interface ListSlicePricingTablePrimary {
+  /**
+   * Heading field in *List → Pricing Table → Primary*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: list.pricingTable.primary.heading
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  heading: prismic.KeyTextField;
+
+  /**
+   * Lead field in *List → Pricing Table → Primary*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: list.pricingTable.primary.lead
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  lead: prismic.KeyTextField;
+
+  /**
+   * Link field in *List → Pricing Table → Primary*
+   *
+   * - **Field Type**: Link
+   * - **Placeholder**: *None*
+   * - **API ID Path**: list.pricingTable.primary.link
+   * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
+   */
+  link: prismic.LinkField<string, string, unknown, prismic.FieldState, never>;
+
+  /**
+   * Services field in *List → Pricing Table → Primary*
+   *
+   * - **Field Type**: Group
+   * - **Placeholder**: *None*
+   * - **API ID Path**: list.pricingTable.primary.services[]
+   * - **Documentation**: https://prismic.io/docs/field#group
+   */
+  services: prismic.GroupField<Simplify<ListSlicePricingTablePrimaryServicesItem>>;
+}
+
+/**
+ * Pricing Table variation for List Slice
+ *
+ * - **API ID**: `pricingTable`
+ * - **Description**: Default
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type ListSlicePricingTable = prismic.SharedSliceVariation<
+  'pricingTable',
+  Simplify<ListSlicePricingTablePrimary>,
+  never
+>;
+
+/**
  * Slice variation for *List*
  */
-type ListSliceVariation = ListSliceDefault;
+type ListSliceVariation = ListSliceDefault | ListSlicePricingTable;
 
 /**
  * List Shared Slice
@@ -3438,8 +3576,11 @@ declare module '@prismicio/client' {
       HeroSliceHeroMaster,
       ListSlice,
       ListSliceDefaultPrimary,
+      ListSlicePricingTablePrimaryServicesItem,
+      ListSlicePricingTablePrimary,
       ListSliceVariation,
       ListSliceDefault,
+      ListSlicePricingTable,
       MediaSectionSlice,
       MediaSectionSliceDefaultPrimary,
       MediaSectionSliceFullWidthImagePrimary,

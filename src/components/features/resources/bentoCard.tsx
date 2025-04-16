@@ -3,9 +3,9 @@
 import { clsx } from 'clsx';
 import { motion } from 'framer-motion';
 import { Subheading } from '@/components/ui/text';
-import { Link } from '@/components/ui/link';
 import { ChevronRightIcon } from '@heroicons/react/16/solid';
 import React from 'react';
+import Link from 'next/link';
 
 export function BentoCard({
   dark = false,

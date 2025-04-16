@@ -24,5 +24,57 @@
 			}
 		},
 		"items": []
+	},
+	{
+		"__TYPE__": "SharedSliceContent",
+		"variation": "pricingTable",
+		"primary": {
+			"heading": {
+				"__TYPE__": "FieldContent",
+				"value": "stared",
+				"type": "Text"
+			},
+			"lead": {
+				"__TYPE__": "FieldContent",
+				"value": "jump",
+				"type": "Text"
+			},
+			"link": {
+				"key": "0c771d0c-5968-47d2-a563-3294824065a8",
+				"__TYPE__": "LinkContent",
+				"value": {
+					"__TYPE__": "ExternalLink",
+					"url": "https://prismic.io",
+					"text": "real"
+				}
+			},
+			"services": {
+				"__TYPE__": "GroupContentType",
+				"value": [
+					{
+						"__TYPE__": "GroupItemContent",
+						"value": [
+							[
+								"service",
+								{
+									"__TYPE__": "LinkContent",
+									"key": "2eed5149-29be-42e3-9920-ce673e402fcc",
+									"value": {
+										"__TYPE__": "DocumentLink",
+										"id": "mock_document_id"
+									}
+								}
+							]
+						]
+					}
+				]
+			}
+		},
+		"items": [
+			{
+				"__TYPE__": "GroupItemContent",
+				"value": []
+			}
+		]
 	}
 ]

@@ -1,9 +1,10 @@
 'use client';
-import { Button } from '@/components/button';
+
 import { useSearch } from './search-context';
 import React from 'react';
 import { SearchIcon } from 'lucide-react';
 import { ReactTyped } from 'react-typed';
+import { Button } from '@/components/ui/button';
 
 interface SearchButtonCtaProps {
   searchCta?: string[];

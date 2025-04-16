@@ -23,7 +23,7 @@ interface SectionDefaultProps {
 export const SectionContentImageFloatText = ({as = 'section',heading, body, image, links, hasBooking, bookingLabel, variation, slice_type}: SectionDefaultProps) => {
   const Tag = as; //
     return (
-      <Tag data-slice-type={slice_type} data-slice-variation={variation} className={cn('relative w-full max-h-[1440px] isolated')}>
+      <Tag data-slice-type={slice_type} data-slice-variation={variation} className={cn('relative w-full max-h-[1440px] isolated overflow-hidden')}>
 
             <div className={'w-full flex justify-center'}>
               <PrismicNextImage field={image}
