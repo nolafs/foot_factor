@@ -1,4 +1,4 @@
-import { Button } from '@/components/button';
+
 import { Container } from '@/components/ui/container';
 import { Heading, Subheading } from '@/components/ui/text';
 import { createClient } from '@/prismicio';
@@ -15,6 +15,8 @@ import {asText, type ImageFieldImage, type LinkField, type RichTextField} from '
 import { type Author } from '@/types';
 import PostAside from '@/components/features/blog/postAside';
 import { WithContext, Article } from 'schema-dts';
+import { Button } from '@/components/ui/button';
+import Link from 'next/link';
 
 
 type Props = {
@@ -206,10 +208,10 @@ export default async function Page({ params }: Props) {
               />
 
               <div className="mt-10">
-                <Button variant="outline" href="/blog"><div>
+                <Button variant="outline" asChild ><Link href="/blog">
                   <ChevronLeftIcon className="size-4" />
                   Back to blog
-                </div>
+                </Link>
                 </Button>
               </div>
             </div>

@@ -14,7 +14,8 @@ import { useMediaQuery } from './hooks/useMediaQuery';
 import cn from 'clsx';
 
 import { capitalize, getFirstChildPropValue } from '@/lib/utils';
-import { Button } from '@/components/button';
+import { Button } from '@/components/ui/button';
+
 
 export type DropdownProps = PropsWithChildren<{
   buttonText?: string | ((options: DropdownButtonTextOptions) => string);

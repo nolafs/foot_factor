@@ -1,9 +1,9 @@
 import { createClient } from '@/prismicio';
 import { Menu, MenuButton, MenuItem, MenuItems } from '@headlessui/react';
 import { CheckIcon, ChevronUpDownIcon } from '@heroicons/react/16/solid';
-import { Link } from '@/components/ui/link';
 import React from 'react';
 import { PostTagLink } from '@/components/features/blog/postTagLink';
+import Link from 'next/link';
 
 export async function Tags({ selected, url = 'blog' }: { selected?: string; url?: string }) {
   const client = createClient();

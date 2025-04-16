@@ -2,10 +2,10 @@ import React from 'react';
 import {Badge} from '@/components/ui/badge';
 import {PrismicNextImage} from '@prismicio/next';
 import dayjs from 'dayjs';
-import {Link} from '@/components/ui/link';
 import {PrismicRichText} from '@prismicio/react';
 import type {ImageFieldImage} from '@prismicio/client';
 import {PostsDocument} from 'prismicio-types';
+import Link from 'next/link';
 
 interface PostFeatureCardProps {
     post: PostsDocument;

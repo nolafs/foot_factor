@@ -1,13 +1,7 @@
 import { createClient } from '@/prismicio';
 import { filter } from '@prismicio/client';
-import type { ImageFieldImage } from '@prismicio/client';
 import { Container } from '@/components/ui/container';
-import { PrismicNextImage } from '@prismicio/next';
-import dayjs from 'dayjs';
-import { Link } from '@/components/ui/link';
-import { PrismicRichText } from '@prismicio/react';
 import React from 'react';
-import { Badge } from '@/components/ui/badge';
 import { BLOGJSONLD } from '@/types/schema';
 import PostFeatureCard from '@/components/features/blog/postFeatureCard';
 

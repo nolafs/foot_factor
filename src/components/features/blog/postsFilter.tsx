@@ -1,8 +1,10 @@
 import React from 'react';
 import { RssIcon } from '@heroicons/react/16/solid';
-import { Button } from '@/components/button';
+
 import { Tags } from './postsTags';
 import { Categories } from './postsCategories';
+import { Button } from '@/components/ui/button';
+import Link from 'next/link';
 
 interface PostsFilterProps {
   categorySelected?: string;
@@ -19,9 +21,11 @@ export const Filter = ({ tagSelected, categorySelected, url = 'blog', hasRss = t
         <Tags selected={tagSelected} url={url} />
       </div>
       {hasRss && (
-        <Button variant="outline" href="/feed.xml" className="gap-1">
+        <Button variant="outline" asChild className="gap-1">
+          <Link href="/feed.xml">
           <RssIcon className="size-4" />
           RSS Feed
+          </Link>
         </Button>
       )}
     </div>

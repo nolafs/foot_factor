@@ -1,9 +1,10 @@
 'use client';
 
-import { Link } from '@/components/ui/link';
+
 import { CheckIcon } from '@heroicons/react/16/solid';
 import React from 'react';
 import { type PostTagsDocument } from '../../../../prismicio-types';
+import Link from 'next/link';
 
 export const PostTagLink = ({
   tag,

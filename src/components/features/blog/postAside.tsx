@@ -2,10 +2,10 @@
 import { type PostsDocumentData} from '../../../../prismicio-types';
 import { type Author } from '@/types';
 import cn from 'clsx';
-import { Link } from '@/components/ui/link';
 import AuthorLink from '@/components/features/author/author-link';
 import SharePage from '@/components/features/share-page/share-page';
 import React from 'react';
+import Link from 'next/link';
 
 type PostAsideProps = {
   as?: keyof JSX.IntrinsicElements;
