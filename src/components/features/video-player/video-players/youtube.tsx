@@ -28,7 +28,7 @@ export function Youtube({
   src,
   title,
   poster,
-  autoplay = true,
+  autoplay = false,
   controls = true,
   loop = false,
   loading = 'lazy',
@@ -37,6 +37,7 @@ export function Youtube({
 }: YoutubeProps) {
 
   const [showPlayer, setShowPlayer] = useState<boolean>(false);
+  const [playPlayer, setPlayPlayer] = useState<boolean>(false);
   const ref = useRef<any>(null);
 
   if (!width) {
@@ -50,11 +51,11 @@ export function Youtube({
   const opts: Config = {
     youtube: {
       playerVars: {
-        mute: autoplay ? 0 : 1,
-        autoplay: autoplay ? 1 : 0,
-        controls: controls ? 1 : 0,
-        loop: loop ? 1 : 0,
-        playsinline: 1,
+        mute: !autoplay ,
+        autoplay: autoplay,
+        controls: controls,
+        loop: loop,
+        playsinline: true,
       },
     },
   };
@@ -77,10 +78,9 @@ export function Youtube({
 
   const play = () => {
     setShowPlayer(true);
-    console.log('Play');
   };
 
-  console.log('Youtube', src);
+  console.log('Youtube',opts);
 
   return (
     <VideoPlayerWrapper handlePlay={handlePlay} handlePause={handlePause} handleReplay={handleReplay}>
@@ -95,7 +95,7 @@ export function Youtube({
               url={src}
               config={opts}
               onPlay={handlePlay}
-              className={'absolute z-10 min-h-full w-auto min-w-full max-w-none'}
+              className={'absolute  min-h-full w-auto min-w-full max-w-none'}
             />
 
           {!autoplay && (

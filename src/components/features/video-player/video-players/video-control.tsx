@@ -70,7 +70,7 @@ export function VideoControl({ poster, handlePlayAction, width, height, title, l
           height={height}
           fallbackAlt=""
           loading={loading}
-          className={'z-10 h-full w-full object-center object-cover'}
+          className={'absolute z-10 top-0 left-0 h-full w-full object-center object-cover'}
           imgixParams={{ fit: 'fill', fm: 'webp' }}
           quality={80}
         />

@@ -33,7 +33,7 @@ export function VideoPlayerWrapper({ children, handlePlay, handlePause, handleRe
             trigger: ref.current,
             start: 'top 70%',
             end: 'bottom 30%',
-            markers: true,
+            markers: false,
             onEnter: () => {
               setReady(true);
               handlePlay();

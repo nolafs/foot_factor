@@ -32,7 +32,7 @@ export function VideoPlayer({ id, video, loading, image}: ContentVideoProps) {
   }
 
   if (video.provider_name === 'YouTube') {
-    const Youtube = dynamic(() => import('./video-players/youtube'));
+    const Youtube = dynamic(() => import('./video-players/youtube'), {ssr: false});
 
     return (
       <Youtube id={id} title={video.title ?? id} poster={image} src={video.embed_url} width={944} loading={loading} height={531} />
@@ -40,7 +40,7 @@ export function VideoPlayer({ id, video, loading, image}: ContentVideoProps) {
   }
 
   if (video.provider_name === 'Vimeo') {
-    const Vimeo = dynamic(() => import('./video-players/vimeo'));
+    const Vimeo = dynamic(() => import('./video-players/vimeo'), {ssr: false});
 
     return <Vimeo id={id} title={video.title ?? ''} poster={image} loading={loading} src={video.embed_url} />;
   }
