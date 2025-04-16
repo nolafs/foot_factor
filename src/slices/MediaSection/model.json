@@ -26,11 +26,11 @@
             "label": "Color",
             "placeholder": "",
             "options": [
-              "White",
+              "default",
               "Primary",
               "Accent"
             ],
-            "default_value": "White"
+            "default_value": "default"
           }
         }
       },

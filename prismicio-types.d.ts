@@ -2383,11 +2383,11 @@ export interface MediaSectionSliceDefaultPrimary {
    *
    * - **Field Type**: Select
    * - **Placeholder**: *None*
-   * - **Default Value**: White
+   * - **Default Value**: default
    * - **API ID Path**: media_section.default.primary.color
    * - **Documentation**: https://prismic.io/docs/field#select
    */
-  color: prismic.SelectField<'White' | 'Primary' | 'Accent', 'filled'>;
+  color: prismic.SelectField<'default' | 'Primary' | 'Accent', 'filled'>;
 }
 
 /**
