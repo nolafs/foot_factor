@@ -404,5 +404,56 @@
 				"value": []
 			}
 		]
+	},
+	{
+		"__TYPE__": "SharedSliceContent",
+		"variation": "contentImageFloatText",
+		"primary": {
+			"heading": {
+				"__TYPE__": "FieldContent",
+				"value": "save",
+				"type": "Text"
+			},
+			"body": {
+				"__TYPE__": "StructuredTextContent",
+				"value": [
+					{
+						"type": "paragraph",
+						"content": {
+							"text": "Fugiat ad et proident ut velit qui do cillum laboris reprehenderit anim enim dolor. Anim exercitation labore enim et consectetur eiusmod aute cupidatat enim eu laboris ullamco dolor excepteur incididunt. Aute in fugiat esse Lorem enim qui sit dolore excepteur consectetur voluptate ex tempor anim."
+						}
+					}
+				]
+			},
+			"animated": {
+				"__TYPE__": "BooleanContent",
+				"value": false
+			},
+			"links": {
+				"key": "73d3edf9-39f9-4eac-b9ee-8ad66b5ea348",
+				"__TYPE__": "LinkContent",
+				"value": {
+					"__TYPE__": "ExternalLink",
+					"url": "https://prismic.io",
+					"text": "sometime",
+					"variant": "Primary"
+				}
+			},
+			"has_booking": {
+				"__TYPE__": "BooleanContent",
+				"value": false
+			},
+			"booking_label": {
+				"__TYPE__": "FieldContent",
+				"value": "well",
+				"type": "Text"
+			}
+		},
+		"items": [
+			{
+				"__TYPE__": "GroupItemContent",
+				"value": []
+			}
+		]
 	}
 ]

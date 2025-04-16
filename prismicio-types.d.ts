@@ -3014,6 +3014,86 @@ export type SectionSliceContentWithImageFull = prismic.SharedSliceVariation<
 >;
 
 /**
+ * Primary content in *Section → Content image float text → Primary*
+ */
+export interface SectionSliceContentImageFloatTextPrimary {
+  /**
+   * Heading field in *Section → Content image float text → Primary*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: section.contentImageFloatText.primary.heading
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  heading: prismic.KeyTextField;
+
+  /**
+   * Body field in *Section → Content image float text → Primary*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: section.contentImageFloatText.primary.body
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  body: prismic.RichTextField;
+
+  /**
+   * Links field in *Section → Content image float text → Primary*
+   *
+   * - **Field Type**: Link
+   * - **Placeholder**: *None*
+   * - **API ID Path**: section.contentImageFloatText.primary.links
+   * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
+   */
+  links: prismic.LinkField<string, string, unknown, prismic.FieldState, 'Primary' | 'Secondary' | 'Outline'>;
+
+  /**
+   * Has Booking field in *Section → Content image float text → Primary*
+   *
+   * - **Field Type**: Boolean
+   * - **Placeholder**: *None*
+   * - **Default Value**: false
+   * - **API ID Path**: section.contentImageFloatText.primary.has_booking
+   * - **Documentation**: https://prismic.io/docs/field#boolean
+   */
+  has_booking: prismic.BooleanField;
+
+  /**
+   * Booking Label field in *Section → Content image float text → Primary*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: section.contentImageFloatText.primary.booking_label
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  booking_label: prismic.KeyTextField;
+
+  /**
+   * Animated field in *Section → Content image float text → Primary*
+   *
+   * - **Field Type**: Boolean
+   * - **Placeholder**: *None*
+   * - **Default Value**: true
+   * - **API ID Path**: section.contentImageFloatText.primary.animated
+   * - **Documentation**: https://prismic.io/docs/field#boolean
+   */
+  animated: prismic.BooleanField;
+}
+
+/**
+ * Content image float text variation for Section Slice
+ *
+ * - **API ID**: `contentImageFloatText`
+ * - **Description**: Default
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type SectionSliceContentImageFloatText = prismic.SharedSliceVariation<
+  'contentImageFloatText',
+  Simplify<SectionSliceContentImageFloatTextPrimary>,
+  never
+>;
+
+/**
  * Slice variation for *Section*
  */
 type SectionSliceVariation =
@@ -3021,7 +3101,8 @@ type SectionSliceVariation =
   | SectionSliceContentWithLeadButtons
   | SectionSliceContentWithImageColumn
   | SectionSliceContentWithImageColumnList
-  | SectionSliceContentWithImageFull;
+  | SectionSliceContentWithImageFull
+  | SectionSliceContentImageFloatText;
 
 /**
  * Section Shared Slice
@@ -3310,12 +3391,14 @@ declare module '@prismicio/client' {
       SectionSliceContentWithImageColumnListPrimaryListItem,
       SectionSliceContentWithImageColumnListPrimary,
       SectionSliceContentWithImageFullPrimary,
+      SectionSliceContentImageFloatTextPrimary,
       SectionSliceVariation,
       SectionSliceDefault,
       SectionSliceContentWithLeadButtons,
       SectionSliceContentWithImageColumn,
       SectionSliceContentWithImageColumnList,
       SectionSliceContentWithImageFull,
+      SectionSliceContentImageFloatText,
       TestimonialSlice,
       TestimonialSliceDefaultPrimary,
       TestimonialSliceTestimonialsPrimaryItemsItem,
