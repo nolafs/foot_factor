@@ -66,7 +66,6 @@ export const NavigationMobileMenu = ({ logo, navigation, siteName}: NavigationSu
   return (
     <>
       <SearchButton />
-
       <Sheet open={mobileMenuOpen} onOpenChange={setMobileMenuOpen} >
         <SheetTrigger asChild>
           <button
@@ -80,7 +79,7 @@ export const NavigationMobileMenu = ({ logo, navigation, siteName}: NavigationSu
         <SheetContent side="right" className="w-[90%] overflow-y-auto text-white bg-blue-950 px-0 py-6 shadow-none border-none">
           <SheetTitle>
             <div className="flex items-center justify-between px-5">
-              <Link href="/public">
+              <Link href="/public" legacyBehavior>
                 <span className="sr-only">{siteName}</span>
                 <PrismicNextImage field={logo} className="inline w-3/4"   />
               </Link>

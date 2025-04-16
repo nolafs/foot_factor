@@ -118,7 +118,7 @@ export default async function Page({ params }: Props) {
       ],
     })
     .then(response => response.data)
-    .catch(() => notFound());
+    //.catch(() => notFound());
 
   if (post.author && 'data' in post.author) {
     const authorData = post.author.data as {
@@ -162,6 +162,7 @@ export default async function Page({ params }: Props) {
     datePublished: post.publishing_date ?? '',
     dateModified: post.publishing_date ?? '',
   };
+
   return (
     <main className={'w-full'}>
       <div className={'absolute top-0 h-full w-full overflow-x-hidden'}>
@@ -194,7 +195,7 @@ export default async function Page({ params }: Props) {
                 imgixParams={{ fm: 'webp', fit: 'crop', crop: ['focalpoint'], q: 70 }}
               />
 
-              <div className={'prose md:prose-lg'}>{post.content && <PrismicRichText field={post.content} />}</div>
+              <div className={'prose md:prose-lg'}>{post.content && <PrismicRichText field={post.content}  />}</div>
 
               <PostAside
                 as="aside"
@@ -205,9 +206,10 @@ export default async function Page({ params }: Props) {
               />
 
               <div className="mt-10">
-                <Button variant="outline" href="/blog">
+                <Button variant="outline" href="/blog"><div>
                   <ChevronLeftIcon className="size-4" />
                   Back to blog
+                </div>
                 </Button>
               </div>
             </div>

@@ -36,5 +36,5 @@ export function Button({ variant = 'primary', className, disabled, ...props }: B
     return <Headless.Button {...props} className={className} />;
   }
 
-  return <Link {...props} className={className} />;
+  return <Link {...props} className={className}  />;
 }

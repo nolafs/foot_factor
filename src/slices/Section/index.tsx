@@ -35,6 +35,7 @@ const Section: FC<SectionProps> = ({ slice }) => {
 
           <SectionContentColumnWithImage
               as="div"
+              key={slice.id + '_' + index}
               heading={item.heading}
               body={item.body}
               image={item.image}

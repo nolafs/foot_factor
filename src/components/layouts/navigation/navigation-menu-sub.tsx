@@ -78,7 +78,7 @@ export default function NavigationMenuSub({ navigation, settings }: NavigationSu
 
           <div className="flex grow-0 lg:hidden">
             <div className="relative z-40">
-              <Link href="/">
+              <Link href="/" >
                 <span className="sr-only">{settings.site_name}</span>
                 <PrismicImage
                     field={settings.logo}
@@ -103,7 +103,7 @@ export default function NavigationMenuSub({ navigation, settings }: NavigationSu
                   <NavigationMenu>
 
                     <div className="flex flex-1">
-                        <Link href="/" className={'w-full'}>
+                        <Link href="/" className={'w-full'} >
                           <span className="sr-only">{settings.site_name}</span>
                           <PrismicImage
                               field={settings.logo}
@@ -129,8 +129,8 @@ export default function NavigationMenuSub({ navigation, settings }: NavigationSu
                               </NavigationMenuItem>
                   ) : (
                       <NavigationMenuItem key={`main-nav-${idx}`}>
-                        <PrismicNextLink field={navigationItem.data.link} passHref legacyBehavior>
-                          <NavigationMenuLink className={cn(navigationMenuTriggerStyle())}>
+                        <PrismicNextLink field={navigationItem.data.link} passHref >
+                          <NavigationMenuLink asChild={true} className={cn(navigationMenuTriggerStyle())}>
                             {navigationItem.data.label}
                           </NavigationMenuLink>
                         </PrismicNextLink>

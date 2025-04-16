@@ -41,7 +41,7 @@ export function Footer({ navigation, settings }: FooterProps) {
         <Container className={'relative z-10 block pb-10'}>
               <div className="mt-10 grid grid-cols-2 gap-y-10 pb-10 lg:grid-cols-6 lg:gap-8">
                 <div className="col-span-2 flex flex-col justify-between">
-                  <Link href="/" className={'grow'}>
+                  <Link href="/" className={'grow'} >
                     <h2 id="footer-heading" className="sr-only">
                       Foot Factor
                     </h2>

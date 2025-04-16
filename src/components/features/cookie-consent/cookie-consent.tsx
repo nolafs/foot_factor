@@ -48,14 +48,13 @@ export function CookieConsent() {
     <div
       className={`fixed bottom-0 left-0 right-0 z-50 mx-auto flex max-w-max px-3 py-3 md:my-10 md:max-w-screen-lg md:px-4 ${showConsent ? 'hidden' : 'flex'} flex-col items-center justify-between gap-4 rounded-sm bg-primary shadow sm:flex-row`}>
       <div className="text-left text-white">
-        <Link href={'/legal/privacy-notice-for-my-ankle'}>
+        <Link href={'/legal/privacy-notice-for-my-ankle'} legacyBehavior>
           <p>
             We use cookies for better user experience and site analytics. By continuing, you agree to our use of
             cookies. Learn more in our <span className="font-bold text-sky-400">Privacy Policy</span>.
           </p>
         </Link>
       </div>
-
       <div className="flex gap-2">
         <button className="rounded-md border-gray-900 px-5 py-2 text-gray-300" onClick={() => declineCookie()}>
           Decline
