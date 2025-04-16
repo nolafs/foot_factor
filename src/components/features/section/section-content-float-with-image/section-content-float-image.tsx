@@ -15,28 +15,28 @@ interface SectionDefaultProps {
   image?: ImageField;
   hasBooking?: boolean;
   links?: LinkField[];
+  float: 'left' | 'right';
   bookingLabel?: KeyTextField | string
-  variation?: 'contentImageFloatText' ;
+  variation?: 'contentImageFloatText' | 'contentImageFloatRight';
   slice_type?: string;
 }
 
-export const SectionContentImageFloatText = ({as = 'section',heading, body, image, links, hasBooking, bookingLabel, variation, slice_type}: SectionDefaultProps) => {
+export const SectionContentImageFloatText = ({as = 'section',heading, body, float = 'left', image, links, hasBooking, bookingLabel, variation, slice_type}: SectionDefaultProps) => {
   const Tag = as; //
     return (
-      <Tag data-slice-type={slice_type} data-slice-variation={variation} className={cn('relative w-full max-h-[1440px] isolated overflow-hidden')}>
+      <Tag data-slice-type={slice_type} data-slice-variation={variation} className={cn('relative w-full h-svh max-h-[1440px] isolated overflow-hidden')}>
 
             <div className={'w-full flex justify-center'}>
               <PrismicNextImage field={image}
                                 className={cn('w-full h-full object-center object-cover')}/>
             </div>
-        <div className={'absolute top-0 left-0 z-1 w-full h-1/2 bg-gradient-to-t from-stone-50/0 to-white'}/>
-        <div className={'absolute top-0 left-0 z-1 w-full h-full bg-gradient-to-l from-stone-50/0 to-white'}/>
         <div className={'absolute z-10 top-0 left-0 w-full'}>
           <Container className={'lg:py-28 py-16 md:py-24'}>
-              <div className={'flex flex-col w-full md:w-6/12 lg:w-5/12  pt-16 md:pt-24 lg:py-32'}>
+            <div className={cn('flex flex-col gap-5 md:gap-8 lg:gap-10', float === 'left' ? 'md:flex-row' : 'md:flex-row-reverse')}>
+              <div className={cn('flex flex-col w-full md:w-6/12 lg:w-6/12 xl:w-5/12  pt-16 md:pt-24 lg:py-32')}>
                 {isFilled.richText(heading) && (
                 <div
-                    className={'content-master text-animation font-medium font-heading text-3xl sm:text-4xl md:text-5xl mb-10 leading-normal lg:text-6xl lg:leading-[72px]'}>
+                    className={'content-master text-animation font-medium font-heading text-3xl sm:text-4xl md:text-5xl mb-10 leading-normal lg:text-5xl xl:text-6xl  lg:leading-[72px]'}>
                   <PrismicRichText field={heading}/>
                 </div>
                 )}
@@ -51,6 +51,7 @@ export const SectionContentImageFloatText = ({as = 'section',heading, body, imag
                              links={links}/>
                 </div>
               </div>
+            </div>
           </Container>
         </div>
       </Tag>

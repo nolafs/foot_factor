@@ -105,6 +105,23 @@ const Section: FC<SectionProps> = ({ slice }) => {
             hasBooking={slice.primary.has_booking}
             bookingLabel={slice.primary.booking_label}
             variation={slice.variation}
+            float={'left'}
+            slice_type={slice.slice_type}
+        />
+    );
+  }
+
+  if (slice.variation === 'contentImageFloatRight') {
+    return (
+        <SectionContentImageFloatText
+            heading={slice.primary.heading}
+            body={slice.primary.body}
+            links={slice.primary.links}
+            image={slice.primary.image}
+            hasBooking={slice.primary.has_booking}
+            bookingLabel={slice.primary.booking_label}
+            float={'right'}
+            variation={slice.variation}
             slice_type={slice.slice_type}
         />
     );
