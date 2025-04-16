@@ -5,7 +5,7 @@ import { useReducer, useRef, useState } from 'react';
 import ReactPlayer, { Config } from 'react-player/lazy';
 
 import VideoControl from './video-control';
-import VideoFrame from './video-frame';
+
 import VideoPlayerWrapper from '../video-player-wrapper';
 import cn from 'clsx';
 
@@ -28,14 +28,14 @@ export function Youtube({
   src,
   title,
   poster,
-  autoplay,
-  frame,
+  autoplay = true,
   controls = true,
   loop = false,
   loading = 'lazy',
   width = 1920,
   height = 1200,
 }: YoutubeProps) {
+
   const [showPlayer, setShowPlayer] = useState<boolean>(false);
   const ref = useRef<any>(null);
 
@@ -77,31 +77,30 @@ export function Youtube({
 
   const play = () => {
     setShowPlayer(true);
+    console.log('Play');
   };
 
-  //debugger;
+  console.log('Youtube', src);
 
   return (
     <VideoPlayerWrapper handlePlay={handlePlay} handlePause={handlePause} handleReplay={handleReplay}>
       <div className={cn('aspect-w-16 aspect-h-9 w-full h-full relative z-20 overflow-hidden')}>
-        <VideoFrame active={frame}>
-          {showPlayer && (
-            <ReactPlayer
+
+        <ReactPlayer
               width="100%"
               height="100%"
               playing={showPlayer}
               ref={ref}
-              light={poster}
               id={id}
               url={src}
               config={opts}
               onPlay={handlePlay}
               className={'absolute z-10 min-h-full w-auto min-w-full max-w-none'}
             />
-          )}
+
           {!autoplay && (
             <VideoControl
-              handlePlay={play}
+              handlePlayAction={play}
               title={title}
               poster={poster}
               loading={loading}
@@ -109,7 +108,6 @@ export function Youtube({
               height={height}
             />
           )}
-        </VideoFrame>
       </div>
     </VideoPlayerWrapper>
   );

@@ -1,12 +1,11 @@
 'use client';
-import Image from 'next/image';
+
 import { useState } from 'react';
 import cn from 'clsx';
 import { PrismicNextImage } from '@prismicio/next';
 
-/* eslint-disable-next-line */
 export interface VideoControlProps {
-  handlePlay: () => void;
+  handlePlayAction: () => void;
   poster?: any;
   width?: number;
   height?: number;
@@ -15,18 +14,22 @@ export interface VideoControlProps {
   mode?: 'light' | 'dark';
 }
 
-export function VideoControl({ poster, handlePlay, width, height, title, loading = 'lazy', mode }: VideoControlProps) {
+export function VideoControl({ poster, handlePlayAction, width, height, title, loading = 'lazy', mode }: VideoControlProps) {
   const [showPlayer, setShowPlayer] = useState<boolean>(false);
 
   const play = () => {
+
+    console.log('Play action triggered');
+
     setShowPlayer(true);
-    handlePlay();
+    handlePlayAction();
+
   };
 
   return (
     <button onClick={play} className={cn(showPlayer ? 'hidden' : 'block')} aria-label={`Play ${title}`}>
-      <div className={'sr-only'}>Play ${title}</div>
-      <div className={'fill-secondary absolute left-0 top-0 flex h-full w-full flex-col items-center justify-center'}>
+      <div className={'sr-only'}>Play {title}</div>
+      <div className={'fill-secondary absolute z-20 left-0 top-0 flex h-full w-full flex-col items-center justify-center'}>
         <div className={'flex h-16 w-16 items-center justify-center rounded-full'}>
           <svg width="179" height="178" viewBox="0 0 179 178" fill="none" xmlns="http://www.w3.org/2000/svg">
             <g filter="url(#filter0_dd_8928_4595)">
@@ -37,8 +40,8 @@ export function VideoControl({ poster, handlePlay, width, height, title, loading
                 fill="#D1BF73"/>
             <defs>
               <filter id="filter0_dd_8928_4595" x="0.5" y="0" width="178" height="178" filterUnits="userSpaceOnUse"
-                      color-interpolation-filters="sRGB">
-                <feFlood flood-opacity="0" result="BackgroundImageFix"/>
+                      colorInterpolationFilters="sRGB">
+                <feFlood floodOpacity="0" result="BackgroundImageFix"/>
                 <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"
                                result="hardAlpha"/>
                 <feOffset dy="4"/>

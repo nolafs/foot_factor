@@ -1,6 +1,4 @@
-/* eslint-disable-next-line */
 'use client';
-
 import { useGSAP } from '@gsap/react';
 import gsap from 'gsap';
 import { ReactNode, useRef, useState } from 'react';
@@ -16,11 +14,14 @@ export interface VideoProps {
 }
 
 export function VideoPlayerWrapper({ children, handlePlay, handlePause, handleReplay }: VideoProps) {
-  const ref = useRef<HTMLDivElement>(null);
+  const ref = useRef<HTMLDivElement | null>(null);
   const [ready, setReady] = useState(false);
 
   useGSAP(
     () => {
+      console.log('VideoPlayerWrapper', ref.current);
+      if (!ref.current) return;
+
       gsap.fromTo(
         '.video',
         { opacity: 0 },
@@ -29,11 +30,10 @@ export function VideoPlayerWrapper({ children, handlePlay, handlePause, handleRe
           y: 0,
           duration: 1,
           scrollTrigger: {
-            //toggleActions: 'play pause resume reset',
-            //markers: true,
             trigger: ref.current,
             start: 'top 70%',
             end: 'bottom 30%',
+            markers: true,
             onEnter: () => {
               setReady(true);
               handlePlay();

@@ -4,7 +4,6 @@ import cn from 'clsx';
 import { useRef, useState } from 'react';
 import ReactPlayer, { Config, ReactPlayerProps } from 'react-player/lazy';
 import VideoControl from './video-control';
-import VideoFrame from './video-frame';
 import VideoPlayerWrapper from '../video-player-wrapper';
 
 export interface VimeoProps {
@@ -82,7 +81,7 @@ export function Vimeo({
           'bg-neutral aspect-w-16 aspect-h-9 relative z-20 h-full w-full overflow-hidden',
           showPlayer ? 'display opacity-100' : 'hidden opacity-0',
         )}>
-        <VideoFrame active={frame}>
+
           {showPlayer && (
             <ReactPlayer
               width="100%"
@@ -98,7 +97,7 @@ export function Vimeo({
 
           {!autoplay && (
             <VideoControl
-              handlePlay={play}
+                handlePlayAction={play}
               title={title}
               loading={loading}
               poster={poster && `${poster}?fm=webp&w=${width}&h=${height}&fit=fill`}
@@ -106,7 +105,7 @@ export function Vimeo({
               height={height}
             />
           )}
-        </VideoFrame>
+
       </div>
     </VideoPlayerWrapper>
   );

@@ -14,6 +14,9 @@ export type MediaSectionProps = SliceComponentProps<Content.MediaSectionSlice>;
  */
 const MediaSection: FC<MediaSectionProps> = ({ slice }) => {
 
+
+  console.log('slice', slice.variation)
+
   if(slice.variation === 'sectionVideo') {
     if(isFilled.embed(slice.primary.video))
     return (<section data-slice-type={slice.slice_type} data-slice-variation={slice.variation}>
