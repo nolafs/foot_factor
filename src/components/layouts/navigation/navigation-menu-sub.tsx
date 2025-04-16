@@ -129,10 +129,11 @@ export default function NavigationMenuSub({ navigation, settings }: NavigationSu
                               </NavigationMenuItem>
                   ) : (
                       <NavigationMenuItem key={`main-nav-${idx}`}>
-                        <PrismicNextLink field={navigationItem.data.link} passHref >
-                          <NavigationMenuLink asChild={true} className={cn(navigationMenuTriggerStyle())}>
+                        <PrismicNextLink field={navigationItem.data.link} passHref
+                                         className={cn(navigationMenuTriggerStyle())}>
+
                             {navigationItem.data.label}
-                          </NavigationMenuLink>
+
                         </PrismicNextLink>
                       </NavigationMenuItem>
                   );
