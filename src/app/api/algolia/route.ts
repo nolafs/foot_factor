@@ -1,7 +1,7 @@
 import * as prismic from '@prismicio/client';
 import { algoliasearch } from 'algoliasearch';
 import config from '../../../../slicemachine.config.json';
-import { PostsDocument } from '../../../../prismicio-types';
+import { type PostsDocument } from '../../../../prismicio-types';
 import {asText} from '@prismicio/client';
 
 const repositoryName = process.env.NEXT_PUBLIC_PRISMIC_ENVIRONMENT ?? config.repositoryName;

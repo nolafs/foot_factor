@@ -22,9 +22,10 @@ export function CallToActionImage({ heading, body, links, image }: Cta) {
           <div className="flex max-lg:mt-16 lg:col-span-2 lg:px-16">
             <div className="mx-auto flex max-w-xl flex-col gap-16 max-lg:text-center">
               <div className="relative text-3xl tracking-tight text-white before:-translate-x-full lg:text-4xl">
-                { isFilled.richText(heading) && (
+
+                {typeof heading !== 'string' && isFilled.richText(heading) && (
                 <Header className="content-master text-animation">
-                  <PrismicRichText field={body} />
+                  <PrismicRichText field={heading} />
                 </Header>
                 )}
                 <PrismicRichText field={body} />

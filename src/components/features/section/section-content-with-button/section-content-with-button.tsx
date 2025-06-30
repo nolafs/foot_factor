@@ -1,5 +1,5 @@
 'use client';
-import {KeyTextField, LinkField, RichTextField} from '@prismicio/client';
+import {type KeyTextField, type LinkField, type RichTextField} from '@prismicio/client';
 import React from 'react';
 import {Container} from '@/components/ui/container';
 import {PrismicRichText} from '@prismicio/react';

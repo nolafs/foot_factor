@@ -81,12 +81,12 @@ export function SliderResources({
                 : 'My Ankle'
             }
             img={
-              ('feature_image' in item.data && item.data.feature_image) ||
-              ('poster' in item.data && item.data.poster) ||
+              ('feature_image' in item.data && item.data.feature_image) ??
+              ('poster' in item.data && item.data.poster) ??
               undefined
             }
-            file={('file' in item.data && item?.data?.file) || undefined}
-            video={'video_url' in item.data ? item.data.video_url || undefined : undefined}
+            file={('file' in item.data && item?.data?.file) ?? undefined}
+            video={'video_url' in item.data ? item.data.video_url ?? undefined : undefined}
             slug={item.uid}
             category={item.data.category as unknown as PostCategoryDocument}
             bounds={bounds}

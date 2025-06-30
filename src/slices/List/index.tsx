@@ -1,6 +1,6 @@
-import { FC } from 'react';
-import {Content, isFilled} from '@prismicio/client';
-import { SliceComponentProps } from '@prismicio/react';
+import { type FC } from 'react';
+import {type Content, isFilled} from '@prismicio/client';
+import { type SliceComponentProps } from '@prismicio/react';
 import {Heading, Lead} from '@/components/ui/text';
 import cn from 'clsx';
 import {Container} from '@/components/ui/container';

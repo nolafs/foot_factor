@@ -1,6 +1,6 @@
 'use client';
-import { MakeBookingDocumentData } from 'prismicio-types';
-import React, {createContext, useContext, useState, ReactNode} from 'react';
+import { type MakeBookingDocumentData } from 'prismicio-types';
+import React, {createContext, useContext, useState, type ReactNode} from 'react';
 
 
 interface BookingContextType {

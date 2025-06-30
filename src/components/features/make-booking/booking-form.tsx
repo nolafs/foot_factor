@@ -30,7 +30,7 @@ import {
 } from "@/components/ui/select"
 import {CalendarIcon} from 'lucide-react';
 import cn from 'clsx';
-import {MakeBookingDocumentData} from '../../../../prismicio-types';
+import {type MakeBookingDocumentData} from '../../../../prismicio-types';
 import { Textarea } from '@/components/ui/textarea';
 import {Checkbox} from '@/components/ui/checkbox';
 import Link from 'next/link';

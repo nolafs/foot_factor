@@ -1,4 +1,4 @@
-import {ImageField, type LinkField} from '@prismicio/client';
+import {type ImageField, type LinkField} from '@prismicio/client';
 import {PrismicNextImage, PrismicNextLink} from '@prismicio/next';
 import ArrowLongRightIcon from '@heroicons/react/24/outline/ArrowLongRightIcon';
 import cn from 'clsx';

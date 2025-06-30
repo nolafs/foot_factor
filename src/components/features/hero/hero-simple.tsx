@@ -1,6 +1,6 @@
 import { Wave } from '@/components/wave';
 import React from 'react';
-import {KeyTextField} from '@prismicio/client';
+import {type KeyTextField} from '@prismicio/client';
 import {Container} from '@/components/container';
 import {Heading, Lead, Subheading} from '@/components/ui/text';
 

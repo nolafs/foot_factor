@@ -1,6 +1,6 @@
-import { FC } from 'react';
-import { Content } from '@prismicio/client';
-import { SliceComponentProps } from '@prismicio/react';
+import { type FC } from 'react';
+import { type Content } from '@prismicio/client';
+import { type SliceComponentProps } from '@prismicio/react';
 import SectionDefault from '@/components/features/section/section-default/section-default';
 import SectionContentWithButton
   from '@/components/features/section/section-content-with-button/section-content-with-button';

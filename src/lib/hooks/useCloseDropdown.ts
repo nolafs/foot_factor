@@ -1,5 +1,5 @@
 'use client';
-import { RefObject, useEffect } from 'react';
+import { type RefObject, useEffect } from 'react';
 
 export function useCloseDropdown<T extends HTMLElement = HTMLElement>(
   ref: RefObject<T>,

@@ -1,4 +1,4 @@
-import { ComponentProps, forwardRef, PropsWithChildren, ReactNode } from 'react';
+import { type ComponentProps, forwardRef, type PropsWithChildren, type ReactNode } from 'react';
 import cn from 'clsx';
 
 export type PanelProps = ComponentProps<'div'> &

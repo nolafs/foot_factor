@@ -7,7 +7,7 @@ import {
   type MakeBookingDocumentData,
   type NavigationBarDocumentData,
   type NavigationBarDocumentDataNavigationItemsItem,
-  type NavigationElementDocument, NavigationMegaMenuItemDocument, SettingsDocumentData,
+  type NavigationElementDocument, type NavigationMegaMenuItemDocument, type SettingsDocumentData,
 } from '../../../../prismicio-types';
 import { PrismicNextLink } from '@prismicio/next';
 import {PrismicImage, SliceZone} from '@prismicio/react';

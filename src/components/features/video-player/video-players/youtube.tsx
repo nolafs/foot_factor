@@ -2,7 +2,7 @@
 'use client';
 
 import { useReducer, useRef, useState } from 'react';
-import ReactPlayer, { Config } from 'react-player/lazy';
+import ReactPlayer, { type Config } from 'react-player/lazy';
 
 import VideoControl from './video-control';
 

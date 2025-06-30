@@ -2,7 +2,7 @@ import cn from 'clsx';
 import {PrismicImage, PrismicRichText} from '@prismicio/react';
 import {PrismicNextLink} from '@prismicio/next';
 import React, {useEffect, useState} from 'react';
-import {NavigationElementDocumentData} from '../../../../prismicio-types';
+import {type NavigationElementDocumentData} from '../../../../prismicio-types';
 import { motion } from 'framer-motion';
 
 export const NavigationMenuSubItem = ({item}: { item: NavigationElementDocumentData}) => {

@@ -2,7 +2,7 @@
 'use client';
 import cn from 'clsx';
 import { useRef, useState } from 'react';
-import ReactPlayer, { Config, ReactPlayerProps } from 'react-player/lazy';
+import ReactPlayer, { type Config, ReactPlayerProps } from 'react-player/lazy';
 import VideoControl from './video-control';
 import VideoPlayerWrapper from '../video-player-wrapper';
 

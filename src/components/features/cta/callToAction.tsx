@@ -1,9 +1,6 @@
-import {Body, Heading, Subheading} from '@/components/ui/text';
+import {Body, Heading} from '@/components/ui/text';
 import { type Cta } from '@/types';
 import { PrismicRichText } from '@prismicio/react';
-import { PrismicNextLink } from '@prismicio/next';
-import cn from 'clsx';
-import { buttonVariants } from '@/components/ui/button';
 import {Container} from '@/components/ui/container';
 import ButtonRow from '@/components/ui/button-row';
 import React from 'react';
@@ -14,7 +11,11 @@ export function CallToAction({ heading, body, links, hasBooking = false, booking
       <Container className={'max-w-4xl lg:py-28 py-16 md:py-24 lg:pb-32'}>
 
         <Heading as={'h2'} primary={true} dark={true} className={'content-master text-animation'}>
-          <PrismicRichText field={heading}/>
+          {typeof heading === 'string' ? (
+              heading
+          ) : (
+              <PrismicRichText field={heading}/>
+          )}
         </Heading>
 
       <Body>

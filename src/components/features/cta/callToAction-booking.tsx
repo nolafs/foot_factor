@@ -20,7 +20,11 @@ export function CallToActionBooking({ label, heading, body, telephone }: Cta) {
             <h2
               className={cn('mx-auto mt-6 max-w-2xl text-3xl font-heading font-medium tracking-tight text-background sm:text-5xl'
               )}>
-              {heading}
+              {typeof heading === 'string' ? (
+                  heading
+              ) : (
+                  <PrismicRichText field={heading}/>
+              )}
             </h2>
           </hgroup>
           <div

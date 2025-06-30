@@ -1,13 +1,13 @@
 import {
-  WithContext,
-  MedicalWebPage,
-  ContactPage,
-  Blog,
-  BlogPosting,
+  type WithContext,
+  type MedicalWebPage,
+  type ContactPage,
+  type Blog,
+  type BlogPosting,
   CollectionPage,
   MedicalScholarlyArticle,
 } from 'schema-dts';
-import {PostsDocument} from '../../prismicio-types';
+import {type PostsDocument} from '../../prismicio-types';
 
 
 const JSONLD: WithContext<MedicalWebPage> = {

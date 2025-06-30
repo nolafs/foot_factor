@@ -1,7 +1,7 @@
 import React from 'react';
 import MakeBookingDialog from '@/components/features/make-booking/make-booking-dialog';
 import ButtonSliceVariation from '@/components/ui/button-slice-variation';
-import {LinkField} from '@prismicio/client';
+import {type LinkField} from '@prismicio/client';
 
 interface ButtonRowProps {
   hasBooking?: boolean;

@@ -1,4 +1,4 @@
-import { PropsWithChildren, useCallback, useEffect, useRef, useState } from 'react';
+import { type PropsWithChildren, useCallback, useEffect, useRef, useState } from 'react';
 import type { SearchResults } from 'algoliasearch-helper';
 import type {
   CurrentRefinementsConnectorParamsRefinement,

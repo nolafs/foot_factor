@@ -4,7 +4,7 @@ import {PrismicNextImage} from '@prismicio/next';
 import dayjs from 'dayjs';
 import {PrismicRichText} from '@prismicio/react';
 import type {ImageFieldImage} from '@prismicio/client';
-import {PostsDocument} from 'prismicio-types';
+import {type PostsDocument} from 'prismicio-types';
 import Link from 'next/link';
 
 interface PostFeatureCardProps {

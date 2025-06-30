@@ -1,6 +1,6 @@
-import React, { FC } from 'react';
-import {Content, isFilled} from '@prismicio/client';
-import {PrismicRichText, SliceComponentProps} from '@prismicio/react';
+import React, { type FC } from 'react';
+import {type Content, isFilled} from '@prismicio/client';
+import {PrismicRichText, type SliceComponentProps} from '@prismicio/react';
 
 import VideoPlayer from '@/components/features/video-player/video-player';
 import cn from 'clsx';

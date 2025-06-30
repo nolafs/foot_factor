@@ -1,9 +1,9 @@
 import React, { type FC} from 'react';
-import {Content, filter} from '@prismicio/client';
-import {PrismicImage, PrismicRichText, SliceComponentProps} from '@prismicio/react';
+import {type Content, filter} from '@prismicio/client';
+import {PrismicImage, PrismicRichText, type SliceComponentProps} from '@prismicio/react';
 import cn from 'clsx';
 import {PrismicNextLink} from '@prismicio/next';
-import {NavigationElementDocumentDataSubsItem} from '../../../prismicio-types';
+import {type NavigationElementDocumentDataSubsItem} from '../../../prismicio-types';
 import ButtonSliceVariation from '@/components/ui/button-slice-variation';
 import BlogArticle from '@/slices/Megamenu/component/blog-article';
 

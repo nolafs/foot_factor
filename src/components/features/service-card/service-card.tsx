@@ -1,9 +1,9 @@
 
 import React from 'react';
-import {FilledContentRelationshipField} from '@prismicio/client';
+import {type FilledContentRelationshipField} from '@prismicio/client';
 import {createClient} from '@/prismicio';
 import {notFound} from 'next/navigation';
-import {ServicesDocumentData} from '../../../../prismicio-types';
+import {type ServicesDocumentData} from '../../../../prismicio-types';
 import { PrismicRichText } from '@prismicio/react';
 import MakeBookingDialog from '@/components/features/make-booking/make-booking-dialog';
 import {PrismicNextLink} from '@prismicio/next';

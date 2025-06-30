@@ -4,15 +4,15 @@ import { Bars3Icon } from '@heroicons/react/24/outline';
 import {
   type NavigationBarDocumentData,
   type NavigationBarDocumentDataNavigationItemsItem,
-  type NavigationElementDocument, NavigationMegaMenuItemDocument,
+  type NavigationElementDocument, type NavigationMegaMenuItemDocument,
 } from '../../../../prismicio-types';
 import { ChevronDownIcon } from '@heroicons/react/20/solid';
 import {PrismicNextImage, PrismicNextLink} from '@prismicio/next';
-import React, {ReactNode, useEffect, useState} from 'react';
+import React, {type ReactNode, useEffect, useState} from 'react';
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '@/components/ui/collapsible';
 import { Sheet, SheetContent, SheetTitle, SheetTrigger } from '@/components/ui/sheet';
 import { SearchButton } from '@/components/features/search/search-button';
-import {ImageField, KeyTextField, LinkField} from '@prismicio/client';
+import {type ImageField, type KeyTextField, type LinkField} from '@prismicio/client';
 import {usePathname} from "next/navigation";
 import cn from 'clsx';
 

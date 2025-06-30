@@ -14,7 +14,7 @@ import React from 'react';
 import {asText, type ImageFieldImage, type LinkField, type RichTextField} from '@prismicio/client';
 import { type Author } from '@/types';
 import PostAside from '@/components/features/blog/postAside';
-import { WithContext, Article } from 'schema-dts';
+import { type WithContext, type Article } from 'schema-dts';
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
 
