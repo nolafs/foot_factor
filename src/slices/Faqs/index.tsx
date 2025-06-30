@@ -130,8 +130,6 @@ const Faqs = async ({ slice }: FaqsProps) => {
       <SectionFaqs
         data={{
           headings: slice.primary.heading,
-          text: slice.primary.subtitle,
-          body: slice.primary.body,
           faqs: faqItems,
         }}
       />

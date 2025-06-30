@@ -1,5 +1,5 @@
 import { clsx } from 'clsx'
-
+// todo: replace this bounded component with the one from the design system
 export function Container({
   className,
   children,

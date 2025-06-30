@@ -2,10 +2,11 @@ import { type RichTextField, type LinkField, type KeyTextField, type ImageField 
 
 export type Cta = {
   label?: KeyTextField | string;
-  heading: KeyTextField | string;
+  heading: RichTextField;
   body?: RichTextField;
   links?: LinkField[];
-  telephone?: string;
   image?: ImageField;
+  hasBooking?: boolean;
+  bookingLabel?: KeyTextField | string;
   dark?: boolean;
 };

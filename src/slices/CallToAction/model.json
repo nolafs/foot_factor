@@ -13,10 +13,12 @@
       "imageUrl": "",
       "primary": {
         "heading": {
-          "type": "Text",
+          "type": "StructuredText",
           "config": {
             "label": "Heading",
-            "placeholder": ""
+            "placeholder": "",
+            "allowTargetBlank": true,
+            "multi": "strong,em"
           }
         },
         "body": {
@@ -36,7 +38,12 @@
             "select": null,
             "allowTargetBlank": true,
             "allowText": true,
-            "repeat": true
+            "repeat": true,
+            "variants": [
+              "Primary",
+              "Secondary",
+              "Outline"
+            ]
           }
         },
         "image": {
@@ -46,51 +53,21 @@
             "constraint": {},
             "thumbnails": []
           }
-        }
-      },
-      "items": {}
-    },
-    {
-      "id": "image",
-      "name": "Image",
-      "docURL": "...",
-      "version": "initial",
-      "description": "Default",
-      "imageUrl": "",
-      "primary": {
-        "heading": {
+        },
+        "has_booking": {
+          "type": "Boolean",
+          "config": {
+            "label": "Has Booking",
+            "placeholder_false": "false",
+            "placeholder_true": "true",
+            "default_value": false
+          }
+        },
+        "booking_label": {
           "type": "Text",
           "config": {
-            "label": "Heading",
+            "label": "Booking Label",
             "placeholder": ""
-          }
-        },
-        "body": {
-          "type": "StructuredText",
-          "config": {
-            "label": "Body",
-            "placeholder": "",
-            "allowTargetBlank": true,
-            "multi": "paragraph,preformatted,heading1,heading2,heading3,heading4,heading5,heading6,strong,em,hyperlink,image,embed,list-item,o-list-item,rtl"
-          }
-        },
-        "links": {
-          "type": "Link",
-          "config": {
-            "label": "Links",
-            "placeholder": "",
-            "select": null,
-            "allowTargetBlank": true,
-            "allowText": true,
-            "repeat": true
-          }
-        },
-        "image": {
-          "type": "Image",
-          "config": {
-            "label": "Image",
-            "constraint": {},
-            "thumbnails": []
           }
         }
       },

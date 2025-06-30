@@ -1,33 +1,25 @@
-import SectionTitle from '@/components/features/section/section-title/section-title';
 import { type KeyTextField, type RichTextField } from '@prismicio/client';
 import FaqItem from './faq-item';
 import type {FAQ} from '@/types/faq.type';
-
-
+import {Heading} from '@/components/ui/text';
+import {PrismicRichText} from '@prismicio/react';
 
 interface SectionFagsProps {
   data: {
     headings: RichTextField | null | undefined;
-    text?: KeyTextField | null | undefined;
-    body: RichTextField | null | undefined;
     faqs: FAQ[];
   };
 
   color?: 'A' | 'B' | 'C';
 }
 
-export function SectionFaqs({ data: { headings, text, body, faqs }, color = 'C' }: SectionFagsProps) {
+export function SectionFaqs({ data: { headings, faqs }, color = 'C' }: SectionFagsProps) {
   return (
     <div className="lg:grid lg:grid-cols-12 lg:gap-8">
       <div className="lg:col-span-5">
-        <SectionTitle
-          title={headings}
-          subtitle={text}
-          description={body}
-          align={'left'}
-          titleSize={'large'}
-          color={color}
-        />
+        <Heading as="h2" >
+          <PrismicRichText field={headings} />
+        </Heading>
       </div>
       <div className="mt-10 lg:col-span-7 lg:mt-0">
         <dl className="space-y-5">

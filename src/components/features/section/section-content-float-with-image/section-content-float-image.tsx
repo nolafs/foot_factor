@@ -6,6 +6,7 @@ import {PrismicRichText} from '@prismicio/react';
 import ButtonRow from '@/components/ui/button-row';
 import {PrismicNextImage} from '@prismicio/next';
 import cn from 'clsx';
+import {Body, Heading} from '@/components/ui/text';
 
 
 interface SectionDefaultProps {
@@ -35,17 +36,13 @@ export const SectionContentImageFloatText = ({as = 'section',heading, body, floa
             <div className={cn('flex flex-col gap-5 md:gap-8 lg:gap-10', float === 'left' ? 'md:flex-row' : 'md:flex-row-reverse')}>
               <div className={cn('flex flex-col w-full md:w-6/12 lg:w-6/12 xl:w-5/12  pt-16 md:pt-24 lg:py-32')}>
                 {isFilled.richText(heading) && (
-                <div
-                    className={'content-master text-animation font-medium font-heading text-3xl sm:text-4xl md:text-5xl mb-10 leading-normal lg:text-5xl xl:text-6xl  lg:leading-[72px]'}>
-                  <PrismicRichText field={heading}/>
-                </div>
+                    <Heading as={'h2'} primary={true} className={'content-master text-animation'}>
+                      <PrismicRichText field={heading}/>
+                    </Heading>
                 )}
-                  <div className={cn('w-full flex flex-col  prose prose-sm md:prose-base lg:prose-lg max-w-none',
-                      'prose-a:text-accent prose-a:no-underline hover:prose-a:underline',
-                      'prose-strong:text-primary-950 prose-headings:!text-primary-500 prose-headings:mt-0 text-primary-500 '
-                      )}>
+                  <Body>
                       <PrismicRichText field={body}/>
-                  </div>
+                  </Body>
                 <div className="flex flex-col gap-x-3 gap-y-4 sm:flex-row">
                   <ButtonRow hasBooking={hasBooking} bookingLabel={bookingLabel ?? 'Book Now'} hasArrow={true}
                              links={links}/>

@@ -1,44 +1,31 @@
-import { Subheading } from '@/components/ui/text';
+import {Body, Heading, Subheading} from '@/components/ui/text';
 import { type Cta } from '@/types';
 import { PrismicRichText } from '@prismicio/react';
 import { PrismicNextLink } from '@prismicio/next';
 import cn from 'clsx';
 import { buttonVariants } from '@/components/ui/button';
+import {Container} from '@/components/ui/container';
+import ButtonRow from '@/components/ui/button-row';
+import React from 'react';
 
-export function CallToAction({ label, heading, body, links, dark }: Cta) {
+export function CallToAction({ heading, body, links, hasBooking = false, bookingLabel = 'Book now' }: Cta) {
   return (
-    <div className="relative w-full pb-16 pt-20 text-center sm:py-24">
-      <hgroup>
-        <Subheading className={cn(dark && 'text-white/70')}>{label}</Subheading>
-        <p
-          className={cn(
-            dark
-              ? 'mx-auto mt-6 max-w-2xl text-3xl font-medium tracking-tight text-white sm:text-5xl'
-              : 'mx-auto mt-6 max-w-2xl text-3xl font-medium tracking-tight text-gray-950 sm:text-5xl',
-          )}>
-          {heading}
-        </p>
-      </hgroup>
-      <div
-        className={
-          dark ? 'mx-auto mt-6 max-w-xs text-sm/6 text-white/70' : 'mx-auto mt-6 max-w-xs text-sm/6 text-gray-500'
-        }>
+    <section className="flex justify-center text-center bg-primary">
+      <Container className={'max-w-4xl lg:py-28 py-16 md:py-24 lg:pb-32'}>
+
+        <Heading as={'h2'} primary={true} dark={true} className={'content-master text-animation'}>
+          <PrismicRichText field={heading}/>
+        </Heading>
+
+      <Body>
         <PrismicRichText field={body} />
-      </div>
+      </Body>
       {links && (
         <div className="mx-auto mt-6 flex flex-col items-center justify-center gap-2 md:flex-row">
-          {links?.map((link, index) => (
-            <PrismicNextLink
-              field={link}
-              key={index}
-              className={cn(
-                buttonVariants({ variant: link.variant === 'Secondary' ? 'secondary' : 'default', size: 'lg' }),
-              )}>
-              {link.text}
-            </PrismicNextLink>
-          ))}
+          <ButtonRow hasBooking={hasBooking} bookingLabel={bookingLabel ?? 'Book Now'} hasArrow={true} links={links}/>
         </div>
       )}
-    </div>
+      </Container>
+    </section>
   );
 }

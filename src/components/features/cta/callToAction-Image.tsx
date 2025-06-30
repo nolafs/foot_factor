@@ -2,8 +2,10 @@ import { Container } from '@/components/ui/container';
 import { type Cta } from '@/types';
 import { PrismicNextImage, PrismicNextLink } from '@prismicio/next';
 import { PrismicRichText } from '@prismicio/react';
+import {Header} from '@radix-ui/react-accordion';
+import {isFilled} from '@prismicio/client';
 
-export function CallToActionImage({ body, links, image }: Cta) {
+export function CallToActionImage({ heading, body, links, image }: Cta) {
   return (
     <div className="mx-2 my-24 rounded-4xl bg-gray-900 bg-[url(/dot-texture.svg)] pb-24 pt-72 lg:pt-36">
       <Container>
@@ -20,6 +22,11 @@ export function CallToActionImage({ body, links, image }: Cta) {
           <div className="flex max-lg:mt-16 lg:col-span-2 lg:px-16">
             <div className="mx-auto flex max-w-xl flex-col gap-16 max-lg:text-center">
               <div className="relative text-3xl tracking-tight text-white before:-translate-x-full lg:text-4xl">
+                { isFilled.richText(heading) && (
+                <Header className="content-master text-animation">
+                  <PrismicRichText field={body} />
+                </Header>
+                )}
                 <PrismicRichText field={body} />
               </div>
 

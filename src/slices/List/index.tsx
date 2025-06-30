@@ -29,7 +29,7 @@ const List: FC<ListProps> = async({ slice }) => {
 
       return (<section data-slice-type={slice.slice_type} data-slice-variation={slice.variation} className={'bg-primary-50'}>
         <Container className={'lg:py-28 py-16 md:py-24'}>
-          <header>
+          <hgroup>
             <div className={'flex w-full justify-between items-center gap-5 md:gap-8 lg:gap-10'}>
               <Heading as="h2" className={'mb-8'}>
                 {slice.primary.heading}
@@ -41,7 +41,7 @@ const List: FC<ListProps> = async({ slice }) => {
                 {slice.primary.lead}
               </Lead>
             </div>
-          </header>
+          </hgroup>
           <div className={'mt-16'}>
             <div className={cn(`grid grid-cols-1 lg:grid-cols-${slice.primary.services.length} gap-5 md:gap-8 lg:gap-10 justify-stretch`)}>
             {slice.primary.services.map((item, index) => (
@@ -52,11 +52,13 @@ const List: FC<ListProps> = async({ slice }) => {
             </div>
           </div>
 
+          {isFilled.link(slice.primary.link) && (
           <div className={'w-full flex justify-center mt-16'}>
             <PrismicNextLink field={slice.primary.link} className={buttonVariants({variant: 'outline'})}>
               {slice.primary.link.text} <CircleArrowRight className={'ml-2 h-4 w-4'}/>
             </PrismicNextLink>
           </div>
+          )}
         </Container>
 
 
@@ -67,7 +69,7 @@ const List: FC<ListProps> = async({ slice }) => {
       return (
           <section data-slice-type={slice.slice_type} data-slice-variation={slice.variation} className={'bg-accent-50'}>
             <Container className={'lg:py-28 py-16 md:py-24'}>
-              <header>
+              <hgroup>
                 <div className={'flex w-full justify-between items-center gap-5 md:gap-8 lg:gap-10'}>
                   <Heading as="h2" className={'mb-8'}>
                     {slice.primary.heading}
@@ -83,7 +85,7 @@ const List: FC<ListProps> = async({ slice }) => {
                     {slice.primary.lead}
                   </Lead>
                 </div>
-              </header>
+              </hgroup>
               <div className={'mt-16'}>
                 <BlogArticle size={3}/>
               </div>

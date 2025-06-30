@@ -12,7 +12,7 @@ type BoundedProps = {
 
 export function Bounded({
   as: Comp = 'div',
-  yPadding = 'base',
+  yPadding = 'lg',
   collapsible = true,
   className,
   fullWidth = false,
@@ -22,7 +22,7 @@ export function Bounded({
     <Comp
       data-collapsible={collapsible}
       className={cn(
-        fullWidth ? '' : 'px-6 xl:px-0',
+        fullWidth ? '' : 'px-6 lg:px-8 xl:px-0',
         yPadding === 'sm' && 'py-8 md:py-10',
         yPadding === 'md' && 'py-16 md:py-20',
         yPadding === 'base' && 'py-20 md:py-28',
