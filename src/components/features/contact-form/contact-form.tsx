@@ -1,7 +1,7 @@
 'use client';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { type ContactFormInput } from '@/types';
-import React, { useRef, useState } from 'react';
+import React, {forwardRef, useRef, useState} from 'react';
 import { useForm, type SubmitHandler } from 'react-hook-form';
 import toast, { Toaster } from 'react-hot-toast';
 import { Button } from '@/components/ui/button';
@@ -10,7 +10,7 @@ import cn from 'clsx';
 import { sendMail, VerifyCaptcha } from '@/action';
 import ReCAPTCHA from 'react-google-recaptcha';
 
-const RECAPTCHA_ACTIVE = true;
+const RECAPTCHA_ACTIVE = process.env.NEXT_PUBLIC_RECAPTCHA_ACTIVE === 'true';
 
 const emailSchema = z.object({
   name: z.string().min(1, 'Please enter your name'),
@@ -35,7 +35,7 @@ export function ContactForm({ items }: ContactFormInputProps) {
   //const captchaRef: any = useRef(null)
   const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
   const [submissionSuccess, setSubmissionSuccess] = useState<boolean>(false);
-  const recaptchaRef = useRef<ReCAPTCHA>(null);
+  const recaptchaRef = useRef<ReCAPTCHA | null>(null);
   const [isVerified, setIsVerified] = useState(!RECAPTCHA_ACTIVE);
 
   const {
@@ -206,14 +206,12 @@ export function ContactForm({ items }: ContactFormInputProps) {
           </div>
 
           {RECAPTCHA_ACTIVE && (
-            <div className="flex w-full justify-start pt-6">
-              <ReCAPTCHA
-                sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY ?? ''}
-                ref={recaptchaRef}
-                onChange={handleChange}
-                onExpired={handleExpired}
-              />
-            </div>
+              React.createElement(ReCAPTCHA as any, {
+                sitekey: process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY ?? '',
+                ref: recaptchaRef,
+                onChange: handleChange,
+                onExpired: handleExpired,
+              })
           )}
 
           <div className="flex w-full justify-end pt-6">
