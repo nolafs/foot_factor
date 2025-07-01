@@ -12,6 +12,8 @@ import {
 } from 'framer-motion';
 import {wrap} from '@motionone/utils';
 import {IconNavListSliceDefaultPrimaryItemsItem} from '@/prismic-types';
+import cn from 'clsx';
+import {PrismicNextImage} from '@prismicio/next';
 
 interface FeatureTickerListProps {
   data: IconNavListSliceDefaultPrimaryItemsItem[],
@@ -86,17 +88,22 @@ export const FeatureTickerList = ({data, baseVelocity = 10}: FeatureTickerListPr
             className={'flex no-white-space flex-nowrap gap-36'}
             style={{x}}>
           {repeatedData.map((item, idx) => (
-              <FeatureTickerListItem key={idx} item={item}/>
+              <FeatureTickerListItem key={idx} style={idx % 2} item={item}/>
           ))}
         </motion.div>
       </div>
   )
 }
 
-const FeatureTickerListItem = ({item}: { item: IconNavListSliceDefaultPrimaryItemsItem }) => {
+const FeatureTickerListItem = ({item , style}: { item: IconNavListSliceDefaultPrimaryItemsItem, style: number }) => {
+
+  console.log('FeatureTickerListItem', item, style);
+
   return (
-      <div className={'px-16 py-8 whitespace-nowrap border border-primary rounded-full text-4xl text-secondary uppercase flex space-x-5'}>
-        {item.label}
+      <div className={cn('px-16 py-8 whitespace-nowrap border border-primary rounded-full text-4xl text-secondary italic uppercase flex space-x-5',
+          style === 0 ? 'bg-primary text-white' : 'text-primary border-accent',
+          )}>
+        <PrismicNextImage field={item.icon}  /> {item.label}
       </div>
   );
 }
