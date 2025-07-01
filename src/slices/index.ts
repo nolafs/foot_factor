@@ -6,9 +6,11 @@ export const components = {
   call_to_action: dynamic(() => import('./CallToAction')),
   faqs: dynamic(() => import('./Faqs')),
   hero: dynamic(() => import('./Hero')),
+  icon_nav_list: dynamic(() => import('./FeatureTickerList')),
   list: dynamic(() => import('./List')),
   media_section: dynamic(() => import('./MediaSection')),
   megamenu: dynamic(() => import('./Megamenu')),
   section: dynamic(() => import('./Section')),
+  team_carousel: dynamic(() => import('./TeamCarousel')),
   testimonial: dynamic(() => import('./Testimonial')),
 };

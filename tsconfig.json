@@ -34,8 +34,8 @@
       "@/*": [
         "./src/*"
       ],
-      "react": [
-        "./node_modules/@types/react"
+      "@/prismic-types": [
+        "./prismicio-types"
       ]
     }
   },

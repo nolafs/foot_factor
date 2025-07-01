@@ -18,6 +18,12 @@
         "fieldset": "Slice Zone",
         "config": {
           "choices": {
+            "icon_nav_list": {
+              "type": "SharedSlice"
+            },
+            "team_carousel": {
+              "type": "SharedSlice"
+            },
             "media_section": {
               "type": "SharedSlice"
             },

@@ -1,0 +1,76 @@
+{
+  "type": "SharedSlice",
+  "id": "team_carousel",
+  "name": "TeamCarousel",
+  "variations": [
+    {
+      "id": "default",
+      "name": "Default",
+      "description": "Displays a carousel with each slide featuring a team member's photo, name, title, description, and an optional play button for media.",
+      "version": "initial",
+      "imageUrl": "",
+      "docURL": "...",
+      "primary": {
+        "heading": {
+          "type": "StructuredText",
+          "config": {
+            "label": "Heading",
+            "placeholder": "",
+            "allowTargetBlank": true,
+            "single": "heading2"
+          }
+        },
+        "lead": {
+          "type": "StructuredText",
+          "config": {
+            "label": "Lead",
+            "placeholder": "",
+            "allowTargetBlank": true,
+            "multi": "paragraph,strong,em,hyperlink"
+          }
+        },
+        "members": {
+          "type": "Group",
+          "config": {
+            "label": "Team Members",
+            "fields": {
+              "photo": {
+                "type": "Image",
+                "config": {
+                  "label": "Photo"
+                }
+              },
+              "video": {
+                "type": "Embed",
+                "config": {
+                  "label": "Video",
+                  "placeholder": ""
+                }
+              },
+              "bio": {
+                "type": "StructuredText",
+                "config": {
+                  "multi": "paragraph,strong,em,hyperlink",
+                  "label": "Bio"
+                }
+              },
+              "name": {
+                "type": "Text",
+                "config": {
+                  "label": "Name"
+                }
+              },
+              "title": {
+                "type": "Text",
+                "config": {
+                  "label": "Title"
+                }
+              }
+            }
+          }
+        }
+      },
+      "items": {}
+    }
+  ]
+}

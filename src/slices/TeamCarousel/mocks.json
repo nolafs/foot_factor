@@ -1,0 +1,279 @@
+[
+	{
+		"__TYPE__": "SharedSliceContent",
+		"variation": "default",
+		"primary": {
+			"members": {
+				"__TYPE__": "GroupContentType",
+				"value": [
+					{
+						"__TYPE__": "GroupItemContent",
+						"value": [
+							[
+								"photo",
+								{
+									"provider": "imgix",
+									"url": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?crop=entropy&cs=srgb&fm=jpg&ixid=M3wzMzc0NjN8MHwxfHNlYXJjaHw4fHxwZW9wbGV8ZW58MHx8fHwxNzUxMzU2MTUyfDA&ixlib=rb-4.1.0&q=85",
+									"alt": "man wearing white V-neck shirt",
+									"origin": {
+										"id": "iFgRcqHznqg",
+										"url": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?crop=entropy&cs=srgb&fm=jpg&ixid=M3wzMzc0NjN8MHwxfHNlYXJjaHw4fHxwZW9wbGV8ZW58MHx8fHwxNzUxMzU2MTUyfDA&ixlib=rb-4.1.0&q=85",
+										"width": 3569,
+										"height": 5354
+									},
+									"width": 3569,
+									"height": 5354,
+									"edit": {
+										"background": "transparent",
+										"zoom": 1,
+										"crop": {
+											"x": 0,
+											"y": 0
+										}
+									},
+									"credits": null,
+									"__TYPE__": "ImageContent"
+								}
+							],
+							[
+								"has_media",
+								{
+									"__TYPE__": "BooleanContent",
+									"value": false
+								}
+							],
+							[
+								"bio",
+								{
+									"__TYPE__": "StructuredTextContent",
+									"value": [
+										{
+											"type": "paragraph",
+											"content": {
+												"text": "Hugo has over 10 years experience, working alongside his father, Norbert, the founder of Foot Factor. Qualified with SIDAS to work with Podiatech medical and Conform’able sports products, Hugo also holds a Non-Surgical Foot Care Diploma giving him the extensive knowledge needed to create bespoke custom orthotics. As Technical Director Hugo trains our in-house podiatrists and works closely with consultants, physiotherapists and other professionals who refer their patients to him. His unique approach and skills are highly regarded by professionals and clients alike.",
+												"spans": []
+											},
+											"direction": "ltr"
+										},
+										{
+											"type": "paragraph",
+											"content": {
+												"text": "With a strong cycling background Hugo raced road bikes at a national level for 8 years in the UK and Europe and has supported Tour de France cyclists from the INEOS Grenadiers, Jumbo Visma and Bahrain Victorious cycling teams with Foot Factor orthotics. Hugo’s other great passion, skiing, took him to Val d’Isere, France, where he had the opportunity to work with World Cup ski racers and elite snow sports athletes. He uses his valuable experience in both the medical and sports sector when creating your bepoke orthotics, handmade and perfectly tailored to you.",
+												"spans": []
+											},
+											"direction": "ltr"
+										}
+									]
+								}
+							],
+							[
+								"name",
+								{
+									"__TYPE__": "FieldContent",
+									"type": "Text",
+									"value": "Hugo Cauvas"
+								}
+							],
+							[
+								"title",
+								{
+									"__TYPE__": "FieldContent",
+									"type": "Text",
+									"value": "Technical Director"
+								}
+							]
+						]
+					},
+					{
+						"__TYPE__": "GroupItemContent",
+						"value": [
+							[
+								"photo",
+								{
+									"__TYPE__": "ImageContent",
+									"provider": "imgix",
+									"url": "https://images.unsplash.com/photo-1494790108377-be9c29b29330?crop=entropy&cs=srgb&fm=jpg&ixid=M3wzMzc0NjN8MHwxfHNlYXJjaHwyfHxwZW9wbGV8ZW58MHx8fHwxNzUxMzU2MTUyfDA&ixlib=rb-4.1.0&q=85",
+									"alt": "closeup photography of woman smiling",
+									"origin": {
+										"id": "mEZ3PoFGs_k",
+										"url": "https://images.unsplash.com/photo-1494790108377-be9c29b29330?crop=entropy&cs=srgb&fm=jpg&ixid=M3wzMzc0NjN8MHwxfHNlYXJjaHwyfHxwZW9wbGV8ZW58MHx8fHwxNzUxMzU2MTUyfDA&ixlib=rb-4.1.0&q=85",
+										"width": 3744,
+										"height": 5616
+									},
+									"width": 3744,
+									"height": 5616,
+									"edit": {
+										"background": "transparent",
+										"zoom": 1,
+										"crop": {
+											"x": 0,
+											"y": 0
+										}
+									}
+								}
+							],
+							[
+								"bio",
+								{
+									"__TYPE__": "StructuredTextContent",
+									"value": [
+										{
+											"type": "paragraph",
+											"content": {
+												"text": "With a strong cycling background Hugo raced road bikes at a national level for 8 years in the UK and Europe and has supported Tour de France cyclists from the INEOS Grenadiers, Jumbo Visma and Bahrain Victorious cycling teams with Foot Factor orthotics. Hugo’s other great passion, skiing, took him to Val d’Isere, France, where he had the opportunity to work with World Cup ski racers and elite snow sports athletes. He uses his valuable experience in both the medical and sports sector when creating your bepoke orthotics, handmade and perfectly tailored to you.",
+												"spans": []
+											},
+											"direction": "ltr"
+										}
+									]
+								}
+							],
+							[
+								"name",
+								{
+									"__TYPE__": "FieldContent",
+									"type": "Text",
+									"value": "Hugo Cauvas"
+								}
+							],
+							[
+								"title",
+								{
+									"__TYPE__": "FieldContent",
+									"type": "Text",
+									"value": "Technical Director"
+								}
+							],
+							[
+								"video",
+								{
+									"embed_url": "https://www.youtube.com/watch?v=BetZjgIIPvU",
+									"__TYPE__": "EmbedContent",
+									"type": "video",
+									"version": "1.0",
+									"title": "What's the difference between osteoporosis and osteoarthritis?",
+									"author_name": "My Ankle",
+									"author_url": "https://www.youtube.com/@myankle2843",
+									"provider_name": "YouTube",
+									"provider_url": "https://www.youtube.com/",
+									"thumbnail_url": "https://i.ytimg.com/vi/BetZjgIIPvU/hqdefault.jpg",
+									"thumbnail_width": 480,
+									"thumbnail_height": 360,
+									"html": "<iframe width=\"200\" height=\"113\" src=\"https://www.youtube.com/embed/BetZjgIIPvU?feature=oembed\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share\" referrerpolicy=\"strict-origin-when-cross-origin\" allowfullscreen title=\"What&#39;s the difference between osteoporosis and osteoarthritis?\"></iframe>",
+									"all": {
+										"embed_url": "https://www.youtube.com/watch?v=BetZjgIIPvU",
+										"type": "video",
+										"version": "1.0",
+										"title": "What's the difference between osteoporosis and osteoarthritis?",
+										"author_name": "My Ankle",
+										"author_url": "https://www.youtube.com/@myankle2843",
+										"provider_name": "YouTube",
+										"provider_url": "https://www.youtube.com/",
+										"thumbnail_url": "https://i.ytimg.com/vi/BetZjgIIPvU/hqdefault.jpg",
+										"thumbnail_width": 480,
+										"thumbnail_height": 360,
+										"html": "<iframe width=\"200\" height=\"113\" src=\"https://www.youtube.com/embed/BetZjgIIPvU?feature=oembed\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share\" referrerpolicy=\"strict-origin-when-cross-origin\" allowfullscreen title=\"What&#39;s the difference between osteoporosis and osteoarthritis?\"></iframe>",
+										"height": 113,
+										"width": 200
+									}
+								}
+							]
+						],
+						"key": "09a7ee1b-10a6-4ce0-ad8c-f4213bb72878"
+					},
+					{
+						"__TYPE__": "GroupItemContent",
+						"value": [
+							[
+								"photo",
+								{
+									"__TYPE__": "ImageContent",
+									"provider": "imgix",
+									"url": "https://images.unsplash.com/photo-1499996860823-5214fcc65f8f?crop=entropy&cs=srgb&fm=jpg&ixid=M3wzMzc0NjN8MHwxfHNlYXJjaHwyN3x8cGVvcGxlfGVufDB8fHx8MTc1MTM1NjE1Mnww&ixlib=rb-4.1.0&q=85",
+									"alt": "man wearing black crew-neck shirt",
+									"origin": {
+										"id": "d2MSDujJl2g",
+										"url": "https://images.unsplash.com/photo-1499996860823-5214fcc65f8f?crop=entropy&cs=srgb&fm=jpg&ixid=M3wzMzc0NjN8MHwxfHNlYXJjaHwyN3x8cGVvcGxlfGVufDB8fHx8MTc1MTM1NjE1Mnww&ixlib=rb-4.1.0&q=85",
+										"width": 4516,
+										"height": 5622
+									},
+									"width": 4516,
+									"height": 5622,
+									"edit": {
+										"background": "transparent",
+										"zoom": 1,
+										"crop": {
+											"x": 0,
+											"y": 0
+										}
+									}
+								}
+							],
+							[
+								"bio",
+								{
+									"__TYPE__": "StructuredTextContent",
+									"value": [
+										{
+											"type": "paragraph",
+											"content": {
+												"text": "With a strong cycling background Hugo raced road bikes at a national level for 8 years in the UK and Europe and has supported Tour de France cyclists from the INEOS Grenadiers, Jumbo Visma and Bahrain Victorious cycling teams with Foot Factor orthotics. Hugo’s other great passion, skiing, took him to Val d’Isere, France, where he had the opportunity to work with World Cup ski racers and elite snow sports athletes. He uses his valuable experience in both the medical and sports sector when creating your bepoke orthotics, handmade and perfectly tailored to you.",
+												"spans": []
+											},
+											"direction": "ltr"
+										}
+									]
+								}
+							],
+							[
+								"name",
+								{
+									"__TYPE__": "FieldContent",
+									"type": "Text",
+									"value": "Hugo Cauvas"
+								}
+							],
+							[
+								"title",
+								{
+									"__TYPE__": "FieldContent",
+									"type": "Text",
+									"value": "Technical Director"
+								}
+							]
+						],
+						"key": "9d7e1cd4-9e26-4d51-b409-633193d67821"
+					}
+				],
+				"key": "18415099-f590-4868-a558-41890d69691f"
+			},
+			"heading": {
+				"__TYPE__": "StructuredTextContent",
+				"value": [
+					{
+						"type": "heading2",
+						"content": {
+							"text": "Meet the Team",
+							"spans": []
+						},
+						"direction": "ltr"
+					}
+				]
+			},
+			"lead": {
+				"__TYPE__": "StructuredTextContent",
+				"value": [
+					{
+						"type": "paragraph",
+						"content": {
+							"text": "Malesuada facilisi libero, nam eu. Quis pellentesque tortor a elementum ut blandit sed pellentesque arcu. Malesuada in faucibus risus velit diam.",
+							"spans": []
+						},
+						"direction": "ltr"
+					}
+				]
+			}
+		},
+		"items": []
+	}
+]

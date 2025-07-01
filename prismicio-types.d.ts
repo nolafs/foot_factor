@@ -911,6 +911,8 @@ export type OrthoticsDocument<Lang extends string = string> = prismic.PrismicDoc
 >;
 
 type PageDocumentDataSlicesSlice =
+  | IconNavListSlice
+  | TeamCarouselSlice
   | MediaSectionSlice
   | ListSlice
   | SectionSlice
@@ -2435,6 +2437,83 @@ type HeroSliceVariation = HeroSliceDefault | HeroSliceSimple | HeroSliceHeroMast
 export type HeroSlice = prismic.SharedSlice<'hero', HeroSliceVariation>;
 
 /**
+ * Item in *FeatureTickerList → Default → Primary → Items*
+ */
+export interface IconNavListSliceDefaultPrimaryItemsItem {
+  /**
+   * Icon field in *FeatureTickerList → Default → Primary → Items*
+   *
+   * - **Field Type**: Image
+   * - **Placeholder**: *None*
+   * - **API ID Path**: icon_nav_list.default.primary.items[].icon
+   * - **Documentation**: https://prismic.io/docs/fields/image
+   */
+  icon: prismic.ImageField<never>;
+
+  /**
+   * Label field in *FeatureTickerList → Default → Primary → Items*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: icon_nav_list.default.primary.items[].label
+   * - **Documentation**: https://prismic.io/docs/fields/text
+   */
+  label: prismic.KeyTextField;
+
+  /**
+   * Link field in *FeatureTickerList → Default → Primary → Items*
+   *
+   * - **Field Type**: Link
+   * - **Placeholder**: *None*
+   * - **API ID Path**: icon_nav_list.default.primary.items[].link
+   * - **Documentation**: https://prismic.io/docs/fields/link
+   */
+  link: prismic.LinkField<string, string, unknown, prismic.FieldState, never>;
+}
+
+/**
+ * Primary content in *FeatureTickerList → Default → Primary*
+ */
+export interface IconNavListSliceDefaultPrimary {
+  /**
+   * Items field in *FeatureTickerList → Default → Primary*
+   *
+   * - **Field Type**: Group
+   * - **Placeholder**: *None*
+   * - **API ID Path**: icon_nav_list.default.primary.items[]
+   * - **Documentation**: https://prismic.io/docs/fields/repeatable-group
+   */
+  items: prismic.GroupField<Simplify<IconNavListSliceDefaultPrimaryItemsItem>>;
+}
+
+/**
+ * Default variation for FeatureTickerList Slice
+ *
+ * - **API ID**: `default`
+ * - **Description**: Default horizontal icon navigation list.
+ * - **Documentation**: https://prismic.io/docs/slices
+ */
+export type IconNavListSliceDefault = prismic.SharedSliceVariation<
+  'default',
+  Simplify<IconNavListSliceDefaultPrimary>,
+  never
+>;
+
+/**
+ * Slice variation for *FeatureTickerList*
+ */
+type IconNavListSliceVariation = IconNavListSliceDefault;
+
+/**
+ * FeatureTickerList Shared Slice
+ *
+ * - **API ID**: `icon_nav_list`
+ * - **Description**: *None*
+ * - **Documentation**: https://prismic.io/docs/slices
+ */
+export type IconNavListSlice = prismic.SharedSlice<'icon_nav_list', IconNavListSliceVariation>;
+
+/**
  * Item in *List → Pricing Table → Primary → Services*
  */
 export interface ListSlicePricingTablePrimaryServicesItem {
@@ -3420,6 +3499,123 @@ type SectionSliceVariation =
 export type SectionSlice = prismic.SharedSlice<'section', SectionSliceVariation>;
 
 /**
+ * Item in *TeamCarousel → Default → Primary → Team Members*
+ */
+export interface TeamCarouselSliceDefaultPrimaryMembersItem {
+  /**
+   * Photo field in *TeamCarousel → Default → Primary → Team Members*
+   *
+   * - **Field Type**: Image
+   * - **Placeholder**: *None*
+   * - **API ID Path**: team_carousel.default.primary.members[].photo
+   * - **Documentation**: https://prismic.io/docs/fields/image
+   */
+  photo: prismic.ImageField<never>;
+
+  /**
+   * Video field in *TeamCarousel → Default → Primary → Team Members*
+   *
+   * - **Field Type**: Embed
+   * - **Placeholder**: *None*
+   * - **API ID Path**: team_carousel.default.primary.members[].video
+   * - **Documentation**: https://prismic.io/docs/fields/embed
+   */
+  video: prismic.EmbedField;
+
+  /**
+   * Bio field in *TeamCarousel → Default → Primary → Team Members*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: team_carousel.default.primary.members[].bio
+   * - **Documentation**: https://prismic.io/docs/fields/rich-text
+   */
+  bio: prismic.RichTextField;
+
+  /**
+   * Name field in *TeamCarousel → Default → Primary → Team Members*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: team_carousel.default.primary.members[].name
+   * - **Documentation**: https://prismic.io/docs/fields/text
+   */
+  name: prismic.KeyTextField;
+
+  /**
+   * Title field in *TeamCarousel → Default → Primary → Team Members*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: team_carousel.default.primary.members[].title
+   * - **Documentation**: https://prismic.io/docs/fields/text
+   */
+  title: prismic.KeyTextField;
+}
+
+/**
+ * Primary content in *TeamCarousel → Default → Primary*
+ */
+export interface TeamCarouselSliceDefaultPrimary {
+  /**
+   * Heading field in *TeamCarousel → Default → Primary*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: team_carousel.default.primary.heading
+   * - **Documentation**: https://prismic.io/docs/fields/rich-text
+   */
+  heading: prismic.RichTextField;
+
+  /**
+   * Lead field in *TeamCarousel → Default → Primary*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: team_carousel.default.primary.lead
+   * - **Documentation**: https://prismic.io/docs/fields/rich-text
+   */
+  lead: prismic.RichTextField;
+
+  /**
+   * Team Members field in *TeamCarousel → Default → Primary*
+   *
+   * - **Field Type**: Group
+   * - **Placeholder**: *None*
+   * - **API ID Path**: team_carousel.default.primary.members[]
+   * - **Documentation**: https://prismic.io/docs/fields/repeatable-group
+   */
+  members: prismic.GroupField<Simplify<TeamCarouselSliceDefaultPrimaryMembersItem>>;
+}
+
+/**
+ * Default variation for TeamCarousel Slice
+ *
+ * - **API ID**: `default`
+ * - **Description**: Displays a carousel with each slide featuring a team member's photo, name, title, description, and an optional play button for media.
+ * - **Documentation**: https://prismic.io/docs/slices
+ */
+export type TeamCarouselSliceDefault = prismic.SharedSliceVariation<
+  'default',
+  Simplify<TeamCarouselSliceDefaultPrimary>,
+  never
+>;
+
+/**
+ * Slice variation for *TeamCarousel*
+ */
+type TeamCarouselSliceVariation = TeamCarouselSliceDefault;
+
+/**
+ * TeamCarousel Shared Slice
+ *
+ * - **API ID**: `team_carousel`
+ * - **Description**: *None*
+ * - **Documentation**: https://prismic.io/docs/slices
+ */
+export type TeamCarouselSlice = prismic.SharedSlice<'team_carousel', TeamCarouselSliceVariation>;
+
+/**
  * Item in *Testimonial → Testimonials → Primary → Items*
  */
 export interface TestimonialSliceTestimonialsPrimaryItemsItem {
@@ -3669,6 +3865,11 @@ declare module '@prismicio/client' {
       HeroSliceDefault,
       HeroSliceSimple,
       HeroSliceHeroMaster,
+      IconNavListSlice,
+      IconNavListSliceDefaultPrimaryItemsItem,
+      IconNavListSliceDefaultPrimary,
+      IconNavListSliceVariation,
+      IconNavListSliceDefault,
       ListSlice,
       ListSliceDefaultPrimary,
       ListSlicePricingTablePrimaryServicesItem,
@@ -3712,6 +3913,11 @@ declare module '@prismicio/client' {
       SectionSliceContentWithImageFull,
       SectionSliceContentImageFloatText,
       SectionSliceContentImageFloatRight,
+      TeamCarouselSlice,
+      TeamCarouselSliceDefaultPrimaryMembersItem,
+      TeamCarouselSliceDefaultPrimary,
+      TeamCarouselSliceVariation,
+      TeamCarouselSliceDefault,
       TestimonialSlice,
       TestimonialSliceDefaultPrimary,
       TestimonialSliceTestimonialsPrimaryItemsItem,

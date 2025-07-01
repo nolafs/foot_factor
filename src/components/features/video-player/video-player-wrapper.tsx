@@ -19,6 +19,7 @@ export function VideoPlayerWrapper({ children, handlePlay, handlePause, handleRe
 
   useGSAP(
     () => {
+
       console.log('VideoPlayerWrapper', ref.current);
       if (!ref.current) return;
 
