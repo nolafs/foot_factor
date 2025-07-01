@@ -69,6 +69,10 @@ export const TeamCard = ({id,data, bounds, scrollX}: TeamCardProps & HTMLMotionP
       <div className={'relative flex flex-col rounded-3xl bg-white p-5 transition-shadow duration-700 ease-in-out group hover:z-20 hover:shadow-[0px_4px_25px_0px_rgba(0,0,0,0.10)]'}>
       <motion.div
           layout
+          initial={{
+            width: '420px',
+            maxWidth: '420px',
+          }}
           className={'flex flex-col max-h-[940px]'}
           animate={{
             width: isExpanded ? '904px' : '420px',
@@ -95,6 +99,9 @@ export const TeamCard = ({id,data, bounds, scrollX}: TeamCardProps & HTMLMotionP
           <div className={'relative overflow-hidden'}>
             <motion.div
                 className={'prose prose-lg max-w-none  min-w-[400px] overflow-hidden'}
+                initial={{
+                  opacity: 0
+                }}
                 animate={{
                   opacity: isExpanded ? 100: 0
                 }}
