@@ -10,39 +10,6 @@
 						"__TYPE__": "GroupItemContent",
 						"value": [
 							[
-								"icon",
-								{
-									"origin": {
-										"id": "main",
-										"url": "https://images.unsplash.com/photo-1499951360447-b19be8fe80f5",
-										"width": 5848,
-										"height": 3899
-									},
-									"url": "https://images.unsplash.com/photo-1499951360447-b19be8fe80f5",
-									"width": 5848,
-									"height": 3899,
-									"edit": {
-										"zoom": 1,
-										"crop": {
-											"x": 0,
-											"y": 0
-										},
-										"background": "transparent"
-									},
-									"alt": "our",
-									"credits": null,
-									"__TYPE__": "ImageContent"
-								}
-							],
-							[
-								"label",
-								{
-									"__TYPE__": "FieldContent",
-									"value": "almost",
-									"type": "Text"
-								}
-							],
-							[
 								"link",
 								{
 									"key": "6a536266-20f5-4aa0-bb66-67b104102772",
@@ -52,10 +19,59 @@
 										"url": "https://slicemachine.dev"
 									}
 								}
+							],
+							[
+								"label",
+								{
+									"__TYPE__": "FieldContent",
+									"type": "Text",
+									"value": "Podiatry Services"
+								}
 							]
 						]
+					},
+					{
+						"__TYPE__": "GroupItemContent",
+						"value": [
+							[
+								"label",
+								{
+									"__TYPE__": "FieldContent",
+									"type": "Text",
+									"value": "Treatment & Care"
+								}
+							]
+						]
+					},
+					{
+						"__TYPE__": "GroupItemContent",
+						"value": [
+							[
+								"label",
+								{
+									"__TYPE__": "FieldContent",
+									"type": "Text",
+									"value": "Orthotics & Sports"
+								}
+							]
+						]
+					},
+					{
+						"__TYPE__": "GroupItemContent",
+						"value": [
+							[
+								"label",
+								{
+									"__TYPE__": "FieldContent",
+									"type": "Text",
+									"value": "Orthotics & Sports"
+								}
+							]
+						],
+						"key": "7abc46c7-97c9-4072-a099-a9d7ca9fec27"
 					}
-				]
+				],
+				"key": "9b46e061-7aef-4e90-9d29-b7723f4b93b6"
 			}
 		},
 		"items": []

@@ -1,15 +1,104 @@
-import React from 'react';
+'use client';
+import React, {useRef, useMemo, useEffect, useState} from 'react';
+
+import {
+  motion,
+  useAnimationFrame,
+  useMotionValue,
+  useScroll,
+  useSpring,
+  useTransform,
+  useVelocity
+} from 'framer-motion';
+import {wrap} from '@motionone/utils';
 import {IconNavListSliceDefaultPrimaryItemsItem} from '@/prismic-types';
 
 interface FeatureTickerListProps {
-    data: IconNavListSliceDefaultPrimaryItemsItem[]
+  data: IconNavListSliceDefaultPrimaryItemsItem[],
+  baseVelocity?: number;
 }
 
-export const FeatureTickerList = ({}: FeatureTickerListProps) => {
+export const FeatureTickerList = ({data, baseVelocity = 10}: FeatureTickerListProps) => {
+  const containerRef = useRef<HTMLDivElement>(null);
+  const contentRef = useRef<HTMLDivElement>(null);
+  const [contentWidth, setContentWidth] = useState<number>(0);
+
+  const baseX = useMotionValue(0);
+  const {scrollY} = useScroll();
+  const directionFactor = useRef<number>(1);
+  const scrollVelocity = useVelocity(scrollY);
+  const smoothVelocity = useSpring(scrollVelocity, {
+    damping: 50,
+    stiffness: 400
+  });
+  const velocityFactor = useTransform(smoothVelocity, [0, 1000], [0, 5], {
+    clamp: false
+  });
+
+  // Measure the actual content width
+  useEffect(() => {
+    const measureContent = () => {
+      if (contentRef.current && containerRef.current) {
+        // Get the width of just the original items (first half)
+        const singleSetWidth = contentRef.current.scrollWidth / 2;
+        const containerWidth = containerRef.current.offsetWidth;
+        const widthPercentage = (singleSetWidth / containerWidth) * 100;
+        setContentWidth(widthPercentage);
+      }
+    };
+
+    measureContent();
+
+    const resizeObserver = new ResizeObserver(measureContent);
+    if (containerRef.current) {
+      resizeObserver.observe(containerRef.current);
+    }
+
+    return () => resizeObserver.disconnect();
+  }, [data]);
+
+  // Wrap based on actual measured content width
+  const x = useTransform(baseX, (v) => contentWidth > 0 ? `${wrap(0, -contentWidth, v)}%` : `${v}%`);
+
+  useAnimationFrame((t, delta) => {
+    let moveBy = directionFactor.current * baseVelocity * (delta / 1000);
+
+    if (velocityFactor.get() < 0) {
+      directionFactor.current = -1;
+    } else if (velocityFactor.get() > 0) {
+      directionFactor.current = 1;
+    }
+
+    moveBy += directionFactor.current * moveBy * velocityFactor.get();
+
+    baseX.set(baseX.get() + moveBy);
+  });
+
+  // Create repeated data for seamless loop - just double it
+  const repeatedData = useMemo(() => {
+    return [...data, ...data];
+  }, [data]);
 
   return (
-      <div>   {/* Your code here */} </div>
+      <div ref={containerRef} className={'w-full overflow-hidden py-16 md:py-24 lg:py-32'}>
+        <motion.div
+            ref={contentRef}
+            className={'flex no-white-space flex-nowrap gap-36'}
+            style={{x}}>
+          {repeatedData.map((item, idx) => (
+              <FeatureTickerListItem key={idx} item={item}/>
+          ))}
+        </motion.div>
+      </div>
   )
+}
+
+const FeatureTickerListItem = ({item}: { item: IconNavListSliceDefaultPrimaryItemsItem }) => {
+  return (
+      <div className={'px-16 py-8 whitespace-nowrap border border-primary rounded-full text-4xl text-secondary uppercase flex space-x-5'}>
+        {item.label}
+      </div>
+  );
 }
 
 export default FeatureTickerList;
