@@ -6,6 +6,7 @@ import {cn} from '@/lib/utils';
 import {scrollLeftVariants, scrollRightVariants} from '@/utils/variants';
 import {PrismicNextImage} from '@prismicio/next';
 import {PrismicRichText} from '@prismicio/react';
+import {useTextAnimation} from '@/lib/hooks/use-text-animation';
 
 interface TimelineListItemProps {
     data: TimelineSliceVerticalWithImagesPrimaryEventsItem
@@ -13,6 +14,9 @@ interface TimelineListItemProps {
 }
 
 export const TimelineListItem = ({data, isEven = false}: TimelineListItemProps) => {
+
+  const {containerRef, triggerRef, scheduleRefresh} = useTextAnimation({enabled: true, refreshDelay: 200});
+
   const lineControl = useAnimation();
   const handleAnimationComplete = () => {
      lineControl.start({
@@ -23,19 +27,21 @@ export const TimelineListItem = ({data, isEven = false}: TimelineListItemProps) 
   }
 
   return (
-      <li className="relative mb-10 grid w-full grid-cols-1 pl-[45px] last:mb-0 md:grid-cols-2 md:pl-0 lg:mb-[68px]">
+      <li  className="relative mb-10 grid w-full grid-cols-1 pl-[45px] last:mb-0 md:grid-cols-2 md:pl-0 lg:mb-[68px]">
 
         {!isEven && (<div></div>)}
           <motion.div
-              className={cn('md:mx-7.5', !isEven && 'md:order-last xl:ml-auto', isEven && 'md:text-right')}
+              className={cn('md:mx-7.5', !isEven && 'md:order-last', isEven && 'md:text-right')}
               initial="offscreen"
               whileInView="onscreen"
               viewport={{once: true, amount: 0.7}}
               variants={isEven ? scrollLeftVariants : scrollRightVariants}
+              onAnimationStart={() => {
+                scheduleRefresh();}}
               onAnimationComplete={handleAnimationComplete}
           >
 
-              <div className={'flex flex-col items-start gap-4 md:items-end px-10'}>
+              <div ref={triggerRef} className={cn('flex flex-col items-start gap-4  ', isEven ? 'md:pr-10 md:items-end' : 'md:pl-10 md:items-start')}>
                 {data.image && (
                     <figure className={'aspect-w-16 aspect-h-9 w-full overflow-hidden rounded-2xl'}>
                       <PrismicNextImage
@@ -59,7 +65,7 @@ export const TimelineListItem = ({data, isEven = false}: TimelineListItemProps) 
                   <div className={'text-5xl font-heading text-accent'}>
                     {data.year}
                   </div>
-                  <div className={'text-2xl'}>
+                  <div className={'text-2xl'} ref={containerRef}>
                     <PrismicRichText field={data.description} />
                   </div>
                 </div>
