@@ -2534,6 +2534,47 @@ export interface ListSlicePricingTablePrimaryServicesItem {
  */
 export interface ListSliceBentoPrimaryItemsItem {
   /**
+   * Columns field in *List → Bento → Primary → Items*
+   *
+   * - **Field Type**: Select
+   * - **Placeholder**: *None*
+   * - **API ID Path**: list.bento.primary.items[].columns
+   * - **Documentation**: https://prismic.io/docs/fields/select
+   */
+  columns: prismic.SelectField<'1' | '2' | '3' | '4' | '5' | '6'>;
+
+  /**
+   * Card Height field in *List → Bento → Primary → Items*
+   *
+   * - **Field Type**: Select
+   * - **Placeholder**: *None*
+   * - **Default Value**: small
+   * - **API ID Path**: list.bento.primary.items[].card_height
+   * - **Documentation**: https://prismic.io/docs/fields/select
+   */
+  card_height: prismic.SelectField<'small' | 'large', 'filled'>;
+
+  /**
+   * Card type field in *List → Bento → Primary → Items*
+   *
+   * - **Field Type**: Select
+   * - **Placeholder**: *None*
+   * - **API ID Path**: list.bento.primary.items[].card_type
+   * - **Documentation**: https://prismic.io/docs/fields/select
+   */
+  card_type: prismic.SelectField<'1' | '2'>;
+
+  /**
+   * Color field in *List → Bento → Primary → Items*
+   *
+   * - **Field Type**: Color
+   * - **Placeholder**: *None*
+   * - **API ID Path**: list.bento.primary.items[].color
+   * - **Documentation**: https://prismic.io/docs/fields/color
+   */
+  color: prismic.ColorField;
+
+  /**
    * Image field in *List → Bento → Primary → Items*
    *
    * - **Field Type**: Image
@@ -2542,6 +2583,16 @@ export interface ListSliceBentoPrimaryItemsItem {
    * - **Documentation**: https://prismic.io/docs/fields/image
    */
   image: prismic.ImageField<never>;
+
+  /**
+   * Image Position field in *List → Bento → Primary → Items*
+   *
+   * - **Field Type**: Select
+   * - **Placeholder**: *None*
+   * - **API ID Path**: list.bento.primary.items[].image_position
+   * - **Documentation**: https://prismic.io/docs/fields/select
+   */
+  image_position: prismic.SelectField<'top' | 'bottom'>;
 
   /**
    * Heading field in *List → Bento → Primary → Items*

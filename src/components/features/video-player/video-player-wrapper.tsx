@@ -4,7 +4,10 @@ import gsap from 'gsap';
 import { type ReactNode, useRef, useState } from 'react';
 import ScrollTrigger from 'gsap/ScrollTrigger';
 
-gsap.registerPlugin(ScrollTrigger);
+
+if (typeof window !== "undefined") {
+  gsap.registerPlugin(ScrollTrigger);
+}
 
 export interface VideoProps {
   children: ReactNode;
@@ -51,6 +54,14 @@ export function VideoPlayerWrapper({ children, handlePlay, handlePause, handleRe
           },
         },
       );
+
+      return () => {
+        if (ref.current) {
+
+          gsap.killTweensOf('.video');
+          ScrollTrigger.getById(ref.current.id)?.kill();
+        }
+      }
     },
     { scope: ref },
   );

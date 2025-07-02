@@ -124,12 +124,68 @@
             "label": "Items",
             "repeat": true,
             "fields": {
+              "columns": {
+                "type": "Select",
+                "config": {
+                  "label": "Columns",
+                  "placeholder": "",
+                  "options": [
+                    "1",
+                    "2",
+                    "3",
+                    "4",
+                    "5",
+                    "6"
+                  ]
+                }
+              },
+              "card_height": {
+                "type": "Select",
+                "config": {
+                  "label": "Card Height",
+                  "placeholder": "",
+                  "options": [
+                    "small",
+                    "large"
+                  ],
+                  "default_value": "small"
+                }
+              },
+              "card_type": {
+                "type": "Select",
+                "config": {
+                  "label": "Card type",
+                  "placeholder": "",
+                  "options": [
+                    "1",
+                    "2"
+                  ]
+                }
+              },
+              "color": {
+                "type": "Color",
+                "config": {
+                  "label": "Color",
+                  "placeholder": ""
+                }
+              },
               "image": {
                 "type": "Image",
                 "config": {
                   "label": "Image",
                   "constraint": {},
                   "thumbnails": []
+                }
+              },
+              "image_position": {
+                "type": "Select",
+                "config": {
+                  "label": "Image Position",
+                  "placeholder": "",
+                  "options": [
+                    "top",
+                    "bottom"
+                  ]
                 }
               },
               "heading": {

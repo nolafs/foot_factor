@@ -5,7 +5,7 @@ import {Heading, Lead} from '@/components/ui/text';
 import cn from 'clsx';
 import {Container} from '@/components/ui/container';
 import BlogArticle from '@/slices/Megamenu/component/blog-article';
-import {PrismicNextLink} from '@prismicio/next';
+import {PrismicNextImage, PrismicNextLink} from '@prismicio/next';
 import {buttonVariants} from '@/components/ui/button';
 import {CircleArrowRight} from 'lucide-react';
 import ServiceCard from '@/components/features/service-card/service-card';
@@ -19,6 +19,66 @@ export type ListProps = SliceComponentProps<Content.ListSlice>;
  * Component for "List" Slices.
  */
 const List: FC<ListProps> = async({ slice }) => {
+
+
+    if (slice.variation === 'bento') {
+      return <section data-slice-type={slice.slice_type} data-slice-variation={slice.variation}>
+        <Container className={'lg:pt-28 pt-16 md:pt-24 text-center'}>
+          <Heading as="h2">
+            {slice.primary.heading}
+          </Heading>
+          <Lead className="mt-4 max-w-3xl mx-auto">
+            {slice.primary.lead}
+          </Lead>
+        </Container>
+        <Container className={'mt-5 lg:mt-16'}>
+          {slice.primary.items.length > 0 && (
+              <div className="mt-10 grid grid-cols-1 gap-4 sm:mt-16 lg:grid-cols-6  grid-flow-row"
+                   style={{gridAutoRows: 'min-content'}}>
+                {slice.primary.items.map((item, idx) => (
+                <div key={'bento-'+idx} className={cn("relative",
+                    item.columns === '1' && 'lg:col-span-1',
+                    item.columns === '2' && 'lg:col-span-2',
+                    item.columns === '3' && 'lg:col-span-3',
+                    item.columns === '4' && 'lg:col-span-4',
+                    item.columns === '5' && 'lg:col-span-5',
+                    item.columns === '6' && 'lg:col-span-6')}>
+                  <div className="absolute inset-0 rounded-lg bg-white max-lg:rounded-4xl lg:rounded-4xl overflow-hidden"/>
+                  <div className={cn("relative flex  flex-col overflow-hidden rounded-2xl",
+                      item.card_height !== 'large' && 'h-[30vh]',
+                      item.card_height === 'large' && 'h-[50vh]')}
+                      style={{backgroundColor: item.color ?? 'transparent'}}
+                  >
+
+
+                    { item.card_type === '1' && (<>
+                    <PrismicNextImage field={item.image} className={cn('w-full h-full object-cover')}/>
+                    <div className="absolute bottom-0 p-10 pt-4">
+                      <h3 className="text-white text-3xl">{item.heading}</h3>
+                      <p className="mt-2 max-w-lg text-lg text-white/90">
+                        {item.lead}
+                      </p>
+                    </div>
+                    </>)}
+
+                    {item.card_type === '2' && (
+                    <div className="p-10 text-center">
+                      <h3 className="text-3xl text-secondary">{item.heading}</h3>
+                      <p className="mt-2 max-w-lg text-sm/6 text-gray-600">
+                        {item.lead}
+                      </p>
+                    </div>
+                    )}
+                  </div>
+                </div>
+              ))}
+              </div>
+
+          )}
+      </Container>
+
+      </section>
+    }
 
 
     if (slice.variation === 'pricingTable') {
