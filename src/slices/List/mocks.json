@@ -57,11 +57,97 @@
 							[
 								"service",
 								{
-									"__TYPE__": "LinkContent",
 									"key": "2eed5149-29be-42e3-9920-ce673e402fcc",
+									"__TYPE__": "LinkContent",
 									"value": {
 										"__TYPE__": "DocumentLink",
 										"id": "mock_document_id"
+									}
+								}
+							]
+						]
+					}
+				]
+			}
+		},
+		"items": [
+			{
+				"__TYPE__": "GroupItemContent",
+				"value": []
+			}
+		]
+	},
+	{
+		"__TYPE__": "SharedSliceContent",
+		"variation": "bento",
+		"primary": {
+			"heading": {
+				"__TYPE__": "FieldContent",
+				"value": "ability",
+				"type": "Text"
+			},
+			"lead": {
+				"__TYPE__": "FieldContent",
+				"value": "wore",
+				"type": "Text"
+			},
+			"items": {
+				"__TYPE__": "GroupContentType",
+				"value": [
+					{
+						"__TYPE__": "GroupItemContent",
+						"value": [
+							[
+								"image",
+								{
+									"origin": {
+										"id": "main",
+										"url": "https://images.unsplash.com/photo-1551739440-5dd934d3a94a",
+										"width": 3456,
+										"height": 4320
+									},
+									"url": "https://images.unsplash.com/photo-1551739440-5dd934d3a94a",
+									"width": 3456,
+									"height": 4320,
+									"edit": {
+										"zoom": 1,
+										"crop": {
+											"x": 0,
+											"y": 0
+										},
+										"background": "transparent"
+									},
+									"alt": "everyone",
+									"credits": null,
+									"__TYPE__": "ImageContent",
+									"thumbnails": {}
+								}
+							],
+							[
+								"heading",
+								{
+									"__TYPE__": "FieldContent",
+									"value": "slowly",
+									"type": "Text"
+								}
+							],
+							[
+								"lead",
+								{
+									"__TYPE__": "FieldContent",
+									"value": "pen",
+									"type": "Text"
+								}
+							],
+							[
+								"link",
+								{
+									"key": "5810e81a-541f-41c3-838c-64d241f61389",
+									"__TYPE__": "LinkContent",
+									"value": {
+										"__TYPE__": "ExternalLink",
+										"url": "https://slicemachine.dev",
+										"text": "roar"
 									}
 								}
 							]

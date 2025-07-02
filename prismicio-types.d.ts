@@ -2530,6 +2530,51 @@ export interface ListSlicePricingTablePrimaryServicesItem {
 }
 
 /**
+ * Item in *List → Bento → Primary → Items*
+ */
+export interface ListSliceBentoPrimaryItemsItem {
+  /**
+   * Image field in *List → Bento → Primary → Items*
+   *
+   * - **Field Type**: Image
+   * - **Placeholder**: *None*
+   * - **API ID Path**: list.bento.primary.items[].image
+   * - **Documentation**: https://prismic.io/docs/fields/image
+   */
+  image: prismic.ImageField<never>;
+
+  /**
+   * Heading field in *List → Bento → Primary → Items*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: list.bento.primary.items[].heading
+   * - **Documentation**: https://prismic.io/docs/fields/text
+   */
+  heading: prismic.KeyTextField;
+
+  /**
+   * Lead field in *List → Bento → Primary → Items*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: list.bento.primary.items[].lead
+   * - **Documentation**: https://prismic.io/docs/fields/text
+   */
+  lead: prismic.KeyTextField;
+
+  /**
+   * Link field in *List → Bento → Primary → Items*
+   *
+   * - **Field Type**: Link
+   * - **Placeholder**: *None*
+   * - **API ID Path**: list.bento.primary.items[].link
+   * - **Documentation**: https://prismic.io/docs/fields/link
+   */
+  link: prismic.LinkField<string, string, unknown, prismic.FieldState, never>;
+}
+
+/**
  * Primary content in *List → Blog → Primary*
  */
 export interface ListSliceDefaultPrimary {
@@ -2632,9 +2677,53 @@ export type ListSlicePricingTable = prismic.SharedSliceVariation<
 >;
 
 /**
+ * Primary content in *List → Bento → Primary*
+ */
+export interface ListSliceBentoPrimary {
+  /**
+   * Heading field in *List → Bento → Primary*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: list.bento.primary.heading
+   * - **Documentation**: https://prismic.io/docs/fields/text
+   */
+  heading: prismic.KeyTextField;
+
+  /**
+   * Lead field in *List → Bento → Primary*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: list.bento.primary.lead
+   * - **Documentation**: https://prismic.io/docs/fields/text
+   */
+  lead: prismic.KeyTextField;
+
+  /**
+   * Items field in *List → Bento → Primary*
+   *
+   * - **Field Type**: Group
+   * - **Placeholder**: *None*
+   * - **API ID Path**: list.bento.primary.items[]
+   * - **Documentation**: https://prismic.io/docs/fields/repeatable-group
+   */
+  items: prismic.GroupField<Simplify<ListSliceBentoPrimaryItemsItem>>;
+}
+
+/**
+ * Bento variation for List Slice
+ *
+ * - **API ID**: `bento`
+ * - **Description**: Default
+ * - **Documentation**: https://prismic.io/docs/slices
+ */
+export type ListSliceBento = prismic.SharedSliceVariation<'bento', Simplify<ListSliceBentoPrimary>, never>;
+
+/**
  * Slice variation for *List*
  */
-type ListSliceVariation = ListSliceDefault | ListSlicePricingTable;
+type ListSliceVariation = ListSliceDefault | ListSlicePricingTable | ListSliceBento;
 
 /**
  * List Shared Slice
@@ -3972,9 +4061,12 @@ declare module '@prismicio/client' {
       ListSliceDefaultPrimary,
       ListSlicePricingTablePrimaryServicesItem,
       ListSlicePricingTablePrimary,
+      ListSliceBentoPrimaryItemsItem,
+      ListSliceBentoPrimary,
       ListSliceVariation,
       ListSliceDefault,
       ListSlicePricingTable,
+      ListSliceBento,
       MediaSectionSlice,
       MediaSectionSliceDefaultPrimary,
       MediaSectionSliceFullWidthImagePrimary,
