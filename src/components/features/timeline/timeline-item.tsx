@@ -19,7 +19,7 @@ export const TimelineListItem = ({data, isEven = false}: TimelineListItemProps) 
 
   const lineControl = useAnimation();
   const handleAnimationComplete = () => {
-     lineControl.start({
+    void lineControl.start({
        width: "14px",
        opacity: 1,
        transition: {duration: 0.5, ease: 'backOut'}
