@@ -78,10 +78,11 @@ export const FeatureTickerList = ({data, baseVelocity = 10}: FeatureTickerListPr
 
   // Create repeated data for seamless loop - just double it
   const repeatedData = useMemo(() => {
-    return [...data, ...data];
+    return [...data, ...data, ...data, ...data]; // Repeat 4 times for seamless effect
   }, [data]);
 
   return (
+      <>
       <div ref={containerRef} className={'w-full overflow-hidden py-16 md:py-24 lg:py-32'}>
         <motion.div
             ref={contentRef}
@@ -92,6 +93,7 @@ export const FeatureTickerList = ({data, baseVelocity = 10}: FeatureTickerListPr
           ))}
         </motion.div>
       </div>
+      </>
   )
 }
 
@@ -100,10 +102,10 @@ const FeatureTickerListItem = ({item , style}: { item: IconNavListSliceDefaultPr
   console.log('FeatureTickerListItem', item, style);
 
   return (
-      <div className={cn('px-16 py-8 whitespace-nowrap border border-primary rounded-full text-4xl text-secondary italic uppercase flex space-x-5',
+      <div className={cn('border w-fit flex-shrink-0 border-primary rounded-full text-4xl text-secondary italic uppercase flex items-center justify-center',
           style === 0 ? 'bg-primary text-white' : 'text-primary border-accent',
           )}>
-        <PrismicNextImage field={item.icon}  /> {item.label}
+        <div className={'flex whitespace-nowrap flex-nowrap gap-4 px-16 py-8'}><PrismicNextImage field={item.icon} className={'h-10 w-10'}/> <span>{item.label}</span></div>
       </div>
   );
 }
