@@ -22,12 +22,12 @@ export const TimelineListItem = ({data, isEven = false}: TimelineListItemProps) 
      lineControl.start({
        width: "14px",
        opacity: 1,
-       transition: {duration: 0.5}
+       transition: {duration: 0.5, ease: 'backOut'}
      });
   }
 
   return (
-      <li  className="relative mb-10 grid w-full grid-cols-1 pl-[45px] last:mb-0 md:grid-cols-2 md:pl-0 lg:mb-[68px]">
+      <li  className="relative mb-10 grid w-full grid-cols-1 pl-10 last:mb-0 md:grid-cols-2 md:pl-0 lg:mb-[68px]">
 
         {!isEven && (<div></div>)}
           <motion.div
@@ -57,15 +57,15 @@ export const TimelineListItem = ({data, isEven = false}: TimelineListItemProps) 
                       />
                     </figure>
                 )}
-                <div className={cn('relative flex gap-5 mt-5', isEven && 'flex-row-reverse')}>
+                <div className={cn('relative flex flex-col md:flex-row gap-5 mt-5', isEven && 'md:flex-row-reverse')}>
 
                   <motion.div initial={{opacity: 0, width: 0}} animate={lineControl}
-                      className={cn("absolute z-10 top-5 h-[2px] w-[14px] bg-secondary/50", isEven ? '-right-10 translate-x-1/2' : '-left-10 -translate-x-1/2' )}/>
+                      className={cn("absolute z-10 top-5 h-[2px] w-[14px] bg-secondary/50 -left-10 -translate-x-1/2", isEven ? 'md:-right-10 md:translate-x-1/2' : 'md:-left-10 md:-translate-x-1/2' )}/>
 
                   <div className={'text-5xl font-heading text-accent'}>
                     {data.year}
                   </div>
-                  <div className={'text-2xl'} ref={containerRef}>
+                  <div className={'text-xl md:text-2xl'} ref={containerRef}>
                     <PrismicRichText field={data.description} />
                   </div>
                 </div>
