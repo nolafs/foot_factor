@@ -1,0 +1,72 @@
+'use client'
+import React from 'react';
+import {TimelineSliceVerticalWithImagesPrimaryEventsItem} from '@/prismic-types';
+import {motion, useAnimation} from 'framer-motion'
+import {cn} from '@/lib/utils';
+import {scrollLeftVariants, scrollRightVariants} from '@/utils/variants';
+import {PrismicNextImage} from '@prismicio/next';
+import {PrismicRichText} from '@prismicio/react';
+
+interface TimelineListItemProps {
+    data: TimelineSliceVerticalWithImagesPrimaryEventsItem
+    isEven?: boolean;
+}
+
+export const TimelineListItem = ({data, isEven = false}: TimelineListItemProps) => {
+  const lineControl = useAnimation();
+  const handleAnimationComplete = () => {
+     lineControl.start({
+       width: "14px",
+       opacity: 1,
+       transition: {duration: 0.5}
+     });
+  }
+
+  return (
+      <li className="relative mb-10 grid w-full grid-cols-1 pl-[45px] last:mb-0 md:grid-cols-2 md:pl-0 lg:mb-[68px]">
+
+        {!isEven && (<div></div>)}
+          <motion.div
+              className={cn('md:mx-7.5', !isEven && 'md:order-last xl:ml-auto', isEven && 'md:text-right')}
+              initial="offscreen"
+              whileInView="onscreen"
+              viewport={{once: true, amount: 0.7}}
+              variants={isEven ? scrollLeftVariants : scrollRightVariants}
+              onAnimationComplete={handleAnimationComplete}
+          >
+
+              <div className={'flex flex-col items-start gap-4 md:items-end px-10'}>
+                {data.image && (
+                    <figure className={'aspect-w-16 aspect-h-9 w-full overflow-hidden rounded-2xl'}>
+                      <PrismicNextImage
+                          field={data.image}
+                          width={662}
+                          height={422}
+                          fallbackAlt=""
+                          imgixParams={{
+                            fit: 'crop',
+                            fm: 'webp',
+                          }}
+                          className="h-full w-full object-cover"
+                      />
+                    </figure>
+                )}
+                <div className={cn('relative flex gap-5 mt-5', isEven && 'flex-row-reverse')}>
+
+                  <motion.div initial={{opacity: 0, width: 0}} animate={lineControl}
+                      className={cn("absolute z-10 top-5 h-[2px] w-[14px] bg-secondary/50", isEven ? '-right-10 translate-x-1/2' : '-left-10 -translate-x-1/2' )}/>
+
+                  <div className={'text-5xl font-heading text-accent'}>
+                    {data.year}
+                  </div>
+                  <div className={'text-2xl'}>
+                    <PrismicRichText field={data.description} />
+                  </div>
+                </div>
+              </div>
+          </motion.div>
+      </li>
+  )
+}
+
+export default TimelineListItem;

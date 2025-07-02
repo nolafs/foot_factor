@@ -911,6 +911,7 @@ export type OrthoticsDocument<Lang extends string = string> = prismic.PrismicDoc
 >;
 
 type PageDocumentDataSlicesSlice =
+  | TimelineSlice
   | IconNavListSlice
   | TeamCarouselSlice
   | MediaSectionSlice
@@ -3560,22 +3561,22 @@ export interface TeamCarouselSliceDefaultPrimary {
   /**
    * Heading field in *TeamCarousel → Default → Primary*
    *
-   * - **Field Type**: Rich Text
+   * - **Field Type**: Text
    * - **Placeholder**: *None*
    * - **API ID Path**: team_carousel.default.primary.heading
-   * - **Documentation**: https://prismic.io/docs/fields/rich-text
+   * - **Documentation**: https://prismic.io/docs/fields/text
    */
-  heading: prismic.RichTextField;
+  heading: prismic.KeyTextField;
 
   /**
    * Lead field in *TeamCarousel → Default → Primary*
    *
-   * - **Field Type**: Rich Text
+   * - **Field Type**: Text
    * - **Placeholder**: *None*
    * - **API ID Path**: team_carousel.default.primary.lead
-   * - **Documentation**: https://prismic.io/docs/fields/rich-text
+   * - **Documentation**: https://prismic.io/docs/fields/text
    */
-  lead: prismic.RichTextField;
+  lead: prismic.KeyTextField;
 
   /**
    * Team Members field in *TeamCarousel → Default → Primary*
@@ -3770,6 +3771,103 @@ type TestimonialSliceVariation = TestimonialSliceDefault | TestimonialSliceTesti
  */
 export type TestimonialSlice = prismic.SharedSlice<'testimonial', TestimonialSliceVariation>;
 
+/**
+ * Item in *Timeline → default → Primary → Events*
+ */
+export interface TimelineSliceVerticalWithImagesPrimaryEventsItem {
+  /**
+   * Image field in *Timeline → default → Primary → Events*
+   *
+   * - **Field Type**: Image
+   * - **Placeholder**: *None*
+   * - **API ID Path**: timeline.vertical_with_images.primary.events[].image
+   * - **Documentation**: https://prismic.io/docs/fields/image
+   */
+  image: prismic.ImageField<never>;
+
+  /**
+   * Year field in *Timeline → default → Primary → Events*
+   *
+   * - **Field Type**: Number
+   * - **Placeholder**: *None*
+   * - **API ID Path**: timeline.vertical_with_images.primary.events[].year
+   * - **Documentation**: https://prismic.io/docs/fields/number
+   */
+  year: prismic.NumberField;
+
+  /**
+   * Description field in *Timeline → default → Primary → Events*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: timeline.vertical_with_images.primary.events[].description
+   * - **Documentation**: https://prismic.io/docs/fields/rich-text
+   */
+  description: prismic.RichTextField;
+}
+
+/**
+ * Primary content in *Timeline → default → Primary*
+ */
+export interface TimelineSliceVerticalWithImagesPrimary {
+  /**
+   * Heading field in *Timeline → default → Primary*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: timeline.vertical_with_images.primary.heading
+   * - **Documentation**: https://prismic.io/docs/fields/text
+   */
+  heading: prismic.KeyTextField;
+
+  /**
+   * Lead field in *Timeline → default → Primary*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: timeline.vertical_with_images.primary.lead
+   * - **Documentation**: https://prismic.io/docs/fields/text
+   */
+  lead: prismic.KeyTextField;
+
+  /**
+   * Events field in *Timeline → default → Primary*
+   *
+   * - **Field Type**: Group
+   * - **Placeholder**: *None*
+   * - **API ID Path**: timeline.vertical_with_images.primary.events[]
+   * - **Documentation**: https://prismic.io/docs/fields/repeatable-group
+   */
+  events: prismic.GroupField<Simplify<TimelineSliceVerticalWithImagesPrimaryEventsItem>>;
+}
+
+/**
+ * default variation for Timeline Slice
+ *
+ * - **API ID**: `vertical_with_images`
+ * - **Description**: A vertical timeline with alternating events, each containing an image, year, and description. Title and optional introduction at the top.
+ * - **Documentation**: https://prismic.io/docs/slices
+ */
+export type TimelineSliceVerticalWithImages = prismic.SharedSliceVariation<
+  'vertical_with_images',
+  Simplify<TimelineSliceVerticalWithImagesPrimary>,
+  never
+>;
+
+/**
+ * Slice variation for *Timeline*
+ */
+type TimelineSliceVariation = TimelineSliceVerticalWithImages;
+
+/**
+ * Timeline Shared Slice
+ *
+ * - **API ID**: `timeline`
+ * - **Description**: *None*
+ * - **Documentation**: https://prismic.io/docs/slices
+ */
+export type TimelineSlice = prismic.SharedSlice<'timeline', TimelineSliceVariation>;
+
 declare module '@prismicio/client' {
   interface CreateClient {
     (repositoryNameOrEndpoint: string, options?: prismic.ClientConfig): prismic.Client<AllDocumentTypes>;
@@ -3925,6 +4023,11 @@ declare module '@prismicio/client' {
       TestimonialSliceVariation,
       TestimonialSliceDefault,
       TestimonialSliceTestimonials,
+      TimelineSlice,
+      TimelineSliceVerticalWithImagesPrimaryEventsItem,
+      TimelineSliceVerticalWithImagesPrimary,
+      TimelineSliceVariation,
+      TimelineSliceVerticalWithImages,
     };
   }
 }

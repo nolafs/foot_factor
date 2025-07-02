@@ -72,7 +72,7 @@ export default function NavigationMenuSub({ navigation, settings }: NavigationSu
                      staggerChildren: 0.05,
                    }}
     >
-      <div className={'mx-auto flex justify-center w-full max-w-[1792px] px-5'}>
+      <div className={'mx-auto flex justify-center w-full max-w-[1792px] px-0 md:px-5'}>
       <div className="relative w-full bg-white md:rounded-lg  border border-gray-200 border-opacity-40 px-6 py-4">
         <div className="flex w-full items-center justify-between">
 

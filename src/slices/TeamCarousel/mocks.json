@@ -90,7 +90,6 @@
 							[
 								"photo",
 								{
-									"__TYPE__": "ImageContent",
 									"provider": "imgix",
 									"url": "https://images.unsplash.com/photo-1494790108377-be9c29b29330?crop=entropy&cs=srgb&fm=jpg&ixid=M3wzMzc0NjN8MHwxfHNlYXJjaHwyfHxwZW9wbGV8ZW58MHx8fHwxNzUxMzU2MTUyfDA&ixlib=rb-4.1.0&q=85",
 									"alt": "closeup photography of woman smiling",
@@ -109,7 +108,9 @@
 											"x": 0,
 											"y": 0
 										}
-									}
+									},
+									"credits": null,
+									"__TYPE__": "ImageContent"
 								}
 							],
 							[
@@ -148,7 +149,6 @@
 								"video",
 								{
 									"embed_url": "https://www.youtube.com/watch?v=BetZjgIIPvU",
-									"__TYPE__": "EmbedContent",
 									"type": "video",
 									"version": "1.0",
 									"title": "What's the difference between osteoporosis and osteoarthritis?",
@@ -160,6 +160,7 @@
 									"thumbnail_width": 480,
 									"thumbnail_height": 360,
 									"html": "<iframe width=\"200\" height=\"113\" src=\"https://www.youtube.com/embed/BetZjgIIPvU?feature=oembed\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share\" referrerpolicy=\"strict-origin-when-cross-origin\" allowfullscreen title=\"What&#39;s the difference between osteoporosis and osteoarthritis?\"></iframe>",
+									"__TYPE__": "EmbedContent",
 									"all": {
 										"embed_url": "https://www.youtube.com/watch?v=BetZjgIIPvU",
 										"type": "video",
@@ -178,8 +179,7 @@
 									}
 								}
 							]
-						],
-						"key": "09a7ee1b-10a6-4ce0-ad8c-f4213bb72878"
+						]
 					},
 					{
 						"__TYPE__": "GroupItemContent",
@@ -187,7 +187,6 @@
 							[
 								"photo",
 								{
-									"__TYPE__": "ImageContent",
 									"provider": "imgix",
 									"url": "https://images.unsplash.com/photo-1499996860823-5214fcc65f8f?crop=entropy&cs=srgb&fm=jpg&ixid=M3wzMzc0NjN8MHwxfHNlYXJjaHwyN3x8cGVvcGxlfGVufDB8fHx8MTc1MTM1NjE1Mnww&ixlib=rb-4.1.0&q=85",
 									"alt": "man wearing black crew-neck shirt",
@@ -206,7 +205,9 @@
 											"x": 0,
 											"y": 0
 										}
-									}
+									},
+									"credits": null,
+									"__TYPE__": "ImageContent"
 								}
 							],
 							[
@@ -241,37 +242,19 @@
 									"value": "Technical Director"
 								}
 							]
-						],
-						"key": "9d7e1cd4-9e26-4d51-b409-633193d67821"
+						]
 					}
-				],
-				"key": "18415099-f590-4868-a558-41890d69691f"
+				]
 			},
 			"heading": {
-				"__TYPE__": "StructuredTextContent",
-				"value": [
-					{
-						"type": "heading2",
-						"content": {
-							"text": "Meet the Team",
-							"spans": []
-						},
-						"direction": "ltr"
-					}
-				]
+				"__TYPE__": "FieldContent",
+				"value": "stranger",
+				"type": "Text"
 			},
 			"lead": {
-				"__TYPE__": "StructuredTextContent",
-				"value": [
-					{
-						"type": "paragraph",
-						"content": {
-							"text": "Malesuada facilisi libero, nam eu. Quis pellentesque tortor a elementum ut blandit sed pellentesque arcu. Malesuada in faucibus risus velit diam.",
-							"spans": []
-						},
-						"direction": "ltr"
-					}
-				]
+				"__TYPE__": "FieldContent",
+				"value": "serve",
+				"type": "Text"
 			}
 		},
 		"items": []

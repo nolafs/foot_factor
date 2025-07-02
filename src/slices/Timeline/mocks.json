@@ -1,0 +1,186 @@
+[
+	{
+		"__TYPE__": "SharedSliceContent",
+		"variation": "vertical_with_images",
+		"primary": {
+			"events": {
+				"__TYPE__": "GroupContentType",
+				"value": [
+					{
+						"__TYPE__": "GroupItemContent",
+						"value": [
+							[
+								"image",
+								{
+									"origin": {
+										"id": "main",
+										"url": "https://images.unsplash.com/photo-1560457079-9a6532ccb118",
+										"width": 4160,
+										"height": 3120
+									},
+									"url": "https://images.unsplash.com/photo-1560457079-9a6532ccb118",
+									"width": 4160,
+									"height": 3120,
+									"edit": {
+										"zoom": 1,
+										"crop": {
+											"x": 0,
+											"y": 0
+										},
+										"background": "transparent"
+									},
+									"alt": "motor",
+									"credits": null,
+									"__TYPE__": "ImageContent"
+								}
+							],
+							[
+								"year",
+								{
+									"__TYPE__": "FieldContent",
+									"type": "Number",
+									"value": "1996"
+								}
+							],
+							[
+								"description",
+								{
+									"__TYPE__": "StructuredTextContent",
+									"value": [
+										{
+											"type": "paragraph",
+											"content": {
+												"text": "Voluptate in laborum laborum occaecat mollit tempor aute labore do. Ut duis cupidatat consectetur voluptate laboris fugiat eu commodo sunt consequat labore est velit id Lorem. Fugiat dolor occaecat ex nulla ut est ut enim pariatur laboris est nulla et laborum ullamco."
+											}
+										}
+									]
+								}
+							]
+						]
+					},
+					{
+						"__TYPE__": "GroupItemContent",
+						"value": [
+							[
+								"year",
+								{
+									"__TYPE__": "FieldContent",
+									"type": "Number",
+									"value": "2003"
+								}
+							],
+							[
+								"description",
+								{
+									"__TYPE__": "StructuredTextContent",
+									"value": [
+										{
+											"type": "paragraph",
+											"content": {
+												"text": "Voluptate in laborum laborum occaecat mollit tempor aute labore do. Ut duis cupidatat consectetur voluptate laboris fugiat eu commodo sunt consequat labore est velit id Lorem. Fugiat dolor occaecat ex nulla ut est ut enim pariatur laboris est nulla et laborum ullamco.",
+												"spans": []
+											},
+											"direction": "ltr"
+										}
+									]
+								}
+							],
+							[
+								"image",
+								{
+									"provider": "imgix",
+									"url": "https://images.unsplash.com/photo-1568992687947-868a62a9f521?crop=entropy&cs=srgb&fm=jpg&ixid=M3wzMzc0NjN8MHwxfHNlYXJjaHwxfHxwZW9wbGUlMjBvZmZpY2V8ZW58MHx8fHwxNzUxNDUwNzcxfDA&ixlib=rb-4.1.0&q=85",
+									"alt": "people sitting on chair",
+									"origin": {
+										"id": "5U_28ojjgms",
+										"url": "https://images.unsplash.com/photo-1568992687947-868a62a9f521?crop=entropy&cs=srgb&fm=jpg&ixid=M3wzMzc0NjN8MHwxfHNlYXJjaHwxfHxwZW9wbGUlMjBvZmZpY2V8ZW58MHx8fHwxNzUxNDUwNzcxfDA&ixlib=rb-4.1.0&q=85",
+										"width": 4821,
+										"height": 2712
+									},
+									"width": 4821,
+									"height": 2712,
+									"edit": {
+										"background": "transparent",
+										"zoom": 1,
+										"crop": {
+											"x": 0,
+											"y": 0
+										}
+									},
+									"credits": null,
+									"__TYPE__": "ImageContent"
+								}
+							]
+						]
+					},
+					{
+						"__TYPE__": "GroupItemContent",
+						"value": [
+							[
+								"image",
+								{
+									"provider": "imgix",
+									"url": "https://images.unsplash.com/photo-1543269865-cbf427effbad?crop=entropy&cs=srgb&fm=jpg&ixid=M3wzMzc0NjN8MHwxfHNlYXJjaHwyMnx8cGVvcGxlfGVufDB8fHx8MTc1MTQ1MDc2M3ww&ixlib=rb-4.1.0&q=85",
+									"alt": "A group of friends at a coffee shop",
+									"origin": {
+										"id": "-uHVRvDr7pg",
+										"url": "https://images.unsplash.com/photo-1543269865-cbf427effbad?crop=entropy&cs=srgb&fm=jpg&ixid=M3wzMzc0NjN8MHwxfHNlYXJjaHwyMnx8cGVvcGxlfGVufDB8fHx8MTc1MTQ1MDc2M3ww&ixlib=rb-4.1.0&q=85",
+										"width": 3997,
+										"height": 2665
+									},
+									"width": 3997,
+									"height": 2665,
+									"edit": {
+										"background": "transparent",
+										"zoom": 1,
+										"crop": {
+											"x": 0,
+											"y": 0
+										}
+									},
+									"credits": null,
+									"__TYPE__": "ImageContent"
+								}
+							],
+							[
+								"year",
+								{
+									"__TYPE__": "FieldContent",
+									"type": "Number",
+									"value": "2007"
+								}
+							],
+							[
+								"description",
+								{
+									"__TYPE__": "StructuredTextContent",
+									"value": [
+										{
+											"type": "paragraph",
+											"content": {
+												"text": "Voluptate in laborum laborum occaecat mollit tempor aute labore do. Ut duis cupidatat consectetur voluptate laboris fugiat eu commodo sunt consequat labore est velit id Lorem. Fugiat dolor occaecat ex nulla ut est ut enim pariatur laboris est nulla et laborum ullamco.",
+												"spans": []
+											},
+											"direction": "ltr"
+										}
+									]
+								}
+							]
+						]
+					}
+				]
+			},
+			"lead": {
+				"__TYPE__": "FieldContent",
+				"type": "Text",
+				"value": "Voluptate in laborum laborum occaecat mollit tempor aute labore do. Ut duis cupidatat consectetur voluptate laboris fugiat eu "
+			},
+			"heading": {
+				"__TYPE__": "FieldContent",
+				"type": "Text",
+				"value": "Our History"
+			}
+		},
+		"items": []
+	}
+]

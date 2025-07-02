@@ -13,7 +13,8 @@ import {
 import {wrap} from '@motionone/utils';
 import {IconNavListSliceDefaultPrimaryItemsItem} from '@/prismic-types';
 import cn from 'clsx';
-import {PrismicNextImage} from '@prismicio/next';
+import {PrismicNextImage, PrismicNextLink} from '@prismicio/next';
+import {isFilled} from '@prismicio/client';
 
 interface FeatureTickerListProps {
   data: IconNavListSliceDefaultPrimaryItemsItem[],
@@ -83,7 +84,7 @@ export const FeatureTickerList = ({data, baseVelocity = 10}: FeatureTickerListPr
 
   return (
       <>
-      <div ref={containerRef} className={'w-full overflow-hidden py-16 md:py-24 lg:py-32'}>
+      <div ref={containerRef} className={'w-full overflow-hidden pt-16 md:pt-24 lg:pt-32'}>
         <motion.div
             ref={contentRef}
             className={'flex no-white-space flex-nowrap gap-36'}
@@ -99,13 +100,22 @@ export const FeatureTickerList = ({data, baseVelocity = 10}: FeatureTickerListPr
 
 const FeatureTickerListItem = ({item , style}: { item: IconNavListSliceDefaultPrimaryItemsItem, style: number }) => {
 
-  console.log('FeatureTickerListItem', item, style);
+  console.log('FeatureTickerListItem', item, style, isFilled.link(item.link));
 
-  return (
-      <div className={cn('border w-fit flex-shrink-0 border-primary rounded-full text-4xl text-secondary italic uppercase flex items-center justify-center',
-          style === 0 ? 'bg-primary text-white' : 'text-primary border-accent',
-          )}>
-        <div className={'flex whitespace-nowrap flex-nowrap gap-4 px-16 py-8'}><PrismicNextImage field={item.icon} className={'h-10 w-10'}/> <span>{item.label}</span></div>
+  const containerStyle = cn('border w-fit flex-shrink-0 border-primary rounded-full text-2xl md:text-3xl lg:text-4xl text-secondary italic uppercase flex items-center justify-center',
+      style === 0 ? 'bg-primary text-white' : 'text-primary border-accent');
+
+  const label = () => {
+    return (
+      <div className={'flex justify-center items-center whitespace-nowrap flex-nowrap gap-4 px-8 py-4 md:px-8 md:py-4 lg:px-16 lg:py-8'}>
+        <PrismicNextImage field={item.icon}
+        className={cn('h-6 w-6 md:h-8 md:w-8 lg:h-10 lg:w-10', style === 1 ? 'brightness-[92%] saturate-[3109%] invert-[10%] sepia-[43%] hue-rotate-180 contrast-[101%]' : 'invert')}/>
+        <span>{item.label}</span></div>)
+  }
+
+  return (isFilled.link(item.link) ? <PrismicNextLink field={item.link} className={cn(containerStyle)} >{label()}</PrismicNextLink> :
+      <div className={containerStyle}>
+        {label()}
       </div>
   );
 }

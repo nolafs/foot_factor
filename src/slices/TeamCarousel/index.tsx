@@ -16,13 +16,13 @@ export type TeamCarouselProps = SliceComponentProps<Content.TeamCarouselSlice>;
 const TeamCarousel: FC<TeamCarouselProps> = ({ slice }) => {
   return (
     <section data-slice-type={slice.slice_type} data-slice-variation={slice.variation}>
-      <div className="py-16 md:py-24 lg:py-32">
+      <div className="pt-16 md:pt-24 lg:pt-32">
         <Container className={'mb-16'}>
-         <Heading as="h2">
-            <PrismicRichText field={slice.primary.heading} />
+         <Heading as="div">
+           {slice.primary.heading}
           </Heading>
           <Lead className="mt-4 max-w-3xl">
-            <PrismicRichText field={slice.primary.lead} />
+            {slice.primary.lead}
           </Lead>
         </Container>
         <TeamSlider data={slice.primary.members} />

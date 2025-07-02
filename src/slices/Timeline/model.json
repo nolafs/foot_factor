@@ -1,12 +1,12 @@
 {
   "type": "SharedSlice",
-  "id": "team_carousel",
-  "name": "TeamCarousel",
+  "id": "timeline",
+  "name": "Timeline",
   "variations": [
     {
-      "id": "default",
-      "name": "Default",
-      "description": "Displays a carousel with each slide featuring a team member's photo, name, title, description, and an optional play button for media.",
+      "id": "vertical_with_images",
+      "name": "default",
+      "description": "A vertical timeline with alternating events, each containing an image, year, and description. Title and optional introduction at the top.",
       "version": "initial",
       "imageUrl": "",
       "docURL": "...",
@@ -25,41 +25,28 @@
             "placeholder": ""
           }
         },
-        "members": {
+        "events": {
           "type": "Group",
           "config": {
-            "label": "Team Members",
+            "label": "Events",
             "fields": {
-              "photo": {
+              "image": {
                 "type": "Image",
                 "config": {
-                  "label": "Photo"
+                  "label": "Image"
                 }
               },
-              "video": {
-                "type": "Embed",
+              "year": {
+                "type": "Number",
                 "config": {
-                  "label": "Video",
-                  "placeholder": ""
+                  "label": "Year"
                 }
               },
-              "bio": {
+              "description": {
                 "type": "StructuredText",
                 "config": {
                   "multi": "paragraph,strong,em,hyperlink",
-                  "label": "Bio"
-                }
-              },
-              "name": {
-                "type": "Text",
-                "config": {
-                  "label": "Name"
-                }
-              },
-              "title": {
-                "type": "Text",
-                "config": {
-                  "label": "Title"
+                  "label": "Description"
                 }
               }
             }
