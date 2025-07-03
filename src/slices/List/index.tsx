@@ -43,28 +43,29 @@ const List: FC<ListProps> = async({ slice }) => {
                     item.columns === '4' && 'lg:col-span-4',
                     item.columns === '5' && 'lg:col-span-5',
                     item.columns === '6' && 'lg:col-span-6')}>
-                  <div className="absolute inset-0 rounded-lg bg-white max-lg:rounded-4xl lg:rounded-4xl overflow-hidden"/>
-                  <div className={cn("relative flex  flex-col overflow-hidden rounded-2xl",
+
+                  <div className={cn("relative flex  flex-col overflow-hidden max-lg:rounded-4xl lg:rounded-4xl",
                       item.card_height !== 'large' && 'h-[30vh]',
                       item.card_height === 'large' && 'h-[50vh]')}
                       style={{backgroundColor: item.color ?? 'transparent'}}
                   >
 
-
                     { item.card_type === '1' && (<>
                     <PrismicNextImage field={item.image} className={cn('w-full h-full object-cover')}/>
-                    <div className="absolute bottom-0 p-10 pt-4">
+                      <div
+                          className="absolute inset-0 rounded-lg bg-gradient-to-t from-secondary/90 to-transparent max-lg:rounded-4xl lg:rounded-4xl overflow-hidden"/>
+                    <div className="absolute  z-5 bottom-0 p-7 md:p-10 lg:p-16  z-10 w-full">
                       <h3 className="text-white text-3xl">{item.heading}</h3>
-                      <p className="mt-2 max-w-lg text-lg text-white/90">
+                      <p className="mt-2 max-w-2xl text-lg text-white/90">
                         {item.lead}
                       </p>
                     </div>
                     </>)}
 
                     {item.card_type === '2' && (
-                    <div className="p-10 text-center">
+                    <div className="p-7 md:p-10 lg:p-16 text-center">
                       <h3 className="text-3xl text-secondary">{item.heading}</h3>
-                      <p className="mt-2 max-w-lg text-sm/6 text-gray-600">
+                      <p className="mt-2 max-w-2xl text-sm/6 text-gray-600">
                         {item.lead}
                       </p>
                     </div>
