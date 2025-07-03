@@ -4308,6 +4308,48 @@ type TestimonialSliceVariation = TestimonialSliceDefault | TestimonialSliceTesti
 export type TestimonialSlice = prismic.SharedSlice<'testimonial', TestimonialSliceVariation>;
 
 /**
+ * Primary content in *Testimonials → Default → Primary*
+ */
+export interface TestimonialsSliceDefaultPrimary {
+  /**
+   * Title field in *Testimonials → Default → Primary*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: testimonials.default.primary.title
+   * - **Documentation**: https://prismic.io/docs/fields/rich-text
+   */
+  title: prismic.RichTextField;
+}
+
+/**
+ * Default variation for Testimonials Slice
+ *
+ * - **API ID**: `default`
+ * - **Description**: Default
+ * - **Documentation**: https://prismic.io/docs/slices
+ */
+export type TestimonialsSliceDefault = prismic.SharedSliceVariation<
+  'default',
+  Simplify<TestimonialsSliceDefaultPrimary>,
+  never
+>;
+
+/**
+ * Slice variation for *Testimonials*
+ */
+type TestimonialsSliceVariation = TestimonialsSliceDefault;
+
+/**
+ * Testimonials Shared Slice
+ *
+ * - **API ID**: `testimonials`
+ * - **Description**: Testimonials
+ * - **Documentation**: https://prismic.io/docs/slices
+ */
+export type TestimonialsSlice = prismic.SharedSlice<'testimonials', TestimonialsSliceVariation>;
+
+/**
  * Item in *Timeline → default → Primary → Events*
  */
 export interface TimelineSliceVerticalWithImagesPrimaryEventsItem {
@@ -4570,6 +4612,10 @@ declare module '@prismicio/client' {
       TestimonialSliceVariation,
       TestimonialSliceDefault,
       TestimonialSliceTestimonials,
+      TestimonialsSlice,
+      TestimonialsSliceDefaultPrimary,
+      TestimonialsSliceVariation,
+      TestimonialsSliceDefault,
       TimelineSlice,
       TimelineSliceVerticalWithImagesPrimaryEventsItem,
       TimelineSliceVerticalWithImagesPrimary,

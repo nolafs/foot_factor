@@ -13,5 +13,6 @@ export const components = {
   section: dynamic(() => import('./Section')),
   team_carousel: dynamic(() => import('./TeamCarousel')),
   testimonial: dynamic(() => import('./Testimonial')),
+  testimonials: dynamic(() => import('./Testimonials')),
   timeline: dynamic(() => import('./Timeline')),
 };
