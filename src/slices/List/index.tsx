@@ -7,7 +7,7 @@ import {Container} from '@/components/ui/container';
 import BlogArticle from '@/slices/Megamenu/component/blog-article';
 import {PrismicNextImage, PrismicNextLink} from '@prismicio/next';
 import {buttonVariants} from '@/components/ui/button';
-import {CircleArrowRight} from 'lucide-react';
+import {ArrowRight, CircleArrowRight} from 'lucide-react';
 import ServiceCard from '@/components/features/service-card/service-card';
 
 /**
@@ -59,16 +59,31 @@ const List: FC<ListProps> = async({ slice }) => {
                       <p className="mt-2 max-w-2xl text-lg text-white/90">
                         {item.lead}
                       </p>
+                      {isFilled.link(item.link) && (<div className={'flex justify-end'}>
+                        <PrismicNextLink field={item.link}
+                                         className={cn(buttonVariants({variant: 'default', size: 'icon'}))}>
+                          <ArrowRight className={'h-4 w-4'}/>
+                        </PrismicNextLink>
+                      </div>
+                      )}
                     </div>
                     </>)}
 
-                    {item.card_type === '2' && (
+                    {item.card_type === '2' && (<>
                     <div className="p-7 md:p-10 lg:p-16 text-center">
                       <h3 className="text-3xl text-secondary">{item.heading}</h3>
                       <p className="mt-2 max-w-2xl text-sm/6 text-gray-600">
                         {item.lead}
                       </p>
                     </div>
+                    {isFilled.link(item.link) && (<div className={'absolute bottom-0 w-full p-7 md:p-10 lg:p-16 flex justify-end'}>
+                          <PrismicNextLink field={item.link}
+                                           className={cn(buttonVariants({variant: 'default', size:'icon'}))}>
+                            <ArrowRight className={'h-4 w-4'}/>
+                          </PrismicNextLink>
+                        </div>
+                    )}
+                    </>
                     )}
                   </div>
                 </div>
