@@ -45,15 +45,15 @@ const List: FC<ListProps> = async({ slice }) => {
                     item.columns === '6' && 'lg:col-span-6')}>
 
                   <div className={cn("relative flex  flex-col overflow-hidden max-lg:rounded-4xl lg:rounded-4xl",
-                      item.card_height !== 'large' && 'h-[30vh]',
-                      item.card_height === 'large' && 'h-[50vh]')}
+                      item.card_height !== 'large' && 'h-[45vh]',
+                      item.card_height === 'large' && 'h-[55vh]')}
                       style={{backgroundColor: item.color ?? 'transparent'}}
                   >
 
                     { item.card_type === '1' && (<>
                     <PrismicNextImage field={item.image} className={cn('w-full h-full object-cover')}/>
                       <div
-                          className="absolute inset-0 rounded-lg bg-gradient-to-t from-secondary/90 to-transparent max-lg:rounded-4xl lg:rounded-4xl overflow-hidden"/>
+                          className="absolute inset-0 rounded-lg bg-gradient-to-t from-primary-950/90 to-transparent max-lg:rounded-4xl lg:rounded-4xl overflow-hidden"/>
                     <div className="absolute  z-5 bottom-0 p-7 md:p-10 lg:p-16  z-10 w-full">
                       <h3 className="text-white text-3xl">{item.heading}</h3>
                       <p className="mt-2 max-w-2xl text-lg text-white/90">
@@ -71,11 +71,20 @@ const List: FC<ListProps> = async({ slice }) => {
 
                     {item.card_type === '2' && (<>
                     <div className="p-7 md:p-10 lg:p-16 text-center">
+                      {item.image_position === 'top' && (<div className={'w-full h-auto  mb-5'}>
+                            <PrismicNextImage field={item.image} className={cn('w-full h-full object-cover')}/>
+                          </div>
+                      )}
                       <h3 className="text-3xl text-secondary">{item.heading}</h3>
                       <p className="mt-2 max-w-2xl text-lg text-gray-600">
                         {item.lead}
                       </p>
                     </div>
+
+                          {item.image_position === 'bottom' && (<div className={'absolute bottom-0 w-full h-auto'}>
+                              <PrismicNextImage field={item.image} className={cn('w-full h-full object-cover')}/>
+                              </div>
+                          )}
                     {isFilled.link(item.link) && (<div className={'absolute bottom-0 w-full p-7 md:p-10 lg:p-16 flex justify-end'}>
                           <PrismicNextLink field={item.link}
                                            className={cn(buttonVariants({variant: 'default', size:'icon'}))}>
