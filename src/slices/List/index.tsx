@@ -45,8 +45,8 @@ const List: FC<ListProps> = async({ slice }) => {
                     item.columns === '6' && 'lg:col-span-6')}>
 
                   <div className={cn("relative flex  flex-col overflow-hidden max-lg:rounded-4xl lg:rounded-4xl",
-                      item.card_height !== 'large' && 'h-[45vh]',
-                      item.card_height === 'large' && 'h-[55vh]')}
+                      item.card_height !== 'large' && 'h-[45vh] max-h-[650px]',
+                      item.card_height === 'large' && 'h-[55vh] max-h-[820px]')}
                       style={{backgroundColor: item.color ?? 'transparent'}}
                   >
 
