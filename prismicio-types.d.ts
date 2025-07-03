@@ -2017,6 +2017,126 @@ export type SettingsDocument<Lang extends string = string> = prismic.PrismicDocu
   Lang
 >;
 
+type TestimonialDocumentDataSlicesSlice = never;
+
+/**
+ * Content for Testimonial documents
+ */
+interface TestimonialDocumentData {
+  /**
+   * Client Profile Image field in *Testimonial*
+   *
+   * - **Field Type**: Image
+   * - **Placeholder**: *None*
+   * - **API ID Path**: testimonial.client_profile_image
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/fields/image
+   */
+  client_profile_image: prismic.ImageField<never>;
+
+  /**
+   * Featured field in *Testimonial*
+   *
+   * - **Field Type**: Boolean
+   * - **Placeholder**: *None*
+   * - **Default Value**: false
+   * - **API ID Path**: testimonial.featured
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/fields/boolean
+   */
+  featured: prismic.BooleanField;
+
+  /**
+   * Client Name field in *Testimonial*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: testimonial.client_name
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/fields/text
+   */
+  client_name: prismic.KeyTextField;
+
+  /**
+   * Activity field in *Testimonial*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: testimonial.activity
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/fields/text
+   */
+  activity: prismic.KeyTextField;
+
+  /**
+   * Quote field in *Testimonial*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: testimonial.quote
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/fields/rich-text
+   */
+  quote: prismic.RichTextField;
+
+  /**
+   * Slice Zone field in *Testimonial*
+   *
+   * - **Field Type**: Slice Zone
+   * - **Placeholder**: *None*
+   * - **API ID Path**: testimonial.slices[]
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/slices
+   */
+  slices: prismic.SliceZone<TestimonialDocumentDataSlicesSlice> /**
+   * Meta Title field in *Testimonial*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: A title of the page used for social media and search engines
+   * - **API ID Path**: testimonial.meta_title
+   * - **Tab**: SEO & Metadata
+   * - **Documentation**: https://prismic.io/docs/fields/text
+   */;
+  meta_title: prismic.KeyTextField;
+
+  /**
+   * Meta Description field in *Testimonial*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: A brief summary of the page
+   * - **API ID Path**: testimonial.meta_description
+   * - **Tab**: SEO & Metadata
+   * - **Documentation**: https://prismic.io/docs/fields/text
+   */
+  meta_description: prismic.KeyTextField;
+
+  /**
+   * Meta Image field in *Testimonial*
+   *
+   * - **Field Type**: Image
+   * - **Placeholder**: *None*
+   * - **API ID Path**: testimonial.meta_image
+   * - **Tab**: SEO & Metadata
+   * - **Documentation**: https://prismic.io/docs/fields/image
+   */
+  meta_image: prismic.ImageField<never>;
+}
+
+/**
+ * Testimonial document from Prismic
+ *
+ * - **API ID**: `testimonial`
+ * - **Repeatable**: `true`
+ * - **Documentation**: https://prismic.io/docs/content-modeling
+ *
+ * @typeParam Lang - Language API ID of the document.
+ */
+export type TestimonialDocument<Lang extends string = string> = prismic.PrismicDocumentWithUID<
+  Simplify<TestimonialDocumentData>,
+  'testimonial',
+  Lang
+>;
+
 export type AllDocumentTypes =
   | AuthorDocument
   | CaseStudiesDocument
@@ -2035,7 +2155,8 @@ export type AllDocumentTypes =
   | PostTagsDocument
   | PostsDocument
   | ServicesDocument
-  | SettingsDocument;
+  | SettingsDocument
+  | TestimonialDocument;
 
 /**
  * Primary content in *CallToAction → Default → Primary*
@@ -4354,6 +4475,9 @@ declare module '@prismicio/client' {
       SettingsDocumentDataSecondaryNavigationItem,
       SettingsDocumentDataSocialMediaItem,
       SettingsDocumentDataContactFormEnquiriesItem,
+      TestimonialDocument,
+      TestimonialDocumentData,
+      TestimonialDocumentDataSlicesSlice,
       AllDocumentTypes,
       CallToActionSlice,
       CallToActionSliceDefaultPrimary,

@@ -1,0 +1,91 @@
+{
+  "format": "page",
+  "id": "testimonial",
+  "label": "Testimonial",
+  "repeatable": true,
+  "status": true,
+  "json": {
+    "Main": {
+      "uid": {
+        "type": "UID",
+        "config": {
+          "label": "UID"
+        }
+      },
+      "client_profile_image": {
+        "type": "Image",
+        "config": {
+          "label": "Client Profile Image",
+          "constraint": {},
+          "thumbnails": []
+        }
+      },
+      "featured": {
+        "type": "Boolean",
+        "config": {
+          "label": "Featured",
+          "placeholder_false": "false",
+          "placeholder_true": "true",
+          "default_value": false
+        }
+      },
+      "client_name": {
+        "type": "Text",
+        "config": {
+          "label": "Client Name",
+          "placeholder": ""
+        }
+      },
+      "activity": {
+        "type": "Text",
+        "config": {
+          "label": "Activity",
+          "placeholder": ""
+        }
+      },
+      "quote": {
+        "type": "StructuredText",
+        "config": {
+          "label": "Quote",
+          "placeholder": "",
+          "allowTargetBlank": true,
+          "multi": "preformatted,heading1,heading2,heading3,heading4,heading5,heading6,hyperlink,image,embed,list-item,o-list-item,rtl"
+        }
+      },
+      "slices": {
+        "type": "Slices",
+        "fieldset": "Slice Zone",
+        "config": {
+          "choices": {}
+        }
+      }
+    },
+    "SEO & Metadata": {
+      "meta_title": {
+        "config": {
+          "label": "Meta Title",
+          "placeholder": "A title of the page used for social media and search engines"
+        },
+        "type": "Text"
+      },
+      "meta_description": {
+        "config": {
+          "label": "Meta Description",
+          "placeholder": "A brief summary of the page"
+        },
+        "type": "Text"
+      },
+      "meta_image": {
+        "config": {
+          "constraint": {
+            "height": 1260,
+            "width": 2400
+          },
+          "label": "Meta Image",
+          "thumbnails": []
+        },
+        "type": "Image"
+      }
+    }
+  }
+}
