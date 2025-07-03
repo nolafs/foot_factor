@@ -27,20 +27,20 @@ export function Subheading({ className, as: Element = 'h2', dark = false, ...pro
       data-dark={dark ? 'true' : undefined}
       className={cn(
         className,
-        'inline-flex items-center h-5 px-2.5 py-0.5 gap-0.5 shadow-[0px_1px_2px_0px_rgba(105,81,255,0.05)]  text-xs/5 font-semibold uppercase leading-none w-fit text-primary-500 bg-primary-200 rounded-full',
+        'inline-flex items-center h-5 px-2.5 py-0.5 gap-0.5 shadow-[0px_1px_2px_0px_rgba(105,81,255,0.05)]  text-xs/5 font-semibold uppercase leading-none w-fit text-slate-500 bg-primary-200 rounded-full',
       )}
     />
   );
 }
 
 export function Lead({ className, ...props }: React.ComponentPropsWithoutRef<'p'>) {
-  return <p className={cn(className, 'text-lg sm:text-xl font-medium text-primary-500')} {...props} />;
+  return <p className={cn(className, 'text-lg sm:text-xl font-medium text-slate-500')} {...props} />;
 }
 
 export function Body({className, ...props}: React.ComponentPropsWithoutRef<'div'>) {
   return <div className={cn(className, 'w-full flex flex-col' +
       'prose prose-sm md:prose-base lg:prose-lg max-w-none',
       'prose-a:text-accent prose-a:no-underline hover:prose-a:underline',
-      'prose-strong:text-primary-950 prose-headings:!text-primary-500 prose-headings:mt-0 text-primary-500 '
+      'prose-strong:text-primary-950 prose-headings:!text-primary-950 prose-headings:mt-0 text-slate-500 '
   )} {...props} />;
 }

@@ -56,7 +56,7 @@ const List: FC<ListProps> = async({ slice }) => {
                           className="absolute inset-0 rounded-lg bg-gradient-to-t from-primary-950/90 to-transparent max-lg:rounded-4xl lg:rounded-4xl overflow-hidden"/>
                     <div className="absolute  z-5 bottom-0 p-7 md:p-10 lg:p-16  z-10 w-full">
                       <h3 className="text-white text-3xl">{item.heading}</h3>
-                      <p className="mt-2 max-w-2xl text-lg text-white/90">
+                      <p className="mt-2 max-w-2xl text-lg text-slate-200">
                         {item.lead}
                       </p>
                       {isFilled.link(item.link) && (<div className={'flex justify-end'}>
@@ -75,7 +75,7 @@ const List: FC<ListProps> = async({ slice }) => {
                             <PrismicNextImage field={item.image} className={cn('w-full h-full object-cover')}/>
                           </div>
                       )}
-                      <h3 className="text-3xl text-secondary">{item.heading}</h3>
+                      <h3 className="text-3xl text-secondary-950">{item.heading}</h3>
                       <p className="mt-2 max-w-2xl text-lg text-gray-600">
                         {item.lead}
                       </p>
