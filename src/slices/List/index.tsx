@@ -33,7 +33,7 @@ const List: FC<ListProps> = async({ slice }) => {
         </Container>
         <Container className={'mt-5 lg:mt-16'}>
           {slice.primary.items.length > 0 && (
-              <div className="mt-10 grid grid-cols-1 gap-4 sm:mt-16 lg:grid-cols-6  grid-flow-row"
+              <div className="mt-10 grid grid-cols-1 gap-6 sm:mt-16 lg:grid-cols-6  grid-flow-row"
                    style={{gridAutoRows: 'min-content'}}>
                 {slice.primary.items.map((item, idx) => (
                 <div key={'bento-'+idx} className={cn("relative",
