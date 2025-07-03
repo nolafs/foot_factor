@@ -1,7 +1,7 @@
 {
   "format": "page",
-  "id": "condition",
-  "label": "Condition",
+  "id": "case_studies",
+  "label": "Case Studies",
   "repeatable": true,
   "status": true,
   "json": {
@@ -29,6 +29,13 @@
           "default_value": false
         }
       },
+      "publishing_date": {
+        "type": "Date",
+        "config": {
+          "label": "Publishing Date",
+          "placeholder": ""
+        }
+      },
       "author": {
         "type": "Link",
         "config": {
@@ -43,23 +50,37 @@
           ]
         }
       },
-      "title": {
+      "client_name": {
         "type": "Text",
         "config": {
-          "label": "Title",
+          "label": "Client Name",
           "placeholder": ""
         }
       },
-      "category": {
+      "client_age": {
+        "type": "Number",
+        "config": {
+          "label": "Client Age",
+          "placeholder": ""
+        }
+      },
+      "activity": {
+        "type": "Text",
+        "config": {
+          "label": "Activity",
+          "placeholder": ""
+        }
+      },
+      "condition": {
         "type": "Link",
         "config": {
-          "label": "Category",
+          "label": "Condition",
           "select": "document",
           "repeat": false,
           "customtypes": [
             {
-              "id": "condition_category",
-              "fields": ["name"]
+              "id": "condition",
+              "fields": ["title"]
             }
           ]
         }
@@ -76,13 +97,13 @@
         "fieldset": "Slice Zone",
         "config": {
           "choices": {
-            "faqs": {
+            "call_to_action": {
+              "type": "SharedSlice"
+            },
+            "media_section": {
               "type": "SharedSlice"
             },
             "section": {
-              "type": "SharedSlice"
-            },
-            "hero": {
               "type": "SharedSlice"
             }
           }
