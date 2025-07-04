@@ -1,0 +1,69 @@
+[
+	{
+		"__TYPE__": "SharedSliceContent",
+		"variation": "bento",
+		"primary": {
+			"heading": {
+				"__TYPE__": "StructuredTextContent",
+				"value": [
+					{
+						"type": "paragraph",
+						"content": {
+							"text": "Esse velit excepteur est occaecat enim reprehenderit nostrud sunt dolore occaecat amet esse tempor est. Deserunt dolor laborum sit aliquip esse magna consectetur id."
+						}
+					}
+				]
+			},
+			"link": {
+				"key": "93fffc14-fc91-40d6-99e0-16a26914abec",
+				"__TYPE__": "LinkContent",
+				"value": {
+					"__TYPE__": "ExternalLink",
+					"url": "http://google.com",
+					"text": "receive"
+				}
+			}
+		},
+		"items": [
+			{
+				"__TYPE__": "GroupItemContent",
+				"value": []
+			}
+		]
+	},
+	{
+		"__TYPE__": "SharedSliceContent",
+		"variation": "default",
+		"primary": {
+			"heading": {
+				"__TYPE__": "StructuredTextContent",
+				"value": [
+					{
+						"type": "paragraph",
+						"content": {
+							"text": "Case Studies from some of our many happy clients",
+							"spans": [
+								{
+									"type": "em",
+									"start": 34,
+									"end": 48
+								}
+							]
+						},
+						"direction": "ltr"
+					}
+				]
+			},
+			"link": {
+				"key": "ab4770ec-d814-41f0-90e9-175a1e18b758",
+				"__TYPE__": "LinkContent",
+				"value": {
+					"__TYPE__": "ExternalLink",
+					"url": "https://slicemachine.dev",
+					"text": "shown"
+				}
+			}
+		},
+		"items": []
+	}
+]

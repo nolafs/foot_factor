@@ -1,4 +1,5 @@
-import { type FC } from 'react';
+'use client';
+import {type FC} from 'react';
 import {type Content, isFilled} from '@prismicio/client';
 import { type SliceComponentProps } from '@prismicio/react';
 import {Heading, Lead} from '@/components/ui/text';
@@ -18,7 +19,7 @@ export type ListProps = SliceComponentProps<Content.ListSlice>;
 /**
  * Component for "List" Slices.
  */
-const List: FC<ListProps> = async({ slice }) => {
+const List: FC<ListProps> = ({ slice }) => {
 
 
     if (slice.variation === 'bento') {
@@ -107,10 +108,6 @@ const List: FC<ListProps> = async({ slice }) => {
 
 
     if (slice.variation === 'pricingTable') {
-
-      if(slice.primary.services.length){
-        console.log('slice', slice.primary.services)
-      }
 
       return (<section data-slice-type={slice.slice_type} data-slice-variation={slice.variation} className={'bg-primary-50'}>
         <Container className={'lg:py-28 py-16 md:py-24'}>

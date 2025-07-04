@@ -14,7 +14,7 @@ export function Heading({ className, as: Element = 'h2', dark = false, primary =
       data-dark={dark ? 'true' : undefined}
       className={cn(
         className,
-        primary ? `font-medium font-heading ${dark && 'text-white'}  text-3xl sm:text-4xl md:text-5xl mb-10 leading-normal lg:text-5xl xl:text-6xl lg:leading-[72px]` :'text-4xl font-heading font-medium tracking-tighter text-primary data-[dark]:text-white sm:text-6xl',
+        primary ? `font-medium font-heading ${dark && 'text-white'}  text-3xl sm:text-4xl md:text-5xl mb-10 leading-normal lg:text-5xl xl:text-6xl lg:leading-[72px]` :'text-4xl font-heading font-medium tracking-tighter text-primary sm:text-6xl',
       )}
     />
   );

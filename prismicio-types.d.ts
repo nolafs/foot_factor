@@ -509,6 +509,7 @@ export type FaqDocument<Lang extends string = string> = prismic.PrismicDocumentW
 >;
 
 type HomeDocumentDataSlicesSlice =
+  | CaseStudiesSlice
   | ListSlice
   | MediaSectionSlice
   | SectionSlice
@@ -2024,6 +2025,17 @@ type TestimonialDocumentDataSlicesSlice = never;
  */
 interface TestimonialDocumentData {
   /**
+   * Client Name field in *Testimonial*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: testimonial.client_name
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/fields/text
+   */
+  client_name: prismic.KeyTextField;
+
+  /**
    * Client Profile Image field in *Testimonial*
    *
    * - **Field Type**: Image
@@ -2045,17 +2057,6 @@ interface TestimonialDocumentData {
    * - **Documentation**: https://prismic.io/docs/fields/boolean
    */
   featured: prismic.BooleanField;
-
-  /**
-   * Client Name field in *Testimonial*
-   *
-   * - **Field Type**: Text
-   * - **Placeholder**: *None*
-   * - **API ID Path**: testimonial.client_name
-   * - **Tab**: Main
-   * - **Documentation**: https://prismic.io/docs/fields/text
-   */
-  client_name: prismic.KeyTextField;
 
   /**
    * Activity field in *Testimonial*
@@ -2320,6 +2321,96 @@ type CallToActionSliceVariation = CallToActionSliceDefault | CallToActionSliceEm
  * - **Documentation**: https://prismic.io/docs/slices
  */
 export type CallToActionSlice = prismic.SharedSlice<'call_to_action', CallToActionSliceVariation>;
+
+/**
+ * Primary content in *CaseStudies → Default → Primary*
+ */
+export interface CaseStudiesSliceDefaultPrimary {
+  /**
+   * Heading field in *CaseStudies → Default → Primary*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: case_studies.default.primary.heading
+   * - **Documentation**: https://prismic.io/docs/fields/rich-text
+   */
+  heading: prismic.RichTextField;
+
+  /**
+   * Link field in *CaseStudies → Default → Primary*
+   *
+   * - **Field Type**: Link
+   * - **Placeholder**: *None*
+   * - **API ID Path**: case_studies.default.primary.link
+   * - **Documentation**: https://prismic.io/docs/fields/link
+   */
+  link: prismic.LinkField<string, string, unknown, prismic.FieldState, never>;
+}
+
+/**
+ * Default variation for CaseStudies Slice
+ *
+ * - **API ID**: `default`
+ * - **Description**: Default
+ * - **Documentation**: https://prismic.io/docs/slices
+ */
+export type CaseStudiesSliceDefault = prismic.SharedSliceVariation<
+  'default',
+  Simplify<CaseStudiesSliceDefaultPrimary>,
+  never
+>;
+
+/**
+ * Primary content in *CaseStudies → Bento → Primary*
+ */
+export interface CaseStudiesSliceBentoPrimary {
+  /**
+   * Heading field in *CaseStudies → Bento → Primary*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: case_studies.bento.primary.heading
+   * - **Documentation**: https://prismic.io/docs/fields/rich-text
+   */
+  heading: prismic.RichTextField;
+
+  /**
+   * Link field in *CaseStudies → Bento → Primary*
+   *
+   * - **Field Type**: Link
+   * - **Placeholder**: *None*
+   * - **API ID Path**: case_studies.bento.primary.link
+   * - **Documentation**: https://prismic.io/docs/fields/link
+   */
+  link: prismic.LinkField<string, string, unknown, prismic.FieldState, never>;
+}
+
+/**
+ * Bento variation for CaseStudies Slice
+ *
+ * - **API ID**: `bento`
+ * - **Description**: Default
+ * - **Documentation**: https://prismic.io/docs/slices
+ */
+export type CaseStudiesSliceBento = prismic.SharedSliceVariation<
+  'bento',
+  Simplify<CaseStudiesSliceBentoPrimary>,
+  never
+>;
+
+/**
+ * Slice variation for *CaseStudies*
+ */
+type CaseStudiesSliceVariation = CaseStudiesSliceDefault | CaseStudiesSliceBento;
+
+/**
+ * CaseStudies Shared Slice
+ *
+ * - **API ID**: `case_studies`
+ * - **Description**: CaseStudies
+ * - **Documentation**: https://prismic.io/docs/slices
+ */
+export type CaseStudiesSlice = prismic.SharedSlice<'case_studies', CaseStudiesSliceVariation>;
 
 /**
  * Item in *Faqs → Default → Primary → FAQs*
@@ -4527,6 +4618,12 @@ declare module '@prismicio/client' {
       CallToActionSliceVariation,
       CallToActionSliceDefault,
       CallToActionSliceEmbedVideo,
+      CaseStudiesSlice,
+      CaseStudiesSliceDefaultPrimary,
+      CaseStudiesSliceBentoPrimary,
+      CaseStudiesSliceVariation,
+      CaseStudiesSliceDefault,
+      CaseStudiesSliceBento,
       FaqsSlice,
       FaqsSliceDefaultPrimaryFaqsItem,
       FaqsSliceDefaultPrimary,

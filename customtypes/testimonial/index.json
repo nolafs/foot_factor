@@ -12,6 +12,13 @@
           "label": "UID"
         }
       },
+      "client_name": {
+        "type": "Text",
+        "config": {
+          "label": "Client Name",
+          "placeholder": ""
+        }
+      },
       "client_profile_image": {
         "type": "Image",
         "config": {
@@ -29,13 +36,6 @@
           "default_value": false
         }
       },
-      "client_name": {
-        "type": "Text",
-        "config": {
-          "label": "Client Name",
-          "placeholder": ""
-        }
-      },
       "activity": {
         "type": "Text",
         "config": {
@@ -49,7 +49,7 @@
           "label": "Quote",
           "placeholder": "",
           "allowTargetBlank": true,
-          "multi": "preformatted,heading1,heading2,heading3,heading4,heading5,heading6,hyperlink,image,embed,list-item,o-list-item,rtl"
+          "multi": "strong,em"
         }
       },
       "slices": {

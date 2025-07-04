@@ -1,0 +1,135 @@
+'use client';
+import {FC, useEffect, useState} from 'react';
+import {Content} from '@prismicio/client';
+import {PrismicRichText, SliceComponentProps} from '@prismicio/react';
+import {Container} from '@/components/ui/container';
+import {Heading} from '@/components/ui/text';
+import {createClient} from '@/prismicio';
+import Slider from '@/components/features/slider/slider';
+import {PrismicNextImage} from '@prismicio/next';
+
+/**
+ * Props for `CaseStudies`.
+ */
+export type CaseStudiesProps = SliceComponentProps<Content.CaseStudiesSlice>;
+
+/**
+ * Component for "CaseStudies" Slices.
+ */
+const CaseStudies: FC<CaseStudiesProps> = ({slice}) => {
+  const [caseStudies, setCaseStudies] = useState<any[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+
+  useEffect(() => {
+    const fetchCaseStudies = async () => {
+      try {
+        const client = createClient();
+        const data = await client.getAllByType('case_studies', {
+          pageSize: 50,
+          fetchLinks: ['condition.title']
+        });
+        setCaseStudies(data);
+      } catch (err) {
+        setError('Failed to fetch case studies');
+        console.error('Error fetching case studies:', err);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    void fetchCaseStudies();
+  }, []);
+
+  const controlsData = caseStudies.map((caseStudy: any) => ({
+    title: caseStudy.data.client_name,
+  }));
+
+  if (loading) {
+    return (
+        <section data-slice-type={slice.slice_type} data-slice-variation={slice.variation}>
+          <Container className={'lg:py-28 py-16 md:py-24'}>
+            <div className="text-center">Loading case studies...</div>
+          </Container>
+        </section>
+    );
+  }
+
+  if (error) {
+    return (
+        <section data-slice-type={slice.slice_type} data-slice-variation={slice.variation}>
+          <Container className={'lg:py-28 py-16 md:py-24'}>
+            <div className="text-center text-red-500">{error}</div>
+          </Container>
+        </section>
+    );
+  }
+
+  if (slice.variation === 'bento') {
+    return (
+        <section data-slice-type={slice.slice_type} data-slice-variation={slice.variation}>
+          <Container className={'lg:py-28 py-16 md:py-24'}>
+            <Heading as={'h2'}>
+              <PrismicRichText field={slice.primary.heading}/>
+            </Heading>
+          </Container>
+
+          {caseStudies && caseStudies.length > 0 ? (
+              caseStudies.map((caseStudy: any, idx: number) => (
+                  <div key={'case_studies_' + idx}>
+                    {caseStudy.data.client_name}
+                  </div>
+              ))
+          ) : (
+              <div className="text-center mt-10">No Case Studies found</div>
+          )}
+        </section>
+    );
+  }
+
+  if (slice.variation === 'default') {
+    return (
+        <section data-slice-type={slice.slice_type} data-slice-variation={slice.variation}>
+          <Container className={'pt-16 md:pt-24 lg:pt-28 max-w-3xl mx-auto'}>
+            <Heading as={'h2'} className={'text-center content-master'}>
+              <PrismicRichText field={slice.primary.heading}/>
+            </Heading>
+          </Container>
+
+          <div className={'w-full pt-5 md:pt-8 lg:pt-16 pb-16 md:pb-24 lg:pb-28'}>
+            <Slider data={controlsData}>
+              {caseStudies && caseStudies.length > 0 ? (
+                  caseStudies.map((caseStudy: any, idx: number) => (
+                      <div
+                          key={'case_studies_' + idx}
+                          className="relative bg-secondary flex aspect-[9/16] w-72 shrink-0 snap-start scroll-ml-[var(--scroll-padding)] flex-col justify-end overflow-hidden rounded-3xl max-lg:rounded-4xl lg:rounded-4xl sm:aspect-[3/4] sm:w-96"
+                      >
+                        <PrismicNextImage
+                            field={caseStudy.data.feature_image}
+                            className="aspect-[9/16] top-0 h-full w-full object-cover"
+                        />
+                        <div
+                            className="absolute inset-0 rounded-lg bg-gradient-to-t from-primary-950/90 to-transparent max-lg:rounded-4xl lg:rounded-4xl overflow-hidden"/>
+                        <div className={'absolute bottom-0 w-full p-7 md:p-10 lg:p-10 flex flex-col z-10'}>
+                          <div className={'text-white text-3xl'}>{caseStudy.data.client_name}</div>
+                          <div className={'text-primary-300 text-2xl'}>
+                            {caseStudy.data.activity}{' '}
+                            {caseStudy.data?.client_age && <span>({caseStudy.data.client_age})</span>}
+                          </div>
+                          <div className={'text-white text-xl'}>{caseStudy.data.condition.data?.title}</div>
+                        </div>
+                      </div>
+                  ))
+              ) : (
+                  <div className="text-center mt-10">No Case Studies found</div>
+              )}
+            </Slider>
+          </div>
+        </section>
+    );
+  }
+
+  return null;
+};
+
+export default CaseStudies;
