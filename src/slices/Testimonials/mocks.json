@@ -3,13 +3,18 @@
 		"__TYPE__": "SharedSliceContent",
 		"variation": "default",
 		"primary": {
-			"title": {
+			"length": {
+				"__TYPE__": "FieldContent",
+				"value": "10",
+				"type": "Number"
+			},
+			"heading": {
 				"__TYPE__": "StructuredTextContent",
 				"value": [
 					{
 						"type": "paragraph",
 						"content": {
-							"text": "Excepteur eiusmod sunt aliqua ullamco ad esse cupidatat consequat quis minim eiusmod esse ad. Cillum nisi Lorem sunt fugiat consequat. Officia elit elit occaecat et."
+							"text": "Sunt ex voluptate sit et magna nostrud cupidatat velit esse commodo dolore. Et elit dolore cupidatat labore commodo ad consequat elit consequat."
 						}
 					}
 				]

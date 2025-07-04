@@ -1,38 +1,6 @@
 [
 	{
 		"__TYPE__": "SharedSliceContent",
-		"variation": "bento",
-		"primary": {
-			"heading": {
-				"__TYPE__": "StructuredTextContent",
-				"value": [
-					{
-						"type": "paragraph",
-						"content": {
-							"text": "Esse velit excepteur est occaecat enim reprehenderit nostrud sunt dolore occaecat amet esse tempor est. Deserunt dolor laborum sit aliquip esse magna consectetur id."
-						}
-					}
-				]
-			},
-			"link": {
-				"key": "93fffc14-fc91-40d6-99e0-16a26914abec",
-				"__TYPE__": "LinkContent",
-				"value": {
-					"__TYPE__": "ExternalLink",
-					"url": "http://google.com",
-					"text": "receive"
-				}
-			}
-		},
-		"items": [
-			{
-				"__TYPE__": "GroupItemContent",
-				"value": []
-			}
-		]
-	},
-	{
-		"__TYPE__": "SharedSliceContent",
 		"variation": "default",
 		"primary": {
 			"heading": {
@@ -62,8 +30,45 @@
 					"url": "https://slicemachine.dev",
 					"text": "shown"
 				}
+			},
+			"length": {
+				"__TYPE__": "FieldContent",
+				"value": "1",
+				"type": "Number"
 			}
 		},
 		"items": []
+	},
+	{
+		"__TYPE__": "SharedSliceContent",
+		"variation": "bento",
+		"primary": {
+			"heading": {
+				"__TYPE__": "StructuredTextContent",
+				"value": [
+					{
+						"type": "paragraph",
+						"content": {
+							"text": "Esse velit excepteur est occaecat enim reprehenderit nostrud sunt dolore occaecat amet esse tempor est. Deserunt dolor laborum sit aliquip esse magna consectetur id."
+						}
+					}
+				]
+			},
+			"link": {
+				"key": "93fffc14-fc91-40d6-99e0-16a26914abec",
+				"__TYPE__": "LinkContent",
+				"value": {
+					"__TYPE__": "ExternalLink",
+					"url": "http://google.com",
+					"text": "receive"
+				}
+			}
+		},
+		"items": [
+			{
+				"__TYPE__": "GroupItemContent",
+				"value": []
+			}
+		]
 	}
 ]

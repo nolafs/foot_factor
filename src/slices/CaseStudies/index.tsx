@@ -1,12 +1,18 @@
 'use client';
 import {FC, useEffect, useState} from 'react';
-import {Content} from '@prismicio/client';
+import {Content, isFilled} from '@prismicio/client';
 import {PrismicRichText, SliceComponentProps} from '@prismicio/react';
 import {Container} from '@/components/ui/container';
 import {Heading} from '@/components/ui/text';
 import {createClient} from '@/prismicio';
 import Slider from '@/components/features/slider/slider';
-import {PrismicNextImage} from '@prismicio/next';
+import {PrismicNextImage, PrismicNextLink} from '@prismicio/next';
+import cn from 'clsx';
+import {buttonVariants} from '@/components/ui/button';
+import {ArrowRight} from 'lucide-react';
+import Link from 'next/link';
+import BentoWrapper from '@/components/features/bento/bento-wrapper';
+import BentoCard from '@/components/features/bento/bento-card';
 
 /**
  * Props for `CaseStudies`.
@@ -72,17 +78,44 @@ const CaseStudies: FC<CaseStudiesProps> = ({slice}) => {
             <Heading as={'h2'}>
               <PrismicRichText field={slice.primary.heading}/>
             </Heading>
-          </Container>
 
-          {caseStudies && caseStudies.length > 0 ? (
-              caseStudies.map((caseStudy: any, idx: number) => (
-                  <div key={'case_studies_' + idx}>
-                    {caseStudy.data.client_name}
-                  </div>
-              ))
-          ) : (
-              <div className="text-center mt-10">No Case Studies found</div>
-          )}
+
+            <BentoWrapper>
+            {caseStudies && caseStudies.length > 0 ? (
+                caseStudies.map((caseStudy: any, idx: number) => (
+                    <BentoCard key={'case_studies_' + idx} columns={Math.floor(idx / 2) % 2 === 0 ? (idx % 2 === 0 ? 4 : 2) : (idx % 2 === 0 ? 2 : 4)}>
+                      <div
+                          key={'case_studies_' + idx}
+                          className="relative bg-secondary w-full h-full flex overflow-hidden rounded-3xl max-lg:rounded-4xl lg:rounded-4xl"
+                      >
+                        <PrismicNextImage
+                            field={caseStudy.data.feature_image}
+                            className="h-full w-full object-cover"
+                        />
+                        <div
+                            className="absolute inset-0 rounded-lg bg-gradient-to-t from-primary-950/90 to-transparent max-lg:rounded-4xl lg:rounded-4xl overflow-hidden"/>
+                        <div className={'absolute bottom-0 w-full p-7 md:p-10 lg:p-10 flex flex-col z-10'}>
+                          <div className={'text-white text-3xl'}>{caseStudy.data.client_name}</div>
+                          <div className={'text-primary-300 text-2xl'}>
+                            {caseStudy.data.activity}{' '}
+                            {caseStudy.data?.client_age && <span>({caseStudy.data.client_age})</span>}
+                          </div>
+                          <div className={'text-white text-xl'}>{caseStudy.data.condition.data?.title}</div>
+                         <div className={'flex justify-end'}>
+                                <Link href={'/resources/case-studies/' + caseStudy.uid}
+                                      className={cn(buttonVariants({variant: 'default', size: 'icon'}))}>
+                                  <ArrowRight className={'h-4 w-4'} strokeWidth={4}/>
+                                </Link>
+                              </div>
+                        </div>
+                      </div>
+                    </BentoCard>
+                ))
+            ) : (
+                <div className="text-center mt-10">No Case Studies found</div>
+            )}
+            </BentoWrapper>
+          </Container>
         </section>
     );
   }
@@ -117,6 +150,13 @@ const CaseStudies: FC<CaseStudiesProps> = ({slice}) => {
                             {caseStudy.data?.client_age && <span>({caseStudy.data.client_age})</span>}
                           </div>
                           <div className={'text-white text-xl'}>{caseStudy.data.condition.data?.title}</div>
+                          <div className={'flex justify-end'}>
+                                <Link href={'/resources/case-studies/' + caseStudy.uid}
+                                                 className={cn(buttonVariants({variant: 'default', size: 'icon'}))}>
+                                  <ArrowRight className={'h-4 w-4'} strokeWidth={4}/>
+                                </Link>
+                              </div>
+
                         </div>
                       </div>
                   ))

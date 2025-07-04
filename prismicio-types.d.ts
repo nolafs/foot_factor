@@ -1185,6 +1185,8 @@ export type OrthoticsDocument<Lang extends string = string> = prismic.PrismicDoc
 >;
 
 type PageDocumentDataSlicesSlice =
+  | CaseStudiesSlice
+  | TestimonialsSlice
   | TimelineSlice
   | IconNavListSlice
   | TeamCarouselSlice
@@ -2345,6 +2347,16 @@ export interface CaseStudiesSliceDefaultPrimary {
    * - **Documentation**: https://prismic.io/docs/fields/link
    */
   link: prismic.LinkField<string, string, unknown, prismic.FieldState, never>;
+
+  /**
+   * Length field in *CaseStudies → Default → Primary*
+   *
+   * - **Field Type**: Number
+   * - **Placeholder**: *None*
+   * - **API ID Path**: case_studies.default.primary.length
+   * - **Documentation**: https://prismic.io/docs/fields/number
+   */
+  length: prismic.NumberField;
 }
 
 /**
@@ -4403,14 +4415,24 @@ export type TestimonialSlice = prismic.SharedSlice<'testimonial', TestimonialSli
  */
 export interface TestimonialsSliceDefaultPrimary {
   /**
-   * Title field in *Testimonials → Default → Primary*
+   * Heading field in *Testimonials → Default → Primary*
    *
    * - **Field Type**: Rich Text
    * - **Placeholder**: *None*
-   * - **API ID Path**: testimonials.default.primary.title
+   * - **API ID Path**: testimonials.default.primary.heading
    * - **Documentation**: https://prismic.io/docs/fields/rich-text
    */
-  title: prismic.RichTextField;
+  heading: prismic.RichTextField;
+
+  /**
+   * Length field in *Testimonials → Default → Primary*
+   *
+   * - **Field Type**: Number
+   * - **Placeholder**: *None*
+   * - **API ID Path**: testimonials.default.primary.length
+   * - **Documentation**: https://prismic.io/docs/fields/number
+   */
+  length: prismic.NumberField;
 }
 
 /**

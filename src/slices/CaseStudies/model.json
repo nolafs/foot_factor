@@ -31,6 +31,13 @@
             "allowText": true,
             "repeat": false
           }
+        },
+        "length": {
+          "type": "Number",
+          "config": {
+            "label": "Length",
+            "placeholder": ""
+          }
         }
       },
       "items": {}

@@ -12,13 +12,20 @@
       "description": "Default",
       "imageUrl": "",
       "primary": {
-        "title": {
+        "heading": {
           "type": "StructuredText",
           "config": {
-            "label": "Title",
+            "label": "Heading",
             "placeholder": "",
             "allowTargetBlank": true,
             "multi": "strong,em"
+          }
+        },
+        "length": {
+          "type": "Number",
+          "config": {
+            "label": "Length",
+            "placeholder": ""
           }
         }
       },
