@@ -61,7 +61,7 @@ const Section: FC<SectionProps> = ({ slice }) => {
             body={slice.primary.body}
             image={slice.primary.image}
             color={slice.primary.color}
-            style='full'
+            variation={slice.variation}
             slice_type={slice.slice_type}
         />
     );
