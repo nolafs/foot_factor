@@ -36,8 +36,6 @@ export const Steps = ({data}: StepsProps) => {
         start: 'top bottom',
         end: 'bottom top',
         scrub: 0.3,
-        //pin: true,
-        //pinSpacing: true,
         onUpdate: (self) => {
           const progress = Math.round(self.progress * 100);
           setCurrentProgress(progress);
@@ -47,6 +45,20 @@ export const Steps = ({data}: StepsProps) => {
         }
       }
     });
+
+    gsap.to({}, {
+      scrollTrigger: {
+        trigger: '#progress',
+        start: 'center center',
+        end: 'bottom bottom',
+        endTrigger: contentRef.current,
+        scrub: 0.3,
+        pin: true,
+        pinSpacing: false,
+        markers: true,
+      }
+    });
+
 
 
   }, {scope: contentRef, dependencies: [data]});
@@ -58,9 +70,9 @@ export const Steps = ({data}: StepsProps) => {
 
   return (
       <Container>
-       <div ref={contentRef} className={'relative w-full h-svh isolate overflow-hidden'}>
+       <div ref={contentRef} className={'relative w-full isolate'}>
 
-         <div className={'absolute top-0 left-0 w-full h-full z-10 flex justify-center items-center'}>
+         <div id={'progress'} className={'absolute top-0 left-0 w-full z-10 flex h-svh  justify-center items-center'}>
            <StepsProgress percentage={currentProgress} />
          </div>
 
@@ -87,10 +99,11 @@ const Step = ({title, description, step_label, image, stepNum, onStepActive}: St
   useGSAP(() => {
     if (!cardRef.current) return;
 
+
     ScrollTrigger.create({
       trigger: cardRef.current,
       start: 'top top',
-      end: 'bottom top',
+      end: '+=100%',
       pin: true,
       pinSpacing: true,
       anticipatePin: 1,
