@@ -72,11 +72,11 @@ export const Steps = ({data}: StepsProps) => {
       <Container>
        <div ref={contentRef} className={'relative w-full isolate'}>
 
-         <div id={'progress'} className={'absolute top-0 left-0 w-full z-10 flex h-svh  justify-center items-center'}>
+         <div id={'progress'} className={'absolute top-0 left-0 w-full z-10 flex h-svh  justify-center items-center pointer-events-none'}>
            <StepsProgress percentage={currentProgress} text={currentStep}/>
          </div>
 
-         <div className={'absolute top-0 left-1/2 -ml-px h-full border-l-2 border-l-primary-100'}></div>
+         <div className={'absolute top-0 left-1/2 -ml-px h-full border-l-2 border-l-primary-100 pointer-events-none'}></div>
 
           <ul ref={listRef} className={'w-full flex flex-col'}>
               {data.map((step, index) => (
@@ -117,13 +117,31 @@ const Step = ({title, description, step_label, image, stepNum, onStepActive}: St
       }
     });
 
+    gsap.fromTo(cardRef.current, {
+      opacity: 0,
+      y: 50
+    }, {
+      opacity: 1,
+      y: 0,
+      duration: 1,
+      ease: 'power2.out',
+      scrollTrigger: {
+        trigger: cardRef.current,
+        start: 'top center',
+        end: '50% center',
+        scrub: 0.3,
+        toggleActions: 'play none none reverse',
+        //markers: true
+      }
+    });
+
   }, {scope: cardRef});
 
   return (
-      <li ref={cardRef} className="w-full h-svh grid grid-cols-1 md:grid-cols-2 gap-x-10 md:gap-x-36 justify-center items-center">
+      <li ref={cardRef} className="w-full h-svh grid grid-cols-1 md:grid-cols-2 gap-x-10 md:gap-x-48 justify-center items-center">
         <div className={'flex flex-col'}>
-          <sub>
-            <span className="text-primary-500 font-bold text-2xl">{step_label}</span> <span className="text-slate-500 font-bold text-2xl">{stepNum ?? stepNum < 10 ? '0' + stepNum : stepNum}</span>
+          <sub className={'text-primary-500 font-semibold mb-3 text-2xl'}>
+            <span>{step_label}</span> <span>{stepNum ?? stepNum < 10 ? '0' + stepNum : stepNum}</span>
           </sub>
         <SectionContent heading={title} body={description} className={'w-full'} />
         </div>
