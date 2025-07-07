@@ -6,11 +6,12 @@ import {useGSAP} from '@gsap/react';
 
 const StepsProgress = ({
                             percentage = 0,
-                            size = 120,
-                            strokeWidth = 8,
-                            color = '#3b82f6',
-                            backgroundColor = '#e5e7eb',
-                            textColor = '#3b82f6',
+                            size = 100,
+                            strokeWidth = 3,
+                            color = '#6C9EBF',
+                            backgroundColor = '#E9EFF5',
+                            textColor = '#6C9EBF',
+                            text = 0,
                             showText = true,
                             duration = 1.5,
                             className = '',
@@ -75,7 +76,7 @@ const StepsProgress = ({
               fill="none"
               stroke={backgroundColor}
               strokeWidth={strokeWidth}
-              opacity={0.3}
+              opacity={1}
           />
 
           {/* Progress Circle */}
@@ -93,6 +94,13 @@ const StepsProgress = ({
               transform={`rotate(-90 ${center} ${center})`}
               className="transition-all duration-300"
           />
+
+          <circle
+              cx={center}
+              cy={center}
+              r={radius}
+              fill="white"
+          />
         </svg>
 
         {/* Progress Text */}
@@ -106,7 +114,7 @@ const StepsProgress = ({
                 fontSize: `${size * 0.2}px`
               }}
           >
-            0
+            {text !== 0 ? text < 10 ? '0' +text : text : `${percentage}%`}
           </span>
             </div>
         )}

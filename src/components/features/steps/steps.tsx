@@ -34,7 +34,7 @@ export const Steps = ({data}: StepsProps) => {
       scrollTrigger: {
         trigger: contentRef.current,
         start: 'top bottom',
-        end: 'bottom top',
+        end: 'bottom bottom',
         scrub: 0.3,
         onUpdate: (self) => {
           const progress = Math.round(self.progress * 100);
@@ -73,12 +73,14 @@ export const Steps = ({data}: StepsProps) => {
        <div ref={contentRef} className={'relative w-full isolate'}>
 
          <div id={'progress'} className={'absolute top-0 left-0 w-full z-10 flex h-svh  justify-center items-center'}>
-           <StepsProgress percentage={currentProgress} />
+           <StepsProgress percentage={currentProgress} text={currentStep}/>
          </div>
+
+         <div className={'absolute top-0 left-1/2 -ml-px h-full border-l-2 border-l-primary-100'}></div>
 
           <ul ref={listRef} className={'w-full flex flex-col'}>
               {data.map((step, index) => (
-                  <Step key={index} {...step} stepNum={index + 1} onStepActive={updateStep} totalSteps={data.length} />
+                  <Step key={index} {...step} stepNum={index + 1} onStepActive={(step) => updateStep(step)} totalSteps={data.length} />
               ))}
           </ul>
        </div>
@@ -107,6 +109,12 @@ const Step = ({title, description, step_label, image, stepNum, onStepActive}: St
       pin: true,
       pinSpacing: true,
       anticipatePin: 1,
+      onEnter: () => {
+        onStepActive(stepNum);
+      },
+      onEnterBack: () => {
+        onStepActive(stepNum);
+      }
     });
 
   }, {scope: cardRef});
