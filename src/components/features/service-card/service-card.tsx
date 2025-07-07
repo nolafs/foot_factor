@@ -47,7 +47,7 @@ export const ServiceCard = ({service}: ServiceCardProps) => {
       }
     };
 
-    fetchServiceData();
+    void fetchServiceData();
   }, [service.id, service.uid]);
 
   if (!service.uid) {
@@ -67,7 +67,7 @@ export const ServiceCard = ({service}: ServiceCardProps) => {
     return (
         <div
             className={'w-full p-8 bg-white rounded-4xl outline outline-1 outline-offset-[-1px] outline-primary-200 flex flex-col justify-center h-full items-center'}>
-          <div className="text-red-500">{error || 'Service not found'}</div>
+          <div className="text-red-500">{error ?? 'Service not found'}</div>
         </div>
     );
   }

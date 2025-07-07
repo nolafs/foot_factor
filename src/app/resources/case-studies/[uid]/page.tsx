@@ -18,10 +18,15 @@ export async function generateMetadata(
   const { uid } = await params;
   const page = await client.getByUID('case_studies', uid).catch(() => notFound());
 
+
   let image = null;
   let pageTitle = '';
   const parentMeta = await parent;
   const parentOpenGraph: ResolvedOpenGraph | null = parentMeta.openGraph ?? null;
+
+  if( page.data?.feature_image?.url) {
+    image = `${page.data.feature_image.url}?w=1200&h=630&fit=crop&fm=webp&q=80`;
+  }
 
   if (parentMeta?.title) {
     pageTitle = parentMeta.title.absolute;

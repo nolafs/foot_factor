@@ -173,7 +173,7 @@ const Testimonials: FC<TestimonialsProps> = ({slice}) => {
                       >
                         {column.map((testimonial) => (
                             <figure
-                                key={testimonial.id || testimonial.data.client_name}
+                                key={testimonial.id ?? testimonial.data.client_name}
                                 className="rounded-2xl bg-white p-6 shadow-lg ring-1 ring-gray-900/5"
                             >
                               <blockquote className="text-gray-900">
