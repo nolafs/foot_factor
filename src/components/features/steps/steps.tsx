@@ -55,7 +55,7 @@ export const Steps = ({data}: StepsProps) => {
         scrub: 0.3,
         pin: true,
         pinSpacing: false,
-        markers: true,
+        //markers: true,
       }
     });
 
