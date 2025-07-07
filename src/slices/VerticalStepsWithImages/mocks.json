@@ -1,0 +1,284 @@
+[
+	{
+		"__TYPE__": "SharedSliceContent",
+		"variation": "default",
+		"primary": {
+			"steps": {
+				"__TYPE__": "GroupContentType",
+				"value": [
+					{
+						"__TYPE__": "GroupItemContent",
+						"value": [
+							[
+								"step_label",
+								{
+									"__TYPE__": "FieldContent",
+									"type": "Text",
+									"value": "Step"
+								}
+							],
+							[
+								"description",
+								{
+									"__TYPE__": "StructuredTextContent",
+									"value": [
+										{
+											"type": "list-item",
+											"content": {
+												"text": "Discussion about your foot concerns, lifestyle, and activity level.",
+												"spans": []
+											},
+											"direction": "ltr"
+										},
+										{
+											"type": "list-item",
+											"content": {
+												"text": "3D scanning & pressure mapping to analyze foot structure and movement.",
+												"spans": []
+											},
+											"direction": "ltr"
+										},
+										{
+											"type": "list-item",
+											"content": {
+												"text": "Gait analysis to detect imbalances like overpronation or arch instability.",
+												"spans": []
+											},
+											"direction": "ltr"
+										},
+										{
+											"type": "list-item",
+											"content": {
+												"text": "Custom plan for orthotics based on your biomechanics and footwear.",
+												"spans": []
+											},
+											"direction": "ltr"
+										}
+									]
+								}
+							],
+							[
+								"image",
+								{
+									"__TYPE__": "ImageContent",
+									"provider": "imgix",
+									"url": "https://images.unsplash.com/photo-1589278787442-d2840f4024f1?crop=entropy&cs=srgb&fm=jpg&ixid=M3wzMzc0NjN8MHwxfHNlYXJjaHwxN3x8Y2xpbmljfGVufDB8fHx8MTc1MTg5MDYyMXww&ixlib=rb-4.1.0&q=85",
+									"alt": "woman in white blazer and white pants standing beside white table",
+									"origin": {
+										"id": "9Wa1HgE1XlA",
+										"url": "https://images.unsplash.com/photo-1589278787442-d2840f4024f1?crop=entropy&cs=srgb&fm=jpg&ixid=M3wzMzc0NjN8MHwxfHNlYXJjaHwxN3x8Y2xpbmljfGVufDB8fHx8MTc1MTg5MDYyMXww&ixlib=rb-4.1.0&q=85",
+										"width": 9685,
+										"height": 5906
+									},
+									"width": 9685,
+									"height": 5906,
+									"edit": {
+										"background": "transparent",
+										"zoom": 1,
+										"crop": {
+											"x": 0,
+											"y": 0
+										}
+									}
+								}
+							],
+							[
+								"title",
+								{
+									"__TYPE__": "FieldContent",
+									"type": "Text",
+									"value": "Consultation & Gait Analysis"
+								}
+							]
+						],
+						"key": "a0d6c0a2-3911-4b3b-a787-38ee44539658"
+					},
+					{
+						"__TYPE__": "GroupItemContent",
+						"value": [
+							[
+								"title",
+								{
+									"__TYPE__": "FieldContent",
+									"type": "Text",
+									"value": "Custom Design & Material Selection"
+								}
+							],
+							[
+								"step_label",
+								{
+									"__TYPE__": "FieldContent",
+									"type": "Text",
+									"value": "Step"
+								}
+							],
+							[
+								"description",
+								{
+									"__TYPE__": "StructuredTextContent",
+									"value": [
+										{
+											"type": "list-item",
+											"content": {
+												"text": "Digital modelling using CAD technology for a precision fit.",
+												"spans": []
+											},
+											"direction": "ltr"
+										},
+										{
+											"type": "list-item",
+											"content": {
+												"text": "Material selection based on use case:",
+												"spans": []
+											},
+											"direction": "ltr"
+										},
+										{
+											"type": "list-item",
+											"content": {
+												"text": "Carbon fibre/Kevlar for sports.",
+												"spans": []
+											},
+											"direction": "ltr"
+										},
+										{
+											"type": "list-item",
+											"content": {
+												"text": "Shock-absorbing foam for impact reduction.",
+												"spans": []
+											},
+											"direction": "ltr"
+										},
+										{
+											"type": "list-item",
+											"content": {
+												"text": "Memory foam/gel for medical support.",
+												"spans": []
+											},
+											"direction": "ltr"
+										},
+										{
+											"type": "list-item",
+											"content": {
+												"text": "Reinforcements added for stability, durability, and comfort.",
+												"spans": []
+											},
+											"direction": "ltr"
+										}
+									]
+								}
+							],
+							[
+								"image",
+								{
+									"__TYPE__": "ImageContent",
+									"provider": "imgix",
+									"url": "https://images.unsplash.com/photo-1589279003513-467d320f47eb?crop=entropy&cs=srgb&fm=jpg&ixid=M3wzMzc0NjN8MHwxfHNlYXJjaHw2fHxjbGluaWN8ZW58MHx8fHwxNzUxODkwNjIxfDA&ixlib=rb-4.1.0&q=85",
+									"alt": "man in white dress shirt sitting on white chair in front of computer",
+									"origin": {
+										"id": "3ewkNkfJj2k",
+										"url": "https://images.unsplash.com/photo-1589279003513-467d320f47eb?crop=entropy&cs=srgb&fm=jpg&ixid=M3wzMzc0NjN8MHwxfHNlYXJjaHw2fHxjbGluaWN8ZW58MHx8fHwxNzUxODkwNjIxfDA&ixlib=rb-4.1.0&q=85",
+										"width": 8256,
+										"height": 5504
+									},
+									"width": 8256,
+									"height": 5504,
+									"edit": {
+										"background": "transparent",
+										"zoom": 1,
+										"crop": {
+											"x": 0,
+											"y": 0
+										}
+									}
+								}
+							]
+						],
+						"key": "ab48b0d7-09e9-4fc8-bc5f-fa863e6eeb2d"
+					},
+					{
+						"__TYPE__": "GroupItemContent",
+						"value": [
+							[
+								"title",
+								{
+									"__TYPE__": "FieldContent",
+									"type": "Text",
+									"value": "On-Site Precision Manufacturing"
+								}
+							],
+							[
+								"description",
+								{
+									"__TYPE__": "StructuredTextContent",
+									"value": [
+										{
+											"type": "list-item",
+											"content": {
+												"text": "3D milling or printing for same-day production.",
+												"spans": []
+											},
+											"direction": "ltr"
+										},
+										{
+											"type": "list-item",
+											"content": {
+												"text": "Heat-molded shaping for a natural foot contour.",
+												"spans": []
+											},
+											"direction": "ltr"
+										},
+										{
+											"type": "list-item",
+											"content": {
+												"text": "Layering and finishing for comfort, hygiene, and longevity.",
+												"spans": []
+											},
+											"direction": "ltr"
+										}
+									]
+								}
+							],
+							[
+								"image",
+								{
+									"__TYPE__": "ImageContent",
+									"provider": "imgix",
+									"url": "https://images.unsplash.com/photo-1612375689547-b5351e63050b?crop=entropy&cs=srgb&fm=jpg&ixid=M3wzMzc0NjN8MHwxfHNlYXJjaHwxMHx8Y2xpbmljfGVufDB8fHx8MTc1MTg5MDYyMXww&ixlib=rb-4.1.0&q=85",
+									"alt": "black flat screen tv on white wooden tv rack",
+									"origin": {
+										"id": "xayCTz6N2nM",
+										"url": "https://images.unsplash.com/photo-1612375689547-b5351e63050b?crop=entropy&cs=srgb&fm=jpg&ixid=M3wzMzc0NjN8MHwxfHNlYXJjaHwxMHx8Y2xpbmljfGVufDB8fHx8MTc1MTg5MDYyMXww&ixlib=rb-4.1.0&q=85",
+										"width": 7762,
+										"height": 5178
+									},
+									"width": 7762,
+									"height": 5178,
+									"edit": {
+										"background": "transparent",
+										"zoom": 1,
+										"crop": {
+											"x": 0,
+											"y": 0
+										}
+									}
+								}
+							],
+							[
+								"step_label",
+								{
+									"__TYPE__": "FieldContent",
+									"type": "Text",
+									"value": "Step"
+								}
+							]
+						],
+						"key": "ca7fe179-0ddf-4c33-8eaa-7634f9cd1057"
+					}
+				],
+				"key": "ce1e39f9-2863-4a82-8916-5ec1721c4ce2"
+			}
+		},
+		"items": []
+	}
+]

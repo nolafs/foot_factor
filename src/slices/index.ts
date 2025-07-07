@@ -16,4 +16,5 @@ export const components = {
   testimonial: dynamic(() => import('./Testimonial')),
   testimonials: dynamic(() => import('./Testimonials')),
   timeline: dynamic(() => import('./Timeline')),
+  vertical_steps_with_images: dynamic(() => import('./VerticalStepsWithImages')),
 };

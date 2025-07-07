@@ -1185,6 +1185,7 @@ export type OrthoticsDocument<Lang extends string = string> = prismic.PrismicDoc
 >;
 
 type PageDocumentDataSlicesSlice =
+  | VerticalStepsWithImagesSlice
   | CaseStudiesSlice
   | TestimonialsSlice
   | TimelineSlice
@@ -1562,7 +1563,7 @@ export type PostsDocument<Lang extends string = string> = prismic.PrismicDocumen
   Lang
 >;
 
-type ServicesDocumentDataSlicesSlice = FaqsSlice | SectionSlice;
+type ServicesDocumentDataSlicesSlice = VerticalStepsWithImagesSlice | FaqsSlice | SectionSlice;
 
 /**
  * Content for Services documents
@@ -3639,7 +3640,7 @@ export interface SectionSliceContentWithImageColumnListPrimaryListItem {
    * - **API ID Path**: section.contentWithImageColumnList.primary.list[].color
    * - **Documentation**: https://prismic.io/docs/fields/select
    */
-  color: prismic.SelectField<'default' | 'Accent'>;
+  color: prismic.SelectField<'default' | 'Accent' | 'Primary'>;
 }
 
 /**
@@ -3821,7 +3822,7 @@ export interface SectionSliceContentWithImageColumnPrimary {
    * - **API ID Path**: section.contentWithImageColumn.primary.color
    * - **Documentation**: https://prismic.io/docs/fields/select
    */
-  color: prismic.SelectField<'default' | 'Accent'>;
+  color: prismic.SelectField<'default' | 'Accent' | 'Primary'>;
 }
 
 /**
@@ -4118,6 +4119,64 @@ export type SectionSliceContentImageFloatRight = prismic.SharedSliceVariation<
 >;
 
 /**
+ * Primary content in *Section → Content-Image-two-columns → Primary*
+ */
+export interface SectionSliceContentImageTwoColumnsPrimary {
+  /**
+   * Heading field in *Section → Content-Image-two-columns → Primary*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: section.contentImageTwoColumns.primary.heading
+   * - **Documentation**: https://prismic.io/docs/fields/text
+   */
+  heading: prismic.KeyTextField;
+
+  /**
+   * Body field in *Section → Content-Image-two-columns → Primary*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: section.contentImageTwoColumns.primary.body
+   * - **Documentation**: https://prismic.io/docs/fields/rich-text
+   */
+  body: prismic.RichTextField;
+
+  /**
+   * Image field in *Section → Content-Image-two-columns → Primary*
+   *
+   * - **Field Type**: Image
+   * - **Placeholder**: *None*
+   * - **API ID Path**: section.contentImageTwoColumns.primary.image
+   * - **Documentation**: https://prismic.io/docs/fields/image
+   */
+  image: prismic.ImageField<never>;
+
+  /**
+   * Color field in *Section → Content-Image-two-columns → Primary*
+   *
+   * - **Field Type**: Select
+   * - **Placeholder**: *None*
+   * - **API ID Path**: section.contentImageTwoColumns.primary.color
+   * - **Documentation**: https://prismic.io/docs/fields/select
+   */
+  color: prismic.SelectField<'default' | 'Primary' | 'Accent'>;
+}
+
+/**
+ * Content-Image-two-columns variation for Section Slice
+ *
+ * - **API ID**: `contentImageTwoColumns`
+ * - **Description**: Default
+ * - **Documentation**: https://prismic.io/docs/slices
+ */
+export type SectionSliceContentImageTwoColumns = prismic.SharedSliceVariation<
+  'contentImageTwoColumns',
+  Simplify<SectionSliceContentImageTwoColumnsPrimary>,
+  never
+>;
+
+/**
  * Slice variation for *Section*
  */
 type SectionSliceVariation =
@@ -4127,7 +4186,8 @@ type SectionSliceVariation =
   | SectionSliceContentWithImageColumnList
   | SectionSliceContentWithImageFull
   | SectionSliceContentImageFloatText
-  | SectionSliceContentImageFloatRight;
+  | SectionSliceContentImageFloatRight
+  | SectionSliceContentImageTwoColumns;
 
 /**
  * Section Shared Slice
@@ -4559,6 +4619,96 @@ type TimelineSliceVariation = TimelineSliceVerticalWithImages;
  */
 export type TimelineSlice = prismic.SharedSlice<'timeline', TimelineSliceVariation>;
 
+/**
+ * Item in *VerticalStepsWithImages → Default → Primary → Steps*
+ */
+export interface VerticalStepsWithImagesSliceDefaultPrimaryStepsItem {
+  /**
+   * Step Label field in *VerticalStepsWithImages → Default → Primary → Steps*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: vertical_steps_with_images.default.primary.steps[].step_label
+   * - **Documentation**: https://prismic.io/docs/fields/text
+   */
+  step_label: prismic.KeyTextField;
+
+  /**
+   * Title field in *VerticalStepsWithImages → Default → Primary → Steps*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: vertical_steps_with_images.default.primary.steps[].title
+   * - **Documentation**: https://prismic.io/docs/fields/text
+   */
+  title: prismic.KeyTextField;
+
+  /**
+   * Description field in *VerticalStepsWithImages → Default → Primary → Steps*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: vertical_steps_with_images.default.primary.steps[].description
+   * - **Documentation**: https://prismic.io/docs/fields/rich-text
+   */
+  description: prismic.RichTextField;
+
+  /**
+   * Image field in *VerticalStepsWithImages → Default → Primary → Steps*
+   *
+   * - **Field Type**: Image
+   * - **Placeholder**: *None*
+   * - **API ID Path**: vertical_steps_with_images.default.primary.steps[].image
+   * - **Documentation**: https://prismic.io/docs/fields/image
+   */
+  image: prismic.ImageField<never>;
+}
+
+/**
+ * Primary content in *VerticalStepsWithImages → Default → Primary*
+ */
+export interface VerticalStepsWithImagesSliceDefaultPrimary {
+  /**
+   * Steps field in *VerticalStepsWithImages → Default → Primary*
+   *
+   * - **Field Type**: Group
+   * - **Placeholder**: *None*
+   * - **API ID Path**: vertical_steps_with_images.default.primary.steps[]
+   * - **Documentation**: https://prismic.io/docs/fields/repeatable-group
+   */
+  steps: prismic.GroupField<Simplify<VerticalStepsWithImagesSliceDefaultPrimaryStepsItem>>;
+}
+
+/**
+ * Default variation for VerticalStepsWithImages Slice
+ *
+ * - **API ID**: `default`
+ * - **Description**: Standard vertical process flow with steps, descriptions, and images placed beside each step.
+ * - **Documentation**: https://prismic.io/docs/slices
+ */
+export type VerticalStepsWithImagesSliceDefault = prismic.SharedSliceVariation<
+  'default',
+  Simplify<VerticalStepsWithImagesSliceDefaultPrimary>,
+  never
+>;
+
+/**
+ * Slice variation for *VerticalStepsWithImages*
+ */
+type VerticalStepsWithImagesSliceVariation = VerticalStepsWithImagesSliceDefault;
+
+/**
+ * VerticalStepsWithImages Shared Slice
+ *
+ * - **API ID**: `vertical_steps_with_images`
+ * - **Description**: *None*
+ * - **Documentation**: https://prismic.io/docs/slices
+ */
+export type VerticalStepsWithImagesSlice = prismic.SharedSlice<
+  'vertical_steps_with_images',
+  VerticalStepsWithImagesSliceVariation
+>;
+
 declare module '@prismicio/client' {
   interface CreateClient {
     (repositoryNameOrEndpoint: string, options?: prismic.ClientConfig): prismic.Client<AllDocumentTypes>;
@@ -4711,6 +4861,7 @@ declare module '@prismicio/client' {
       SectionSliceContentWithImageFullPrimary,
       SectionSliceContentImageFloatTextPrimary,
       SectionSliceContentImageFloatRightPrimary,
+      SectionSliceContentImageTwoColumnsPrimary,
       SectionSliceVariation,
       SectionSliceDefault,
       SectionSliceContentWithLeadButtons,
@@ -4719,6 +4870,7 @@ declare module '@prismicio/client' {
       SectionSliceContentWithImageFull,
       SectionSliceContentImageFloatText,
       SectionSliceContentImageFloatRight,
+      SectionSliceContentImageTwoColumns,
       TeamCarouselSlice,
       TeamCarouselSliceDefaultPrimaryMembersItem,
       TeamCarouselSliceDefaultPrimary,
@@ -4740,6 +4892,11 @@ declare module '@prismicio/client' {
       TimelineSliceVerticalWithImagesPrimary,
       TimelineSliceVariation,
       TimelineSliceVerticalWithImages,
+      VerticalStepsWithImagesSlice,
+      VerticalStepsWithImagesSliceDefaultPrimaryStepsItem,
+      VerticalStepsWithImagesSliceDefaultPrimary,
+      VerticalStepsWithImagesSliceVariation,
+      VerticalStepsWithImagesSliceDefault,
     };
   }
 }

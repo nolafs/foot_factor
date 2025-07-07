@@ -1,11 +1,10 @@
 'use client';
-import {type ImageField, type KeyTextField, LinkField, type RichTextField, type SelectField} from '@prismicio/client';
+import {type ImageField, type KeyTextField,  type RichTextField, type SelectField} from '@prismicio/client';
 import React from 'react';
 import {Container} from '@/components/ui/container';
-import {PrismicRichText} from '@prismicio/react';
-import ButtonRow from '@/components/ui/button-row';
 import {PrismicNextImage} from '@prismicio/next';
 import cn from 'clsx';
+import SectionContent from '@/components/features/section/section-content';
 
 
 interface SectionDefaultProps {
@@ -40,19 +39,7 @@ export const SectionContentColumnWithImage = ({as = 'section',heading, body, ima
                 )}
             </div>)}
             <div className={'flex flex-col md:flex-row pt-16 md:pt-24 lg:py-32'}>
-                <div className={'w-full sm:w-full md:w-1/4 lg:w-5/12'}>
-                    <h2 className={cn('font-heading mb-5 font-medium text-2xl md:text-3xl lg:text-4xl',
-                        color === 'Primary' && 'text-primary-500',
-                        )}>{heading}</h2>
-                </div>
-
-                <div className={cn('w-full flex flex-col lg:w-8/12 prose prose-sm md:prose-base lg:prose-lg max-w-none',
-                    'prose-a:text-accent prose-a:no-underline hover:prose-a:underline',
-                    'prose-strong:text-primary-950 prose-headings:!text-primary-500 prose-headings:mt-0 text-primary-500 ',
-                    color === 'Primary' && 'prose-strong:text-primary-400 prose-headings:!text-primary-300 prose-p:!text-primary-300 prose-ul:!text-primary-300 prose-headings:mt-0 text-primary-500 ',
-                    )}>
-                    <PrismicRichText field={body}/>
-                </div>
+                <SectionContent body={body} heading={heading} color={color?.toString()}/>
             </div>
         </Container>
       </Tag>

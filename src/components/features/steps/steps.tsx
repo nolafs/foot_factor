@@ -1,0 +1,120 @@
+'use client';
+import React, {useState} from 'react';
+import {VerticalStepsWithImagesSliceDefaultPrimaryStepsItem} from '@/prismic-types';
+import SectionContent from '@/components/features/section/section-content';
+import gsap from 'gsap';
+import ScrollTrigger from 'gsap/ScrollTrigger';
+import {useGSAP} from '@gsap/react';
+import {PrismicNextImage} from '@prismicio/next';
+import {Container} from '@/components/ui/container';
+import StepsProgress from '@/components/features/steps/steps-progress';
+
+if(typeof window !== 'undefined') {
+  gsap.registerPlugin(ScrollTrigger);
+}
+
+interface StepsProps {
+    data: VerticalStepsWithImagesSliceDefaultPrimaryStepsItem[]
+}
+
+export const Steps = ({data}: StepsProps) => {
+
+  const contentRef = React.useRef<HTMLDivElement>(null);
+  const listRef = React.useRef<HTMLUListElement>(null);
+  const [currentProgress, setCurrentProgress] = useState(0);
+  const [currentStep, setCurrentStep] = useState(1);
+
+  useGSAP(() => {
+
+    if (!contentRef.current || !listRef.current) return;
+
+    // Overall progress based on scroll through entire steps section
+    gsap.to({}, {
+      ease: 'none',
+      scrollTrigger: {
+        trigger: contentRef.current,
+        start: 'top bottom',
+        end: 'bottom top',
+        scrub: 0.3,
+        //pin: true,
+        //pinSpacing: true,
+        onUpdate: (self) => {
+          const progress = Math.round(self.progress * 100);
+          setCurrentProgress(progress);
+        },
+        onRefresh: () => {
+          setCurrentProgress(0);
+        }
+      }
+    });
+
+
+  }, {scope: contentRef, dependencies: [data]});
+
+  const updateStep = React.useCallback((stepNumber: number) => {
+    setCurrentStep(stepNumber);
+  }, []);
+
+
+  return (
+      <Container>
+       <div ref={contentRef} className={'relative w-full h-svh isolate overflow-hidden'}>
+
+         <div className={'absolute top-0 left-0 w-full h-full z-10 flex justify-center items-center'}>
+           <StepsProgress percentage={currentProgress} />
+         </div>
+
+          <ul ref={listRef} className={'w-full flex flex-col'}>
+              {data.map((step, index) => (
+                  <Step key={index} {...step} stepNum={index + 1} onStepActive={updateStep} totalSteps={data.length} />
+              ))}
+          </ul>
+       </div>
+      </Container>
+  )
+}
+
+interface StepProps extends VerticalStepsWithImagesSliceDefaultPrimaryStepsItem {
+  stepNum: number;
+  totalSteps: number;
+  onStepActive: (stepNumber: number) => void;
+}
+
+const Step = ({title, description, step_label, image, stepNum, onStepActive}: StepProps) => {
+
+  const cardRef = React.useRef<HTMLLIElement>(null);
+
+  useGSAP(() => {
+    if (!cardRef.current) return;
+
+    ScrollTrigger.create({
+      trigger: cardRef.current,
+      start: 'top top',
+      end: 'bottom top',
+      pin: true,
+      pinSpacing: true,
+      anticipatePin: 1,
+    });
+
+  }, {scope: cardRef});
+
+  return (
+      <li ref={cardRef} className="w-full h-svh grid grid-cols-1 md:grid-cols-2 gap-x-10 md:gap-x-36 justify-center items-center">
+        <div className={'flex flex-col'}>
+          <sub>
+            <span className="text-primary-500 font-bold text-2xl">{step_label}</span> <span className="text-slate-500 font-bold text-2xl">{stepNum ?? stepNum < 10 ? '0' + stepNum : stepNum}</span>
+          </sub>
+        <SectionContent heading={title} body={description} className={'w-full'} />
+        </div>
+        <div className="flex justify-center items-center">
+        {image && (
+          <div className="aspect-h-1 aspect-w-1 w-full h-full max-h-[700px] max-w-[700px]">
+            <PrismicNextImage field={image}  className="w-full h-full object-cover rounded-4xl" />
+          </div>
+        )}
+        </div>
+      </li>
+  );
+}
+
+export default Steps;

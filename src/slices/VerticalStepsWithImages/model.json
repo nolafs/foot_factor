@@ -1,0 +1,52 @@
+{
+  "type": "SharedSlice",
+  "id": "vertical_steps_with_images",
+  "name": "VerticalStepsWithImages",
+  "variations": [
+    {
+      "id": "default",
+      "name": "Default",
+      "description": "Standard vertical process flow with steps, descriptions, and images placed beside each step.",
+      "version": "initial",
+      "imageUrl": "",
+      "docURL": "...",
+      "primary": {
+        "steps": {
+          "type": "Group",
+          "config": {
+            "label": "Steps",
+            "fields": {
+              "step_label": {
+                "type": "Text",
+                "config": {
+                  "label": "Step Label"
+                }
+              },
+              "title": {
+                "type": "Text",
+                "config": {
+                  "label": "Title",
+                  "placeholder": ""
+                }
+              },
+              "description": {
+                "type": "StructuredText",
+                "config": {
+                  "multi": "paragraph,strong,em,hyperlink,list-item,o-list-item",
+                  "label": "Description"
+                }
+              },
+              "image": {
+                "type": "Image",
+                "config": {
+                  "label": "Image"
+                }
+              }
+            }
+          }
+        }
+      },
+      "items": {}
+    }
+  ]
+}

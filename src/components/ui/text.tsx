@@ -1,20 +1,23 @@
 import {cn} from '@/lib/utils';
+import {SelectField} from '@prismicio/client';
 
 
 type HeadingProps = {
   as?: 'div' | 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6';
   dark?: boolean;
   primary?: boolean;
+  color?: SelectField | string | undefined;
 } & React.ComponentPropsWithoutRef<'div' | 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6'>;
 
-export function Heading({ className, as: Element = 'h2', dark = false, primary = false, ...props }: HeadingProps) {
+export function Heading({ className, as: Element = 'h2', dark = false, primary = false, color, ...props }: HeadingProps) {
   return (
     <Element
       {...props}
       data-dark={dark ? 'true' : undefined}
       className={cn(
-        className,
         primary ? `font-medium font-heading ${dark && 'text-white'}  text-3xl sm:text-4xl md:text-5xl mb-10 leading-normal lg:text-5xl xl:text-6xl lg:leading-[72px]` :'text-4xl font-heading font-medium tracking-tighter text-primary sm:text-6xl',
+        className,
+        color === 'Primary' && 'text-primary-500',
       )}
     />
   );
@@ -37,10 +40,16 @@ export function Lead({ className, ...props }: React.ComponentPropsWithoutRef<'p'
   return <p className={cn(className, 'text-lg sm:text-xl font-medium text-slate-500')} {...props} />;
 }
 
-export function Body({className, ...props}: React.ComponentPropsWithoutRef<'div'>) {
-  return <div className={cn(className, 'w-full flex flex-col' +
+type BodyProps = {
+  className?: string;
+  color?: SelectField | string | undefined;
+}
+
+export function Body({className, color, ...props}: React.ComponentPropsWithoutRef<'div'> & BodyProps) {
+  return <div className={cn('w-full flex flex-col', className,
       'prose prose-sm md:prose-base lg:prose-lg max-w-none',
       'prose-a:text-accent prose-a:no-underline hover:prose-a:underline',
-      'prose-strong:text-primary-950 prose-headings:!text-primary-950 prose-headings:mt-0 text-slate-500 '
+      color !== 'Primary' && 'prose-strong:text-primary-950 prose-headings:!text-primary-950 prose-headings:mt-0 text-slate-500 ',
+      color === 'Primary' && 'prose-strong:!text-primary-400 prose-headings:!text-primary-300 prose-p:!text-primary-300 prose-ul:!text-primary-300 prose-headings:mt-0 text-primary-500 '
   )} {...props} />;
 }

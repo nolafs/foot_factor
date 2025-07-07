@@ -40,9 +40,11 @@ export const SectionContentImageFloatText = ({as = 'section',heading, body, floa
                       <PrismicRichText field={heading}/>
                     </Heading>
                 )}
-                  <Body>
+                {isFilled.richText(body) && (
+                    <Body className={'mt-4'}>
                       <PrismicRichText field={body}/>
-                  </Body>
+                    </Body>
+                )}
                 <div className="flex flex-col gap-x-3 gap-y-4 sm:flex-row">
                   <ButtonRow hasBooking={hasBooking} bookingLabel={bookingLabel ?? 'Book Now'} hasArrow={true}
                              links={links}/>

@@ -255,8 +255,8 @@
 			},
 			"color": {
 				"__TYPE__": "FieldContent",
-				"type": "Select",
-				"value": "default"
+				"value": "default",
+				"type": "Select"
 			}
 		},
 		"items": [
@@ -333,7 +333,7 @@
 								"color",
 								{
 									"__TYPE__": "FieldContent",
-									"value": "Accent",
+									"value": "default",
 									"type": "Select"
 								}
 							]
@@ -415,8 +415,10 @@
 					{
 						"type": "paragraph",
 						"content": {
-							"text": "Fugiat ad et proident ut velit qui do cillum laboris reprehenderit anim enim dolor. Anim exercitation labore enim et consectetur eiusmod aute cupidatat enim eu laboris ullamco dolor excepteur incididunt. Aute in fugiat esse Lorem enim qui sit dolore excepteur consectetur voluptate ex tempor anim."
-						}
+							"text": "Footfactor will assess your biomechanical function and create orthotics/insoles to correct these issues leading to a smoother ride and optimum performance.",
+							"spans": []
+						},
+						"direction": "ltr"
 					}
 				]
 			},
@@ -434,7 +436,7 @@
 						"value": {
 							"__TYPE__": "ExternalLink",
 							"url": "https://prismic.io",
-							"text": "inch",
+							"text": "Call now",
 							"variant": "Outline"
 						}
 					}
@@ -455,31 +457,40 @@
 					{
 						"type": "paragraph",
 						"content": {
-							"text": "Ipsum ea laborum cupidatat non ea excepteur ad reprehenderit ullamco mollit esse fugiat sint. In anim proident deserunt."
-						}
+							"text": "Want to get back out on the roads? We can help you there...",
+							"spans": [
+								{
+									"type": "em",
+									"start": 35,
+									"end": 59
+								}
+							]
+						},
+						"direction": "ltr"
 					}
 				]
 			},
 			"image": {
+				"provider": "imgix",
+				"url": "https://images.unsplash.com/photo-1528629297340-d1d466945dc5?crop=entropy&cs=srgb&fm=jpg&ixid=M3wzMzc0NjN8MHwxfHNlYXJjaHw3fHxiaWtlfGVufDB8fHx8MTc1MTg4NTc4Mnww&ixlib=rb-4.1.0&q=85",
+				"alt": "man riding bicycle on road during daytime",
 				"origin": {
-					"id": "main",
-					"url": "https://images.unsplash.com/photo-1587614295999-6c1c13675117",
-					"width": 3810,
-					"height": 5715
+					"id": "nPOtzvGLYW0",
+					"url": "https://images.unsplash.com/photo-1528629297340-d1d466945dc5?crop=entropy&cs=srgb&fm=jpg&ixid=M3wzMzc0NjN8MHwxfHNlYXJjaHw3fHxiaWtlfGVufDB8fHx8MTc1MTg4NTc4Mnww&ixlib=rb-4.1.0&q=85",
+					"width": 3829,
+					"height": 2411
 				},
-				"url": "https://images.unsplash.com/photo-1587614295999-6c1c13675117",
-				"width": 3810,
-				"height": 5715,
+				"width": 3829,
+				"height": 2411,
 				"edit": {
+					"background": "transparent",
 					"zoom": 1,
 					"crop": {
 						"x": 0,
 						"y": 0
-					},
-					"background": "transparent"
+					}
 				},
 				"credits": null,
-				"alt": null,
 				"__TYPE__": "ImageContent",
 				"thumbnails": {}
 			}
@@ -568,6 +579,64 @@
 			"animated": {
 				"__TYPE__": "BooleanContent",
 				"value": false
+			}
+		},
+		"items": [
+			{
+				"__TYPE__": "GroupItemContent",
+				"value": []
+			}
+		]
+	},
+	{
+		"__TYPE__": "SharedSliceContent",
+		"variation": "contentImageTwoColumns",
+		"primary": {
+			"heading": {
+				"__TYPE__": "FieldContent",
+				"type": "Text",
+				"value": "How We Make Bespoke Orthotics"
+			},
+			"body": {
+				"__TYPE__": "StructuredTextContent",
+				"value": [
+					{
+						"type": "paragraph",
+						"content": {
+							"text": "At Foot Factor, we don’t believe in one-size-fits-all solutions. Your feet are unique, and so should be your orthotics. Our precision-crafted insoles are designed to enhance performance, reduce pain, and support an active lifestyle. From high-performance athletes to those seeking everyday comfort, we ensure a perfect fit through cutting-edge technology and expert craftsmanship. Here’s how we create custom orthotics in just one day—tailored precisely to you.",
+							"spans": []
+						},
+						"direction": "ltr"
+					}
+				]
+			},
+			"image": {
+				"origin": {
+					"id": "main",
+					"url": "https://images.unsplash.com/photo-1593642532973-d31b6557fa68",
+					"width": 8640,
+					"height": 8640
+				},
+				"url": "https://images.unsplash.com/photo-1593642532973-d31b6557fa68",
+				"width": 8640,
+				"height": 8640,
+				"edit": {
+					"zoom": 1,
+					"crop": {
+						"x": 0,
+						"y": 0
+					},
+					"background": "transparent"
+				},
+				"alt": "wife",
+				"credits": null,
+				"__TYPE__": "ImageContent",
+				"thumbnails": {}
+			},
+			"color": {
+				"__TYPE__": "FieldContent",
+				"type": "Select",
+				"value": "Primary"
 			}
 		},
 		"items": [
