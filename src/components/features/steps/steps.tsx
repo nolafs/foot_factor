@@ -105,7 +105,7 @@ const Step = ({title, description, step_label, image, stepNum, onStepActive}: St
     ScrollTrigger.create({
       trigger: cardRef.current,
       start: 'top top',
-      end: '+=100%',
+      end: '+=50%',
       pin: true,
       pinSpacing: true,
       anticipatePin: 1,
