@@ -168,7 +168,9 @@ export default function NavigationMenuSub({ navigation, settings }: NavigationSu
             </NavigationMenuList>
             <div className="relative z-40 hidden lg:flex flex-1 lg:justify-end space-x-2">
               <SearchButton/>
-              <MakeBookingDialog />
+              <div className="flex items-center" aria-label="Make a booking">
+                <MakeBookingDialog />
+              </div>
 
             </div>
           </NavigationMenu>
