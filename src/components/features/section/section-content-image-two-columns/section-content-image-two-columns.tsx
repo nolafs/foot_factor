@@ -26,9 +26,9 @@ export const SectionContentImageTwoColumns = ({as = 'section',heading, body, ima
       <Tag data-slice-type={slice_type} data-slice-variation={variation} className={cn('w-full', color === 'default' && 'bg-background', color === 'Accent' && 'bg-accent-50' , color === 'Primary' && 'bg-primary')}>
         <Container className={cn( 'lg:py-28 py-16 md:py-24')}>
             <div className={'grid grid-cols-1 md:grid-cols-2 justify-center item-center  gap-5 md:gap-8 lg:gap-10'}>
-              <div className={'order-first md:order-last flex flex-col '}>
+              <div className={'order-first md:order-last flex flex-col justify-center'}>
                 {image && (
-                    <div className={'w-full flex justify-center aspect-w-16 aspect-h-9 '}>
+                    <div className={'aspect-w-16 aspect-h-9 '}>
                         <PrismicNextImage field={image} className={cn('w-full h-full object-center object-cover rounded-4xl overflow-hidden')} />
                     </div>
                 )}
