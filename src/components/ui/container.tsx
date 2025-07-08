@@ -65,6 +65,7 @@ const ContainerComponent = forwardRef<
               className,
               backgroundColorClass,
               padding === 'base' && 'px-6 lg:px-8',
+              padding === 'md' && 'py-10 md:py-16 lg:py-20',
               padding === 'lg' && 'py-16 md:py-24 lg:py-28'
           )}
           {...rest}

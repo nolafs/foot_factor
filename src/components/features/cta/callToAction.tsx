@@ -5,9 +5,9 @@ import {Container} from '@/components/ui/container';
 import ButtonRow from '@/components/ui/button-row';
 import React from 'react';
 
-export function CallToAction({ heading, body, links, hasBooking = false, bookingLabel = 'Book now', wave, comp = 'section',  }: Cta) {
+export function CallToAction({ heading, body, links, hasBooking = false, bookingLabel = 'Book now', wave, comp = 'section', padding = 'lg' }: Cta) {
   return (
-      <Container as={comp} padding={'lg'} color={'primary'} className={'text-center'} wave={wave}>
+      <Container as={comp} padding={padding} color={'primary'} className={'text-center'} wave={wave}>
         <Heading as={'header'} primary={true} dark={true} className={'content-master primary text-white text-animation'}>
           {typeof heading === 'string' ? (
               <h2>{heading}</h2>
