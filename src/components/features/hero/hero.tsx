@@ -48,7 +48,6 @@ export  function Hero({ heading, subheading, lead,  links, image, hasBooking, ra
 
         <Container className="relative z-20">
           <div className="pb-22 pt-32 sm:pb-24 sm:pt-32 md:pb-52 md:pt-64 w-full sm:w-full lg:max-w-3xl">
-            <hgroup>
             { subheading &&  <Badge>{subheading}</Badge>}
             <header
                 className={cn(
@@ -60,7 +59,7 @@ export  function Hero({ heading, subheading, lead,  links, image, hasBooking, ra
                   <h1>{heading}</h1>
               )}
             </header>
-            <p
+            <div
                 className={cn(
                     'mt-8 max-w-2xl text-xl/7 font-medium text-gray-950/75 drop-shadow-[0px_0px_10px_rgba(255,255,255,1)] sm:text-xl/7'
                 )}>
@@ -69,7 +68,7 @@ export  function Hero({ heading, subheading, lead,  links, image, hasBooking, ra
               ) : (
                   <p>{lead}</p>
               )}
-            </p>
+            </div>
 
 
             <ButtonRow hasBooking={hasBooking} links={links}/>
@@ -78,7 +77,6 @@ export  function Hero({ heading, subheading, lead,  links, image, hasBooking, ra
             <div>
 
             </div>
-            </hgroup>
           </div>
         </Container>
       </div>

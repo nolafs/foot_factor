@@ -3,6 +3,7 @@ import { type SliceComponentProps } from '@prismicio/react';
 import { TestimonialSingle } from '@/components/features/testimonial/testimonial-single';
 import { TestimonialSlider } from '@/components/features/testimonial/testimonial-slider';
 import { type TestimonialType as TestimonialType } from '@/types';
+import {Container} from '@/components/ui/container';
 
 /**
  * Props for `Testimonial`.
@@ -20,14 +21,14 @@ const Testimonial = ({ slice }: TestimonialProps): JSX.Element => {
 
   if (slice.variation === 'default') {
     return (
-      <div data-slice-type={slice.slice_type} className={'mt-36'}>
+      <Container as={'section'} data-slice-type={slice.slice_type} className={'mt-36'}>
         <TestimonialSingle
           body={slice.primary.body}
           image={slice.primary.image}
           name={slice.primary.name}
           position={slice.primary.position}
         />
-      </div>
+      </Container>
     );
   }
 

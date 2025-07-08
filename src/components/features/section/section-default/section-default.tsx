@@ -20,8 +20,8 @@ export const SectionDefault = ({heading, body, animated, slice_type, variation}:
 
 
     return (
-      <section ref={triggerRef} className={'w-full'} data-slice-type={slice_type} data-slice-variation={variation}>
-        <Container className={'lg:py-28 py-16 md:py-24'}>
+        <Container as={'section'} ref={triggerRef} padding={'lg'} data-slice-type={slice_type}
+                   data-slice-variation={variation}>
             <div className={'flex flex-col md:flex-row gap-5 md:gap-8'}>
                 <div className={'w-full md:w-1/4 lg:w-5/12'}>
                     <h2 className={'font-heading font-medium text-2xl md:text-3xl lg:text-4xl'}>{heading}</h2>
@@ -31,7 +31,6 @@ export const SectionDefault = ({heading, body, animated, slice_type, variation}:
                 </div>
             </div>
         </Container>
-      </section>
   )
 }
 

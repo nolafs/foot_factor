@@ -46,7 +46,7 @@ const Faqs = async ({ slice }: FaqsProps) => {
 
   if (slice.variation === 'grid') {
     return (
-      <Bounded as={'section'} yPadding={'sm'} data-slice-type={slice.slice_type}>
+        <Container as={'section'}  padding={'lg'} data-slice-type={slice.slice_type}>
         <div className="mx-auto max-w-7xl px-6 py-16 sm:py-24 lg:px-8">
           <div className="mx-auto max-w-2xl text-center">
             <h2 className="text-4xl font-semibold tracking-tight text-gray-900 sm:text-5xl">
@@ -69,13 +69,13 @@ const Faqs = async ({ slice }: FaqsProps) => {
             </dl>
           </div>
         </div>
-      </Bounded>
+        </Container>
     );
   }
 
   if (slice.variation === 'columnCollapsible') {
     return (
-      <Container className={'mb:mt-24 mb-24 mt-16'} data-slice-type={slice.slice_type}>
+      <Container as={'section'} className={'mb:mt-24 mb-24 mt-16'} data-slice-type={slice.slice_type}>
         {slice.primary.has_intro && (
           <>
             <Subheading className="text-center">{slice.primary.subtitle}</Subheading>
@@ -102,7 +102,7 @@ const Faqs = async ({ slice }: FaqsProps) => {
 
   if (slice.variation === 'column') {
     return (
-      <Bounded as={'section'} yPadding={'md'}>
+        <Container as={'section'} padding={'lg'}>
         {slice.primary.has_intro && (
           <>
             <Subheading className="text-center">{slice.primary.subtitle}</Subheading>
@@ -121,19 +121,19 @@ const Faqs = async ({ slice }: FaqsProps) => {
             </dl>
           ))}
         </div>
-      </Bounded>
+      </Container>
     );
   }
 
   return (
-    <Bounded as={'section'} yPadding={'sm'} data-slice-type={slice.slice_type}>
+    <Container as={'section'} padding={'lg'} color={'accent'} data-slice-type={slice.slice_type}>
       <SectionFaqs
         data={{
           headings: slice.primary.heading,
           faqs: faqItems,
         }}
       />
-    </Bounded>
+    </Container>
   );
 };
 

@@ -95,31 +95,25 @@ const Testimonials: FC<TestimonialsProps> = ({slice}) => {
 
   if (loading) {
     return (
-        <section data-slice-type={slice.slice_type} data-slice-variation={slice.variation}>
-          <Container className={'lg:py-28 py-16 md:py-24'}>
+        <Container as={'section'} padding={'lg'} data-slice-type={slice.slice_type} data-slice-variation={slice.variation}>
             <div className="text-center">Loading case studies...</div>
-          </Container>
-        </section>
+        </Container>
     );
   }
 
   if (error) {
     return (
-        <section data-slice-type={slice.slice_type} data-slice-variation={slice.variation}>
-          <Container className={'lg:py-28 py-16 md:py-24'}>
+        <Container as={'section'} padding={'lg'} data-slice-type={slice.slice_type} data-slice-variation={slice.variation}>
             <div className="text-center text-red-500">{error}</div>
-          </Container>
-        </section>
+        </Container>
     );
   }
 
   if (testimonials.length === 0 || !testimonials) {
     return (
-        <section data-slice-type={slice.slice_type} data-slice-variation={slice.variation}>
-          <Container className={'lg:py-28 py-16 md:py-24'}>
+        <Container as={'section'} padding={'lg'} data-slice-type={slice.slice_type} data-slice-variation={slice.variation}>
             <div className="text-center">No testimonials available.</div>
-          </Container>
-        </section>
+        </Container>
     );
   }
 
@@ -128,8 +122,8 @@ const Testimonials: FC<TestimonialsProps> = ({slice}) => {
   console.log('Testimonials grid:', grid);
 
   return (
-      <section data-slice-type={slice.slice_type} data-slice-variation={slice.variation}>
-        <Container className={'lg:py-28 py-16 md:py-24 bg-accent-100'}>
+        <Container as={'section'} padding={"lg"} data-slice-type={slice.slice_type}
+                   data-slice-variation={slice.variation} color={'accent'}>
           <Heading as={'h2'} className={'text-center content-master max-w-3xl mx-auto'}>
             <PrismicRichText field={slice.primary.heading}/>
           </Heading>
@@ -197,7 +191,6 @@ const Testimonials: FC<TestimonialsProps> = ({slice}) => {
             ))}
           </div>
         </Container>
-      </section>
   );
 };
 

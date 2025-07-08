@@ -27,9 +27,6 @@ const Section: FC<SectionProps> = ({ slice }) => {
   console.log('slice', slice.variation)
 
   if (slice.variation === 'contentWithImageColumnList') {
-
-    console.log('contentWithImageColumnList')
-
     return(
     <section>
       <Container className={'pt-16 md:pt-24 lg:pt-32 pb-5 md:pb-10 lg:pb-16'}>
@@ -40,7 +37,7 @@ const Section: FC<SectionProps> = ({ slice }) => {
       {(slice.primary.list.length) && slice.primary.list.map ( (item, index) => (
 
           <SectionContentColumnWithImage
-              as="div"
+              as="section"
               key={slice.id + '_' + index}
               heading={item.heading}
               body={item.body}
@@ -59,6 +56,7 @@ const Section: FC<SectionProps> = ({ slice }) => {
   if (slice.variation === 'contentImageTwoColumns') {
     return (
         <SectionContentImageTwoColumns
+            as="section"
             heading={slice.primary.heading}
             body={slice.primary.body}
             image={slice.primary.image}

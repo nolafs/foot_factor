@@ -32,7 +32,7 @@ export const SectionContentImageFloatText = ({as = 'section',heading, body, floa
                                 className={cn('w-full h-full object-center object-cover')}/>
             </div>
         <div className={'absolute z-10 top-0 left-0 w-full'}>
-          <Container className={'lg:py-28 py-16 md:py-24'}>
+          <Container>
             <div className={cn('flex flex-col gap-5 md:gap-8 lg:gap-10', float === 'left' ? 'md:flex-row' : 'md:flex-row-reverse')}>
               <div className={cn('flex flex-col w-full md:w-6/12 lg:w-6/12 xl:w-5/12  pt-16 md:pt-24 lg:py-32')}>
                 {isFilled.richText(heading) && (

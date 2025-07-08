@@ -48,7 +48,7 @@ export const SectionContentColumnListImage = ({as = 'section',heading, items, im
               </div>
               <div>
                 <ul className={'flex flex-col'}>
-                  {items && items.map((item, index) => (
+                  {items?.map((item, index) => (
                     <li key={index} className={'flex flex-col  py-14 first:pt-0 border-b border-primary-500 last:border-0'}>
                       <div className={'flex space-x-4 mb-2 items-center'}>
                       {isFilled.image(item.icon) && (

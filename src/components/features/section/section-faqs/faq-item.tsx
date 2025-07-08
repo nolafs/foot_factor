@@ -4,7 +4,7 @@ import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '@/component
 import { Button } from '@/components/ui/button';
 import { useState } from 'react';
 import { PrismicRichText } from '@prismicio/react';
-import { CircleArrowDownIcon, CircleArrowUpIcon } from 'lucide-react';
+import {CircleArrowDownIcon, CircleArrowUpIcon, MinusIcon, PlusIcon} from 'lucide-react';
 
 interface FaqItemProps {
   heading: KeyTextField | null | undefined;
@@ -15,20 +15,19 @@ export function FaqItem({ heading, body }: FaqItemProps) {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <Collapsible open={isOpen} onOpenChange={setIsOpen}>
+    <Collapsible open={isOpen} onOpenChange={setIsOpen} className={'border-b border-primary-950 pb-5 '}>
       <dt>
-        <CollapsibleTrigger asChild>
-          <Button variant="ghost" size="lg" className={'w-full whitespace-normal p-2 md:p-3'}>
-            <div className="flex w-full items-center justify-between text-left">
+        <CollapsibleTrigger className={'w-full'}>
+            <div className="flex w-full py-3 items-center justify-between text-primary-950 text-left font-medium leading-7 text-xl md:text-2xl lg:text-3xl">
               <span>
                 <span className="sr-only">Toggle</span>
-                <span className="font-semibold leading-7">{heading}</span>
+                <span>{heading}</span>
               </span>
               <span className={'text-right'}>
-                {isOpen ? <CircleArrowUpIcon size={24} /> : <CircleArrowDownIcon size={24} />}
+                {isOpen ? <MinusIcon size={36} strokeWidth={'1px'} /> : <PlusIcon size={36} strokeWidth={'1px'} />}
               </span>
             </div>
-          </Button>
+
         </CollapsibleTrigger>
       </dt>
 

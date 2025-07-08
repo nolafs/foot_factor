@@ -21,10 +21,10 @@ interface SectionDefaultProps {
 }
 
 export const SectionContentImageTwoColumns = ({as = 'section',heading, body, image, color, variation, slice_type}: SectionDefaultProps) => {
-  const Tag = as; //
+
     return (
-      <Tag data-slice-type={slice_type} data-slice-variation={variation} className={cn('w-full', color === 'default' && 'bg-background', color === 'Accent' && 'bg-accent-50' , color === 'Primary' && 'bg-primary')}>
-        <Container className={cn( 'lg:py-28 py-16 md:py-24')}>
+
+        <Container as={as} data-slice-type={slice_type} data-slice-variation={variation} padding={'lg'} color={color?.toString()}>
             <div className={'grid grid-cols-1 md:grid-cols-2 justify-center item-center  gap-5 md:gap-8 lg:gap-10'}>
               <div className={'order-first md:order-last flex flex-col justify-center'}>
                 {image && (
@@ -45,7 +45,7 @@ export const SectionContentImageTwoColumns = ({as = 'section',heading, body, ima
               </div>
             </div>
         </Container>
-      </Tag>
+
   )
 }
 

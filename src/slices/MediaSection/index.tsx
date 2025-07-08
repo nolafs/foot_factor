@@ -45,9 +45,8 @@ const MediaSection: FC<MediaSectionProps> = ({ slice }) => {
 
   if (slice.variation === 'default') {
     return (
-
-          <div data-slice-type={slice.slice_type} data-slice-variation={slice.variation} className={cn('w-full', slice.primary.color === 'default' && 'bg-background', slice.primary.color === 'Accent' && 'bg-accent-50', slice.primary.color === 'Primary' && 'bg-primary')}>
-          <Container className={'lg:py-28 py-16 md:py-24'}>
+          <Container as={'section'} padding={'lg'} data-slice-type={slice.slice_type}
+                     data-slice-variation={slice.variation} color={slice.primary.color}>
             <div className={'flex flex-col gap-5 md:gap-8 lg:gap-10'}>
               {slice.primary.image && (
                   <div className={'w-full flex justify-center aspect-w-16 aspect-h-9 '}>
@@ -57,8 +56,6 @@ const MediaSection: FC<MediaSectionProps> = ({ slice }) => {
               )}
             </div>
           </Container>
-          </div>
-
     );
   }
 };
