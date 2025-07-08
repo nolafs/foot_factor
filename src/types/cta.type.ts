@@ -12,5 +12,5 @@ export type Cta = {
   dark?: boolean;
   comp?: string;
   wave?: boolean;
-  padding?: 'sm' | 'md' | 'lg' | 'xl';
+  padding?: 'sm' | 'md' | 'lg' | 'base';
 };
