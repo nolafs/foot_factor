@@ -6,6 +6,8 @@ import { Heading, Subheading } from '@/components/ui/text';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
 import { Container } from '@/components/ui/container';
 import { type Content } from '@prismicio/client';
+import {CallToAction as CallToActionComponent} from '@/components/features/cta/callToAction';
+import React from 'react';
 
 /**
  * Props for `Faqs`.
@@ -127,12 +129,25 @@ const Faqs = async ({ slice }: FaqsProps) => {
 
   return (
     <Container as={'section'} padding={'lg'} color={'accent'} data-slice-type={slice.slice_type}>
+
       <SectionFaqs
         data={{
           headings: slice.primary.heading,
           faqs: faqItems,
         }}
       />
+
+
+    {slice.primary.has_cta && (<div className={'mt-20 md:mt-28 lg:mt-32 rounded-4xl overflow-hidden'}>
+        <CallToActionComponent
+            heading={slice.primary.cta_heading}
+            body={slice.primary.cta_body}
+            links={slice.primary.cta_links}
+            wave={true}
+        />
+          </div>
+      )}
+
     </Container>
   );
 };

@@ -2592,6 +2592,49 @@ export interface FaqsSliceDefaultPrimary {
    * - **Documentation**: https://prismic.io/docs/fields/repeatable-group
    */
   faqs: prismic.GroupField<Simplify<FaqsSliceDefaultPrimaryFaqsItem>>;
+
+  /**
+   * Has Call to Action field in *Faqs → Default → Primary*
+   *
+   * - **Field Type**: Boolean
+   * - **Placeholder**: *None*
+   * - **Default Value**: false
+   * - **API ID Path**: faqs.default.primary.has_cta
+   * - **Documentation**: https://prismic.io/docs/fields/boolean
+   */
+  has_cta: prismic.BooleanField;
+
+  /**
+   * Cta Heading field in *Faqs → Default → Primary*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: faqs.default.primary.cta_heading
+   * - **Documentation**: https://prismic.io/docs/fields/text
+   */
+  cta_heading: prismic.KeyTextField;
+
+  /**
+   * Cta Body field in *Faqs → Default → Primary*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: faqs.default.primary.cta_body
+   * - **Documentation**: https://prismic.io/docs/fields/rich-text
+   */
+  cta_body: prismic.RichTextField;
+
+  /**
+   * Cta Links field in *Faqs → Default → Primary*
+   *
+   * - **Field Type**: Link
+   * - **Placeholder**: *None*
+   * - **API ID Path**: faqs.default.primary.cta_links
+   * - **Documentation**: https://prismic.io/docs/fields/link
+   */
+  cta_links: prismic.Repeatable<
+    prismic.LinkField<string, string, unknown, prismic.FieldState, 'Primary' | 'Secondary' | 'Accent'>
+  >;
 }
 
 /**

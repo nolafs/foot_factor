@@ -1,10 +1,11 @@
 import {cn} from '@/lib/utils';
-import {
+import React, {
   forwardRef,
   type ElementType,
   type ComponentPropsWithRef,
   type ReactNode
 } from 'react';
+import {Wave} from '@/components/wave';
 
 type ContainerProps<T extends ElementType> = {
   as?: T;
@@ -12,6 +13,7 @@ type ContainerProps<T extends ElementType> = {
   children?: ReactNode;
   padding?: 'sm' | 'md' | 'base' | 'lg';
   color?:  string;
+  wave?: boolean;
 } & ComponentPropsWithRef<T>;
 
 type PolymorphicContainer = <T extends ElementType = 'div'>(
@@ -30,6 +32,7 @@ const ContainerComponent = forwardRef<
       children,
       padding = 'base',
       color = 'transparent',
+      wave = false,
       ...rest
     }: ContainerProps<T>,
     ref: React.Ref<React.ElementRef<T>>
@@ -58,7 +61,7 @@ const ContainerComponent = forwardRef<
   return (
       <Component
           ref={ref}
-          className={cn(
+          className={cn('relative w-full overflow-hidden',
               className,
               backgroundColorClass,
               padding === 'base' && 'px-6 lg:px-8',
@@ -66,7 +69,12 @@ const ContainerComponent = forwardRef<
           )}
           {...rest}
       >
-        <div className="container mx-auto w-full">{children}</div>
+        {wave && (
+            <div className={'absolute inset-0 w-full h-full overflow-hidden'}>
+              <Wave/>
+            </div>
+        )}
+        <div className="relative container mx-auto w-full z-20">{children}</div>
       </Component>
   );
 });

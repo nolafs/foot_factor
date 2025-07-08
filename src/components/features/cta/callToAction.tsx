@@ -5,10 +5,9 @@ import {Container} from '@/components/ui/container';
 import ButtonRow from '@/components/ui/button-row';
 import React from 'react';
 
-export function CallToAction({ heading, body, links, hasBooking = false, bookingLabel = 'Book now' }: Cta) {
+export function CallToAction({ heading, body, links, hasBooking = false, bookingLabel = 'Book now', wave, comp = 'section',  }: Cta) {
   return (
-    <section className="flex justify-center text-center bg-primary">
-      <Container className={'max-w-4xl lg:py-28 py-16 md:py-24 lg:pb-32'}>
+      <Container as={comp} padding={'lg'} color={'primary'} className={'text-center'} wave={wave}>
         <Heading as={'header'} primary={true} dark={true} className={'content-master primary text-white text-animation'}>
           {typeof heading === 'string' ? (
               <h2>{heading}</h2>
@@ -26,6 +25,5 @@ export function CallToAction({ heading, body, links, hasBooking = false, booking
         </div>
       )}
       </Container>
-    </section>
   );
 }

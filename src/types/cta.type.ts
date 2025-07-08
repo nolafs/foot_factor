@@ -2,7 +2,7 @@ import { type RichTextField, type LinkField, type KeyTextField, type ImageField 
 
 export type Cta = {
   label?: KeyTextField | string;
-  heading: RichTextField | string;
+  heading: RichTextField | KeyTextField | string;
   body?: RichTextField;
   links?: LinkField[];
   image?: ImageField;
@@ -10,4 +10,6 @@ export type Cta = {
   telephone?: string;
   bookingLabel?: KeyTextField | string;
   dark?: boolean;
+  comp?: string;
+  wave?: boolean;
 };

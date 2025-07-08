@@ -39,6 +39,47 @@
               }
             }
           }
+        },
+        "has_cta": {
+          "type": "Boolean",
+          "config": {
+            "label": "Has Call to Action",
+            "placeholder_false": "false",
+            "placeholder_true": "true",
+            "default_value": false
+          }
+        },
+        "cta_heading": {
+          "type": "Text",
+          "config": {
+            "label": "Cta Heading",
+            "placeholder": ""
+          }
+        },
+        "cta_body": {
+          "type": "StructuredText",
+          "config": {
+            "label": "Cta Body",
+            "placeholder": "",
+            "allowTargetBlank": true,
+            "multi": "strong,em"
+          }
+        },
+        "cta_links": {
+          "type": "Link",
+          "config": {
+            "label": "Cta Links",
+            "placeholder": "",
+            "select": null,
+            "allowTargetBlank": true,
+            "allowText": true,
+            "repeat": true,
+            "variants": [
+              "Primary",
+              "Secondary",
+              "Accent"
+            ]
+          }
         }
       },
       "items": {}
