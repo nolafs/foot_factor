@@ -72,11 +72,11 @@ export const Steps = ({data}: StepsProps) => {
       <Container>
        <div ref={contentRef} className={'relative w-full isolate'}>
 
-         <div id={'progress'} className={'absolute top-0 left-0 w-full z-10 flex h-svh  justify-center items-center pointer-events-none'}>
+         <div id={'progress'} className={'hidden absolute top-0 left-0 w-full z-10 md:flex h-svh  justify-center items-center pointer-events-none'}>
            <StepsProgress percentage={currentProgress} text={currentStep}/>
          </div>
 
-         <div className={'absolute top-0 left-1/2 -ml-px h-full border-l-2 border-l-primary-100 pointer-events-none'}></div>
+         <div className={'hidden md:block absolute top-0 left-1/2 -ml-px h-full border-l-2 border-l-primary-100 pointer-events-none'}></div>
 
           <ul ref={listRef} className={'w-full flex flex-col'}>
               {data.map((step, index) => (
@@ -138,12 +138,12 @@ const Step = ({title, description, step_label, image, stepNum, onStepActive}: St
   }, {scope: cardRef});
 
   return (
-      <li ref={cardRef} className="w-full h-svh grid grid-cols-1 md:grid-cols-2 gap-x-10 md:gap-x-48 justify-center items-center">
+      <li ref={cardRef} className="w-full h-svh grid grid-cols-1 gap-20 py-20 md:py-10 md:grid-cols-2 gap-x-10 md:gap-x-48 justify-center items-center">
         <div className={'flex flex-col'}>
           <sub className={'text-primary-500 font-semibold mb-3 text-2xl'}>
             <span>{step_label}</span> <span>{stepNum ?? stepNum < 10 ? '0' + stepNum : stepNum}</span>
           </sub>
-        <SectionContent heading={title} body={description} className={'w-full'} />
+         <SectionContent heading={title} body={description} className={'w-full'} />
         </div>
         <div className="flex justify-center items-center">
         {image && (

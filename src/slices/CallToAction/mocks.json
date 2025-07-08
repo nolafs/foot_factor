@@ -168,9 +168,9 @@
 				"__TYPE__": "StructuredTextContent",
 				"value": [
 					{
-						"type": "paragraph",
+						"type": "heading2",
 						"content": {
-							"text": "Labore consequat excepteur ullamco enim tempor velit enim labore in laboris eu ad non qui duis."
+							"text": "Donkey"
 						}
 					}
 				]

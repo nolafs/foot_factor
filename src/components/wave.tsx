@@ -3,9 +3,7 @@ interface WaveProps {
     className?: string;
 }
 
-export const Wave = ({waveType, className = 'w-full h-full object-cover object-center'}: WaveProps) => {
-
-
+export const Wave = ({waveType, className = 'w-full h-full object-cover object-center min-w-max'}: WaveProps) => {
 
     if(waveType === 'type_1') {
 

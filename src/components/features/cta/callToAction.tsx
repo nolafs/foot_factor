@@ -11,7 +11,7 @@ export function CallToAction({ heading, body, links, hasBooking = false, booking
       <Container className={'max-w-4xl lg:py-28 py-16 md:py-24 lg:pb-32'}>
         <Heading as={'header'} primary={true} dark={true} className={'content-master primary text-white text-animation'}>
           {typeof heading === 'string' ? (
-              heading
+              <h2>{heading}</h2>
           ) : (
               <PrismicRichText field={heading} />
           )}
