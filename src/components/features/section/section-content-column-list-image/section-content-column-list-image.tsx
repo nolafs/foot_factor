@@ -41,7 +41,7 @@ export const SectionContentColumnListImage = ({as = 'section',heading, items, im
                   {items && items.map((item, index) => (
                     <li key={index} className={'flex items-start gap-4 mb-6 border-b border-primary-200 pb-6 last:border-0'}>
                       {isFilled.image(item.icon) && (
-                        <div className={'shrink-0 w-8 h-8'}>
+                        <div className={'shrink-0 w-20 h-20'}>
                           <PrismicNextImage field={item.icon} className={'w-full h-full object-cover'}/>
                         </div>
                       )}
