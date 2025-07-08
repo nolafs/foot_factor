@@ -74,6 +74,10 @@
     b, i, strong, em{
       @apply !font-accent !text-accent font-normal italic;
     }
+
+    &.primary  {
+        @apply !text-white;
+    }
   }
 
   .text-animation > div {

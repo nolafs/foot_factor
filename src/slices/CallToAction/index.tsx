@@ -5,6 +5,7 @@ import { CallToAction as CallToActionComponent } from '@/components/features/cta
 
 import React from 'react';
 import { CallToActionVideo } from '@/components/features/cta/callToAction-video';
+import CallToActionTwoColumns from '@/components/features/cta/callToAction-two-columns';
 
 /**
  * Props for `CallToAction`.
@@ -15,6 +16,21 @@ export type CallToActionProps = SliceComponentProps<Content.CallToActionSlice>;
  * Component for "CallToAction" Slices.
  */
 const CallToAction = ({ slice }: CallToActionProps): JSX.Element => {
+
+  if(slice.variation === 'ctaTwoColumns') {
+    return (
+        <CallToActionTwoColumns
+            heading={slice.primary.heading}
+            body={slice.primary.body}
+            links={slice.primary.links}
+            image={slice.primary.image}
+            hasBooking={slice.primary.has_booking}
+            bookingLabel={slice.primary.booking_label}
+        />
+    );
+  }
+
+
   if (slice.variation === 'embedVideo') {
     return (
       <CallToActionVideo

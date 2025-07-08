@@ -1563,7 +1563,7 @@ export type PostsDocument<Lang extends string = string> = prismic.PrismicDocumen
   Lang
 >;
 
-type ServicesDocumentDataSlicesSlice = VerticalStepsWithImagesSlice | FaqsSlice | SectionSlice;
+type ServicesDocumentDataSlicesSlice = CallToActionSlice | VerticalStepsWithImagesSlice | FaqsSlice | SectionSlice;
 
 /**
  * Content for Services documents
@@ -2312,9 +2312,93 @@ export type CallToActionSliceEmbedVideo = prismic.SharedSliceVariation<
 >;
 
 /**
+ * Primary content in *CallToAction → cta-two-columns → Primary*
+ */
+export interface CallToActionSliceCtaTwoColumnsPrimary {
+  /**
+   * Heading field in *CallToAction → cta-two-columns → Primary*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: call_to_action.ctaTwoColumns.primary.heading
+   * - **Documentation**: https://prismic.io/docs/fields/rich-text
+   */
+  heading: prismic.RichTextField;
+
+  /**
+   * Body field in *CallToAction → cta-two-columns → Primary*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: call_to_action.ctaTwoColumns.primary.body
+   * - **Documentation**: https://prismic.io/docs/fields/rich-text
+   */
+  body: prismic.RichTextField;
+
+  /**
+   * Links field in *CallToAction → cta-two-columns → Primary*
+   *
+   * - **Field Type**: Link
+   * - **Placeholder**: *None*
+   * - **API ID Path**: call_to_action.ctaTwoColumns.primary.links
+   * - **Documentation**: https://prismic.io/docs/fields/link
+   */
+  links: prismic.Repeatable<
+    prismic.LinkField<string, string, unknown, prismic.FieldState, 'Primary' | 'Secondary' | 'Outline'>
+  >;
+
+  /**
+   * Image field in *CallToAction → cta-two-columns → Primary*
+   *
+   * - **Field Type**: Image
+   * - **Placeholder**: *None*
+   * - **API ID Path**: call_to_action.ctaTwoColumns.primary.image
+   * - **Documentation**: https://prismic.io/docs/fields/image
+   */
+  image: prismic.ImageField<never>;
+
+  /**
+   * Has Booking field in *CallToAction → cta-two-columns → Primary*
+   *
+   * - **Field Type**: Boolean
+   * - **Placeholder**: *None*
+   * - **Default Value**: false
+   * - **API ID Path**: call_to_action.ctaTwoColumns.primary.has_booking
+   * - **Documentation**: https://prismic.io/docs/fields/boolean
+   */
+  has_booking: prismic.BooleanField;
+
+  /**
+   * Booking Label field in *CallToAction → cta-two-columns → Primary*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: call_to_action.ctaTwoColumns.primary.booking_label
+   * - **Documentation**: https://prismic.io/docs/fields/text
+   */
+  booking_label: prismic.KeyTextField;
+}
+
+/**
+ * cta-two-columns variation for CallToAction Slice
+ *
+ * - **API ID**: `ctaTwoColumns`
+ * - **Description**: Default
+ * - **Documentation**: https://prismic.io/docs/slices
+ */
+export type CallToActionSliceCtaTwoColumns = prismic.SharedSliceVariation<
+  'ctaTwoColumns',
+  Simplify<CallToActionSliceCtaTwoColumnsPrimary>,
+  never
+>;
+
+/**
  * Slice variation for *CallToAction*
  */
-type CallToActionSliceVariation = CallToActionSliceDefault | CallToActionSliceEmbedVideo;
+type CallToActionSliceVariation =
+  | CallToActionSliceDefault
+  | CallToActionSliceEmbedVideo
+  | CallToActionSliceCtaTwoColumns;
 
 /**
  * CallToAction Shared Slice
@@ -4787,9 +4871,11 @@ declare module '@prismicio/client' {
       CallToActionSlice,
       CallToActionSliceDefaultPrimary,
       CallToActionSliceEmbedVideoPrimary,
+      CallToActionSliceCtaTwoColumnsPrimary,
       CallToActionSliceVariation,
       CallToActionSliceDefault,
       CallToActionSliceEmbedVideo,
+      CallToActionSliceCtaTwoColumns,
       CaseStudiesSlice,
       CaseStudiesSliceDefaultPrimary,
       CaseStudiesSliceBentoPrimary,

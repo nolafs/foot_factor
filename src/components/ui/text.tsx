@@ -3,11 +3,11 @@ import {SelectField} from '@prismicio/client';
 
 
 type HeadingProps = {
-  as?: 'div' | 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6';
+  as?: 'div' | 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'header';
   dark?: boolean;
   primary?: boolean;
   color?: SelectField | string | undefined;
-} & React.ComponentPropsWithoutRef<'div' | 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6'>;
+} & React.ComponentPropsWithoutRef<'div' | 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'header'>;
 
 export function Heading({ className, as: Element = 'h2', dark = false, primary = false, color, ...props }: HeadingProps) {
   return (

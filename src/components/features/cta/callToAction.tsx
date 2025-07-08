@@ -9,8 +9,7 @@ export function CallToAction({ heading, body, links, hasBooking = false, booking
   return (
     <section className="flex justify-center text-center bg-primary">
       <Container className={'max-w-4xl lg:py-28 py-16 md:py-24 lg:pb-32'}>
-
-        <Heading as={'h2'} primary={true} dark={true} className={'content-master text-animation'}>
+        <Heading as={'header'} primary={true} dark={true} className={'content-master primary text-white text-animation'}>
           {typeof heading === 'string' ? (
               heading
           ) : (
