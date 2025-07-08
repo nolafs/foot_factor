@@ -23,10 +23,19 @@ interface SectionDefaultProps {
 export const SectionContentColumnListImage = ({as = 'section',heading, items, image, color,  variation, slice_type}: SectionDefaultProps) => {
   const Tag = as; //
     return (
-      <Tag data-slice-type={slice_type} data-slice-variation={variation} className={cn('w-full', color === 'default' && 'bg-background', color === 'Accent' && 'bg-accent-50' , color === 'Primary' && 'bg-primary')}>
-        <Container className={cn( 'lg:py-28 py-16 md:py-24')}>
-            <div className={'grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-10'}>
-              <div>{Array.isArray(heading) && isFilled.richText(heading) ? (
+      <Tag data-slice-type={slice_type} data-slice-variation={variation} className={cn('w-full relative', color === 'default' && 'bg-background', color === 'Accent' && 'bg-accent-50' , color === 'Primary' && 'bg-primary')}>
+
+        {isFilled.image(image) && (
+            <div className={'hidden lg:block absolute bottom-0 w-1/2'}>
+              <PrismicNextImage field={image}
+                                className={cn('w-full h-full object-cover object-center rounded-4xl overflow-hidden')}/>
+            </div>
+        )}
+
+
+        <Container className={cn( 'py-16 md:py-24 lg:py-28')}>
+            <div className={'grid grid-cols-1 lg:grid-cols-2 gap-y-20 lg:gap-x-10'}>
+              <div className={'relative'}>{Array.isArray(heading) && isFilled.richText(heading) ? (
                     <PrismicRichText field={heading}/>
               ) : (heading && (
 
@@ -35,11 +44,12 @@ export const SectionContentColumnListImage = ({as = 'section',heading, items, im
                         } className={cn('text-2xl md:text-3xl lg:text-4xl'
                         )}>{heading}</Heading>
 
-              ))}</div>
+              ))}
+              </div>
               <div>
                 <ul className={'flex flex-col'}>
                   {items && items.map((item, index) => (
-                    <li key={index} className={'flex flex-col  py-14 border-b border-primary-500 last:border-0'}>
+                    <li key={index} className={'flex flex-col  py-14 first:pt-0 border-b border-primary-500 last:border-0'}>
                       <div className={'flex space-x-4 mb-2 items-center'}>
                       {isFilled.image(item.icon) && (
                         <div className={'shrink-0 w-20 h-20'}>
