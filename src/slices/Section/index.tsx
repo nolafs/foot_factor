@@ -11,6 +11,8 @@ import SectionContentImageFloatText
   from '@/components/features/section/section-content-float-with-image/section-content-float-image';
 import SectionContentImageTwoColumns
   from '@/components/features/section/section-content-image-two-columns/section-content-image-two-columns';
+import SectionContentColumnListImage
+  from '@/components/features/section/section-content-column-list-image/section-content-column-list-image';
 
 /**
  * Props for `Section`.
@@ -59,6 +61,19 @@ const Section: FC<SectionProps> = ({ slice }) => {
         <SectionContentImageTwoColumns
             heading={slice.primary.heading}
             body={slice.primary.body}
+            image={slice.primary.image}
+            color={slice.primary.color}
+            variation={slice.variation}
+            slice_type={slice.slice_type}
+        />
+    );
+  }
+
+  if (slice.variation === 'contentTwoColumnIconList') {
+    return (
+        <SectionContentColumnListImage
+            heading={slice.primary.heading}
+            items={slice.primary.items}
             image={slice.primary.image}
             color={slice.primary.color}
             variation={slice.variation}

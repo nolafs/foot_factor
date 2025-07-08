@@ -3728,6 +3728,41 @@ export interface SectionSliceContentWithImageColumnListPrimaryListItem {
 }
 
 /**
+ * Item in *Section → Content two column Icon list → Primary → Items*
+ */
+export interface SectionSliceContentTwoColumnIconListPrimaryItemsItem {
+  /**
+   * Icon field in *Section → Content two column Icon list → Primary → Items*
+   *
+   * - **Field Type**: Image
+   * - **Placeholder**: *None*
+   * - **API ID Path**: section.contentTwoColumnIconList.primary.items[].icon
+   * - **Documentation**: https://prismic.io/docs/fields/image
+   */
+  icon: prismic.ImageField<never>;
+
+  /**
+   * Heading field in *Section → Content two column Icon list → Primary → Items*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: section.contentTwoColumnIconList.primary.items[].heading
+   * - **Documentation**: https://prismic.io/docs/fields/text
+   */
+  heading: prismic.KeyTextField;
+
+  /**
+   * Body field in *Section → Content two column Icon list → Primary → Items*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: section.contentTwoColumnIconList.primary.items[].body
+   * - **Documentation**: https://prismic.io/docs/fields/rich-text
+   */
+  body: prismic.RichTextField;
+}
+
+/**
  * Primary content in *Section → Default → Primary*
  */
 export interface SectionSliceDefaultPrimary {
@@ -4261,6 +4296,75 @@ export type SectionSliceContentImageTwoColumns = prismic.SharedSliceVariation<
 >;
 
 /**
+ * Primary content in *Section → Content two column Icon list → Primary*
+ */
+export interface SectionSliceContentTwoColumnIconListPrimary {
+  /**
+   * Heading field in *Section → Content two column Icon list → Primary*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: section.contentTwoColumnIconList.primary.heading
+   * - **Documentation**: https://prismic.io/docs/fields/text
+   */
+  heading: prismic.KeyTextField;
+
+  /**
+   * Animated field in *Section → Content two column Icon list → Primary*
+   *
+   * - **Field Type**: Boolean
+   * - **Placeholder**: *None*
+   * - **Default Value**: true
+   * - **API ID Path**: section.contentTwoColumnIconList.primary.animated
+   * - **Documentation**: https://prismic.io/docs/fields/boolean
+   */
+  animated: prismic.BooleanField;
+
+  /**
+   * Image field in *Section → Content two column Icon list → Primary*
+   *
+   * - **Field Type**: Image
+   * - **Placeholder**: *None*
+   * - **API ID Path**: section.contentTwoColumnIconList.primary.image
+   * - **Documentation**: https://prismic.io/docs/fields/image
+   */
+  image: prismic.ImageField<never>;
+
+  /**
+   * Color field in *Section → Content two column Icon list → Primary*
+   *
+   * - **Field Type**: Select
+   * - **Placeholder**: *None*
+   * - **API ID Path**: section.contentTwoColumnIconList.primary.color
+   * - **Documentation**: https://prismic.io/docs/fields/select
+   */
+  color: prismic.SelectField<'default' | 'Accent' | 'Primary'>;
+
+  /**
+   * Items field in *Section → Content two column Icon list → Primary*
+   *
+   * - **Field Type**: Group
+   * - **Placeholder**: *None*
+   * - **API ID Path**: section.contentTwoColumnIconList.primary.items[]
+   * - **Documentation**: https://prismic.io/docs/fields/repeatable-group
+   */
+  items: prismic.GroupField<Simplify<SectionSliceContentTwoColumnIconListPrimaryItemsItem>>;
+}
+
+/**
+ * Content two column Icon list variation for Section Slice
+ *
+ * - **API ID**: `contentTwoColumnIconList`
+ * - **Description**: Default
+ * - **Documentation**: https://prismic.io/docs/slices
+ */
+export type SectionSliceContentTwoColumnIconList = prismic.SharedSliceVariation<
+  'contentTwoColumnIconList',
+  Simplify<SectionSliceContentTwoColumnIconListPrimary>,
+  never
+>;
+
+/**
  * Slice variation for *Section*
  */
 type SectionSliceVariation =
@@ -4271,7 +4375,8 @@ type SectionSliceVariation =
   | SectionSliceContentWithImageFull
   | SectionSliceContentImageFloatText
   | SectionSliceContentImageFloatRight
-  | SectionSliceContentImageTwoColumns;
+  | SectionSliceContentImageTwoColumns
+  | SectionSliceContentTwoColumnIconList;
 
 /**
  * Section Shared Slice
@@ -4948,6 +5053,8 @@ declare module '@prismicio/client' {
       SectionSliceContentImageFloatTextPrimary,
       SectionSliceContentImageFloatRightPrimary,
       SectionSliceContentImageTwoColumnsPrimary,
+      SectionSliceContentTwoColumnIconListPrimaryItemsItem,
+      SectionSliceContentTwoColumnIconListPrimary,
       SectionSliceVariation,
       SectionSliceDefault,
       SectionSliceContentWithLeadButtons,
@@ -4957,6 +5064,7 @@ declare module '@prismicio/client' {
       SectionSliceContentImageFloatText,
       SectionSliceContentImageFloatRight,
       SectionSliceContentImageTwoColumns,
+      SectionSliceContentTwoColumnIconList,
       TeamCarouselSlice,
       TeamCarouselSliceDefaultPrimaryMembersItem,
       TeamCarouselSliceDefaultPrimary,
