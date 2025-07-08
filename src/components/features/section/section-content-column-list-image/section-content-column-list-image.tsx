@@ -37,20 +37,23 @@ export const SectionContentColumnListImage = ({as = 'section',heading, items, im
 
               ))}</div>
               <div>
-                <ul>
+                <ul className={'flex flex-col'}>
                   {items && items.map((item, index) => (
-                    <li key={index} className={'flex items-start gap-4 mb-6 border-b border-primary-200 pb-6 last:border-0'}>
+                    <li key={index} className={'flex flex-col  py-14 border-b border-primary-500 last:border-0'}>
+                      <div className={'flex space-x-4 mb-2 items-center'}>
                       {isFilled.image(item.icon) && (
                         <div className={'shrink-0 w-20 h-20'}>
                           <PrismicNextImage field={item.icon} className={'w-full h-full object-cover'}/>
                         </div>
                       )}
-                      <div>
                         {isFilled.keyText(item.heading) && (
-                          <Heading as={'h3'} color={
-                            color?.toString() === 'Primary' ? 'Light' : color?.toString()
-                          } className={'text-lg font-semibold'}>{item.heading}</Heading>
+                            <Heading as={'h3'} color={
+                              color?.toString() === 'Primary' ? 'Light' : color?.toString()
+                            } className={'text-3xl md:text-4xl lg:text-5xl'}>{item.heading}</Heading>
                         )}
+                      </div>
+                      <div>
+
                         {isFilled.richText(item.body) && (
                           <p className={cn(color === 'Primary' ? 'text-gray-400' : 'text-gray-700', 'mt-2')}>
                             <PrismicRichText field={item.body}/>
