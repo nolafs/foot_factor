@@ -13,7 +13,7 @@ export function CallToAction({ heading, body, links, hasBooking = false, booking
           {typeof heading === 'string' ? (
               heading
           ) : (
-              <PrismicRichText field={heading}/>
+              <PrismicRichText field={heading} />
           )}
         </Heading>
 

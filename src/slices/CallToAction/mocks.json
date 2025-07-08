@@ -68,18 +68,10 @@
 				"__TYPE__": "StructuredTextContent",
 				"value": [
 					{
-						"type": "paragraph",
+						"type": "heading2",
 						"content": {
-							"text": "Need help choosing the right service?",
-							"spans": [
-								{
-									"type": "strong",
-									"start": 0,
-									"end": 9
-								}
-							]
-						},
-						"direction": "ltr"
+							"text": "Attack"
+						}
 					}
 				]
 			},
