@@ -39,8 +39,11 @@ const ContainerComponent = forwardRef<
 ) {
   const Component = as ?? 'div';
   let backgroundColorClass = '';
+  const colorLowerCase = color.toLowerCase();
 
-  switch (color) {
+
+
+  switch (colorLowerCase) {
     case 'primary':
       backgroundColorClass = 'bg-primary';
       break;

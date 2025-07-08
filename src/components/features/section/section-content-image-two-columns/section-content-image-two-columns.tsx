@@ -23,7 +23,6 @@ interface SectionDefaultProps {
 export const SectionContentImageTwoColumns = ({as = 'section',heading, body, image, color, variation, slice_type}: SectionDefaultProps) => {
 
     return (
-
         <Container as={as} data-slice-type={slice_type} data-slice-variation={variation} padding={'lg'} color={color?.toString()}>
             <div className={'grid grid-cols-1 md:grid-cols-2 justify-center item-center  gap-5 md:gap-8 lg:gap-10'}>
               <div className={'order-first md:order-last flex flex-col justify-center'}>
