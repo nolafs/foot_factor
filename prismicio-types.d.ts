@@ -293,7 +293,7 @@ export type CaseStudiesDocument<Lang extends string = string> = prismic.PrismicD
   Lang
 >;
 
-type ConditionDocumentDataSlicesSlice = FaqsSlice | SectionSlice | HeroSlice;
+type ConditionDocumentDataSlicesSlice = MediaSectionSlice | CallToActionSlice | FaqsSlice | SectionSlice | HeroSlice;
 
 /**
  * Content for Condition documents
@@ -3662,9 +3662,53 @@ export interface ListSliceBentoPrimary {
 export type ListSliceBento = prismic.SharedSliceVariation<'bento', Simplify<ListSliceBentoPrimary>, never>;
 
 /**
+ * Primary content in *List → Guides → Primary*
+ */
+export interface ListSliceGuidesPrimary {
+  /**
+   * Heading field in *List → Guides → Primary*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: list.guides.primary.heading
+   * - **Documentation**: https://prismic.io/docs/fields/text
+   */
+  heading: prismic.KeyTextField;
+
+  /**
+   * Lead field in *List → Guides → Primary*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: list.guides.primary.lead
+   * - **Documentation**: https://prismic.io/docs/fields/text
+   */
+  lead: prismic.KeyTextField;
+
+  /**
+   * Link field in *List → Guides → Primary*
+   *
+   * - **Field Type**: Link
+   * - **Placeholder**: *None*
+   * - **API ID Path**: list.guides.primary.link
+   * - **Documentation**: https://prismic.io/docs/fields/link
+   */
+  link: prismic.LinkField<string, string, unknown, prismic.FieldState, never>;
+}
+
+/**
+ * Guides variation for List Slice
+ *
+ * - **API ID**: `guides`
+ * - **Description**: Default
+ * - **Documentation**: https://prismic.io/docs/slices
+ */
+export type ListSliceGuides = prismic.SharedSliceVariation<'guides', Simplify<ListSliceGuidesPrimary>, never>;
+
+/**
  * Slice variation for *List*
  */
-type ListSliceVariation = ListSliceDefault | ListSlicePricingTable | ListSliceBento;
+type ListSliceVariation = ListSliceDefault | ListSlicePricingTable | ListSliceBento | ListSliceGuides;
 
 /**
  * List Shared Slice
@@ -5393,10 +5437,12 @@ declare module '@prismicio/client' {
       ListSlicePricingTablePrimary,
       ListSliceBentoPrimaryItemsItem,
       ListSliceBentoPrimary,
+      ListSliceGuidesPrimary,
       ListSliceVariation,
       ListSliceDefault,
       ListSlicePricingTable,
       ListSliceBento,
+      ListSliceGuides,
       MediaSectionSlice,
       MediaSectionSliceDefaultPrimary,
       MediaSectionSliceFullWidthImagePrimary,

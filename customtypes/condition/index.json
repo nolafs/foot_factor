@@ -77,6 +77,12 @@
         "fieldset": "Slice Zone",
         "config": {
           "choices": {
+            "media_section": {
+              "type": "SharedSlice"
+            },
+            "call_to_action": {
+              "type": "SharedSlice"
+            },
             "faqs": {
               "type": "SharedSlice"
             },

@@ -478,5 +478,36 @@
 				"value": []
 			}
 		]
+	},
+	{
+		"__TYPE__": "SharedSliceContent",
+		"variation": "guides",
+		"primary": {
+			"heading": {
+				"__TYPE__": "FieldContent",
+				"value": "recently",
+				"type": "Text"
+			},
+			"lead": {
+				"__TYPE__": "FieldContent",
+				"value": "else",
+				"type": "Text"
+			},
+			"link": {
+				"key": "34ea5878-c872-4724-81dd-8e2ca3de8b15",
+				"__TYPE__": "LinkContent",
+				"value": {
+					"__TYPE__": "ExternalLink",
+					"url": "http://twitter.com",
+					"text": "ice"
+				}
+			}
+		},
+		"items": [
+			{
+				"__TYPE__": "GroupItemContent",
+				"value": []
+			}
+		]
 	}
 ]

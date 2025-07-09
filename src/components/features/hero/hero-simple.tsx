@@ -29,8 +29,6 @@ export const HeroSimple = ({wave_type, subheading, heading, label}: HeroSimplePr
             </div>
             <div
                 className={'absolute z-1 bg-gradient-to-r from-primary-300 to-primary-300/0  w-full h-full top-0 left-0'}/>
-
-
             <Container className={'relative z-20 max-w-6xl'}>
                 {label?.length && (
                     <Subheading className="mt-16">{label}</Subheading>

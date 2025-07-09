@@ -24,7 +24,7 @@ export  function Hero({ heading, subheading, lead,  links, image, hasBooking, ra
 
 
   return (
-      <div className="relative isolate overflow-hidden">
+      <div className="relative isolate overflow-hidden h-svh max-h-[1080px]">
           <>
             <div
                 className="absolute top-0 z-10 h-full w-full bg-primary opacity-40"/>
@@ -47,8 +47,8 @@ export  function Hero({ heading, subheading, lead,  links, image, hasBooking, ra
           </>
 
 
-        <Container className="relative z-20">
-          <div className="pb-22 pt-32 sm:pb-24 sm:pt-32 md:pb-52 md:pt-64 w-full sm:w-full lg:max-w-3xl">
+        <Container className="relative z-20 flex flex-col justify-end h-full">
+          <div className="pb-10 pt-32 sm:pb-16 sm:pt-32 md:pb-32 md:pt-64 w-full sm:w-full lg:max-w-3xl">
             { subheading &&  <Badge >{subheading}</Badge>}
             <header
                 className={cn(
@@ -62,7 +62,7 @@ export  function Hero({ heading, subheading, lead,  links, image, hasBooking, ra
             </header>
             <div
                 className={cn(
-                    'mt-8 max-w-2xl text-xl/7 font-medium text-gray-950/75 drop-shadow-[0px_0px_10px_rgba(255,255,255,1)] sm:text-xl/7'
+                    'mt-8 max-w-2xl text-xl/7 font-medium text-primary-300 sm:text-xl/7'
                 )}>
               {Array.isArray(lead) && isFilled.richText(lead) ? (
                   <PrismicRichText field={lead}/>
