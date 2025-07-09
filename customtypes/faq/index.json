@@ -12,6 +12,29 @@
           "label": "UID"
         }
       },
+      "show_on_faqs": {
+        "type": "Boolean",
+        "config": {
+          "label": "Show on FAQs",
+          "placeholder_false": "false",
+          "placeholder_true": "true",
+          "default_value": false
+        }
+      },
+      "category": {
+        "type": "Link",
+        "config": {
+          "label": "Category",
+          "select": "document",
+          "repeat": false,
+          "customtypes": [
+            {
+              "id": "faq_category",
+              "fields": ["name"]
+            }
+          ]
+        }
+      },
       "heading": {
         "type": "Text",
         "config": {

@@ -11,13 +11,17 @@ import {PrismicRichText, SliceZone} from '@prismicio/react';
 
 import { GradientBackground } from '@/components/ui/gradient';
 import React from 'react';
-import {asText, type ImageFieldImage, type LinkField, type RichTextField} from '@prismicio/client';
-import { type Author } from '@/types';
+import {asText, type ImageFieldImage, isFilled, type LinkField, type RichTextField} from '@prismicio/client';
+import {type Author, type CustomLinkToMediaField} from '@/types';
 import PostAside from '@/components/features/blog/postAside';
 import { type WithContext, type Article } from 'schema-dts';
-import { Button } from '@/components/ui/button';
+import {Button, buttonVariants} from '@/components/ui/button';
 import Link from 'next/link';
 import {components} from '@/slices';
+import {Hero as HeroComponent} from '@/components/features/hero/hero';
+import {DownloadLink} from '@/components/ui/downloadLink';
+import cn from 'clsx';
+import {FolderDownIcon} from 'lucide-react';
 
 
 type Props = {
@@ -168,56 +172,52 @@ export default async function Page({ params }: Props) {
 
   return (
     <main className={'w-full'}>
-      <div className={'absolute top-0 h-full w-full overflow-x-hidden'}>
-        <GradientBackground />
-      </div>
-      <Container className="mb-16 mt-24 md:mb-24 md:mt-40">
-        <div className={'relative z-30'}>
-          <Subheading className="mt-16">{dayjs(post.publishing_date).format('dddd, MMMM D, YYYY')}</Subheading>
-          <Heading as="h1" className="mt-2 max-w-6xl">
-            {post.name}
-          </Heading>
-        </div>
-        <div className="mt-10 grid min-h-svh grid-cols-1 gap-8 pb-24 sm:mt-10 md:mt-16 lg:grid-cols-[15rem_1fr] xl:grid-cols-[15rem_1fr_15rem]">
+      <HeroComponent
+          heading={post.name}
+          subheading={dayjs(post.publishing_date).format('dddd, MMMM D, YYYY')}
+          image={post.feature_image}
+      >
+        <div className={'w-full flex justify-between space-x-5 bg-white rounded-2xl p-5'}>
+          <div className={'grow max-w-4xl'}>
           <PostAside
-            as={'aside'}
-            uid={id}
-            post={post}
-            author={author!}
-            classNames={'hidden lg:flex h-full max-h-[800px] lg:sticky lg:top-28 lg:flex-col lg:items-start'}
+              as={'aside'}
+              uid={id}
+              post={post}
+              author={author!}
           />
-
-          <div className="text-gray-700">
-            <div className="max-w-2xl xl:mx-auto">
-              <PrismicNextImage
-                field={post.feature_image}
-                width={672}
-                height={448}
-                priority={true}
-                className="mb-10 aspect-[3/2] w-full rounded-2xl object-cover shadow-xl"
-                imgixParams={{ fm: 'webp', fit: 'crop', crop: ['focalpoint'], q: 70 }}
-              />
-
-              <div ><SliceZone slices={post.slices} components={components}/></div>
-
-              <PostAside
-                as="aside"
-                uid={id}
-                post={post}
-                author={author!}
-                classNames={'lg:hidden border-y mt-10 border-gray-600 py-5'}
-              />
-
-              <div className="mt-10">
-                <Button variant="outline" asChild ><Link href="/blog">
-                  <ChevronLeftIcon className="size-4" />
-                  Back to blog
-                </Link>
-                </Button>
-              </div>
-            </div>
+          </div>
+          <div className={'shrink'}>
+          {isFilled.linkToMedia(post.file) && (
+              <DownloadLink
+                  href={(post.file as CustomLinkToMediaField)?.url}
+                  className={cn(buttonVariants({size: 'icon'}))}>
+                <FolderDownIcon className={'h-6 w-6'}/>
+              </DownloadLink>
+          )}
           </div>
         </div>
+
+      </HeroComponent>
+
+      <SliceZone slices={post.slices} components={components}/>
+
+      <Container className="mb-16">
+        <div className="mt-10 flex items-center justify-between">
+          <Button variant="outline" asChild ><Link href="/blog">
+            <ChevronLeftIcon className="size-4" />
+            Back to all guides
+          </Link>
+          </Button>
+          {isFilled.linkToMedia(post.file) && (
+              <DownloadLink
+                  href={(post.file as CustomLinkToMediaField)?.url}
+                  className={cn(buttonVariants({size: 'default'}))}>
+                Download now <FolderDownIcon className={'h-6 w-6'}/>
+              </DownloadLink>
+          )}
+        </div>
+
+
       </Container>
       {/* Add JSON-LD to your page */}
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />

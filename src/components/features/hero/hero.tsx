@@ -16,9 +16,10 @@ export interface HeroProps {
   hasBooking?: boolean;
   rating?: ImageField;
   imagePosition?: 'left' | 'right' | 'center' | 'top' | 'bottom';
+  children?: React.ReactNode;
 }
 
-export  function Hero({ heading, subheading, lead,  links, image, hasBooking, rating, imagePosition = 'center' }: HeroProps) {
+export  function Hero({ heading, subheading, lead,  links, image, hasBooking, rating, imagePosition = 'center', children }: HeroProps) {
 
 
 
@@ -48,7 +49,7 @@ export  function Hero({ heading, subheading, lead,  links, image, hasBooking, ra
 
         <Container className="relative z-20">
           <div className="pb-22 pt-32 sm:pb-24 sm:pt-32 md:pb-52 md:pt-64 w-full sm:w-full lg:max-w-3xl">
-            { subheading &&  <Badge>{subheading}</Badge>}
+            { subheading &&  <Badge >{subheading}</Badge>}
             <header
                 className={cn(
                     'font-heading  text-balance text-5xl/[1.1] font-medium text-white sm:text-6xl/[1.1] md:text-6xl/[0.8] lg:text-7xl/[1.1]'
@@ -69,14 +70,13 @@ export  function Hero({ heading, subheading, lead,  links, image, hasBooking, ra
                   <p>{lead}</p>
               )}
             </div>
-
-
             <ButtonRow hasBooking={hasBooking} links={links}/>
-
             {rating && (<div className={'mt-48'}><PrismicNextImage field={rating} /></div>)}
-            <div>
-
-            </div>
+            {children && (
+                <div className={'absolute bottom-10 left-0 right-0 z-20 flex'}>
+                  {children}
+                </div>
+            )}
           </div>
         </Container>
       </div>

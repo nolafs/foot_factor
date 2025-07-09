@@ -27,9 +27,9 @@ export const PostAside = ({
   onNavigate,
 }: PostAsideProps) => {
   return (
-    <Component className={cn('flex flex-wrap items-center gap-8 max-lg:justify-between', classNames)}>
+    <Component className={cn('flex flex-wrap items-start justify-between gap-10 md:divide-x divide-primary-200', classNames)}>
       {post.category && (
-        <div className="flex flex-col flex-wrap gap-2">
+        <div className="flex flex-col flex-wrap gap-2 px-5">
           <span className="text-sm font-medium text-gray-500">Category:</span>
           <Link
             key="test"
@@ -49,7 +49,7 @@ export const PostAside = ({
         </div>
       )}
       {author && (
-        <div className="flex flex-col flex-wrap gap-2">
+        <div className="flex flex-col flex-wrap gap-2 px-5">
           <span className="text-sm font-medium text-gray-500">Author:</span>
           <span className={'text-gray-700'}>
             <AuthorLink author={author} />
@@ -58,7 +58,7 @@ export const PostAside = ({
       )}
 
       {post.tags && (
-        <div className="flex flex-wrap gap-2 md:flex-col">
+        <div className="flex flex-wrap gap-2 md:flex-col px-5">
           <span className="text-sm font-medium text-gray-500">Tags:</span>
           <div className="flex flex-wrap gap-2">
             {post.tags.map((item, idx) => (
@@ -74,7 +74,7 @@ export const PostAside = ({
         </div>
       )}
       {uid && (
-        <div>
+        <div className="flex flex-col flex-wrap gap-2 px-5">
           <div className="mb-2 text-sm font-medium text-gray-500">Share:</div>
           {'title' in post && post.title && <SharePage slug={uid} title={post?.title} />}
         </div>

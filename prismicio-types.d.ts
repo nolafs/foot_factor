@@ -471,6 +471,29 @@ export type ConditionCategoryDocument<Lang extends string = string> = prismic.Pr
  */
 interface FaqDocumentData {
   /**
+   * Show on FAQs field in *FAQ*
+   *
+   * - **Field Type**: Boolean
+   * - **Placeholder**: *None*
+   * - **Default Value**: false
+   * - **API ID Path**: faq.show_on_faqs
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/fields/boolean
+   */
+  show_on_faqs: prismic.BooleanField;
+
+  /**
+   * Category field in *FAQ*
+   *
+   * - **Field Type**: Content Relationship
+   * - **Placeholder**: *None*
+   * - **API ID Path**: faq.category
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/fields/content-relationship
+   */
+  category: ContentRelationshipFieldWithData<[{ id: 'faq_category'; fields: ['name'] }]>;
+
+  /**
    * Heading field in *FAQ*
    *
    * - **Field Type**: Text
@@ -505,6 +528,37 @@ interface FaqDocumentData {
 export type FaqDocument<Lang extends string = string> = prismic.PrismicDocumentWithUID<
   Simplify<FaqDocumentData>,
   'faq',
+  Lang
+>;
+
+/**
+ * Content for Faq Category documents
+ */
+interface FaqCategoryDocumentData {
+  /**
+   * Name field in *Faq Category*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: faq_category.name
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/fields/text
+   */
+  name: prismic.KeyTextField;
+}
+
+/**
+ * Faq Category document from Prismic
+ *
+ * - **API ID**: `faq_category`
+ * - **Repeatable**: `true`
+ * - **Documentation**: https://prismic.io/docs/content-modeling
+ *
+ * @typeParam Lang - Language API ID of the document.
+ */
+export type FaqCategoryDocument<Lang extends string = string> = prismic.PrismicDocumentWithUID<
+  Simplify<FaqCategoryDocumentData>,
+  'faq_category',
   Lang
 >;
 
@@ -2354,6 +2408,7 @@ export type AllDocumentTypes =
   | ConditionDocument
   | ConditionCategoryDocument
   | FaqDocument
+  | FaqCategoryDocument
   | GuideDocument
   | HomeDocument
   | LegalDocument
@@ -5236,6 +5291,8 @@ declare module '@prismicio/client' {
       ConditionCategoryDocumentData,
       FaqDocument,
       FaqDocumentData,
+      FaqCategoryDocument,
+      FaqCategoryDocumentData,
       GuideDocument,
       GuideDocumentData,
       GuideDocumentDataTagsItem,
