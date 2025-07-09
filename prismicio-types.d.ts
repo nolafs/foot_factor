@@ -293,6 +293,21 @@ export type CaseStudiesDocument<Lang extends string = string> = prismic.PrismicD
   Lang
 >;
 
+/**
+ * Item in *Condition → Tags*
+ */
+export interface ConditionDocumentDataTagsItem {
+  /**
+   * Tag field in *Condition → Tags*
+   *
+   * - **Field Type**: Content Relationship
+   * - **Placeholder**: *None*
+   * - **API ID Path**: condition.tags[].tag
+   * - **Documentation**: https://prismic.io/docs/fields/content-relationship
+   */
+  tag: ContentRelationshipFieldWithData<[{ id: 'post_tags'; fields: ['name'] }]>;
+}
+
 type ConditionDocumentDataSlicesSlice = MediaSectionSlice | CallToActionSlice | FaqsSlice | SectionSlice | HeroSlice;
 
 /**
@@ -365,6 +380,17 @@ interface ConditionDocumentData {
    * - **Documentation**: https://prismic.io/docs/fields/text
    */
   excerpt: prismic.KeyTextField;
+
+  /**
+   * Tags field in *Condition*
+   *
+   * - **Field Type**: Group
+   * - **Placeholder**: *None*
+   * - **API ID Path**: condition.tags[]
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/fields/repeatable-group
+   */
+  tags: prismic.GroupField<Simplify<ConditionDocumentDataTagsItem>>;
 
   /**
    * Slice Zone field in *Condition*
@@ -5330,6 +5356,7 @@ declare module '@prismicio/client' {
       CaseStudiesDocumentDataSlicesSlice,
       ConditionDocument,
       ConditionDocumentData,
+      ConditionDocumentDataTagsItem,
       ConditionDocumentDataSlicesSlice,
       ConditionCategoryDocument,
       ConditionCategoryDocumentData,
