@@ -515,12 +515,12 @@ export interface GuideDocumentDataTagsItem {
   /**
    * Tag field in *Guide → Tags*
    *
-   * - **Field Type**: Text
+   * - **Field Type**: Content Relationship
    * - **Placeholder**: *None*
    * - **API ID Path**: guide.tags[].tag
-   * - **Documentation**: https://prismic.io/docs/fields/text
+   * - **Documentation**: https://prismic.io/docs/fields/content-relationship
    */
-  tag: prismic.KeyTextField;
+  tag: ContentRelationshipFieldWithData<[{ id: 'post_tags'; fields: ['name'] }]>;
 }
 
 type GuideDocumentDataSlicesSlice = SectionSlice | IconNavListSlice | CallToActionSlice;

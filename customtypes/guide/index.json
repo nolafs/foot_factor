@@ -96,10 +96,17 @@
           "repeat": true,
           "fields": {
             "tag": {
-              "type": "Text",
+              "type": "Link",
               "config": {
                 "label": "Tag",
-                "placeholder": ""
+                "select": "document",
+                "repeat": false,
+                "customtypes": [
+                  {
+                    "id": "post_tags",
+                    "fields": ["name"]
+                  }
+                ]
               }
             }
           }
