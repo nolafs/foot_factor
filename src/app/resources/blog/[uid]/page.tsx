@@ -17,6 +17,7 @@ import PostAside from '@/components/features/blog/postAside';
 import { type WithContext, type Article } from 'schema-dts';
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
+import HeroSimple from '@/components/features/hero/hero-simple';
 
 
 type Props = {
@@ -167,23 +168,18 @@ export default async function Page({ params }: Props) {
 
   return (
     <main className={'w-full'}>
-      <div className={'absolute top-0 h-full w-full overflow-x-hidden'}>
-        <GradientBackground />
-      </div>
-      <Container className="mb-16 mt-24 md:mb-24 md:mt-40">
-        <div className={'relative z-30'}>
-          <Subheading className="mt-16">{dayjs(post.publishing_date).format('dddd, MMMM D, YYYY')}</Subheading>
-          <Heading as="h1" className="mt-2 max-w-6xl">
-            {post.title}
-          </Heading>
-        </div>
+      <HeroSimple wave_type={'5'}
+        heading={post.title}
+        subheading={dayjs(post.publishing_date).format('dddd, MMMM D, YYYY')}
+      />
+      <Container>
         <div className="mt-10 grid min-h-svh grid-cols-1 gap-8 pb-24 sm:mt-10 md:mt-16 lg:grid-cols-[15rem_1fr] xl:grid-cols-[15rem_1fr_15rem]">
           <PostAside
             as={'aside'}
             uid={id}
             post={post}
             author={author!}
-            classNames={'hidden lg:flex h-full max-h-[800px] lg:sticky lg:top-28 lg:flex-col lg:items-start'}
+            classNames={'hidden lg:flex h-full max-h-[800px] lg:sticky lg:top-28 lg:flex-col lg:!justify-start lg:divide-x-0   lg:items-start'}
           />
 
           <div className="text-gray-700">
