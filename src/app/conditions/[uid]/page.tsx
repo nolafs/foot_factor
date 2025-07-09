@@ -5,6 +5,15 @@ import { createClient } from '@/prismicio';
 import { components } from '@/slices';
 import React from 'react';
 import {asImageSrc, isFilled} from '@prismicio/client';
+import {Hero} from '@/components/features/hero/hero';
+import {Heading, Lead} from '@/components/ui/text';
+import {PrismicNextLink} from '@prismicio/next';
+import {buttonVariants} from '@/components/ui/button';
+import {CircleArrowRight} from 'lucide-react';
+import BlogArticle from '@/slices/Megamenu/component/blog-article';
+import {Container} from '@/components/ui/container';
+import Link from 'next/link';
+import {PostTagsDocumentData} from '@/prismic-types';
 
 type Params = { uid: string };
 
@@ -31,7 +40,34 @@ export default async function Page({ params }: { params: Promise<Params> }) {
 
   return (
     <main className={'w-full overflow-hidden'}>
+      <Hero heading={page.data.title} image={page.data.feature_image} subheading={'Condition'} lead={page.data.excerpt} />
       <SliceZone slices={page.data.slices} components={components} />
+
+      <Container as={'section'} color={'accent'} padding={'lg'}>
+        <hgroup>
+          <div className={'flex w-full justify-between items-center gap-5 md:gap-8 lg:gap-10'}>
+            <Heading as="h2" className={'mb-8'}>
+              Related Articles
+            </Heading>
+            <div>
+              <Link href={'/resources/blog'} className={buttonVariants({variant: 'default'})}>
+                All articles <CircleArrowRight className={'ml-2 h-4 w-4'}/>
+              </Link>
+            </div>
+          </div>
+          <div className={'w-full md:max-w-4xl lg:max-w-3xl'}>
+            <Lead>
+              Find expert tips, advice, and insights to support your foot health and active lifestyle.
+            </Lead>
+          </div>
+        </hgroup>
+        <div className={'mt-16'}>
+          <BlogArticle size={3} tags={page.data.tags
+              .map(item => (item.tag as unknown as { id: string }).id)
+              .filter(Boolean)
+          }/>
+        </div>
+      </Container>
     </main>
   );
 }

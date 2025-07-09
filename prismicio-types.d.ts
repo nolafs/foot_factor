@@ -308,7 +308,7 @@ export interface ConditionDocumentDataTagsItem {
   tag: ContentRelationshipFieldWithData<[{ id: 'post_tags'; fields: ['name'] }]>;
 }
 
-type ConditionDocumentDataSlicesSlice = MediaSectionSlice | CallToActionSlice | FaqsSlice | SectionSlice | HeroSlice;
+type ConditionDocumentDataSlicesSlice = MediaSectionSlice | CallToActionSlice | FaqsSlice | SectionSlice;
 
 /**
  * Content for Condition documents

@@ -149,8 +149,9 @@ const List: FC<ListProps> = ({ slice }) => {
 
     if(slice.variation === 'default') {
       return (
-          <section data-slice-type={slice.slice_type} data-slice-variation={slice.variation} className={'bg-accent-50'}>
-            <Container className={'lg:py-28 py-16 md:py-24'}>
+
+            <Container as={'section'} color={'accent'} padding={'lg'} data-slice-type={slice.slice_type}
+                       data-slice-variation={slice.variation}>
               <hgroup>
                 <div className={'flex w-full justify-between items-center gap-5 md:gap-8 lg:gap-10'}>
                   <Heading as="h2" className={'mb-8'}>
@@ -172,7 +173,6 @@ const List: FC<ListProps> = ({ slice }) => {
                 <BlogArticle size={3}/>
               </div>
             </Container>
-          </section>
       );
     }
 
