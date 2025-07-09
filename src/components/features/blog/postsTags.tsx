@@ -37,7 +37,7 @@ export async function Tags({ selected, url = 'blog' }: { selected?: string; url?
       </MenuButton>
       <MenuItems
         anchor="bottom start"
-        className="max-h-[150px] min-w-40 rounded-lg bg-white p-1 shadow-lg ring-1 ring-gray-200 [--anchor-gap:6px] [--anchor-offset:-4px] [--anchor-padding:10px]">
+        className="z-20 max-h-[150px] min-w-40 rounded-lg bg-white p-1 shadow-lg ring-1 ring-gray-200 [--anchor-gap:6px] [--anchor-offset:-4px] [--anchor-padding:10px]">
         <MenuItem>
           <Link
             href={`/${url}`}

@@ -33,7 +33,7 @@ export async function Categories({ selected, url = 'blog' }: { selected?: string
       </MenuButton>
       <MenuItems
         anchor="bottom start"
-        className="min-w-40 rounded-lg bg-white p-1 shadow-lg ring-1 ring-gray-200 [--anchor-gap:6px] [--anchor-offset:-4px] [--anchor-padding:10px]">
+        className="min-w-40 z-20 rounded-lg bg-white p-1 shadow-lg ring-1 ring-gray-200 [--anchor-gap:6px] [--anchor-offset:-4px] [--anchor-padding:10px]">
         <MenuItem>
           <Link
             href={`/${url}`}

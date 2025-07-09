@@ -15,7 +15,7 @@ interface PostsFilterProps {
 
 export const Filter = ({ tagSelected, categorySelected, url = 'blog', hasRss = true }: PostsFilterProps) => {
   return (
-    <div className="flex flex-wrap items-center justify-between gap-2">
+    <div className="relative flex flex-wrap items-center justify-between gap-2 z-20">
       <div className={'flex flex-wrap items-center gap-5'}>
         <Categories selected={categorySelected} url={url} />
         <Tags selected={tagSelected} url={url} />

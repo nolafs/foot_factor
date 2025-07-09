@@ -4,7 +4,7 @@ import type { Metadata, ResolvingMetadata } from 'next';
 import { createClient } from '@/prismicio';
 import { PrismicNextImage } from '@prismicio/next';
 import { PrismicRichText } from '@prismicio/react';
-import { asText, filter, type ImageFieldImage } from '@prismicio/client';
+import {asText, filter, type ImageFieldImage, isFilled} from '@prismicio/client';
 import React from 'react';
 import { FeaturedPosts } from './_components/guideFeatured';
 import { Badge } from '@/components/ui/badge';
@@ -16,6 +16,7 @@ import { type ResolvedOpenGraph } from 'next/dist/lib/metadata/types/opengraph-t
 import Filter from '@/components/features/blog/postsFilter';
 import {type ConditionCategoryDocument, type PostTagsDocument} from '@/prismic-types';
 import HeroSimple from '@/components/features/hero/hero-simple';
+import Link from 'next/link';
 
 type Props = {
   params: Promise<{ uid: string }>;
@@ -157,26 +158,31 @@ async function Posts({ page, category, tags : Tags }: { page: number; category?:
                     className="aspect-square size-6 rounded-full object-cover"
                   />
                 )}
-
                 <div className="text-sm/5 text-gray-700">
-                  {(post.data.author.data as { name: string }).name || 'My Ankle'}
+                  {(post.data.author.data as { name: string }).name || 'Foot Factor'}
                 </div>
               </div>
             )}
           </div>
           <div className="sm:col-span-2 sm:max-w-2xl">
-            <h2 className="text-sm/5 font-medium">{post.data.name}</h2>
+            <h2 className="text-sm/5 font-medium">
+              <Link href={`/resources/guides/${post.uid}`}>
+                {post.data.name}
+              </Link>
+            </h2>
             <div className="mt-3 text-sm/6 text-gray-500">
               <PrismicRichText field={post.data.description} />
             </div>
 
             <div className="mt-4">
+              {isFilled.linkToMedia(post.data.file) && (
               <DownloadLink
                 className={'flex items-center gap-1 text-sm/5 font-medium'}
                 href={(post.data.file as CustomLinkToMediaField)?.url}>
                 <FolderDownIcon className={'h-6 w-6'} />
                 {post.data.file.text}
               </DownloadLink>
+                  )}
             </div>
           </div>
         </div>

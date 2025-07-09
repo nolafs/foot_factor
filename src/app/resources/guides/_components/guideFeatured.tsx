@@ -1,5 +1,5 @@
 import { createClient } from '@/prismicio';
-import { filter, type ImageFieldImage } from '@prismicio/client';
+import {filter, type ImageFieldImage, isFilled} from '@prismicio/client';
 import { Container } from '@/components/ui/container';
 import { PrismicNextImage } from '@prismicio/next';
 import dayjs from 'dayjs';
@@ -10,6 +10,8 @@ import { buttonVariants } from '@/components/ui/button';
 import cn from 'clsx';
 import { DownloadLink } from '@/components/ui/downloadLink';
 import { type CustomLinkToMediaField } from '@/types';
+import Link from 'next/link';
+import {FolderDownIcon} from 'lucide-react';
 
 export async function FeaturedPosts() {
   const client = createClient();
@@ -64,22 +66,27 @@ export async function FeaturedPosts() {
                   {dayjs(post.data.publishing_date).format('dddd, MMMM D, YYYY')}
                 </div>
                 <div className="mt-2 text-base/7 font-medium">
-                  <DownloadLink href={(post.data.file as CustomLinkToMediaField)?.url}>
+                  <Link href={`/resources/guides/${post.uid}`}>
                     <span className="absolute inset-0" />
                     {post.data.name}
-                  </DownloadLink>
+                  </Link>
                 </div>
 
                 <div className="mt-2 flex-1 text-sm/6 text-gray-500">
                   <PrismicRichText field={post.data.description} />
                 </div>
 
-                <div className="mt-4">
+                <div className="mt-4 flex space-x-4">
+                  <Link href={`/resources/guides/${post.uid}`} className={cn(buttonVariants(), 'w-full')}>
+                    Read more
+                  </Link>
+                  {isFilled.linkToMedia(post.data.file) && (
                   <DownloadLink
                     href={(post.data.file as CustomLinkToMediaField)?.url}
                     className={cn(buttonVariants(), 'w-full')}>
-                    {post.data.file.text}
+                    <FolderDownIcon className={'h-6 w-6'}/> {post.data.file.text}
                   </DownloadLink>
+                  )}
                 </div>
 
                 {post.data.author && 'data' in post.data.author && (
