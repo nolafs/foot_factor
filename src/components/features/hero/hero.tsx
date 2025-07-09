@@ -1,11 +1,13 @@
+'use client';
 import { Container } from '@/components/ui/container';
 import {type ImageField, isFilled, type KeyTextField, type LinkField, type RichTextField} from '@prismicio/client';
 import { PrismicNextImage } from '@prismicio/next';
-import React from 'react';
+import React, {useRef} from 'react';
 import cn from 'clsx';
 import {PrismicRichText} from '@prismicio/react';
 import {Badge} from '@/components/ui/badge';
 import ButtonRow from '@/components/ui/button-row';
+import {motion, useScroll, useTransform} from 'framer-motion';
 
 export interface HeroProps {
   heading: RichTextField | KeyTextField | string;
@@ -20,7 +22,19 @@ export interface HeroProps {
 }
 
 export  function Hero({ heading, subheading, lead,  links, image, hasBooking, rating, imagePosition = 'center', children }: HeroProps) {
+  const heroRef = useRef<HTMLDivElement | null>(null);
+  const imageRef = useRef<HTMLDivElement | null>(null);
 
+  // Track scroll progress relative to the hero section
+  const {scrollYProgress} = useScroll({
+    target: heroRef,
+    offset: ["start start", "end start"]
+  });
+
+  // Transform values for different elements
+  const textY = useTransform(scrollYProgress, [0, 0.8], [0, -500]);
+  const imageY = useTransform(scrollYProgress, [0, 0.8], [0, 1000]);
+  const imageScale = useTransform(scrollYProgress, [0, 0.8], [1, 1.3]);
 
 
   return (
@@ -29,7 +43,11 @@ export  function Hero({ heading, subheading, lead,  links, image, hasBooking, ra
             <div
                 className="absolute top-0 z-10 h-full w-full bg-primary opacity-40"/>
             {image && (
-                <div className="z-1 absolute inset-0 overflow-hidden h-full">
+                <motion.div
+                    ref={imageRef}
+                    className="z-1 absolute inset-0 overflow-hidden h-full"
+                    style={{y: imageY, scale: imageScale}}
+                >
                   <PrismicNextImage
                       loading={'lazy'}
                       field={image}
@@ -42,11 +60,14 @@ export  function Hero({ heading, subheading, lead,  links, image, hasBooking, ra
                       imagePosition === 'center' && 'object-center',
                       )}
                   />
-                </div>
+                </motion.div>
             )}
           </>
 
-
+        <motion.div
+            className="absolute bottom-0 w-full z-20"
+            style={{y: textY}}
+        >
         <Container className="relative z-20 flex flex-col justify-end h-full">
           <div className="pb-10 pt-32 sm:pb-16 sm:pt-32 md:pb-32 md:pt-64 w-full sm:w-full lg:max-w-3xl">
             { subheading &&  <Badge >{subheading}</Badge>}
@@ -79,6 +100,7 @@ export  function Hero({ heading, subheading, lead,  links, image, hasBooking, ra
             )}
           </div>
         </Container>
+        </motion.div>
       </div>
   );
 }
