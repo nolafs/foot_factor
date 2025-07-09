@@ -1,6 +1,6 @@
 'use client'
 import React, {useCallback, useLayoutEffect, useRef, useState} from 'react';
-import {TeamCarouselSliceDefaultPrimaryMembersItem} from '@/prismic-types';
+import {type TeamCarouselSliceDefaultPrimaryMembersItem} from '@/prismic-types';
 import {PrismicNextImage} from '@prismicio/next';
 import {Button} from '@/components/ui/button';
 import {ArrowRight} from 'lucide-react';

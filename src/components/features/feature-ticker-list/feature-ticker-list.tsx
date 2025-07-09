@@ -11,7 +11,7 @@ import {
   useVelocity
 } from 'framer-motion';
 import {wrap} from '@motionone/utils';
-import {IconNavListSliceDefaultPrimaryItemsItem} from '@/prismic-types';
+import {type IconNavListSliceDefaultPrimaryItemsItem} from '@/prismic-types';
 import cn from 'clsx';
 import {PrismicNextImage, PrismicNextLink} from '@prismicio/next';
 import {isFilled} from '@prismicio/client';

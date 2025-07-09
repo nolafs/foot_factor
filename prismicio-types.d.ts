@@ -523,7 +523,7 @@ export interface GuideDocumentDataTagsItem {
   tag: ContentRelationshipFieldWithData<[{ id: 'post_tags'; fields: ['name'] }]>;
 }
 
-type GuideDocumentDataSlicesSlice = SectionSlice | IconNavListSlice | CallToActionSlice;
+type GuideDocumentDataSlicesSlice = MediaSectionSlice | SectionSlice | IconNavListSlice | CallToActionSlice;
 
 /**
  * Content for Guide documents

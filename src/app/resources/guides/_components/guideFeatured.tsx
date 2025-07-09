@@ -14,14 +14,14 @@ import { type CustomLinkToMediaField } from '@/types';
 export async function FeaturedPosts() {
   const client = createClient();
   const featuredPosts = await client
-    .getByType('download', {
+    .getByType('guide', {
       pageSize: 3,
       page: 0,
-      filters: [filter.at('my.download.featured', true)],
-      fetchLinks: ['author.name', 'author.profile_image', 'post_category.name'],
+      filters: [filter.at('my.guide.featured', true)],
+      fetchLinks: ['author.name', 'author.profile_image', 'condition_category.name'],
       orderings: [
         {
-          field: 'my.download.publishing_date',
+          field: 'my.guide.publishing_date',
           direction: 'desc',
         },
       ],

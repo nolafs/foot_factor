@@ -4,10 +4,10 @@ import SectionContent from '@/components/features/section/section-content';
 import {
     type ImageFieldImage,
     isFilled,
-    KeyTextField,
+    type KeyTextField,
     type LinkField,
     type Repeatable,
-    RichTextField
+    type RichTextField
 } from '@prismicio/client';
 import {PrismicNextImage} from '@prismicio/next';
 import ButtonRow from '@/components/ui/button-row';

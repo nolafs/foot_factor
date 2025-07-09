@@ -20,6 +20,7 @@ import Filter from '../../../components/features/blog/postsFilter';
 import AuthorLink from '@/components/features/author/author-link';
 import { type PostCategoryDocument, type PostTagsDocument } from '../../../../prismicio-types';
 import Link from 'next/link';
+import HeroSimple from '@/components/features/hero/hero-simple';
 
 type Props = {
   params: Promise<{ uid: string }>;
@@ -198,13 +199,12 @@ export default async function Blog({ searchParams }: Props) {
 
   return (
     <main className={'min-h-svh w-full overflow-hidden'}>
-      <Container className="mt-24 md:mt-36">
-        <Subheading className="mt-16">Blog</Subheading>
-        <Heading as="h1" className="mt-2">
-          What’s happening at Foot Factor.
-        </Heading>
-        <Lead className="mt-6 max-w-3xl">Looking for resources on foot health You&apos;re in the right place.</Lead>
-      </Container>
+
+      <HeroSimple wave_type={'3'}
+      label={'Blog'}
+      heading={'What’s happening at Foot Factor.'}
+      subheading={'Looking for resources on foot health? You\'re in the right place.'}
+      />
       {page === 1 && !categories && !tags && <FeaturedPosts />}
       <Container className="mt-16 pb-24">
         <Filter categorySelected={categories ? categories[0] : undefined} tagSelected={tags ? tags[0] : undefined} />

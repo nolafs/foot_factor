@@ -1,7 +1,7 @@
 import React from 'react';
 import cn from 'clsx';
 import {PrismicRichText} from '@prismicio/react';
-import {RichTextField, SelectField } from '@prismicio/client';
+import {type RichTextField, SelectField } from '@prismicio/client';
 import {Body} from '@/components/ui/text';
 
 interface SectionBodyProps {

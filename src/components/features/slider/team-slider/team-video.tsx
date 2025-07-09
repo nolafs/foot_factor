@@ -1,7 +1,7 @@
 import React, {useRef, useState} from 'react';
 import Notification from '@/components/ui/notification';
 import type {EmbedField, ImageField} from '@prismicio/client';
-import ReactPlayer, {Config} from 'react-player/lazy';
+import ReactPlayer, {type Config} from 'react-player/lazy';
 import VideoControl from '@/components/features/video-player/video-players/video-control';
 
 interface TeamVideoProps {

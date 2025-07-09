@@ -1,6 +1,6 @@
 'use client';
 import React, {useRef, useState} from 'react';
-import {TeamCarouselSliceDefaultPrimaryMembersItem} from '@/prismic-types';
+import {type TeamCarouselSliceDefaultPrimaryMembersItem} from '@/prismic-types';
 import TeamCard from '@/components/features/slider/team-slider/team-card';
 import {useMotionValueEvent, useScroll} from 'framer-motion';
 import useMeasure from 'react-use-measure';

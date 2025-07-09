@@ -1,5 +1,5 @@
 import {cn} from '@/lib/utils';
-import {SelectField} from '@prismicio/client';
+import {type SelectField} from '@prismicio/client';
 
 
 type HeadingProps = {

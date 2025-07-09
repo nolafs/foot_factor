@@ -1,6 +1,6 @@
 'use client'
 import React from 'react';
-import {TimelineSliceVerticalWithImagesPrimaryEventsItem} from '@/prismic-types';
+import {type TimelineSliceVerticalWithImagesPrimaryEventsItem} from '@/prismic-types';
 import {motion, useAnimation} from 'framer-motion'
 import {cn} from '@/lib/utils';
 import {scrollLeftVariants, scrollRightVariants} from '@/utils/variants';

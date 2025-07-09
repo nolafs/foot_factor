@@ -1,5 +1,5 @@
 import React from 'react';
-import {TimelineSliceVerticalWithImagesPrimaryEventsItem} from '@/prismic-types';
+import {type TimelineSliceVerticalWithImagesPrimaryEventsItem} from '@/prismic-types';
 import TimelineListItem from '@/components/features/timeline/timeline-item';
 import {Container} from '@/components/ui/container';
 

@@ -1,6 +1,6 @@
 import React from 'react';
 import cn from 'clsx';
-import {isFilled, type KeyTextField, RichTextField, SelectField} from '@prismicio/client';
+import {isFilled, type KeyTextField, type RichTextField, SelectField} from '@prismicio/client';
 import SectionBody from '@/components/features/section/section-body';
 import {Heading} from '@/components/ui/text';
 import {PrismicRichText} from '@prismicio/react';

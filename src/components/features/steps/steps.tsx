@@ -1,6 +1,6 @@
 'use client';
 import React, {useState} from 'react';
-import {VerticalStepsWithImagesSliceDefaultPrimaryStepsItem} from '@/prismic-types';
+import {type VerticalStepsWithImagesSliceDefaultPrimaryStepsItem} from '@/prismic-types';
 import SectionContent from '@/components/features/section/section-content';
 import gsap from 'gsap';
 import ScrollTrigger from 'gsap/ScrollTrigger';

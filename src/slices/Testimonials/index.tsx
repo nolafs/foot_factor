@@ -1,7 +1,7 @@
 'use client';
-import {FC, useEffect, useState} from 'react';
-import {Content} from '@prismicio/client';
-import {PrismicRichText, SliceComponentProps} from '@prismicio/react';
+import {type FC, useEffect, useState} from 'react';
+import {type Content} from '@prismicio/client';
+import {PrismicRichText, type SliceComponentProps} from '@prismicio/react';
 import {createClient} from '@/prismicio';
 import {Container} from '@/components/ui/container';
 import {PrismicNextImage} from '@prismicio/next';

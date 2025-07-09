@@ -1,6 +1,4 @@
-import { Container } from '@/components/ui/container';
-import { GradientBackground } from '@/components/ui/gradient';
-import { Heading, Lead, Subheading } from '@/components/ui/text';
+import { Container } from '@/components/ui/container';import { Heading, Lead, Subheading } from '@/components/ui/text';
 import dayjs from 'dayjs';
 import type { Metadata, ResolvingMetadata } from 'next';
 import { createClient } from '@/prismicio';
@@ -8,7 +6,7 @@ import { PrismicNextImage } from '@prismicio/next';
 import { PrismicRichText } from '@prismicio/react';
 import { asText, filter, type ImageFieldImage } from '@prismicio/client';
 import React from 'react';
-import { FeaturedPosts } from './_components/postsFeatured';
+import { FeaturedPosts } from './_components/guideFeatured';
 import { Badge } from '@/components/ui/badge';
 import { FolderDownIcon } from 'lucide-react';
 import { Pagination } from '@/components/ui/pagination';
@@ -16,7 +14,8 @@ import { DownloadLink } from '@/components/ui/downloadLink';
 import { type CustomLinkToMediaField, type OGImage } from '@/types';
 import { type ResolvedOpenGraph } from 'next/dist/lib/metadata/types/opengraph-types';
 import Filter from '@/components/features/blog/postsFilter';
-import {ConditionCategoryDocument, PostTagsDocument} from '@/prismic-types';
+import {type ConditionCategoryDocument, type PostTagsDocument} from '@/prismic-types';
+import HeroSimple from '@/components/features/hero/hero-simple';
 
 type Props = {
   params: Promise<{ uid: string }>;
@@ -206,16 +205,12 @@ export default async function Guide({ searchParams }: Props) {
   }
   return (
     <main className={'min-h-svh w-full overflow-hidden'}>
-      <Container className="mt-36 md:mt-36">
-        <Subheading className="mt-16">Downloads</Subheading>
-        <Heading as="h1" className="mt-2">
-          Free Guides & Resources
-        </Heading>
-        <Lead className="mt-6 max-w-3xl">
-          Download expert-written guides and brochures on ankle conditions, treatments, and recovery. Get the latest
-          information in easy-to-read PDFs, available anytime you need them.
-        </Lead>
-      </Container>
+      <HeroSimple wave_type={'3'}
+                  label={'Guides'}
+                  heading={'Free Guides'}
+                  subheading={'Download expert-written guides and brochures on ankle conditions, treatments, and recovery. Get the latest\n' +
+                      '          information in easy-to-read PDFs, available anytime you need them.'}
+      />
       {page === 1 && !categories && !tags && <FeaturedPosts />}
       <Container className="mt-24 pb-24">
         <Filter

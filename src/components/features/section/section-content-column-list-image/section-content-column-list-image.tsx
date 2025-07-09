@@ -5,7 +5,7 @@ import {Container} from '@/components/ui/container';
 import {PrismicNextImage} from '@prismicio/next';
 import cn from 'clsx';
 import SectionContent from '@/components/features/section/section-content';
-import {SectionSliceContentTwoColumnIconListPrimaryItemsItem} from '@/prismic-types';
+import {type SectionSliceContentTwoColumnIconListPrimaryItemsItem} from '@/prismic-types';
 import {PrismicRichText} from '@prismicio/react';
 import {Heading} from '@/components/ui/text';
 
