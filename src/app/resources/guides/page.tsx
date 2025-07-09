@@ -205,7 +205,7 @@ export default async function Guide({ searchParams }: Props) {
   }
   return (
     <main className={'min-h-svh w-full overflow-hidden'}>
-      <HeroSimple wave_type={'3'}
+      <HeroSimple wave_type={'4'}
                   label={'Guides'}
                   heading={'Free Guides'}
                   subheading={'Download expert-written guides and brochures on ankle conditions, treatments, and recovery. Get the latest\n' +
