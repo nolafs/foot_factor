@@ -16,7 +16,8 @@
         "type": "Text",
         "config": {
           "label": "Name",
-          "placeholder": ""
+          "placeholder": "",
+          "useAsTitle": true
         }
       },
       "feature_image": {

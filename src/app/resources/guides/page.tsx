@@ -1,25 +1,22 @@
 import { Container } from '@/components/ui/container';
 import { GradientBackground } from '@/components/ui/gradient';
-
 import { Heading, Lead, Subheading } from '@/components/ui/text';
-import { ChevronRightIcon } from '@heroicons/react/16/solid';
 import dayjs from 'dayjs';
 import type { Metadata, ResolvingMetadata } from 'next';
 import { createClient } from '@/prismicio';
-
+import { PrismicNextImage } from '@prismicio/next';
 import { PrismicRichText } from '@prismicio/react';
-import { asText, filter } from '@prismicio/client';
+import { asText, filter, type ImageFieldImage } from '@prismicio/client';
 import React from 'react';
 import { FeaturedPosts } from './_components/postsFeatured';
-
 import { Badge } from '@/components/ui/badge';
+import { FolderDownIcon } from 'lucide-react';
 import { Pagination } from '@/components/ui/pagination';
-import type { ResolvedOpenGraph } from 'next/dist/lib/metadata/types/opengraph-types';
-import type { Author, OGImage } from '@/types';
-import Filter from '../../../components/features/blog/postsFilter';
-import AuthorLink from '@/components/features/author/author-link';
-import { type PostCategoryDocument, type PostTagsDocument } from '../../../../prismicio-types';
-import Link from 'next/link';
+import { DownloadLink } from '@/components/ui/downloadLink';
+import { type CustomLinkToMediaField, type OGImage } from '@/types';
+import { type ResolvedOpenGraph } from 'next/dist/lib/metadata/types/opengraph-types';
+import Filter from '@/components/features/blog/postsFilter';
+import {ConditionCategoryDocument, PostTagsDocument} from '@/prismic-types';
 
 type Props = {
   params: Promise<{ uid: string }>;
@@ -35,14 +32,14 @@ export async function generateMetadata(
   const client = createClient();
 
   const posts = await client
-    .getByType('posts', {
+    .getByType('guide', {
       pageSize: 1,
       page: 0,
-      filters: [filter.at('my.posts.featured', true)],
+      filters: [filter.at('my.guide.featured', true)],
       fetchLinks: ['author.name', 'author.profile_image', 'post_category.name'],
       orderings: [
         {
-          field: 'my.posts.publishing_date',
+          field: 'my.guide.publishing_date',
           direction: 'desc',
         },
       ],
@@ -62,10 +59,12 @@ export async function generateMetadata(
   }
 
   return {
-    title: 'Foot Factor - Articles',
-    description: asText(page?.data.excerpt)! ?? "Looking for resources on ankle pain? You're in the right place.",
+    title: 'Foot Factor - Guides & Downloads',
+    description:
+      asText(page?.data.description)! ??
+      'Download expert-written guides and brochures on conditions, treatments, and recovery. Get the latest information in easy-to-read PDFs, available anytime you need them.',
     openGraph: {
-      title: 'Foot Factor',
+      title: 'Foot Factor - Guides & Downloads',
       images: [
         {
           url: image ?? (parentOpenGraph?.images ? (parentOpenGraph.images[0] as OGImage).url : ''),
@@ -75,53 +74,47 @@ export async function generateMetadata(
   };
 }
 
-async function Posts({ page, category, tags }: { page: number; category?: string[]; tags?: string[] }) {
+async function Posts({ page, category, tags : Tags }: { page: number; category?: string[]; tags?: string[] }) {
   const client = createClient();
-  let categories: PostCategoryDocument[] = [];
-  let tagList: PostTagsDocument[] = [];
-
+  let categories: ConditionCategoryDocument[] = [];
+  let tags: PostTagsDocument[] = [];
   if (category) {
-    categories = await client.getAllByUIDs('post_category', [...category]);
+    categories = await client.getAllByUIDs('condition_category', [...category]);
   }
 
-  if (tags) {
-    tagList = await client.getAllByUIDs('post_tags', [...tags]);
+  if (Tags) {
+    tags = await client.getAllByUIDs('post_tags', [...Tags]);
   }
 
   const posts = await client
-    .getByType('posts', {
+    .getByType('guide', {
       pageSize: 10,
       page: page,
       filters:
-        categories.length || tagList.length
+        categories.length || tags.length
           ? [
               filter.any(
-                'my.posts.category',
+                'my.guide.category',
                 categories.map(cat => cat.id),
               ),
               filter.any(
-                'my.posts.tags.tag',
-                tagList.map(tag => tag.id),
+                'my.guide.tags.tag',
+                  tags.map(tag => tag.id),
               ),
             ]
           : [],
-
       fetchLinks: [
         'author.name',
         'author.profile_image',
         'author.description',
         'author.link',
-        'post_category.name',
-        'post_category.uid',
+        'condition_category.name',
+        'condition_category.uid',
         'post_tags',
       ],
       orderings: [
         {
-          field: 'my.posts.publishing_date',
-          direction: 'desc',
-        },
-        {
-          field: 'my.posts.last_publication_date',
+          field: 'my.download.published_date',
           direction: 'desc',
         },
       ],
@@ -134,6 +127,8 @@ async function Posts({ page, category, tags }: { page: number; category?: string
   if (posts.length === 0) {
     return <p className="mt-6 text-gray-500">No posts found.</p>;
   }
+  // TODO: Generate JSON-LD for the posts
+  //const JSONLD = DOWNLOADS_JSONLD(posts);
 
   return (
     <div className="mt-6">
@@ -143,7 +138,7 @@ async function Posts({ page, category, tags }: { page: number; category?: string
           className="relative grid grid-cols-1 border-b border-b-gray-100 py-10 first:border-t first:border-t-gray-200 max-sm:gap-3 sm:grid-cols-3">
           <div>
             <div className="text-sm/5 max-sm:text-gray-700 sm:font-medium">
-              {dayjs(post.data.publishing_date ?? post.last_publication_date).format('dddd, MMMM D, YYYY')}
+              {dayjs(post.data.publishing_date).format('dddd, MMMM D, YYYY')}
             </div>
 
             {post.data.category && 'data' in post.data.category && (
@@ -153,33 +148,47 @@ async function Posts({ page, category, tags }: { page: number; category?: string
             )}
 
             {post.data.author && 'data' in post.data.author && (
-              <div className="z-2 relative mt-6 flex items-center gap-3">
-                <AuthorLink author={post.data.author.data as Author} />
+              <div className="mt-6 flex items-center gap-3">
+                {post.data.author && (
+                  <PrismicNextImage
+                    alt=""
+                    width={64}
+                    height={64}
+                    field={(post.data.author.data as { profile_image: ImageFieldImage }).profile_image}
+                    className="aspect-square size-6 rounded-full object-cover"
+                  />
+                )}
+
+                <div className="text-sm/5 text-gray-700">
+                  {(post.data.author.data as { name: string }).name || 'My Ankle'}
+                </div>
               </div>
             )}
           </div>
-          <div className="group relative sm:col-span-2 sm:max-w-2xl">
-            <h2 className="text-md/5 font-medium group-hover:text-gray-700">{post.data.title}</h2>
+          <div className="sm:col-span-2 sm:max-w-2xl">
+            <h2 className="text-sm/5 font-medium">{post.data.name}</h2>
             <div className="mt-3 text-sm/6 text-gray-500">
-              <PrismicRichText field={post.data.excerpt} />
+              <PrismicRichText field={post.data.description} />
             </div>
+
             <div className="mt-4">
-              <Link
-                href={`/resources/blog/${post.uid}`}
-                className="flex items-center gap-1 text-sm/5 font-medium group-hover:text-accent">
-                <span className="absolute inset-0" />
-                Read more <span className={'sr-only'}>About {post.data.title}</span>
-                <ChevronRightIcon className="size-4 fill-gray-400 group-hover:fill-accent" />
-              </Link>
+              <DownloadLink
+                className={'flex items-center gap-1 text-sm/5 font-medium'}
+                href={(post.data.file as CustomLinkToMediaField)?.url}>
+                <FolderDownIcon className={'h-6 w-6'} />
+                {post.data.file.text}
+              </DownloadLink>
             </div>
           </div>
         </div>
       ))}
+      {/* TODO: See Ankle Add JSON-LD to your page */}
     </div>
+
   );
 }
 
-export default async function Blog({ searchParams }: Props) {
+export default async function Guide({ searchParams }: Props) {
   const params = await searchParams;
 
   const page = params.page && typeof params.page === 'string' && parseInt(params.page) > 1 ? parseInt(params.page) : 1;
@@ -195,21 +204,28 @@ export default async function Blog({ searchParams }: Props) {
   if (tags?.length === 0) {
     tags = undefined;
   }
-
   return (
     <main className={'min-h-svh w-full overflow-hidden'}>
-      <Container className="mt-24 md:mt-36">
-        <Subheading className="mt-16">Blog</Subheading>
+      <Container className="mt-36 md:mt-36">
+        <Subheading className="mt-16">Downloads</Subheading>
         <Heading as="h1" className="mt-2">
-          What’s happening at Foot Factor.
+          Free Guides & Resources
         </Heading>
-        <Lead className="mt-6 max-w-3xl">Looking for resources on foot health You&apos;re in the right place.</Lead>
+        <Lead className="mt-6 max-w-3xl">
+          Download expert-written guides and brochures on ankle conditions, treatments, and recovery. Get the latest
+          information in easy-to-read PDFs, available anytime you need them.
+        </Lead>
       </Container>
       {page === 1 && !categories && !tags && <FeaturedPosts />}
-      <Container className="mt-16 pb-24">
-        <Filter categorySelected={categories ? categories[0] : undefined} tagSelected={tags ? tags[0] : undefined} />
+      <Container className="mt-24 pb-24">
+        <Filter
+          url={'downloads'}
+          hasRss={false}
+          categorySelected={categories ? categories[0] : undefined}
+          tagSelected={tags ? tags[0] : undefined}
+        />
         <Posts page={page} category={categories} tags={tags} />
-        <Pagination contentType={'posts'} slug={'blog'} page={page} category={categories} tags={tags} />
+        <Pagination slug={'downloads'} contentType={'guide'} page={page} category={categories} tags={tags} />
       </Container>
     </main>
   );
@@ -218,7 +234,7 @@ export default async function Blog({ searchParams }: Props) {
 export async function generateStaticParams() {
   const client = createClient();
 
-  const pages = await client.getAllByType('posts');
+  const pages = await client.getAllByType('guide');
 
   return pages.map(page => {
     return { uid: page.uid };

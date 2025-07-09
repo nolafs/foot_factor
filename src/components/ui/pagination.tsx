@@ -5,7 +5,7 @@ import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/16/solid';
 import { clsx } from 'clsx';
 import React from 'react';
 import { filter } from '@prismicio/client';
-import type { PostCategoryDocument, PostTagsDocument } from '../../../prismicio-types';
+import type { PostCategoryDocument, PostTagsDocument } from '@/prismic-types';
 import Link from 'next/link';
 
 type PaginationData = {
@@ -22,7 +22,7 @@ export async function Pagination({
   category,
   tags,
 }: {
-  contentType: 'posts' ;
+  contentType: 'posts' | 'guide';
   slug: string;
   page: number;
   category?: string[];

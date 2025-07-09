@@ -16,7 +16,8 @@
         "type": "Text",
         "config": {
           "label": "Heading",
-          "placeholder": ""
+          "placeholder": "",
+          "useAsTitle": true
         }
       },
       "body": {

@@ -58,7 +58,8 @@
         "type": "Text",
         "config": {
           "label": "Title",
-          "placeholder": "Title"
+          "placeholder": "Title",
+          "useAsTitle": true
         }
       },
       "excerpt": {

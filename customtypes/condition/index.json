@@ -47,7 +47,8 @@
         "type": "Text",
         "config": {
           "label": "Title",
-          "placeholder": ""
+          "placeholder": "",
+          "useAsTitle": true
         }
       },
       "category": {

@@ -54,7 +54,8 @@
         "type": "Text",
         "config": {
           "label": "Client Name",
-          "placeholder": ""
+          "placeholder": "",
+          "useAsTitle": true
         }
       },
       "client_age": {
