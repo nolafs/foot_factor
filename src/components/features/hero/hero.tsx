@@ -32,8 +32,8 @@ export  function Hero({ heading, subheading, lead,  links, image, hasBooking, ra
   });
 
   // Transform values for different elements
-  const textY = useTransform(scrollYProgress, [0, 0.8], [0, -500]);
-  const imageY = useTransform(scrollYProgress, [0, 0.8], [0, 1000]);
+  const textY = useTransform(scrollYProgress, [0, 0.8], ["0vh", "-200vh"]);
+  const imageY = useTransform(scrollYProgress, [0, 0.8], ["0vh", "200vh"]);
   const imageScale = useTransform(scrollYProgress, [0, 0.8], [1, 1.3]);
 
 
