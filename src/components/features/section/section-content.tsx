@@ -21,7 +21,7 @@ export const SectionContent = ({heading, body, color, className }: SectionConten
             </div>
         ) : ( heading && (
             <div className={cn(className ?? 'w-full sm:w-full md:w-1/4 lg:w-5/12', 'mb-3')}>
-              <Heading as={'h2'} className={cn('text-2xl md:text-3xl lg:text-4xl'
+              <Heading color={color} as={'h2'} className={cn('text-2xl md:text-3xl lg:text-4xl'
               )}>{heading}</Heading>
             </div>)
         )}

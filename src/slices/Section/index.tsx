@@ -95,6 +95,19 @@ const Section: FC<SectionProps> = ({ slice }) => {
     );
   }
 
+  if (slice.variation === 'contentNoImageColumn') {
+    return (
+        <SectionContentColumnWithImage
+            heading={slice.primary.heading}
+            body={slice.primary.body}
+            color={slice.primary.color}
+            variation={slice.variation}
+            slice_type={slice.slice_type}
+
+        />
+    );
+  }
+
   if (slice.variation === 'contentWithImageColumn') {
     return (
         <SectionContentColumnWithImage

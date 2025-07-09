@@ -526,6 +526,21 @@ export interface GuideDocumentDataTagsItem {
 type GuideDocumentDataSlicesSlice = MediaSectionSlice | SectionSlice | IconNavListSlice | CallToActionSlice;
 
 /**
+ * Item in *Guide → Keywords*
+ */
+export interface GuideDocumentDataKeywordsItem {
+  /**
+   * word field in *Guide → Keywords*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: guide.keywords[].word
+   * - **Documentation**: https://prismic.io/docs/fields/text
+   */
+  word: prismic.KeyTextField;
+}
+
+/**
  * Content for Guide documents
  */
 interface GuideDocumentData {
@@ -672,6 +687,17 @@ interface GuideDocumentData {
    * - **Documentation**: https://prismic.io/docs/fields/image
    */
   meta_image: prismic.ImageField<never>;
+
+  /**
+   * Keywords field in *Guide*
+   *
+   * - **Field Type**: Group
+   * - **Placeholder**: *None*
+   * - **API ID Path**: guide.keywords[]
+   * - **Tab**: SEO & Metadata
+   * - **Documentation**: https://prismic.io/docs/fields/repeatable-group
+   */
+  keywords: prismic.GroupField<Simplify<GuideDocumentDataKeywordsItem>>;
 }
 
 /**
@@ -4590,6 +4616,65 @@ export type SectionSliceContentTwoColumnIconList = prismic.SharedSliceVariation<
 >;
 
 /**
+ * Primary content in *Section → Content no image column → Primary*
+ */
+export interface SectionSliceContentNoImageColumnPrimary {
+  /**
+   * Heading field in *Section → Content no image column → Primary*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: section.contentNoImageColumn.primary.heading
+   * - **Documentation**: https://prismic.io/docs/fields/text
+   */
+  heading: prismic.KeyTextField;
+
+  /**
+   * Body field in *Section → Content no image column → Primary*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: section.contentNoImageColumn.primary.body
+   * - **Documentation**: https://prismic.io/docs/fields/rich-text
+   */
+  body: prismic.RichTextField;
+
+  /**
+   * Animated field in *Section → Content no image column → Primary*
+   *
+   * - **Field Type**: Boolean
+   * - **Placeholder**: *None*
+   * - **Default Value**: true
+   * - **API ID Path**: section.contentNoImageColumn.primary.animated
+   * - **Documentation**: https://prismic.io/docs/fields/boolean
+   */
+  animated: prismic.BooleanField;
+
+  /**
+   * Color field in *Section → Content no image column → Primary*
+   *
+   * - **Field Type**: Select
+   * - **Placeholder**: *None*
+   * - **API ID Path**: section.contentNoImageColumn.primary.color
+   * - **Documentation**: https://prismic.io/docs/fields/select
+   */
+  color: prismic.SelectField<'default' | 'Accent' | 'Primary'>;
+}
+
+/**
+ * Content no image column variation for Section Slice
+ *
+ * - **API ID**: `contentNoImageColumn`
+ * - **Description**: Default
+ * - **Documentation**: https://prismic.io/docs/slices
+ */
+export type SectionSliceContentNoImageColumn = prismic.SharedSliceVariation<
+  'contentNoImageColumn',
+  Simplify<SectionSliceContentNoImageColumnPrimary>,
+  never
+>;
+
+/**
  * Slice variation for *Section*
  */
 type SectionSliceVariation =
@@ -4601,7 +4686,8 @@ type SectionSliceVariation =
   | SectionSliceContentImageFloatText
   | SectionSliceContentImageFloatRight
   | SectionSliceContentImageTwoColumns
-  | SectionSliceContentTwoColumnIconList;
+  | SectionSliceContentTwoColumnIconList
+  | SectionSliceContentNoImageColumn;
 
 /**
  * Section Shared Slice
@@ -5154,6 +5240,7 @@ declare module '@prismicio/client' {
       GuideDocumentData,
       GuideDocumentDataTagsItem,
       GuideDocumentDataSlicesSlice,
+      GuideDocumentDataKeywordsItem,
       HomeDocument,
       HomeDocumentData,
       HomeDocumentDataSlicesSlice,
@@ -5284,6 +5371,7 @@ declare module '@prismicio/client' {
       SectionSliceContentImageTwoColumnsPrimary,
       SectionSliceContentTwoColumnIconListPrimaryItemsItem,
       SectionSliceContentTwoColumnIconListPrimary,
+      SectionSliceContentNoImageColumnPrimary,
       SectionSliceVariation,
       SectionSliceDefault,
       SectionSliceContentWithLeadButtons,
@@ -5294,6 +5382,7 @@ declare module '@prismicio/client' {
       SectionSliceContentImageFloatRight,
       SectionSliceContentImageTwoColumns,
       SectionSliceContentTwoColumnIconList,
+      SectionSliceContentNoImageColumn,
       TeamCarouselSlice,
       TeamCarouselSliceDefaultPrimaryMembersItem,
       TeamCarouselSliceDefaultPrimary,

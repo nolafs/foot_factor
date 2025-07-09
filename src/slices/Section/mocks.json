@@ -752,5 +752,42 @@
 				"value": []
 			}
 		]
+	},
+	{
+		"__TYPE__": "SharedSliceContent",
+		"variation": "contentNoImageColumn",
+		"primary": {
+			"heading": {
+				"__TYPE__": "FieldContent",
+				"value": "seed",
+				"type": "Text"
+			},
+			"body": {
+				"__TYPE__": "StructuredTextContent",
+				"value": [
+					{
+						"type": "paragraph",
+						"content": {
+							"text": "Mollit esse aliqua amet incididunt irure labore consectetur enim esse id voluptate ea."
+						}
+					}
+				]
+			},
+			"animated": {
+				"__TYPE__": "BooleanContent",
+				"value": false
+			},
+			"color": {
+				"__TYPE__": "FieldContent",
+				"value": "Primary",
+				"type": "Select"
+			}
+		},
+		"items": [
+			{
+				"__TYPE__": "GroupItemContent",
+				"value": []
+			}
+		]
 	}
 ]

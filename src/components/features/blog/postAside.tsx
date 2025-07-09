@@ -1,5 +1,5 @@
 'use client';
-import { type PostsDocumentData} from '../../../../prismicio-types';
+import {GuideDocumentData, type PostsDocumentData} from '../../../../prismicio-types';
 import { type Author } from '@/types';
 import cn from 'clsx';
 import AuthorLink from '@/components/features/author/author-link';
@@ -10,7 +10,7 @@ import Link from 'next/link';
 type PostAsideProps = {
   as?: keyof JSX.IntrinsicElements;
   uid?: string;
-  post: Partial<PostsDocumentData>;
+  post: Partial<PostsDocumentData> | Partial<GuideDocumentData>;
   author?: Author;
   url?: string;
   classNames?: string;
