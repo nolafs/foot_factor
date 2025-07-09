@@ -35,7 +35,7 @@ export async function FeaturedPosts() {
   }
 
   return (
-    <div className="mt-24 bg-gradient-to-t from-gray-100 pb-14">
+      <div className="py-24 bg-accent-100">
       <Container>
         <h2 className="text-3xl font-medium tracking-tight">Featured</h2>
         <div className="mt-6 grid grid-cols-1 gap-8 lg:grid-cols-3">

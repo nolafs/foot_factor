@@ -1,8 +1,8 @@
 import { Wave } from '@/components/wave';
 import React from 'react';
 import {type KeyTextField} from '@prismicio/client';
-import {Container} from '@/components/container';
 import {Heading, Lead, Subheading} from '@/components/ui/text';
+import { Container } from '@/components/ui/container';
 
 interface HeroSimpleProps {
     wave_type:  'default' | '1' | '2' | '3' | '4' | '5' | '6' | '7' | '8';
