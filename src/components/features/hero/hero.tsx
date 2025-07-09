@@ -33,8 +33,8 @@ export  function Hero({ heading, subheading, lead,  links, image, hasBooking, ra
 
   // Transform values for different elements
   const textY = useTransform(scrollYProgress, [0, 0.8], ["0vh", "-200vh"]);
-  const imageY = useTransform(scrollYProgress, [0, 0.8], ["0vh", "200vh"]);
-  const imageScale = useTransform(scrollYProgress, [0, 0.8], [1, 1.3]);
+  const imageY = useTransform(scrollYProgress, [0, 1], ["0vh", "150vh"]);
+  const imageScale = useTransform(scrollYProgress, [0, 1], [1, 1.2]);
 
 
   return (
@@ -46,7 +46,7 @@ export  function Hero({ heading, subheading, lead,  links, image, hasBooking, ra
                 <motion.div
                     ref={imageRef}
                     className="z-1 absolute inset-0 overflow-hidden h-full"
-                    style={{y: imageY, scale: imageScale}}
+                    style={{y: imageY, scale: imageScale, transform: 'translateZ(0)'}}
                 >
                   <PrismicNextImage
                       loading={'lazy'}

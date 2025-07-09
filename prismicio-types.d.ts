@@ -492,6 +492,138 @@ export type ConditionCategoryDocument<Lang extends string = string> = prismic.Pr
   Lang
 >;
 
+type ConditionsDocumentDataSlicesSlice = ListSlice | CallToActionSlice | FaqsSlice;
+
+/**
+ * Item in *Conditions → Social Cards*
+ */
+export interface ConditionsDocumentDataSocialCardsItem {
+  /**
+   * Social Card Image field in *Conditions → Social Cards*
+   *
+   * - **Field Type**: Image
+   * - **Placeholder**: *None*
+   * - **API ID Path**: conditions.social_cards[].social_card_image
+   * - **Documentation**: https://prismic.io/docs/fields/image
+   */
+  social_card_image: prismic.ImageField<never>;
+
+  /**
+   * Social Card Title field in *Conditions → Social Cards*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: conditions.social_cards[].social_card_title
+   * - **Documentation**: https://prismic.io/docs/fields/text
+   */
+  social_card_title: prismic.KeyTextField;
+
+  /**
+   * Social Card description  field in *Conditions → Social Cards*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: conditions.social_cards[].social_card_description
+   * - **Documentation**: https://prismic.io/docs/fields/text
+   */
+  social_card_description: prismic.KeyTextField;
+}
+
+/**
+ * Content for Conditions documents
+ */
+interface ConditionsDocumentData {
+  /**
+   * Title field in *Conditions*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: conditions.title
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/fields/text
+   */
+  title: prismic.KeyTextField;
+
+  /**
+   * Lead field in *Conditions*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: conditions.lead
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/fields/text
+   */
+  lead: prismic.KeyTextField;
+
+  /**
+   * Slice Zone field in *Conditions*
+   *
+   * - **Field Type**: Slice Zone
+   * - **Placeholder**: *None*
+   * - **API ID Path**: conditions.slices[]
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/slices
+   */
+  slices: prismic.SliceZone<ConditionsDocumentDataSlicesSlice> /**
+   * Meta Title field in *Conditions*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: A title of the page used for social media and search engines
+   * - **API ID Path**: conditions.meta_title
+   * - **Tab**: SEO & Metadata
+   * - **Documentation**: https://prismic.io/docs/fields/text
+   */;
+  meta_title: prismic.KeyTextField;
+
+  /**
+   * Meta Description field in *Conditions*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: A brief summary of the page
+   * - **API ID Path**: conditions.meta_description
+   * - **Tab**: SEO & Metadata
+   * - **Documentation**: https://prismic.io/docs/fields/text
+   */
+  meta_description: prismic.KeyTextField;
+
+  /**
+   * Meta Image field in *Conditions*
+   *
+   * - **Field Type**: Image
+   * - **Placeholder**: *None*
+   * - **API ID Path**: conditions.meta_image
+   * - **Tab**: SEO & Metadata
+   * - **Documentation**: https://prismic.io/docs/fields/image
+   */
+  meta_image: prismic.ImageField<never>;
+
+  /**
+   * Social Cards field in *Conditions*
+   *
+   * - **Field Type**: Group
+   * - **Placeholder**: *None*
+   * - **API ID Path**: conditions.social_cards[]
+   * - **Tab**: SEO & Metadata
+   * - **Documentation**: https://prismic.io/docs/fields/repeatable-group
+   */
+  social_cards: prismic.GroupField<Simplify<ConditionsDocumentDataSocialCardsItem>>;
+}
+
+/**
+ * Conditions document from Prismic
+ *
+ * - **API ID**: `conditions`
+ * - **Repeatable**: `false`
+ * - **Documentation**: https://prismic.io/docs/content-modeling
+ *
+ * @typeParam Lang - Language API ID of the document.
+ */
+export type ConditionsDocument<Lang extends string = string> = prismic.PrismicDocumentWithoutUID<
+  Simplify<ConditionsDocumentData>,
+  'conditions',
+  Lang
+>;
+
 /**
  * Content for FAQ documents
  */
@@ -2433,6 +2565,7 @@ export type AllDocumentTypes =
   | CaseStudiesDocument
   | ConditionDocument
   | ConditionCategoryDocument
+  | ConditionsDocument
   | FaqDocument
   | FaqCategoryDocument
   | GuideDocument
@@ -5290,6 +5423,61 @@ export interface VerticalStepsWithImagesSliceDefaultPrimaryStepsItem {
 }
 
 /**
+ * Item in *VerticalStepsWithImages → Video Vertical Stepper → Primary → Steps*
+ */
+export interface VerticalStepsWithImagesSliceVideoVerticalStepperPrimaryStepsItem {
+  /**
+   * Step Label field in *VerticalStepsWithImages → Video Vertical Stepper → Primary → Steps*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: vertical_steps_with_images.videoVerticalStepper.primary.steps[].step_label
+   * - **Documentation**: https://prismic.io/docs/fields/text
+   */
+  step_label: prismic.KeyTextField;
+
+  /**
+   * Title field in *VerticalStepsWithImages → Video Vertical Stepper → Primary → Steps*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: vertical_steps_with_images.videoVerticalStepper.primary.steps[].title
+   * - **Documentation**: https://prismic.io/docs/fields/text
+   */
+  title: prismic.KeyTextField;
+
+  /**
+   * Description field in *VerticalStepsWithImages → Video Vertical Stepper → Primary → Steps*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: vertical_steps_with_images.videoVerticalStepper.primary.steps[].description
+   * - **Documentation**: https://prismic.io/docs/fields/rich-text
+   */
+  description: prismic.RichTextField;
+
+  /**
+   * Image field in *VerticalStepsWithImages → Video Vertical Stepper → Primary → Steps*
+   *
+   * - **Field Type**: Image
+   * - **Placeholder**: *None*
+   * - **API ID Path**: vertical_steps_with_images.videoVerticalStepper.primary.steps[].image
+   * - **Documentation**: https://prismic.io/docs/fields/image
+   */
+  image: prismic.ImageField<never>;
+
+  /**
+   * Video field in *VerticalStepsWithImages → Video Vertical Stepper → Primary → Steps*
+   *
+   * - **Field Type**: Link to Media
+   * - **Placeholder**: *None*
+   * - **API ID Path**: vertical_steps_with_images.videoVerticalStepper.primary.steps[].video
+   * - **Documentation**: https://prismic.io/docs/fields/link-to-media
+   */
+  video: prismic.LinkToMediaField<prismic.FieldState, never>;
+}
+
+/**
  * Primary content in *VerticalStepsWithImages → Default → Primary*
  */
 export interface VerticalStepsWithImagesSliceDefaultPrimary {
@@ -5318,9 +5506,39 @@ export type VerticalStepsWithImagesSliceDefault = prismic.SharedSliceVariation<
 >;
 
 /**
+ * Primary content in *VerticalStepsWithImages → Video Vertical Stepper → Primary*
+ */
+export interface VerticalStepsWithImagesSliceVideoVerticalStepperPrimary {
+  /**
+   * Steps field in *VerticalStepsWithImages → Video Vertical Stepper → Primary*
+   *
+   * - **Field Type**: Group
+   * - **Placeholder**: *None*
+   * - **API ID Path**: vertical_steps_with_images.videoVerticalStepper.primary.steps[]
+   * - **Documentation**: https://prismic.io/docs/fields/repeatable-group
+   */
+  steps: prismic.GroupField<Simplify<VerticalStepsWithImagesSliceVideoVerticalStepperPrimaryStepsItem>>;
+}
+
+/**
+ * Video Vertical Stepper variation for VerticalStepsWithImages Slice
+ *
+ * - **API ID**: `videoVerticalStepper`
+ * - **Description**: Standard vertical process flow with steps, descriptions, and images placed beside each step.
+ * - **Documentation**: https://prismic.io/docs/slices
+ */
+export type VerticalStepsWithImagesSliceVideoVerticalStepper = prismic.SharedSliceVariation<
+  'videoVerticalStepper',
+  Simplify<VerticalStepsWithImagesSliceVideoVerticalStepperPrimary>,
+  never
+>;
+
+/**
  * Slice variation for *VerticalStepsWithImages*
  */
-type VerticalStepsWithImagesSliceVariation = VerticalStepsWithImagesSliceDefault;
+type VerticalStepsWithImagesSliceVariation =
+  | VerticalStepsWithImagesSliceDefault
+  | VerticalStepsWithImagesSliceVideoVerticalStepper;
 
 /**
  * VerticalStepsWithImages Shared Slice
@@ -5360,6 +5578,10 @@ declare module '@prismicio/client' {
       ConditionDocumentDataSlicesSlice,
       ConditionCategoryDocument,
       ConditionCategoryDocumentData,
+      ConditionsDocument,
+      ConditionsDocumentData,
+      ConditionsDocumentDataSlicesSlice,
+      ConditionsDocumentDataSocialCardsItem,
       FaqDocument,
       FaqDocumentData,
       FaqCategoryDocument,
@@ -5537,8 +5759,11 @@ declare module '@prismicio/client' {
       VerticalStepsWithImagesSlice,
       VerticalStepsWithImagesSliceDefaultPrimaryStepsItem,
       VerticalStepsWithImagesSliceDefaultPrimary,
+      VerticalStepsWithImagesSliceVideoVerticalStepperPrimaryStepsItem,
+      VerticalStepsWithImagesSliceVideoVerticalStepperPrimary,
       VerticalStepsWithImagesSliceVariation,
       VerticalStepsWithImagesSliceDefault,
+      VerticalStepsWithImagesSliceVideoVerticalStepper,
     };
   }
 }

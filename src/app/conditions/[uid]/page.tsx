@@ -7,14 +7,11 @@ import React from 'react';
 import {asImageSrc, isFilled} from '@prismicio/client';
 import {Hero} from '@/components/features/hero/hero';
 import {Heading, Lead} from '@/components/ui/text';
-import {PrismicNextLink} from '@prismicio/next';
 import {buttonVariants} from '@/components/ui/button';
 import {CircleArrowRight} from 'lucide-react';
 import BlogArticle from '@/slices/Megamenu/component/blog-article';
 import {Container} from '@/components/ui/container';
 import Link from 'next/link';
-import {PostTagsDocumentData} from '@/prismic-types';
-
 type Params = { uid: string };
 
 export async function generateMetadata({params}: { params: Promise<Params> }): Promise<Metadata> {

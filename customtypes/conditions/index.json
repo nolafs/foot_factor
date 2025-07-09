@@ -1,0 +1,100 @@
+{
+  "format": "page",
+  "id": "conditions",
+  "label": "Conditions",
+  "repeatable": false,
+  "status": true,
+  "json": {
+    "Main": {
+      "title": {
+        "type": "Text",
+        "config": {
+          "label": "Title",
+          "placeholder": ""
+        }
+      },
+      "lead": {
+        "type": "Text",
+        "config": {
+          "label": "Lead",
+          "placeholder": ""
+        }
+      },
+      "slices": {
+        "type": "Slices",
+        "fieldset": "Slice Zone",
+        "config": {
+          "choices": {
+            "list": {
+              "type": "SharedSlice"
+            },
+            "call_to_action": {
+              "type": "SharedSlice"
+            },
+            "faqs": {
+              "type": "SharedSlice"
+            }
+          }
+        }
+      }
+    },
+    "SEO & Metadata": {
+      "meta_title": {
+        "config": {
+          "label": "Meta Title",
+          "placeholder": "A title of the page used for social media and search engines"
+        },
+        "type": "Text"
+      },
+      "meta_description": {
+        "config": {
+          "label": "Meta Description",
+          "placeholder": "A brief summary of the page"
+        },
+        "type": "Text"
+      },
+      "meta_image": {
+        "config": {
+          "constraint": {
+            "height": 1260,
+            "width": 2400
+          },
+          "label": "Meta Image",
+          "thumbnails": []
+        },
+        "type": "Image"
+      },
+      "social_cards": {
+        "type": "Group",
+        "config": {
+          "label": "Social Cards",
+          "repeat": true,
+          "fields": {
+            "social_card_image": {
+              "type": "Image",
+              "config": {
+                "label": "Social Card Image",
+                "constraint": {},
+                "thumbnails": []
+              }
+            },
+            "social_card_title": {
+              "type": "Text",
+              "config": {
+                "label": "Social Card Title",
+                "placeholder": ""
+              }
+            },
+            "social_card_description": {
+              "type": "Text",
+              "config": {
+                "label": "Social Card description ",
+                "placeholder": ""
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

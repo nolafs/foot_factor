@@ -62,7 +62,7 @@ const ContainerComponent = forwardRef<
   return (
       <Component
           ref={ref}
-          className={cn('relative w-full overflow-hidden',
+          className={cn('relative w-full mx-auto overflow-hidden',
               className,
               backgroundColorClass,
               padding === 'base' && 'px-6 lg:px-8',
