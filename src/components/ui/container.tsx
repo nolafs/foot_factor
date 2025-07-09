@@ -41,8 +41,6 @@ const ContainerComponent = forwardRef<
   let backgroundColorClass = '';
   const colorLowerCase = color.toLowerCase();
 
-
-
   switch (colorLowerCase) {
     case 'primary':
       backgroundColorClass = 'bg-primary';

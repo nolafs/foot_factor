@@ -508,6 +508,187 @@ export type FaqDocument<Lang extends string = string> = prismic.PrismicDocumentW
   Lang
 >;
 
+/**
+ * Item in *Guide → Tags*
+ */
+export interface GuideDocumentDataTagsItem {
+  /**
+   * Tag field in *Guide → Tags*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: guide.tags[].tag
+   * - **Documentation**: https://prismic.io/docs/fields/text
+   */
+  tag: prismic.KeyTextField;
+}
+
+type GuideDocumentDataSlicesSlice = SectionSlice | IconNavListSlice | CallToActionSlice;
+
+/**
+ * Content for Guide documents
+ */
+interface GuideDocumentData {
+  /**
+   * Name field in *Guide*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: guide.name
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/fields/text
+   */
+  name: prismic.KeyTextField;
+
+  /**
+   * Feature Image field in *Guide*
+   *
+   * - **Field Type**: Image
+   * - **Placeholder**: *None*
+   * - **API ID Path**: guide.feature_image
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/fields/image
+   */
+  feature_image: prismic.ImageField<never>;
+
+  /**
+   * Featured field in *Guide*
+   *
+   * - **Field Type**: Boolean
+   * - **Placeholder**: *None*
+   * - **Default Value**: false
+   * - **API ID Path**: guide.featured
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/fields/boolean
+   */
+  featured: prismic.BooleanField;
+
+  /**
+   * Publishing Date field in *Guide*
+   *
+   * - **Field Type**: Date
+   * - **Placeholder**: *None*
+   * - **API ID Path**: guide.publishing_date
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/fields/date
+   */
+  publishing_date: prismic.DateField;
+
+  /**
+   * Author field in *Guide*
+   *
+   * - **Field Type**: Content Relationship
+   * - **Placeholder**: *None*
+   * - **API ID Path**: guide.author
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/fields/content-relationship
+   */
+  author: ContentRelationshipFieldWithData<
+    [{ id: 'author'; fields: ['name', 'link', 'description', 'profile_image'] }]
+  >;
+
+  /**
+   * Category field in *Guide*
+   *
+   * - **Field Type**: Content Relationship
+   * - **Placeholder**: *None*
+   * - **API ID Path**: guide.category
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/fields/content-relationship
+   */
+  category: ContentRelationshipFieldWithData<[{ id: 'condition_category'; fields: ['name'] }]>;
+
+  /**
+   * Description field in *Guide*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: guide.description
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/fields/rich-text
+   */
+  description: prismic.RichTextField;
+
+  /**
+   * File field in *Guide*
+   *
+   * - **Field Type**: Link to Media
+   * - **Placeholder**: *None*
+   * - **API ID Path**: guide.file
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/fields/link-to-media
+   */
+  file: prismic.LinkToMediaField<prismic.FieldState, never>;
+
+  /**
+   * Tags field in *Guide*
+   *
+   * - **Field Type**: Group
+   * - **Placeholder**: *None*
+   * - **API ID Path**: guide.tags[]
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/fields/repeatable-group
+   */
+  tags: prismic.GroupField<Simplify<GuideDocumentDataTagsItem>>;
+
+  /**
+   * Slice Zone field in *Guide*
+   *
+   * - **Field Type**: Slice Zone
+   * - **Placeholder**: *None*
+   * - **API ID Path**: guide.slices[]
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/slices
+   */
+  slices: prismic.SliceZone<GuideDocumentDataSlicesSlice> /**
+   * Meta Title field in *Guide*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: A title of the page used for social media and search engines
+   * - **API ID Path**: guide.meta_title
+   * - **Tab**: SEO & Metadata
+   * - **Documentation**: https://prismic.io/docs/fields/text
+   */;
+  meta_title: prismic.KeyTextField;
+
+  /**
+   * Meta Description field in *Guide*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: A brief summary of the page
+   * - **API ID Path**: guide.meta_description
+   * - **Tab**: SEO & Metadata
+   * - **Documentation**: https://prismic.io/docs/fields/text
+   */
+  meta_description: prismic.KeyTextField;
+
+  /**
+   * Meta Image field in *Guide*
+   *
+   * - **Field Type**: Image
+   * - **Placeholder**: *None*
+   * - **API ID Path**: guide.meta_image
+   * - **Tab**: SEO & Metadata
+   * - **Documentation**: https://prismic.io/docs/fields/image
+   */
+  meta_image: prismic.ImageField<never>;
+}
+
+/**
+ * Guide document from Prismic
+ *
+ * - **API ID**: `guide`
+ * - **Repeatable**: `true`
+ * - **Documentation**: https://prismic.io/docs/content-modeling
+ *
+ * @typeParam Lang - Language API ID of the document.
+ */
+export type GuideDocument<Lang extends string = string> = prismic.PrismicDocumentWithUID<
+  Simplify<GuideDocumentData>,
+  'guide',
+  Lang
+>;
+
 type HomeDocumentDataSlicesSlice =
   | CaseStudiesSlice
   | ListSlice
@@ -2147,6 +2328,7 @@ export type AllDocumentTypes =
   | ConditionDocument
   | ConditionCategoryDocument
   | FaqDocument
+  | GuideDocument
   | HomeDocument
   | LegalDocument
   | MakeBookingDocument
@@ -4968,6 +5150,10 @@ declare module '@prismicio/client' {
       ConditionCategoryDocumentData,
       FaqDocument,
       FaqDocumentData,
+      GuideDocument,
+      GuideDocumentData,
+      GuideDocumentDataTagsItem,
+      GuideDocumentDataSlicesSlice,
       HomeDocument,
       HomeDocumentData,
       HomeDocumentDataSlicesSlice,
