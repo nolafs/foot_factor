@@ -44,7 +44,7 @@ export const StepsMedia = ({data}: StepsMediaProps) => {
                 pin: true,
                 pinSpacing: false,
                 anticipatePin: 1,
-                markers: true
+                markers: false
             }
         });
 
@@ -57,6 +57,7 @@ export const StepsMedia = ({data}: StepsMediaProps) => {
                 <div>
                   <div className={'intro z-5 relative w-full h-svh isolated overflow-hidden'}>
                     <div className={'w-full h-full flex justify-center'}>
+
                       <PrismicNextImage field={data.intro_image}
                                         className={cn('w-full h-full object-center object-cover')}/>
                     </div>
