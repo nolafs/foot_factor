@@ -204,7 +204,7 @@ export default async function Page({ params }: Props) {
               />
 
               <div className="mt-10">
-                <Button variant="outline" asChild ><Link href="/blog">
+                <Button variant="outline" asChild ><Link href="/resources/blog">
                   <ChevronLeftIcon className="size-4" />
                   Back to blog
                 </Link>

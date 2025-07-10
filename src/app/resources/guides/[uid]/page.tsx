@@ -203,7 +203,7 @@ export default async function Page({ params }: Props) {
 
       <Container className="mb-16">
         <div className="mt-10 flex items-center justify-between">
-          <Button variant="outline" asChild ><Link href="/blog">
+          <Button variant="outline" asChild ><Link href="/resources/guides">
             <ChevronLeftIcon className="size-4" />
             Back to all guides
           </Link>
