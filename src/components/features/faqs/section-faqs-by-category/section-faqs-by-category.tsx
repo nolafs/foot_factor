@@ -18,17 +18,17 @@ interface SectionFaqsByCategoryProps {
 
 const getFaqsByCategory = async (category:string) => {
   const client = createClient();
-  const faqItems: FaqDocument[] = [];
 
-  const data = await client.getByType('faq', {
+  console.log('category', category)
+
+  return await client.getByType('faq', {
     pageSize: 20,
+    fetchLinks: ['faq_category.name'],
     filters: [
         filter.at('my.faq.show_on_faqs', true),
-        filter.any('my.faq.category.name', [category])
+        filter.at('my.faq.category', category)
     ]
   })
-
-  return data;
 }
 
 
@@ -44,8 +44,8 @@ export const SectionFaqsByCategory = ({heading, subtitle, category}: SectionFaqs
         const data = await getFaqsByCategory(category)
         setFaqItems(data.results);
       } catch (err) {
-        setError('Failed to fetch case studies');
-        console.error('Error fetching case studies:', err);
+        setError('Failed to fetch FAQs');
+        console.error('Error fetching FAQs:', err);
       } finally {
         setLoading(false);
       }
@@ -71,17 +71,24 @@ export const SectionFaqsByCategory = ({heading, subtitle, category}: SectionFaqs
     );
   }
 
+  if(faqItems.length === 0) {
+    return null
+  }
+
+  console.log(faqItems);
+
 
   return (<>
 
-
+        <div className={'text-center mb-10'}>
           {isFilled.keyText(subtitle) &&
 					  <Subheading className="text-center">{subtitle}</Subheading>}
           {isFilled.richText(heading) && (
-              <Heading as="h2" className="text-center">
+              <Heading as="h2">
                 <PrismicRichText field={heading}/>
               </Heading>
           )}
+        </div>
 
 
         <Accordion type="single" collapsible className={'px-0'}>

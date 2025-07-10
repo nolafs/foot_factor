@@ -140,7 +140,8 @@
               "Primary",
               "Secondary",
               "Accent"
-            ]
+            ],
+            "default_value": "default"
           }
         }
       },

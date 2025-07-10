@@ -30,8 +30,8 @@
 							[
 								"faq",
 								{
-									"__TYPE__": "LinkContent",
 									"key": "a90b9148-8efe-4f93-b8ae-87f8b5d426e6",
+									"__TYPE__": "LinkContent",
 									"value": {
 										"__TYPE__": "DocumentLink",
 										"id": "mock_document_id"
@@ -111,7 +111,7 @@
 			},
 			"color": {
 				"__TYPE__": "FieldContent",
-				"value": "Secondary",
+				"value": "default",
 				"type": "Select"
 			}
 		},

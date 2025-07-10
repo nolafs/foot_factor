@@ -1,11 +1,12 @@
 import { type SliceComponentProps } from '@prismicio/react';
 import { SectionFaqs } from '@/components/features/faqs/section-faqs/section-faqs';
 import { Container } from '@/components/ui/container';
-import {type Content, isFilled, KeyTextField, RichTextField} from '@prismicio/client';
+import {type Content, KeyTextField, RichTextField} from '@prismicio/client';
 import {CallToAction as CallToActionComponent} from '@/components/features/cta/callToAction';
 import React from 'react';
 import SectionFaqsByCategory from '@/components/features/faqs/section-faqs-by-category/section-faqs-by-category';
-import {FaqCategoryDocument} from '@/prismic-types';
+import {FaqDocument} from '@/prismic-types';
+
 
 /**
  * Props for `Faqs`.
@@ -19,10 +20,22 @@ const Faqs = async ({ slice }: FaqsProps) => {
 
 
   if (slice.variation === 'columnCollapsible') {
+
+    if(!slice.primary.category) {
+      return (
+          <Container as={'section'} padding={'lg'} color={slice.primary.color} data-slice-type={slice.slice_type}
+                     data-slice-variation={slice.variation}>
+            No category selected for this FAQ section.
+          </Container>
+      );
+    }
+
     return (
         <Container as={'section'} padding={'lg'} color={slice.primary.color} data-slice-type={slice.slice_type}
                    data-slice-variation={slice.variation}>
-          <SectionFaqsByCategory heading={slice.primary.heading} subtitle={slice.primary.subtitle} category={'Orthotics & Treatment'} />
+          <SectionFaqsByCategory heading={slice.primary.heading} subtitle={slice.primary.subtitle} category={(slice.primary.category as unknown as {
+            id: string
+          })?.id } />
         </Container>
     );
   }
@@ -34,7 +47,7 @@ const Faqs = async ({ slice }: FaqsProps) => {
       <SectionFaqs
         data={{
           headings: slice.primary.heading,
-          faqs: slice.primary.faqs.map(item => item.faq as unknown as {heading: KeyTextField | string, body: RichTextField, id: string}),
+          faqs: slice.primary.faqs.map(item => item.faq as unknown as FaqDocument),
         }}
       />
 

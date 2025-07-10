@@ -2,6 +2,7 @@ import {type KeyTextField, type RichTextField} from '@prismicio/client';
 import FaqItem from './faq-item';
 import {Heading} from '@/components/ui/text';
 import {PrismicRichText} from '@prismicio/react';
+import {FaqDocument} from '@/prismic-types';
 
 
 
@@ -9,11 +10,7 @@ import {PrismicRichText} from '@prismicio/react';
 interface SectionFagsProps {
   data: {
     headings: RichTextField | null | undefined;
-    faqs: {
-      body: RichTextField;
-      heading: KeyTextField | string;
-      id: string;
-    }[];
+    faqs: FaqDocument[];
   };
 
   color?: 'A' | 'B' | 'C';
@@ -35,7 +32,7 @@ export function SectionFaqs({ data: { headings, faqs }, color = 'C' }: SectionFa
       <div className="mt-10 lg:col-span-7 lg:mt-0">
         <dl className="space-y-5">
           {faqs.map((faq, idx) => (
-            <FaqItem key={`${faq.id}-${idx}`} heading={faq.heading} body={faq.body} />
+            <FaqItem key={`${faq.id}-${idx}`} heading={faq.data.heading} body={faq.data.body} />
           ))}
         </dl>
       </div>

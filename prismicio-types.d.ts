@@ -3062,10 +3062,11 @@ export interface FaqsSliceColumnCollapsiblePrimary {
    *
    * - **Field Type**: Select
    * - **Placeholder**: *None*
+   * - **Default Value**: default
    * - **API ID Path**: faqs.columnCollapsible.primary.color
    * - **Documentation**: https://prismic.io/docs/fields/select
    */
-  color: prismic.SelectField<'default' | 'Primary' | 'Secondary' | 'Accent'>;
+  color: prismic.SelectField<'default' | 'Primary' | 'Secondary' | 'Accent', 'filled'>;
 }
 
 /**

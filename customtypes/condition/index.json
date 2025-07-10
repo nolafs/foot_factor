@@ -10,6 +10,7 @@
         "type": "UID",
         "config": {
           "label": "UID"
+
         }
       },
       "feature_image": {
