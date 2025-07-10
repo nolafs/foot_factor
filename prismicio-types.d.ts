@@ -5170,16 +5170,6 @@ export interface VerticalStepsWithImagesSliceDefaultPrimaryStepsItem {
  */
 export interface VerticalStepsWithImagesSliceVideoVerticalStepperPrimaryStepsItem {
   /**
-   * Step Label field in *VerticalStepsWithImages → Video Vertical Stepper → Primary → Steps*
-   *
-   * - **Field Type**: Text
-   * - **Placeholder**: *None*
-   * - **API ID Path**: vertical_steps_with_images.videoVerticalStepper.primary.steps[].step_label
-   * - **Documentation**: https://prismic.io/docs/fields/text
-   */
-  step_label: prismic.KeyTextField;
-
-  /**
    * Title field in *VerticalStepsWithImages → Video Vertical Stepper → Primary → Steps*
    *
    * - **Field Type**: Text

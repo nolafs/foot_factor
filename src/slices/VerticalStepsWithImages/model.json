@@ -78,12 +78,6 @@
           "config": {
             "label": "Steps",
             "fields": {
-              "step_label": {
-                "type": "Text",
-                "config": {
-                  "label": "Step Label"
-                }
-              },
               "title": {
                 "type": "Text",
                 "config": {

@@ -291,14 +291,6 @@
 						"__TYPE__": "GroupItemContent",
 						"value": [
 							[
-								"step_label",
-								{
-									"__TYPE__": "FieldContent",
-									"value": "point",
-									"type": "Text"
-								}
-							],
-							[
 								"title",
 								{
 									"__TYPE__": "FieldContent",
