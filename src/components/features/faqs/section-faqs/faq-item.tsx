@@ -1,10 +1,9 @@
 'use client';
 import { type KeyTextField, type RichTextField } from '@prismicio/client';
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '@/components/ui/collapsible';
-import { Button } from '@/components/ui/button';
 import { useState } from 'react';
 import { PrismicRichText } from '@prismicio/react';
-import {CircleArrowDownIcon, CircleArrowUpIcon, MinusIcon, PlusIcon} from 'lucide-react';
+import { MinusIcon, PlusIcon} from 'lucide-react';
 
 interface FaqItemProps {
   heading: KeyTextField | null | undefined;

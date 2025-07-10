@@ -2943,52 +2943,7 @@ export interface FaqsSliceDefaultPrimaryFaqsItem {
    * - **API ID Path**: faqs.default.primary.faqs[].faq
    * - **Documentation**: https://prismic.io/docs/fields/content-relationship
    */
-  faq: prismic.ContentRelationshipField<'faq'>;
-}
-
-/**
- * Item in *Faqs → Grid → Primary → FAQs*
- */
-export interface FaqsSliceGridPrimaryFaqsItem {
-  /**
-   * FAQ field in *Faqs → Grid → Primary → FAQs*
-   *
-   * - **Field Type**: Content Relationship
-   * - **Placeholder**: *None*
-   * - **API ID Path**: faqs.grid.primary.faqs[].faq
-   * - **Documentation**: https://prismic.io/docs/fields/content-relationship
-   */
-  faq: prismic.ContentRelationshipField<'faq'>;
-}
-
-/**
- * Item in *Faqs → Column → Primary → FAQs*
- */
-export interface FaqsSliceColumnPrimaryFaqsItem {
-  /**
-   * FAQ field in *Faqs → Column → Primary → FAQs*
-   *
-   * - **Field Type**: Content Relationship
-   * - **Placeholder**: *None*
-   * - **API ID Path**: faqs.column.primary.faqs[].faq
-   * - **Documentation**: https://prismic.io/docs/fields/content-relationship
-   */
-  faq: prismic.ContentRelationshipField<'faq'>;
-}
-
-/**
- * Item in *Faqs → Column Collapsible  → Primary → FAQs*
- */
-export interface FaqsSliceColumnCollapsiblePrimaryFaqsItem {
-  /**
-   * FAQ field in *Faqs → Column Collapsible  → Primary → FAQs*
-   *
-   * - **Field Type**: Content Relationship
-   * - **Placeholder**: *None*
-   * - **API ID Path**: faqs.columnCollapsible.primary.faqs[].faq
-   * - **Documentation**: https://prismic.io/docs/fields/content-relationship
-   */
-  faq: prismic.ContentRelationshipField<'faq'>;
+  faq: ContentRelationshipFieldWithData<[{ id: 'faq'; fields: ['body', 'heading'] }]>;
 }
 
 /**
@@ -3069,125 +3024,6 @@ export interface FaqsSliceDefaultPrimary {
 export type FaqsSliceDefault = prismic.SharedSliceVariation<'default', Simplify<FaqsSliceDefaultPrimary>, never>;
 
 /**
- * Primary content in *Faqs → Grid → Primary*
- */
-export interface FaqsSliceGridPrimary {
-  /**
-   * Heading field in *Faqs → Grid → Primary*
-   *
-   * - **Field Type**: Rich Text
-   * - **Placeholder**: *None*
-   * - **API ID Path**: faqs.grid.primary.heading
-   * - **Documentation**: https://prismic.io/docs/fields/rich-text
-   */
-  heading: prismic.RichTextField;
-
-  /**
-   * Subtitle field in *Faqs → Grid → Primary*
-   *
-   * - **Field Type**: Text
-   * - **Placeholder**: *None*
-   * - **API ID Path**: faqs.grid.primary.subtitle
-   * - **Documentation**: https://prismic.io/docs/fields/text
-   */
-  subtitle: prismic.KeyTextField;
-
-  /**
-   * Body field in *Faqs → Grid → Primary*
-   *
-   * - **Field Type**: Rich Text
-   * - **Placeholder**: *None*
-   * - **API ID Path**: faqs.grid.primary.body
-   * - **Documentation**: https://prismic.io/docs/fields/rich-text
-   */
-  body: prismic.RichTextField;
-
-  /**
-   * FAQs field in *Faqs → Grid → Primary*
-   *
-   * - **Field Type**: Group
-   * - **Placeholder**: *None*
-   * - **API ID Path**: faqs.grid.primary.faqs[]
-   * - **Documentation**: https://prismic.io/docs/fields/repeatable-group
-   */
-  faqs: prismic.GroupField<Simplify<FaqsSliceGridPrimaryFaqsItem>>;
-}
-
-/**
- * Grid variation for Faqs Slice
- *
- * - **API ID**: `grid`
- * - **Description**: Default
- * - **Documentation**: https://prismic.io/docs/slices
- */
-export type FaqsSliceGrid = prismic.SharedSliceVariation<'grid', Simplify<FaqsSliceGridPrimary>, never>;
-
-/**
- * Primary content in *Faqs → Column → Primary*
- */
-export interface FaqsSliceColumnPrimary {
-  /**
-   * Heading field in *Faqs → Column → Primary*
-   *
-   * - **Field Type**: Rich Text
-   * - **Placeholder**: *None*
-   * - **API ID Path**: faqs.column.primary.heading
-   * - **Documentation**: https://prismic.io/docs/fields/rich-text
-   */
-  heading: prismic.RichTextField;
-
-  /**
-   * Subtitle field in *Faqs → Column → Primary*
-   *
-   * - **Field Type**: Text
-   * - **Placeholder**: *None*
-   * - **API ID Path**: faqs.column.primary.subtitle
-   * - **Documentation**: https://prismic.io/docs/fields/text
-   */
-  subtitle: prismic.KeyTextField;
-
-  /**
-   * Body field in *Faqs → Column → Primary*
-   *
-   * - **Field Type**: Rich Text
-   * - **Placeholder**: *None*
-   * - **API ID Path**: faqs.column.primary.body
-   * - **Documentation**: https://prismic.io/docs/fields/rich-text
-   */
-  body: prismic.RichTextField;
-
-  /**
-   * FAQs field in *Faqs → Column → Primary*
-   *
-   * - **Field Type**: Group
-   * - **Placeholder**: *None*
-   * - **API ID Path**: faqs.column.primary.faqs[]
-   * - **Documentation**: https://prismic.io/docs/fields/repeatable-group
-   */
-  faqs: prismic.GroupField<Simplify<FaqsSliceColumnPrimaryFaqsItem>>;
-
-  /**
-   * Has Intro field in *Faqs → Column → Primary*
-   *
-   * - **Field Type**: Boolean
-   * - **Placeholder**: *None*
-   * - **Default Value**: false
-   * - **API ID Path**: faqs.column.primary.has_intro
-   * - **Documentation**: https://prismic.io/docs/fields/boolean
-   */
-  has_intro: prismic.BooleanField;
-}
-
-/**
- * Column variation for Faqs Slice
- *
- * - **API ID**: `column`
- * - **Description**: Default
- * - **Documentation**: https://prismic.io/docs/slices
- */
-export type FaqsSliceColumn = prismic.SharedSliceVariation<'column', Simplify<FaqsSliceColumnPrimary>, never>;
-
-/**
  * Primary content in *Faqs → Column Collapsible  → Primary*
  */
 export interface FaqsSliceColumnCollapsiblePrimary {
@@ -3212,35 +3048,24 @@ export interface FaqsSliceColumnCollapsiblePrimary {
   subtitle: prismic.KeyTextField;
 
   /**
-   * Body field in *Faqs → Column Collapsible  → Primary*
+   * Category field in *Faqs → Column Collapsible  → Primary*
    *
-   * - **Field Type**: Rich Text
+   * - **Field Type**: Content Relationship
    * - **Placeholder**: *None*
-   * - **API ID Path**: faqs.columnCollapsible.primary.body
-   * - **Documentation**: https://prismic.io/docs/fields/rich-text
+   * - **API ID Path**: faqs.columnCollapsible.primary.category
+   * - **Documentation**: https://prismic.io/docs/fields/content-relationship
    */
-  body: prismic.RichTextField;
+  category: ContentRelationshipFieldWithData<[{ id: 'faq_category'; fields: ['name'] }]>;
 
   /**
-   * FAQs field in *Faqs → Column Collapsible  → Primary*
+   * Color field in *Faqs → Column Collapsible  → Primary*
    *
-   * - **Field Type**: Group
+   * - **Field Type**: Select
    * - **Placeholder**: *None*
-   * - **API ID Path**: faqs.columnCollapsible.primary.faqs[]
-   * - **Documentation**: https://prismic.io/docs/fields/repeatable-group
+   * - **API ID Path**: faqs.columnCollapsible.primary.color
+   * - **Documentation**: https://prismic.io/docs/fields/select
    */
-  faqs: prismic.GroupField<Simplify<FaqsSliceColumnCollapsiblePrimaryFaqsItem>>;
-
-  /**
-   * Has Intro field in *Faqs → Column Collapsible  → Primary*
-   *
-   * - **Field Type**: Boolean
-   * - **Placeholder**: *None*
-   * - **Default Value**: false
-   * - **API ID Path**: faqs.columnCollapsible.primary.has_intro
-   * - **Documentation**: https://prismic.io/docs/fields/boolean
-   */
-  has_intro: prismic.BooleanField;
+  color: prismic.SelectField<'default' | 'Primary' | 'Secondary' | 'Accent'>;
 }
 
 /**
@@ -3259,7 +3084,7 @@ export type FaqsSliceColumnCollapsible = prismic.SharedSliceVariation<
 /**
  * Slice variation for *Faqs*
  */
-type FaqsSliceVariation = FaqsSliceDefault | FaqsSliceGrid | FaqsSliceColumn | FaqsSliceColumnCollapsible;
+type FaqsSliceVariation = FaqsSliceDefault | FaqsSliceColumnCollapsible;
 
 /**
  * Faqs Shared Slice
@@ -5656,16 +5481,9 @@ declare module '@prismicio/client' {
       FaqsSlice,
       FaqsSliceDefaultPrimaryFaqsItem,
       FaqsSliceDefaultPrimary,
-      FaqsSliceGridPrimaryFaqsItem,
-      FaqsSliceGridPrimary,
-      FaqsSliceColumnPrimaryFaqsItem,
-      FaqsSliceColumnPrimary,
-      FaqsSliceColumnCollapsiblePrimaryFaqsItem,
       FaqsSliceColumnCollapsiblePrimary,
       FaqsSliceVariation,
       FaqsSliceDefault,
-      FaqsSliceGrid,
-      FaqsSliceColumn,
       FaqsSliceColumnCollapsible,
       HeroSlice,
       HeroSliceDefaultPrimary,

@@ -33,7 +33,13 @@
                   "label": "FAQ",
                   "select": "document",
                   "customtypes": [
-                    "faq"
+                    {
+                      "id": "faq",
+                      "fields": [
+                        "body",
+                        "heading"
+                      ]
+                    }
                   ]
                 }
               }
@@ -85,125 +91,6 @@
       "items": {}
     },
     {
-      "id": "grid",
-      "name": "Grid",
-      "docURL": "...",
-      "version": "initial",
-      "description": "Default",
-      "imageUrl": "",
-      "primary": {
-        "heading": {
-          "type": "StructuredText",
-          "config": {
-            "label": "Heading",
-            "placeholder": "",
-            "allowTargetBlank": true,
-            "multi": "paragraph,preformatted,heading1,heading2,heading3,heading4,heading5,heading6,strong,em,hyperlink,image,embed,list-item,o-list-item,rtl"
-          }
-        },
-        "subtitle": {
-          "type": "Text",
-          "config": {
-            "label": "Subtitle",
-            "placeholder": ""
-          }
-        },
-        "body": {
-          "type": "StructuredText",
-          "config": {
-            "label": "Body",
-            "placeholder": "",
-            "allowTargetBlank": true,
-            "multi": "paragraph,preformatted,heading1,heading2,heading3,heading4,heading5,heading6,strong,em,hyperlink,image,embed,list-item,o-list-item,rtl"
-          }
-        },
-        "faqs": {
-          "type": "Group",
-          "config": {
-            "label": "FAQs",
-            "repeat": true,
-            "fields": {
-              "faq": {
-                "type": "Link",
-                "config": {
-                  "label": "FAQ",
-                  "select": "document",
-                  "customtypes": [
-                    "faq"
-                  ]
-                }
-              }
-            }
-          }
-        }
-      },
-      "items": {}
-    },
-    {
-      "id": "column",
-      "name": "Column",
-      "docURL": "...",
-      "version": "initial",
-      "description": "Default",
-      "imageUrl": "",
-      "primary": {
-        "heading": {
-          "type": "StructuredText",
-          "config": {
-            "label": "Heading",
-            "placeholder": "",
-            "allowTargetBlank": true,
-            "multi": "paragraph,preformatted,heading1,heading2,heading3,heading4,heading5,heading6,strong,em,hyperlink,image,embed,list-item,o-list-item,rtl"
-          }
-        },
-        "subtitle": {
-          "type": "Text",
-          "config": {
-            "label": "Subtitle",
-            "placeholder": ""
-          }
-        },
-        "body": {
-          "type": "StructuredText",
-          "config": {
-            "label": "Body",
-            "placeholder": "",
-            "allowTargetBlank": true,
-            "multi": "paragraph,preformatted,heading1,heading2,heading3,heading4,heading5,heading6,strong,em,hyperlink,image,embed,list-item,o-list-item,rtl"
-          }
-        },
-        "faqs": {
-          "type": "Group",
-          "config": {
-            "label": "FAQs",
-            "repeat": true,
-            "fields": {
-              "faq": {
-                "type": "Link",
-                "config": {
-                  "label": "FAQ",
-                  "select": "document",
-                  "customtypes": [
-                    "faq"
-                  ]
-                }
-              }
-            }
-          }
-        },
-        "has_intro": {
-          "type": "Boolean",
-          "config": {
-            "label": "Has Intro",
-            "placeholder_false": "false",
-            "placeholder_true": "true",
-            "default_value": false
-          }
-        }
-      },
-      "items": {}
-    },
-    {
       "id": "columnCollapsible",
       "name": "Column Collapsible ",
       "docURL": "...",
@@ -227,41 +114,33 @@
             "placeholder": ""
           }
         },
-        "body": {
-          "type": "StructuredText",
+        "category": {
+          "type": "Link",
           "config": {
-            "label": "Body",
-            "placeholder": "",
-            "allowTargetBlank": true,
-            "multi": "paragraph,preformatted,heading1,heading2,heading3,heading4,heading5,heading6,strong,em,hyperlink,image,embed,list-item,o-list-item,rtl"
-          }
-        },
-        "faqs": {
-          "type": "Group",
-          "config": {
-            "label": "FAQs",
-            "repeat": true,
-            "fields": {
-              "faq": {
-                "type": "Link",
-                "config": {
-                  "label": "FAQ",
-                  "select": "document",
-                  "customtypes": [
-                    "faq"
-                  ]
-                }
+            "label": "Category",
+            "select": "document",
+            "repeat": false,
+            "customtypes": [
+              {
+                "id": "faq_category",
+                "fields": [
+                  "name"
+                ]
               }
-            }
+            ]
           }
         },
-        "has_intro": {
-          "type": "Boolean",
+        "color": {
+          "type": "Select",
           "config": {
-            "label": "Has Intro",
-            "placeholder_false": "false",
-            "placeholder_true": "true",
-            "default_value": false
+            "label": "Color",
+            "placeholder": "",
+            "options": [
+              "default",
+              "Primary",
+              "Secondary",
+              "Accent"
+            ]
           }
         }
       },
