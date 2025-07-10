@@ -1,3 +1,4 @@
+'use client'
 import React, {useEffect, useState} from 'react';
 import {createClient} from '@/prismicio';
 import {FaqDocument} from '@/prismic-types';
@@ -5,7 +6,7 @@ import {filter, isFilled, KeyTextField, RichTextField} from '@prismicio/client';
 import {Heading, Subheading} from '@/components/ui/text';
 import {PrismicRichText} from '@prismicio/react';
 import {Accordion, AccordionContent, AccordionItem, AccordionTrigger} from '@/components/ui/accordion';
-import {Container} from '@/components/ui/container';
+
 
 
 interface SectionFaqsByCategoryProps {
