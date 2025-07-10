@@ -27,7 +27,7 @@ interface StepsMediaProps {
 
 export const StepsMedia = ({data}: StepsMediaProps) => {
     const contentRef = React.useRef<HTMLDivElement>(null);
-    const listRef = React.useRef<HTMLUListElement>(null);
+    const listRef = React.useRef<HTMLDivElement>(null);
 
 
     useGSAP(() => {
@@ -53,8 +53,8 @@ export const StepsMedia = ({data}: StepsMediaProps) => {
   return (
       <section>
           <div ref={contentRef} className={'relative w-full isolate'}>
-              <ul ref={listRef} className={'w-full flex flex-col'}>
-                <li>
+              <div ref={listRef} className={'w-full flex flex-col'}>
+                <div>
                   <div className={'intro z-5 relative w-full h-svh isolated overflow-hidden'}>
                     <div className={'w-full h-full flex justify-center'}>
                       <PrismicNextImage field={data.intro_image}
@@ -76,9 +76,11 @@ export const StepsMedia = ({data}: StepsMediaProps) => {
 
                       </div>
                   </div>
-                </li>
+                </div>
+                <ul className={'relative w-full'}>
                 {data.steps.map((step, idx) => (<StepMedia key={'video_stepper'+idx} index={idx} totalItems={data.steps.length} data={step}/>))}
-              </ul>
+                </ul>
+              </div>
           </div>
       </section>
   )
@@ -130,7 +132,7 @@ const StepMedia = ({data, index, totalItems}: StepMediaProps) => {
           trigger: cardRef.current,
           start: 'top top',
           end: `+=${200 / totalItems}%`,
-          markers: true,
+         // markers: true,
           scrub: 0.3,
         }
       });
@@ -143,7 +145,6 @@ const StepMedia = ({data, index, totalItems}: StepMediaProps) => {
         start: 'top top',
         end: 'bottom center',
         scrub: 0.5,
-
         pin: true,
         pinSpacing: true,
       }
@@ -159,10 +160,11 @@ const StepMedia = ({data, index, totalItems}: StepMediaProps) => {
       ease: 'power2.out',
 
     })
+
         .to(contentRef.current, {
           opacity: 0,
          y: '-100%',
-          duration: 0.5,
+          duration: 1,
           ease: 'power2.in',
         });
 
@@ -170,17 +172,17 @@ const StepMedia = ({data, index, totalItems}: StepMediaProps) => {
 
 
   return (
-      <li ref={cardRef} className={'relative isolate'} style={{zIndex: index + 1}}>
+      <li ref={cardRef}  >
 
 
-        <div ref={imageRef} className={'relative w-full h-svh flex -z-0 justify-center'}>
-          <div className={'absolute top-0 left-0 w-full h-full z-5 bg-black/30'}></div>
+        <div ref={imageRef} className={'absolute w-full h-svh flex -z-0 justify-center'} style={{zIndex: index + 1}}>
+          <div className={'absolute top-0 left-0 w-full h-full z-5 bg-black/60'}></div>
           <PrismicNextImage field={data.image}
                             className={cn('w-full h-full object-center object-cover')}/>
         </div>
 
 
-        <div ref={contentRef} className={'absolute w-full z-20 top-0 left-0 h-svh flex flex-col justify-center container mx-auto'}>
+        <div ref={contentRef} className={'relative w-full z-20  h-svh flex flex-col justify-center container mx-auto'}>
           <div className={cn('flex w-full', data.alignment === 'Left' ? 'md:justify-start' : 'md:justify-end')}>
             <div className={'flex flex-col md:w-1/2 px-4 md:px-8 lg:px-16 xl:px-24'}>
             {isFilled.keyText(data.title) && (
@@ -189,7 +191,7 @@ const StepMedia = ({data, index, totalItems}: StepMediaProps) => {
                 </Heading>
             )}
             {isFilled.richText(data.description) && (
-                <Body className={'mt-4'} color={'primary'}>
+                <Body className={'mt-4'} color={'primary'} >
                   <PrismicRichText field={data.description}/>
                 </Body>
             )}
@@ -199,6 +201,7 @@ const StepMedia = ({data, index, totalItems}: StepMediaProps) => {
             </div>
           </div>
           </div>
+          {index === totalItems - 1 && (<div className={'w-full h-svh'} />)}
         </div>
       </li>
   );
