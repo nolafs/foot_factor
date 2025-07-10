@@ -13,7 +13,7 @@ type ContainerProps<T extends ElementType> = {
   children?: ReactNode;
   padding?: 'sm' | 'md' | 'base' | 'lg';
   color?:  string;
-  wave?: boolean;
+  wave?: string;
 } & ComponentPropsWithRef<T>;
 
 type PolymorphicContainer = <T extends ElementType = 'div'>(
@@ -32,7 +32,7 @@ const ContainerComponent = forwardRef<
       children,
       padding = 'base',
       color = 'transparent',
-      wave = false,
+      wave,
       ...rest
     }: ContainerProps<T>,
     ref: React.Ref<React.ElementRef<T>>
@@ -73,7 +73,7 @@ const ContainerComponent = forwardRef<
       >
         {wave && (
             <div className={'absolute inset-0 w-full h-full overflow-hidden'}>
-              <Wave/>
+              <Wave waveType={wave}/>
             </div>
         )}
         <div className="relative container mx-auto w-full z-20">{children}</div>

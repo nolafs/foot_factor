@@ -11,6 +11,6 @@ export type Cta = {
   bookingLabel?: KeyTextField | string;
   dark?: boolean;
   comp?: string;
-  wave?: boolean;
+  wave?: string;
   padding?: 'sm' | 'md' | 'lg' | 'base';
 };

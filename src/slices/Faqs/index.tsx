@@ -57,7 +57,7 @@ const Faqs = async ({ slice }: FaqsProps) => {
             heading={slice.primary.cta_heading}
             body={slice.primary.cta_body}
             links={slice.primary.cta_links}
-            wave={true}
+            wave={'default'}
             padding={'md'}
         />
           </div>

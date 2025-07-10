@@ -4900,61 +4900,6 @@ type TeamCarouselSliceVariation = TeamCarouselSliceDefault;
 export type TeamCarouselSlice = prismic.SharedSlice<'team_carousel', TeamCarouselSliceVariation>;
 
 /**
- * Item in *Testimonial → Testimonials → Primary → Items*
- */
-export interface TestimonialSliceTestimonialsPrimaryItemsItem {
-  /**
-   * Stars field in *Testimonial → Testimonials → Primary → Items*
-   *
-   * - **Field Type**: Select
-   * - **Placeholder**: *None*
-   * - **API ID Path**: testimonial.testimonials.primary.items[].stars
-   * - **Documentation**: https://prismic.io/docs/fields/select
-   */
-  stars: prismic.SelectField<'1' | '2' | '3' | '4' | '5'>;
-
-  /**
-   * Body field in *Testimonial → Testimonials → Primary → Items*
-   *
-   * - **Field Type**: Rich Text
-   * - **Placeholder**: *None*
-   * - **API ID Path**: testimonial.testimonials.primary.items[].body
-   * - **Documentation**: https://prismic.io/docs/fields/rich-text
-   */
-  body: prismic.RichTextField;
-
-  /**
-   * Name field in *Testimonial → Testimonials → Primary → Items*
-   *
-   * - **Field Type**: Text
-   * - **Placeholder**: *None*
-   * - **API ID Path**: testimonial.testimonials.primary.items[].name
-   * - **Documentation**: https://prismic.io/docs/fields/text
-   */
-  name: prismic.KeyTextField;
-
-  /**
-   * Image field in *Testimonial → Testimonials → Primary → Items*
-   *
-   * - **Field Type**: Image
-   * - **Placeholder**: *None*
-   * - **API ID Path**: testimonial.testimonials.primary.items[].image
-   * - **Documentation**: https://prismic.io/docs/fields/image
-   */
-  image: prismic.ImageField<never>;
-
-  /**
-   * Position field in *Testimonial → Testimonials → Primary → Items*
-   *
-   * - **Field Type**: Text
-   * - **Placeholder**: *None*
-   * - **API ID Path**: testimonial.testimonials.primary.items[].position
-   * - **Documentation**: https://prismic.io/docs/fields/text
-   */
-  position: prismic.KeyTextField;
-}
-
-/**
  * Primary content in *Testimonial → Default → Primary*
  */
 export interface TestimonialSliceDefaultPrimary {
@@ -5013,37 +4958,9 @@ export type TestimonialSliceDefault = prismic.SharedSliceVariation<
 >;
 
 /**
- * Primary content in *Testimonial → Testimonials → Primary*
- */
-export interface TestimonialSliceTestimonialsPrimary {
-  /**
-   * Items field in *Testimonial → Testimonials → Primary*
-   *
-   * - **Field Type**: Group
-   * - **Placeholder**: *None*
-   * - **API ID Path**: testimonial.testimonials.primary.items[]
-   * - **Documentation**: https://prismic.io/docs/fields/repeatable-group
-   */
-  items: prismic.GroupField<Simplify<TestimonialSliceTestimonialsPrimaryItemsItem>>;
-}
-
-/**
- * Testimonials variation for Testimonial Slice
- *
- * - **API ID**: `testimonials`
- * - **Description**: Default
- * - **Documentation**: https://prismic.io/docs/slices
- */
-export type TestimonialSliceTestimonials = prismic.SharedSliceVariation<
-  'testimonials',
-  Simplify<TestimonialSliceTestimonialsPrimary>,
-  never
->;
-
-/**
  * Slice variation for *Testimonial*
  */
-type TestimonialSliceVariation = TestimonialSliceDefault | TestimonialSliceTestimonials;
+type TestimonialSliceVariation = TestimonialSliceDefault;
 
 /**
  * Testimonial Shared Slice
@@ -5336,6 +5253,26 @@ export type VerticalStepsWithImagesSliceDefault = prismic.SharedSliceVariation<
  */
 export interface VerticalStepsWithImagesSliceVideoVerticalStepperPrimary {
   /**
+   * Intro Body field in *VerticalStepsWithImages → Video Vertical Stepper → Primary*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: vertical_steps_with_images.videoVerticalStepper.primary.intro_body
+   * - **Documentation**: https://prismic.io/docs/fields/rich-text
+   */
+  intro_body: prismic.RichTextField;
+
+  /**
+   * Intro Image field in *VerticalStepsWithImages → Video Vertical Stepper → Primary*
+   *
+   * - **Field Type**: Image
+   * - **Placeholder**: *None*
+   * - **API ID Path**: vertical_steps_with_images.videoVerticalStepper.primary.intro_image
+   * - **Documentation**: https://prismic.io/docs/fields/image
+   */
+  intro_image: prismic.ImageField<never>;
+
+  /**
    * Steps field in *VerticalStepsWithImages → Video Vertical Stepper → Primary*
    *
    * - **Field Type**: Group
@@ -5561,11 +5498,8 @@ declare module '@prismicio/client' {
       TeamCarouselSliceDefault,
       TestimonialSlice,
       TestimonialSliceDefaultPrimary,
-      TestimonialSliceTestimonialsPrimaryItemsItem,
-      TestimonialSliceTestimonialsPrimary,
       TestimonialSliceVariation,
       TestimonialSliceDefault,
-      TestimonialSliceTestimonials,
       TestimonialsSlice,
       TestimonialsSliceDefaultPrimary,
       TestimonialsSliceVariation,

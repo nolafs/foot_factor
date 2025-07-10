@@ -56,6 +56,23 @@
       "imageUrl": "",
       "docURL": "...",
       "primary": {
+        "intro_body": {
+          "type": "StructuredText",
+          "config": {
+            "label": "Intro Body",
+            "placeholder": "",
+            "allowTargetBlank": true,
+            "multi": "strong,em"
+          }
+        },
+        "intro_image": {
+          "type": "Image",
+          "config": {
+            "label": "Intro Image",
+            "constraint": {},
+            "thumbnails": []
+          }
+        },
         "steps": {
           "type": "Group",
           "config": {
