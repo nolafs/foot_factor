@@ -55,7 +55,7 @@ const Megamenu: FC<MegaMenuProps> = ({slice, context}) => {
 
   if(slice.variation === 'blog') {
 
-    return (<div>
+    return (<div className={'hidden xl:block w-full h-full'}>
       <h2 className="text-3xl font-medium tracking-tight">Featured Article</h2>
       <BlogArticle size={2} />
     </div>)
@@ -65,7 +65,7 @@ const Megamenu: FC<MegaMenuProps> = ({slice, context}) => {
   if (slice.variation === 'imageButtonRow') {
 
     return (<div><div className={'flex flex-col w-full h-full flex-1 justify-items-stretch'}>
-       <div className={`grid grid-cols-${slice.primary.links.length} gap-x-2 h-full`}>
+       <div className={`grid grid-cols-1 lg:grid-cols-${slice.primary.links.length} gap-x-2 h-full`}>
           {slice.primary.links.map((item, idx) => (
               <div key={`main-nav-item-${idx}`} className={'group h-full'}>
                 <PrismicNextLink field={item.link} className={'relative isolate block w-full h-full overflow-hidden rounded-xl text-shadow text-shadow-blur-5   text-shadow-cyan-950/50'}>
@@ -116,7 +116,7 @@ const Megamenu: FC<MegaMenuProps> = ({slice, context}) => {
                           className={'flex flex-col w-10/12  space-y-1'}
                       >
                         <div
-                            className={'text-xl md:text-2xl lg:text-3xl font-medium leading-9 text-primary transition-all group-hover:text-accent'}>{item.label}</div>
+                            className={'text-xl lg:text-2xl xl:text-3xl font-medium leading-9 text-primary transition-all group-hover:text-accent'}>{item.label}</div>
                         <div className={'text-secondary text-sm/6 transition-all group-hover:text-white'}>{item.subtitle}</div>
                       </PrismicNextLink>
                     </div>

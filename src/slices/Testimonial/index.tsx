@@ -21,14 +21,12 @@ const Testimonial = ({ slice }: TestimonialProps): JSX.Element => {
 
   if (slice.variation === 'default') {
     return (
-      <Container as={'section'} data-slice-type={slice.slice_type} className={'mt-36'}>
         <TestimonialSingle
           body={slice.primary.body}
           image={slice.primary.image}
           name={slice.primary.name}
           position={slice.primary.position}
         />
-      </Container>
     );
   }
 

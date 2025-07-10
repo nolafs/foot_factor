@@ -129,7 +129,7 @@ export type AuthorDocument<Lang extends string = string> = prismic.PrismicDocume
   Lang
 >;
 
-type CaseStudiesDocumentDataSlicesSlice = CallToActionSlice | MediaSectionSlice | SectionSlice;
+type CaseStudiesDocumentDataSlicesSlice = TestimonialSlice | CallToActionSlice | MediaSectionSlice | SectionSlice;
 
 /**
  * Content for Case Studies documents
