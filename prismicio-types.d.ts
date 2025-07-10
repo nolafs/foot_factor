@@ -5208,6 +5208,26 @@ export interface VerticalStepsWithImagesSliceVideoVerticalStepperPrimaryStepsIte
    * - **Documentation**: https://prismic.io/docs/fields/link-to-media
    */
   video: prismic.LinkToMediaField<prismic.FieldState, never>;
+
+  /**
+   * Links field in *VerticalStepsWithImages → Video Vertical Stepper → Primary → Steps*
+   *
+   * - **Field Type**: Link
+   * - **Placeholder**: *None*
+   * - **API ID Path**: vertical_steps_with_images.videoVerticalStepper.primary.steps[].links
+   * - **Documentation**: https://prismic.io/docs/fields/link
+   */
+  links: prismic.Repeatable<prismic.LinkField<string, string, unknown, prismic.FieldState, never>>;
+
+  /**
+   * Alignment field in *VerticalStepsWithImages → Video Vertical Stepper → Primary → Steps*
+   *
+   * - **Field Type**: Select
+   * - **Placeholder**: *None*
+   * - **API ID Path**: vertical_steps_with_images.videoVerticalStepper.primary.steps[].alignment
+   * - **Documentation**: https://prismic.io/docs/fields/select
+   */
+  alignment: prismic.SelectField<'Left' | 'Right'>;
 }
 
 /**

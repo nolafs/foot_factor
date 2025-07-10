@@ -106,6 +106,28 @@
                   "select": "media",
                   "allowText": true
                 }
+              },
+              "links": {
+                "type": "Link",
+                "config": {
+                  "label": "Links",
+                  "placeholder": "",
+                  "select": null,
+                  "allowTargetBlank": true,
+                  "allowText": true,
+                  "repeat": true
+                }
+              },
+              "alignment": {
+                "type": "Select",
+                "config": {
+                  "label": "Alignment",
+                  "placeholder": "",
+                  "options": [
+                    "Left",
+                    "Right"
+                  ]
+                }
               }
             }
           }
