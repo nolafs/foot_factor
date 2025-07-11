@@ -31,7 +31,7 @@ const List: FC<ListProps> = ({ slice }) => {
         </Heading>
       </Container>
         <div className={'w-full pt-5 md:pt-8 lg:pt-16 pb-16 md:pb-24 lg:pb-28'}>
-          <SliderDynamicList contentType={'guide'} size={'default'} />
+          <SliderDynamicList contentType={'guide'} size={'default'} baseUrl={'/resources/guides'} />
         </div>
     </section>)
     }
@@ -45,7 +45,7 @@ const List: FC<ListProps> = ({ slice }) => {
             </Heading>
           </Container>
           <div className={'w-full pt-5 md:pt-8 lg:pt-16 pb-16 md:pb-24 lg:pb-28'}>
-            <SliderDynamicList contentType={'orthotics'} size={'large'}/>
+            <SliderDynamicList contentType={'orthotics'} size={'large'} baseUrl={'/services/orthotics'}/>
           </div>
         </section>
     );

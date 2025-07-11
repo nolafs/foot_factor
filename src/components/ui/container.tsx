@@ -55,14 +55,14 @@ const ContainerComponent = forwardRef<
       backgroundColorClass = 'bg-muted';
       break;
     case 'default':
-      backgroundColorClass = 'bg-background';
+      backgroundColorClass = 'bg-white';
       break;
   }
 
   return (
       <Component
           ref={ref}
-          className={cn('relative w-full mx-auto overflow-hidden',
+          className={cn('relative w-full mx-auto overflow-hidden z-10',
               className,
               backgroundColorClass,
               padding === 'base' && 'px-6 lg:px-8',

@@ -62,8 +62,8 @@ export const StepsMedia = ({data}: StepsMediaProps) => {
     }, {scope: contentRef, dependencies: [data]});
 
   return (
-      <section>
-          <div ref={contentRef} className={'relative w-full isolate'}>
+
+          <div ref={contentRef} className={'relative w-full isolate overflow-hidden'}>
               <div ref={listRef} className={'w-full flex flex-col'}>
                 <div>
                   <div className={'intro z-5 relative w-full h-svh isolated overflow-hidden'}>
@@ -94,9 +94,7 @@ export const StepsMedia = ({data}: StepsMediaProps) => {
                 <li className={'relative h-svh'}></li>
                 </ul>
               </div>
-          </div>
-      </section>
-  )
+          </div>)
 }
 
 interface StepMediaProps {
