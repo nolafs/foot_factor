@@ -12,6 +12,51 @@
           "label": "UID"
         }
       },
+      "subheading": {
+        "type": "Text",
+        "config": {
+          "label": "Subheading",
+          "placeholder": ""
+        }
+      },
+      "heading": {
+        "type": "Text",
+        "config": {
+          "label": "Heading",
+          "placeholder": ""
+        }
+      },
+      "lead": {
+        "type": "StructuredText",
+        "config": {
+          "label": "Lead",
+          "placeholder": "",
+          "allowTargetBlank": true,
+          "multi": "strong,em"
+        }
+      },
+      "image": {
+        "type": "Image",
+        "config": {
+          "label": "Image",
+          "constraint": {
+            "width": 1920,
+            "height": 1080
+          },
+          "thumbnails": []
+        }
+      },
+      "thumb": {
+        "type": "Image",
+        "config": {
+          "label": "Thumb",
+          "constraint": {
+            "width": 1080,
+            "height": 1080
+          },
+          "thumbnails": []
+        }
+      },
       "slices": {
         "type": "Slices",
         "fieldset": "Slice Zone",

@@ -4,7 +4,8 @@ import { SliceZone } from '@prismicio/react';
 import { createClient } from '@/prismicio';
 import { components } from '@/slices';
 import React from 'react';
-import { asImageSrc, isFilled } from '@prismicio/client';
+import {asImageSrc, asText, isFilled} from '@prismicio/client';
+import {Hero} from '@/components/features/hero/hero';
 
 
 type Params = { uid: string };
@@ -16,11 +17,11 @@ export async function generateMetadata({params}: { params: Promise<Params> }): P
 
   return {
     title: page.data.meta_title,
-    description: page.data.meta_description,
+    description: page.data.meta_description ?? asText(page.data.lead),
     openGraph: {
       title: isFilled.keyText(page.data.meta_title) ? page.data.meta_title : undefined,
-      description: isFilled.keyText(page.data.meta_description) ? page.data.meta_description : undefined,
-      images: isFilled.image(page.data.meta_image) ? [asImageSrc(page.data.meta_image)] : undefined,
+      description: isFilled.keyText(page.data.meta_description) ? page.data.meta_description :  asText(page.data.lead),
+      images: isFilled.image(page.data.meta_image) ? [asImageSrc(page.data.meta_image)] : page.data.image.url ? [page.data.image.url] : [],
     },
   };
 }
@@ -33,6 +34,12 @@ export default async function Page({ params }: { params: Promise<Params> }) {
 
   return (
     <main className={'w-full overflow-hidden'}>
+        <Hero
+          subheading={page.data.subheading}
+          heading={page.data.heading}
+          lead={page.data.lead}
+          image={page.data.image}
+        />
         <SliceZone slices={page.data.slices} components={components} />
     </main>
   );

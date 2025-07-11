@@ -509,5 +509,36 @@
 				"value": []
 			}
 		]
+	},
+	{
+		"__TYPE__": "SharedSliceContent",
+		"variation": "orthotics",
+		"primary": {
+			"heading": {
+				"__TYPE__": "FieldContent",
+				"value": "unusual",
+				"type": "Text"
+			},
+			"lead": {
+				"__TYPE__": "FieldContent",
+				"value": "built",
+				"type": "Text"
+			},
+			"link": {
+				"key": "e1c56bb2-5401-4749-aef8-4ce211a40259",
+				"__TYPE__": "LinkContent",
+				"value": {
+					"__TYPE__": "ExternalLink",
+					"url": "https://prismic.io",
+					"text": "hand"
+				}
+			}
+		},
+		"items": [
+			{
+				"__TYPE__": "GroupItemContent",
+				"value": []
+			}
+		]
 	}
 ]

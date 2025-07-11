@@ -115,7 +115,12 @@
                   "select": null,
                   "allowTargetBlank": true,
                   "allowText": true,
-                  "repeat": true
+                  "repeat": true,
+                  "variants": [
+                    "Primary",
+                    "Secondary",
+                    "Outline"
+                  ]
                 }
               },
               "alignment": {

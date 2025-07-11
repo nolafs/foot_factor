@@ -1546,6 +1546,61 @@ type OrthoticsDocumentDataSlicesSlice = FaqsSlice | CallToActionSlice | SectionS
  */
 interface OrthoticsDocumentData {
   /**
+   * Subheading field in *Orthotics*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: orthotics.subheading
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/fields/text
+   */
+  subheading: prismic.KeyTextField;
+
+  /**
+   * Heading field in *Orthotics*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: orthotics.heading
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/fields/text
+   */
+  heading: prismic.KeyTextField;
+
+  /**
+   * Lead field in *Orthotics*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: orthotics.lead
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/fields/rich-text
+   */
+  lead: prismic.RichTextField;
+
+  /**
+   * Image field in *Orthotics*
+   *
+   * - **Field Type**: Image
+   * - **Placeholder**: *None*
+   * - **API ID Path**: orthotics.image
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/fields/image
+   */
+  image: prismic.ImageField<never>;
+
+  /**
+   * Thumb field in *Orthotics*
+   *
+   * - **Field Type**: Image
+   * - **Placeholder**: *None*
+   * - **API ID Path**: orthotics.thumb
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/fields/image
+   */
+  thumb: prismic.ImageField<never>;
+
+  /**
    * Slice Zone field in *Orthotics*
    *
    * - **Field Type**: Slice Zone
@@ -3691,9 +3746,58 @@ export interface ListSliceGuidesPrimary {
 export type ListSliceGuides = prismic.SharedSliceVariation<'guides', Simplify<ListSliceGuidesPrimary>, never>;
 
 /**
+ * Primary content in *List → Orthotics → Primary*
+ */
+export interface ListSliceOrthoticsPrimary {
+  /**
+   * Heading field in *List → Orthotics → Primary*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: list.orthotics.primary.heading
+   * - **Documentation**: https://prismic.io/docs/fields/text
+   */
+  heading: prismic.KeyTextField;
+
+  /**
+   * Lead field in *List → Orthotics → Primary*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: list.orthotics.primary.lead
+   * - **Documentation**: https://prismic.io/docs/fields/text
+   */
+  lead: prismic.KeyTextField;
+
+  /**
+   * Link field in *List → Orthotics → Primary*
+   *
+   * - **Field Type**: Link
+   * - **Placeholder**: *None*
+   * - **API ID Path**: list.orthotics.primary.link
+   * - **Documentation**: https://prismic.io/docs/fields/link
+   */
+  link: prismic.LinkField<string, string, unknown, prismic.FieldState, never>;
+}
+
+/**
+ * Orthotics variation for List Slice
+ *
+ * - **API ID**: `orthotics`
+ * - **Description**: Default
+ * - **Documentation**: https://prismic.io/docs/slices
+ */
+export type ListSliceOrthotics = prismic.SharedSliceVariation<'orthotics', Simplify<ListSliceOrthoticsPrimary>, never>;
+
+/**
  * Slice variation for *List*
  */
-type ListSliceVariation = ListSliceDefault | ListSlicePricingTable | ListSliceBento | ListSliceGuides;
+type ListSliceVariation =
+  | ListSliceDefault
+  | ListSlicePricingTable
+  | ListSliceBento
+  | ListSliceGuides
+  | ListSliceOrthotics;
 
 /**
  * List Shared Slice
@@ -5217,7 +5321,9 @@ export interface VerticalStepsWithImagesSliceVideoVerticalStepperPrimaryStepsIte
    * - **API ID Path**: vertical_steps_with_images.videoVerticalStepper.primary.steps[].links
    * - **Documentation**: https://prismic.io/docs/fields/link
    */
-  links: prismic.Repeatable<prismic.LinkField<string, string, unknown, prismic.FieldState, never>>;
+  links: prismic.Repeatable<
+    prismic.LinkField<string, string, unknown, prismic.FieldState, 'Primary' | 'Secondary' | 'Outline'>
+  >;
 
   /**
    * Alignment field in *VerticalStepsWithImages → Video Vertical Stepper → Primary → Steps*
@@ -5453,11 +5559,13 @@ declare module '@prismicio/client' {
       ListSliceBentoPrimaryItemsItem,
       ListSliceBentoPrimary,
       ListSliceGuidesPrimary,
+      ListSliceOrthoticsPrimary,
       ListSliceVariation,
       ListSliceDefault,
       ListSlicePricingTable,
       ListSliceBento,
       ListSliceGuides,
+      ListSliceOrthotics,
       MediaSectionSlice,
       MediaSectionSliceDefaultPrimary,
       MediaSectionSliceFullWidthImagePrimary,

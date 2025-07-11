@@ -360,12 +360,13 @@
 									"type": "Link",
 									"value": [
 										{
-											"key": "23928199-0a05-4404-bf7d-7eff7be03cca",
+											"key": "086f468e-699f-4b7c-ba53-1d99953d4385",
 											"__TYPE__": "LinkContent",
 											"value": {
 												"__TYPE__": "ExternalLink",
-												"url": "http://google.com",
-												"text": "lost"
+												"url": "https://slicemachine.dev",
+												"text": "anything",
+												"variant": "Primary"
 											}
 										}
 									]
