@@ -1,4 +1,4 @@
-import {type KeyTextField, type RichTextField} from '@prismicio/client';
+import {type KeyTextField, type RichTextField, isFilled} from '@prismicio/client';
 import FaqItem from './faq-item';
 import {Heading} from '@/components/ui/text';
 import {PrismicRichText} from '@prismicio/react';
@@ -32,7 +32,7 @@ export function SectionFaqs({ data: { headings, faqs }, color = 'C' }: SectionFa
       <div className="mt-10 lg:col-span-7 lg:mt-0">
         <dl className="space-y-5">
           {faqs.map((faq, idx) => (
-            <FaqItem key={`${faq.id}-${idx}`} heading={faq.data.heading} body={faq.data.body} />
+              (isFilled.keyText(faq.data?.heading) && isFilled.richText(faq.data.body)) && <FaqItem key={`${faq.id}-${idx}`} heading={faq.data.heading} body={faq.data.body} />
           ))}
         </dl>
       </div>
