@@ -10,6 +10,7 @@ import {PrismicNextImage, PrismicNextLink} from '@prismicio/next';
 import {buttonVariants} from '@/components/ui/button';
 import {ArrowRight, CircleArrowRight} from 'lucide-react';
 import ServiceCard from '@/components/features/service-card/service-card';
+import SliderDynamicList from '@/components/features/slider/slider-dynamic-list';
 
 /**
  * Props for `List`.
@@ -21,6 +22,34 @@ export type ListProps = SliceComponentProps<Content.ListSlice>;
  */
 const List: FC<ListProps> = ({ slice }) => {
 
+
+  if (slice.variation === 'guides') {
+    return ( <section data-slice-type={slice.slice_type} data-slice-variation={slice.variation}>
+      <Container as={'div'} color={'default'}>
+        <Heading as="h2" className={'mb-8 text-center'}>
+          {slice.primary.heading}
+        </Heading>
+      </Container>
+        <div className={'w-full pt-5 md:pt-8 lg:pt-16 pb-16 md:pb-24 lg:pb-28'}>
+          <SliderDynamicList contentType={'guide'} size={'default'} />
+        </div>
+    </section>)
+    }
+
+  if (slice.variation === 'orthotics') {
+    return (
+        <section data-slice-type={slice.slice_type} data-slice-variation={slice.variation}>
+          <Container as={'div'} color={'default'}>
+            <Heading as="h2" className={'mb-8 text-center'}>
+              {slice.primary.heading}
+            </Heading>
+          </Container>
+          <div className={'w-full pt-5 md:pt-8 lg:pt-16 pb-16 md:pb-24 lg:pb-28'}>
+            <SliderDynamicList contentType={'orthotics'} size={'large'}/>
+          </div>
+        </section>
+    );
+  }
 
     if (slice.variation === 'bento') {
       return <section data-slice-type={slice.slice_type} data-slice-variation={slice.variation}>
@@ -105,7 +134,6 @@ const List: FC<ListProps> = ({ slice }) => {
 
       </section>
     }
-
 
     if (slice.variation === 'pricingTable') {
 

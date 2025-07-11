@@ -776,7 +776,7 @@ interface GuideDocumentData {
    * - **Tab**: Main
    * - **Documentation**: https://prismic.io/docs/fields/image
    */
-  feature_image: prismic.ImageField<never>;
+  feature_image: prismic.ImageField<'master' | 'thumb'>;
 
   /**
    * Featured field in *Guide*
@@ -2037,7 +2037,15 @@ export type PostsDocument<Lang extends string = string> = prismic.PrismicDocumen
   Lang
 >;
 
-type ServicesDocumentDataSlicesSlice = CallToActionSlice | VerticalStepsWithImagesSlice | FaqsSlice | SectionSlice;
+type ServicesDocumentDataSlicesSlice =
+  | CaseStudiesSlice
+  | IconNavListSlice
+  | MediaSectionSlice
+  | ListSlice
+  | CallToActionSlice
+  | VerticalStepsWithImagesSlice
+  | FaqsSlice
+  | SectionSlice;
 
 /**
  * Content for Services documents

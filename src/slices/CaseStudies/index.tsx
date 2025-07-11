@@ -13,6 +13,7 @@ import {ArrowRight} from 'lucide-react';
 import Link from 'next/link';
 import BentoWrapper from '@/components/features/bento/bento-wrapper';
 import BentoCard from '@/components/features/bento/bento-card';
+import {SliderCard} from '@/components/features/slider/slider-card';
 
 /**
  * Props for `CaseStudies`.
@@ -121,6 +122,7 @@ const CaseStudies: FC<CaseStudiesProps> = ({slice}) => {
   }
 
   if (slice.variation === 'default') {
+
     return (
         <section data-slice-type={slice.slice_type} data-slice-variation={slice.variation}>
           <Container className={'pt-16 md:pt-24 lg:pt-28 max-w-3xl mx-auto'}>
@@ -130,35 +132,23 @@ const CaseStudies: FC<CaseStudiesProps> = ({slice}) => {
           </Container>
 
           <div className={'w-full pt-5 md:pt-8 lg:pt-16 pb-16 md:pb-24 lg:pb-28'}>
-            <Slider data={controlsData}>
+            <Slider data={controlsData} size={'large'}>
               {caseStudies && caseStudies.length > 0 ? (
                   caseStudies.map((caseStudy: any, idx: number) => (
-                      <div
-                          key={'case_studies_' + idx}
-                          className="relative bg-secondary flex aspect-[9/16] w-72 shrink-0 snap-start scroll-ml-[var(--scroll-padding)] flex-col justify-end overflow-hidden rounded-3xl max-lg:rounded-4xl lg:rounded-4xl sm:aspect-[3/4] sm:w-96"
-                      >
-                        <PrismicNextImage
-                            field={caseStudy.data.feature_image}
-                            className="aspect-[9/16] top-0 h-full w-full object-cover"
-                        />
-                        <div
-                            className="absolute inset-0 rounded-lg bg-gradient-to-t from-primary-950/90 to-transparent max-lg:rounded-4xl lg:rounded-4xl overflow-hidden"/>
-                        <div className={'absolute bottom-0 w-full p-7 md:p-10 lg:p-10 flex flex-col z-10'}>
-                          <div className={'text-white text-3xl'}>{caseStudy.data.client_name}</div>
-                          <div className={'text-primary-300 text-2xl'}>
-                            {caseStudy.data.activity}{' '}
-                            {caseStudy.data?.client_age && <span>({caseStudy.data.client_age})</span>}
-                          </div>
-                          <div className={'text-white text-xl'}>{caseStudy.data.condition.data?.title}</div>
-                          <div className={'flex justify-end'}>
-                                <Link href={'/resources/case-studies/' + caseStudy.uid}
-                                                 className={cn(buttonVariants({variant: 'default', size: 'icon'}))}>
-                                  <ArrowRight className={'h-4 w-4'} strokeWidth={4}/>
-                                </Link>
-                              </div>
-
-                        </div>
-                      </div>
+                      <SliderCard
+                          index={idx}
+                          key={`${caseStudy.uid}_${idx}`}
+                          keyPrefix="case_studies"
+                          aspectRatio={'portrait'}
+                          size={'large'}
+                          imageField={caseStudy.data.feature_image}
+                          href={`/resources/case-studies/${caseStudy.uid}`}
+                          title={caseStudy.data.client_name}
+                          subtitle={`${caseStudy.data.activity}${
+                              caseStudy.data?.client_age ? ` (${caseStudy.data.client_age})` : ''
+                          }`}
+                          description={caseStudy.data.condition.data?.title}
+                      />
                   ))
               ) : (
                   <div className="text-center mt-10">No Case Studies found</div>

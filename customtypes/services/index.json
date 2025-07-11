@@ -40,6 +40,18 @@
         "fieldset": "Slice Zone",
         "config": {
           "choices": {
+            "case_studies": {
+              "type": "SharedSlice"
+            },
+            "icon_nav_list": {
+              "type": "SharedSlice"
+            },
+            "media_section": {
+              "type": "SharedSlice"
+            },
+            "list": {
+              "type": "SharedSlice"
+            },
             "call_to_action": {
               "type": "SharedSlice"
             },

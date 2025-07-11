@@ -25,7 +25,18 @@
         "config": {
           "label": "Feature Image",
           "constraint": {},
-          "thumbnails": []
+          "thumbnails": [
+            {
+              "name": "master",
+              "width": 1920,
+              "height": 1020
+            },
+            {
+              "name": "thumb",
+              "width": 331,
+              "height": 408
+            }
+          ]
         }
       },
       "featured": {

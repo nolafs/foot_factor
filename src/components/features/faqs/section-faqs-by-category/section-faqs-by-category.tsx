@@ -75,8 +75,6 @@ export const SectionFaqsByCategory = ({heading, subtitle, category}: SectionFaqs
     return null
   }
 
-  console.log(faqItems);
-
 
   return (<>
 
