@@ -3871,6 +3871,76 @@ export interface ListSliceOrthoticsPrimary {
 export type ListSliceOrthotics = prismic.SharedSliceVariation<'orthotics', Simplify<ListSliceOrthoticsPrimary>, never>;
 
 /**
+ * Primary content in *List → Conditions → Primary*
+ */
+export interface ListSliceConditionsPrimary {
+  /**
+   * Heading field in *List → Conditions → Primary*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: list.conditions.primary.heading
+   * - **Documentation**: https://prismic.io/docs/fields/text
+   */
+  heading: prismic.KeyTextField;
+
+  /**
+   * Lead field in *List → Conditions → Primary*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: list.conditions.primary.lead
+   * - **Documentation**: https://prismic.io/docs/fields/text
+   */
+  lead: prismic.KeyTextField;
+
+  /**
+   * Footer Header field in *List → Conditions → Primary*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: list.conditions.primary.footer_header
+   * - **Documentation**: https://prismic.io/docs/fields/text
+   */
+  footer_header: prismic.KeyTextField;
+
+  /**
+   * Footer body field in *List → Conditions → Primary*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: list.conditions.primary.footer_body
+   * - **Documentation**: https://prismic.io/docs/fields/text
+   */
+  footer_body: prismic.KeyTextField;
+
+  /**
+   * Links field in *List → Conditions → Primary*
+   *
+   * - **Field Type**: Link
+   * - **Placeholder**: *None*
+   * - **API ID Path**: list.conditions.primary.links
+   * - **Documentation**: https://prismic.io/docs/fields/link
+   */
+  links: prismic.Repeatable<
+    prismic.LinkField<string, string, unknown, prismic.FieldState, 'Primary' | 'Secondary' | 'Accent' | 'Link'>
+  >;
+}
+
+/**
+ * Conditions variation for List Slice
+ *
+ * - **API ID**: `conditions`
+ * - **Description**: Default
+ * - **Documentation**: https://prismic.io/docs/slices
+ */
+export type ListSliceConditions = prismic.SharedSliceVariation<
+  'conditions',
+  Simplify<ListSliceConditionsPrimary>,
+  never
+>;
+
+/**
  * Slice variation for *List*
  */
 type ListSliceVariation =
@@ -3878,7 +3948,8 @@ type ListSliceVariation =
   | ListSlicePricingTable
   | ListSliceBento
   | ListSliceGuides
-  | ListSliceOrthotics;
+  | ListSliceOrthotics
+  | ListSliceConditions;
 
 /**
  * List Shared Slice
@@ -5644,12 +5715,14 @@ declare module '@prismicio/client' {
       ListSliceBentoPrimary,
       ListSliceGuidesPrimary,
       ListSliceOrthoticsPrimary,
+      ListSliceConditionsPrimary,
       ListSliceVariation,
       ListSliceDefault,
       ListSlicePricingTable,
       ListSliceBento,
       ListSliceGuides,
       ListSliceOrthotics,
+      ListSliceConditions,
       MediaSectionSlice,
       MediaSectionSliceDefaultPrimary,
       MediaSectionSliceFullWidthImagePrimary,

@@ -8,19 +8,19 @@
 				"type": "Text",
 				"value": "Articles"
 			},
-			"link": {
-				"key": "e6b1ce1a-3bd7-43e3-8a23-9608cfa0aa0e",
-				"__TYPE__": "LinkContent",
-				"value": {
-					"__TYPE__": "ExternalLink",
-					"url": "http://twitter.com",
-					"text": "angry"
-				}
-			},
 			"lead": {
 				"__TYPE__": "FieldContent",
 				"type": "Text",
 				"value": "With our integrated CRM, project management, collaboration and invoicing capabilities, you can manage your business in one secure platform."
+			},
+			"link": {
+				"key": "15626a94-fb1e-47d5-9f80-84fb6876227f",
+				"__TYPE__": "LinkContent",
+				"value": {
+					"__TYPE__": "ExternalLink",
+					"url": "https://prismic.io",
+					"text": "palace"
+				}
 			}
 		},
 		"items": []
@@ -532,6 +532,54 @@
 					"url": "https://prismic.io",
 					"text": "hand"
 				}
+			}
+		},
+		"items": [
+			{
+				"__TYPE__": "GroupItemContent",
+				"value": []
+			}
+		]
+	},
+	{
+		"__TYPE__": "SharedSliceContent",
+		"variation": "conditions",
+		"primary": {
+			"heading": {
+				"__TYPE__": "FieldContent",
+				"value": "part",
+				"type": "Text"
+			},
+			"lead": {
+				"__TYPE__": "FieldContent",
+				"value": "addition",
+				"type": "Text"
+			},
+			"footer_header": {
+				"__TYPE__": "FieldContent",
+				"value": "somehow",
+				"type": "Text"
+			},
+			"footer_body": {
+				"__TYPE__": "FieldContent",
+				"value": "subject",
+				"type": "Text"
+			},
+			"links": {
+				"__TYPE__": "RepeatableContent",
+				"type": "Link",
+				"value": [
+					{
+						"__TYPE__": "LinkContent",
+						"key": "9867e983-6530-4630-b8b0-dc0099ea66ef",
+						"value": {
+							"__TYPE__": "ExternalLink",
+							"url": "https://slicemachine.dev",
+							"text": "forgotten",
+							"variant": "Link"
+						}
+					}
+				]
 			}
 		},
 		"items": [

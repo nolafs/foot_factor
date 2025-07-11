@@ -290,6 +290,62 @@
         }
       },
       "items": {}
+    },
+    {
+      "id": "conditions",
+      "name": "Conditions",
+      "docURL": "...",
+      "version": "initial",
+      "description": "Default",
+      "imageUrl": "",
+      "primary": {
+        "heading": {
+          "type": "Text",
+          "config": {
+            "label": "Heading",
+            "placeholder": ""
+          }
+        },
+        "lead": {
+          "type": "Text",
+          "config": {
+            "label": "Lead",
+            "placeholder": ""
+          }
+        },
+        "footer_header": {
+          "type": "Text",
+          "config": {
+            "label": "Footer Header",
+            "placeholder": ""
+          }
+        },
+        "footer_body": {
+          "type": "Text",
+          "config": {
+            "label": "Footer body",
+            "placeholder": ""
+          }
+        },
+        "links": {
+          "type": "Link",
+          "config": {
+            "label": "Links",
+            "placeholder": "",
+            "select": null,
+            "allowTargetBlank": true,
+            "allowText": true,
+            "repeat": true,
+            "variants": [
+              "Primary",
+              "Secondary",
+              "Accent",
+              "Link"
+            ]
+          }
+        }
+      },
+      "items": {}
     }
   ]
 }

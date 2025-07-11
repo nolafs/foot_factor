@@ -7,7 +7,7 @@ import Slider from '@/components/features/slider/slider';
 import {SliderCard} from '@/components/features/slider/slider-card';
 
 interface SliderDynamicListProps {
-    contentType: 'orthotics' | 'guide' ;
+    contentType: 'orthotics' | 'guide' | 'condition';
     baseUrl?: string;
     tags?: string[];
     category?: string;
@@ -15,7 +15,7 @@ interface SliderDynamicListProps {
     size?: 'large' | 'default';
 }
 
-const getTypeByCategoryTags = async (contentType: 'orthotics' | 'guide'  ,category?: string, tags?: string[]): Promise<{
+const getTypeByCategoryTags = async (contentType: 'orthotics' | 'guide' | 'condition' ,category?: string, tags?: string[]): Promise<{
     results: AllDocumentTypes[];
 }> => {
     const client = createClient();

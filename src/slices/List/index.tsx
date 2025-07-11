@@ -11,6 +11,7 @@ import {buttonVariants} from '@/components/ui/button';
 import {ArrowRight, CircleArrowRight} from 'lucide-react';
 import ServiceCard from '@/components/features/service-card/service-card';
 import SliderDynamicList from '@/components/features/slider/slider-dynamic-list';
+import ButtonRow from '@/components/ui/button-row';
 
 /**
  * Props for `List`.
@@ -21,6 +22,38 @@ export type ListProps = SliceComponentProps<Content.ListSlice>;
  * Component for "List" Slices.
  */
 const List: FC<ListProps> = ({ slice }) => {
+
+  if (slice.variation === 'conditions') {
+    return (<Container as={'section'} padding={'lg'} fullWidth={true} color={'accent'} data-slice-type={slice.slice_type} data-slice-variation={slice.variation}>
+
+        <div className={'max-w-3xl mx-auto text-center'}>
+        <Heading as="h2" className={'mb-8 text-center'}>
+          {slice.primary.heading}
+        </Heading>
+
+        <Lead className={'mb-8 text-center'}>
+          {slice.primary.lead}
+        </Lead>
+        </div>
+
+      <div className={'w-full pt-5 md:pt-8 lg:pt-16 pb-16 md:pb-24 lg:pb-28'}>
+        <SliderDynamicList contentType={'condition'} size={'default'} baseUrl={'/conditions'}/>
+      </div>
+
+      <div className={'max-w-3xl mx-auto text-center'}>
+        <Heading as="h3" className={'mb-8 text-center text-4xl lg:text-5xl'}>
+          {slice.primary.footer_header}
+        </Heading>
+
+        <Lead className={'mb-8 text-center'}>
+          {slice.primary.footer_body}
+        </Lead>
+        <div className={'w-full flex justify-center'}>
+        <ButtonRow hasBooking={false} hasArrow={true} links={slice.primary.links} />
+        </div>
+      </div>
+    </Container>)
+  }
 
 
   if (slice.variation === 'guides') {
