@@ -3411,6 +3411,41 @@ export interface IconNavListSliceDefaultPrimaryItemsItem {
 }
 
 /**
+ * Item in *FeatureTickerList → Logo ticker → Primary → Items*
+ */
+export interface IconNavListSliceLogoTickerPrimaryItemsItem {
+  /**
+   * Icon field in *FeatureTickerList → Logo ticker → Primary → Items*
+   *
+   * - **Field Type**: Image
+   * - **Placeholder**: *None*
+   * - **API ID Path**: icon_nav_list.logoTicker.primary.items[].icon
+   * - **Documentation**: https://prismic.io/docs/fields/image
+   */
+  icon: prismic.ImageField<never>;
+
+  /**
+   * Label field in *FeatureTickerList → Logo ticker → Primary → Items*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: icon_nav_list.logoTicker.primary.items[].label
+   * - **Documentation**: https://prismic.io/docs/fields/text
+   */
+  label: prismic.KeyTextField;
+
+  /**
+   * Link field in *FeatureTickerList → Logo ticker → Primary → Items*
+   *
+   * - **Field Type**: Link
+   * - **Placeholder**: *None*
+   * - **API ID Path**: icon_nav_list.logoTicker.primary.items[].link
+   * - **Documentation**: https://prismic.io/docs/fields/link
+   */
+  link: prismic.LinkField<string, string, unknown, prismic.FieldState, never>;
+}
+
+/**
  * Primary content in *FeatureTickerList → Default → Primary*
  */
 export interface IconNavListSliceDefaultPrimary {
@@ -3439,9 +3474,47 @@ export type IconNavListSliceDefault = prismic.SharedSliceVariation<
 >;
 
 /**
+ * Primary content in *FeatureTickerList → Logo ticker → Primary*
+ */
+export interface IconNavListSliceLogoTickerPrimary {
+  /**
+   * Items field in *FeatureTickerList → Logo ticker → Primary*
+   *
+   * - **Field Type**: Group
+   * - **Placeholder**: *None*
+   * - **API ID Path**: icon_nav_list.logoTicker.primary.items[]
+   * - **Documentation**: https://prismic.io/docs/fields/repeatable-group
+   */
+  items: prismic.GroupField<Simplify<IconNavListSliceLogoTickerPrimaryItemsItem>>;
+
+  /**
+   * Color field in *FeatureTickerList → Logo ticker → Primary*
+   *
+   * - **Field Type**: Select
+   * - **Placeholder**: *None*
+   * - **API ID Path**: icon_nav_list.logoTicker.primary.color
+   * - **Documentation**: https://prismic.io/docs/fields/select
+   */
+  color: prismic.SelectField<'default' | 'Primary' | 'Secondary' | 'Accent'>;
+}
+
+/**
+ * Logo ticker variation for FeatureTickerList Slice
+ *
+ * - **API ID**: `logoTicker`
+ * - **Description**: Default horizontal icon navigation list.
+ * - **Documentation**: https://prismic.io/docs/slices
+ */
+export type IconNavListSliceLogoTicker = prismic.SharedSliceVariation<
+  'logoTicker',
+  Simplify<IconNavListSliceLogoTickerPrimary>,
+  never
+>;
+
+/**
  * Slice variation for *FeatureTickerList*
  */
-type IconNavListSliceVariation = IconNavListSliceDefault;
+type IconNavListSliceVariation = IconNavListSliceDefault | IconNavListSliceLogoTicker;
 
 /**
  * FeatureTickerList Shared Slice
@@ -5558,8 +5631,11 @@ declare module '@prismicio/client' {
       IconNavListSlice,
       IconNavListSliceDefaultPrimaryItemsItem,
       IconNavListSliceDefaultPrimary,
+      IconNavListSliceLogoTickerPrimaryItemsItem,
+      IconNavListSliceLogoTickerPrimary,
       IconNavListSliceVariation,
       IconNavListSliceDefault,
+      IconNavListSliceLogoTicker,
       ListSlice,
       ListSliceDefaultPrimary,
       ListSlicePricingTablePrimaryServicesItem,

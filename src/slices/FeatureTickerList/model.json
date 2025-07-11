@@ -42,6 +42,63 @@
         }
       },
       "items": {}
+    },
+    {
+      "id": "logoTicker",
+      "name": "Logo ticker",
+      "description": "Default horizontal icon navigation list.",
+      "version": "initial",
+      "imageUrl": "",
+      "docURL": "...",
+      "primary": {
+        "items": {
+          "type": "Group",
+          "config": {
+            "label": "Items",
+            "fields": {
+              "icon": {
+                "type": "Image",
+                "config": {
+                  "constraint": {
+                    "height": 331,
+                    "width": 331
+                  },
+                  "label": "Icon"
+                }
+              },
+              "label": {
+                "type": "Text",
+                "config": {
+                  "label": "Label"
+                }
+              },
+              "link": {
+                "type": "Link",
+                "config": {
+                  "label": "Link",
+                  "allowText": false,
+                  "repeat": false,
+                  "select": null
+                }
+              }
+            }
+          }
+        },
+        "color": {
+          "type": "Select",
+          "config": {
+            "label": "Color",
+            "placeholder": "",
+            "options": [
+              "default",
+              "Primary",
+              "Secondary",
+              "Accent"
+            ]
+          }
+        }
+      },
+      "items": {}
     }
   ]
 }

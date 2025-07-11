@@ -24,7 +24,8 @@ const List: FC<ListProps> = ({ slice }) => {
 
 
   if (slice.variation === 'guides') {
-    return ( <section data-slice-type={slice.slice_type} data-slice-variation={slice.variation}>
+    return ( <section data-slice-type={slice.slice_type} data-slice-variation={slice.variation}
+                      className={'py-16 md:py-24 lg:py-28'}>
       <Container as={'div'} color={'default'}>
         <Heading as="h2" className={'mb-8 text-center'}>
           {slice.primary.heading}
@@ -38,7 +39,7 @@ const List: FC<ListProps> = ({ slice }) => {
 
   if (slice.variation === 'orthotics') {
     return (
-        <section data-slice-type={slice.slice_type} data-slice-variation={slice.variation}>
+        <section data-slice-type={slice.slice_type} data-slice-variation={slice.variation} className={'py-16 md:py-24 lg:py-28'}>
           <Container as={'div'} color={'default'}>
             <Heading as="h2" className={'mb-8 text-center'}>
               {slice.primary.heading}
