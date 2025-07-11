@@ -59,7 +59,10 @@ export const Steps = ({data}: StepsProps) => {
       }
     });
 
-
+    // Force a refesh of ScrollTrigger to ensure it picks up the correct heights
+    setTimeout(() => {
+      ScrollTrigger.refresh();
+    }, 1000)
 
   }, {scope: contentRef, dependencies: [data]});
 
@@ -117,35 +120,87 @@ const Step = ({title, description, step_label, image, stepNum, onStepActive}: St
       }
     });
 
-    gsap.fromTo(cardRef.current, {
-      opacity: 0,
-      y: 50
-    }, {
-      opacity: 1,
-      y: 0,
-      duration: 1,
-      ease: 'power2.out',
+    const tl = gsap.timeline({
       scrollTrigger: {
         trigger: cardRef.current,
         start: 'top center',
-        end: '50% center',
+        end: 'bottom top',
         scrub: 0.3,
         toggleActions: 'play none none reverse',
         //markers: true
       }
     });
 
+    tl.fromTo('.content', {
+      opacity: 0,
+      y: '100%'
+    }, {
+      opacity: 1,
+      y: 0,
+      duration: 1,
+      ease: 'power2.out',
+    });
+
+    tl.to('.content', {
+      opacity: 1,
+      y: 0,
+      duration: 1,
+      ease: 'power2.out',
+    });
+
+    tl.to('.content',{
+      opacity: 0,
+      y: '-100%',
+      ease: 'power2.in',
+    })
+
+
+    const imgTl = gsap.timeline({
+      scrollTrigger: {
+        trigger: cardRef.current,
+        start: 'top center',
+        end: 'bottom top',
+        scrub: 0.3,
+        toggleActions: 'play none none reverse',
+        //markers: true
+      }
+    });
+
+    imgTl.fromTo('.image', {
+      opacity: 0,
+      x: '100%'
+    }, {
+      opacity: 1,
+      x: 0,
+      duration: 1,
+      ease: 'power2.out',
+    });
+
+    imgTl.to('.image', {
+      opacity: 1,
+      duration: 2,
+      y: 0,
+      ease: 'power2.out',
+    })
+
+    imgTl.to('.image',  {
+      opacity: 0,
+      duration: 2,
+      y: '-100%',
+      ease: 'power2.in',
+    })
+
   }, {scope: cardRef});
 
   return (
       <li ref={cardRef} className="w-full h-svh grid grid-cols-1 gap-20 py-20 md:py-10 md:grid-cols-2 gap-x-10 md:gap-x-48 justify-center items-center">
-        <div className={'flex flex-col'}>
+        <div className={'content flex flex-col'}>
           <sub className={'text-primary-500 font-semibold mb-3 text-2xl'}>
             <span>{step_label}</span> <span>{stepNum ?? stepNum < 10 ? '0' + stepNum : stepNum}</span>
           </sub>
          <SectionContent heading={title} body={description} className={'w-full'} />
         </div>
-        <div className="flex justify-center items-center">
+        <div className="image flex justify-center items-center">
         {image && (
           <div className="aspect-h-1 aspect-w-1 w-full h-full max-h-[700px] max-w-[700px]">
             <PrismicNextImage field={image}  className="w-full h-full object-cover rounded-4xl" />
