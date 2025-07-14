@@ -90,7 +90,7 @@ export async function POST() {
         };
       }),
       image: post.data.feature_image, // Post featured image
-      text: post.data?.excerpt?.slice(0, 5000) || post.data?.title || '' , // Post content transformed to search text
+      text: post.data?.excerpt?.slice(0, 5000) ?? post.data?.title ?? '' , // Post content transformed to search text
     }));
 
     // Index records to Algolia
