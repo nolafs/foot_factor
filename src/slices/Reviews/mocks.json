@@ -1,0 +1,19 @@
+[
+	{
+		"__TYPE__": "SharedSliceContent",
+		"variation": "default",
+		"primary": {
+			"heading": {
+				"__TYPE__": "FieldContent",
+				"value": "tight",
+				"type": "Text"
+			},
+			"embedded_code": {
+				"__TYPE__": "FieldContent",
+				"type": "Text",
+				"value": "<!-- Elfsight Google Reviews | Untitled Google Reviews --> <script src=\"https://static.elfsight.com/platform/platform.js\" async></script> <div class=\"elfsight-app-4ff619fb-512d-484d-b158-1e9e5676afaf\" data-elfsight-app-lazy></div>"
+			}
+		},
+		"items": []
+	}
+]

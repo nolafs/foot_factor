@@ -1,0 +1,33 @@
+{
+  "id": "reviews",
+  "type": "SharedSlice",
+  "name": "Reviews",
+  "description": "Reviews",
+  "variations": [
+    {
+      "id": "default",
+      "name": "Default",
+      "docURL": "...",
+      "version": "initial",
+      "description": "Default",
+      "imageUrl": "",
+      "primary": {
+        "heading": {
+          "type": "Text",
+          "config": {
+            "label": "Heading",
+            "placeholder": ""
+          }
+        },
+        "embedded_code": {
+          "type": "Text",
+          "config": {
+            "label": "Embedded Code",
+            "placeholder": ""
+          }
+        }
+      },
+      "items": {}
+    }
+  ]
+}

@@ -4274,6 +4274,54 @@ type MegamenuSliceVariation =
 export type MegamenuSlice = prismic.SharedSlice<'megamenu', MegamenuSliceVariation>;
 
 /**
+ * Primary content in *Reviews → Default → Primary*
+ */
+export interface ReviewsSliceDefaultPrimary {
+  /**
+   * Heading field in *Reviews → Default → Primary*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: reviews.default.primary.heading
+   * - **Documentation**: https://prismic.io/docs/fields/text
+   */
+  heading: prismic.KeyTextField;
+
+  /**
+   * Embedded Code field in *Reviews → Default → Primary*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: reviews.default.primary.embedded_code
+   * - **Documentation**: https://prismic.io/docs/fields/text
+   */
+  embedded_code: prismic.KeyTextField;
+}
+
+/**
+ * Default variation for Reviews Slice
+ *
+ * - **API ID**: `default`
+ * - **Description**: Default
+ * - **Documentation**: https://prismic.io/docs/slices
+ */
+export type ReviewsSliceDefault = prismic.SharedSliceVariation<'default', Simplify<ReviewsSliceDefaultPrimary>, never>;
+
+/**
+ * Slice variation for *Reviews*
+ */
+type ReviewsSliceVariation = ReviewsSliceDefault;
+
+/**
+ * Reviews Shared Slice
+ *
+ * - **API ID**: `reviews`
+ * - **Description**: Reviews
+ * - **Documentation**: https://prismic.io/docs/slices
+ */
+export type ReviewsSlice = prismic.SharedSlice<'reviews', ReviewsSliceVariation>;
+
+/**
  * Item in *Section → Content with Image column list → Primary → List*
  */
 export interface SectionSliceContentWithImageColumnListPrimaryListItem {
@@ -5742,6 +5790,10 @@ declare module '@prismicio/client' {
       MegamenuSliceMegaVideo,
       MegamenuSliceImageButtonRow,
       MegamenuSliceBlog,
+      ReviewsSlice,
+      ReviewsSliceDefaultPrimary,
+      ReviewsSliceVariation,
+      ReviewsSliceDefault,
       SectionSlice,
       SectionSliceDefaultPrimary,
       SectionSliceContentWithLeadButtonsPrimary,

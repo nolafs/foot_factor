@@ -11,6 +11,7 @@ export const components = {
   list: dynamic(() => import('./List')),
   media_section: dynamic(() => import('./MediaSection')),
   megamenu: dynamic(() => import('./Megamenu')),
+  reviews: dynamic(() => import('./Reviews')),
   section: dynamic(() => import('./Section')),
   team_carousel: dynamic(() => import('./TeamCarousel')),
   testimonial: dynamic(() => import('./Testimonial')),
