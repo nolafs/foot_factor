@@ -29,7 +29,7 @@ export async function POST() {
       objectID: post.id, // Unique identifier in algolia
       title: post.data.title, // Post title
       type: 'article', // Post type
-      slug: post.uid,
+      slug: `/resources/blog/${post.uid}`,
       featured: post.data.featured,
       author:
         (post.data.author && 'data' in post.data.author && (post.data.author.data as { name: string }).name) ||
@@ -54,18 +54,18 @@ export async function POST() {
     await algoliaClient.saveObjects({ indexName: 'blog', objects: articleRecords });
 
     //Conditions
-    /*
+
     // Get all articles from Prismic
-    const video = await client.getAllByType('video', {
-      fetchLinks: ['author.name', 'author.profile_image', 'post_category.name', 'post_tags', 'post_tags.name'],
+    const conditions = await client.getAllByType('condition', {
+      fetchLinks: ['author.name', 'author.profile_image', 'condition_category.name'],
     });
 
     // Map articles to Algolia records
-    const videoRecords = video.map(post => ({
+    const conditionRecords = conditions.map(post => ({
       objectID: post.id, // Unique identifier in algolia
-      title: post.data.name, // Post title
-      type: 'video', // Post type
-      slug: post.uid, // Post URL slug
+      title: post.data.title, // Post title
+      type: 'condition', // Post type
+      slug: `/conditions/${(post.data.category as { slug: string }).slug}/${post.uid}`, // Post URL slug
       featured: post.data.featured,
       author:
         (post.data.author &&
@@ -75,7 +75,7 @@ export async function POST() {
               name: string;
             }
           ).name) ||
-        'My Ankle',
+        'Foot Factor',
       category:
         post.data.category && 'data' in post.data.category && (post.data.category.data as { name: string }).name,
       tags: post.data.tags.map(item => {
@@ -89,55 +89,15 @@ export async function POST() {
           name,
         };
       }),
-      image: post.data.poster, // Post featured image
-      text: asText(post.data.description).slice(0, 5000), // Post content transformed to search text
-    }));
-
-    // Index records to Algolia
-    await algoliaClient.saveObjects({ indexName: 'blog', objects: videoRecords });
-
-    //downloads
-
-    // Get all articles from Prismic
-    const downloads = await client.getAllByType('download', {
-      fetchLinks: ['author.name', 'author.profile_image', 'post_category.name', 'post_tags', 'post_tags.name'],
-    });
-
-    // Map articles to Algolia records
-    const downloadRecords = downloads.map(post => ({
-      objectID: post.id, // Unique identifier in algolia
-      title: post.data.name, // Post title
-      type: 'download', // Post type
-      slug: post.uid, // Post URL slug
-      featured: post.data.featured,
-      author:
-        (post.data.author &&
-          'data' in post.data.author &&
-          (
-            post.data.author.data as {
-              name: string;
-            }
-          ).name) ||
-        'My Ankle',
-      category:
-        post.data.category && 'data' in post.data.category && (post.data.category.data as { name: string }).name,
-      tags: post.data.tags.map(item => {
-        const slug = item && 'tag' in item && (item.tag as { uid: string }).uid;
-        const name = item && 'tag' in item && (item.tag as { data: { name: string } }).data?.name;
-
-        return {
-          slug,
-          name,
-        };
-      }),
       image: post.data.feature_image, // Post featured image
-      text: asText(post.data.description).slice(0, 5000), // Post content transformed to search text
+      text: post.data?.excerpt?.slice(0, 5000) || post.data?.title || '' , // Post content transformed to search text
     }));
 
     // Index records to Algolia
-    await algoliaClient.saveObjects({ indexName: 'blog', objects: downloadRecords });
+    await algoliaClient.saveObjects({ indexName: 'conditions', objects: conditionRecords });
 
-     */
+
+
 
     // Return success response if the process completes without any issue
     return new Response('Content successfully synchronized with Algolia search', {
