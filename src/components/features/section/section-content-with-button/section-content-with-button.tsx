@@ -28,7 +28,7 @@ export const SectionContentWithButton = ({heading, body, subheading, links, hasB
               <PrismicRichText field={subheading}/>
             </div>
 
-            <div className={'lg:text-2xl text-primary-600'}>
+            <div className={'lg:text-2xl text-primary-600 mt-5'}>
               <PrismicRichText field={body}/>
             </div>
             <div className="flex flex-col gap-x-3 gap-y-4 sm:flex-row">

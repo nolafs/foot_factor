@@ -13,16 +13,18 @@
       "imageUrl": "",
       "primary": {
         "heading": {
-          "type": "Text",
+          "type": "StructuredText",
           "config": {
             "label": "Heading",
-            "placeholder": ""
+            "placeholder": "",
+            "allowTargetBlank": true,
+            "multi": "heading3,heading4,heading5,heading6,strong,em"
           }
         },
-        "embedded_code": {
+        "share_link": {
           "type": "Text",
           "config": {
-            "label": "Embedded Code",
+            "label": "Share Link",
             "placeholder": ""
           }
         }

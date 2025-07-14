@@ -4281,22 +4281,22 @@ export interface ReviewsSliceDefaultPrimary {
   /**
    * Heading field in *Reviews → Default → Primary*
    *
-   * - **Field Type**: Text
+   * - **Field Type**: Rich Text
    * - **Placeholder**: *None*
    * - **API ID Path**: reviews.default.primary.heading
-   * - **Documentation**: https://prismic.io/docs/fields/text
+   * - **Documentation**: https://prismic.io/docs/fields/rich-text
    */
-  heading: prismic.KeyTextField;
+  heading: prismic.RichTextField;
 
   /**
-   * Embedded Code field in *Reviews → Default → Primary*
+   * Share Link field in *Reviews → Default → Primary*
    *
    * - **Field Type**: Text
    * - **Placeholder**: *None*
-   * - **API ID Path**: reviews.default.primary.embedded_code
+   * - **API ID Path**: reviews.default.primary.share_link
    * - **Documentation**: https://prismic.io/docs/fields/text
    */
-  embedded_code: prismic.KeyTextField;
+  share_link: prismic.KeyTextField;
 }
 
 /**
