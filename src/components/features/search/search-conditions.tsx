@@ -26,14 +26,14 @@ export const SearchConditions = ({conditionCategories}: SearchConditionsProps) =
                   {!category.data.card_style || category.data.card_style === 'default' && (<>
                   <div className="absolute inset-0 rounded-lg bg-gradient-to-t from-primary-950/90 to-transparent max-lg:rounded-4xl lg:rounded-4xl overflow-hidden"/>
                   <div className={'absolute bottom-0 w-full p-7 md:p-10 lg:p-10 flex flex-col z-10'}>
-                  <h3 className={'text-white font-semibold text-3xl group-hover:text-accent transition-all ease-in-out '}>{category.data.name}</h3>
+                  <h3 className={'text-white font-semibold text-3xl md:text-4xl lg:text-5xl group-hover:text-accent transition-all ease-in-out '}>{category.data.name}</h3>
                     <p className={'text-primary-300 text-xl'}>{category.data.description}</p>
                   </div>
                   </> )}
 
                   {category.data.card_style && category.data.card_style === 'left' && (<>
                     <div className={'absolute bottom-0 w-full md:w-7/12 p-7 md:p-10 lg:p-10 flex flex-col z-10'}>
-                      <h3 className={'text-primary font-semibold text-3xl'}>{category.data.name}</h3>
+                      <h3 className={'text-primary font-semibold text-3xl md:text-4xl lg:text-5xl'}>{category.data.name}</h3>
                       <p className={'text-primary-700 text-xl'}>{category.data.description}</p>
                     </div>
                   </>)}
