@@ -13,7 +13,7 @@ interface SectionBodyProps {
 export const SectionBody = ({body, color, className}: SectionBodyProps) => {
 
   return (
-      <Body color={color} className={cn('w-full flex flex-col', className ?? 'lg:w-8/12')}>
+      <Body color={color} className={cn('w-full flex flex-col', className)}>
           <PrismicRichText field={body}/>
       </Body>
   )

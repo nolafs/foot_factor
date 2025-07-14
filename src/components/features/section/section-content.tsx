@@ -16,11 +16,11 @@ export const SectionContent = ({heading, body, color, className }: SectionConten
 
   return (<>
         {Array.isArray(heading) && isFilled.richText(heading) ? (
-            <div className={cn(className ?? 'w-full sm:w-full md:w-1/4 lg:w-5/12', 'mb-3')}>
+            <div className={cn(className , 'mb-3')}>
               <PrismicRichText field={heading}/>
             </div>
         ) : ( heading && (
-            <div className={cn(className ?? 'w-full sm:w-full md:w-1/4 lg:w-5/12', 'mb-3')}>
+            <div className={cn(className, 'mb-3')}>
               <Heading color={color} as={'h2'} className={cn('text-2xl md:text-3xl lg:text-4xl'
               )}>{heading}</Heading>
             </div>)

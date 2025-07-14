@@ -5,6 +5,8 @@ import {Container} from '@/components/ui/container';
 import {PrismicNextImage} from '@prismicio/next';
 import cn from 'clsx';
 import SectionContent from '@/components/features/section/section-content';
+import SectionColumns from '@/components/features/section/section-columns';
+import SectionBody from '@/components/features/section/section-body';
 
 
 interface SectionDefaultProps {
@@ -15,7 +17,7 @@ interface SectionDefaultProps {
   image?: ImageField;
   color?: SelectField;
   style?: 'framed' | 'full'
-  variation?: 'contentWithImageColumnList' | 'contentWithImageFull' | 'contentWithImageColumn' | 'contentNoImageColumn';
+  variation?:  'contentWithImageColumn' | 'contentNoImageColumn' | 'contentWithImageFull' | 'contentWithImageColumnList';
   slice_type?: string;
 }
 
@@ -24,7 +26,7 @@ export const SectionContentColumnWithImage = ({as = 'section',heading, body, ima
     return (
       <Tag data-slice-type={slice_type} data-slice-variation={variation} className={cn('w-full', color === 'default' && 'bg-background', color === 'Accent' && 'bg-accent-50' , color === 'Primary' && 'bg-primary')}>
         {image && isFilled.image(image) && style === 'full' && (
-              <div className={'w-full flex justify-center aspect-w-16 aspect-h-9 '}>
+              <div className={'w-full flex justify-center aspect-w-16 aspect-h-9'}>
                 <PrismicNextImage field={image}
                                   className={cn('w-full h-full object-center object-cover')}/>
               </div>
@@ -41,9 +43,11 @@ export const SectionContentColumnWithImage = ({as = 'section',heading, body, ima
                 )}
             </div>)
           }
-            <div className={'flex flex-col md:flex-row pt-16 md:pt-24 lg:py-32'}>
-                <SectionContent body={body} heading={heading} color={color?.toString()}/>
-            </div>
+          <div className={'mt-8 md:mt-16 lg:mt-20'}>
+          <SectionColumns heading={heading}  color={color?.toString()} classNames={''} >
+            {isFilled.richText(body) && <SectionBody body={body}  color={color?.toString()}/> }
+          </SectionColumns>
+          </div>
         </Container>
       </Tag>
   )
