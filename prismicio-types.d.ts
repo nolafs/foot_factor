@@ -475,6 +475,39 @@ interface ConditionCategoryDocumentData {
    * - **Documentation**: https://prismic.io/docs/fields/text
    */
   name: prismic.KeyTextField;
+
+  /**
+   * Description field in *Condition Category*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: condition_category.description
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/fields/text
+   */
+  description: prismic.KeyTextField;
+
+  /**
+   * Weight field in *Condition Category*
+   *
+   * - **Field Type**: Number
+   * - **Placeholder**: *None*
+   * - **API ID Path**: condition_category.weight
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/fields/number
+   */
+  weight: prismic.NumberField;
+
+  /**
+   * Card Style field in *Condition Category*
+   *
+   * - **Field Type**: Select
+   * - **Placeholder**: *None*
+   * - **API ID Path**: condition_category.card_style
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/fields/select
+   */
+  card_style: prismic.SelectField<'default' | 'center' | 'left'>;
 }
 
 /**

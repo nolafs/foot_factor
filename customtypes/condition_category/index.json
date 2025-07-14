@@ -26,6 +26,28 @@
           "label": "Name",
           "placeholder": ""
         }
+      },
+      "description": {
+        "type": "Text",
+        "config": {
+          "label": "Description",
+          "placeholder": ""
+        }
+      },
+      "weight": {
+        "type": "Number",
+        "config": {
+          "label": "Weight",
+          "placeholder": ""
+        }
+      },
+      "card_style": {
+        "type": "Select",
+        "config": {
+          "label": "Card Style",
+          "placeholder": "",
+          "options": ["default", "center", "left"]
+        }
       }
     }
   }

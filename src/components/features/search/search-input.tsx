@@ -100,20 +100,13 @@ export function SearchInput({ isSearchPage = true }: { isSearchPage: boolean }) 
                 }}
               />
             </div>
-            <Subheading
-              as="div"
-              className={cn('flex flex-wrap items-center justify-between gap-2', isSearchPage ? 'mt-16' : 'mt-5')}>
+            <div
+              className={cn('relative z-[9999] flex flex-wrap items-center justify-between gap-2', isSearchPage ? 'mt-16' : 'mt-5')}>
               <h3 className={'tracking-tight md:tracking-widest'}>Search Results</h3>
 
-              <div className={'relative z-20 flex flex-wrap gap-2'}>
+              <div className={' flex flex-wrap gap-2'}>
                 <FacetDropdown closeOnChange={closeOnChange} classNames={{ root: 'my-CategoryDropdown' }}>
                   <RefinementList attribute="category" searchable={true} searchablePlaceholder="Search..." />
-                </FacetDropdown>
-                <FacetDropdown
-                  closeOnChange={closeOnChange}
-                  buttonText={'Media Type'}
-                  classNames={{ root: 'my-TypeDropdown' }}>
-                  <RefinementList attribute="type" searchable={true} searchablePlaceholder="Search..." />
                 </FacetDropdown>
                 <FacetDropdown
                   closeOnChange={closeOnChange}
@@ -122,7 +115,7 @@ export function SearchInput({ isSearchPage = true }: { isSearchPage: boolean }) 
                   <RefinementList attribute="tags.name" searchable={true} searchablePlaceholder="Search..." />
                 </FacetDropdown>
               </div>
-            </Subheading>
+            </div>
             <hr className={cn('border-t border-gray-200', isSearchPage ? 'mt-6' : 'mt-6 opacity-0')} />
           </Container>
         </div>

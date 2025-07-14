@@ -20,10 +20,10 @@ export async function generateMetadata(
   const parentOpenGraph: ResolvedOpenGraph | null = parentMeta.openGraph ?? null;
 
   return {
-    title: 'My Ankle - Search',
+    title: 'Foot Factor - Search',
     description: 'Search for more information',
     openGraph: {
-      title: 'My Ankle - Search',
+      title: 'Foot Factor - Search',
       images: [
         {
           url: parentOpenGraph?.images ? (parentOpenGraph.images[0] as OGImage).url : '',
@@ -40,14 +40,14 @@ export default async function Page() {
       <Container className="mt-24 md:mt-36">
         <Subheading className="mt-16">Search</Subheading>
         <Heading as="h1" className="mt-2">
-          Search Ankle Health our Resources
+          Search Foot Factor
         </Heading>
         <Lead className="mt-6 max-w-3xl">
           Explore expert advice, treatment insights, and recovery tips through our curated articles, video and other
           resources. Stay informed and take charge of your ankle health journey.
         </Lead>
       </Container>
-      <div className="mb-24 mt-10 md:mb-24 md:mt-16">
+      <div className="mb-24 mt-5 md:mb-24 md:mt-10">
         <SearchInput isSearchPage={true} />
       </div>
     </main>

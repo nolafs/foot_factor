@@ -1,30 +1,16 @@
 import React from 'react';
 import Link from 'next/link';
-import { Download, FileDown, Film, Newspaper, SquareArrowOutUpRight } from 'lucide-react';
+import {Activity, Download, FileDown, Film, Newspaper, SquareArrowOutUpRight} from 'lucide-react';
 import { Highlight, Snippet } from 'react-instantsearch';
 import { type HitProps } from '@/types';
 import { Badge } from '@/components/ui/badge';
-import type { HitBaseItem } from '@/types/hit.type';
 import Image from 'next/image';
 import { useSearch } from '@/components/features/search/search-context';
-import { DownloadLink } from '@/components/ui/downloadLink';
+
 
 export const SearchHitItem = ({ hit }: HitProps) => {
   const { openSearchDialog, setSearchDialog } = useSearch();
   const imageUrl: string | null = hit.image?.url as string | null;
-
-  const getUrl = (item: HitBaseItem) => {
-    if (item.type === 'video') {
-      return '/videos/' + item.slug;
-    }
-    if (item.type === 'article') {
-      return '/blog/' + item.slug;
-    }
-    if (item.type === 'download') {
-      return '/downloads/' + item.slug;
-    }
-    return '';
-  };
 
   return (
     <div
@@ -35,9 +21,8 @@ export const SearchHitItem = ({ hit }: HitProps) => {
         {imageUrl ? (
           <div className={'relative w-full md:w-[200px]'}>
             <div className={'relative h-fit w-fit rounded-md bg-accent/60 p-2 md:absolute md:left-2 md:top-2'}>
-              {hit.type === 'video' && <Film className={'h-5 w-5 text-white'} />}
+              {hit.type === 'condition' && <Activity className={'h-5 w-5 text-white'} /> }
               {hit.type === 'article' && <Newspaper className={'h-5 w-5 text-white'} />}
-              {hit.type === 'download' && <FileDown className={'h-5 w-5 text-white'} />}
             </div>
 
             <Image
@@ -50,9 +35,8 @@ export const SearchHitItem = ({ hit }: HitProps) => {
           </div>
         ) : (
           <div className={'h-fit w-fit rounded-md bg-accent/60 p-2 md:p-3'}>
-            {hit.type === 'video' && <Film className={'h-5 w-5 text-white sm:h-5 sm:w-5 md:h-7 md:w-7'} />}
+            {hit.type === 'condition' && <Activity className={'h-5 w-5 text-white sm:h-5 sm:w-5 md:h-7 md:w-7'} />}
             {hit.type === 'article' && <Newspaper className={'h-5 w-5 text-white md:h-7 md:w-7'} />}
-            {hit.type === 'download' && <FileDown className={'h-5 w-5 text-white md:h-7 md:w-7'} />}
           </div>
         )}
       </div>
@@ -73,20 +57,14 @@ export const SearchHitItem = ({ hit }: HitProps) => {
         </div>
       </div>
       <div>
-        {hit.type !== 'download' ? (
-          <Link
-            href={getUrl(hit)}
+        <Link
+            href={hit.slug ?? ''}
             className={''}
-            onClick={() => hit.type !== 'download' && setSearchDialog(false)}
-            legacyBehavior>
-            <span className="absolute inset-0" />
-            <SquareArrowOutUpRight className={'h-5 w-5 text-black group-hover:text-pink-600'} />
-          </Link>
-        ) : (
-          <DownloadLink href={getUrl(hit)}>
-            <Download className={'h-5 w-5 text-black group-hover:text-pink-600'} />
-          </DownloadLink>
-        )}
+            onClick={() => setSearchDialog(false)}
+            >
+          <span className="absolute inset-0"/>
+          <SquareArrowOutUpRight className={'h-5 w-5 text-black group-hover:text-pink-600'}/>
+        </Link>
       </div>
     </div>
   );

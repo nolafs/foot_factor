@@ -9,6 +9,7 @@ import React from 'react';
 import HeroSimple from '@/components/features/hero/hero-simple';
 import {Container} from '@/components/ui/container';
 import Link from 'next/link';
+import SearchConditions from '@/components/features/search/search-conditions';
 
 type Params = { uid: string };
 
@@ -52,7 +53,12 @@ export default async function Page() {
   const client = createClient();
   const page = await client.getSingle('conditions', ).catch(() => notFound());
   const conditions = await client.getAllByType('condition').catch(() => notFound());
-  const conditionCategories = await client.getAllByType('condition_category').catch(() => notFound());
+  const conditionCategories = await client.getAllByType('condition_category', {
+    orderings: {
+      field: 'my.condition_category.weight',
+      direction: 'asc',
+    },
+  }).catch(() => notFound());
 
 
   console.log('conditions', conditions)
@@ -61,29 +67,9 @@ export default async function Page() {
     <main className={'w-full overflow-hidden'}>
       <HeroSimple wave_type={'2'} heading={page.data.title} subheading={page.data.lead}  />
 
-      <Container as={'section'}>
-      <ul>
-        {conditionCategories.map((category) => (
-          <li key={category.id} className={'mb-8'}>
-            <h2 className={'text-2xl font-bold mb-4'}>{category.data.name}</h2>
-            <ul className={'list-disc pl-5'}>
-              {conditions
-                .filter(condition => (condition.data.category as {id: string})?.id === category.id)
-                .map(condition => (
-                  <li key={condition.id}>
-                    <Link href={`/conditions/${(condition.data.category as {slug: string}).slug}/${condition.uid}`} className={'text-blue-600 hover:underline'}>
-                      {condition.data.title}
-                    </Link>
-                  </li>
-                ))}
-            </ul>
-          </li>
-        ))}
-      </ul>
-      </Container>
+      <SearchConditions conditionCategories={conditionCategories} />
 
-
-        <SliceZone slices={page.data.slices} components={components} />
+      <SliceZone slices={page.data.slices} components={components} />
     </main>
   );
 }

@@ -128,7 +128,7 @@ export function FacetDropdown({ children, buttonText, closeOnChange, classNames 
     <Panel
       header={header}
       footer={footer}
-      className={cn('ais-Dropdown', isOpened && 'ais-Dropdown--opened', classNames.root)}
+      className={cn('ais-Dropdown', isOpened && 'ais-Dropdown--opened z-20', classNames.root)}
       ref={panelRef}>
       <DropdownMiddleware isOpened={isOpened} closeOnChange={closeOnChange} close={close} />
       <h2 className={cn('ais-Dropdown-mobileTitle', classNames.mobileTitle)}>{text}</h2>

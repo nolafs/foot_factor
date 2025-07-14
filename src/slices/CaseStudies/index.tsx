@@ -95,20 +95,20 @@ const CaseStudies: FC<CaseStudiesProps> = ({slice}) => {
                         />
                         <div
                             className="absolute inset-0 rounded-lg bg-gradient-to-t from-primary-950/90 to-transparent max-lg:rounded-4xl lg:rounded-4xl overflow-hidden"/>
-                        <div className={'absolute bottom-0 w-full p-7 md:p-10 lg:p-10 flex flex-col z-10'}>
-                          <div className={'text-white text-3xl'}>{caseStudy.data.client_name}</div>
-                          <div className={'text-primary-300 text-2xl'}>
-                            {caseStudy.data.activity}{' '}
-                            {caseStudy.data?.client_age && <span>({caseStudy.data.client_age})</span>}
+                          <div className={'absolute bottom-0 w-full p-7 md:p-10 lg:p-10 flex flex-col z-10'}>
+                            <div className={'text-white text-3xl'}>{caseStudy.data.client_name}</div>
+                            <div className={'text-primary-300 text-2xl'}>
+                              {caseStudy.data.activity}{' '}
+                              {caseStudy.data?.client_age && <span>({caseStudy.data.client_age})</span>}
+                            </div>
+                            <div className={'text-white text-xl'}>{caseStudy.data.condition.data?.title}</div>
+                           <div className={'flex justify-end'}>
+                                  <Link href={'/resources/case-studies/' + caseStudy.uid}
+                                        className={cn(buttonVariants({variant: 'default', size: 'icon'}))}>
+                                    <ArrowRight className={'h-4 w-4'} strokeWidth={4}/>
+                                  </Link>
+                                </div>
                           </div>
-                          <div className={'text-white text-xl'}>{caseStudy.data.condition.data?.title}</div>
-                         <div className={'flex justify-end'}>
-                                <Link href={'/resources/case-studies/' + caseStudy.uid}
-                                      className={cn(buttonVariants({variant: 'default', size: 'icon'}))}>
-                                  <ArrowRight className={'h-4 w-4'} strokeWidth={4}/>
-                                </Link>
-                              </div>
-                        </div>
                       </div>
                     </BentoCard>
                 ))
