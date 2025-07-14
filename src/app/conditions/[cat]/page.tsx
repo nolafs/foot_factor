@@ -10,7 +10,7 @@ import HeroSimple from '@/components/features/hero/hero-simple';
 import {Container} from '@/components/ui/container';
 import Link from 'next/link';
 
-type Params = { uid: string };
+type Params = { cat: string };
 
 export async function generateMetadata(
   { params }: { params: Promise<Params> },
@@ -48,14 +48,14 @@ export async function generateMetadata(
   };
 }
 
-export default async function Page() {
+export default async function Page({params}: { params: Promise<Params> }) {
+  const { cat } = await params;
   const client = createClient();
   const page = await client.getSingle('conditions', ).catch(() => notFound());
   const conditions = await client.getAllByType('condition').catch(() => notFound());
   const conditionCategories = await client.getAllByType('condition_category').catch(() => notFound());
 
 
-  console.log('conditions', conditions)
 
   return (
     <main className={'w-full overflow-hidden'}>
@@ -71,7 +71,7 @@ export default async function Page() {
                 .filter(condition => (condition.data.category as {id: string})?.id === category.id)
                 .map(condition => (
                   <li key={condition.id}>
-                    <Link href={`/conditions/${(condition.data.category as {slug: string}).slug}/${condition.uid}`} className={'text-blue-600 hover:underline'}>
+                    <Link href={`/conditions/${(condition.data.category as { id: string}).id}/${condition.uid}`} className={'text-blue-600 hover:underline'}>
                       {condition.data.title}
                     </Link>
                   </li>

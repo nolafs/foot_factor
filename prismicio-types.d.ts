@@ -368,7 +368,7 @@ interface ConditionDocumentData {
    * - **Tab**: Main
    * - **Documentation**: https://prismic.io/docs/fields/content-relationship
    */
-  category: ContentRelationshipFieldWithData<[{ id: 'condition_category'; fields: ['name'] }]>;
+  category: ContentRelationshipFieldWithData<[{ id: 'condition_category'; fields: ['name', 'image'] }]>;
 
   /**
    * Excerpt field in *Condition*
@@ -492,7 +492,7 @@ export type ConditionCategoryDocument<Lang extends string = string> = prismic.Pr
   Lang
 >;
 
-type ConditionsDocumentDataSlicesSlice = ListSlice | CallToActionSlice | FaqsSlice;
+type ConditionsDocumentDataSlicesSlice = ReviewsSlice | ListSlice | CallToActionSlice | FaqsSlice;
 
 /**
  * Item in *Conditions → Social Cards*

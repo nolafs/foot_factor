@@ -19,7 +19,7 @@ export const ReviewSliderElfsight = ({share_link}: ReviewSliderElfsightProps) =>
                       style={{border: 'none', width: '100%'}}
                       ref={(el) => {
                           if (el && typeof window !== 'undefined' && 'iFrameResize' in window) {
-                              // @ts-ignore
+                            //@ts-expect-error: iframeResizer is a global function provided by the script
                               iFrameResize({}, el);
                           }
                       }}

@@ -10,7 +10,6 @@
         "type": "UID",
         "config": {
           "label": "UID"
-
         }
       },
       "feature_image": {
@@ -61,7 +60,7 @@
           "customtypes": [
             {
               "id": "condition_category",
-              "fields": ["name"]
+              "fields": ["name", "image"]
             }
           ]
         }

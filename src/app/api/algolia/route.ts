@@ -1,7 +1,7 @@
 import * as prismic from '@prismicio/client';
 import { algoliasearch } from 'algoliasearch';
 import config from '../../../../slicemachine.config.json';
-import { type PostsDocument } from '../../../../prismicio-types';
+import { type PostsDocument } from '@/prismic-types';
 import {asText} from '@prismicio/client';
 
 const repositoryName = process.env.NEXT_PUBLIC_PRISMIC_ENVIRONMENT ?? config.repositoryName;
@@ -53,7 +53,7 @@ export async function POST() {
     // Index records to Algolia
     await algoliaClient.saveObjects({ indexName: 'blog', objects: articleRecords });
 
-    //Videos
+    //Conditions
     /*
     // Get all articles from Prismic
     const video = await client.getAllByType('video', {

@@ -43,7 +43,7 @@ export const SectionContentColumnWithImage = ({as = 'section',heading, body, ima
                 )}
             </div>)
           }
-          <div className={'mt-8 md:mt-16 lg:mt-20'}>
+          <div className={style === 'full' ? 'my-8 md:my-16 lg:my-20' : isFilled.image(image) ? 'mt-8 md:mt-16 lg:mt-20' : 'mt-0'}>
           <SectionColumns heading={heading}  color={color?.toString()} classNames={''} >
             {isFilled.richText(body) && <SectionBody body={body}  color={color?.toString()}/> }
           </SectionColumns>
