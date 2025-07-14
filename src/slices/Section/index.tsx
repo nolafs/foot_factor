@@ -175,7 +175,6 @@ const Section: FC<SectionProps> = ({ slice }) => {
         <SectionDefault
             heading={slice.primary.heading}
             body={slice.primary.body}
-            animated={slice.primary.animated}
             variation={slice.variation}
             slice_type={slice.slice_type}
         />

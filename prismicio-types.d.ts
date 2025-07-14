@@ -2038,6 +2038,7 @@ export type PostsDocument<Lang extends string = string> = prismic.PrismicDocumen
 >;
 
 type ServicesDocumentDataSlicesSlice =
+  | ReviewsSlice
   | CaseStudiesSlice
   | IconNavListSlice
   | MediaSectionSlice
