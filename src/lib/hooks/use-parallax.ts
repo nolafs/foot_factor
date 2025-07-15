@@ -23,7 +23,7 @@ const useParallax = (speed = 0.5, smooth = true, scale: number | null  = null) =
 
   // Auto-calculate scale based on parallax speed if not provided
   const autoScale = 1 + (Math.abs(speed) * 0.2);
-  const finalScale = scale || autoScale;
+  const finalScale = scale ?? autoScale;
 
   return {
     ref,

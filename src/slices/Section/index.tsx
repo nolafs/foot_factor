@@ -33,7 +33,7 @@ const Section: FC<SectionProps> = ({ slice }) => {
     return (
         <Container as={'section'} data-slice-type={slice.slice_type} data-slice-variation={slice.variation} padding={'lg'}
                    color={slice.primary.color?.toString()}>
-          <div className={cn('flex flex-col items-center justify-between gap-8 md:gap-16', slice.primary.image_position === 'Left' && 'md:flex-row ', slice.primary.image_position === 'Right' && 'md:flex-row-reverse') }>
+          <div className={cn('flex flex-col items-center justify-between gap-8 md:gap-16 lg:gap-52', slice.primary.image_position === 'Left' && 'md:flex-row ', slice.primary.image_position === 'Right' && 'md:flex-row-reverse') }>
             <div className={'w-full md:w-1/2 flex justify-center'}>
               {slice.primary.image && (
                   <div className={'w-full aspect-w-1 aspect-h-1 rounded-4xl overflow-hidden'}>
@@ -42,7 +42,7 @@ const Section: FC<SectionProps> = ({ slice }) => {
               )}
             </div>
             <div className={'w-full md:w-1/2 flex justify-center'}>
-              <div className={'w-full flex flex-col justify-center'}>
+              <div className={'w-full flex flex-col'}>
               <SectionContent
                   heading={slice.primary.heading}
                   body={slice.primary.body}
