@@ -62,7 +62,7 @@ export const Slider = ({children, data, size}: SliderProps) => {
           <div
               ref={scrollRef}
               className={cn([
-                  'flex items-stretch',
+                  'flex items-stretch pb-10',
                   '[scrollbar-width:none] [&::-webkit-scrollbar]:hidden',
                   'snap-x snap-mandatory overflow-y-visible  overflow-x-auto overscroll-x-contain scroll-smooth',
               ])}>
