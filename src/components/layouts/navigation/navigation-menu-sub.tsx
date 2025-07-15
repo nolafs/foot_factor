@@ -73,7 +73,7 @@ export default function NavigationMenuSub({ navigation, settings }: NavigationSu
                    }}
     >
       <div className={'mx-auto flex justify-center w-full max-w-[1792px] px-0 md:px-5'}>
-      <div className="relative w-full bg-white md:rounded-lg  border border-gray-200 border-opacity-40 px-6 py-4">
+        <div className="relative w-full bg-white md:rounded-lg  border border-gray-200 border-opacity-40 px-3 py-2 sm:px-6 sm:py-4 ">
         <div className="flex w-full items-center justify-between">
 
           <div className="flex grow-0 lg:hidden">
@@ -83,7 +83,14 @@ export default function NavigationMenuSub({ navigation, settings }: NavigationSu
                 <PrismicImage
                     field={settings.logo}
                     className={cn(
-                        'inline w-full !max-w-[250px] origin-left',
+                        'hidden sm:inline w-full !max-w-[250px] origin-left',
+                    )}
+
+                />
+                <PrismicImage
+                    field={settings.logo_alt}
+                    className={cn(
+                        'inline sm:hidden w-full !max-h-[40px] origin-left',
                     )}
 
                 />
@@ -92,10 +99,10 @@ export default function NavigationMenuSub({ navigation, settings }: NavigationSu
           </div>
 
           <div className="flex justify-end shrink  lg:hidden">
-          <div className="flex items-center gap-x-2">
-            <MakeBookingDialog />
-            <NavigationMobileMenu navigation={navigation} logo={settings.footer_logo} siteName={settings.site_name} />
-          </div>
+            <div className="flex items-center gap-x-1">
+              <MakeBookingDialog />
+              <NavigationMobileMenu navigation={navigation} logo={settings.footer_logo} siteName={settings.site_name} />
+            </div>
           </div>
 
 

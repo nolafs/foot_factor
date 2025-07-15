@@ -5,7 +5,7 @@ import {
   type NavigationBarDocumentData,
   type NavigationBarDocumentDataNavigationItemsItem,
   type NavigationElementDocument, type NavigationMegaMenuItemDocument,
-} from '../../../../prismicio-types';
+} from '@/prismic-types';
 import { ChevronDownIcon } from '@heroicons/react/20/solid';
 import {PrismicNextImage, PrismicNextLink} from '@prismicio/next';
 import React, {type ReactNode, useEffect, useState} from 'react';
@@ -15,10 +15,6 @@ import { SearchButton } from '@/components/features/search/search-button';
 import {type ImageField, type KeyTextField, type LinkField} from '@prismicio/client';
 import {usePathname} from "next/navigation";
 import cn from 'clsx';
-
-import ButtonSliceVariation from '@/components/ui/button-slice-variation';
-import MakeBookingDialog from '@/components/features/make-booking/make-booking-dialog';
-
 
 interface NavigationSubProps {
   navigation: NavigationBarDocumentData;
@@ -79,7 +75,7 @@ export const NavigationMobileMenu = ({ logo, navigation, siteName}: NavigationSu
         <SheetContent side="right" className="w-[90%] overflow-y-auto text-white bg-blue-950 px-0 py-6 shadow-none border-none">
           <SheetTitle>
             <div className="flex items-center justify-between px-5">
-              <Link href="/public" legacyBehavior>
+              <Link href="/" >
                 <span className="sr-only">{siteName}</span>
                 <PrismicNextImage field={logo} className="inline w-3/4"   />
               </Link>

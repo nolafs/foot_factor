@@ -65,11 +65,13 @@ export  function Hero({ heading, subheading, lead,  links, image, hasBooking, ra
           </>
 
         <motion.div
-            className="absolute bottom-0 w-full z-20"
+            className="absolute top-0 sm:bottom-0 sm:top-auto w-full z-20"
             style={{y: textY}}
         >
-        <Container className="relative z-20 flex flex-col justify-end h-full">
-          <div className="pb-10 pt-32 sm:pb-16 sm:pt-32 md:pb-32 md:pt-64 w-full sm:w-full lg:max-w-3xl">
+        <Container className="relative z-20 flex flex-col justify-end h-svh">
+          <div className="flex flex-col  justify-stretch pb-5 pt-20 sm:pb-16 sm:pt-32 md:pb-32 md:pt-64 w-full h-svh sm:w-full lg:max-w-3xl">
+            <div className={'grow flex flex-col justify-center'}>
+             <div>
             { subheading &&  <Badge >{subheading}</Badge>}
             <header
                 className={cn(
@@ -92,12 +94,16 @@ export  function Hero({ heading, subheading, lead,  links, image, hasBooking, ra
               )}
             </div>
             <ButtonRow hasBooking={hasBooking} links={links}/>
-            {rating && (<div className={'mt-48'}><PrismicNextImage field={rating} /></div>)}
+             </div>
+            </div>
+            <div className={'shrink'}>
+            {rating && (<div><PrismicNextImage field={rating} /></div>)}
             {children && (
                 <div className={'absolute bottom-10 left-0 right-0 z-20 flex'}>
                   {children}
                 </div>
             )}
+            </div>
           </div>
         </Container>
         </motion.div>
