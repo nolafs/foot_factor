@@ -124,14 +124,14 @@ const CaseStudies: FC<CaseStudiesProps> = ({slice}) => {
   if (slice.variation === 'default') {
 
     return (
-        <section data-slice-type={slice.slice_type} data-slice-variation={slice.variation}>
-          <Container className={'pt-16 md:pt-24 lg:pt-28 max-w-3xl mx-auto'}>
-            <Heading as={'h2'} className={'text-center content-master'}>
+        <Container as={'section'} padding={'lg'} fullWidth={true} data-slice-type={slice.slice_type} data-slice-variation={slice.variation}>
+          <Container  className={'max-w-3xl mx-auto'}>
+            <Heading as={'h2'} size={'xl'} className={'text-center content-master'}>
               <PrismicRichText field={slice.primary.heading}/>
             </Heading>
           </Container>
 
-          <div className={'w-full pt-5 md:pt-8 lg:pt-16 pb-16 md:pb-24 lg:pb-28'}>
+          <div className={'w-full'}>
             <Slider data={controlsData} size={'large'}>
               {caseStudies && caseStudies.length > 0 ? (
                   caseStudies.map((caseStudy: any, idx: number) => (
@@ -155,7 +155,7 @@ const CaseStudies: FC<CaseStudiesProps> = ({slice}) => {
               )}
             </Slider>
           </div>
-        </section>
+        </Container>
     );
   }
 

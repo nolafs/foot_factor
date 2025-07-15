@@ -56,20 +56,15 @@ export const Slider = ({children, data, size}: SliderProps) => {
       }
     }, [data]);
 
-    const sizeClasses = size === 'large'
-        ? 'gap-10'
-        : 'gap-5';
-
 
     return (
       <div ref={setReferenceWindowRef} className={cn('relative' )}>
           <div
               ref={scrollRef}
               className={cn([
-                  'flex py-7',
-                  sizeClasses,
+                  'flex items-stretch',
                   '[scrollbar-width:none] [&::-webkit-scrollbar]:hidden',
-                  'snap-x snap-mandatory overflow-x-auto overscroll-x-contain scroll-smooth',
+                  'snap-x snap-mandatory overflow-y-visible  overflow-x-auto overscroll-x-contain scroll-smooth',
               ])}>
               {children}
           </div>

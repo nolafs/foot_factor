@@ -49,7 +49,7 @@ export const BlogArticle = ({size = 2, tags}: {size: number, tags?: string[]} ) 
   return (
 
           resentPosts.length && (
-                  <div className={`mt-2 grid grid-cols-1 grid-cols-${size} gap-3 px-2`}>
+                  <div className={`mt-2 grid grid-cols-1 md:grid-cols-${size} gap-3 px-2`}>
                       {resentPosts.map(post => (
                           <PostFeatureCard key={post.uid} post={post} showExcerpt={false} showAuthor={false} />
                       ))}

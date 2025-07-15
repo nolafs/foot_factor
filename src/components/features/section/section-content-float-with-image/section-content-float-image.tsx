@@ -25,13 +25,10 @@ interface SectionDefaultProps {
 export const SectionContentImageFloatText = ({as = 'section',heading, body, float = 'left', image, links, hasBooking, bookingLabel, variation, slice_type}: SectionDefaultProps) => {
   const Tag = as; //
     return (
-      <Tag data-slice-type={slice_type} data-slice-variation={variation} className={cn('relative w-full h-full max-h-svh isolated overflow-hidden')}>
+      <Container as={'section'} fullWidth={true} data-slice-type={slice_type} data-slice-variation={variation} className={cn('relative w-full h-full md:max-h-svh isolated overflow-hidden')}>
 
-            <div className={'w-full h-full flex justify-center'}>
-              <PrismicNextImage field={image}
-                                className={cn('w-full h-full object-center object-cover')}/>
-            </div>
-        <div className={'absolute z-10 top-0 left-0 w-full'}>
+
+        <div className={'relative mb-10 md:mb-0 md:absolute z-10 top-0 left-0 w-full'}>
           <Container>
             <div className={cn('flex flex-col gap-5 md:gap-8 lg:gap-10', float === 'left' ? 'md:flex-row' : 'md:flex-row-reverse')}>
               <div className={cn('flex flex-col w-full md:w-6/12 lg:w-6/12 xl:w-5/12  pt-16 md:pt-24 lg:py-32')}>
@@ -41,7 +38,7 @@ export const SectionContentImageFloatText = ({as = 'section',heading, body, floa
                     </Heading>
                 )}
                 {isFilled.richText(body) && (
-                    <Body className={'mt-4'}>
+                    <Body>
                       <PrismicRichText field={body}/>
                     </Body>
                 )}
@@ -53,7 +50,11 @@ export const SectionContentImageFloatText = ({as = 'section',heading, body, floa
             </div>
           </Container>
         </div>
-      </Tag>
+        <div className={'w-full h-full flex justify-center'}>
+          <PrismicNextImage field={image}
+                            className={cn('w-full h-full object-center object-cover')}/>
+        </div>
+      </Container>
   )
 }
 

@@ -86,11 +86,11 @@ export const ServiceCard = ({service}: ServiceCardProps) => {
         </div>
 
         <div
-            className={'py-8 w-full mt-5 border-y border-primary-400 text-secondary text-sm sm:text-base md:text-lg lg:text-xl font-medium leading-loose'}>
+            className={'py-4 sm:py-5 md:py-6 lg:py-8 w-full mt-5 border-y border-primary-400 text-secondary text-sm sm:text-base md:text-lg lg:text-xl font-medium leading-normal lg:leading-relaxed'}>
           {serviceData?.price_lead}
         </div>
         <div
-            className={'prose py-5 flex-1 w-full text-secondary text-sm sm:text-base md:text-lg lg:text-xl font-medium leading-loose'}>
+            className={'prose py-5 flex-1 w-full text-secondary text-sm sm:text-base md:text-lg lg:text-xl font-medium leading-normal lg:leading-relaxed'}>
           <PrismicRichText field={serviceData?.price_features}/>
         </div>
         <div className={'w-full flex justify-center mt-5'}>
