@@ -1,7 +1,7 @@
 'use client';
 import dynamic from 'next/dynamic';
 import Notification from '@/components/ui/notification';
-import {type EmbedField, isFilled} from '@prismicio/client';
+import {type EmbedField} from '@prismicio/client';
 
 
 export interface ContentVideoProps {

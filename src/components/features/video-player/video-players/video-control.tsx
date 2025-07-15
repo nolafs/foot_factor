@@ -30,7 +30,7 @@ export function VideoControl({ poster, handlePlayAction, width, height, title, l
     <button onClick={play} className={cn(showPlayer ? 'hidden' : 'block')} aria-label={`Play ${title}`}>
       <div className={'sr-only'}>Play {title}</div>
       <div className={'fill-secondary absolute z-20 left-0 top-0 flex h-full w-full flex-col items-center justify-center'}>
-        <div className={'flex h-16 w-16 items-center justify-center rounded-full'}>
+        <div className={'flex h-24 w-24 md:h-32 md:w-32 items-center justify-center rounded-full'}>
           <svg width="179" height="178" viewBox="0 0 179 178" fill="none" xmlns="http://www.w3.org/2000/svg">
             <g filter="url(#filter0_dd_8928_4595)">
               <circle cx="89.5" cy="85" r="64" fill="white"/>
