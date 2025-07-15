@@ -18,7 +18,7 @@ export const SectionColumns = ({
                                    color,
                                    contentRef,
                                    columnSize,
-                                   classNames = 'content-master text-animation font-medium font-heading text-3xl sm:text-4xl md:text-5xl leading-snug  md:leading-normal lg:text-6xl lg:leading-[72px]',
+                                   classNames = 'content-master text-animation font-medium font-heading text-3xl sm:text-4xl lg:text-5xl leading-snug  lg:leading-normal lg:text-6xl lg:leading-[72px]',
                                    children}: SectionColumnsProps) => {
 
   const colSize = {

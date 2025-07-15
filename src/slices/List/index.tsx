@@ -97,16 +97,16 @@ const List: FC<ListProps> = ({ slice }) => {
         </Container>
         <Container>
           {slice.primary.items.length > 0 && (
-              <div className="mt-10 grid grid-cols-1 gap-6 sm:mt-16 lg:grid-cols-6  grid-flow-row"
+              <div className="mt-10 grid grid-cols-1 gap-6 sm:mt-16 md:grid-cols-6  grid-flow-row"
                    style={{gridAutoRows: 'min-content'}}>
                 {slice.primary.items.map((item, idx) => (
                 <div key={'bento-'+idx} className={cn("relative",
-                    item.columns === '1' && 'lg:col-span-1',
-                    item.columns === '2' && 'lg:col-span-2',
-                    item.columns === '3' && 'lg:col-span-3',
-                    item.columns === '4' && 'lg:col-span-4',
-                    item.columns === '5' && 'lg:col-span-5',
-                    item.columns === '6' && 'lg:col-span-6')}>
+                    item.columns === '1' && 'col-span-6 lg:col-span-1',
+                    item.columns === '2' && 'md:col-span-3 lg:col-span-2',
+                    item.columns === '3' && 'md:col-span-3 lg:col-span-3',
+                    item.columns === '4' && 'md:col-span-3 lg:col-span-4',
+                    item.columns === '5' && 'md:col-span-3 lg:col-span-5',
+                    item.columns === '6' && 'md:col-span-6 lg:col-span-6')}>
 
                   <div className={cn("relative flex  flex-col overflow-hidden max-lg:rounded-4xl lg:rounded-4xl",
                       item.card_height !== 'large' && 'md:h-[45vh] md:min-h-[520px] md:max-h-[650px]',

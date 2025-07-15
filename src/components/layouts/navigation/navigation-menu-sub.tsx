@@ -63,7 +63,7 @@ export default function NavigationMenuSub({ navigation, settings }: NavigationSu
 
   return (
     <motion.header id={'navbar'}
-                   className="fixed top-0 z-40 w-screen lg:mt-10"
+                   className="fixed top-0 z-40 w-screen md:mt-5 lg:mt-10"
                    animate={hidden ? "hidden" : "visible"}
                    variants={parentVariants}
                    transition={{
