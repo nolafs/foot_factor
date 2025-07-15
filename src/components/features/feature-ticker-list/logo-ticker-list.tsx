@@ -106,9 +106,9 @@ const LogoTickerListItem = ({item}: { item: IconNavListSliceLogoTickerPrimaryIte
   console.log('LogoTickerListItem', item, isFilled.link(item.link));
 
 
-  return (isFilled.link(item.link) ? <PrismicNextLink field={item.link} className={'flex justify-center min-w-[331]'} >
-        <PrismicNextImage field={item.icon} width={331} height={331} className={'w-full h-auto'} />
-      </PrismicNextLink> : <div><PrismicNextImage field={item.icon} width={331} height={331} /></div>
+  return (<div className={'flex justify-center min-w-[331px] min-h-[331px]'}> {isFilled.link(item.link) ? <PrismicNextLink field={item.link}>
+        <PrismicNextImage field={item.icon} width={331} height={331} className={'w-full h-auto '} />
+      </PrismicNextLink> : <div><PrismicNextImage field={item.icon} width={331} height={331} /></div>}</div>
 
   );
 }

@@ -16,12 +16,13 @@ export interface HeroProps {
   links?: LinkField[];
   image?: ImageField;
   hasBooking?: boolean;
+  vAlign?: 'top' | 'center' | 'bottom';
   rating?: ImageField;
   imagePosition?: 'left' | 'right' | 'center' | 'top' | 'bottom';
   children?: React.ReactNode;
 }
 
-export  function Hero({ heading, subheading, lead,  links, image, hasBooking, rating, imagePosition = 'center', children }: HeroProps) {
+export  function Hero({ heading, subheading, lead,  links, image, hasBooking, rating, imagePosition = 'center', vAlign = 'center', children }: HeroProps) {
   const heroRef = useRef<HTMLDivElement | null>(null);
   const imageRef = useRef<HTMLDivElement | null>(null);
   const speed = 0.8;
@@ -43,7 +44,6 @@ export  function Hero({ heading, subheading, lead,  links, image, hasBooking, ra
     restDelta: 0.001
   });
 
-  //const autoScale = (1 + (Math.abs(speed) * 0.2));
 
 
   return (
@@ -55,7 +55,7 @@ export  function Hero({ heading, subheading, lead,  links, image, hasBooking, ra
                 <motion.div
                     ref={imageRef}
                     className="z-1 absolute inset-0 overflow-hidden w-full h-full"
-                    style={{y: imageY, scale: imageScale, transform: 'translateZ(0)'}}
+                    style={{y: smoothY, scale: imageScale, transform: 'translateZ(0)'}}
                 >
                   <PrismicNextImage
                       loading={'lazy'}
@@ -78,8 +78,13 @@ export  function Hero({ heading, subheading, lead,  links, image, hasBooking, ra
             style={{y: textY}}
         >
         <Container className="relative z-20 flex flex-col justify-end h-svh">
-          <div className="flex flex-col  justify-stretch pb-5 pt-20 sm:pb-16 sm:pt-32 md:pb-32 md:pt-64 w-full h-svh sm:w-full lg:max-w-3xl">
-            <div className={'grow flex flex-col justify-center'}>
+          <div className={cn("flex flex-col justify-stretch pb-5 pt-20 sm:pb-16 sm:pt-32 md:pb-32 md:pt-64 w-full h-svh sm:w-full lg:max-w-3xl"
+          )}>
+            <div className={cn('grow flex flex-col',
+              vAlign === 'top' && 'justify-start',
+              vAlign === 'center' && 'justify-center',
+              vAlign === 'bottom' && 'justify-end',
+            )}>
              <div>
             { subheading &&  <Badge >{subheading}</Badge>}
             <header

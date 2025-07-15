@@ -38,6 +38,7 @@ export default async function Page({ params }: { params: Promise<Params> }) {
           subheading={page.data.subheading}
           heading={page.data.heading}
           lead={page.data.lead}
+          vAlign={'bottom'}
           image={page.data.image}
         />
         <SliceZone slices={page.data.slices} components={components} />

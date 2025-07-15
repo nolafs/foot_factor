@@ -17,7 +17,7 @@ interface SectionDefaultProps {
   image?: ImageField;
   color?: SelectField;
   style?: 'framed' | 'full'
-  variation?:  'contentWithImageColumn' | 'contentNoImageColumn' | 'contentWithImageFull' | 'contentWithImageColumnList';
+  variation?:  'contentWithImageColumn' | 'contentNoImageColumn' | 'contentWithImageFull' | 'contentWithImageColumnList' | 'contentColumnList';
   slice_type?: string;
 }
 
@@ -28,7 +28,7 @@ export const SectionContentColumnWithImage = ({as = 'section',heading, body, ima
         {image && isFilled.image(image) && style === 'full' && (
               <div className={'w-full flex justify-center aspect-w-16 aspect-h-9'}>
                 <PrismicNextImage field={image}
-                                  className={cn('w-full h-full object-center object-cover')}/>
+                                  className={cn('w-full h-full object-center object-fit')}/>
               </div>
           )
         }

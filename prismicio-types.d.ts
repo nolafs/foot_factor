@@ -1573,6 +1573,7 @@ export type NavigationMegaMenuItemDocument<Lang extends string = string> = prism
 >;
 
 type OrthoticsDocumentDataSlicesSlice =
+  | IconNavListSlice
   | ListSlice
   | MediaSectionSlice
   | ReviewsSlice
@@ -4457,6 +4458,41 @@ export interface SectionSliceContentTwoColumnIconListPrimaryItemsItem {
 }
 
 /**
+ * Item in *Section → Content Column list → Primary → List*
+ */
+export interface SectionSliceContentColumnListPrimaryListItem {
+  /**
+   * Heading field in *Section → Content Column list → Primary → List*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: section.contentColumnList.primary.list[].heading
+   * - **Documentation**: https://prismic.io/docs/fields/text
+   */
+  heading: prismic.KeyTextField;
+
+  /**
+   * Body field in *Section → Content Column list → Primary → List*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: section.contentColumnList.primary.list[].body
+   * - **Documentation**: https://prismic.io/docs/fields/rich-text
+   */
+  body: prismic.RichTextField;
+
+  /**
+   * Color field in *Section → Content Column list → Primary → List*
+   *
+   * - **Field Type**: Select
+   * - **Placeholder**: *None*
+   * - **API ID Path**: section.contentColumnList.primary.list[].color
+   * - **Documentation**: https://prismic.io/docs/fields/select
+   */
+  color: prismic.SelectField<'default' | 'Accent' | 'Primary'>;
+}
+
+/**
  * Primary content in *Section → Default → Primary*
  */
 export interface SectionSliceDefaultPrimary {
@@ -5181,6 +5217,45 @@ export interface SectionSliceContentWithImageLeftRightPrimary {
    * - **Documentation**: https://prismic.io/docs/fields/select
    */
   color: prismic.SelectField<'default' | 'Accent' | 'Primary'>;
+
+  /**
+   * Has Booking field in *Section → Content With Image left right → Primary*
+   *
+   * - **Field Type**: Boolean
+   * - **Placeholder**: *None*
+   * - **Default Value**: false
+   * - **API ID Path**: section.contentWithImageLeftRight.primary.has_booking
+   * - **Documentation**: https://prismic.io/docs/fields/boolean
+   */
+  has_booking: prismic.BooleanField;
+
+  /**
+   * Booking Label field in *Section → Content With Image left right → Primary*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: section.contentWithImageLeftRight.primary.booking_label
+   * - **Documentation**: https://prismic.io/docs/fields/text
+   */
+  booking_label: prismic.KeyTextField;
+
+  /**
+   * Links field in *Section → Content With Image left right → Primary*
+   *
+   * - **Field Type**: Link
+   * - **Placeholder**: *None*
+   * - **API ID Path**: section.contentWithImageLeftRight.primary.links
+   * - **Documentation**: https://prismic.io/docs/fields/link
+   */
+  links: prismic.Repeatable<
+    prismic.LinkField<
+      string,
+      string,
+      unknown,
+      prismic.FieldState,
+      'Primary' | 'Secondary' | 'Accent' | 'Outline' | 'Link'
+    >
+  >;
 }
 
 /**
@@ -5193,6 +5268,44 @@ export interface SectionSliceContentWithImageLeftRightPrimary {
 export type SectionSliceContentWithImageLeftRight = prismic.SharedSliceVariation<
   'contentWithImageLeftRight',
   Simplify<SectionSliceContentWithImageLeftRightPrimary>,
+  never
+>;
+
+/**
+ * Primary content in *Section → Content Column list → Primary*
+ */
+export interface SectionSliceContentColumnListPrimary {
+  /**
+   * Heading field in *Section → Content Column list → Primary*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: section.contentColumnList.primary.heading
+   * - **Documentation**: https://prismic.io/docs/fields/text
+   */
+  heading: prismic.KeyTextField;
+
+  /**
+   * List field in *Section → Content Column list → Primary*
+   *
+   * - **Field Type**: Group
+   * - **Placeholder**: *None*
+   * - **API ID Path**: section.contentColumnList.primary.list[]
+   * - **Documentation**: https://prismic.io/docs/fields/repeatable-group
+   */
+  list: prismic.GroupField<Simplify<SectionSliceContentColumnListPrimaryListItem>>;
+}
+
+/**
+ * Content Column list variation for Section Slice
+ *
+ * - **API ID**: `contentColumnList`
+ * - **Description**: Default
+ * - **Documentation**: https://prismic.io/docs/slices
+ */
+export type SectionSliceContentColumnList = prismic.SharedSliceVariation<
+  'contentColumnList',
+  Simplify<SectionSliceContentColumnListPrimary>,
   never
 >;
 
@@ -5210,7 +5323,8 @@ type SectionSliceVariation =
   | SectionSliceContentImageTwoColumns
   | SectionSliceContentTwoColumnIconList
   | SectionSliceContentNoImageColumn
-  | SectionSliceContentWithImageLeftRight;
+  | SectionSliceContentWithImageLeftRight
+  | SectionSliceContentColumnList;
 
 /**
  * Section Shared Slice
@@ -6020,6 +6134,8 @@ declare module '@prismicio/client' {
       SectionSliceContentTwoColumnIconListPrimary,
       SectionSliceContentNoImageColumnPrimary,
       SectionSliceContentWithImageLeftRightPrimary,
+      SectionSliceContentColumnListPrimaryListItem,
+      SectionSliceContentColumnListPrimary,
       SectionSliceVariation,
       SectionSliceDefault,
       SectionSliceContentWithLeadButtons,
@@ -6032,6 +6148,7 @@ declare module '@prismicio/client' {
       SectionSliceContentTwoColumnIconList,
       SectionSliceContentNoImageColumn,
       SectionSliceContentWithImageLeftRight,
+      SectionSliceContentColumnList,
       SoleDeconstructSlice,
       SoleDeconstructSliceDefaultPrimaryItemsItem,
       SoleDeconstructSliceDefaultPrimary,

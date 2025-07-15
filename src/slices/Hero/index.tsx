@@ -27,6 +27,7 @@ const Hero = ({ slice }: HeroProps): JSX.Element => {
         lead={slice.primary.lead}
         image={slice.primary.image}
         links={slice.primary.links}
+        vAlign={'center'}
         hasBooking={slice.primary.has_booking}
         rating={slice.primary.google_rating}
     />)
@@ -37,6 +38,7 @@ const Hero = ({ slice }: HeroProps): JSX.Element => {
       heading={slice.primary.heading}
       subheading={slice.primary.subheading}
       lead={slice.primary.lead}
+      vAlign={'bottom'}
       image={slice.primary.image}
       links={slice.primary.links}
     />

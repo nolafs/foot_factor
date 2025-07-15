@@ -1,4 +1,4 @@
-import { type FC } from 'react';
+import React, { type FC } from 'react';
 import { type Content } from '@prismicio/client';
 import { type SliceComponentProps } from '@prismicio/react';
 import SectionDefault from '@/components/features/section/section-default/section-default';
@@ -16,6 +16,7 @@ import SectionContentColumnListImage
 import {cn} from '@/lib/utils';
 import {PrismicNextImage} from '@prismicio/next';
 import SectionContent from '@/components/features/section/section-content';
+import ButtonRow from '@/components/ui/button-row';
 
 /**
  * Props for `Section`.
@@ -48,10 +49,39 @@ const Section: FC<SectionProps> = ({ slice }) => {
                   body={slice.primary.body}
                   color={slice.primary.color?.toString()}
               />
+                {(slice.primary.links || slice.primary.has_booking) && (
+                <div className="flex flex-col gap-x-3 gap-y-4 sm:flex-row">
+                  <ButtonRow hasBooking={slice.primary.has_booking} bookingLabel={slice.primary.booking_label ?? 'Book Now'} hasArrow={true}
+                             links={slice.primary.links}/>
+                </div> )}
               </div>
             </div>
           </div>
         </Container>
+    )
+  }
+
+  if (slice.variation === 'contentColumnList') {
+    return (
+        <section data-slice-type={slice.slice_type} data-slice-variation={slice.variation}>
+          <Container className={'pt-16 md:pt-24 lg:pt-32 pb-5 md:pb-10 lg:pb-16'}>
+            <header>
+              <h2 className={'text-center mx-auto max-w-4xl font-heading font-medium text-2xl md:text-4xl lg:text-5xl'}>{slice.primary.heading}</h2>
+            </header>
+          </Container>
+          {(slice.primary.list.length) && slice.primary.list.map((item, index) => (
+
+              <SectionContentColumnWithImage
+                  as="section"
+                  key={slice.id + '_' + index}
+                  heading={item.heading}
+                  body={item.body}
+                  color={item.color}
+                  variation={slice.variation}
+                  slice_type={slice.slice_type}
+              />)
+          )}
+        </section>
     )
   }
 

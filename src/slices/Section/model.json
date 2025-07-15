@@ -674,6 +674,95 @@
               "Primary"
             ]
           }
+        },
+        "has_booking": {
+          "type": "Boolean",
+          "config": {
+            "label": "Has Booking",
+            "placeholder_false": "false",
+            "placeholder_true": "true",
+            "default_value": false
+          }
+        },
+        "booking_label": {
+          "type": "Text",
+          "config": {
+            "label": "Booking Label",
+            "placeholder": ""
+          }
+        },
+        "links": {
+          "type": "Link",
+          "config": {
+            "label": "Links",
+            "placeholder": "",
+            "select": null,
+            "allowTargetBlank": true,
+            "allowText": true,
+            "repeat": true,
+            "variants": [
+              "Primary",
+              "Secondary",
+              "Accent",
+              "Outline",
+              "Link"
+            ]
+          }
+        }
+      },
+      "items": {}
+    },
+    {
+      "id": "contentColumnList",
+      "name": "Content Column list",
+      "docURL": "...",
+      "version": "initial",
+      "description": "Default",
+      "imageUrl": "",
+      "primary": {
+        "heading": {
+          "type": "Text",
+          "config": {
+            "label": "Heading",
+            "placeholder": ""
+          }
+        },
+        "list": {
+          "type": "Group",
+          "config": {
+            "label": "List",
+            "repeat": true,
+            "fields": {
+              "heading": {
+                "type": "Text",
+                "config": {
+                  "label": "Heading",
+                  "placeholder": ""
+                }
+              },
+              "body": {
+                "type": "StructuredText",
+                "config": {
+                  "label": "Body",
+                  "placeholder": "",
+                  "allowTargetBlank": true,
+                  "multi": "paragraph,preformatted,heading1,heading2,heading3,heading4,heading5,heading6,strong,em,hyperlink,image,embed,list-item,o-list-item,rtl"
+                }
+              },
+              "color": {
+                "type": "Select",
+                "config": {
+                  "label": "Color",
+                  "placeholder": "",
+                  "options": [
+                    "default",
+                    "Accent",
+                    "Primary"
+                  ]
+                }
+              }
+            }
+          }
         }
       },
       "items": {}
