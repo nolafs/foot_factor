@@ -12,6 +12,7 @@ import {ArrowRight, CircleArrowRight} from 'lucide-react';
 import ServiceCard from '@/components/features/service-card/service-card';
 import SliderDynamicList from '@/components/features/slider/slider-dynamic-list';
 import ButtonRow from '@/components/ui/button-row';
+import BentoTypeCard from '@/components/features/bento/bento-type-card';
 
 /**
  * Props for `List`.
@@ -72,16 +73,16 @@ const List: FC<ListProps> = ({ slice }) => {
 
   if (slice.variation === 'orthotics') {
     return (
-        <section data-slice-type={slice.slice_type} data-slice-variation={slice.variation} className={'py-16 md:py-24 lg:py-28'}>
+        <Container as={'section'} padding={'lg'} fullWidth={'true'} data-slice-type={slice.slice_type} data-slice-variation={slice.variation} className={'py-16 md:py-24 lg:py-28'}>
           <Container as={'div'} color={'default'}>
-            <Heading as="h2" className={'mb-8 text-center'}>
+            <Heading as="h2" className={'text-center'}>
               {slice.primary.heading}
             </Heading>
           </Container>
-          <div className={'w-full pt-5 md:pt-8 lg:pt-16 pb-16 md:pb-24 lg:pb-28'}>
-            <SliderDynamicList contentType={'orthotics'} size={'large'} baseUrl={'/services/orthotics'}/>
+          <div className={'w-full'}>
+            <SliderDynamicList contentType={'orthotics'} size={'default'} baseUrl={'/services/orthotics'}/>
           </div>
-        </section>
+        </Container>
     );
   }
 
@@ -114,51 +115,7 @@ const List: FC<ListProps> = ({ slice }) => {
                       style={{backgroundColor: item.color ?? 'transparent'}}
                   >
 
-                    { item.card_type === '1' && (<>
-                    <PrismicNextImage field={item.image} className={cn('absolute md:relative w-full h-full object-cover')}/>
-                      <div
-                          className="absolute inset-0 rounded-lg bg-gradient-to-t from-primary-950/90 to-transparent max-lg:rounded-4xl lg:rounded-4xl overflow-hidden"/>
-                    <div className="relative mt-32 md:mt-0 md:absolute  z-5 bottom-0 p-7 md:p-10 lg:p-16  z-10 w-full">
-                      <Heading as={'h3'} color={'White'}>{item.heading}</Heading>
-                      <Lead className="mt-2 max-w-2xl" color={'Light'} size={'sm'}>
-                        {item.lead}
-                      </Lead>
-                      {isFilled.link(item.link) && (<div className={'flex justify-end'}>
-                        <PrismicNextLink field={item.link}
-                                         className={cn(buttonVariants({variant: 'default', size: 'icon'}))}>
-                          <ArrowRight className={'h-4 w-4'} strokeWidth={4}/>
-                        </PrismicNextLink>
-                      </div>
-                      )}
-                    </div>
-                    </>)}
-
-                    {item.card_type === '2' && (
-                    <>
-                        <div className="p-7 sm:p-7 md:p-10 lg:p-16 text-center">
-                          {item.image_position === 'top' && (<div className={'w-full h-auto  mb-5'}>
-                                <PrismicNextImage field={item.image} className={cn('w-full h-full object-cover')}/>
-                              </div>
-                          )}
-                          <Heading as={'h3'} className="text-secondary-950">{item.heading}</Heading>
-                          <Lead className="mt-2 max-w-2xl text-lg" size={'sm'}>
-                            {item.lead}
-                          </Lead>
-                        </div>
-                          {item.image_position === 'bottom' && (<div className={'block md:hidden h-52'} />)}
-                          {item.image_position === 'bottom' && (<div className={'absolute bottom-0 w-full h-auto'}>
-                              <PrismicNextImage field={item.image} className={cn('w-full h-full object-cover')}/>
-                              </div>
-                          )}
-
-                          {isFilled.link(item.link) && (<div className={'relative z-10 md:absolute bottom-0 w-full p-7 md:p-10 lg:p-16 flex justify-end'}>
-                            <PrismicNextLink field={item.link}
-                                             className={cn(buttonVariants({variant: 'default', size:'icon'}))}>
-                              <ArrowRight size={32} strokeWidth={4}/>
-                            </PrismicNextLink>
-                          </div>)}
-                    </>
-                    )}
+                    <BentoTypeCard item={item} />
                   </div>
                 </div>
               ))}

@@ -7,6 +7,7 @@ import ButtonRow from '@/components/ui/button-row';
 import {PrismicNextImage} from '@prismicio/next';
 import cn from 'clsx';
 import {Body, Heading} from '@/components/ui/text';
+import useParallax from '@/lib/hooks/use-parallax';
 
 
 interface SectionDefaultProps {
@@ -23,9 +24,11 @@ interface SectionDefaultProps {
 }
 
 export const SectionContentImageFloatText = ({as = 'section',heading, body, float = 'left', image, links, hasBooking, bookingLabel, variation, slice_type}: SectionDefaultProps) => {
-  const Tag = as; //
-    return (
-      <Container as={'section'} fullWidth={true} data-slice-type={slice_type} data-slice-variation={variation} className={cn('relative w-full h-full md:max-h-svh isolated overflow-hidden')}>
+  const parallax = useParallax(0.8, true);
+
+
+  return (
+      <Container as={as} fullWidth={true} data-slice-type={slice_type} data-slice-variation={variation} className={cn('relative w-full h-full md:max-h-svh isolated overflow-hidden')}>
 
 
         <div className={'relative mb-10 md:mb-0 md:absolute z-10 top-0 left-0 w-full'}>

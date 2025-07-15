@@ -62,6 +62,18 @@
         "fieldset": "Slice Zone",
         "config": {
           "choices": {
+            "list": {
+              "type": "SharedSlice"
+            },
+            "media_section": {
+              "type": "SharedSlice"
+            },
+            "reviews": {
+              "type": "SharedSlice"
+            },
+            "sole_deconstruct": {
+              "type": "SharedSlice"
+            },
             "faqs": {
               "type": "SharedSlice"
             },

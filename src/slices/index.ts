@@ -13,6 +13,7 @@ export const components = {
   megamenu: dynamic(() => import('./Megamenu')),
   reviews: dynamic(() => import('./Reviews')),
   section: dynamic(() => import('./Section')),
+  sole_deconstruct: dynamic(() => import('./SoleDeconstruct')),
   team_carousel: dynamic(() => import('./TeamCarousel')),
   testimonial: dynamic(() => import('./Testimonial')),
   testimonials: dynamic(() => import('./Testimonials')),

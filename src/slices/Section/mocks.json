@@ -789,5 +789,70 @@
 				"value": []
 			}
 		]
+	},
+	{
+		"__TYPE__": "SharedSliceContent",
+		"variation": "contentWithImageLeftRight",
+		"primary": {
+			"heading": {
+				"__TYPE__": "FieldContent",
+				"value": "stairs",
+				"type": "Text"
+			},
+			"body": {
+				"__TYPE__": "StructuredTextContent",
+				"value": [
+					{
+						"type": "paragraph",
+						"content": {
+							"text": "Et ut ea aliquip laboris irure quis Lorem ex elit sint cupidatat eu occaecat sunt fugiat. Occaecat adipisicing ullamco qui ex ut pariatur sit eu ad est Lorem proident fugiat. Ad qui fugiat tempor dolor consequat."
+						}
+					}
+				]
+			},
+			"animated": {
+				"__TYPE__": "BooleanContent",
+				"value": false
+			},
+			"image": {
+				"origin": {
+					"id": "main",
+					"url": "https://images.unsplash.com/photo-1498050108023-c5249f4df085",
+					"width": 3882,
+					"height": 2584
+				},
+				"url": "https://images.unsplash.com/photo-1498050108023-c5249f4df085",
+				"width": 3882,
+				"height": 2584,
+				"edit": {
+					"zoom": 1,
+					"crop": {
+						"x": 0,
+						"y": 0
+					},
+					"background": "transparent"
+				},
+				"alt": "likely",
+				"credits": null,
+				"__TYPE__": "ImageContent",
+				"thumbnails": {}
+			},
+			"color": {
+				"__TYPE__": "FieldContent",
+				"type": "Select",
+				"value": "Accent"
+			},
+			"image_position": {
+				"__TYPE__": "FieldContent",
+				"type": "Select",
+				"value": "Left"
+			}
+		},
+		"items": [
+			{
+				"__TYPE__": "GroupItemContent",
+				"value": []
+			}
+		]
 	}
 ]

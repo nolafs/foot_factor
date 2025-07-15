@@ -32,7 +32,7 @@ export const SectionContentColumnWithImage = ({as = 'section',heading, body, ima
               </div>
           )
         }
-        <Container className={cn(style === 'framed' && 'lg:py-28 py-16 md:py-24')}>
+        <Container className={cn(style === 'framed' && 'py-16 md:py-24 lg:py-28')}>
           {image && isFilled.image(image) &&
           style === 'framed' && (
             <div className={'flex flex-col gap-5 md:gap-8 lg:gap-10'}>

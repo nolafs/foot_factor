@@ -40,6 +40,9 @@
         "fieldset": "Slice Zone",
         "config": {
           "choices": {
+            "sole_deconstruct": {
+              "type": "SharedSlice"
+            },
             "reviews": {
               "type": "SharedSlice"
             },

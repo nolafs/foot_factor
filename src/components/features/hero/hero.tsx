@@ -7,7 +7,7 @@ import cn from 'clsx';
 import {PrismicRichText} from '@prismicio/react';
 import {Badge} from '@/components/ui/badge';
 import ButtonRow from '@/components/ui/button-row';
-import {motion, useScroll, useTransform} from 'framer-motion';
+import {motion, useScroll, useSpring, useTransform} from 'framer-motion';
 
 export interface HeroProps {
   heading: RichTextField | KeyTextField | string;
@@ -24,17 +24,26 @@ export interface HeroProps {
 export  function Hero({ heading, subheading, lead,  links, image, hasBooking, rating, imagePosition = 'center', children }: HeroProps) {
   const heroRef = useRef<HTMLDivElement | null>(null);
   const imageRef = useRef<HTMLDivElement | null>(null);
-
+  const speed = 0.8;
   // Track scroll progress relative to the hero section
   const {scrollYProgress} = useScroll({
     target: heroRef,
     offset: ["start start", "end start"]
   });
 
+
   // Transform values for different elements
-  const textY = useTransform(scrollYProgress, [0, 0.8], ["0vh", "-200vh"]);
-  const imageY = useTransform(scrollYProgress, [0, 1], ["0vh", "150vh"]);
-  const imageScale = useTransform(scrollYProgress, [0, 1], [1, 1.2]);
+  const textY = useTransform(scrollYProgress, [0, 1], ["0vh", "-200vh"]);
+  const imageY = useTransform(scrollYProgress, [0, 1], [`0vh`, `${200 * speed}vh`]);
+  const imageScale = useTransform(scrollYProgress, [0, 1], [1.2, 2]);
+
+  const smoothY = useSpring(imageY, {
+    stiffness: 100,
+    damping: 30,
+    restDelta: 0.001
+  });
+
+  //const autoScale = (1 + (Math.abs(speed) * 0.2));
 
 
   return (
@@ -45,7 +54,7 @@ export  function Hero({ heading, subheading, lead,  links, image, hasBooking, ra
             {image && (
                 <motion.div
                     ref={imageRef}
-                    className="z-1 absolute inset-0 overflow-hidden h-full"
+                    className="z-1 absolute inset-0 overflow-hidden w-full h-full"
                     style={{y: imageY, scale: imageScale, transform: 'translateZ(0)'}}
                 >
                   <PrismicNextImage

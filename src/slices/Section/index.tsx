@@ -13,6 +13,9 @@ import SectionContentImageTwoColumns
   from '@/components/features/section/section-content-image-two-columns/section-content-image-two-columns';
 import SectionContentColumnListImage
   from '@/components/features/section/section-content-column-list-image/section-content-column-list-image';
+import {cn} from '@/lib/utils';
+import {PrismicNextImage} from '@prismicio/next';
+import SectionContent from '@/components/features/section/section-content';
 
 /**
  * Props for `Section`.
@@ -26,9 +29,35 @@ const Section: FC<SectionProps> = ({ slice }) => {
 
   console.log('slice', slice.variation)
 
+  if(slice.variation === 'contentWithImageLeftRight') {
+    return (
+        <Container as={'section'} data-slice-type={slice.slice_type} data-slice-variation={slice.variation} padding={'lg'}
+                   color={slice.primary.color?.toString()}>
+          <div className={cn('flex flex-col items-center justify-between gap-8 md:gap-16', slice.primary.image_position === 'Left' && 'md:flex-row ', slice.primary.image_position === 'Right' && 'md:flex-row-reverse') }>
+            <div className={'w-full md:w-1/2 flex justify-center'}>
+              {slice.primary.image && (
+                  <div className={'w-full aspect-w-1 aspect-h-1 rounded-4xl overflow-hidden'}>
+                    <PrismicNextImage field={slice.primary.image} width={694} height={694} className={'w-full h-full object-center object-cover '} />
+                  </div>
+              )}
+            </div>
+            <div className={'w-full md:w-1/2 flex justify-center'}>
+              <div className={'w-full flex flex-col justify-center'}>
+              <SectionContent
+                  heading={slice.primary.heading}
+                  body={slice.primary.body}
+                  color={slice.primary.color?.toString()}
+              />
+              </div>
+            </div>
+          </div>
+        </Container>
+    )
+  }
+
   if (slice.variation === 'contentWithImageColumnList') {
     return(
-    <section>
+    <section data-slice-type={slice.slice_type} data-slice-variation={slice.variation}>
       <Container className={'pt-16 md:pt-24 lg:pt-32 pb-5 md:pb-10 lg:pb-16'}>
       <header>
         <h2 className={'text-center mx-auto max-w-4xl font-heading font-medium text-2xl md:text-4xl lg:text-5xl'}>{slice.primary.heading}</h2>

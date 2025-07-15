@@ -3,6 +3,8 @@
 import { useState } from 'react';
 import cn from 'clsx';
 import { PrismicNextImage } from '@prismicio/next';
+import useParallax from '@/lib/hooks/use-parallax';
+import { motion } from 'framer-motion';
 
 export interface VideoControlProps {
   handlePlayAction: () => void;
@@ -16,11 +18,9 @@ export interface VideoControlProps {
 
 export function VideoControl({ poster, handlePlayAction, width, height, title, loading = 'lazy', mode }: VideoControlProps) {
   const [showPlayer, setShowPlayer] = useState<boolean>(false);
+  const parallax = useParallax(0.8, true);
 
   const play = () => {
-
-    console.log('Play action triggered');
-
     setShowPlayer(true);
     handlePlayAction();
 
@@ -63,17 +63,25 @@ export function VideoControl({ poster, handlePlayAction, width, height, title, l
 
         </div>
       </div>
-      {poster && (
+      {poster && (<motion.div
+              ref={parallax.ref}
+              style={{
+                y: parallax.y,
+                scale: parallax.scale
+              }}
+              className="absolute inset-0 z-10"
+          >
         <PrismicNextImage
           field={poster}
           width={width}
           height={height}
           fallbackAlt=""
           loading={loading}
-          className={'absolute z-10 top-0 left-0 h-full w-full object-center object-cover'}
+          className={'h-full w-full object-center object-cover'}
           imgixParams={{ fit: 'fill', fm: 'webp' }}
           quality={80}
         />
+          </motion.div>
       ) }
     </button>
   );

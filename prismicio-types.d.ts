@@ -1572,7 +1572,16 @@ export type NavigationMegaMenuItemDocument<Lang extends string = string> = prism
   Lang
 >;
 
-type OrthoticsDocumentDataSlicesSlice = FaqsSlice | CallToActionSlice | SectionSlice | TestimonialSlice | HeroSlice;
+type OrthoticsDocumentDataSlicesSlice =
+  | ListSlice
+  | MediaSectionSlice
+  | ReviewsSlice
+  | SoleDeconstructSlice
+  | FaqsSlice
+  | CallToActionSlice
+  | SectionSlice
+  | TestimonialSlice
+  | HeroSlice;
 
 /**
  * Content for Orthotics documents
@@ -2071,6 +2080,7 @@ export type PostsDocument<Lang extends string = string> = prismic.PrismicDocumen
 >;
 
 type ServicesDocumentDataSlicesSlice =
+  | SoleDeconstructSlice
   | ReviewsSlice
   | CaseStudiesSlice
   | IconNavListSlice
@@ -5108,6 +5118,85 @@ export type SectionSliceContentNoImageColumn = prismic.SharedSliceVariation<
 >;
 
 /**
+ * Primary content in *Section → Content With Image left right → Primary*
+ */
+export interface SectionSliceContentWithImageLeftRightPrimary {
+  /**
+   * Heading field in *Section → Content With Image left right → Primary*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: section.contentWithImageLeftRight.primary.heading
+   * - **Documentation**: https://prismic.io/docs/fields/text
+   */
+  heading: prismic.KeyTextField;
+
+  /**
+   * Body field in *Section → Content With Image left right → Primary*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: section.contentWithImageLeftRight.primary.body
+   * - **Documentation**: https://prismic.io/docs/fields/rich-text
+   */
+  body: prismic.RichTextField;
+
+  /**
+   * Animated field in *Section → Content With Image left right → Primary*
+   *
+   * - **Field Type**: Boolean
+   * - **Placeholder**: *None*
+   * - **Default Value**: true
+   * - **API ID Path**: section.contentWithImageLeftRight.primary.animated
+   * - **Documentation**: https://prismic.io/docs/fields/boolean
+   */
+  animated: prismic.BooleanField;
+
+  /**
+   * Image field in *Section → Content With Image left right → Primary*
+   *
+   * - **Field Type**: Image
+   * - **Placeholder**: *None*
+   * - **API ID Path**: section.contentWithImageLeftRight.primary.image
+   * - **Documentation**: https://prismic.io/docs/fields/image
+   */
+  image: prismic.ImageField<never>;
+
+  /**
+   * Image Position field in *Section → Content With Image left right → Primary*
+   *
+   * - **Field Type**: Select
+   * - **Placeholder**: *None*
+   * - **API ID Path**: section.contentWithImageLeftRight.primary.image_position
+   * - **Documentation**: https://prismic.io/docs/fields/select
+   */
+  image_position: prismic.SelectField<'Left' | 'Right'>;
+
+  /**
+   * Color field in *Section → Content With Image left right → Primary*
+   *
+   * - **Field Type**: Select
+   * - **Placeholder**: *None*
+   * - **API ID Path**: section.contentWithImageLeftRight.primary.color
+   * - **Documentation**: https://prismic.io/docs/fields/select
+   */
+  color: prismic.SelectField<'default' | 'Accent' | 'Primary'>;
+}
+
+/**
+ * Content With Image left right variation for Section Slice
+ *
+ * - **API ID**: `contentWithImageLeftRight`
+ * - **Description**: Default
+ * - **Documentation**: https://prismic.io/docs/slices
+ */
+export type SectionSliceContentWithImageLeftRight = prismic.SharedSliceVariation<
+  'contentWithImageLeftRight',
+  Simplify<SectionSliceContentWithImageLeftRightPrimary>,
+  never
+>;
+
+/**
  * Slice variation for *Section*
  */
 type SectionSliceVariation =
@@ -5120,7 +5209,8 @@ type SectionSliceVariation =
   | SectionSliceContentImageFloatRight
   | SectionSliceContentImageTwoColumns
   | SectionSliceContentTwoColumnIconList
-  | SectionSliceContentNoImageColumn;
+  | SectionSliceContentNoImageColumn
+  | SectionSliceContentWithImageLeftRight;
 
 /**
  * Section Shared Slice
@@ -5130,6 +5220,83 @@ type SectionSliceVariation =
  * - **Documentation**: https://prismic.io/docs/slices
  */
 export type SectionSlice = prismic.SharedSlice<'section', SectionSliceVariation>;
+
+/**
+ * Item in *SoleDeconstruct → Default → Primary → Items*
+ */
+export interface SoleDeconstructSliceDefaultPrimaryItemsItem {
+  /**
+   * Image field in *SoleDeconstruct → Default → Primary → Items*
+   *
+   * - **Field Type**: Image
+   * - **Placeholder**: *None*
+   * - **API ID Path**: sole_deconstruct.default.primary.items[].image
+   * - **Documentation**: https://prismic.io/docs/fields/image
+   */
+  image: prismic.ImageField<never>;
+
+  /**
+   * Title field in *SoleDeconstruct → Default → Primary → Items*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: sole_deconstruct.default.primary.items[].title
+   * - **Documentation**: https://prismic.io/docs/fields/text
+   */
+  title: prismic.KeyTextField;
+
+  /**
+   * Body field in *SoleDeconstruct → Default → Primary → Items*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: sole_deconstruct.default.primary.items[].body
+   * - **Documentation**: https://prismic.io/docs/fields/rich-text
+   */
+  body: prismic.RichTextField;
+}
+
+/**
+ * Primary content in *SoleDeconstruct → Default → Primary*
+ */
+export interface SoleDeconstructSliceDefaultPrimary {
+  /**
+   * Items field in *SoleDeconstruct → Default → Primary*
+   *
+   * - **Field Type**: Group
+   * - **Placeholder**: *None*
+   * - **API ID Path**: sole_deconstruct.default.primary.items[]
+   * - **Documentation**: https://prismic.io/docs/fields/repeatable-group
+   */
+  items: prismic.GroupField<Simplify<SoleDeconstructSliceDefaultPrimaryItemsItem>>;
+}
+
+/**
+ * Default variation for SoleDeconstruct Slice
+ *
+ * - **API ID**: `default`
+ * - **Description**: Default
+ * - **Documentation**: https://prismic.io/docs/slices
+ */
+export type SoleDeconstructSliceDefault = prismic.SharedSliceVariation<
+  'default',
+  Simplify<SoleDeconstructSliceDefaultPrimary>,
+  never
+>;
+
+/**
+ * Slice variation for *SoleDeconstruct*
+ */
+type SoleDeconstructSliceVariation = SoleDeconstructSliceDefault;
+
+/**
+ * SoleDeconstruct Shared Slice
+ *
+ * - **API ID**: `sole_deconstruct`
+ * - **Description**: SoleDeconstruct
+ * - **Documentation**: https://prismic.io/docs/slices
+ */
+export type SoleDeconstructSlice = prismic.SharedSlice<'sole_deconstruct', SoleDeconstructSliceVariation>;
 
 /**
  * Item in *TeamCarousel → Default → Primary → Team Members*
@@ -5852,6 +6019,7 @@ declare module '@prismicio/client' {
       SectionSliceContentTwoColumnIconListPrimaryItemsItem,
       SectionSliceContentTwoColumnIconListPrimary,
       SectionSliceContentNoImageColumnPrimary,
+      SectionSliceContentWithImageLeftRightPrimary,
       SectionSliceVariation,
       SectionSliceDefault,
       SectionSliceContentWithLeadButtons,
@@ -5863,6 +6031,12 @@ declare module '@prismicio/client' {
       SectionSliceContentImageTwoColumns,
       SectionSliceContentTwoColumnIconList,
       SectionSliceContentNoImageColumn,
+      SectionSliceContentWithImageLeftRight,
+      SoleDeconstructSlice,
+      SoleDeconstructSliceDefaultPrimaryItemsItem,
+      SoleDeconstructSliceDefaultPrimary,
+      SoleDeconstructSliceVariation,
+      SoleDeconstructSliceDefault,
       TeamCarouselSlice,
       TeamCarouselSliceDefaultPrimaryMembersItem,
       TeamCarouselSliceDefaultPrimary,

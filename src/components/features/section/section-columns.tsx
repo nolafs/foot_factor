@@ -18,7 +18,7 @@ export const SectionColumns = ({
                                    color,
                                    contentRef,
                                    columnSize,
-                                   classNames = 'content-master text-animation font-medium font-heading text-3xl sm:text-4xl lg:text-5xl leading-snug  lg:leading-normal lg:text-6xl lg:leading-[72px]',
+                                   classNames = 'content-master text-animation font-medium font-heading text-3xl sm:text-4xl lg:text-5xl leading-snug  lg:text-6xl lg:leading-[72px]',
                                    children}: SectionColumnsProps) => {
 
   const colSize = {
@@ -37,7 +37,7 @@ export const SectionColumns = ({
 
 
   return (
-      <div className={'flex flex-col md:flex-row gap-5 md:gap-8 lg:gap-16'}>
+      <div className={'flex flex-col md:flex-row gap-5 md:gap-24 lg:gap-48'}>
           <div className={colSize.left}>
               {Array.isArray(heading) && isFilled.richText(heading) ? (
                   <div className={cn('content-master font-heading font-medium text-2xl md:text-3xl lg:text-4xl')}>

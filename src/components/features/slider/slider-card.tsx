@@ -44,14 +44,15 @@ export function SliderCard<T>({
 
   const sizeClasses = size === 'large'
       ? 'w-full  max-h-[600px] max-w-[540px]'
-      : 'w-full  max-w-[331px] max-h-[408px]';
+      : 'w-full  max-w-[380px] max-h-[420px]';
 
   return (
       <div
           key={`${keyPrefix}_${index}`}
           className={cn(
-              "px-2.5 lg:px-5  py-10 flex-shrink-0 snap-center scroll-ml-[var(--scroll-padding)]",
+              " flex-shrink-0 snap-center scroll-ml-[var(--scroll-padding)]",
               sizeClasses,
+              size === 'large' ? 'px-2.5 lg:px-5 py-10' : 'px-2 lg:px-2 py-5',
               className
           )}
       >
@@ -75,7 +76,7 @@ export function SliderCard<T>({
           <div className={cn("absolute bottom-0 w-full  flex flex-col z-10", size === 'large' ? 'p-7 md:p-10 lg:p-10' : 'p-5 md:p-8 lg:p-8')}>
             {contentType && <div className={'mb-1'}><Badge variant={'secondary'}>{contentType}</Badge> </div>}
 
-            <div className={cn(size === 'large' ? "text-white text-3xl" : 'text-white text-xl')}>{title}</div>
+            <div className={cn(size === 'large' ? "text-white text-4xl" : 'text-white text-3xl')}>{title}</div>
 
             {subtitle && (
                 <div className={"text-primary-300 text-2xl"}>{subtitle}</div>
