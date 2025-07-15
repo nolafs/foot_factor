@@ -2332,6 +2332,17 @@ interface SettingsDocumentData {
   logo: prismic.ImageField<never>;
 
   /**
+   * Logo Alt field in *Settings*
+   *
+   * - **Field Type**: Image
+   * - **Placeholder**: *None*
+   * - **API ID Path**: settings.logo_alt
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/fields/image
+   */
+  logo_alt: prismic.ImageField<never>;
+
+  /**
    * Site Name field in *Settings*
    *
    * - **Field Type**: Text

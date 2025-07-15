@@ -14,6 +14,17 @@
           "thumbnails": []
         }
       },
+      "logo_alt": {
+        "type": "Image",
+        "config": {
+          "label": "Logo Alt",
+          "constraint": {
+            "width": 120,
+            "height": 120
+          },
+          "thumbnails": []
+        }
+      },
       "site_name": {
         "type": "Text",
         "config": {
