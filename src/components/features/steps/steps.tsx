@@ -8,6 +8,7 @@ import {useGSAP} from '@gsap/react';
 import {PrismicNextImage} from '@prismicio/next';
 import {Container} from '@/components/ui/container';
 import StepsProgress from '@/components/features/steps/steps-progress';
+import {cn} from '@/lib/utils';
 
 if(typeof window !== 'undefined') {
   gsap.registerPlugin(ScrollTrigger);
@@ -106,9 +107,16 @@ const Step = ({title, description, step_label, image, stepNum, onStepActive}: St
 
 
     ScrollTrigger.create({
+
+    });
+
+    gsap.timeline({
+      scrollTrigger: {
       trigger: cardRef.current,
       start: 'top top',
-      end: '+=50%',
+      end: 'bottom+=50% bottom',
+      markers: false,
+      scrub: 0.3,
       pin: true,
       pinSpacing: true,
       anticipatePin: 1,
@@ -118,82 +126,117 @@ const Step = ({title, description, step_label, image, stepNum, onStepActive}: St
       onEnterBack: () => {
         onStepActive(stepNum);
       }
-    });
+    }})
+
+        /*
+        .from(cardRef.current, {
+          scale: 0.5,
+          opacity: 0,
+          duration: 1,
+          ease: 'power2.out',
+        })
+        .to(cardRef.current, {
+          scale: 1,
+          opacity: 1,
+          duration: 1,
+          ease: 'power2.out',
+        })
+      .to(cardRef.current, {
+      scale: 0.5,
+      opacity: 0,
+      duration: 1,
+      ease: 'power2.out',
+    })
+
+         */
 
     const tl = gsap.timeline({
       scrollTrigger: {
         trigger: cardRef.current,
         start: 'top center',
-        end: 'bottom top',
+        end: 'bottom+=50% top',
         scrub: 0.3,
         toggleActions: 'play none none reverse',
-        //markers: true
+        markers: false
       }
     });
 
     tl.fromTo('.content', {
       opacity: 0,
-      y: '100%'
+      y: '100%',
+      scale: 0.5,
     }, {
       opacity: 1,
-      y: 0,
+      y: '0%',
+      scale: 1,
       duration: 1,
       ease: 'power2.out',
     });
 
     tl.to('.content', {
       opacity: 1,
-      y: 0,
+      y: '0%',
       duration: 1,
       ease: 'power2.out',
     });
 
-    tl.to('.content',{
+    tl.to('.content', {
       opacity: 0,
-      y: '-100%',
-      ease: 'power2.in',
-    })
+      y: '0%',
+      scale: 0.5,
+      duration: 1,
+      ease: 'power2.out',
+    });
+
+
 
 
     const imgTl = gsap.timeline({
       scrollTrigger: {
         trigger: cardRef.current,
         start: 'top center',
-        end: 'bottom top',
-        scrub: 0.3,
+        end: 'bottom+=50% top',
         toggleActions: 'play none none reverse',
-        //markers: true
+        scrub: 0.3,
+        markers: false
       }
     });
 
     imgTl.fromTo('.image', {
       opacity: 0,
-      x: '100%'
+      y: '100%',
+      scale: 0.5,
     }, {
       opacity: 1,
-      x: 0,
+      y: '0%',
+      scale: 1,
       duration: 1,
       ease: 'power2.out',
     });
 
     imgTl.to('.image', {
       opacity: 1,
-      duration: 2,
-      y: 0,
+      y: '0%',
+      duration: 1,
       ease: 'power2.out',
-    })
+    });
 
-    imgTl.to('.image',  {
+    imgTl.to('.image', {
       opacity: 0,
-      duration: 2,
-      y: '-100%',
-      ease: 'power2.in',
-    })
+      y: '0%',
+      scale: 0.5,
+      duration: 1,
+      ease: 'power2.out',
+    });
+
 
   }, {scope: cardRef});
 
   return (
-      <li ref={cardRef} className="w-full h-svh grid grid-cols-1 gap-20 py-20 md:py-10 md:grid-cols-2 gap-x-10 md:gap-x-48 justify-center items-center">
+      <li ref={cardRef} className={cn("perspective-dramatic w-full h-svh grid grid-cols-1 gap-20 py-20 md:py-10 md:grid-cols-2 gap-x-10 md:gap-x-48 justify-start items-center",
+      //stepNum % 2 === 0 ? 'bg-accent' : 'bg-primary-300'
+      )
+      }>
         <div className={'content flex flex-col'}>
           <sub className={'text-primary-500 font-semibold mb-3 text-2xl'}>
             <span>{step_label}</span> <span>{stepNum ?? stepNum < 10 ? '0' + stepNum : stepNum}</span>
