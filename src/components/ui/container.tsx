@@ -48,7 +48,7 @@ const ContainerComponent = forwardRef<
       backgroundColorClass = 'bg-primary';
       break;
     case 'secondary':
-      backgroundColorClass = 'bg-secondary';
+      backgroundColorClass = 'bg-primary-200';
       break;
     case 'accent':
       backgroundColorClass = 'bg-accent-50';

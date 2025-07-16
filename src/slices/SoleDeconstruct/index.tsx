@@ -14,9 +14,8 @@ export type SoleDeconstructProps = SliceComponentProps<Content.SoleDeconstructSl
  */
 const SoleDeconstruct: FC<SoleDeconstructProps> = ({ slice }) => {
   return (
-    <Container as={'section'} padding={'lg'} data-slice-type={slice.slice_type} data-slice-variation={slice.variation}>
+
         <SoleDeconstructor data={slice.primary.items} />
-    </Container>
   );
 };
 
