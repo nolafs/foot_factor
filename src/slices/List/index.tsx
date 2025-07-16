@@ -58,17 +58,17 @@ const List: FC<ListProps> = ({ slice }) => {
 
 
   if (slice.variation === 'guides') {
-    return ( <section data-slice-type={slice.slice_type} data-slice-variation={slice.variation}
-                      className={'py-16 md:py-24 lg:py-28'}>
+    return (<Container as={'section'} padding={'lg'} fullWidth={'true'} data-slice-type={slice.slice_type}
+                       data-slice-variation={slice.variation} className={'py-16 md:py-24 lg:py-28'}>
       <Container as={'div'} color={'default'}>
         <Heading as="h2" className={'mb-8 text-center'}>
           {slice.primary.heading}
         </Heading>
       </Container>
-        <div className={'w-full pt-5 md:pt-8 lg:pt-16 pb-16 md:pb-24 lg:pb-28'}>
+      <div className={'w-full'}>
           <SliderDynamicList contentType={'guide'} size={'default'} baseUrl={'/resources/guides'} />
         </div>
-    </section>)
+    </Container>)
     }
 
   if (slice.variation === 'orthotics') {

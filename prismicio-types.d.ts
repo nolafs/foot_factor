@@ -5350,6 +5350,16 @@ export interface SoleDeconstructSliceDefaultPrimaryItemsItem {
   image: prismic.ImageField<never>;
 
   /**
+   * Indicator field in *SoleDeconstruct → Default → Primary → Items*
+   *
+   * - **Field Type**: Image
+   * - **Placeholder**: *None*
+   * - **API ID Path**: sole_deconstruct.default.primary.items[].indicator
+   * - **Documentation**: https://prismic.io/docs/fields/image
+   */
+  indicator: prismic.ImageField<never>;
+
+  /**
    * Title field in *SoleDeconstruct → Default → Primary → Items*
    *
    * - **Field Type**: Text
@@ -5358,6 +5368,16 @@ export interface SoleDeconstructSliceDefaultPrimaryItemsItem {
    * - **Documentation**: https://prismic.io/docs/fields/text
    */
   title: prismic.KeyTextField;
+
+  /**
+   * Excerpt field in *SoleDeconstruct → Default → Primary → Items*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: sole_deconstruct.default.primary.items[].excerpt
+   * - **Documentation**: https://prismic.io/docs/fields/text
+   */
+  excerpt: prismic.KeyTextField;
 
   /**
    * Body field in *SoleDeconstruct → Default → Primary → Items*
@@ -5875,6 +5895,17 @@ export interface VerticalStepsWithImagesSliceDefaultPrimary {
    * - **Documentation**: https://prismic.io/docs/fields/repeatable-group
    */
   steps: prismic.GroupField<Simplify<VerticalStepsWithImagesSliceDefaultPrimaryStepsItem>>;
+
+  /**
+   * Section Padding field in *VerticalStepsWithImages → Default → Primary*
+   *
+   * - **Field Type**: Boolean
+   * - **Placeholder**: *None*
+   * - **Default Value**: false
+   * - **API ID Path**: vertical_steps_with_images.default.primary.section_padding
+   * - **Documentation**: https://prismic.io/docs/fields/boolean
+   */
+  section_padding: prismic.BooleanField;
 }
 
 /**

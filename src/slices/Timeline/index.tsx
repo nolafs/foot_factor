@@ -15,18 +15,18 @@ export type TimelineProps = SliceComponentProps<Content.TimelineSlice>;
  */
 const Timeline: FC<TimelineProps> = ({ slice }) => {
   return (
-    <section data-slice-type={slice.slice_type} data-slice-variation={slice.variation}>
-      <Container className={'mb-16 text-center pt-16 md:pt-24 lg:pt-32'}>
+    <Container as={'section'} fullWidth={true}  data-slice-type={slice.slice_type} data-slice-variation={slice.variation}>
+      <div className={'mb-16 text-center'} >
         <Heading as="h2">
           {slice.primary.heading}
         </Heading>
         <Lead className="mt-4 max-w-3xl mx-auto">
          {slice.primary.lead}
         </Lead>
-      </Container>
+      </div>
 
       <TimelineList data={slice.primary.events} />
-    </section>
+    </Container>
   );
 };
 

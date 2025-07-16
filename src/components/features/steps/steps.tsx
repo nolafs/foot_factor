@@ -15,10 +15,11 @@ if(typeof window !== 'undefined') {
 }
 
 interface StepsProps {
-    data: VerticalStepsWithImagesSliceDefaultPrimaryStepsItem[]
+    data: VerticalStepsWithImagesSliceDefaultPrimaryStepsItem[];
+    sectionPadding?: boolean;
 }
 
-export const Steps = ({data}: StepsProps) => {
+export const Steps = ({data, sectionPadding}: StepsProps) => {
 
   const contentRef = React.useRef<HTMLDivElement>(null);
   const listRef = React.useRef<HTMLUListElement>(null);
@@ -73,19 +74,21 @@ export const Steps = ({data}: StepsProps) => {
 
 
   return (
-      <Container>
-       <div ref={contentRef} className={'relative w-full isolate mt-10'}>
+       <div ref={contentRef} className={cn('relative w-full isolate ', sectionPadding && 'mt-10')}>
 
          <div id={'progress'} className={'hidden absolute top-0 left-0 w-full z-10 md:flex h-svh  justify-center items-center pointer-events-none'}>
-           <div className={'hidden md:block absolute top-0 left-0  border-t-2 border-t-primary-100 w-1/2 h-10 border-r-2 rounded-tr-4xl -mt-10 ml-[1px]'}>
-           </div>
-           <div
-               className={'hidden md:block absolute top-0 left-1/2  border-t-2 border-t-primary-100 w-1/2 h-10 border-l-2 rounded-tl-4xl -mt-10 -ml-[1px]'}>
-           </div>
-           <div
-               className={'hidden md:block absolute z-10 top-0 left-0 w-full -mt-10 h-10 bg-gradient-to-r from-white via-transparent to-white'}>
-           </div>
+           {sectionPadding && (<>
+             <div className={'hidden md:block absolute top-0 left-0  border-t-2 border-t-primary-100 w-1/2 h-10 border-r-2 rounded-tr-4xl -mt-10 ml-[1px]'}>
+             </div>
+             <div
+                 className={'hidden md:block absolute top-0 left-1/2  border-t-2 border-t-primary-100 w-1/2 h-10 border-l-2 rounded-tl-4xl -mt-10 -ml-[1px]'}>
+             </div>
+             <div
+                 className={'hidden md:block absolute z-10 top-0 left-0 w-full -mt-10 h-10 bg-gradient-to-r from-white via-transparent to-white'}>
+             </div>
+           </>)}
            <StepsProgress percentage={currentProgress} text={currentStep}/>
+
          </div>
 
          <div className={'hidden md:block absolute top-0 left-1/2 -ml-px h-full border-l-2 border-l-primary-100 pointer-events-none'}></div>
@@ -96,7 +99,6 @@ export const Steps = ({data}: StepsProps) => {
               ))}
           </ul>
        </div>
-      </Container>
   )
 }
 

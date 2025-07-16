@@ -22,7 +22,7 @@ export const SectionContentWithButton = ({heading, body, subheading, links, hasB
 
     return (
         <Container as={'section'} padding={'lg'} data-slice-type={slice_type} data-slice-variation={variation}>
-          <SectionColumns heading={heading}  classNames={''}>
+          <SectionColumns heading={heading}  classNames={''} columnSize={'small'}>
             <div
                 className={'content-master text-animation font-medium font-heading text-3xl sm:text-4xl md:text-5xl leading-normal lg:text-6xl lg:leading-[72px]'}>
               <PrismicRichText field={subheading}/>

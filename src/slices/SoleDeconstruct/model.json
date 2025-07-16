@@ -26,10 +26,25 @@
                   "thumbnails": []
                 }
               },
+              "indicator": {
+                "type": "Image",
+                "config": {
+                  "label": "Indicator",
+                  "constraint": {},
+                  "thumbnails": []
+                }
+              },
               "title": {
                 "type": "Text",
                 "config": {
                   "label": "Title",
+                  "placeholder": ""
+                }
+              },
+              "excerpt": {
+                "type": "Text",
+                "config": {
+                  "label": "Excerpt",
                   "placeholder": ""
                 }
               },
@@ -39,7 +54,7 @@
                   "label": "Body",
                   "placeholder": "",
                   "allowTargetBlank": true,
-                  "multi": "strong,em,hyperlink,list-item,o-list-item,paragraph"
+                  "multi": "paragraph,preformatted,heading1,heading2,heading3,heading4,heading5,heading6,strong,em,hyperlink,image,embed,list-item,o-list-item,rtl"
                 }
               }
             }

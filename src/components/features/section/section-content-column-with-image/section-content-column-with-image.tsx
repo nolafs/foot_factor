@@ -26,9 +26,9 @@ export const SectionContentColumnWithImage = ({as = 'section',heading, body, ima
     return (
       <Tag data-slice-type={slice_type} data-slice-variation={variation} className={cn('w-full', color === 'default' && 'bg-background', color === 'Accent' && 'bg-accent-50' , color === 'Primary' && 'bg-primary')}>
         {image && isFilled.image(image) && style === 'full' && (
-              <div className={'w-full flex justify-center aspect-w-16 aspect-h-9'}>
+              <div className={'w-full flex justify-center'}>
                 <PrismicNextImage field={image}
-                                  className={cn('w-full h-full object-center object-fit')}/>
+                                  className={cn('w-full h-auto object-center object-fit')}/>
               </div>
           )
         }
@@ -37,8 +37,8 @@ export const SectionContentColumnWithImage = ({as = 'section',heading, body, ima
           style === 'framed' && (
             <div className={'flex flex-col gap-5 md:gap-8 lg:gap-10'}>
                 {image && (
-                    <div className={'w-full flex justify-center aspect-w-16 aspect-h-9 '}>
-                        <PrismicNextImage field={image} className={cn('w-full h-full object-center object-cover rounded-4xl overflow-hidden')} />
+                    <div className={'w-full flex justify-center'}>
+                        <PrismicNextImage field={image} className={cn('w-full h-auto object-center object-fit rounded-4xl overflow-hidden')} />
                     </div>
                 )}
             </div>)

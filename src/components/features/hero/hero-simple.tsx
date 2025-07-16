@@ -36,7 +36,7 @@ export const HeroSimple = ({wave_type, subheading, heading, label}: HeroSimplePr
                     <Heading as="h1" size={'xl'} className="mt-2">
                         {heading}
                     </Heading>
-                    <Lead className="mt-6 max-w-3xl" size={'lg'}>{subheading}</Lead>
+                    <Lead className="mt-2 sm:mt-2 md:mt-4 lg:mt-6 max-w-3xl" size={'lg'}>{subheading}</Lead>
                 </Container>
         </div>
     );

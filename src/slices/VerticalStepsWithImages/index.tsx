@@ -3,6 +3,7 @@ import { type Content } from '@prismicio/client';
 import { type SliceComponentProps } from '@prismicio/react';
 import Steps from '@/components/features/steps/steps';
 import StepsMedia from '@/components/features/steps/steps-media';
+import {Container} from '@/components/ui/container';
 
 /**
  * Props for `VerticalStepsWithImages`.
@@ -23,9 +24,9 @@ const VerticalStepsWithImages: FC<VerticalStepsWithImagesProps> = ({ slice }) =>
 
 
   return (
-    <section data-slice-type={slice.slice_type} data-slice-variation={slice.variation}>
-      <Steps data={slice.primary.steps} />
-    </section>
+    <Container as={'section'} padding={slice.primary.section_padding ? 'lg' : 'base'} data-slice-type={slice.slice_type} data-slice-variation={slice.variation}>
+      <Steps data={slice.primary.steps} sectionPadding={slice.primary.section_padding}/>
+    </Container>
   );
 };
 
