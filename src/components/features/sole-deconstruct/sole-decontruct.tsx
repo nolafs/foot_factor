@@ -9,6 +9,7 @@ import {PrismicRichText} from '@prismicio/react';
 import {Container} from '@/components/ui/container';
 import {PrismicNextImage} from '@prismicio/next';
 import {cn} from '@/lib/utils';
+import {Wave} from '@/components/wave';
 
 if (typeof window !== 'undefined') {
     gsap.registerPlugin(ScrollTrigger);
@@ -55,6 +56,17 @@ export const SoleDeconstructor = ({data}: SoleDeconstructProps) => {
                     end: "bottom center",
                     onEnter: () => {
                         // fade in the indicator for the current item
+                        gsap.fromTo(`.item-image-${index}`, {
+                            opacity: 0,
+                            y: '100%',
+                        },
+                        {
+                            opacity: 1,
+                            y: 0,
+                            duration: 0.5,
+                            ease: 'power2.out',
+                        });
+
                         gsap.to(`.indicator-${index}`, {
                             opacity: 1,
                             duration: 0.5,
@@ -116,7 +128,7 @@ export const SoleDeconstructor = ({data}: SoleDeconstructProps) => {
             <div className={'flex  min-h-svh py-10 md:py-20 lg:py-32'}>
                 <div className={'w-1/2 image relative h-svh pt-20'}>
                     {data.map((item, index) => (
-                        <div key={index} className={'item-image absolute w-full'}>
+                        <div key={index} className={`item-image-${index} absolute w-full opacity-0`}>
                             <PrismicNextImage field={item.image} />
                         </div>
                     ))}
@@ -128,7 +140,7 @@ export const SoleDeconstructor = ({data}: SoleDeconstructProps) => {
                 </div>
                 <div className={'w-1/2'}>
                     {data.map((item, index) => (
-                        <div key={index} className={'item-content flex flex-col gap-2 h-svh opacity-1 my-5'}>
+                        <div key={index} className={'item-content flex flex-col gap-2 h-svh last:h-[50vh]  opacity-1 my-5 opacity-0'}>
                             <header  className={'flex space-x-5 items-center mb-5'}>
                             <div className={'header-num border border-primary-400 rounded-full w-12 h-12 flex items-center justify-center text-2xl font-bold text-primary-400 '}>
                                 <span>{index + 1}</span>
