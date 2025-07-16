@@ -73,6 +73,11 @@ export async function generateMetadata({}: Props, parent: ResolvingMetadata): Pr
     openGraph: {
       images: [...defaultImages],
     },
+    verification: {
+      other: {
+        'algolia-site-verification': '3032BA6863E51546',
+      }
+    },
     robots: {
       index: true,
       follow: true,

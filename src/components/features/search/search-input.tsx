@@ -13,7 +13,6 @@ import {
 } from 'react-instantsearch';
 import SearchHitItem from '@/components/features/search/search-hit-item';
 import { InstantSearchNext } from 'react-instantsearch-nextjs';
-import { Subheading } from '@/components/ui/text';
 import React, { FormEvent } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import cn from 'clsx';
