@@ -12,14 +12,23 @@ import {CircleArrowRight} from 'lucide-react';
 import BlogArticle from '@/slices/Megamenu/component/blog-article';
 import {Container} from '@/components/ui/container';
 import Link from 'next/link';
-type Params = { uid: string };
+type Params = { uid: string, cat: string };
 
 export async function generateMetadata({params}: { params: Promise<Params> }): Promise<Metadata> {
-  const {uid} = await params;
+  const {uid, cat} = await params;
   const client = createClient();
   const page = await client.getByUID('condition', uid).catch(() => notFound());
 
   return {
+    metadataBase: new URL(
+        `${process.env.NEXT_PUBLIC_BASE_URL}/${cat}/${page.uid}`
+    ),
+    alternates: {
+      canonical: `${process.env.NEXT_PUBLIC_BASE_URL}/conditions/${cat}/${page.uid}`,
+      types: {
+        'application/rss+xml': `${process.env.NEXT_PUBLIC_BASE_URL}/feed.xml`,
+      },
+    },
     title: page.data.meta_title,
     description: page.data.meta_description,
     openGraph: {

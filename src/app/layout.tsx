@@ -59,7 +59,7 @@ export async function generateMetadata({}: Props, parent: ResolvingMetadata): Pr
     metadataBase: new URL(
       isURL(settings.data?.canonical_url ?? '')
         ? settings.data.canonical_url!
-        : (process.env.NEXT_PUBLIC_SITE_URL ?? 'https://footfactor.com'),
+        : (process.env.NEXT_PUBLIC_BASE_URL ?? 'https://footfactor.com'),
     ),
     alternates: {
       canonical: settings.data?.canonical_url ?? process.env.NEXT_PUBLIC_BASE_URL ?? 'https://footfactor.com',

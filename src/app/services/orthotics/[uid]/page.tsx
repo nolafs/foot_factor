@@ -16,6 +16,15 @@ export async function generateMetadata({params}: { params: Promise<Params> }): P
   const page = await client.getByUID('orthotics', uid).catch(() => notFound());
 
   return {
+    metadataBase: new URL(
+        `${process.env.NEXT_PUBLIC_BASE_URL}/services/orthotics/${page.uid}`
+    ),
+    alternates: {
+      canonical: `${process.env.NEXT_PUBLIC_BASE_URL}/services/orthotics/${page.uid}`,
+      types: {
+        'application/rss+xml': `${process.env.NEXT_PUBLIC_BASE_URL}/feed.xml`,
+      },
+    },
     title: page.data.meta_title,
     description: page.data.meta_description ?? asText(page.data.lead),
     openGraph: {

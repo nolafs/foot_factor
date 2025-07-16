@@ -91,12 +91,18 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   }
 
   return {
+    metadataBase: new URL(
+        `${process.env.NEXT_PUBLIC_BASE_URL}/resources/guides/${id}`
+    ),
+    alternates: {
+      canonical: `${process.env.NEXT_PUBLIC_BASE_URL}/resources/guides/${id}`,
+      types: {
+        'application/rss+xml': `${process.env.NEXT_PUBLIC_BASE_URL}/feed.xml`,
+      },
+    },
     title: post.data.name,
     description: description,
     authors: [{ name: author?.name ?? '' }],
-    alternates: {
-      canonical: `/resources/guide/${id}`,
-    },
     creator: author?.name,
     publisher: author?.name,
     keywords: tags.filter(tag => tag !== false).length ? tags.filter(tag => tag !== false) : null,

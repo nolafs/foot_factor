@@ -34,6 +34,15 @@ export async function generateMetadata(
 
 
   return {
+    metadataBase: new URL(
+        `${process.env.NEXT_PUBLIC_BASE_URL}/resources/case-studies/${page.uid}`
+    ),
+    alternates: {
+      canonical: `${process.env.NEXT_PUBLIC_BASE_URL}/resources/case-studies/${page.uid}`,
+      types: {
+        'application/rss+xml': `${process.env.NEXT_PUBLIC_BASE_URL}/feed.xml`,
+      },
+    },
     title: `Foot Factor - ${pageTitle}`,
     description: page.data.meta_description ?? parentMeta.description,
     openGraph: {
