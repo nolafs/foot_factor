@@ -51,7 +51,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
   const conditionsPosts = conditions.map(post => {
     return {
-      url: `${process.env.NEXT_PUBLIC_BASE_URL}/conditions/${(post.data.category as {data:{name:string}}).data.name}/${post.uid}`,
+      url: `${process.env.NEXT_PUBLIC_BASE_URL}/conditions/${(post.data.category as {uid:string}).uid}/${post.uid}`,
       lastModified: post.last_publication_date?.toString() ?? new Date().toISOString(),
       changeFrequency: 'monthly',
       priority: 0.8,
