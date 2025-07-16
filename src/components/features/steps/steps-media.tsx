@@ -209,6 +209,7 @@ const StepMedia = ({data, index, totalItems}: StepMediaProps) => {
                 muted={true}
                 loop={true}
                 autoplay={true}
+                playsinline={true}
                 poster={data.image.url}
                   width="100%"
                   height="100%"
