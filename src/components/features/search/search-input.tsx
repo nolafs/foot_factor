@@ -72,9 +72,10 @@ export function SearchInput({ isSearchPage = true }: { isSearchPage: boolean }) 
               }}
               onSubmit={() => {
                 if (!isSearchPage) {
-                  console.log('Search submitted:', searchParams.getAll('blog[query]'));
-                  const query = searchParams.getAll('blog[query]')?.join(' ');
-                  router.push(`/search/?blog%5Bquery%5D=${query}`);
+                  console.log('Search submitted:', searchParams.getAll('global[query]'));
+                  const query = searchParams.getAll('global[query]')?.join(' ');
+
+                  router.push(`/search/?global%5Bquery%5D=${query}`);
 
                   setSearchDialog(false);
                 }

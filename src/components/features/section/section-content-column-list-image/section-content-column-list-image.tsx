@@ -1,5 +1,12 @@
 'use client';
-import {type ImageField, isFilled, type KeyTextField, type RichTextField, type SelectField} from '@prismicio/client';
+import {
+  asText,
+  type ImageField,
+  isFilled,
+  type KeyTextField,
+  type RichTextField,
+  type SelectField
+} from '@prismicio/client';
 import React from 'react';
 import {Container} from '@/components/ui/container';
 import {PrismicNextImage} from '@prismicio/next';
@@ -28,6 +35,13 @@ export const SectionContentColumnListImage = ({as = 'section',heading, items, im
         {isFilled.image(image) && (
             <div className={'hidden lg:block absolute bottom-0 w-1/2'}>
               <PrismicNextImage field={image}
+                                fallbackAlt={
+                                  (Array.isArray(heading) && isFilled.richText(heading)
+                                      ? asText(heading)
+                                      : typeof heading === 'string'
+                                          ? heading
+                                          : 'Section Image') as ''
+                                }
                                 className={cn('w-full h-full object-cover object-center rounded-4xl overflow-hidden')}/>
             </div>
         )}
@@ -65,9 +79,9 @@ export const SectionContentColumnListImage = ({as = 'section',heading, items, im
                       <div>
 
                         {isFilled.richText(item.body) && (
-                          <p className={cn(color === 'Primary' ? 'text-gray-400' : 'text-gray-700', 'mt-2')}>
+                          <div className={cn(color === 'Primary' ? 'text-gray-400' : 'text-gray-700', 'mt-2')}>
                             <PrismicRichText field={item.body}/>
-                          </p>
+                          </div>
                         )}
                       </div>
                     </li>)

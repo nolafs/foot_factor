@@ -11,14 +11,14 @@ import type {ResolvedOpenGraph} from 'next/dist/lib/metadata/types/opengraph-typ
 
 type Params = { uid: string };
 
-export async function generateMetadata({params}: { params: Promise<Params> }): Promise<Metadata> {
+export async function generateMetadata({params, parent}: { params: Promise<Params>, parent: ResolvingMetadata }): Promise<Metadata> {
   const {uid} = await params;
   const client = createClient();
   const page = await client.getByUID('orthotics', uid).catch(() => notFound());
 
   let pageTitle = '';
   const parentMeta = await parent;
-  const parentOpenGraph: ResolvedOpenGraph | null = parentMeta.openGraph ?? null;
+  const parentOpenGraph: ResolvedOpenGraph | null = parentMeta?.openGraph ?? null;
 
   if (parentMeta?.title) {
     pageTitle = parentMeta.title.absolute;
