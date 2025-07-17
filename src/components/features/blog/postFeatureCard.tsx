@@ -1,11 +1,13 @@
 import React from 'react';
 import {Badge} from '@/components/ui/badge';
 import {PrismicNextImage} from '@prismicio/next';
-import dayjs from 'dayjs';
+import Image from 'next/image';
 import {PrismicRichText} from '@prismicio/react';
 import type {ImageFieldImage} from '@prismicio/client';
 import {type PostsDocument} from 'prismicio-types';
 import Link from 'next/link';
+import Placeholder from '@/assets/placeholder-img.png' ;
+import dayjs from 'dayjs';
 
 interface PostFeatureCardProps {
     post: PostsDocument;
@@ -25,7 +27,7 @@ export const PostFeatureCard = ({post, showExcerpt = true, showAuthor = true}: P
               </div>
           )}
 
-          {post.data.feature_image && (<div className={'aspect-w-16 aspect-h-9'}>
+          {post.data.feature_image ? (<div className={'aspect-w-16 aspect-h-9'}>
               <PrismicNextImage
                   field={post.data.feature_image}
                   width={420}
@@ -34,7 +36,7 @@ export const PostFeatureCard = ({post, showExcerpt = true, showAuthor = true}: P
                   className={' w-full h-full rounded-2xl object-cover'}
                   imgixParams={{fm: 'webp', fit: 'crop', crop: ['focalpoint'], width: 420, height: 235, q: 70}}
               /></div>
-          )}
+          ) : (<Image src={Placeholder} alt={'Placeholder image'} />)}
           <div className="flex flex-1 flex-col p-8">
               <div className="text-sm/5 text-gray-700">
                   {dayjs(post.data.publishing_date).format('dddd, MMMM D, YYYY')}

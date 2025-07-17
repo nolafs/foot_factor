@@ -22,7 +22,7 @@ import { Container } from '@/components/ui/container';
 
 export function SearchInput({ isSearchPage = true }: { isSearchPage: boolean }) {
   const router = useRouter();
-  const { openSearchDialog, setSearchDialog } = useSearch();
+  const { setSearchDialog } = useSearch();
   const searchParams = useSearchParams();
 
   const closeOnChange = () => window.innerWidth > 375;

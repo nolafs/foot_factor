@@ -6,6 +6,7 @@ import { components } from '@/slices';
 import React from 'react';
 import {Hero} from '@/components/features/hero/hero';
 import {asImageSrc, isFilled} from '@prismicio/client';
+import type {ResolvedOpenGraph} from 'next/dist/lib/metadata/types/opengraph-types';
 
 type Params = { uid: string };
 
@@ -19,6 +20,7 @@ export async function generateMetadata(
 
   let pageTitle = '';
   const parentMeta = await parent;
+  const parentOpenGraph: ResolvedOpenGraph | null = parentMeta.openGraph ?? null;
 
   if (parentMeta?.title) {
     pageTitle = parentMeta.title.absolute;
@@ -40,7 +42,7 @@ export async function generateMetadata(
     openGraph: {
       title: isFilled.keyText(page.data.meta_title) ? page.data.meta_title : pageTitle,
       description: isFilled.keyText(page.data.meta_description) ? page.data.meta_description : '',
-      images: isFilled.image(page.data.meta_image) ? [asImageSrc(page.data.meta_image)] : [],
+      images: isFilled.image(page.data.meta_image) ? [asImageSrc(page.data.meta_image)] : parentOpenGraph?.images ? parentOpenGraph.images : [],
     },
   };
 }

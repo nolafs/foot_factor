@@ -1,6 +1,5 @@
 
 import { Container } from '@/components/ui/container';
-import { Heading, Subheading } from '@/components/ui/text';
 import { createClient } from '@/prismicio';
 import { ChevronLeftIcon } from '@heroicons/react/16/solid';
 import { PrismicNextImage } from '@prismicio/next';
@@ -8,16 +7,17 @@ import dayjs from 'dayjs';
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import { PrismicRichText } from '@prismicio/react';
-
-import { GradientBackground } from '@/components/ui/gradient';
 import React from 'react';
-import {asText, type ImageFieldImage, type LinkField, type RichTextField} from '@prismicio/client';
+import {asText, type ImageFieldImage, isFilled, type LinkField, type RichTextField} from '@prismicio/client';
 import { type Author } from '@/types';
 import PostAside from '@/components/features/blog/postAside';
 import { type WithContext, type Article } from 'schema-dts';
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
 import HeroSimple from '@/components/features/hero/hero-simple';
+import Image from 'next/image';
+import Placeholder  from '@/assets/placeholder-img.png';
+
 
 
 type Props = {
@@ -190,6 +190,8 @@ export default async function Page({ params }: Props) {
 
           <div className="text-gray-700">
             <div className="max-w-2xl xl:mx-auto">
+
+              {isFilled.image(post.feature_image) ? (
               <PrismicNextImage
                 field={post.feature_image}
                 width={672}
@@ -198,6 +200,17 @@ export default async function Page({ params }: Props) {
                 className="mb-10 aspect-[3/2] w-full rounded-2xl object-cover shadow-xl"
                 imgixParams={{ fm: 'webp', fit: 'crop', crop: ['focalpoint'], q: 70 }}
               />
+                  ) : (
+
+              <Image
+                  src={Placeholder}
+                  width={672}
+                  height={448}
+                  alt="Placeholder image"
+                  className="mb-10 aspect-[3/2] w-full rounded-2xl object-cover shadow-xl"
+              />
+              )}
+
 
               <div className={'prose md:prose-lg'}>{post.content && <PrismicRichText field={post.content}  />}</div>
 

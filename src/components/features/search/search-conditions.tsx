@@ -1,5 +1,4 @@
 import React from 'react';
-import {ImageField} from '@prismicio/client';
 import BentoWrapper from '@/components/features/bento/bento-wrapper';
 import BentoCard from '@/components/features/bento/bento-card';
 import Link from 'next/link';
@@ -7,6 +6,7 @@ import {PrismicNextImage} from '@prismicio/next';
 import {Container} from '@/components/ui/container';
 import {ConditionCategoryDocument} from '@/prismic-types';
 import {buttonVariants} from '@/components/ui/button';
+import {AutoComplete} from '@/components/features/search/autocomplete';
 
 interface SearchConditionsProps {
     conditionCategories?: ConditionCategoryDocument[]
@@ -14,8 +14,11 @@ interface SearchConditionsProps {
 
 export const SearchConditions = ({conditionCategories}: SearchConditionsProps) => {
 
-  return (<Container as={'section'}>
-      <BentoWrapper>
+  return (<Container as={'section'} padding={'lg'}>
+
+    <AutoComplete />
+
+      <BentoWrapper className={'!mt-0'}>
         {conditionCategories?.map((category, idx) => (
             <BentoCard key={'condition_'+ category.id} columns={Math.floor(idx / 2) % 2 === 0 ? (idx % 2 === 0 ? 4 : 2) : (idx % 2 === 0 ? 2 : 4)}>
               <Link href={'/conditions/' + category.uid} className={'group'}>

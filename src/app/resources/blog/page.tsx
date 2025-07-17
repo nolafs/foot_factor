@@ -1,7 +1,4 @@
 import { Container } from '@/components/ui/container';
-import { GradientBackground } from '@/components/ui/gradient';
-
-import { Heading, Lead, Subheading } from '@/components/ui/text';
 import { ChevronRightIcon } from '@heroicons/react/16/solid';
 import dayjs from 'dayjs';
 import type { Metadata, ResolvingMetadata } from 'next';
@@ -18,7 +15,7 @@ import type { ResolvedOpenGraph } from 'next/dist/lib/metadata/types/opengraph-t
 import type { Author, OGImage } from '@/types';
 import Filter from '../../../components/features/blog/postsFilter';
 import AuthorLink from '@/components/features/author/author-link';
-import { type PostCategoryDocument, type PostTagsDocument } from '../../../../prismicio-types';
+import { type PostCategoryDocument, type PostTagsDocument } from '@/prismic-types';
 import Link from 'next/link';
 import HeroSimple from '@/components/features/hero/hero-simple';
 
@@ -64,7 +61,7 @@ export async function generateMetadata(
 
   return {
     title: 'Foot Factor - Articles',
-    description: asText(page?.data.excerpt)! ?? "Looking for resources on ankle pain? You're in the right place.",
+    description: asText(page?.data.excerpt)! ?? "Looking for resources on foot health? You're in the right place.",
     openGraph: {
       title: 'Foot Factor',
       images: [
@@ -182,7 +179,6 @@ async function Posts({ page, category, tags }: { page: number; category?: string
 
 export default async function Blog({ searchParams }: Props) {
   const params = await searchParams;
-
   const page = params.page && typeof params.page === 'string' && parseInt(params.page) > 1 ? parseInt(params.page) : 1;
 
   //
@@ -209,7 +205,7 @@ export default async function Blog({ searchParams }: Props) {
       <Container className="mt-16 pb-24">
         <Filter categorySelected={categories ? categories[0] : undefined} tagSelected={tags ? tags[0] : undefined} />
         <Posts page={page} category={categories} tags={tags} />
-        <Pagination contentType={'posts'} slug={'blog'} page={page} category={categories} tags={tags} />
+        <Pagination contentType={'posts'} slug={'resources/blog'} page={page} category={categories} tags={tags} />
       </Container>
     </main>
   );

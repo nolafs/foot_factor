@@ -6,6 +6,7 @@ import { components } from '@/slices';
 import React from 'react';
 import {asImageSrc, asText, isFilled} from '@prismicio/client';
 import {Hero} from '@/components/features/hero/hero';
+import type {ResolvedOpenGraph} from 'next/dist/lib/metadata/types/opengraph-types';
 
 
 type Params = { uid: string };
@@ -14,6 +15,14 @@ export async function generateMetadata({params}: { params: Promise<Params> }): P
   const {uid} = await params;
   const client = createClient();
   const page = await client.getByUID('orthotics', uid).catch(() => notFound());
+
+  let pageTitle = '';
+  const parentMeta = await parent;
+  const parentOpenGraph: ResolvedOpenGraph | null = parentMeta.openGraph ?? null;
+
+  if (parentMeta?.title) {
+    pageTitle = parentMeta.title.absolute;
+  }
 
   return {
     metadataBase: new URL(
@@ -25,12 +34,12 @@ export async function generateMetadata({params}: { params: Promise<Params> }): P
         'application/rss+xml': `${process.env.NEXT_PUBLIC_BASE_URL}/feed.xml`,
       },
     },
-    title: page.data.meta_title,
+    title: `${isFilled.keyText(page.data.meta_title) ? page.data.meta_title : pageTitle}`,
     description: page.data.meta_description ?? asText(page.data.lead),
     openGraph: {
       title: isFilled.keyText(page.data.meta_title) ? page.data.meta_title : undefined,
       description: isFilled.keyText(page.data.meta_description) ? page.data.meta_description :  asText(page.data.lead),
-      images: isFilled.image(page.data.meta_image) ? [asImageSrc(page.data.meta_image)] : page.data.image.url ? [page.data.image.url] : [],
+      images: isFilled.image(page.data.meta_image) ? [asImageSrc(page.data.meta_image)] : page.data.image.url ? [page.data.image.url] : parentOpenGraph?.images ? parentOpenGraph.images : [],
     },
   };
 }
