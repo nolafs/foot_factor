@@ -59,7 +59,7 @@ export function SearchInput({ isSearchPage = true }: { isSearchPage: boolean }) 
               ? 'sticky top-0 z-20 shrink border-b border-gray-200 bg-white/60 pt-16 backdrop-blur-sm sm:pt-12 md:pt-24'
               : ''
           }>
-          <Container>
+          <div className={'container mx-auto'}>
             <SearchBox
               placeholder="Search resources"
               classNames={{
@@ -104,6 +104,9 @@ export function SearchInput({ isSearchPage = true }: { isSearchPage: boolean }) 
               <h3 className={'tracking-tight md:tracking-widest'}>Search Results</h3>
 
               <div className={' flex flex-wrap gap-2'}>
+                <FacetDropdown closeOnChange={closeOnChange} buttonText={'Type'} classNames={{root: 'my-TypeDropdown'}}>
+                  <RefinementList attribute="type" searchable={true} searchablePlaceholder="Search..."/>
+                </FacetDropdown>
                 <FacetDropdown closeOnChange={closeOnChange} classNames={{ root: 'my-CategoryDropdown' }}>
                   <RefinementList attribute="category" searchable={true} searchablePlaceholder="Search..." />
                 </FacetDropdown>
@@ -116,7 +119,7 @@ export function SearchInput({ isSearchPage = true }: { isSearchPage: boolean }) 
               </div>
             </div>
             <hr className={cn('border-t border-gray-200', isSearchPage ? 'mt-6' : 'mt-6 opacity-0')} />
-          </Container>
+          </div>
         </div>
         <Container className={'!px-0 md:!px-6'}>
           <div className="mt-5 flex h-full grow flex-col justify-between">

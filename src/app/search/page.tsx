@@ -7,6 +7,7 @@ import { type ResolvedOpenGraph } from 'next/dist/lib/metadata/types/opengraph-t
 import { Heading, Lead, Subheading } from '@/components/ui/text';
 import { Container } from '@/components/ui/container';
 import { SearchInput } from '@/components/features/search/search-input';
+import HeroSimple from '@/components/features/hero/hero-simple';
 
 type Params = { uid: string };
 
@@ -36,17 +37,13 @@ export async function generateMetadata(
 export default async function Page() {
   return (
     <main className={'w-full overflow-hidden'}>
-      <GradientBackground />
-      <Container className="mt-24 md:mt-36">
-        <Subheading className="mt-16">Search</Subheading>
-        <Heading as="h1" className="mt-2">
-          Search Foot Factor
-        </Heading>
-        <Lead className="mt-6 max-w-3xl">
-          Explore expert advice, treatment insights, and recovery tips through our curated articles, video and other
-          resources. Stay informed and take charge of your ankle health journey.
-        </Lead>
-      </Container>
+      <HeroSimple
+          wave_type={'default'}
+        heading={'Search Foot Factor'}
+        subheading={'Explore expert advice, treatment insights, and recovery tips through our curated articles, video and other\n' +
+            '          resources. Stay informed and take charge of your ankle health journey.'}
+        label={'search'}
+      />
       <div className="mb-24 mt-5 md:mb-24 md:mt-10">
         <SearchInput isSearchPage={true} />
       </div>

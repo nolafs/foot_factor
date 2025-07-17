@@ -129,6 +129,21 @@ export type AuthorDocument<Lang extends string = string> = prismic.PrismicDocume
   Lang
 >;
 
+/**
+ * Item in *Case Studies → Tags*
+ */
+export interface CaseStudiesDocumentDataTagsItem {
+  /**
+   * Tag field in *Case Studies → Tags*
+   *
+   * - **Field Type**: Content Relationship
+   * - **Placeholder**: *None*
+   * - **API ID Path**: case_studies.tags[].tag
+   * - **Documentation**: https://prismic.io/docs/fields/content-relationship
+   */
+  tag: ContentRelationshipFieldWithData<[{ id: 'post_tags'; fields: ['name'] }]>;
+}
+
 type CaseStudiesDocumentDataSlicesSlice = TestimonialSlice | CallToActionSlice | MediaSectionSlice | SectionSlice;
 
 /**
@@ -225,6 +240,17 @@ interface CaseStudiesDocumentData {
   condition: ContentRelationshipFieldWithData<[{ id: 'condition'; fields: ['title'] }]>;
 
   /**
+   * Category field in *Case Studies*
+   *
+   * - **Field Type**: Content Relationship
+   * - **Placeholder**: *None*
+   * - **API ID Path**: case_studies.category
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/fields/content-relationship
+   */
+  category: ContentRelationshipFieldWithData<[{ id: 'condition_category'; fields: ['name'] }]>;
+
+  /**
    * Excerpt field in *Case Studies*
    *
    * - **Field Type**: Text
@@ -234,6 +260,17 @@ interface CaseStudiesDocumentData {
    * - **Documentation**: https://prismic.io/docs/fields/text
    */
   excerpt: prismic.KeyTextField;
+
+  /**
+   * Tags field in *Case Studies*
+   *
+   * - **Field Type**: Group
+   * - **Placeholder**: *None*
+   * - **API ID Path**: case_studies.tags[]
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/fields/repeatable-group
+   */
+  tags: prismic.GroupField<Simplify<CaseStudiesDocumentDataTagsItem>>;
 
   /**
    * Slice Zone field in *Case Studies*
@@ -6016,6 +6053,7 @@ declare module '@prismicio/client' {
       AuthorDocumentData,
       CaseStudiesDocument,
       CaseStudiesDocumentData,
+      CaseStudiesDocumentDataTagsItem,
       CaseStudiesDocumentDataSlicesSlice,
       ConditionDocument,
       ConditionDocumentData,

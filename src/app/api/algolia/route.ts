@@ -83,8 +83,6 @@ export async function POST() {
         const slug = item && 'tag' in item && (item.tag as { uid: string }).uid;
         const name = item && 'tag' in item && (item.tag as { data: { name: string } }).data?.name;
 
-        console.log(item);
-
         return {
           slug,
           name,
@@ -100,7 +98,7 @@ export async function POST() {
 
     // Get all articles from Prismic
     const guides = await client.getAllByType('guide', {
-      fetchLinks: ['author.name', 'author.profile_image', 'condition_category.name'],
+      fetchLinks: ['author.name', 'author.profile_image', 'condition_category.name', 'condition_category'],
     });
 
     // Map articles to Algolia records
@@ -125,8 +123,6 @@ export async function POST() {
         const slug = item && 'tag' in item && (item.tag as { uid: string }).uid;
         const name = item && 'tag' in item && (item.tag as { data: { name: string } }).data?.name;
 
-        console.log(item);
-
         return {
           slug,
           name,
@@ -147,7 +143,7 @@ export async function POST() {
     // Map articles to Algolia records
     const orthoticRecords = orthotics.map(post => ({
       objectID: post.id, // Unique identifier in algolia
-      title: post.data.heading, // Post title
+      title: post.data.heading ?? post.data.meta_title, // Post title
       type: 'orthotics', // Post type
       slug: `/services/orthotics/${post.uid}`, // Post URL slug
       featured: true,
@@ -210,8 +206,10 @@ export async function POST() {
 
     // Get all articles from Prismic
     const caseStudies = await client.getAllByType('case_studies', {
-      fetchLinks: ['condition_category.title', 'author.name', 'author.profile_image'],
+      fetchLinks: ['condition.title', 'condition_category.name', 'condition_category', 'author.name', 'author.profile_image', 'post_tags, post_tags.name'],
     });
+
+
 
     // Map articles to Algolia records
     const caseStudiesRecords = caseStudies.map(post => ({
@@ -229,9 +227,20 @@ export async function POST() {
                   }
               ).name) ||
           'Foot Factor',
+      condition: post.data.condition && 'data' in post.data.condition && (post.data.condition.data as {
+        title: string
+      }).title,
       category:
-          post.data.condition && 'data' in post.data.condition && (post.data.condition.data as { title: string }).title,
-      tags: 'faq',
+          post.data.category && 'data' in post.data.category && (post.data.category.data as { name: string }).name,
+      tags: post.data.tags.map(item => {
+        const slug = item && 'tag' in item && (item.tag as { uid: string }).uid;
+        const name = item && 'tag' in item && (item.tag as { data: { name: string } }).data?.name;
+
+        return {
+          slug,
+          name,
+        };
+      }),
       text: post.data?.excerpt?.slice(0, 5000) ?? post.data?.meta_description ??   '', // Post content transformed to search text
     }));
 
