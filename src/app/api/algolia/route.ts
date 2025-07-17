@@ -52,7 +52,7 @@ export async function POST() {
 
     // Index records to Algolia
     await algoliaClient.saveObjects({ indexName: 'blog', objects: articleRecords });
-    await algoliaClient.saveObjects({ indexName: 'global_pages', objects: articleRecords });
+    await algoliaClient.saveObjects({ indexName: 'global', objects: articleRecords });
 
     //Conditions
 
@@ -96,7 +96,7 @@ export async function POST() {
 
     // Index records to Algolia
     await algoliaClient.saveObjects({ indexName: 'conditions', objects: conditionRecords });
-    await algoliaClient.saveObjects({ indexName: 'global_pages', objects: conditionRecords });
+    await algoliaClient.saveObjects({ indexName: 'global', objects: conditionRecords });
 
     // Get all articles from Prismic
     const guides = await client.getAllByType('guide', {
@@ -137,7 +137,7 @@ export async function POST() {
     }));
 
     // Index records to Algolia
-    await algoliaClient.saveObjects({indexName: 'global_pages', objects: guideRecords});
+    await algoliaClient.saveObjects({indexName: 'global', objects: guideRecords});
 
     // Get all articles from Prismic
     const orthotics = await client.getAllByType('orthotics', {
@@ -183,7 +183,29 @@ export async function POST() {
     }));
 
     // Index records to Algolia
-    await algoliaClient.saveObjects({indexName: 'global_pages', objects: serviceRecords});
+    await algoliaClient.saveObjects({indexName: 'global', objects: serviceRecords});
+
+    // Get all articles from Prismic
+    const pages = await client.getAllByType('page', {
+      fetchLinks: ['post_category.name'],
+    });
+
+    // Map articles to Algolia records
+    const pageRecords = pages.map(post => ({
+      objectID: post.id, // Unique identifier in algolia
+      title: post.data.meta_title, // Post title
+      type: 'page', // Post type
+      slug: `${post.uid}`, // Post URL slug
+      featured: true,
+      author: 'Foot Factor',
+      category: 'all',
+      tags: 'service',
+      image: post.data.meta_image, // Post featured image
+      text:  post.data?.meta_description ?? '', // Post content transformed to search text
+    }));
+
+    // Index records to Algolia
+    await algoliaClient.saveObjects({indexName: 'global', objects: pageRecords});
 
 
     // Return success response if the process completes without any issue
