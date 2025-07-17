@@ -140,17 +140,19 @@ export async function POST() {
       fetchLinks: ['post_category.name'],
     });
 
+    console.log('orthotics', orthotics);
+
     // Map articles to Algolia records
     const orthoticRecords = orthotics.map(post => ({
       objectID: post.id, // Unique identifier in algolia
-      title: post.data.heading ?? post.data.meta_title, // Post title
-      type: 'orthotics', // Post type
+      title: post.data.meta_title ?? post.data.heading, // Post title
+      type: 'service', // Post type
       slug: `/services/orthotics/${post.uid}`, // Post URL slug
       featured: true,
       author: 'Foot Factor',
       category:
           post.data.category && 'data' in post.data.category && (post.data.category.data as { name: string }).name,
-      tags: 'service',
+      tags: ['service', post.data?.subheading?.toLowerCase() ?? 'orthotics'],
       image: post.data.image, // Post featured image
       text: post.data?.description?.slice(0, 5000) ?? post.data?.meta_description ?? '', // Post content transformed to search text
     }));
@@ -166,7 +168,7 @@ export async function POST() {
     // Map articles to Algolia records
     const serviceRecords = services.map(post => ({
       objectID: post.id, // Unique identifier in algolia
-      title: post.data.heading, // Post title
+      title: post.data.meta_title ?? post.data.heading , // Post title
       type: 'service', // Post type
       slug: `/services/${post.uid}`, // Post URL slug
       featured: true,

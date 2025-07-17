@@ -6,7 +6,7 @@ import {
   Download,
   FileDown,
   FileIcon, FileQuestionIcon,
-  Film,
+  Film, Footprints,
   HeartPulse,
   Newspaper,
   SquareArrowOutUpRight
@@ -38,6 +38,7 @@ export const SearchHitItem = ({ hit }: HitProps) => {
               {hit.type === 'service' && <HeartPulse className={'h-5 w-5 text-white'}/>}
               {hit.type === 'case study' && <BookMarked className={'h-5 w-5 text-white'}/>}
               {hit.type === 'faq' && <FileQuestionIcon className={'h-5 w-5 text-white'}/>}
+              {hit.type === 'orthotics' && <Footprints className={'h-5 w-5 text-white'}/> }
             </div>
 
             <Image
@@ -57,6 +58,7 @@ export const SearchHitItem = ({ hit }: HitProps) => {
             {hit.type === 'service' && <HeartPulse className={'h-5 w-5 text-white sm:h-5 sm:w-5 md:h-7 md:w-7'}/>}
             {hit.type === 'case study' && <BookMarked className={'h-5 w-5 text-white sm:h-5 sm:w-5 md:h-7 md:w-7'}/>}
             {hit.type === 'faq' && <FileQuestionIcon className={'h-5 w-5 text-white sm:h-5 sm:w-5 md:h-7 md:w-7'}/>}
+            {hit.type === 'orthotics' && <Footprints className={'h-5 w-5 text-white sm:h-5 sm:w-5 md:h-7 md:w-7'}/>}
           </div>
         )}
       </div>
