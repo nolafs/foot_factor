@@ -9,38 +9,56 @@ import {createRoot, type Root} from 'react-dom/client';
 import React, {
   useEffect,
   useRef,
-  type ReactNode,
   createElement,
   Fragment,
 } from 'react';
 import type {HitBaseItem} from '@/types/hit.type';
 import Link from 'next/link';
 import {Activity, SquareArrowOutUpRight} from 'lucide-react';
-import {Container} from '@/components/ui/container';
 import {Heading} from '@/components/ui/text';
+import {Badge} from '@/components/ui/badge';
+import Image from 'next/image';
 
 const AutocompleteItem = ({item}: { item: HitBaseItem }) => {
   const trimmedText =
       item.text.length > 100 ? item.text.substring(0, 200) + '...' : item.text;
 
+  const imageUrl: string | null = item.image?.url as string | null;
+
   return (
-      <div className="items-top group relative flex w-full justify-between space-x-2 p-2">
-        <div>
-          <div className="rounded-md bg-gray-900/30 p-1.5 group-hover:bg-pink-600">
-            <Activity className="h-5 w-5 text-white sm:h-5 sm:w-5 md:h-7 md:w-7"/>
+      <div className="group relative flex w-full items-center justify-between space-x-4 p-4 border-b border-gray-200">
+
+          <div className={'relative isolate'}>
+
+            {imageUrl ? (<>
+            <div className={'relative h-fit w-fit rounded-md bg-accent/60 p-2 md:absolute md:left-2 md:top-2'}>
+                  <Activity className="h-3 w-3 text-white"/>
+            </div>
+            <Image
+                src={imageUrl}
+                alt={item.title}
+                width={120}
+                height={68}
+                className={'hidden aspect-[16/9] h-full w-full rounded-md object-cover object-center sm:hidden md:block'}
+            /></>
+            ) : (
+                <div className={'h-fit w-fit rounded-md bg-accent/60 p-2 md:p-3'}>
+                  <Activity className={'h-5 w-5 text-white sm:h-5 sm:w-5 md:h-7 md:w-7'}/>
+                </div>
+            )}
           </div>
-        </div>
-        <div className="flex grow flex-col">
-          <div className="flex w-auto rounded-full text-[8px] text-gray-500">
-            {item.category}
-          </div>
-          <div className="font-semibold">{item.title}</div>
+
+        <div className="flex grow flex-col space-y-2">
+
+          <Badge className={'w-fit bg-accent capitalize text-[9px]'}>{item.category}</Badge>
+
+          <div className="font-semibold group-hover:text-accent">{item.title}</div>
           <p className="mt-2 text-sm text-gray-600">{trimmedText}</p>
         </div>
         <div>
           <Link href={`/conditions/${item.category}/${item.slug}`}>
             <span className="absolute inset-0"/>
-            <SquareArrowOutUpRight className="h-5 w-5 text-black group-hover:text-pink-600"/>
+            <SquareArrowOutUpRight className="h-5 w-5 text-black group-hover:text-accent"/>
           </Link>
         </div>
       </div>

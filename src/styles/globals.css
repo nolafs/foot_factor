@@ -121,3 +121,9 @@
 .aa-Panel {
   z-index: 9999 !important;
 }
+
+.aa-Item {
+  &[aria-selected="true"] {
+    background-color: transparent !important;
+  }
+}

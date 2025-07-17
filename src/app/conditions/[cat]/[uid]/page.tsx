@@ -46,7 +46,7 @@ export default async function Page({ params }: { params: Promise<Params> }) {
 
   return (
     <main className={'w-full overflow-hidden'}>
-      <Hero heading={page.data.title} image={page.data.feature_image} subheading={'Condition'} lead={page.data.excerpt} />
+      <Hero heading={page.data.title} image={page.data.feature_image} subheading={'Condition'} vAlign={'bottom'} lead={page.data.excerpt} />
       <SliceZone slices={page.data.slices} components={components} />
 
       <Container as={'section'} color={'accent'} padding={'lg'}>

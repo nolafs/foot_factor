@@ -12,6 +12,7 @@ import Link from 'next/link';
 import {asImageSrc, filter, isFilled} from '@prismicio/client';
 import {PrismicNextImage} from '@prismicio/next';
 import {Badge} from '@/components/ui/badge';
+import {AutoComplete} from '@/components/features/search/autocomplete';
 
 
 type Params = { cat: string };
@@ -89,8 +90,13 @@ export default async function Page({params}: { params: Promise<Params> }) {
     <main className={'w-full overflow-hidden'}>
       <HeroSimple wave_type={'2'} heading={currentCategory} subheading={page.data.lead} label={page.data.title}  />
 
+
       <Container as={'section'}  padding={'lg'}>
-      <ul className={'grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4'}>
+
+        <AutoComplete/>
+
+
+        <ul className={'grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4'}>
         {conditions.map((item, idx)=> (
             <li key={idx}>
               <Link href={`/conditions/${(item.data?.category as { uid: string }).uid}/${item.uid}`} className={'flex flex-col gap-4 p-4 bg-white rounded-lg group  hover:shadow-lg transition-shadow duration-300'}>
