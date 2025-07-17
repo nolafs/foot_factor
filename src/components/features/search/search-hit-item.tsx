@@ -1,6 +1,6 @@
 import React from 'react';
 import Link from 'next/link';
-import {Activity, Download, FileDown, Film, Newspaper, SquareArrowOutUpRight} from 'lucide-react';
+import {Activity, Download, FileDown, FileIcon, Film, HeartPulse, Newspaper, SquareArrowOutUpRight} from 'lucide-react';
 import { Highlight, Snippet } from 'react-instantsearch';
 import { type HitProps } from '@/types';
 import { Badge } from '@/components/ui/badge';
@@ -23,6 +23,9 @@ export const SearchHitItem = ({ hit }: HitProps) => {
             <div className={'relative h-fit w-fit rounded-md bg-accent/60 p-2 md:absolute md:left-2 md:top-2'}>
               {hit.type === 'condition' && <Activity className={'h-5 w-5 text-white'} /> }
               {hit.type === 'article' && <Newspaper className={'h-5 w-5 text-white'} />}
+              {hit.type === 'page' && <FileIcon className={'h-5 w-5 text-white'}/>}
+              {hit.type === 'guide' && <FileDown className={'h-5 w-5 text-white'}/>}
+              {hit.type === 'service' && <HeartPulse className={'h-5 w-5 text-white'}/>}
             </div>
 
             <Image
@@ -37,13 +40,16 @@ export const SearchHitItem = ({ hit }: HitProps) => {
           <div className={'h-fit w-fit rounded-md bg-accent/60 p-2 md:p-3'}>
             {hit.type === 'condition' && <Activity className={'h-5 w-5 text-white sm:h-5 sm:w-5 md:h-7 md:w-7'} />}
             {hit.type === 'article' && <Newspaper className={'h-5 w-5 text-white md:h-7 md:w-7'} />}
+            {hit.type === 'page' && <FileIcon className={'h-5 w-5 text-white'}/>}
+            {hit.type === 'guide' && <FileDown className={'h-5 w-5 text-white'}/>}
+            {hit.type === 'service' && <HeartPulse className={'h-5 w-5 text-white'}/>}
           </div>
         )}
       </div>
       <div className={'flex grow flex-col'}>
         <div className={'mb-3 flex origin-left scale-90 flex-wrap items-center gap-1'}>
-          {hit?.category && <Badge className={'w-fit'}>{hit.category}</Badge>}
-          <Badge className={'w-fit bg-accent capitalize'}>{hit.type}</Badge>
+          {hit?.category && <Badge className={'w-fit'}>{hit.category.toUpperCase()}</Badge>}
+          <Badge className={'w-fit bg-accent capitalize'}>{hit.type.toUpperCase()}</Badge>
         </div>
         <div className={'flex gap-2'}>
           <div className={'flex flex-col'}>
