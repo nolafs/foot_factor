@@ -3,9 +3,8 @@ import { notFound } from 'next/navigation';
 import { SliceZone } from '@prismicio/react';
 import { createClient } from '@/prismicio';
 import { components } from '@/slices';
-import type { OGImage } from '@/types';
-import type { ResolvedOpenGraph } from 'next/dist/lib/metadata/types/opengraph-types';
 import React from 'react';
+import {asImageSrc, isFilled} from '@prismicio/client';
 
 type Params = { uid: string };
 
@@ -18,15 +17,8 @@ export async function generateMetadata(
   const { uid } = await params;
   const page = await client.getByUID('page', uid).catch(() => notFound());
 
-  let image = null;
   let pageTitle = '';
   const parentMeta = await parent;
-  const parentOpenGraph: ResolvedOpenGraph | null = parentMeta.openGraph ?? null;
-
-  if (page.data.meta_image) {
-
-    image = `${page.data.meta_image.url}?w=1200&h=630&fit=crop&fm=webp&q=80`;
-  }
 
   if (parentMeta?.title) {
     pageTitle = parentMeta.title.absolute;
@@ -46,12 +38,9 @@ export async function generateMetadata(
     title: `Foot Factor - ${pageTitle}`,
     description: page.data.meta_description ?? parentMeta.description,
     openGraph: {
-      title: page.data.meta_title ?? parentMeta.title ?? undefined,
-      images: [
-        {
-          url: image ?? (parentOpenGraph?.images ? (parentOpenGraph.images[0] as OGImage).url : ''),
-        },
-      ],
+      title: isFilled.keyText(page.data.meta_title) ? page.data.meta_title : pageTitle,
+      description: isFilled.keyText(page.data.meta_description) ? page.data.meta_description : '',
+      images: isFilled.image(page.data.meta_image) ? [asImageSrc(page.data.meta_image)] : [],
     },
   };
 }

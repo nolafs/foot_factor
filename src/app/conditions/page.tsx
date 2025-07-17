@@ -3,13 +3,10 @@ import { notFound } from 'next/navigation';
 import { SliceZone } from '@prismicio/react';
 import { createClient } from '@/prismicio';
 import { components } from '@/slices';
-import type { OGImage } from '@/types';
-import type { ResolvedOpenGraph } from 'next/dist/lib/metadata/types/opengraph-types';
 import React from 'react';
 import HeroSimple from '@/components/features/hero/hero-simple';
-import {Container} from '@/components/ui/container';
-import Link from 'next/link';
 import SearchConditions from '@/components/features/search/search-conditions';
+import {asImageSrc, isFilled} from '@prismicio/client';
 
 type Params = { uid: string };
 
@@ -20,31 +17,26 @@ export async function generateMetadata(
   const client = createClient();
   const page = await client.getSingle('conditions',).catch(() => notFound());
 
-  let image = null;
   let pageTitle = '';
   const parentMeta = await parent;
-  const parentOpenGraph: ResolvedOpenGraph | null = parentMeta.openGraph ?? null;
-
-  if (page.data.social_cards && page.data.social_cards.length > 0 && page.data.social_cards[0]?.social_card_image) {
-
-    image = `${page.data.social_cards[0]?.social_card_image.url}?w=1200&h=630&fit=crop&fm=webp&q=80`;
-  }
 
   if (parentMeta?.title) {
     pageTitle = parentMeta.title.absolute;
   }
 
-
   return {
     title: `Foot Factor - ${pageTitle}`,
     description: page.data.meta_description ?? parentMeta.description,
+    alternates: {
+      canonical: `${process.env.NEXT_PUBLIC_BASE_URL}/conditions`,
+      types: {
+        'application/rss+xml': `${process.env.NEXT_PUBLIC_BASE_URL}/feed.xml`,
+      },
+    },
     openGraph: {
-      title: page.data.meta_title ?? parentMeta.title ?? undefined,
-      images: [
-        {
-          url: image ?? (parentOpenGraph?.images ? (parentOpenGraph.images[0] as OGImage).url : ''),
-        },
-      ],
+      title: isFilled.keyText(page.data.meta_title) ? page.data.meta_title : pageTitle,
+      description: isFilled.keyText(page.data.meta_description) ? page.data.meta_description : '',
+      images: isFilled.image(page.data.meta_image) ? [asImageSrc(page.data.meta_image)] : [],
     },
   };
 }

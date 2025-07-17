@@ -29,12 +29,12 @@ export async function generateMetadata({params}: { params: Promise<Params> }): P
         'application/rss+xml': `${process.env.NEXT_PUBLIC_BASE_URL}/feed.xml`,
       },
     },
-    title: page.data.meta_title,
+    title: page.data.meta_title ? page.data.meta_title : isFilled.keyText(page.data.title) ? page.data.title : '',
     description: page.data.meta_description,
     openGraph: {
-      title: isFilled.keyText(page.data.meta_title) ? page.data.meta_title : undefined,
-      description: isFilled.keyText(page.data.meta_description) ? page.data.meta_description : undefined,
-      images: isFilled.image(page.data.meta_image) ? [asImageSrc(page.data.meta_image)] : undefined,
+      title: isFilled.keyText(page.data.meta_title) ? page.data.meta_title : isFilled.keyText(page.data.title) ? page.data.title : '',
+      description: isFilled.keyText(page.data.meta_description) ? page.data.meta_description : isFilled.keyText(page.data.excerpt) ? page.data.excerpt : '',
+      images: isFilled.image(page.data.meta_image) ? [asImageSrc(page.data.meta_image)] : isFilled.image(page.data.feature_image) ? [asImageSrc(page.data.feature_image)] : [],
     },
   };
 }

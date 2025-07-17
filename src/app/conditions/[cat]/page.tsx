@@ -9,7 +9,7 @@ import React from 'react';
 import HeroSimple from '@/components/features/hero/hero-simple';
 import {Container} from '@/components/ui/container';
 import Link from 'next/link';
-import {filter} from '@prismicio/client';
+import {asImageSrc, filter, isFilled} from '@prismicio/client';
 import {PrismicNextImage} from '@prismicio/next';
 import {Badge} from '@/components/ui/badge';
 
@@ -20,34 +20,33 @@ export async function generateMetadata(
   { params }: { params: Promise<Params> },
   parent: ResolvingMetadata,
 ): Promise<Metadata> {
+  const { cat } = await params;
   const client = createClient();
   const page = await client.getSingle('conditions',).catch(() => notFound());
 
-  let image = null;
   let pageTitle = '';
   const parentMeta = await parent;
-  const parentOpenGraph: ResolvedOpenGraph | null = parentMeta.openGraph ?? null;
-
-  if (page.data.social_cards && page.data.social_cards.length > 0 && page.data.social_cards[0]?.social_card_image) {
-
-    image = `${page.data.social_cards[0]?.social_card_image.url}?w=1200&h=630&fit=crop&fm=webp&q=80`;
-  }
 
   if (parentMeta?.title) {
     pageTitle = parentMeta.title.absolute;
   }
 
-
   return {
+    metadataBase: new URL(
+        `${process.env.NEXT_PUBLIC_BASE_URL}/conditions/${page.uid}`
+    ),
+    alternates: {
+      canonical: `${process.env.NEXT_PUBLIC_BASE_URL}/conditions/${page.uid}`,
+      types: {
+        'application/rss+xml': `${process.env.NEXT_PUBLIC_BASE_URL}/feed.xml`,
+      },
+    },
     title: `Foot Factor - ${pageTitle}`,
     description: page.data.meta_description ?? parentMeta.description,
     openGraph: {
-      title: page.data.meta_title ?? parentMeta.title ?? undefined,
-      images: [
-        {
-          url: image ?? (parentOpenGraph?.images ? (parentOpenGraph.images[0] as OGImage).url : ''),
-        },
-      ],
+      title: isFilled.keyText(page.data.meta_title) ? page.data.meta_title : isFilled.keyText(page.data.title) ? page.data.title : '',
+      description: isFilled.keyText(page.data.meta_description) ? page.data.meta_description : '',
+      images: isFilled.image(page.data.meta_image) ? [asImageSrc(page.data.meta_image)] :  [],
     },
   };
 }
