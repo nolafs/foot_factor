@@ -1,6 +1,16 @@
 import React from 'react';
 import Link from 'next/link';
-import {Activity, Download, FileDown, FileIcon, Film, HeartPulse, Newspaper, SquareArrowOutUpRight} from 'lucide-react';
+import {
+  Activity,
+  BookMarked,
+  Download,
+  FileDown,
+  FileIcon, FileQuestionIcon,
+  Film,
+  HeartPulse,
+  Newspaper,
+  SquareArrowOutUpRight
+} from 'lucide-react';
 import { Highlight, Snippet } from 'react-instantsearch';
 import { type HitProps } from '@/types';
 import { Badge } from '@/components/ui/badge';
@@ -26,6 +36,8 @@ export const SearchHitItem = ({ hit }: HitProps) => {
               {hit.type === 'page' && <FileIcon className={'h-5 w-5 text-white'}/>}
               {hit.type === 'guide' && <FileDown className={'h-5 w-5 text-white'}/>}
               {hit.type === 'service' && <HeartPulse className={'h-5 w-5 text-white'}/>}
+              {hit.type === 'case study' && <BookMarked className={'h-5 w-5 text-white'}/>}
+              {hit.type === 'faq' && <FileQuestionIcon className={'h-5 w-5 text-white'}/>}
             </div>
 
             <Image
@@ -40,9 +52,11 @@ export const SearchHitItem = ({ hit }: HitProps) => {
           <div className={'h-fit w-fit rounded-md bg-accent/60 p-2 md:p-3'}>
             {hit.type === 'condition' && <Activity className={'h-5 w-5 text-white sm:h-5 sm:w-5 md:h-7 md:w-7'} />}
             {hit.type === 'article' && <Newspaper className={'h-5 w-5 text-white md:h-7 md:w-7'} />}
-            {hit.type === 'page' && <FileIcon className={'h-5 w-5 text-white'}/>}
-            {hit.type === 'guide' && <FileDown className={'h-5 w-5 text-white'}/>}
-            {hit.type === 'service' && <HeartPulse className={'h-5 w-5 text-white'}/>}
+            {hit.type === 'page' && <FileIcon className={'h-5 w-5 text-white sm:h-5 sm:w-5 md:h-7 md:w-7'}/>}
+            {hit.type === 'guide' && <FileDown className={'h-5 w-5 text-white sm:h-5 sm:w-5 md:h-7 md:w-7'}/>}
+            {hit.type === 'service' && <HeartPulse className={'h-5 w-5 text-white sm:h-5 sm:w-5 md:h-7 md:w-7'}/>}
+            {hit.type === 'case study' && <BookMarked className={'h-5 w-5 text-white sm:h-5 sm:w-5 md:h-7 md:w-7'}/>}
+            {hit.type === 'faq' && <FileQuestionIcon className={'h-5 w-5 text-white sm:h-5 sm:w-5 md:h-7 md:w-7'}/>}
           </div>
         )}
       </div>
