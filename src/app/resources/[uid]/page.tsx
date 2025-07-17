@@ -6,6 +6,7 @@ import { components } from '@/slices';
 import type { OGImage } from '@/types';
 import type { ResolvedOpenGraph } from 'next/dist/lib/metadata/types/opengraph-types';
 import React from 'react';
+import {isFilled} from '@prismicio/client';
 
 type Params = { uid: string };
 
@@ -42,7 +43,7 @@ export async function generateMetadata(
         'application/rss+xml': `${process.env.NEXT_PUBLIC_BASE_URL}/feed.xml`,
       },
     },
-    title: `Foot Factor - ${pageTitle}`,
+    title: `${isFilled.keyText(page.data.meta_title) ? page.data.meta_title : pageTitle}`,
     description: page.data.meta_description ?? parentMeta.description,
     openGraph: {
       title: page.data.meta_title ?? parentMeta.title ?? undefined,

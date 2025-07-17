@@ -25,7 +25,7 @@ export async function generateMetadata(
   }
 
   return {
-    title: `Foot Factor - ${pageTitle}`,
+    title: `${isFilled.keyText(page.data.meta_title) ? page.data.meta_title : pageTitle}`,
     description: page.data.meta_description ?? parentMeta.description,
     alternates: {
       canonical: `${process.env.NEXT_PUBLIC_BASE_URL}/conditions`,

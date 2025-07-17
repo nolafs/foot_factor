@@ -41,7 +41,7 @@ export async function generateMetadata(
         'application/rss+xml': `${process.env.NEXT_PUBLIC_BASE_URL}/feed.xml`,
       },
     },
-    title: `Foot Factor - ${pageTitle}`,
+    title: `${isFilled.keyText(page.data.meta_title) ? page.data.meta_title : pageTitle}`,
     description: page.data.meta_description ?? parentMeta.description,
     openGraph: {
       title: isFilled.keyText(page.data.meta_title) ? page.data.meta_title : isFilled.keyText(page.data.title) ? page.data.title : '',

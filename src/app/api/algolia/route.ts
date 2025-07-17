@@ -140,8 +140,6 @@ export async function POST() {
       fetchLinks: ['post_category.name'],
     });
 
-    console.log('orthotics', orthotics);
-
     // Map articles to Algolia records
     const orthoticRecords = orthotics.map(post => ({
       objectID: post.id, // Unique identifier in algolia

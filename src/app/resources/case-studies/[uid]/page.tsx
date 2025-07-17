@@ -3,10 +3,9 @@ import { notFound } from 'next/navigation';
 import { SliceZone } from '@prismicio/react';
 import { createClient } from '@/prismicio';
 import { components } from '@/slices';
-import type { OGImage } from '@/types';
-import type { ResolvedOpenGraph } from 'next/dist/lib/metadata/types/opengraph-types';
 import React from 'react';
 import {Hero} from '@/components/features/hero/hero';
+import {asImageSrc, isFilled} from '@prismicio/client';
 
 type Params = { uid: string };
 
@@ -18,15 +17,8 @@ export async function generateMetadata(
   const { uid } = await params;
   const page = await client.getByUID('case_studies', uid).catch(() => notFound());
 
-
-  let image = null;
   let pageTitle = '';
   const parentMeta = await parent;
-  const parentOpenGraph: ResolvedOpenGraph | null = parentMeta.openGraph ?? null;
-
-  if( page.data?.feature_image?.url) {
-    image = `${page.data.feature_image.url}?w=1200&h=630&fit=crop&fm=webp&q=80`;
-  }
 
   if (parentMeta?.title) {
     pageTitle = parentMeta.title.absolute;
@@ -43,15 +35,12 @@ export async function generateMetadata(
         'application/rss+xml': `${process.env.NEXT_PUBLIC_BASE_URL}/feed.xml`,
       },
     },
-    title: `Foot Factor - ${pageTitle}`,
+    title: `${isFilled.keyText(page.data.meta_title) ? page.data.meta_title : pageTitle}`,
     description: page.data.meta_description ?? parentMeta.description,
     openGraph: {
-      title: page.data.meta_title ?? parentMeta.title ?? undefined,
-      images: [
-        {
-          url: image ?? (parentOpenGraph?.images ? (parentOpenGraph.images[0] as OGImage).url : ''),
-        },
-      ],
+      title: isFilled.keyText(page.data.meta_title) ? page.data.meta_title : pageTitle,
+      description: isFilled.keyText(page.data.meta_description) ? page.data.meta_description : '',
+      images: isFilled.image(page.data.meta_image) ? [asImageSrc(page.data.meta_image)] : [],
     },
   };
 }
