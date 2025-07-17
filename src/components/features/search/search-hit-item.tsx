@@ -3,10 +3,9 @@ import Link from 'next/link';
 import {
   Activity,
   BookMarked,
-  Download,
   FileDown,
   FileIcon, FileQuestionIcon,
-  Film, Footprints,
+  Footprints,
   HeartPulse,
   Newspaper,
   SquareArrowOutUpRight
