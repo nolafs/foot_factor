@@ -23,9 +23,9 @@ export async function generateMetadata(
   const parentMeta = await parent;
   const parentOpenGraph: ResolvedOpenGraph | null = parentMeta.openGraph ?? null;
 
-  if (page.data.social_cards && page.data.social_cards.length > 0 && page.data.social_cards[0]?.social_card_image) {
+  if (page.data.meta_image) {
 
-    image = `${page.data.social_cards[0]?.social_card_image.url}?w=1200&h=630&fit=crop&fm=webp&q=80`;
+    image = `${page.data.meta_image.url}?w=1200&h=630&fit=crop&fm=webp&q=80`;
   }
 
   if (parentMeta?.title) {
