@@ -67,6 +67,7 @@ export default async function Page({ params }: { params: Promise<Params> }) {
         <Hero heading={page.data.client_name}
               subheading={`${page.data.activity}`}
               image={page.data.feature_image}
+              vAlign={'bottom'}
               imagePosition={'center'} />
         <SliceZone slices={page.data.slices} components={components} />
     </main>

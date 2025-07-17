@@ -33,7 +33,7 @@ export function SearchInput({ isSearchPage = true }: { isSearchPage: boolean }) 
   );
 
   return (
-    <InstantSearchNext searchClient={searchClient} indexName="blog" routing={true}>
+    <InstantSearchNext searchClient={searchClient} indexName="global_pages" routing={true}>
       <Configure
         advancedSyntax={true}
         queryType="prefixAll"

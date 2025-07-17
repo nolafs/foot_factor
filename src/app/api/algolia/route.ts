@@ -52,6 +52,7 @@ export async function POST() {
 
     // Index records to Algolia
     await algoliaClient.saveObjects({ indexName: 'blog', objects: articleRecords });
+    await algoliaClient.saveObjects({ indexName: 'global_pages', objects: articleRecords });
 
     //Conditions
 
@@ -95,8 +96,94 @@ export async function POST() {
 
     // Index records to Algolia
     await algoliaClient.saveObjects({ indexName: 'conditions', objects: conditionRecords });
+    await algoliaClient.saveObjects({ indexName: 'global_pages', objects: conditionRecords });
 
+    // Get all articles from Prismic
+    const guides = await client.getAllByType('guide', {
+      fetchLinks: ['author.name', 'author.profile_image', 'condition_category.name'],
+    });
 
+    // Map articles to Algolia records
+    const guideRecords = guides.map(post => ({
+      objectID: post.id, // Unique identifier in algolia
+      title: post.data.name, // Post title
+      type: 'guide', // Post type
+      slug: `/resources/guides/${post.uid}`, // Post URL slug
+      featured: post.data.featured,
+      author:
+          (post.data.author &&
+              'data' in post.data.author &&
+              (
+                  post.data.author.data as {
+                    name: string;
+                  }
+              ).name) ||
+          'Foot Factor',
+      category:
+          post.data.category && 'data' in post.data.category && (post.data.category.data as { name: string }).name,
+      tags: post.data.tags.map(item => {
+        const slug = item && 'tag' in item && (item.tag as { uid: string }).uid;
+        const name = item && 'tag' in item && (item.tag as { data: { name: string } }).data?.name;
+
+        console.log(item);
+
+        return {
+          slug,
+          name,
+        };
+      }),
+      image: post.data.feature_image, // Post featured image
+      text: post.data?.description?.slice(0, 5000) ?? post.data?.name ?? '', // Post content transformed to search text
+    }));
+
+    // Index records to Algolia
+    await algoliaClient.saveObjects({indexName: 'global_pages', objects: guideRecords});
+
+    // Get all articles from Prismic
+    const orthotics = await client.getAllByType('orthotics', {
+      fetchLinks: ['post_category.name'],
+    });
+
+    // Map articles to Algolia records
+    const orthoticRecords = orthotics.map(post => ({
+      objectID: post.id, // Unique identifier in algolia
+      title: post.data.heading, // Post title
+      type: 'orthotics', // Post type
+      slug: `/services/orthotics/${post.uid}`, // Post URL slug
+      featured: true,
+      author: 'Foot Factor',
+      category:
+          post.data.category && 'data' in post.data.category && (post.data.category.data as { name: string }).name,
+      tags: 'service',
+      image: post.data.image, // Post featured image
+      text: post.data?.description?.slice(0, 5000) ?? post.data?.meta_description ?? '', // Post content transformed to search text
+    }));
+
+    // Index records to Algolia
+    await algoliaClient.saveObjects({indexName: 'global_pages', objects: orthoticRecords});
+
+    // Get all articles from Prismic
+    const services = await client.getAllByType('services', {
+      fetchLinks: ['post_category.name'],
+    });
+
+    // Map articles to Algolia records
+    const serviceRecords = services.map(post => ({
+      objectID: post.id, // Unique identifier in algolia
+      title: post.data.heading, // Post title
+      type: 'service', // Post type
+      slug: `/services/${post.uid}`, // Post URL slug
+      featured: true,
+      author: 'Foot Factor',
+      category:
+          post.data.category && 'data' in post.data.category && (post.data.category.data as { name: string }).name,
+      tags: 'service',
+      image: post.data.meta_image, // Post featured image
+      text: post.data?.description?.slice(0, 5000) ?? post.data?.meta_description ?? '', // Post content transformed to search text
+    }));
+
+    // Index records to Algolia
+    await algoliaClient.saveObjects({indexName: 'global_pages', objects: serviceRecords});
 
 
     // Return success response if the process completes without any issue

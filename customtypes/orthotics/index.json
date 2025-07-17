@@ -35,6 +35,13 @@
           "multi": "strong,em"
         }
       },
+      "description": {
+        "type": "Text",
+        "config": {
+          "label": "Description",
+          "placeholder": ""
+        }
+      },
       "image": {
         "type": "Image",
         "config": {
@@ -55,6 +62,20 @@
             "height": 1080
           },
           "thumbnails": []
+        }
+      },
+      "category": {
+        "type": "Link",
+        "config": {
+          "label": "Category",
+          "select": "document",
+          "repeat": false,
+          "customtypes": [
+            {
+              "id": "post_category",
+              "fields": ["name"]
+            }
+          ]
         }
       },
       "slices": {

@@ -1622,6 +1622,17 @@ interface OrthoticsDocumentData {
   lead: prismic.RichTextField;
 
   /**
+   * Description field in *Orthotics*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: orthotics.description
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/fields/text
+   */
+  description: prismic.KeyTextField;
+
+  /**
    * Image field in *Orthotics*
    *
    * - **Field Type**: Image
@@ -1642,6 +1653,17 @@ interface OrthoticsDocumentData {
    * - **Documentation**: https://prismic.io/docs/fields/image
    */
   thumb: prismic.ImageField<never>;
+
+  /**
+   * Category field in *Orthotics*
+   *
+   * - **Field Type**: Content Relationship
+   * - **Placeholder**: *None*
+   * - **API ID Path**: orthotics.category
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/fields/content-relationship
+   */
+  category: ContentRelationshipFieldWithData<[{ id: 'post_category'; fields: ['name'] }]>;
 
   /**
    * Slice Zone field in *Orthotics*
@@ -1717,41 +1739,6 @@ type PageDocumentDataSlicesSlice =
   | FaqsSlice;
 
 /**
- * Item in *Page → Social Cards - Facebook & Twitter*
- */
-export interface PageDocumentDataSocialCardsItem {
-  /**
-   * Social Card Image field in *Page → Social Cards - Facebook & Twitter*
-   *
-   * - **Field Type**: Image
-   * - **Placeholder**: *None*
-   * - **API ID Path**: page.social_cards[].social_card_image
-   * - **Documentation**: https://prismic.io/docs/fields/image
-   */
-  social_card_image: prismic.ImageField<never>;
-
-  /**
-   * Social Card TItle field in *Page → Social Cards - Facebook & Twitter*
-   *
-   * - **Field Type**: Text
-   * - **Placeholder**: *None*
-   * - **API ID Path**: page.social_cards[].social_card_title
-   * - **Documentation**: https://prismic.io/docs/fields/text
-   */
-  social_card_title: prismic.KeyTextField;
-
-  /**
-   * Social card description field in *Page → Social Cards - Facebook & Twitter*
-   *
-   * - **Field Type**: Text
-   * - **Placeholder**: *None*
-   * - **API ID Path**: page.social_cards[].social_card_description
-   * - **Documentation**: https://prismic.io/docs/fields/text
-   */
-  social_card_description: prismic.KeyTextField;
-}
-
-/**
  * Content for Page documents
  */
 interface PageDocumentData {
@@ -1787,15 +1774,15 @@ interface PageDocumentData {
   meta_description: prismic.KeyTextField;
 
   /**
-   * Social Cards - Facebook & Twitter field in *Page*
+   * Meta Image field in *Page*
    *
-   * - **Field Type**: Group
+   * - **Field Type**: Image
    * - **Placeholder**: *None*
-   * - **API ID Path**: page.social_cards[]
+   * - **API ID Path**: page.meta_image
    * - **Tab**: SEO Metadata
-   * - **Documentation**: https://prismic.io/docs/fields/repeatable-group
+   * - **Documentation**: https://prismic.io/docs/fields/image
    */
-  social_cards: prismic.GroupField<Simplify<PageDocumentDataSocialCardsItem>>;
+  meta_image: prismic.ImageField<never>;
 }
 
 /**
@@ -2128,6 +2115,28 @@ interface ServicesDocumentData {
    * - **Documentation**: https://prismic.io/docs/fields/select
    */
   wave: prismic.SelectField<'default' | '1' | '2' | '3' | '4' | '5' | '6' | '7' | '8'>;
+
+  /**
+   * Category field in *Services*
+   *
+   * - **Field Type**: Content Relationship
+   * - **Placeholder**: *None*
+   * - **API ID Path**: services.category
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/fields/content-relationship
+   */
+  category: ContentRelationshipFieldWithData<[{ id: 'post_category'; fields: ['name'] }]>;
+
+  /**
+   * description field in *Services*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: services.description
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/fields/text
+   */
+  description: prismic.KeyTextField;
 
   /**
    * Slice Zone field in *Services*
@@ -6053,7 +6062,6 @@ declare module '@prismicio/client' {
       PageDocument,
       PageDocumentData,
       PageDocumentDataSlicesSlice,
-      PageDocumentDataSocialCardsItem,
       PostCategoryDocument,
       PostCategoryDocumentData,
       PostTagsDocument,
