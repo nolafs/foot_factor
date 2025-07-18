@@ -1761,6 +1761,8 @@ export type OrthoticsDocument<Lang extends string = string> = prismic.PrismicDoc
 >;
 
 type PageDocumentDataSlicesSlice =
+  | ReviewsSlice
+  | LocationMapCalloutSlice
   | VerticalStepsWithImagesSlice
   | CaseStudiesSlice
   | TestimonialsSlice
@@ -4063,6 +4065,103 @@ type ListSliceVariation =
 export type ListSlice = prismic.SharedSlice<'list', ListSliceVariation>;
 
 /**
+ * Item in *LocationMapCallout → Map with Callout Right → Primary → Address Lines*
+ */
+export interface LocationMapCalloutSliceMapWithCalloutRightPrimaryAddressLinesItem {
+  /**
+   * Line field in *LocationMapCallout → Map with Callout Right → Primary → Address Lines*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: location_map_callout.map_with_callout_right.primary.address_lines[].line
+   * - **Documentation**: https://prismic.io/docs/fields/text
+   */
+  line: prismic.KeyTextField;
+}
+
+/**
+ * Primary content in *LocationMapCallout → Map with Callout Right → Primary*
+ */
+export interface LocationMapCalloutSliceMapWithCalloutRightPrimary {
+  /**
+   * Heading field in *LocationMapCallout → Map with Callout Right → Primary*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: location_map_callout.map_with_callout_right.primary.heading
+   * - **Documentation**: https://prismic.io/docs/fields/rich-text
+   */
+  heading: prismic.RichTextField;
+
+  /**
+   * Address Lines field in *LocationMapCallout → Map with Callout Right → Primary*
+   *
+   * - **Field Type**: Group
+   * - **Placeholder**: *None*
+   * - **API ID Path**: location_map_callout.map_with_callout_right.primary.address_lines[]
+   * - **Documentation**: https://prismic.io/docs/fields/repeatable-group
+   */
+  address_lines: prismic.GroupField<Simplify<LocationMapCalloutSliceMapWithCalloutRightPrimaryAddressLinesItem>>;
+
+  /**
+   * Button Link field in *LocationMapCallout → Map with Callout Right → Primary*
+   *
+   * - **Field Type**: Link
+   * - **Placeholder**: *None*
+   * - **API ID Path**: location_map_callout.map_with_callout_right.primary.button_link
+   * - **Documentation**: https://prismic.io/docs/fields/link
+   */
+  button_link: prismic.LinkField<string, string, unknown, prismic.FieldState, never>;
+
+  /**
+   * Map Center field in *LocationMapCallout → Map with Callout Right → Primary*
+   *
+   * - **Field Type**: GeoPoint
+   * - **Placeholder**: *None*
+   * - **API ID Path**: location_map_callout.map_with_callout_right.primary.map_center
+   * - **Documentation**: https://prismic.io/docs/fields/geopoint
+   */
+  map_center: prismic.GeoPointField;
+
+  /**
+   * Zoom field in *LocationMapCallout → Map with Callout Right → Primary*
+   *
+   * - **Field Type**: Number
+   * - **Placeholder**: *None*
+   * - **API ID Path**: location_map_callout.map_with_callout_right.primary.zoom
+   * - **Documentation**: https://prismic.io/docs/fields/number
+   */
+  zoom: prismic.NumberField;
+}
+
+/**
+ * Map with Callout Right variation for LocationMapCallout Slice
+ *
+ * - **API ID**: `map_with_callout_right`
+ * - **Description**: Map background with a right-aligned callout showing heading, address, and a button.
+ * - **Documentation**: https://prismic.io/docs/slices
+ */
+export type LocationMapCalloutSliceMapWithCalloutRight = prismic.SharedSliceVariation<
+  'map_with_callout_right',
+  Simplify<LocationMapCalloutSliceMapWithCalloutRightPrimary>,
+  never
+>;
+
+/**
+ * Slice variation for *LocationMapCallout*
+ */
+type LocationMapCalloutSliceVariation = LocationMapCalloutSliceMapWithCalloutRight;
+
+/**
+ * LocationMapCallout Shared Slice
+ *
+ * - **API ID**: `location_map_callout`
+ * - **Description**: *None*
+ * - **Documentation**: https://prismic.io/docs/slices
+ */
+export type LocationMapCalloutSlice = prismic.SharedSlice<'location_map_callout', LocationMapCalloutSliceVariation>;
+
+/**
  * Primary content in *MediaSection → Default → Primary*
  */
 export interface MediaSectionSliceDefaultPrimary {
@@ -6174,6 +6273,11 @@ declare module '@prismicio/client' {
       ListSliceGuides,
       ListSliceOrthotics,
       ListSliceConditions,
+      LocationMapCalloutSlice,
+      LocationMapCalloutSliceMapWithCalloutRightPrimaryAddressLinesItem,
+      LocationMapCalloutSliceMapWithCalloutRightPrimary,
+      LocationMapCalloutSliceVariation,
+      LocationMapCalloutSliceMapWithCalloutRight,
       MediaSectionSlice,
       MediaSectionSliceDefaultPrimary,
       MediaSectionSliceFullWidthImagePrimary,

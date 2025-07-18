@@ -1,0 +1,67 @@
+[
+	{
+		"__TYPE__": "SharedSliceContent",
+		"variation": "map_with_callout_right",
+		"primary": {
+			"heading": {
+				"__TYPE__": "StructuredTextContent",
+				"value": [
+					{
+						"type": "heading2",
+						"content": {
+							"text": "Visit our Central London clinic for your Foot Assessment",
+							"spans": [
+								{
+									"type": "em",
+									"start": 10,
+									"end": 31
+								}
+							]
+						},
+						"direction": "ltr"
+					}
+				]
+			},
+			"address_lines": {
+				"__TYPE__": "GroupContentType",
+				"value": [
+					{
+						"__TYPE__": "GroupItemContent",
+						"value": [
+							[
+								"line",
+								{
+									"__TYPE__": "FieldContent",
+									"value": "basis",
+									"type": "Text"
+								}
+							]
+						]
+					}
+				]
+			},
+			"button_link": {
+				"key": "4c161a50-6203-4808-ab3a-e1b048f841d0",
+				"__TYPE__": "LinkContent",
+				"value": {
+					"__TYPE__": "ExternalLink",
+					"url": "http://twitter.com",
+					"text": "colony"
+				}
+			},
+			"map_center": {
+				"__TYPE__": "GeoPointContent",
+				"position": {
+					"lat": 51.517256,
+					"lng": -0.1438066
+				}
+			},
+			"zoom": {
+				"__TYPE__": "FieldContent",
+				"type": "Number",
+				"value": "15"
+			}
+		},
+		"items": []
+	}
+]

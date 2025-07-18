@@ -21,6 +21,7 @@
   "dependencies": {
     "@algolia/autocomplete-js": "^1.18.0",
     "@algolia/autocomplete-theme-classic": "^1.18.0",
+    "@googlemaps/react-wrapper": "^1.2.0",
     "@gsap/react": "^2.1.2",
     "@headlessui/react": "^2.2.0",
     "@heroicons/react": "^2.2.0",
@@ -109,6 +110,7 @@
     "@semantic-release/release-notes-generator": "^14.0.3",
     "@slicemachine/adapter-next": "^0.3.66",
     "@types/eslint": "^8.56.10",
+    "@types/google.maps": "^3.58.1",
     "@types/node": "^20.14.10",
     "@types/react": "^18.3.3",
     "@types/react-dom": "^18.3.0",

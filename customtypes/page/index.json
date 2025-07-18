@@ -18,6 +18,12 @@
         "fieldset": "Slice Zone",
         "config": {
           "choices": {
+            "reviews": {
+              "type": "SharedSlice"
+            },
+            "location_map_callout": {
+              "type": "SharedSlice"
+            },
             "vertical_steps_with_images": {
               "type": "SharedSlice"
             },

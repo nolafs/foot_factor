@@ -9,6 +9,7 @@ export const components = {
   hero: dynamic(() => import('./Hero')),
   icon_nav_list: dynamic(() => import('./FeatureTickerList')),
   list: dynamic(() => import('./List')),
+  location_map_callout: dynamic(() => import('./LocationMapCallout')),
   media_section: dynamic(() => import('./MediaSection')),
   megamenu: dynamic(() => import('./Megamenu')),
   reviews: dynamic(() => import('./Reviews')),

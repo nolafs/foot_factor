@@ -1,0 +1,61 @@
+{
+  "type": "SharedSlice",
+  "id": "location_map_callout",
+  "name": "LocationMapCallout",
+  "variations": [
+    {
+      "id": "map_with_callout_right",
+      "name": "Map with Callout Right",
+      "description": "Map background with a right-aligned callout showing heading, address, and a button.",
+      "version": "initial",
+      "imageUrl": "",
+      "docURL": "...",
+      "primary": {
+        "heading": {
+          "type": "StructuredText",
+          "config": {
+            "multi": "heading2,strong,em",
+            "label": "Heading"
+          }
+        },
+        "address_lines": {
+          "type": "Group",
+          "config": {
+            "label": "Address Lines",
+            "fields": {
+              "line": {
+                "type": "Text",
+                "config": {
+                  "label": "Line"
+                }
+              }
+            }
+          }
+        },
+        "button_link": {
+          "type": "Link",
+          "config": {
+            "label": "Button Link",
+            "allowText": true,
+            "repeat": false,
+            "select": null
+          }
+        },
+        "map_center": {
+          "type": "GeoPoint",
+          "config": {
+            "label": "Map Center"
+          }
+        },
+        "zoom": {
+          "type": "Number",
+          "config": {
+            "label": "Zoom",
+            "placeholder": ""
+          }
+        }
+      },
+      "items": {}
+    }
+  ]
+}

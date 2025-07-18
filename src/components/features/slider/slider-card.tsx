@@ -56,6 +56,9 @@ export function SliderCard<T>({
               className
           )}
       >
+        <Link
+            href={href}
+        className={'group'}>
         <div className={cn('relative bg-secondary-100 flex-shrink-0 flex-col justify-end overflow-hidden rounded-3xl max-lg:rounded-4xl lg:rounded-4xl',
           sizeClasses
         )}>
@@ -65,7 +68,7 @@ export function SliderCard<T>({
                 field={imageField}
                 width={size === 'large' ? 540 : 331}
                 height={size === 'large' ? 600 : 400}
-                className={cn("top-0 left-0 h-full w-full object-cover object-center")}
+                className={cn("top-0 left-0 h-full w-full object-cover object-center transition delay-150 duration-300 ease-in-out group-hover:scale-105")}
             />
             )}
             </div>
@@ -75,31 +78,26 @@ export function SliderCard<T>({
 
           <div className={cn("absolute bottom-0 w-full  flex flex-col z-10", size === 'large' ? 'p-7 md:p-10 lg:p-10' : 'p-5 md:p-8 lg:p-8')}>
             {contentType && <div className={'mb-1'}><Badge variant={'secondary'}>{contentType}</Badge> </div>}
-
-            <div className={cn(size === 'large' ? "text-white text-4xl" : 'text-white text-3xl')}>{title}</div>
-
+            <h3 className={cn('font-semibold group-hover:text-accent',size === 'large' ? "text-white text-4xl" : 'text-white text-3xl')}>{title}</h3>
             {subtitle && (
                 <div className={"text-primary-300 text-2xl"}>{subtitle}</div>
             )}
-
             {description && (
                 <div className="text-white text-xl">{description}</div>
             )}
-
             {children}
-
             {showArrow && (
                 <div className="flex justify-end mt-2">
-                  <Link
-                      href={href}
-                      className={cn(buttonVariants({variant: 'default', size: 'icon'}))}
-                  >
-                    <ArrowRight className="h-4 w-4" strokeWidth={4}/>
-                  </Link>
+                  <div
+                      className={cn('bg-accent rounded-full h-12 w-12 flex justify-center items-center text-neutral-50 group-hover:bg-primary group-hover:text-accent')}>
+                    <ArrowRight size={22} strokeWidth={4}/>
+                  </div>
+
                 </div>
             )}
           </div>
         </div>
+        </Link>
       </div>
   );
 }
