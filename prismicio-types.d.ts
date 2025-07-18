@@ -1761,6 +1761,7 @@ export type OrthoticsDocument<Lang extends string = string> = prismic.PrismicDoc
 >;
 
 type PageDocumentDataSlicesSlice =
+  | ContactFormSectionSlice
   | ReviewsSlice
   | LocationMapCalloutSlice
   | VerticalStepsWithImagesSlice
