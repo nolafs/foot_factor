@@ -114,7 +114,7 @@ const CategoryRefinement = () => {
 
         {isOpen && (
             <div
-                className="absolute top-full left-0 mt-2 w-64 bg-white border border-gray-200 rounded-lg shadow-lg z-50 max-h-60 overflow-y-auto">
+                className="absolute top-full right-0 mt-2 w-64 bg-white border border-gray-200 rounded-lg shadow-lg z-50 max-h-60 overflow-y-auto">
               <div className="p-2 border-b border-gray-100">
                 <span className="text-xs text-gray-500 font-medium">Filter by Category</span>
               </div>
