@@ -4080,6 +4080,31 @@ export interface LocationMapCalloutSliceMapWithCalloutRightPrimaryAddressLinesIt
 }
 
 /**
+ * Item in *LocationMapCallout → Map with Callout Right → Primary → Map Markers*
+ */
+export interface LocationMapCalloutSliceMapWithCalloutRightPrimaryMapMarkersItem {
+  /**
+   * Name field in *LocationMapCallout → Map with Callout Right → Primary → Map Markers*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: location_map_callout.map_with_callout_right.primary.map_markers[].name
+   * - **Documentation**: https://prismic.io/docs/fields/text
+   */
+  name: prismic.KeyTextField;
+
+  /**
+   * Marker Location field in *LocationMapCallout → Map with Callout Right → Primary → Map Markers*
+   *
+   * - **Field Type**: GeoPoint
+   * - **Placeholder**: *None*
+   * - **API ID Path**: location_map_callout.map_with_callout_right.primary.map_markers[].marker_location
+   * - **Documentation**: https://prismic.io/docs/fields/geopoint
+   */
+  marker_location: prismic.GeoPointField;
+}
+
+/**
  * Primary content in *LocationMapCallout → Map with Callout Right → Primary*
  */
 export interface LocationMapCalloutSliceMapWithCalloutRightPrimary {
@@ -4132,6 +4157,16 @@ export interface LocationMapCalloutSliceMapWithCalloutRightPrimary {
    * - **Documentation**: https://prismic.io/docs/fields/number
    */
   zoom: prismic.NumberField;
+
+  /**
+   * Map Markers field in *LocationMapCallout → Map with Callout Right → Primary*
+   *
+   * - **Field Type**: Group
+   * - **Placeholder**: *None*
+   * - **API ID Path**: location_map_callout.map_with_callout_right.primary.map_markers[]
+   * - **Documentation**: https://prismic.io/docs/fields/repeatable-group
+   */
+  map_markers: prismic.GroupField<Simplify<LocationMapCalloutSliceMapWithCalloutRightPrimaryMapMarkersItem>>;
 }
 
 /**
@@ -6275,6 +6310,7 @@ declare module '@prismicio/client' {
       ListSliceConditions,
       LocationMapCalloutSlice,
       LocationMapCalloutSliceMapWithCalloutRightPrimaryAddressLinesItem,
+      LocationMapCalloutSliceMapWithCalloutRightPrimaryMapMarkersItem,
       LocationMapCalloutSliceMapWithCalloutRightPrimary,
       LocationMapCalloutSliceVariation,
       LocationMapCalloutSliceMapWithCalloutRight,

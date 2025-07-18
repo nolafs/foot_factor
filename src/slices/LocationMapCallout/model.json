@@ -53,6 +53,28 @@
             "label": "Zoom",
             "placeholder": ""
           }
+        },
+        "map_markers": {
+          "type": "Group",
+          "config": {
+            "label": "Map Markers",
+            "repeat": true,
+            "fields": {
+              "name": {
+                "type": "Text",
+                "config": {
+                  "label": "Name",
+                  "placeholder": ""
+                }
+              },
+              "marker_location": {
+                "type": "GeoPoint",
+                "config": {
+                  "label": "Marker Location"
+                }
+              }
+            }
+          }
         }
       },
       "items": {}

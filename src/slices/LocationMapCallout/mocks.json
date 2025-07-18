@@ -32,13 +32,71 @@
 								"line",
 								{
 									"__TYPE__": "FieldContent",
-									"value": "basis",
-									"type": "Text"
+									"type": "Text",
+									"value": "Footer Factor"
 								}
 							]
-						]
+						],
+						"key": "de687d86-14de-4261-96b3-be77fcb2e759"
+					},
+					{
+						"__TYPE__": "GroupItemContent",
+						"value": [
+							[
+								"line",
+								{
+									"__TYPE__": "FieldContent",
+									"type": "Text",
+									"value": "4th Floor, Edinburgh House"
+								}
+							]
+						],
+						"key": "099b8d02-6c80-4427-86ea-9c92702483c1"
+					},
+					{
+						"__TYPE__": "GroupItemContent",
+						"value": [
+							[
+								"line",
+								{
+									"__TYPE__": "FieldContent",
+									"type": "Text",
+									"value": "40 Great Portland Street"
+								}
+							]
+						],
+						"key": "c217b684-2697-4eeb-bcaf-af656f3ab87f"
+					},
+					{
+						"__TYPE__": "GroupItemContent",
+						"value": [
+							[
+								"line",
+								{
+									"__TYPE__": "FieldContent",
+									"type": "Text",
+									"value": "London"
+								}
+							]
+						],
+						"key": "ebf4ef03-e2f6-47d6-9005-19bcf11b750c"
+					},
+					{
+						"__TYPE__": "GroupItemContent",
+						"value": [
+							[
+								"line",
+								{
+									"__TYPE__": "FieldContent",
+									"type": "Text",
+									"value": "W1W 7LZ"
+								}
+							]
+						],
+						"key": "7333ebf8-c110-446c-9e4e-29926cc2f886"
 					}
-				]
+				],
+				"key": "6ff2c550-769b-4c73-acde-3277e75b2231"
 			},
 			"button_link": {
 				"key": "4c161a50-6203-4808-ab3a-e1b048f841d0",
@@ -52,14 +110,44 @@
 			"map_center": {
 				"__TYPE__": "GeoPointContent",
 				"position": {
-					"lat": 51.517256,
-					"lng": -0.1438066
+					"lat": 51.5176365208192,
+					"lng": -0.1352074245929738
 				}
 			},
 			"zoom": {
 				"__TYPE__": "FieldContent",
 				"type": "Number",
 				"value": "15"
+			},
+			"map_markers": {
+				"__TYPE__": "GroupContentType",
+				"value": [
+					{
+						"__TYPE__": "GroupItemContent",
+						"value": [
+							[
+								"marker_location",
+								{
+									"__TYPE__": "GeoPointContent",
+									"position": {
+										"lat": 51.517256,
+										"lng": -0.1438066
+									}
+								}
+							],
+							[
+								"name",
+								{
+									"__TYPE__": "FieldContent",
+									"type": "Text",
+									"value": "Foot Factor"
+								}
+							]
+						],
+						"key": "4bfbd4ea-a0c2-4121-aa5e-e100a79a284f"
+					}
+				],
+				"key": "00829f4a-025b-4439-95bd-3a7d644cba20"
 			}
 		},
 		"items": []

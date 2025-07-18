@@ -2,14 +2,16 @@
 import React, {useEffect, useRef} from 'react';
 import {GeoPointField} from '@prismicio/client';
 import {addSingleMarkers} from '@/components/features/google-map/addSingleMaker';
+import {LocationMapCalloutSliceMapWithCalloutRightPrimaryMapMarkersItem} from '@/prismic-types';
 
 
 interface GoogleMapProps {
     data: GeoPointField;
+    markers?: LocationMapCalloutSliceMapWithCalloutRightPrimaryMapMarkersItem[];
     zoom?: number;
 }
 
-export const GoogleMap = ({data, zoom = 7 }: GoogleMapProps) => {
+export const GoogleMap = ({data, markers, zoom = 7 }: GoogleMapProps) => {
 
     const ref = useRef<HTMLDivElement | null>(null);
 
@@ -23,14 +25,29 @@ export const GoogleMap = ({data, zoom = 7 }: GoogleMapProps) => {
                 zoom: zoom,
             });
 
-            const locations = [
-                {
+
+
+            if (markers && markers.length > 0) {
+                markers?.map((marker) => {
+                    const locations = [{
+                        lat: marker.marker_location.latitude,
+                        lng: marker.marker_location.longitude,
+                    }];
+
+                    addSingleMarkers({locations, map, label: marker.name ?? 'Location'});
+
+                });
+            } else {
+                const locations = [{
                     lat: data.latitude,
                     lng: data.longitude,
-                }
-            ];
+                }];
+                addSingleMarkers({locations, map});
+            }
 
-            addSingleMarkers({locations, map});
+
+
+
         }
 
     }, [ref]);

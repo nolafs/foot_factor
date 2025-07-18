@@ -4,7 +4,7 @@ import {PrismicRichText, SliceComponentProps} from '@prismicio/react';
 import {Container} from '@/components/ui/container';
 import GoogleMapWrapper from '@/components/features/google-map/google-map-wrapper';
 import GoogleMap from '@/components/features/google-map/google-map';
-import {Heading} from '@/components/ui/text';
+import {Body, Heading} from '@/components/ui/text';
 
 /**
  * Props for `LocationMapCallout`.
@@ -21,13 +21,22 @@ const LocationMapCallout: FC<LocationMapCalloutProps> = ({ slice }) => {
         <GoogleMap data={slice.primary.map_center ?? {
           latitude: 0,
           longitude: 0,
-        }} zoom={slice.primary.zoom ?? 7} />
+        }} zoom={slice.primary.zoom ?? 7} markers={slice.primary.map_markers} />
       </GoogleMapWrapper>
 
-      <div className={'absolute max-w-[694px] w-full bg-white rounded-xl shadow-lg p-6 top-4 right-4 z-10'}>
+      <div className={'lg:absolute lg:w-1/2 lg:top-1/2 lg:-translate-y-1/2 max-w-[600px] bg-white rounded-xl shadow-lg p-16 right-4 z-10'}>
         <Heading as="h2" className={'content-master'}>
           <PrismicRichText field={slice.primary.heading} />
         </Heading>
+        <Body>
+          <div className={'flex flex-col gap-2 pt-5'}>
+            {slice.primary.address_lines.map((item, index) => (
+              <div key={index} className={'pl-0'}>
+                {item.line}
+              </div>
+            ))}
+          </div>
+        </Body>
       </div>
     </Container>
   );
