@@ -99,3 +99,7 @@
 
 
 }
+
+.ais-RefinementList-labelText {
+  text-transform: capitalize;
+}

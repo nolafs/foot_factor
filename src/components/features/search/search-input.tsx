@@ -13,12 +13,12 @@ import {
 } from 'react-instantsearch';
 import SearchHitItem from '@/components/features/search/search-hit-item';
 import { InstantSearchNext } from 'react-instantsearch-nextjs';
-import React, { FormEvent } from 'react';
+import React from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import cn from 'clsx';
 import { useSearch } from '@/components/features/search/search-context';
 import { FacetDropdown } from '@/lib/FacetDropdown';
-import { Container } from '@/components/ui/container';
+
 
 export function SearchInput({ isSearchPage = true }: { isSearchPage: boolean }) {
   const router = useRouter();
@@ -102,7 +102,7 @@ export function SearchInput({ isSearchPage = true }: { isSearchPage: boolean }) 
             </div>
             <div
               className={cn('relative z-[9999] flex flex-wrap items-center justify-between gap-2', isSearchPage ? 'mt-16' : 'mt-5')}>
-              <h3 className={'tracking-tight md:tracking-widest'}>Search Results</h3>
+              <h3 className={'hidden md:block tracking-tight md:tracking-widest'}>Search Results</h3>
 
               <div className={' flex flex-wrap gap-2'}>
                 <FacetDropdown closeOnChange={closeOnChange} buttonText={'Type'} classNames={{root: 'my-TypeDropdown'}}>
