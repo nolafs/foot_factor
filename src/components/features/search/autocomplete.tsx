@@ -255,7 +255,7 @@ const SearchComponent = () => {
                   </div>
               ) : inputValue ? (
                   <div className="px-4 py-8 text-center text-gray-500">
-                    <p>No results found for "{inputValue}"</p>
+                    <p>No results found for {inputValue}</p>
                     <p className="text-sm mt-2">Try adjusting your search terms or filters</p>
                   </div>
               ) : null}
