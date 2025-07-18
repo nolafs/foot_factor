@@ -165,10 +165,10 @@ export default async function Page({ params }: Props) {
     },
     publisher: {
       '@type': 'Organization',
-      name: 'MyAnkle.co.uk', // Replace with your site name
+      name: 'footfactor.com', // Replace with your site name
       logo: {
         '@type': 'ImageObject',
-        url: 'https://myankle.co.uk/share-img.png', // Add your actual logo URL
+        url: 'https://footfactor.com/share-img.png', // Add your actual logo URL
       },
     },
     description: asText(post.description) || '',
