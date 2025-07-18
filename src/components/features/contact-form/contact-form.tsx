@@ -221,7 +221,7 @@ export function ContactForm({ items }: ContactFormInputProps) {
               type="submit"
               variant={'default'}
               size={'lg'}
-              className={cn(`${isSubmitting ? 'loading' : ''}`, 'w-full bg-primary')}
+              className={cn(`${isSubmitting ? 'loading' : ''}`, 'bg-accent')}
               disabled={!isVerified || isSubmitting}>
               {isSubmitting ? 'Submitting' : 'Submit'}
             </Button>
