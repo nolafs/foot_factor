@@ -77,7 +77,7 @@ export function Body({className, color, ...props}: React.ComponentPropsWithoutRe
       'prose prose-sm md:prose-base lg:prose-lg max-w-none !leading-tight md:!leading-normal',
       'prose-a:text-accent prose-a:no-underline hover:prose-a:underline prose-headings:font-heading',
       color !== 'Primary' && 'prose-strong:text-primary-950 prose-headings:!text-primary-950  prose-headings:mt-0 text-slate-500 ',
-      color === 'Primary' && 'prose-strong:!text-primary-400 prose-headings:!text-primary-300 prose-p:!text-primary-300 prose-ul:!text-primary-300 prose-headings:mt-0 text-primary-500 ',
+      color === 'Primary' && 'prose-strong:!text-primary-400 prose-headings:!text-white prose-p:!text-primary-300 prose-ul:!text-primary-300 prose-headings:mt-0 text-primary-500 ',
       color === 'Light' && 'prose-strong:text-primary-950 prose-headings:!text-primary-950 prose-headings:mt-0 text-slate-200 '
   )} {...props} />;
 }
