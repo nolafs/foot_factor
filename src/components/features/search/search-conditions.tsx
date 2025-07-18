@@ -18,7 +18,7 @@ export const SearchConditions = ({conditionCategories}: SearchConditionsProps) =
 
     <AutoComplete />
 
-      <BentoWrapper className={'!mt-0'}>
+      <BentoWrapper className={'!mt-0 isolate'}>
         {conditionCategories?.map((category, idx) => (
             <BentoCard key={'condition_'+ category.id} columns={Math.floor(idx / 2) % 2 === 0 ? (idx % 2 === 0 ? 4 : 2) : (idx % 2 === 0 ? 2 : 4)}>
               <Link href={'/conditions/' + category.uid} className={'group'}>

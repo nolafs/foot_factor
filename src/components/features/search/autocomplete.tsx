@@ -2,14 +2,24 @@
 
 import {liteClient as algoliasearch} from 'algoliasearch/lite';
 import React, {useState, useEffect, useRef} from 'react';
-import {InstantSearchNext} from 'react-instantsearch-nextjs';
-import {useSearchBox, useHits, useStats, Configure, PoweredBy} from 'react-instantsearch';
+import {
+  InstantSearch,
+  useSearchBox,
+  useHits,
+  useStats,
+  useRefinementList,
+  useClearRefinements,
+  Configure,
+  PoweredBy, Stats
+} from 'react-instantsearch';
 import type {HitBaseItem} from '@/types/hit.type';
 import Link from 'next/link';
-import {Activity, SquareArrowOutUpRight, Search, X} from 'lucide-react';
+import {Activity, SquareArrowOutUpRight, Search, X, Filter, ChevronDown} from 'lucide-react';
 import {Heading} from '@/components/ui/text';
 import {Badge} from '@/components/ui/badge';
 import Image from 'next/image';
+import {Button} from '@/components/ui/button';
+import cn from 'clsx';
 
 const AutocompleteItem = ({item}: { item: HitBaseItem }) => {
   const trimmedText =
@@ -54,8 +64,100 @@ const AutocompleteItem = ({item}: { item: HitBaseItem }) => {
   );
 };
 
+// Category refinement component
+const CategoryRefinement = () => {
+  const [isOpen, setIsOpen] = useState(false);
+  const dropdownRef = useRef<HTMLDivElement>(null);
 
-// Custom search component using React InstantSearch hooks
+  const {items, refine} = useRefinementList({
+    attribute: 'category',
+    limit: 10,
+    sortBy: ['count:desc', 'name:asc'],
+  });
+
+  console.log('CategoryRefinement items', items);
+
+  // Close dropdown when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
+        setIsOpen(false);
+      }
+    };
+
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, []);
+
+  // Show selected categories count
+  const selectedCount = items.filter(item => item.isRefined).length;
+
+  if (items.length === 0) return null;
+
+  return (
+      <div className="relative" ref={dropdownRef}>
+        <Button variant={'outline'} size={'icon'}
+            onClick={() => setIsOpen(!isOpen)}
+            className={cn(`flex rounded-lg  transition-colors relative`,
+                selectedCount > 0
+                    ? 'border-accent bg-white text-accent'
+                    : 'border-gray-300 hover:border-gray-400'
+            )}
+        >
+          <Filter className="h-4 w-4"/>
+          {selectedCount > 0 && (
+          <div className="text-[10px] flex justify-center items-center rounded-full h-4 w-4 bg-accent text-white absolute top-1 right-1">
+            <span>{selectedCount}</span>
+          </div>
+          )}
+        </Button>
+
+        {isOpen && (
+            <div
+                className="absolute top-full left-0 mt-2 w-64 bg-white border border-gray-200 rounded-lg shadow-lg z-50 max-h-60 overflow-y-auto">
+              <div className="p-2 border-b border-gray-100">
+                <span className="text-xs text-gray-500 font-medium">Filter by Category</span>
+              </div>
+              {items.map((item) => (
+                  <label
+                      key={item.value}
+                      className="flex items-center space-x-3 px-4 py-2 hover:bg-gray-50 cursor-pointer border-b border-gray-50 last:border-b-0"
+                  >
+                    <input
+                        type="checkbox"
+                        checked={item.isRefined}
+                        onChange={() => refine(item.value)}
+                        className="rounded border-gray-300 text-accent focus:ring-accent-400"
+                    />
+                    <span className="flex-1 text-sm capitalize">{item.label}</span>
+                    <span className="text-xs text-gray-500 bg-gray-100 px-2 py-1 rounded">
+                {item.count}
+              </span>
+                  </label>
+              ))}
+            </div>
+        )}
+      </div>
+  );
+};
+
+// Clear refinements component
+const ClearFilters = () => {
+  const {canRefine, refine} = useClearRefinements();
+
+  if (!canRefine) return null;
+
+  return (
+      <Button variant={'outline'} size={'icon'}
+          onClick={() => refine()}
+          className="px-3 py-2 text-sm text-red-600 border border-red-300 rounded-lg hover:bg-red-50 transition-colors"
+      >
+        <X className="h-4 w-4"/>
+      </Button>
+  );
+};
+
+// Main search component
 const SearchComponent = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [inputValue, setInputValue] = useState('');
@@ -63,7 +165,6 @@ const SearchComponent = () => {
 
   const {query, refine, clear} = useSearchBox();
   const {hits} = useHits<HitBaseItem>();
-  const {nbHits, processingTimeMS} = useStats();
 
   // Sync input value with search query
   useEffect(() => {
@@ -102,8 +203,8 @@ const SearchComponent = () => {
         <Heading as="h2" className="mb-0">Search Conditions</Heading>
 
         {/* Search Input */}
-        <div className="relative mt-4">
-          <div className="relative">
+        <div className="relative flex space-x-2 mt-4">
+          <div className="relative grow">
             <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-400"/>
             <input
                 ref={inputRef}
@@ -124,15 +225,24 @@ const SearchComponent = () => {
                 </button>
             )}
           </div>
+          {/* Refinements */}
+          <div className="flex space-x-2">
+            <CategoryRefinement/>
+            <ClearFilters/>
+          </div>
         </div>
+
+        <div className="flex items-center space-x-3 mt-4">
+        </div>
+
 
         {/* Results */}
         {isOpen && inputValue && (
-            <div className="mt-4 bg-white border border-gray-200 rounded-lg shadow-lg overflow-hidden">
+            <div className="absolute z-[999] mt-28 bg-white border border-gray-200 rounded-lg shadow-lg overflow-hidden">
               {/* Stats */}
               {inputValue && (
                   <div className="px-4 py-3 text-sm text-gray-500 bg-gray-50 border-b border-gray-200">
-                    {nbHits} result{nbHits !== 1 ? 's' : ''} found in {processingTimeMS}ms
+                   <Stats />
                   </div>
               )}
 
@@ -145,8 +255,8 @@ const SearchComponent = () => {
                   </div>
               ) : inputValue ? (
                   <div className="px-4 py-8 text-center text-gray-500">
-                    <p>No results found for {inputValue}</p>
-                    <p className="text-sm mt-2">Try adjusting your search terms</p>
+                    <p>No results found for "{inputValue}"</p>
+                    <p className="text-sm mt-2">Try adjusting your search terms or filters</p>
                   </div>
               ) : null}
 
@@ -167,13 +277,13 @@ export const AutoComplete = () => {
   );
 
   return (
-      <InstantSearchNext searchClient={searchClient} indexName="conditions">
+      <InstantSearch searchClient={searchClient} indexName="conditions">
         <Configure
             hitsPerPage={8}
             analytics={true}
             clickAnalytics={true}
         />
         <SearchComponent/>
-      </InstantSearchNext>
+      </InstantSearch>
   );
 };
