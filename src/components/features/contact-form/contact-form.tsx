@@ -9,6 +9,7 @@ import { z } from 'zod';
 import cn from 'clsx';
 import { sendMail, VerifyCaptcha } from '@/action';
 import ReCAPTCHA from 'react-google-recaptcha';
+import {ContactFormSectionSliceDefaultPrimaryItemsItem} from '@/prismic-types';
 
 const RECAPTCHA_ACTIVE = process.env.NEXT_PUBLIC_RECAPTCHA_ACTIVE === 'true';
 
@@ -20,15 +21,10 @@ const emailSchema = z.object({
   agreeToTerms: z.boolean().refine(val => val, 'You must agree to the Terms & Conditions'),
 });
 
-export type ContactEnquiryItem = {
-  value: string;
-  label: string;
-};
-
 export type EmailSchema = z.infer<typeof emailSchema>;
 
 interface ContactFormInputProps {
-  items: ContactEnquiryItem[];
+  items: ContactFormSectionSliceDefaultPrimaryItemsItem[];
 }
 
 export function ContactForm({ items }: ContactFormInputProps) {
@@ -160,11 +156,15 @@ export function ContactForm({ items }: ContactFormInputProps) {
             Nature of Enquiry
           </option>
           {items.length ? (
-            items.map((item, index) => (
-              <option key={item.value + index} value={item.value}>
-                {item.label}
-              </option>
-            ))
+              items.map((item, index) => {
+                if (item.value == null) return null; // skip items with undefined or null value
+
+                return (
+                    <option key={`${item.value}-${index}`} value={item.value}>
+                      {item.label}
+                    </option>
+                );
+              })
           ) : (
             <>
               <option value="general">General Inquiry</option>
@@ -198,7 +198,7 @@ export function ContactForm({ items }: ContactFormInputProps) {
                 {...register('agreeToTerms')}
                 id="agreeToTerms"
               />
-              <label htmlFor="agreeToTerms" className="label-text">
+              <label htmlFor="agreeToTerms" className="text-base">
                 I agree to the Terms & Conditions
               </label>
             </div>
@@ -219,6 +219,7 @@ export function ContactForm({ items }: ContactFormInputProps) {
             {isVerified}
             <Button
               type="submit"
+              variant={'default'}
               size={'lg'}
               className={cn(`${isSubmitting ? 'loading' : ''}`, 'w-full bg-primary')}
               disabled={!isVerified || isSubmitting}>

@@ -31,8 +31,8 @@ export async function sendMail(formData: FormData) {
       agreeToTerms: formData.get('agreeToTerms') === 'true',
     });
 
-    const sentFrom = new Sender(`noreply@${process.env.MAILERSEND_DOMAIN}`, 'Mr Andrew Goldberg OBE');
-    const recipients: Recipient[] = [new Recipient('info@goldbergpp.com', 'Contact Form Website')];
+    const sentFrom = new Sender(`noreply@${process.env.MAILERSEND_DOMAIN}`, 'Foot Factor');
+    const recipients: Recipient[] = [new Recipient('info@footfactor.com', 'Contact Form Website')];
 
     if (validatedFields) {
       const emailParams = new EmailParams()

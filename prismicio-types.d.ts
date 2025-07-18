@@ -3099,6 +3099,83 @@ type CaseStudiesSliceVariation = CaseStudiesSliceDefault | CaseStudiesSliceBento
 export type CaseStudiesSlice = prismic.SharedSlice<'case_studies', CaseStudiesSliceVariation>;
 
 /**
+ * Item in *ContactFormSection → Default → Primary → Items*
+ */
+export interface ContactFormSectionSliceDefaultPrimaryItemsItem {
+  /**
+   * Label field in *ContactFormSection → Default → Primary → Items*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: contact_form_section.default.primary.items[].label
+   * - **Documentation**: https://prismic.io/docs/fields/text
+   */
+  label: prismic.KeyTextField;
+
+  /**
+   * Value field in *ContactFormSection → Default → Primary → Items*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: contact_form_section.default.primary.items[].value
+   * - **Documentation**: https://prismic.io/docs/fields/text
+   */
+  value: prismic.KeyTextField;
+}
+
+/**
+ * Primary content in *ContactFormSection → Default → Primary*
+ */
+export interface ContactFormSectionSliceDefaultPrimary {
+  /**
+   * Heading field in *ContactFormSection → Default → Primary*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: contact_form_section.default.primary.heading
+   * - **Documentation**: https://prismic.io/docs/fields/text
+   */
+  heading: prismic.KeyTextField;
+
+  /**
+   * Items field in *ContactFormSection → Default → Primary*
+   *
+   * - **Field Type**: Group
+   * - **Placeholder**: *None*
+   * - **API ID Path**: contact_form_section.default.primary.items[]
+   * - **Documentation**: https://prismic.io/docs/fields/repeatable-group
+   */
+  items: prismic.GroupField<Simplify<ContactFormSectionSliceDefaultPrimaryItemsItem>>;
+}
+
+/**
+ * Default variation for ContactFormSection Slice
+ *
+ * - **API ID**: `default`
+ * - **Description**: Default
+ * - **Documentation**: https://prismic.io/docs/slices
+ */
+export type ContactFormSectionSliceDefault = prismic.SharedSliceVariation<
+  'default',
+  Simplify<ContactFormSectionSliceDefaultPrimary>,
+  never
+>;
+
+/**
+ * Slice variation for *ContactFormSection*
+ */
+type ContactFormSectionSliceVariation = ContactFormSectionSliceDefault;
+
+/**
+ * ContactFormSection Shared Slice
+ *
+ * - **API ID**: `contact_form_section`
+ * - **Description**: ContactFormSection
+ * - **Documentation**: https://prismic.io/docs/slices
+ */
+export type ContactFormSectionSlice = prismic.SharedSlice<'contact_form_section', ContactFormSectionSliceVariation>;
+
+/**
  * Item in *Faqs → Default → Primary → FAQs*
  */
 export interface FaqsSliceDefaultPrimaryFaqsItem {
@@ -6269,6 +6346,11 @@ declare module '@prismicio/client' {
       CaseStudiesSliceVariation,
       CaseStudiesSliceDefault,
       CaseStudiesSliceBento,
+      ContactFormSectionSlice,
+      ContactFormSectionSliceDefaultPrimaryItemsItem,
+      ContactFormSectionSliceDefaultPrimary,
+      ContactFormSectionSliceVariation,
+      ContactFormSectionSliceDefault,
       FaqsSlice,
       FaqsSliceDefaultPrimaryFaqsItem,
       FaqsSliceDefaultPrimary,
