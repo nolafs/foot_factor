@@ -55,7 +55,7 @@ const AutocompleteItem = ({item}: { item: HitBaseItem }) => {
           <p className="mt-2 text-sm text-gray-600">{trimmedText}</p>
         </div>
         <div>
-          <Link href={`/conditions/${item.category}/${item.slug}`}>
+          <Link href={item.slug}>
             <span className="absolute inset-0"/>
             <SquareArrowOutUpRight className="h-5 w-5 text-black group-hover:text-accent"/>
           </Link>
@@ -238,7 +238,7 @@ const SearchComponent = () => {
 
         {/* Results */}
         {isOpen && inputValue && (
-            <div className="absolute z-[999] mt-28 bg-white border border-gray-200 rounded-lg shadow-lg overflow-hidden">
+            <div className="absolute z-[999] w-full mt-28 bg-white border border-gray-200 rounded-lg shadow-lg overflow-hidden">
               {/* Stats */}
               {inputValue && (
                   <div className="px-4 py-3 text-sm text-gray-500 bg-gray-50 border-b border-gray-200">
