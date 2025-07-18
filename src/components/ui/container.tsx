@@ -75,7 +75,7 @@ const ContainerComponent = forwardRef<
       >
         {wave && (
             <div className={'absolute inset-0 w-full h-full overflow-hidden'}>
-              <Wave waveType={wave}/>
+              <Wave waveType={wave} />
             </div>
         )}
         <div className={cn("relative w-full z-20", !fullWidth && 'container mx-auto ')}>{children}</div>

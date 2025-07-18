@@ -15,7 +15,7 @@ export type TimelineProps = SliceComponentProps<Content.TimelineSlice>;
  */
 const Timeline: FC<TimelineProps> = ({ slice }) => {
   return (
-    <Container as={'section'} fullWidth={true}  data-slice-type={slice.slice_type} data-slice-variation={slice.variation}>
+    <Container as={'section'} fullWidth={true} padding={'lg'} data-slice-type={slice.slice_type} data-slice-variation={slice.variation}>
       <div className={'mb-16 text-center'} >
         <Heading as="h2">
           {slice.primary.heading}

@@ -7,7 +7,7 @@ interface WaveProps {
 
 export const Wave = ({waveType, className = ''}: WaveProps) => {
 
-    const baseCss = 'w-full h-full object-cover object-center min-w-max opacity-50';
+    const baseCss = 'w-full h-full object-cover object-center min-w-max opacity-30';
 
     if(waveType === 'type_1') {
         return (
