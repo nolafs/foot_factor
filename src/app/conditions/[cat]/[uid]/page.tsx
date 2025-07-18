@@ -29,7 +29,7 @@ export async function generateMetadata({params}: { params: Promise<Params> }): P
         'application/rss+xml': `${process.env.NEXT_PUBLIC_BASE_URL}/feed.xml`,
       },
     },
-    title: page.data.meta_title ? page.data.meta_title : isFilled.keyText(page.data.title) ? page.data.title : '',
+    title: page.data.meta_title ?? isFilled.keyText(page.data.title) ? page.data.title : '',
     description: page.data.meta_description,
     openGraph: {
       title: isFilled.keyText(page.data.meta_title) ? page.data.meta_title : isFilled.keyText(page.data.title) ? page.data.title : '',

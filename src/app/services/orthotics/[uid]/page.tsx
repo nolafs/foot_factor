@@ -39,7 +39,11 @@ export async function generateMetadata({params, parent}: { params: Promise<Param
     openGraph: {
       title: isFilled.keyText(page.data.meta_title) ? page.data.meta_title : undefined,
       description: isFilled.keyText(page.data.meta_description) ? page.data.meta_description :  asText(page.data.lead),
-      images: isFilled.image(page.data.meta_image) ? [asImageSrc(page.data.meta_image)] : page.data.image.url ? [page.data.image.url] : parentOpenGraph?.images ? parentOpenGraph.images : [],
+      images: isFilled.image(page.data.meta_image)
+          ? [asImageSrc(page.data.meta_image)]
+          : page.data.image?.url
+              ? [page.data.image.url]
+              : parentOpenGraph?.images ?? [],
     },
   };
 }

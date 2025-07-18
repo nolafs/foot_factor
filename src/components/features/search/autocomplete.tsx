@@ -93,6 +93,7 @@ export const AutoComplete = () => {
         createElement,
         Fragment,
         render: () => {
+          console.log('Rendering autocomplete');
         },
       },
       render({children}, root) {

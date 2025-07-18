@@ -42,7 +42,7 @@ export async function generateMetadata(
     openGraph: {
       title: isFilled.keyText(page.data.meta_title) ? page.data.meta_title : pageTitle,
       description: isFilled.keyText(page.data.meta_description) ? page.data.meta_description : '',
-      images: isFilled.image(page.data.meta_image) ? [asImageSrc(page.data.meta_image)] : parentOpenGraph?.images ? parentOpenGraph.images : [],
+      images: isFilled.image(page.data.meta_image) ? [asImageSrc(page.data.meta_image)] : parentOpenGraph?.images ?? [],
     },
   };
 }
