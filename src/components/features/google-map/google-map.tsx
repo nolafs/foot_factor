@@ -3,6 +3,7 @@ import React, {useEffect, useRef} from 'react';
 import {GeoPointField} from '@prismicio/client';
 import {addSingleMarkers} from '@/components/features/google-map/addSingleMaker';
 import {LocationMapCalloutSliceMapWithCalloutRightPrimaryMapMarkersItem} from '@/prismic-types';
+import {useMediaQuery} from '@/lib/hooks/useMediaQuery';
 
 
 interface GoogleMapProps {
@@ -14,18 +15,25 @@ interface GoogleMapProps {
 export const GoogleMap = ({data, markers, zoom = 7 }: GoogleMapProps) => {
 
     const ref = useRef<HTMLDivElement | null>(null);
+    const isMobile = useMediaQuery('(max-width: 768px)');
 
     useEffect(() => {
         if (ref.current) {
+
+            if (markers && markers.length > 0 && isMobile && markers[0]?.marker_location) {
+                // If markers are provided and it's a mobile view, use the first marker's location
+                data.latitude = markers[0]?.marker_location.latitude;
+                data.longitude = markers[0]?.marker_location.longitude;
+            }
+
+
             const map = new window.google.maps.Map(ref.current, {
                 center: {
-                    lat: data.latitude,
+                    lat:  data.latitude,
                     lng: data.longitude,
                 },
                 zoom: zoom,
             });
-
-
 
             if (markers && markers.length > 0) {
                 markers?.map((marker) => {
@@ -50,7 +58,7 @@ export const GoogleMap = ({data, markers, zoom = 7 }: GoogleMapProps) => {
 
         }
 
-    }, [ref]);
+    }, [ref, isMobile]);
 
   return (
       <div
