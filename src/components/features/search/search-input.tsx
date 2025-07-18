@@ -59,7 +59,7 @@ export function SearchInput({ isSearchPage = true }: { isSearchPage: boolean }) 
               ? 'sticky top-0 z-20 shrink border-b border-gray-200 bg-white/60 pt-16 backdrop-blur-sm sm:pt-12 md:pt-24'
               : ''
           }>
-          <div className={'container mx-auto'}>
+          <div className={'container mx-auto px-5'}>
             <SearchBox
               placeholder="Search resources"
               classNames={{
@@ -122,7 +122,7 @@ export function SearchInput({ isSearchPage = true }: { isSearchPage: boolean }) 
             <hr className={cn('border-t border-gray-200', isSearchPage ? 'mt-6' : 'mt-6 opacity-0')} />
           </div>
         </div>
-        <Container className={'!px-0 md:!px-6'}>
+        <div className={cn('container mx-auto', isSearchPage ? 'mt-10' : 'mt-5')}>
           <div className="mt-5 flex h-full grow flex-col justify-between">
             <Hits
               hitComponent={SearchHitItem}
@@ -144,7 +144,7 @@ export function SearchInput({ isSearchPage = true }: { isSearchPage: boolean }) 
               }}
             />
           </div>
-        </Container>
+        </div>
       </div>
     </InstantSearchNext>
   );

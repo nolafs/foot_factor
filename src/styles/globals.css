@@ -127,3 +127,9 @@
     background-color: transparent !important;
   }
 }
+
+.search-scroll{
+  [data-radix-scroll-area-viewport] {
+    > div {display: block !important};
+  }
+}

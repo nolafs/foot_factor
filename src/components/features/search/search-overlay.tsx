@@ -50,10 +50,11 @@ export function SearchOverlay() {
           <Button onClick={handleClose} className="absolute right-4 top-4 z-50" variant={'default'} size={'icon'}>
             <X className="size-8" />
           </Button>
-          <ScrollArea className={'absolute h-full w-full'}>
-            {/* Search Input */}
-            <SearchInput isSearchPage={false} />
-          </ScrollArea>
+
+            <ScrollArea className="search-scroll absolute w-full h-full">
+              <SearchInput isSearchPage={false}/>
+            </ScrollArea>
+
         </div>
       )}
     </div>
