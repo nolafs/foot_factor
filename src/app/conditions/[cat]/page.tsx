@@ -3,8 +3,6 @@ import { notFound } from 'next/navigation';
 import { SliceZone } from '@prismicio/react';
 import { createClient } from '@/prismicio';
 import { components } from '@/slices';
-import type { OGImage } from '@/types';
-import type { ResolvedOpenGraph } from 'next/dist/lib/metadata/types/opengraph-types';
 import React from 'react';
 import HeroSimple from '@/components/features/hero/hero-simple';
 import {Container} from '@/components/ui/container';
@@ -13,6 +11,8 @@ import {asImageSrc, filter, isFilled} from '@prismicio/client';
 import {PrismicNextImage} from '@prismicio/next';
 import {Badge} from '@/components/ui/badge';
 import {AutoComplete} from '@/components/features/search/autocomplete';
+import Image from 'next/image';
+import  PlaceholderImage  from '@/assets/placeholder-img.png';
 
 
 type Params = { cat: string };
@@ -100,11 +100,13 @@ export default async function Page({params}: { params: Promise<Params> }) {
         {conditions.map((item, idx)=> (
             <li key={idx}>
               <Link href={`/conditions/${(item.data?.category as { uid: string }).uid}/${item.uid}`} className={'flex flex-col gap-4 p-4 bg-white rounded-lg group  hover:shadow-lg transition-shadow duration-300'}>
-                {item.data.feature_image && (
+                {isFilled.image(item.data.feature_image) ? (
                     <PrismicNextImage
                         field={item.data.feature_image}
                         className={'w-full h-48 object-cover rounded-lg'}/>
-                )}
+                ) : (
+                <Image src={PlaceholderImage} alt={item.data.title ?? 'placeholder image'}
+                       className={'w-full h-48 object-cover rounded-lg'}/>)}
                 <div><Badge variant={'secondary'}>{(item.data?.category as {data: {name: string}}).data.name}</Badge></div>
                 <div>
                   <h3 className={'text-lg font-semibold mb-3 group-hover:text-accent'}>{item.data.title}</h3>
