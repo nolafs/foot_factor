@@ -6,7 +6,6 @@ import gsap from 'gsap';
 import ScrollTrigger from 'gsap/ScrollTrigger';
 import {useGSAP} from '@gsap/react';
 import {PrismicNextImage} from '@prismicio/next';
-import {Container} from '@/components/ui/container';
 import StepsProgress from '@/components/features/steps/steps-progress';
 import {cn} from '@/lib/utils';
 
@@ -30,6 +29,9 @@ export const Steps = ({data, sectionPadding}: StepsProps) => {
 
     if (!contentRef.current || !listRef.current) return;
 
+    // use gsap media query to online the scroll trigger on desktop
+    const mediaQuery = gsap.matchMedia();
+    mediaQuery.add('(min-width: 768px)', () => {
     // Overall progress based on scroll through entire steps section
     gsap.to({}, {
       ease: 'none',
@@ -65,6 +67,12 @@ export const Steps = ({data, sectionPadding}: StepsProps) => {
     setTimeout(() => {
       ScrollTrigger.refresh();
     }, 1000)
+
+      //cleanup code
+      return () => {
+        ScrollTrigger.getAll().forEach(trigger => trigger.kill());
+      };
+    })
 
   }, {scope: contentRef, dependencies: [data]});
 
@@ -115,135 +123,139 @@ const Step = ({title, description, step_label, image, stepNum, onStepActive}: St
   useGSAP(() => {
     if (!cardRef.current) return;
 
+    const mediaQuery = gsap.matchMedia();
+    mediaQuery.add('(min-width: 768px)', () => {
 
-    ScrollTrigger.create({
+      gsap.timeline({
+        scrollTrigger: {
+          trigger: cardRef.current,
+          start: 'top top',
+          end: 'bottom+=50% bottom',
+          markers: false,
+          scrub: 0.3,
+          pin: true,
+          pinSpacing: true,
+          anticipatePin: 1,
+          onEnter: () => {
+            onStepActive(stepNum);
+          },
+          onEnterBack: () => {
+            onStepActive(stepNum);
+          }
+        }
+      })
 
-    });
-
-    gsap.timeline({
-      scrollTrigger: {
-      trigger: cardRef.current,
-      start: 'top top',
-      end: 'bottom+=50% bottom',
-      markers: false,
-      scrub: 0.3,
-      pin: true,
-      pinSpacing: true,
-      anticipatePin: 1,
-      onEnter: () => {
-        onStepActive(stepNum);
-      },
-      onEnterBack: () => {
-        onStepActive(stepNum);
-      }
-    }})
-
-        /*
-        .from(cardRef.current, {
-          scale: 0.5,
-          opacity: 0,
-          duration: 1,
-          ease: 'power2.out',
-        })
-        .to(cardRef.current, {
-          scale: 1,
-          opacity: 1,
-          duration: 1,
-          ease: 'power2.out',
-        })
+      /*
+      .from(cardRef.current, {
+        scale: 0.5,
+        opacity: 0,
+        duration: 1,
+        ease: 'power2.out',
+      })
       .to(cardRef.current, {
-      scale: 0.5,
-      opacity: 0,
-      duration: 1,
-      ease: 'power2.out',
-    })
+        scale: 1,
+        opacity: 1,
+        duration: 1,
+        ease: 'power2.out',
+      })
+    .to(cardRef.current, {
+    scale: 0.5,
+    opacity: 0,
+    duration: 1,
+    ease: 'power2.out',
+  })
 
-         */
+       */
 
-    const tl = gsap.timeline({
-      scrollTrigger: {
-        trigger: cardRef.current,
-        start: 'top center',
-        end: 'bottom+=50% top',
-        scrub: 0.3,
-        toggleActions: 'play none none reverse',
-        markers: false
-      }
-    });
+      const tl = gsap.timeline({
+        scrollTrigger: {
+          trigger: cardRef.current,
+          start: 'top center',
+          end: 'bottom+=50% top',
+          scrub: 0.3,
+          toggleActions: 'play none none reverse',
+          markers: false
+        }
+      });
 
-    tl.fromTo('.content', {
-      opacity: 0,
-      y: '100%',
-      scale: 0.5,
-    }, {
-      opacity: 1,
-      y: '0%',
-      scale: 1,
-      duration: 1,
-      ease: 'power2.out',
-    });
+      tl.fromTo('.content', {
+        opacity: 0,
+        y: '100%',
+        scale: 0.5,
+      }, {
+        opacity: 1,
+        y: '0%',
+        scale: 1,
+        duration: 1,
+        ease: 'power2.out',
+      });
 
-    tl.to('.content', {
-      opacity: 1,
-      y: '0%',
-      duration: 1,
-      ease: 'power2.out',
-    });
+      tl.to('.content', {
+        opacity: 1,
+        y: '0%',
+        duration: 1,
+        ease: 'power2.out',
+      });
 
-    tl.to('.content', {
-      opacity: 0,
-      y: '0%',
-      scale: 0.5,
-      duration: 1,
-      ease: 'power2.out',
-    });
-
-
+      tl.to('.content', {
+        opacity: 0,
+        y: '0%',
+        scale: 0.5,
+        duration: 1,
+        ease: 'power2.out',
+      });
 
 
-    const imgTl = gsap.timeline({
-      scrollTrigger: {
-        trigger: cardRef.current,
-        start: 'top center',
-        end: 'bottom+=50% top',
-        toggleActions: 'play none none reverse',
-        scrub: 0.3,
-        markers: false
-      }
-    });
+      const imgTl = gsap.timeline({
+        scrollTrigger: {
+          trigger: cardRef.current,
+          start: 'top center',
+          end: 'bottom+=50% top',
+          toggleActions: 'play none none reverse',
+          scrub: 0.3,
+          markers: false
+        }
+      });
 
-    imgTl.fromTo('.image', {
-      opacity: 0,
-      y: '100%',
-      scale: 0.5,
-    }, {
-      opacity: 1,
-      y: '0%',
-      scale: 1,
-      duration: 1,
-      ease: 'power2.out',
-    });
+      imgTl.fromTo('.image', {
+        opacity: 0,
+        y: '100%',
+        scale: 0.5,
+      }, {
+        opacity: 1,
+        y: '0%',
+        scale: 1,
+        duration: 1,
+        ease: 'power2.out',
+      });
 
-    imgTl.to('.image', {
-      opacity: 1,
-      y: '0%',
-      duration: 1,
-      ease: 'power2.out',
-    });
+      imgTl.to('.image', {
+        opacity: 1,
+        y: '0%',
+        duration: 1,
+        ease: 'power2.out',
+      });
 
-    imgTl.to('.image', {
-      opacity: 0,
-      y: '0%',
-      scale: 0.5,
-      duration: 1,
-      ease: 'power2.out',
+      imgTl.to('.image', {
+        opacity: 0,
+        y: '0%',
+        scale: 0.5,
+        duration: 1,
+        ease: 'power2.out',
+      });
+
+
+      //cleanup code
+      return () => {
+        ScrollTrigger.getAll().forEach(trigger => trigger.kill());
+      };
     });
 
 
   }, {scope: cardRef});
 
   return (
-      <li ref={cardRef} className={cn("perspective-dramatic w-full h-svh grid grid-cols-1 gap-20 py-20 md:py-10 md:grid-cols-2 gap-x-10 md:gap-x-48 justify-start items-center",
+      <li ref={cardRef} className={cn("perspective-dramatic w-full md:h-svh grid grid-cols-1 gap-20 py-20 md:py-10 md:grid-cols-2 gap-x-10 md:gap-x-48 justify-start items-center",
       //stepNum % 2 === 0 ? 'bg-accent' : 'bg-primary-300'
       )
       }>
