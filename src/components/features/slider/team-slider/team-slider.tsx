@@ -19,6 +19,7 @@ export const TeamSlider = ({data}: TeamSliderProps) => {
   const {scrollX} = useScroll({container: scrollRef});
   const [setReferenceWindowRef, bounds] = useMeasure();
   const [activeIndex, setActiveIndex] = useState(0);
+  const [expandedId, setExpandedId] = useState<string | null>(null);
 
   useMotionValueEvent(scrollX, 'change', x => {
     if (scrollRef.current?.children[0]) {
@@ -32,6 +33,13 @@ export const TeamSlider = ({data}: TeamSliderProps) => {
     scrollRef.current!.scrollTo({left: (width + gap) * index});
   }
 
+  const onExpand = (id: string, isExpanded: boolean) => {
+    //close other if open
+    if (isExpanded) {
+        setExpandedId(id)
+    }
+  }
+
 
   return (<div ref={setReferenceWindowRef} className={'relative'}>
       <div
@@ -43,7 +51,7 @@ export const TeamSlider = ({data}: TeamSliderProps) => {
             '[--scroll-padding:max(theme(spacing.6),calc((100vw-theme(maxWidth.2xl))/2))] lg:[--scroll-padding:max(theme(spacing.8),calc((100vw-theme(maxWidth.7xl))/2))]',
           ])}>
           {data.map((member, idx) =>
-              <TeamCard data={member} id={'member_' + idx} key={'member_' + idx} scrollX={scrollX} bounds={bounds} onClick={()=> scrollTo(idx)} />
+              <TeamCard data={member} id={'member_' + idx} key={'member_' + idx}  scrollX={scrollX} bounds={bounds} currentExpanded={expandedId} onExpand={onExpand} onClick={()=> scrollTo(idx)} />
           )}
       </div>
     <Container className="mt-1">

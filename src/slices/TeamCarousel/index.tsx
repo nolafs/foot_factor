@@ -1,6 +1,6 @@
 import { type FC } from 'react';
 import { type Content } from '@prismicio/client';
-import {PrismicRichText, type SliceComponentProps} from '@prismicio/react';
+import {type SliceComponentProps} from '@prismicio/react';
 import {Heading, Lead} from '@/components/ui/text';
 import {Container} from '@/components/ui/container';
 import TeamSlider from '@/components/features/slider/team-slider/team-slider';
@@ -15,8 +15,7 @@ export type TeamCarouselProps = SliceComponentProps<Content.TeamCarouselSlice>;
  */
 const TeamCarousel: FC<TeamCarouselProps> = ({ slice }) => {
   return (
-    <section data-slice-type={slice.slice_type} data-slice-variation={slice.variation}>
-      <div className="pt-16 md:pt-24 lg:pt-32">
+    <Container padding={'lg'} fullWidth={true} data-slice-type={slice.slice_type} data-slice-variation={slice.variation}>
         <Container className={'mb-16'}>
          <Heading as="div">
            {slice.primary.heading}
@@ -26,8 +25,7 @@ const TeamCarousel: FC<TeamCarouselProps> = ({ slice }) => {
           </Lead>
         </Container>
         <TeamSlider data={slice.primary.members} />
-      </div>
-    </section>
+    </Container>
   );
 };
 

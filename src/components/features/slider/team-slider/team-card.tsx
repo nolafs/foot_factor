@@ -1,5 +1,5 @@
 'use client'
-import React, {useCallback, useLayoutEffect, useRef, useState} from 'react';
+import React, {useCallback, useEffect, useLayoutEffect, useRef, useState} from 'react';
 import {type TeamCarouselSliceDefaultPrimaryMembersItem} from '@/prismic-types';
 import {PrismicNextImage} from '@prismicio/next';
 import {Button} from '@/components/ui/button';
@@ -18,9 +18,11 @@ interface TeamCardProps {
     data: TeamCarouselSliceDefaultPrimaryMembersItem,
     bounds: RectReadOnly,
     scrollX: MotionValue<number>
+    onExpand?: (id: string, isExpanded: boolean) => void;
+    currentExpanded?: string | null;
 }
 
-export const TeamCard = ({id,data, bounds, scrollX}: TeamCardProps & HTMLMotionProps<'div'>) => {
+export const TeamCard = ({id,data, bounds, scrollX, onExpand,  currentExpanded}: TeamCardProps & HTMLMotionProps<'div'>) => {
   const ref = useRef<HTMLDivElement | null>(null);
   const [isExpanded, setIsExpanded] = useState(false);
 
@@ -56,10 +58,20 @@ export const TeamCard = ({id,data, bounds, scrollX}: TeamCardProps & HTMLMotionP
     opacity.set(computeOpacity());
   });
 
+  useEffect(() => {
+    if( isExpanded) {
+      if(id !== currentExpanded) {
+        setIsExpanded(false);
+        onExpand?.(id, false);
+      }
+    }
+
+  }, [currentExpanded]);
+
   const toggleExpanded = () => {
     setIsExpanded(!isExpanded);
+    onExpand?.(id, !isExpanded);
   };
-
 
 
   return (
@@ -67,24 +79,24 @@ export const TeamCard = ({id,data, bounds, scrollX}: TeamCardProps & HTMLMotionP
 		  ref={ref}
 		  style={{opacity}}>
       <div className={'relative flex flex-col rounded-3xl bg-white p-5 transition-shadow duration-700 ease-in-out group hover:z-20 hover:shadow-[0px_4px_25px_0px_rgba(0,0,0,0.10)]'}>
-      <motion.div
-          layout
-          initial={{
-            width: '420px',
-            maxWidth: '420px',
-          }}
-          className={'flex flex-col max-h-[940px]'}
-          animate={{
-            width: isExpanded ? '904px' : '420px',
-            maxWidth: isExpanded ? '904px' : '420px'
-          }}
-          transition={{
-            duration: 0.5,
-            ease: "easeInOut"
-          }}
-      >
+        <motion.div
+            layout
+            initial={{
+              width: '420px',
+              maxWidth: '420px',
+            }}
+            className={'flex flex-col max-h-[940px]'}
+            animate={{
+              width: isExpanded ? '904px' : '420px',
+              maxWidth: isExpanded ? '904px' : '420px'
+            }}
+            transition={{
+              duration: 0.5,
+              ease: "easeInOut"
+            }}
+        >
         <div className={'flex gap-5 items-start justify-between'}>
-          <div className={'flex flex-col max-w-[420px] max-h-[743px] w-full flex-shrink-0'}>
+          <div className={'flex flex-col max-w-md lg:max-w-[420px] lg:max-h-[743px] w-full flex-shrink-0'}>
             <div className={'flex flex-col space-y-5 rounded-2xl overflow-hidden'}>
               <div className={'aspect-h-16 aspect-w-9 relative w-full'}>
               {isFilled.embed(data.video) ? <TeamVideo id={id} title={data.title ?? ''} video={data.video} image={data.photo} loading={'lazy'}/> :
