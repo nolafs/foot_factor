@@ -8,6 +8,7 @@ import {ScrollArea} from '@/components/ui/scroll-area';
 import {PrismicNextImage} from '@prismicio/next';
 import {isFilled} from '@prismicio/client';
 import TeamVideo from '@/components/features/slider/team-slider/team-video';
+import {cn} from '@/lib/utils';
 
 interface TeamAccordionProps {
     data: TeamCarouselSliceDefaultPrimaryMembersItem[]
@@ -39,7 +40,7 @@ export const TeamAccordion = ({data}: TeamAccordionProps) => {
                   >
                       {/* Header */}
                     {/* Header */}
-                    <div className="flex flex-col items-center justify-between w-16 bg-white  border-l-2 border-gray-200 p-4">
+                    <div className={cn(isActive ? 'w-10' : 'w-16',  "flex flex-col items-center justify-between  bg-white  border-l-2 border-gray-200 p-2")}>
                       <div>
                         <PrismicNextImage field={item.photo} className="w-5 h-5 object-cover object-center rounded-full mb-2" />
                       </div>
@@ -62,19 +63,22 @@ export const TeamAccordion = ({data}: TeamAccordionProps) => {
                                       duration: 0.4,
                                       delay: 0.2
                                   }}
-                                  className="flex-1 flex flex-col justify-center bg-white text-primary"
+                                  className="flex-1 flex flex-col w-full justify-center bg-white text-primary"
                               >
-                                <ScrollArea className="h-full w-full overflow-y-auto border-l-2 border-gray-200 p-2">
+                                <ScrollArea className="h-full overflow-y-auto border-l-2 border-gray-200 p-2 w-[200px] ">
                                   <div className="flex items-center">
-                                      <h2 className="text-lg  font-bold">{item.name}</h2>
+                                      <h2 className="text-lg  font-bold flex flex-col">
+                                        {item.name}
+                                        <span className="text-sm text-gray-500 font-medium">{item.title}</span>
+                                      </h2>
                                   </div>
-                                  <div className={'prose prose-sm'}>
-                                    <div className={'aspect-h-9 aspect-w-16 relative w-full mb-4 rounded-lg overflow-hidden'}>
+                                  <div className={'prose prose-sm !leading-tight'}>
+                                    <div className={'w-full h-auto px-1 mb-4'}>
                                       {isFilled.embed(item.video) ?
                                           <TeamVideo id={item.title ?? 'video'} title={item.title ?? ''} video={item.video}
                                                      image={item.photo} loading={'lazy'}/> :
                                           <PrismicNextImage field={item.photo}
-                                                            className={'h-full w-full object-center object-cover'}/>}
+                                                            className={'rounded-lg overflow-hidde h-full w-full object-center object-cover'}/>}
                                     </div>
                                   <PrismicRichText field={item.bio} />
                                   </div>
