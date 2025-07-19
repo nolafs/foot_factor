@@ -4,6 +4,7 @@ import {type SliceComponentProps} from '@prismicio/react';
 import {Heading, Lead} from '@/components/ui/text';
 import {Container} from '@/components/ui/container';
 import TeamSlider from '@/components/features/slider/team-slider/team-slider';
+import TeamAccordion from '@/components/features/slider/team-accordion/team-accordion';
 
 /**
  * Props for `TeamCarousel`.
@@ -24,7 +25,12 @@ const TeamCarousel: FC<TeamCarouselProps> = ({ slice }) => {
             {slice.primary.lead}
           </Lead>
         </Container>
+       <div className={'hidden md:block'}>
         <TeamSlider data={slice.primary.members} />
+       </div>
+      <div className={'block md:hidden'}>
+        <TeamAccordion data={slice.primary.members} />
+      </div>
     </Container>
   );
 };

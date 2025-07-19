@@ -53,7 +53,7 @@ type LeadProps = {
 export function Lead({ className, size, color, ...props }: LeadProps & React.ComponentPropsWithoutRef<'p'>) {
   return <p className={cn(className,
       'font-medium tracking-tight leading-tight',
-      !size && 'text-lg sm:text-xl',
+      !size && 'text-lg md:text-lg sm:text-lg lg:text-xl',
       size === 'sm' && 'text-sm sm:text-base',
       size === 'md' && 'text-sm sm:text-sm md:text-lg',
       size === 'lg' && 'text-base sm:text-lg md:text-xl',

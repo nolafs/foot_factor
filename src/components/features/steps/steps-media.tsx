@@ -66,7 +66,7 @@ export const StepsMedia = ({data}: StepsMediaProps) => {
           <div ref={contentRef} className={'relative w-full isolate overflow-hidden'}>
               <div ref={listRef} className={'w-full flex flex-col'}>
                 <div>
-                  <div className={'intro z-5 relative w-full h-svh isolated overflow-hidden'}>
+                  <div className={'intro z-5 relative w-full h-screen isolated overflow-hidden'}>
                     <div className={'w-full h-full flex justify-center'}>
 
                       <PrismicNextImage field={data.intro_image}
