@@ -101,7 +101,7 @@ export const NavigationMobileMenu = ({ logo, navigation, siteName}: NavigationSu
                               <PrismicNextLink
                                   key={`main-mobile-nav-${item.label}}`}
                                   field={item.link}
-
+                                  onClick={() => setMobileMenuOpen(false)}
                                   className="block text-base font-semibold text-white">
                                 {item.label}
                               </PrismicNextLink>

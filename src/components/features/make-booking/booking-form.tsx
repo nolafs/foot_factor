@@ -30,7 +30,7 @@ import {
 } from "@/components/ui/select"
 import {CalendarIcon} from 'lucide-react';
 import cn from 'clsx';
-import {type MakeBookingDocumentData} from '../../../../prismicio-types';
+import {type MakeBookingDocumentData} from '@/prismic-types';
 import { Textarea } from '@/components/ui/textarea';
 import {Checkbox} from '@/components/ui/checkbox';
 import Link from 'next/link';
@@ -96,6 +96,7 @@ export const BookingForm = ({booking}: BookingFormProps) => {
   })
 
   const onSubmit = (data: z.infer<typeof FormSchema>) => {
+    //TODO: submit the form data
     console.log(data);
   }
 

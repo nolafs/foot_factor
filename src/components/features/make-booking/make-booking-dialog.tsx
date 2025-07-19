@@ -48,7 +48,7 @@ export const MakeBookingDialog = ({ buttonLabel = 'Book now', size = 'sm', class
                           {bookingData?.call_to_actions.map((action, index) => (
                               <div
                                   key={index}
-                                  className="flex flex-col space-y-2 sm:p-5 lg:p-8 rounded-xl text-primary-foreground bg-primary"
+                                  className="flex flex-col space-y-2 p-3 sm:p-5 lg:p-8 rounded-xl text-primary-foreground bg-primary"
                               >
                                 <h3 className="font-normal font-heading text-lg md:text-xl lg:text-3xl">
                                   {action.header}
