@@ -98,7 +98,7 @@ export const TeamAccordion = ({data}: TeamAccordionProps) => {
             <motion.button
                 key={index}
                 className={`w-3 h-3 rounded-full transition-colors ${
-                    activeIndex === index ? 'bg-white' : 'bg-gray-600'
+                    activeIndex === index ? 'bg-slate-400' : 'bg-slate-100'
                 }`}
                 whileHover={{scale: 1.2}}
                 whileTap={{scale: 0.9}}

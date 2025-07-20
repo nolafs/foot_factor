@@ -60,7 +60,7 @@ export const TimelineListItem = ({data, isEven = false}: TimelineListItemProps) 
                 <div className={cn('relative flex flex-col md:flex-row gap-5 mt-5', isEven && 'md:flex-row-reverse')}>
 
                   <motion.div initial={{opacity: 0, width: 0}} animate={lineControl}
-                      className={cn("absolute z-10 top-5 h-[2px] w-[14px] bg-secondary/50 ", isEven ? '-left-10 -translate-x-1/2 md:left-auto  md:!-right-10 md:translate-x-1/2' : 'md:-left-10 md:-translate-x-1/2' )}/>
+                      className={cn("absolute z-10 top-5 h-[2px] w-[14px] bg-secondary/50 ", isEven ? '-left-10 -translate-x-1/2 md:left-auto  md:!-right-10 md:translate-x-1/2' : '-left-10 -translate-x-1/2' )}/>
 
                   <div className={'text-5xl font-heading text-accent'}>
                     {data.year}
