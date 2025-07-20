@@ -19,11 +19,9 @@ const MediaSection: FC<MediaSectionProps> = ({ slice }) => {
 
   if(slice.variation === 'sectionVideo') {
     if(isFilled.embed(slice.primary.video))
-    return (<section data-slice-type={slice.slice_type} data-slice-variation={slice.variation}>
-      <div className={'w-full max-w-full'}>
+    return (<Container fullWidth={true} data-slice-type={slice.slice_type} data-slice-variation={slice.variation}>
         <VideoPlayer id={slice.id}  video={slice.primary.video} image={slice.primary.poster}  loading={'lazy'} />
-      </div>
-    </section>)
+    </Container>)
   }
 
   if (slice.variation === 'fullWidthImage') {

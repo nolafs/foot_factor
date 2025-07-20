@@ -85,7 +85,7 @@ export function Youtube({
   return (
     <VideoPlayerWrapper handlePlay={handlePlay} handlePause={handlePause} handleReplay={handleReplay}>
       <div className={cn('aspect-w-16 aspect-h-9 w-full h-full relative z-20 overflow-hidden')}>
-
+        {showPlayer && (
         <ReactPlayer
               width="100%"
               height="100%"
@@ -97,6 +97,7 @@ export function Youtube({
               onPlay={handlePlay}
               className={'absolute  min-h-full w-auto min-w-full max-w-none'}
             />
+        )}
 
           {!autoplay && (
             <VideoControl

@@ -15,7 +15,7 @@ interface HeroSimpleProps {
 export const HeroSimple = ({wave_type, subheading, heading, label}: HeroSimpleProps) => {
 
     return (<div
-            className={'relative isolate bg-gradient-to-r from-primary-300 to-primary-300/0  pb-24 pt-24 md:pb-40 md:pt-52  overflow-hidden'}>
+            className={'relative isolate bg-gradient-to-r from-primary-300 to-primary-300/0  pb-20 pt-32 md:pb-40 md:pt-52  overflow-hidden'}>
             <div className={'absolute w-full h-full top-0 left-0 flex items-center justify-center'}>
                 <Wave
                     waveType={

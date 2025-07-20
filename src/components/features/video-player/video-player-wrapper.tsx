@@ -67,7 +67,7 @@ export function VideoPlayerWrapper({ children, handlePlay, handlePause, handleRe
   );
 
   return (
-    <div ref={ref} className={'relative'}>
+    <div ref={ref} className={'relative bg-black'}>
       {children}
     </div>
   );
