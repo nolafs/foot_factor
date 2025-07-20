@@ -80,8 +80,6 @@ export function Youtube({
     setShowPlayer(true);
   };
 
-  console.log('Youtube',opts);
-
   return (
     <VideoPlayerWrapper handlePlay={handlePlay} handlePause={handlePause} handleReplay={handleReplay}>
       <div className={cn('aspect-w-16 aspect-h-9 w-full h-full relative z-20 overflow-hidden')}>

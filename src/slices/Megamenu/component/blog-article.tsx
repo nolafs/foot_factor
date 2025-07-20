@@ -39,7 +39,6 @@ export const BlogArticle = ({size = 2, tags}: {size: number, tags?: string[]} ) 
       }
 
       void fetchPosts();
-      console.log('resentPosts', resentPosts);
     }, []);
 
   if (!resentPosts.length) {
