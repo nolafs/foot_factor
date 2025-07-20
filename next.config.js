@@ -6,6 +6,7 @@ import './src/env.js';
 
 /** @type {import("next").NextConfig} */
 const config = {
+	productionBrowserSourceMaps: true,
 	images: {
 		formats: ['image/webp', 'image/avif'], // modern formats preferred
 		remotePatterns: [
