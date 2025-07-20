@@ -24,6 +24,11 @@ export function VideoPlayerWrapper({ children, handlePlay, handlePause, handleRe
     () => {
       if (!ref.current) return;
 
+      // gsap check if .video element is already present
+      if (!document.querySelector('.video')) {
+        return;
+      }
+
       gsap.fromTo(
         '.video',
         { opacity: 0 },
