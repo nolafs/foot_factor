@@ -7,6 +7,7 @@ import './src/env.js';
 /** @type {import("next").NextConfig} */
 const config = {
 	images: {
+		formats: ['image/webp', 'image/avif'], // modern formats preferred
 		remotePatterns: [
 			{
 				protocol: 'https',
