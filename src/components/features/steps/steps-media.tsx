@@ -199,7 +199,7 @@ const StepMedia = ({data, index, totalItems}: StepMediaProps) => {
       <li ref={cardRef}  >
 
 
-        <div ref={imageRef} className={'absolute w-full h-svh flex -z-0 justify-center'} style={{zIndex: index + 1}}>
+        <div ref={imageRef} className={'absolute w-full h-screen flex -z-0 justify-center'} style={{zIndex: index + 1}}>
           <div className={'absolute top-0 left-0 w-full h-full z-20 bg-black/60'}></div>
           {isFilled.linkToMedia(data.video) ?(
               <ReactPlayer
@@ -243,7 +243,7 @@ const StepMedia = ({data, index, totalItems}: StepMediaProps) => {
         </div>
 
 
-        <div ref={contentRef} className={'relative w-full z-20  h-svh flex flex-col justify-center container mx-auto'}>
+        <div ref={contentRef} className={'relative w-full z-20  h-screen flex flex-col justify-center container mx-auto'}>
           <div  className={cn('flex w-full', data.alignment === 'Left' ? 'md:justify-start' : 'md:justify-end')}>
             <div className={'flex flex-col md:w-1/2 px-4 md:px-8 lg:px-16 xl:px-24'}>
             {isFilled.keyText(data.title) && (
