@@ -41,8 +41,8 @@ export async function GET() {
   posts.map(post => {
     feed.item({
       title: post.data.title!,
-      guid: `${process.env.NEXT_PUBLIC_BASE_URL}/blog/${post.uid}`,
-      url: `${process.env.NEXT_PUBLIC_BASE_URL}/blog/${post.uid}`,
+      guid: `${process.env.NEXT_PUBLIC_BASE_URL}/resources/blog/${post.uid}`,
+      url: `${process.env.NEXT_PUBLIC_BASE_URL}/resources/blog/${post.uid}`,
       date: post.data.publishing_date!.toString(),
       description: asText(post.data.excerpt) ?? '',
       author:
@@ -52,7 +52,7 @@ export async function GET() {
                 name: string;
               }
             ).name
-          : 'My Ankle',
+          : 'Foot Factor',
       categories:
         post.data.category && 'data' in post.data.category
           ? [
