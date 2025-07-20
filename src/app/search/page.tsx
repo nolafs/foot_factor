@@ -1,13 +1,11 @@
 import React from 'react';
-import { GradientBackground } from '@/components/ui/gradient';
 import { type OGImage } from '@/types';
-
 import type { Metadata, ResolvingMetadata } from 'next';
 import { type ResolvedOpenGraph } from 'next/dist/lib/metadata/types/opengraph-types';
-import { Heading, Lead, Subheading } from '@/components/ui/text';
-import { Container } from '@/components/ui/container';
 import { SearchInput } from '@/components/features/search/search-input';
 import HeroSimple from '@/components/features/hero/hero-simple';
+import JSONLD from '@/types/schema';
+import SchemaInjector from '@/utils/schema-injection';
 
 type Params = { uid: string };
 
@@ -47,6 +45,7 @@ export default async function Page() {
       <div className="mb-24 mt-5 md:mb-24 md:mt-10">
         <SearchInput isSearchPage={true} />
       </div>
+      <SchemaInjector uid={'default'}/>
     </main>
   );
 }

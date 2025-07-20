@@ -7,6 +7,7 @@ import type { OGImage } from '@/types';
 import type { ResolvedOpenGraph } from 'next/dist/lib/metadata/types/opengraph-types';
 import React from 'react';
 import {isFilled} from '@prismicio/client';
+import SchemaInjector from '@/utils/schema-injection';
 
 type Params = { uid: string };
 
@@ -64,6 +65,7 @@ export default async function Page({ params }: { params: Promise<Params> }) {
   return (
     <main className={'w-full overflow-hidden'}>
         <SliceZone slices={page.data.slices} components={components} />
+        <SchemaInjector uid={uid}/>
     </main>
   );
 }

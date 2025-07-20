@@ -7,6 +7,7 @@ import React from 'react';
 import {asImageSrc, isFilled} from '@prismicio/client';
 import type {ResolvedOpenGraph} from 'next/dist/lib/metadata/types/opengraph-types';
 import JSONLD, {CONTACTJSONLD} from '@/types/schema';
+import SchemaInjector from '@/utils/schema-injection';
 
 type Params = { uid: string };
 
@@ -57,10 +58,7 @@ export default async function Page({ params }: { params: Promise<Params> }) {
     <main className={'w-full overflow-hidden'}>
         <SliceZone slices={page.data.slices} components={components} />
 
-      { uid === 'contact-us' ? (
-        <script type="application/ld+json" dangerouslySetInnerHTML={{__html: JSON.stringify(CONTACTJSONLD)}} />) : (
-          <script type="application/ld+json" dangerouslySetInnerHTML={{__html: JSON.stringify(JSONLD)}}/>
-        )}
+      <SchemaInjector uid={uid} />
     </main>
   );
 }

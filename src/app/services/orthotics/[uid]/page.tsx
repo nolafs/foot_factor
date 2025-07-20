@@ -7,6 +7,7 @@ import React from 'react';
 import {asImageSrc, asText, isFilled} from '@prismicio/client';
 import {Hero} from '@/components/features/hero/hero';
 import type {ResolvedOpenGraph} from 'next/dist/lib/metadata/types/opengraph-types';
+import SchemaInjector from '@/utils/schema-injection';
 
 
 type Params = { uid: string };
@@ -64,6 +65,7 @@ export default async function Page({ params }: { params: Promise<Params> }) {
           image={page.data.image}
         />
         <SliceZone slices={page.data.slices} components={components} />
+        <SchemaInjector uid={uid} />
     </main>
   );
 }
