@@ -255,7 +255,7 @@ const Step = ({title, description, step_label, image, stepNum, onStepActive}: St
   }, {scope: cardRef});
 
   return (
-      <li ref={cardRef} className={cn("perspective-dramatic w-full md:h-svh grid grid-cols-1 gap-20 py-20 md:py-10 md:grid-cols-2 gap-x-10 md:gap-x-48 justify-start items-center",
+      <li ref={cardRef} className={cn("perspective-dramatic w-full md:h-svh grid grid-cols-1 gap-20 py-5 md:py-10 md:grid-cols-2 gap-x-10 md:gap-x-48 justify-start items-center",
       //stepNum % 2 === 0 ? 'bg-accent' : 'bg-primary-300'
       )
       }>
@@ -267,7 +267,7 @@ const Step = ({title, description, step_label, image, stepNum, onStepActive}: St
         </div>
         <div className="image flex justify-center items-center">
         {image && (
-          <div className="aspect-h-1 aspect-w-1 w-full h-full max-h-[700px] max-w-[700px]">
+          <div className="aspect-h-1 aspect-w-1 w-full md:h-full max-h-[700px] max-w-[700px]">
             <PrismicNextImage field={image}  className="w-full h-full object-cover rounded-4xl" />
           </div>
         )}

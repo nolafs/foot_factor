@@ -59,6 +59,9 @@ const ContainerComponent = forwardRef<
     case 'default':
       backgroundColorClass = 'bg-white';
       break;
+    default:
+      backgroundColorClass = 'bg-transparent';
+      break
   }
 
   return (

@@ -24,7 +24,7 @@ const VerticalStepsWithImages: FC<VerticalStepsWithImagesProps> = ({ slice }) =>
 
 
   return (
-    <Container as={'section'} padding={slice.primary.section_padding ? 'lg' : 'base'} data-slice-type={slice.slice_type} data-slice-variation={slice.variation}>
+    <Container as={'section'} padding={slice.primary.section_padding ? 'lg' : 'base'} className={'!pt-0'} data-slice-type={slice.slice_type} data-slice-variation={slice.variation}>
       <Steps data={slice.primary.steps} sectionPadding={slice.primary.section_padding}/>
     </Container>
   );

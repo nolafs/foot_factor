@@ -134,7 +134,7 @@ export function Footer({ navigation, settings }: FooterProps) {
                   })}
                 </div>
               </div>
-          <div className={'flex justify-between items-center py-10'}>
+          <div className={'flex justify-between items-center space-x-5 py-10'}>
             <div>{settings.google_rating && <PrismicNextImage field={settings.google_rating}/>}</div>
             <div> {social && <SocialList items={social} icons={true} variantList={1} variantButton={3}/>}</div>
           </div>

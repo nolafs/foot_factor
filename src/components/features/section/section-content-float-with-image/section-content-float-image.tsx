@@ -28,7 +28,7 @@ export const SectionContentImageFloatText = ({as = 'section',heading, body, floa
 
 
   return (
-      <Container as={as} fullWidth={true} data-slice-type={slice_type} data-slice-variation={variation} className={cn('relative w-full h-full isolated overflow-hidden')}>
+      <Container as={as} fullWidth={true} data-slice-type={slice_type} color={'default'} data-slice-variation={variation} className={cn('relative w-full h-full isolated overflow-hidden')}>
 
 
         <div className={'relative mb-10 md:mb-0 md:absolute z-10 top-0 left-0 w-full'}>
