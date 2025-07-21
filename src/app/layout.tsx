@@ -3,7 +3,7 @@ import { Poppins, Exo_2, PT_Serif } from 'next/font/google';
 import { type Metadata, type ResolvingMetadata } from 'next';
 import { PrismicPreview } from '@prismicio/next';
 import { repositoryName } from '@/prismicio';
-import CookieConsent from '@/components/features/cookie-consent/cookie-consent';
+
 import { GoogleAnalytics } from '@next/third-parties/google';
 import Footer from '@/components/layouts/footer';
 import { createClient } from '@/prismicio';
@@ -14,6 +14,9 @@ import React, { Suspense } from 'react';
 import { SearchProvider } from '@/components/features/search/search-context';
 import { SearchOverlay } from '@/components/features/search/search-overlay';
 import { BookingProvider } from '@/lib/context/booking.context';
+import {RootInnerLayout} from '@/components/layouts/RootInnerLayout';
+import {IS_GTM_ENABLED} from '@/lib/tracking/config.tracking';
+import {GoogleTagManager} from '@/components/features/tracking/GoogleTagManager';
 
 const poppins = Poppins({
   subsets: ['latin'],
@@ -114,38 +117,37 @@ export default async function RootLayout({ children }: Readonly<{ children: Reac
   return (
     <html lang="en" className={`${poppins.variable} ${exo2.variable} ${ptSerif.variable}`}>
       <body className={'min-h-screen text-gray-950 antialiased'}>
-        {/* Loading-bar */}
-        <NextTopLoader color={'hsl(var(--accent))'} height={5} showSpinner={false} shadow={false} zIndex={99999} />
 
-        <SearchProvider>
-          <BookingProvider initialData={makeBooking.data}>
-          <NavigationMenuSub navigation={navigation.data} settings={settings.data}  />
+      {IS_GTM_ENABLED && <GoogleTagManager/>}
+      <RootInnerLayout>
+          {/* Loading-bar */}
+          <NextTopLoader color={'hsl(var(--accent))'} height={5} showSpinner={false} shadow={false} zIndex={99999} />
 
-          {/* Content */}
+          <SearchProvider>
+            <BookingProvider initialData={makeBooking.data}>
+            <NavigationMenuSub navigation={navigation.data} settings={settings.data}  />
 
-          {children}
+            {/* Content */}
+            {children}
 
-          {/* Footer consent */}
-          <Footer
-            navigation={navigation.data}
-            settings={settings.data }
-          />
+            {/* Footer consent */}
+            <Footer
+              navigation={navigation.data}
+              settings={settings.data }
+            />
 
-          {/* Cookie consent */}
-          <Suspense>
-            <CookieConsent />
-            <BackToTop />
-          </Suspense>
+            {/* Cookie consent */}
+            <Suspense>
+              <BackToTop />
+            </Suspense>
 
-          {/* Prismic preview */}
-          <PrismicPreview repositoryName={repositoryName} />
-          </BookingProvider>
-          <SearchOverlay />
-        </SearchProvider>
+            {/* Prismic preview */}
+            <PrismicPreview repositoryName={repositoryName} />
+            </BookingProvider>
+            <SearchOverlay />
+          </SearchProvider>
+        </RootInnerLayout>
       </body>
-
-      {/* Analytics */}
-      <GoogleAnalytics gaId={process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS_ID ?? ''} />
     </html>
   );
 }
