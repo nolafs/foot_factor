@@ -100,8 +100,6 @@ export const FeatureTickerList = ({data, baseVelocity = 10}: FeatureTickerListPr
 
 const FeatureTickerListItem = ({item , style}: { item: IconNavListSliceDefaultPrimaryItemsItem, style: number }) => {
 
-  console.log('FeatureTickerListItem', item, style, isFilled.link(item.link));
-
   const containerStyle = cn('border w-fit flex-shrink-0 border-primary rounded-full text-2xl md:text-3xl lg:text-4xl text-secondary italic uppercase flex items-center justify-center',
       style === 0 ? 'bg-primary text-white' : 'text-primary border-accent');
 
