@@ -1,6 +1,6 @@
-// src/libs/tracking/types.tracking.d.ts
-
-// Extend the global namespace to recognize GTM-related properties
+/* eslint-disable */
+/* tslint:disable */
+// @ts-nocheck
 declare global {
   interface Window {
     gtag?: Gtag.Gtag

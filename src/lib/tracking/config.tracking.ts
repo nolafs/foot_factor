@@ -8,6 +8,6 @@ export const IS_GTM_ENABLED =
 
 // Centralized tracking configuration
 export const trackingConfig = {
-  gtmId: process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS_ID || '',
+  gtmId: process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS_ID ?? '',
   cookieBannerCookieName: 'cookieConsent',
 }
