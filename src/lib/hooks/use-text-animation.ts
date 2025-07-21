@@ -70,7 +70,7 @@ export const useTextAnimation = (options: UseTextAnimationOptions = {}) => {
       if (!containerRef.current || !triggerRef.current) return;
 
       // Create new SplitText instance
-      const splits = new SplitText(containerRef.current, {type: splitType});
+      const splits = new SplitText(containerRef.current, {type: splitType, aria: 'hidden'});
       splitsRef.current = splits;
 
       // Create new timeline
