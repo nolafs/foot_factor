@@ -9,7 +9,7 @@ interface BentoCardImageProps {
 export const BentoCard = ({columns, children}: BentoCardImageProps) => {
 
   return (
-      <div  className={cn("relative",
+      <div  className={cn("relative min-h-80",
           columns === 1 && 'lg:col-span-1',
           columns === 2 && 'lg:col-span-2',
           columns === 3 && 'lg:col-span-3',
