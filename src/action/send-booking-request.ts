@@ -57,10 +57,10 @@ ${validatedFields.referralPatient ? `
 REFERRAL INFORMATION:
 --------------------
 Referral Patient: Yes
-Referrer's Name: ${validatedFields.referralName || 'Not provided'}
-Referrer's Surname: ${validatedFields.referralSurname || 'Not provided'}
-Referrer's Email: ${validatedFields.referralEmail || 'Not provided'}
-Referrer's Telephone: ${validatedFields.referralTelephone || 'Not provided'}
+Referrer's Name: ${validatedFields.referralName ?? 'Not provided'}
+Referrer's Surname: ${validatedFields.referralSurname ?? 'Not provided'}
+Referrer's Email: ${validatedFields.referralEmail ?? 'Not provided'}
+Referrer's Telephone: ${validatedFields.referralTelephone ?? 'Not provided'}
 ` : 'Referral Patient: No'}
 
 ${validatedFields.message ? `
@@ -113,10 +113,10 @@ Sent from Foot Factor Website
         <div class="section">
           <h3>Referral Information</h3>
           <div class="field"><strong>Referral Patient:</strong> Yes</div>
-          <div class="field"><strong>Referrer's Name:</strong> ${validatedFields.referralName || 'Not provided'}</div>
-          <div class="field"><strong>Referrer's Surname:</strong> ${validatedFields.referralSurname || 'Not provided'}</div>
-          <div class="field"><strong>Referrer's Email:</strong> ${validatedFields.referralEmail || 'Not provided'}</div>
-          <div class="field"><strong>Referrer's Telephone:</strong> ${validatedFields.referralTelephone || 'Not provided'}</div>
+          <div class="field"><strong>Referrer's Name:</strong> ${validatedFields.referralName ?? 'Not provided'}</div>
+          <div class="field"><strong>Referrer's Surname:</strong> ${validatedFields.referralSurname ?? 'Not provided'}</div>
+          <div class="field"><strong>Referrer's Email:</strong> ${validatedFields.referralEmail ?? 'Not provided'}</div>
+          <div class="field"><strong>Referrer's Telephone:</strong> ${validatedFields.referralTelephone ?? 'Not provided'}</div>
         </div>
         ` : `
         <div class="section">
@@ -180,8 +180,9 @@ Sent from Foot Factor Website
 
     // Handle MailerSend API errors
     if (error && typeof error === 'object' && 'message' in error) {
+      const message = typeof error.message === 'string' ? error.message : 'Unknown error';
       return {
-        errors: [{path: 'email', message: `Email service error: ${error.message}`}],
+        errors: [{path: 'email', message: `Email service error: ${message}`}],
         data: null,
       };
     }
