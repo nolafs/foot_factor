@@ -52,6 +52,7 @@ export const useTextAnimation = (options: UseTextAnimationOptions = {}) => {
   const timelineRef = useRef<gsap.core.Timeline | null>(null);
   const splitsRef = useRef<SplitText | null>(null);
   const isResizing = useRef(false);
+  const currentWidth = useRef<number>(0);
 
   // Function to completely recreate the animation
   const recreateAnimation = () => {
@@ -135,6 +136,10 @@ export const useTextAnimation = (options: UseTextAnimationOptions = {}) => {
   };
 
   useGSAP(() => {
+
+    //set current width
+    currentWidth.current = containerRef.current?.offsetWidth || 0;
+
     recreateAnimation();
 
     return () => {
@@ -160,7 +165,11 @@ export const useTextAnimation = (options: UseTextAnimationOptions = {}) => {
     if (!refreshOnResize) return;
 
     const handleResize = () => {
-      scheduleRecreate(); // Use recreate instead of refresh for resize
+      //check if width had change but ignore height changes
+      if(!containerRef.current || containerRef.current.offsetWidth !== currentWidth.current) {
+        currentWidth.current = containerRef.current?.offsetWidth || 0;
+        scheduleRecreate(); // Use recreate instead of refresh for resize
+      }
     };
 
     const handleOrientationChange = () => {
