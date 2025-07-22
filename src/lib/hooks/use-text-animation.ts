@@ -57,11 +57,14 @@ export const useTextAnimation = (options: UseTextAnimationOptions = {}) => {
   const recreateAnimation = () => {
     if (!enabled || !containerRef.current || !triggerRef.current) return;
 
+    gsap.set(containerRef.current, {opacity: 0});
     // Clean up existing animation
+
     if (timelineRef.current) {
       timelineRef.current.kill();
     }
     if (splitsRef.current) {
+
       splitsRef.current.revert();
     }
 
