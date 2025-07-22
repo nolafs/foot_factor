@@ -100,6 +100,8 @@ export const useTextAnimation = (options: UseTextAnimationOptions = {}) => {
               0
           );
       isResizing.current = false;
+      gsap.set(containerRef.current, {opacity: 1}); // Ensure container is visible after animation
+
     }, 50);
   };
 

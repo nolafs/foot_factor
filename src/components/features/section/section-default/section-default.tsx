@@ -22,7 +22,7 @@ export const SectionDefault = ({heading, body, slice_type, variation}: SectionDe
     return (
         <Container as={'section'} ref={triggerRef} padding={'lg'} data-slice-type={slice_type}
                    data-slice-variation={variation}>
-          <SectionColumns heading={heading} contentRef={containerRef} columnSize={'small'}>
+          <SectionColumns heading={heading} contentRef={containerRef} columnSize={'small'} >
             <PrismicRichText field={body}/>
           </SectionColumns>
 
