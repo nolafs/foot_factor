@@ -180,7 +180,7 @@ export const BookingForm = ({booking}: BookingFormProps) => {
               render={({field}) => (
                   <FormItem className="flex flex-col w-full">
                     <FormLabel>Date of birth</FormLabel>
-                    <Popover>
+                    <Popover modal={true}>
                       <PopoverTrigger asChild className={'w-full'}>
                         <FormControl>
                           <Button
