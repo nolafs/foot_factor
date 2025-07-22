@@ -53,18 +53,22 @@ export function ContactForm({ items }: ContactFormInputProps) {
       formData.append('enquiryType', data.enquiryType || '');
       formData.append('agreeToTerms', data.agreeToTerms ? 'true' : 'false');
 
-      const { data: success, errors } = await sendMail(formData);
+      const { success, errors } = await sendMail(formData);
+
+      console.log('Form submission result:', success);
 
       if (success) {
         setIsSubmitting(false);
         setSubmissionSuccess(true);
         toast.success('Your message has been sent!');
         reset(); // Optionally reset form fields
+        return;
       }
 
       if (errors) {
         setIsSubmitting(false);
         toast.error('There was an error sending your message. Please try again later.');
+        return;
       }
     } catch (error) {
       setIsSubmitting(false);
@@ -104,11 +108,11 @@ export function ContactForm({ items }: ContactFormInputProps) {
 
   if (submissionSuccess) {
     return (
-      <div className={'container mx-auto flex max-w-2xl flex-col items-center justify-center'}>
-        <div className="mb-10 text-center font-bold">
+      <div className={'container mx-auto flex flex-col'}>
+        <div className="mb-10 font-bold">
           Your message has been sent successfully! We will get back to you soon.
         </div>
-        <div>
+        <div className="flex w-full justify-end">
           <Button variant={'default'} size={'lg'} onClick={handleContinue}>
             Back
           </Button>

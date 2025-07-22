@@ -16,7 +16,7 @@ export type ContactFormSectionProps = SliceComponentProps<Content.ContactFormSec
 const ContactFormSection: FC<ContactFormSectionProps> = ({ slice }) => {
   return (
     <Container padding={'lg'} data-slice-type={slice.slice_type} data-slice-variation={slice.variation}>
-      <SectionColumns columnSize={'small'} heading={slice.primary.heading} >
+      <SectionColumns columnSize={'small'} heading={slice.primary.heading} classNames={'prose prose-lg'}>
         <ContactForm  items={slice.primary.items ?? []} />
       </SectionColumns>
     </Container>

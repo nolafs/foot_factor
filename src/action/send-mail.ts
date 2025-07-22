@@ -31,8 +31,8 @@ export async function sendMail(formData: FormData) {
       agreeToTerms: formData.get('agreeToTerms') === 'true',
     });
 
-    const sentFrom = new Sender(`noreply@${process.env.MAILERSEND_DOMAIN}`, 'Foot Factor');
-    const recipients: Recipient[] = [new Recipient('info@footfactor.com', 'Contact Form Website')];
+    const sentFrom = new Sender(`webmaster@${process.env.MAILERSEND_DOMAIN}`, 'Foot Factor');
+    const recipients: Recipient[] = [new Recipient('webmaster@footfactor.com', 'Contact Form Website')];
 
     if (validatedFields) {
       const emailParams = new EmailParams()
@@ -52,18 +52,24 @@ export async function sendMail(formData: FormData) {
     }
 
     return {
+      success: true,
       errors: null,
       data: 'data received and mutated',
     };
   } catch (error) {
+
+    console.error('Error sending email:', error);
+
     if (error instanceof z.ZodError) {
       return {
+        success: false,
         errors: transformZodErrors(error),
         data: null,
       };
     }
 
     return {
+      success: false,
       errors: error,
       data: 'data received and mutated',
     };
