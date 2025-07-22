@@ -104,6 +104,25 @@ export const BookingForm = ({booking}: BookingFormProps) => {
     }
   }
 
+  if (submissionSuccess) {
+    return (
+        <div className="mt-10">
+          <h2 className="text-2xl font-bold mb-4">Booking Request Submitted</h2>
+          <p className="text-lg">Thank you for your booking request. We will be in touch shortly.</p>
+          <Button
+              variant={'default'}
+              size={'lg'}
+              className={'mt-5 bg-accent'}
+              onClick={() => {
+                setSubmissionSuccess(false);
+                form.reset();
+              }}>
+            Make another booking </Button>
+        </div>
+    );
+  }
+
+
   return (
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="mt-5 space-y-3">

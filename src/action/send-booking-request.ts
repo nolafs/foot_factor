@@ -162,6 +162,31 @@ Sent from Foot Factor Website
 
     console.log('Email sent successfully:', result);
 
+    if(result) {
+      const recipients = [
+        new Recipient(validatedFields.email, "Your Client")
+      ];
+
+      const personalization = [
+        {
+          email: validatedFields.email,
+          data: {
+            name: validatedFields.name
+          },
+        }
+      ];
+
+      const emailParams = new EmailParams()
+          .setFrom(sentFrom)
+          .setTo(recipients)
+          .setReplyTo(sentFrom)
+          .setSubject("Booking Request Received")
+          .setTemplateId('o65qngkvzp3lwr12')
+          .setPersonalization(personalization);
+
+      await mailerSend.email.send(emailParams);
+    }
+
     return {
       errors: null,
       data: 'Booking request sent successfully',
