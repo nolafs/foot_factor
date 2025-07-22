@@ -12,12 +12,13 @@ import cn from 'clsx';
 interface SharePageProps {
   title: string | null | undefined;
   slug: string | null | undefined;
+  route?: string;
   align?: 'center' | 'left' | 'right';
 }
 
-export function SharePage({ title, slug, align = 'right' }: SharePageProps) {
-  const titleToShare = `Check out this amazing post: ${title}`;
-  const shareUrl = `${process.env.NEXT_PUBLIC_BASE_URL}/blog/${slug}`;
+export function SharePage({ title,  slug, align = 'right', route = 'resources/blog'}: SharePageProps) {
+  const titleToShare = `Check out: ${title}`;
+  const shareUrl = `${process.env.NEXT_PUBLIC_BASE_URL}/${route}/${slug}`;
 
   return (
     <ul className={cn('m-0 flex space-x-2 p-0', align === 'right' && 'items-end justify-end')}>

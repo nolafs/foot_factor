@@ -15,6 +15,17 @@ type PostAsideProps = {
   url?: string;
   classNames?: string;
   onNavigate?: () => void;
+  shareRoute?: string;
+};
+
+const getPostTitle = (post: Partial<PostsDocumentData> | Partial<GuideDocumentData>): string => {
+  if ('title' in post && post.title) return post.title;
+  if ('name' in post && post.name) return post.name;
+  return '';
+};
+
+const hasTitle = (post: Partial<PostsDocumentData> | Partial<GuideDocumentData>): boolean => {
+  return ('title' in post && !!post.title) || ('name' in post && !!post.name);
 };
 
 export const PostAside = ({
@@ -25,6 +36,7 @@ export const PostAside = ({
   url = 'blog',
   classNames,
   onNavigate,
+  shareRoute = 'resources/blog',
 }: PostAsideProps) => {
   return (
     <Component className={cn('flex flex-wrap items-start justify-between gap-10 md:divide-x divide-primary-200', classNames)}>
@@ -76,7 +88,13 @@ export const PostAside = ({
       {uid && (
         <div className="flex flex-col flex-wrap gap-2 px-5">
           <div className="mb-2 text-sm font-medium text-gray-500">Share:</div>
-          {'title' in post && post.title && <SharePage slug={uid} title={post?.title} />}
+          {post && hasTitle(post) &&
+		        <SharePage
+			        slug={uid}
+			        title={getPostTitle(post)}
+			        route={shareRoute}
+		        />
+          }
         </div>
       )}
     </Component>

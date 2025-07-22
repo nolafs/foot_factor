@@ -190,6 +190,7 @@ export default async function Page({ params }: Props) {
               uid={id}
               post={post}
               author={author!}
+              shareRoute={'resources/guides'}
           />
           </div>
           <div className={'shrink'}>
