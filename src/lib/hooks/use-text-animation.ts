@@ -138,7 +138,7 @@ export const useTextAnimation = (options: UseTextAnimationOptions = {}) => {
   useGSAP(() => {
 
     //set current width
-    currentWidth.current = containerRef.current?.offsetWidth || 0;
+    currentWidth.current = containerRef.current?.offsetWidth ?? 0;
 
     recreateAnimation();
 
@@ -167,7 +167,7 @@ export const useTextAnimation = (options: UseTextAnimationOptions = {}) => {
     const handleResize = () => {
       //check if width had change but ignore height changes
       if(!containerRef.current || containerRef.current.offsetWidth !== currentWidth.current) {
-        currentWidth.current = containerRef.current?.offsetWidth || 0;
+        currentWidth.current = containerRef.current?.offsetWidth ?? 0;
         scheduleRecreate(); // Use recreate instead of refresh for resize
       }
     };
