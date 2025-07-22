@@ -113,7 +113,7 @@ export  function Hero({ heading, subheading, lead,  links, image, hasBooking, ra
             <div className={'shrink'}>
             {rating && (<div><PrismicNextImage field={rating} /></div>)}
             {children && (
-                <div className={'absolute bottom-10 left-0 right-0 z-20 flex'}>
+                <div className={'relative mt-2 md:absolute md:bottom-10 md:left-0 md:right-0 z-20 flex'}>
                   {children}
                 </div>
             )}
