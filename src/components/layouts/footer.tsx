@@ -135,7 +135,7 @@ export function Footer({ navigation, settings }: FooterProps) {
                   })}
                 </div>
               </div>
-          <div className={'flex justify-between items-center space-x-5 py-10'}>
+          <div className={'flex flex-col md:flex-row md:justify-between  md:space-x-5 pb-10 md:py-10'}>
             <div>{!settings.google_widget && settings.google_rating && <PrismicNextImage field={settings.google_rating}/>}
               {settings.google_widget && ( <ReviewSliderElfsight share_link={settings.google_widget} width={'auto'} />)}
             </div>
