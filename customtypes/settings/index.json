@@ -203,6 +203,13 @@
                 "label": "Value",
                 "placeholder": ""
               }
+            },
+            "email_template_id": {
+              "type": "Text",
+              "config": {
+                "label": "Email Template Id",
+                "placeholder": ""
+              }
             }
           }
         }
@@ -227,6 +234,36 @@
         "type": "Text",
         "config": {
           "label": "Email",
+          "placeholder": ""
+        }
+      }
+    },
+    "CRM": {
+      "booking_new_patient": {
+        "type": "Text",
+        "config": {
+          "label": "Booking New Patient",
+          "placeholder": ""
+        }
+      },
+      "booking_existing_patient": {
+        "type": "Text",
+        "config": {
+          "label": "Booking Existing Patient",
+          "placeholder": ""
+        }
+      },
+      "booking_referral_patient": {
+        "type": "Text",
+        "config": {
+          "label": "Booking Referral Patient",
+          "placeholder": ""
+        }
+      },
+      "booking_referral_professional": {
+        "type": "Text",
+        "config": {
+          "label": "Booking Referral Professional",
           "placeholder": ""
         }
       }

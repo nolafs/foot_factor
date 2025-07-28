@@ -129,6 +129,27 @@
         "fieldset": "Slice Zone",
         "config": {
           "choices": {
+            "list": {
+              "type": "SharedSlice"
+            },
+            "vertical_steps_with_images": {
+              "type": "SharedSlice"
+            },
+            "case_studies": {
+              "type": "SharedSlice"
+            },
+            "testimonial": {
+              "type": "SharedSlice"
+            },
+            "sole_deconstruct": {
+              "type": "SharedSlice"
+            },
+            "reviews": {
+              "type": "SharedSlice"
+            },
+            "faqs": {
+              "type": "SharedSlice"
+            },
             "media_section": {
               "type": "SharedSlice"
             },

@@ -25,7 +25,7 @@ const LocationMapCallout: FC<LocationMapCalloutProps> = ({ slice }) => {
       </GoogleMapWrapper>
 
       <div className={'container mx-auto lg:absolute lg:w-[40%] lg:top-1/2 lg:-translate-y-1/2 max-w-[600px] bg-white lg:rounded-[32px] shadow-lg p-16 right-4 z-10'}>
-        <Heading as="h2" className={'content-master'}>
+        <Heading as="div" className={'content-master'}>
           <PrismicRichText field={slice.primary.heading} />
         </Heading>
         <Body>

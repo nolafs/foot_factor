@@ -805,7 +805,18 @@ export interface GuideDocumentDataTagsItem {
   tag: ContentRelationshipFieldWithData<[{ id: 'post_tags'; fields: ['name'] }]>;
 }
 
-type GuideDocumentDataSlicesSlice = MediaSectionSlice | SectionSlice | IconNavListSlice | CallToActionSlice;
+type GuideDocumentDataSlicesSlice =
+  | ListSlice
+  | VerticalStepsWithImagesSlice
+  | CaseStudiesSlice
+  | TestimonialSlice
+  | SoleDeconstructSlice
+  | ReviewsSlice
+  | FaqsSlice
+  | MediaSectionSlice
+  | SectionSlice
+  | IconNavListSlice
+  | CallToActionSlice;
 
 /**
  * Item in *Guide → Keywords*
@@ -2374,6 +2385,16 @@ export interface SettingsDocumentDataContactFormEnquiriesItem {
    * - **Documentation**: https://prismic.io/docs/fields/text
    */
   value: prismic.KeyTextField;
+
+  /**
+   * Email Template Id field in *Settings → Contact Form Enquiries*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: settings.contact_form_enquiries[].email_template_id
+   * - **Documentation**: https://prismic.io/docs/fields/text
+   */
+  email_template_id: prismic.KeyTextField;
 }
 
 /**
@@ -2590,7 +2611,49 @@ interface SettingsDocumentData {
    * - **Tab**: Contact
    * - **Documentation**: https://prismic.io/docs/fields/text
    */
-  email: prismic.KeyTextField;
+  email: prismic.KeyTextField /**
+   * Booking New Patient field in *Settings*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: settings.booking_new_patient
+   * - **Tab**: CRM
+   * - **Documentation**: https://prismic.io/docs/fields/text
+   */;
+  booking_new_patient: prismic.KeyTextField;
+
+  /**
+   * Booking Existing Patient field in *Settings*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: settings.booking_existing_patient
+   * - **Tab**: CRM
+   * - **Documentation**: https://prismic.io/docs/fields/text
+   */
+  booking_existing_patient: prismic.KeyTextField;
+
+  /**
+   * Booking Referral Patient field in *Settings*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: settings.booking_referral_patient
+   * - **Tab**: CRM
+   * - **Documentation**: https://prismic.io/docs/fields/text
+   */
+  booking_referral_patient: prismic.KeyTextField;
+
+  /**
+   * Booking Referral Professional field in *Settings*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: settings.booking_referral_professional
+   * - **Tab**: CRM
+   * - **Documentation**: https://prismic.io/docs/fields/text
+   */
+  booking_referral_professional: prismic.KeyTextField;
 }
 
 /**

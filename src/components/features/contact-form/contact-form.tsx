@@ -1,7 +1,7 @@
 'use client';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { type ContactFormInput } from '@/types';
-import React, {forwardRef, useRef, useState} from 'react';
+import React, {forwardRef, useEffect, useRef, useState} from 'react';
 import { useForm, type SubmitHandler } from 'react-hook-form';
 import toast, { Toaster } from 'react-hot-toast';
 import { Button } from '@/components/ui/button';
@@ -10,6 +10,7 @@ import cn from 'clsx';
 import { sendMail, VerifyCaptcha } from '@/action';
 import ReCAPTCHA from 'react-google-recaptcha';
 import {ContactFormSectionSliceDefaultPrimaryItemsItem} from '@/prismic-types';
+import {createClient} from "@/prismicio";
 
 const RECAPTCHA_ACTIVE = process.env.NEXT_PUBLIC_RECAPTCHA_ACTIVE === 'true';
 
@@ -23,6 +24,17 @@ const emailSchema = z.object({
 
 export type EmailSchema = z.infer<typeof emailSchema>;
 
+const getEnquireTypeOptions = async () => {
+
+  const client = createClient();
+  const settings = await client.getSingle('settings');
+
+  console.log(settings.data.contact_form_enquiries);
+
+  return settings.data.contact_form_enquiries ?? [];
+
+}
+
 interface ContactFormInputProps {
   items: ContactFormSectionSliceDefaultPrimaryItemsItem[];
 }
@@ -33,6 +45,18 @@ export function ContactForm({ items }: ContactFormInputProps) {
   const [submissionSuccess, setSubmissionSuccess] = useState<boolean>(false);
   const recaptchaRef = useRef<ReCAPTCHA | null>(null);
   const [isVerified, setIsVerified] = useState(!RECAPTCHA_ACTIVE);
+  const [enquiryTypeOptions, setEnquiryTypeOptions] = useState<ContactFormSectionSliceDefaultPrimaryItemsItem[]>(items ??[]);
+
+  useEffect(() => {
+
+    const fetchEnquiryTypes = async () => {
+        const options = await getEnquireTypeOptions();
+        setEnquiryTypeOptions(options);
+    }
+
+    void fetchEnquiryTypes();
+
+  }, [])
 
   const {
     register,
@@ -156,11 +180,11 @@ export function ContactForm({ items }: ContactFormInputProps) {
           )}
           {...register('enquiryType')}
           disabled={isSubmitting}>
-          <option value="" disabled defaultValue="">
+          <option value="" disabled defaultValue="" selected={true} >
             Nature of Enquiry
           </option>
-          {items.length ? (
-              items.map((item, index) => {
+          {enquiryTypeOptions.length ? (
+              enquiryTypeOptions.map((item, index) => {
                 if (item.value == null) return null; // skip items with undefined or null value
 
                 return (
