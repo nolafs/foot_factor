@@ -8,6 +8,7 @@ import { Heading } from '@/components/ui/text';
 import { Container } from '@/components/ui/container';
 import { GradientBackground } from '@/components/ui/gradient';
 import React from 'react';
+import HeroSimple from "@/components/features/hero/hero-simple";
 
 type Params = { uid: string };
 
@@ -42,11 +43,9 @@ export default async function Page({ params }: { params: Promise<Params> }) {
 
   return (
     <main className={'min-h-svh w-full overflow-hidden'}>
-      <GradientBackground />
-      <Container className="mt-24 md:mt-36">
+      <HeroSimple wave_type={'2'} heading={page.data.title}   />
+      <Container>
         <article>
-          {/* Header */}
-          <Heading as="h1">{page.data.title}</Heading>
           {/* Content */}
           <section className="mt-16">
             <div className={'md:prose-md prose prose-sm prose-neutral mx-auto mb-20 lg:prose-xl'}>
