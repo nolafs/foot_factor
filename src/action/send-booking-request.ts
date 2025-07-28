@@ -28,7 +28,7 @@ export async function sendBookingMail(formData: z.infer<typeof emailBookingSchem
     const validatedFields = emailBookingSchema.parse(formData);
 
     const sentFrom = new Sender(`webmaster@${process.env.MAILERSEND_DOMAIN}`, 'Foot Factor');
-    const recipients: Recipient[] = [new Recipient('info@footfactor.com', 'Booking Form Website')];
+    const recipients: Recipient[] = [new Recipient(`info@${process.env.MAILERSEND_DOMAIN}`, 'Booking Form Website')];
 
     // Determine patient type for subject
     const getPatientType = () => {
@@ -197,7 +197,7 @@ Sent from Foot Factor Website
                     .setFrom(sentFrom)
                     .setTo(recipients)
                     .setReplyTo(sentFrom)
-                    .setSubject("Referral Confirmation")
+                    .setSubject("Referral Request Received")
                     .setTemplateId(settings.data.booking_referral_professional ?? '')
                     .setPersonalization(personalization);
 

@@ -2,6 +2,7 @@
 
 import { EmailParams, MailerSend, Recipient, Sender } from 'mailersend';
 import { z } from 'zod';
+import {createClient} from "@/prismicio";
 
 export const transformZodErrors = async (error: z.ZodError) => {
   return error.issues.map(issue => ({
@@ -32,7 +33,7 @@ export async function sendMail(formData: FormData) {
     });
 
     const sentFrom = new Sender(`webmaster@${process.env.MAILERSEND_DOMAIN}`, 'Foot Factor');
-    const recipients: Recipient[] = [new Recipient('webmaster@footfactor.com', 'Contact Form Website')];
+    const recipients: Recipient[] = [new Recipient(`info@${process.env.MAILERSEND_DOMAIN}`, 'Contact Form Website')];
 
     if (validatedFields) {
       const emailParams = new EmailParams()
@@ -49,6 +50,37 @@ export async function sendMail(formData: FormData) {
       const mailer = await mailerSend.email.send(emailParams);
 
       console.log('email sent', mailer);
+    }
+
+    //Response email
+    const client = createClient();
+    const settings = await client.getSingle('settings');
+    const typeofEnquiry = settings.data.contact_form_enquiries?.find(
+      (item) => item.value === formData.get('enquiryType'));
+
+    console.log('enquiryType', typeofEnquiry);
+
+    const templateId = typeofEnquiry?.email_template_id ?? null;
+
+    const personalization = [
+      {
+        email: validatedFields.email,
+        data: {
+          name: validatedFields.name
+        },
+      }
+    ];
+
+    if (templateId) {
+      const emailParams = new EmailParams()
+          .setFrom(sentFrom)
+          .setTo(recipients)
+          .setReplyTo(sentFrom)
+          .setSubject("Thanks for contacting Foot Factor")
+          .setTemplateId(templateId)
+          .setPersonalization(personalization);
+
+      await mailerSend.email.send(emailParams);
     }
 
     return {

@@ -180,7 +180,7 @@ export function ContactForm({ items }: ContactFormInputProps) {
           )}
           {...register('enquiryType')}
           disabled={isSubmitting}>
-          <option value="" disabled defaultValue="" selected={true} >
+          <option  disabled  selected={true}>
             Nature of Enquiry
           </option>
           {enquiryTypeOptions.length ? (
