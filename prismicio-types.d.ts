@@ -2560,7 +2560,18 @@ interface SettingsDocumentData {
    * - **Tab**: Footer
    * - **Documentation**: https://prismic.io/docs/fields/image
    */
-  google_rating: prismic.ImageField<never> /**
+  google_rating: prismic.ImageField<never>;
+
+  /**
+   * Google Widget field in *Settings*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: settings.google_widget
+   * - **Tab**: Footer
+   * - **Documentation**: https://prismic.io/docs/fields/text
+   */
+  google_widget: prismic.KeyTextField /**
    * Social Media field in *Settings*
    *
    * - **Field Type**: Group
@@ -3591,6 +3602,16 @@ export interface HeroSliceHeroMasterPrimary {
    * - **Documentation**: https://prismic.io/docs/fields/image
    */
   google_rating: prismic.ImageField<never>;
+
+  /**
+   * Google Widget  field in *Hero → Master → Primary*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: hero.heroMaster.primary.google_widget
+   * - **Documentation**: https://prismic.io/docs/fields/text
+   */
+  google_widget: prismic.KeyTextField;
 }
 
 /**

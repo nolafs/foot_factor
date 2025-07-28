@@ -196,6 +196,11 @@
 			"has_booking": {
 				"__TYPE__": "BooleanContent",
 				"value": true
+			},
+			"google_widget": {
+				"__TYPE__": "FieldContent",
+				"value": "shout",
+				"type": "Text"
 			}
 		},
 		"items": [

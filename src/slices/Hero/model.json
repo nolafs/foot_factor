@@ -181,6 +181,13 @@
             "constraint": {},
             "thumbnails": []
           }
+        },
+        "google_widget": {
+          "type": "Text",
+          "config": {
+            "label": "Google Widget ",
+            "placeholder": ""
+          }
         }
       },
       "items": {}
