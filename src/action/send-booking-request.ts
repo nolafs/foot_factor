@@ -164,37 +164,69 @@ Sent from Foot Factor Website
     console.log('Email sent successfully:', result);
 
     if(result) {
-      const recipients = [
-        new Recipient(validatedFields.email, "Your Client")
-      ];
+        const recipients = [
+            new Recipient(validatedFields.email, "Your Client")
+        ];
 
-      const personalization = [
-        {
-          email: validatedFields.email,
-          data: {
-            name: validatedFields.name
-          },
+        const personalization = [
+            {
+                email: validatedFields.email,
+                data: {
+                    name: validatedFields.name
+                },
+            }
+        ];
+
+        const client = createClient();
+        const settings = await client.getSingle('settings');
+        let templateId: string | null = null;
+
+        if (formData.existingPatient) {
+            templateId = settings.data.booking_existing_patient ?? null;
         }
-      ];
 
-      const client = createClient();
-      const settings = await client.getSingle('settings');
+        if(!formData.existingPatient) {
+            templateId = settings.data.booking_new_patient ?? null;
+        }
 
-      const emailParams = new EmailParams()
-          .setFrom(sentFrom)
-          .setTo(recipients)
-          .setReplyTo(sentFrom)
-          .setSubject("Booking Request Received")
-          .setTemplateId('o65qngkvzp3lwr12')
-          .setPersonalization(personalization);
+        if(formData.referralPatient) {
+            templateId = settings.data.booking_referral_patient ?? null;
 
-      await mailerSend.email.send(emailParams);
+            if(settings.data.booking_referral_professional) {
+                const emailParams = new EmailParams()
+                    .setFrom(sentFrom)
+                    .setTo(recipients)
+                    .setReplyTo(sentFrom)
+                    .setSubject("Referral Confirmation")
+                    .setTemplateId(settings.data.booking_referral_professional ?? '')
+                    .setPersonalization(personalization);
+
+                await mailerSend.email.send(emailParams);
+            }
+        }
+
+        if (templateId) {
+            const emailParams = new EmailParams()
+                .setFrom(sentFrom)
+                .setTo(recipients)
+                .setReplyTo(sentFrom)
+                .setSubject("Booking Request Received")
+                .setTemplateId(templateId)
+                .setPersonalization(personalization);
+
+            await mailerSend.email.send(emailParams);
+        }
+
+        return {
+            errors: null,
+            data: 'Booking request sent successfully',
+        };
+    } else{
+        return {
+            errors: [{path: 'email', message: 'Failed to send booking request email'}],
+            data: null,
+        };
     }
-
-    return {
-      errors: null,
-      data: 'Booking request sent successfully',
-    };
 
   } catch (error) {
     console.error('Error in sendBookingMail:', error);
