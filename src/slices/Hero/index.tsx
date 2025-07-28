@@ -30,6 +30,7 @@ const Hero = ({ slice }: HeroProps): JSX.Element => {
         vAlign={'center'}
         hasBooking={slice.primary.has_booking}
         rating={slice.primary.google_rating}
+        widget={slice.primary.google_widget ?? null}
     />)
   }
 

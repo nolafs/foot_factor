@@ -8,6 +8,7 @@ import {PrismicRichText} from '@prismicio/react';
 import {Badge} from '@/components/ui/badge';
 import ButtonRow from '@/components/ui/button-row';
 import {motion, useScroll, useSpring, useTransform} from 'framer-motion';
+import ReviewSliderElfsight from "@/components/features/reviews/review-slider-elfsight";
 
 export interface HeroProps {
   heading: RichTextField | KeyTextField | string;
@@ -18,11 +19,12 @@ export interface HeroProps {
   hasBooking?: boolean;
   vAlign?: 'top' | 'center' | 'bottom';
   rating?: ImageField;
+  widget?: string | null | undefined;
   imagePosition?: 'left' | 'right' | 'center' | 'top' | 'bottom';
   children?: React.ReactNode;
 }
 
-export  function Hero({ heading, subheading, lead,  links, image, hasBooking, rating, imagePosition = 'center', vAlign = 'center', children }: HeroProps) {
+export  function Hero({ heading, subheading, lead,  links, image, hasBooking, rating, widget, imagePosition = 'center', vAlign = 'center', children }: HeroProps) {
   const heroRef = useRef<HTMLDivElement | null>(null);
   const imageRef = useRef<HTMLDivElement | null>(null);
   const speed = 0.8;
@@ -111,7 +113,8 @@ export  function Hero({ heading, subheading, lead,  links, image, hasBooking, ra
              </div>
             </div>
             <div className={'shrink'}>
-            {rating && (<div><PrismicNextImage field={rating} /></div>)}
+            {!widget && rating && (<div><PrismicNextImage field={rating} /></div>)}
+                {widget && ( <ReviewSliderElfsight share_link={widget} width={'auto'} />)}
             {children && (
                 <div className={'relative mt-2 md:absolute md:bottom-10 md:left-0 md:right-0 z-20 flex'}>
                   {children}

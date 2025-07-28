@@ -9,6 +9,7 @@ import { type
   type NavigationElementDocument, type NavigationMegaMenuItemDocument, type SettingsDocumentData,
 } from '../../../prismicio-types';
 import {CallToActionBooking} from "@/components/features/cta/callToAction-booking";
+import ReviewSliderElfsight from "@/components/features/reviews/review-slider-elfsight";
 
 
 
@@ -135,7 +136,9 @@ export function Footer({ navigation, settings }: FooterProps) {
                 </div>
               </div>
           <div className={'flex justify-between items-center space-x-5 py-10'}>
-            <div>{settings.google_rating && <PrismicNextImage field={settings.google_rating}/>}</div>
+            <div>{!settings.google_widget && settings.google_rating && <PrismicNextImage field={settings.google_rating}/>}
+              {settings.google_widget && ( <ReviewSliderElfsight share_link={settings.google_widget} width={'auto'} />)}
+            </div>
             <div> {social && <SocialList items={social} icons={true} variantList={1} variantButton={3}/>}</div>
           </div>
           <div className="py-2 text-sm md:flex md:items-center md:justify-between">

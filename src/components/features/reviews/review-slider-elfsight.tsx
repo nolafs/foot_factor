@@ -5,9 +5,10 @@ import Script from 'next/script';
 
 interface ReviewSliderElfsightProps {
     share_link?: KeyTextField | string;
+    width?: string;
 }
 
-export const ReviewSliderElfsight = ({share_link}: ReviewSliderElfsightProps) => {
+export const ReviewSliderElfsight = ({share_link, width = '100%'}: ReviewSliderElfsightProps) => {
 
   return (
 
@@ -16,7 +17,7 @@ export const ReviewSliderElfsight = ({share_link}: ReviewSliderElfsightProps) =>
                   <Script src="https://cdnjs.cloudflare.com/ajax/libs/iframe-resizer/4.2.10/iframeResizer.min.js"/>
                   <iframe
                       src={share_link}
-                      style={{border: 'none', width: '100%'}}
+                      style={{border: 'none', background: 'transparent', width: width ?? '100%'}}
                       ref={(el) => {
                           if (el && typeof window !== 'undefined' && 'iFrameResize' in window) {
                             //@ts-expect-error: iframeResizer is a global function provided by the script
