@@ -20,9 +20,10 @@ interface NavigationSubProps {
   navigation: NavigationBarDocumentData;
   siteName?: KeyTextField | string;
   logo: ImageField;
+
 }
 
-const ButtonIcon = ({label, link, icon, children, trigger, classNames}: { label: KeyTextField | string, link?: LinkField, icon: ImageField,trigger?:boolean, children?: ReactNode, classNames?: string}) => {
+const ButtonIcon = ({label, link, icon, children, trigger, onClick, classNames}: { label: KeyTextField | string, link?: LinkField, icon: ImageField,trigger?:boolean,   onClick?: () => void, children?: ReactNode, classNames?: string}) => {
   const [active, setActive] = useState<boolean>(false);
   const path = usePathname();
 
@@ -33,7 +34,7 @@ const ButtonIcon = ({label, link, icon, children, trigger, classNames}: { label:
   }, [link, path]);
 
   const linkContent = () => { return (
-      <div className={cn('flex text-xl font-semibold text-white items-center gap-x-4 py-4 w-full pr-5', classNames)}>
+      <div className={cn('flex text-xl font-semibold text-white items-center gap-x-4 py-4 w-full pr-5', classNames)} onClick={onClick}>
         <span className={cn('w-6 h-4 rounded-r-full', active ? 'bg-white' : 'bg-transparent')}></span>
         <span className={'flex-grow-0'}>
       <PrismicNextImage field={icon} fallbackAlt={''}
@@ -74,8 +75,8 @@ export const NavigationMobileMenu = ({ logo, navigation, siteName}: NavigationSu
         </SheetTrigger>
         <SheetContent side="right" className="w-[90%] overflow-y-auto text-white bg-blue-950 px-0 py-6 shadow-none border-none">
           <SheetTitle>
-            <div className="flex items-center justify-between px-5">
-              <Link href="/" className={'w-[60%]'}>
+            <div className="flex items-center justify-between px-5" onClick={() => setMobileMenuOpen(false)}>
+              <Link href="/" className={'w-[60%]'} >
                 <span className="sr-only">{siteName}</span>
                 <PrismicNextImage field={logo} className="inline w-full"   />
               </Link>
@@ -85,10 +86,10 @@ export const NavigationMobileMenu = ({ logo, navigation, siteName}: NavigationSu
             {navigation?.navigation_items.map((item: NavigationBarDocumentDataNavigationItemsItem, idx) => {
               const navigationItem = item.navigation_item as unknown as NavigationElementDocument | NavigationMegaMenuItemDocument;
               return navigationItem.data?.subs[0]?.label !== null ? (
-                  <div key={`main-mobile-nav-${idx}`}>
+                  <div key={`main-mobile-nav-${idx}`} >
                     <Collapsible>
-                      <CollapsibleTrigger className={'group w-full'}>
-                        <ButtonIcon label={navigationItem.data.label} link={navigationItem.data.link} trigger={true} icon={navigationItem.data.icon}>
+                      <CollapsibleTrigger className={'group w-full'} >
+                        <ButtonIcon label={navigationItem.data.label} link={navigationItem.data.link} trigger={true} icon={navigationItem.data.icon} onClick={() => setMobileMenuOpen(false)}>
                           <ChevronDownIcon
                               aria-hidden="true"
                               className="size-5 flex-none group-data-[open]:rotate-180"
@@ -113,7 +114,7 @@ export const NavigationMobileMenu = ({ logo, navigation, siteName}: NavigationSu
               ) : (
 
                   <ButtonIcon key={`main-mobile-nav-${idx}`} link={navigationItem.data.link}
-                              label={navigationItem.data.label} icon={navigationItem.data.icon}/>
+                              label={navigationItem.data.label} icon={navigationItem.data.icon} onClick={() => setMobileMenuOpen(false)}/>
 
               );
             })}
