@@ -89,7 +89,7 @@ export const NavigationMobileMenu = ({ logo, navigation, siteName}: NavigationSu
                   <div key={`main-mobile-nav-${idx}`} >
                     <Collapsible>
                       <CollapsibleTrigger className={'group w-full'} >
-                        <ButtonIcon label={navigationItem.data.label} link={navigationItem.data.link} trigger={true} icon={navigationItem.data.icon} onClick={() => setMobileMenuOpen(false)}>
+                        <ButtonIcon label={navigationItem.data.label} link={navigationItem.data.link} trigger={true} icon={navigationItem.data.icon} >
                           <ChevronDownIcon
                               aria-hidden="true"
                               className="size-5 flex-none group-data-[open]:rotate-180"
