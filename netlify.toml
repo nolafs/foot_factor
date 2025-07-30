@@ -18,105 +18,105 @@
     w = ":width"
     q = ":quality"
 [[redirects]]
-from = "/the-difference-between-our-bespoke-orthotics-and-our-custom-insoles/"
-to = "/resources/blog/the-difference-between-our-bespoke-orthotics-and-our-custom-insoles/"
-status = 301
-force = true
+    from = "/the-difference-between-our-bespoke-orthotics-and-our-custom-insoles/"
+    to = "/resources/blog/the-difference-between-our-bespoke-orthotics-and-our-custom-insoles/"
+    status = 301
+    force = true
 [[redirects]]
-from = "/the-impact-of-ageing-on-feet-and-the-role-of-orthotics/"
-to = "/resources/blog/the-impact-of-ageing-on-feet-and-the-role-of-orthotics/"
-status = 301
-force = true
+    from = "/the-impact-of-ageing-on-feet-and-the-role-of-orthotics/"
+    to = "/resources/blog/the-impact-of-ageing-on-feet-and-the-role-of-orthotics/"
+    status = 301
+    force = true
 [[redirects]]
-from = "/give-the-gift-of-comfort-this-christmas/"
-to = "/resources/blog/give-the-gift-of-comfort-this-christmas/"
-status = 301
-force = true
+    from = "/give-the-gift-of-comfort-this-christmas/"
+    to = "/resources/blog/give-the-gift-of-comfort-this-christmas/"
+    status = 301
+    force = true
 [[redirects]]
-from = "/give-your-old-ski-boots-a-second-chance/"
-to = "/resources/blog/give-your-old-ski-boots-a-second-chance/"
-status = 301
-force = true
+    from = "/give-your-old-ski-boots-a-second-chance/"
+    to = "/resources/blog/give-your-old-ski-boots-a-second-chance/"
+    status = 301
+    force = true
 [[redirects]]
-from = "/five-of-the-best-winter-hiking-trails-near-london/"
-to = "/resources/blog/five-of-the-best-winter-hiking-trails-near-london/"
-status = 301
-force = true
+    from = "/five-of-the-best-winter-hiking-trails-near-london/"
+    to = "/resources/blog/five-of-the-best-winter-hiking-trails-near-london/"
+    status = 301
+    force = true
 [[redirects]]
-from = "/bespoke-orthotics-in-football-enhancing-performance-and-preventing-injury/"
-to = "/resources/blog/bespoke-orthotics-in-football-enhancing-performance-and-preventing-injury/"
-status = 301
-force = true
+    from = "/bespoke-orthotics-in-football-enhancing-performance-and-preventing-injury/"
+    to = "/resources/blog/bespoke-orthotics-in-football-enhancing-performance-and-preventing-injury/"
+    status = 301
+    force = true
 [[redirects]]
-from = "/understanding-plantar-fasciitis-causes-symptoms-and-treatment/"
-to = "/resources/blog/understanding-plantar-fasciitis-causes-symptoms-and-treatment/"
-status = 301
-force = true
+    from = "/understanding-plantar-fasciitis-causes-symptoms-and-treatment/"
+    to = "/resources/blog/understanding-plantar-fasciitis-causes-symptoms-and-treatment/"
+    status = 301
+    force = true
 [[redirects]]
-from = "/your-orthotics-appointment-what-to-expect/"
-to = "/resources/blog/your-orthotics-appointment-what-to-expect/"
-status = 301
-force = true
+    from = "/your-orthotics-appointment-what-to-expect/"
+    to = "/resources/blog/your-orthotics-appointment-what-to-expect/"
+    status = 301
+    force = true
 [[redirects]]
-from = "/running-orthotics-explained/"
-to = "/resources/blog/running-orthotics-explained/"
-status = 301
-force = true
+    from = "/running-orthotics-explained/"
+    to = "/resources/blog/running-orthotics-explained/"
+    status = 301
+    force = true
 [[redirects]]
-from = "/benefits-of-bespoke-orthotics-for-golfers/"
-to = "/resources/blog/benefits-of-bespoke-orthotics-for-golfers/"
-status = 301
-force = true
+    from = "/benefits-of-bespoke-orthotics-for-golfers/"
+    to = "/resources/blog/benefits-of-bespoke-orthotics-for-golfers/"
+    status = 301
+    force = true
 [[redirects]]
-from = "/bespoke-orthotics-for-hip-and-pelvic-pain/"
-to = "/resources/blog/bespoke-orthotics-for-hip-and-pelvic-pain/"
-status = 301
-force = true
+    from = "/bespoke-orthotics-for-hip-and-pelvic-pain/"
+    to = "/resources/blog/bespoke-orthotics-for-hip-and-pelvic-pain/"
+    status = 301
+    force = true
 [[redirects]]
-from = "/choosing-the-right-footwear-for-your-holiday/"
-to = "/resources/blog/choosing-the-right-footwear-for-your-holiday/"
-status = 301
-force = true
+    from = "/choosing-the-right-footwear-for-your-holiday/"
+    to = "/resources/blog/choosing-the-right-footwear-for-your-holiday/"
+    status = 301
+    force = true
 [[redirects]]
-from = "/is-under-or-over-pronation-the-cause-of-your-running-injuries/"
-to = "/resources/blog/is-under-or-over-pronation-the-cause-of-your-running-injuries/"
-status = 301
-force = true
+    from = "/is-under-or-over-pronation-the-cause-of-your-running-injuries/"
+    to = "/resources/blog/is-under-or-over-pronation-the-cause-of-your-running-injuries/"
+    status = 301
+    force = true
 [[redirects]]
-from = "/bespoke-hiking-orthotics/"
-to = "/resources/blog/bespoke-hiking-orthotics/"
-status = 301
-force = true
+    from = "/bespoke-hiking-orthotics/"
+    to = "/resources/blog/bespoke-hiking-orthotics/"
+    status = 301
+    force = true
 [[redirects]]
-from = "/how-orthotics-can-aid-in-acl-injury-recovery/"
-to = "/resources/blog/how-orthotics-can-aid-in-acl-injury-recovery/"
-status = 301
-force = true
+    from = "/how-orthotics-can-aid-in-acl-injury-recovery/"
+    to = "/resources/blog/how-orthotics-can-aid-in-acl-injury-recovery/"
+    status = 301
+    force = true
 [[redirects]]
-from = "/exploring-the-best-spring-hiking-trails-in-the-uk/"
-to = "/resources/blog/exploring-the-best-spring-hiking-trails-in-the-uk/"
-status = 301
-force = true
+    from = "/exploring-the-best-spring-hiking-trails-in-the-uk/"
+    to = "/resources/blog/exploring-the-best-spring-hiking-trails-in-the-uk/"
+    status = 301
+    force = true
 [[redirects]]
-from = "/finding-relief-how-bespoke-orthotics-alleviate-bunion-pain/"
-to = "/resources/blog/finding-relief-how-bespoke-orthotics-alleviate-bunion-pain/"
-status = 301
-force = true
+    from = "/finding-relief-how-bespoke-orthotics-alleviate-bunion-pain/"
+    to = "/resources/blog/finding-relief-how-bespoke-orthotics-alleviate-bunion-pain/"
+    status = 301
+    force = true
 [[redirects]]
-from = "/orthotics-for-pregnancy/"
-to = "/resources/blog/orthotics-for-pregnancy/"
-status = 301
-force = true
+    from = "/orthotics-for-pregnancy/"
+    to = "/resources/blog/orthotics-for-pregnancy/"
+    status = 301
+    force = true
 [[redirects]]
-from = "/tendonitis-orthotics/"
-to = "/resources/blog/tendonitis-orthotics/"
-status = 301
-force = true
+    from = "/tendonitis-orthotics/"
+    to = "/resources/blog/tendonitis-orthotics/"
+    status = 301
+    force = true
 [[redirects]]
-from = "/preparing-for-the-london-marathon-2024/"
-to = "/resources/blog/preparing-for-the-london-marathon-2024/"
-status = 301
-force = true
+    from = "/preparing-for-the-london-marathon-2024/"
+    to = "/resources/blog/preparing-for-the-london-marathon-2024/"
+    status = 301
+    force = true
 [[redirects]]
 from = "/arch-support-orthotics-for-flat-feet/"
 to = "/resources/blog/arch-support-orthotics-for-flat-feet/"
@@ -421,12 +421,89 @@ for = "/*"
     Permissions-Policy = "geolocation=(), microphone=(), camera=()"
 
 [[headers]]
-for = "/*"
+    for = "/*"
   [headers.values]
     Strict-Transport-Security = '''
       max-age=63072000;
       includeSubDomains;
       preload'''
+
+[[headers]]
+  for = "/api/*"
+  [headers.values]
+    Cache-Control = "no-cache, no-store, must-revalidate"
+
+[[headers]]
+  for = "*.js"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "*.css"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "*.png"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "*.jpg"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "*.jpeg"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "*.gif"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "*.webp"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "*.svg"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "*.woff"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "*.woff2"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "*.ttf"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "*.eot"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "/_next/static/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "/favicon.ico"
+  [headers.values]
+    Cache-Control = "public, max-age=86400"
+
+
 
 [context]
 
