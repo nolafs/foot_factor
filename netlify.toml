@@ -420,13 +420,6 @@ for = "/*"
     Strict-Transport-Security = "max-age=31536000; includeSubDomains; preload"
     Permissions-Policy = "geolocation=(), microphone=(), camera=()"
 
-[[headers]]
-    for = "/*"
-  [headers.values]
-    Strict-Transport-Security = '''
-      max-age=63072000;
-      includeSubDomains;
-      preload'''
 
 [[headers]]
   for = "/api/*"
@@ -506,7 +499,5 @@ for = "/*"
 
 
 [context]
-
   [context.production]
-
   [context.main]
