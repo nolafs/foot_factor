@@ -138,9 +138,7 @@ const StepMedia = ({data, index, totalItems}: StepMediaProps) => {
         const card = cardRef.current;
         const image = imageRef.current;
         const content = contentRef.current;
-        const video = videoRef.current;
 
-        console.log('StepMedia', videoRef.current, data.video);
 
         if (isFilled.linkToMedia(data.video) ) {
 
@@ -148,7 +146,7 @@ const StepMedia = ({data, index, totalItems}: StepMediaProps) => {
                     trigger: card,
                     start: 'top bottom',
                     end: 'bottom+=100% top',
-                    markers: true,
+                    markers: false,
                     onEnter: () => videoRef.current?.getInternalPlayer()?.play(),
                     onLeave: () => videoRef.current?.getInternalPlayer()?.pause(),
                     onEnterBack: () => videoRef.current?.getInternalPlayer()?.play(),
