@@ -83,7 +83,7 @@ export const StepsMedia = ({data}: StepsMediaProps) => {
 
   return (
 
-          <div ref={contentRef} className={'relative w-full isolate overflow-hidden'}>
+          <div ref={contentRef} className={'relative w-full isolate overflow-hidden z-0'}>
               <div ref={listRef} className={'w-full flex flex-col'}>
                 <div>
                   <div className={'intro z-5 relative w-full h-screen isolated overflow-hidden'}>
@@ -140,14 +140,19 @@ const StepMedia = ({data, index, totalItems}: StepMediaProps) => {
         const content = contentRef.current;
         const video = videoRef.current;
 
-        if (video) {
+        console.log('StepMedia', videoRef.current, data.video);
+
+        if (isFilled.linkToMedia(data.video) ) {
 
                 ScrollTrigger.create({
                     trigger: card,
                     start: 'top bottom',
-                    end: 'bottom top',
+                    end: 'bottom+=100% top',
+                    markers: true,
                     onEnter: () => videoRef.current?.getInternalPlayer()?.play(),
-                    // onLeave: () => video.pause(),
+                    onLeave: () => videoRef.current?.getInternalPlayer()?.pause(),
+                    onEnterBack: () => videoRef.current?.getInternalPlayer()?.play(),
+                    onLeaveBack: () => videoRef.current?.getInternalPlayer()?.pause(),
                 })
 
         }
@@ -225,7 +230,7 @@ const StepMedia = ({data, index, totalItems}: StepMediaProps) => {
                     ease: 'power2.in',
                 })
 
-    }, { scope: cardRef, dependencies: [index, totalItems] });
+    }, { scope: cardRef, dependencies: [index, totalItems, videoRef.current] });
 
     useEffect(() => {
         ScrollTrigger.refresh();
@@ -233,12 +238,12 @@ const StepMedia = ({data, index, totalItems}: StepMediaProps) => {
 
 
   return (
-      <li ref={cardRef}  >
+      <li ref={cardRef} className={'relative isolate'} >
 
 
         <div ref={imageRef} className={'absolute w-full h-screen flex -z-0 justify-center'} style={{zIndex: index + 1}}>
           <div className={'absolute top-0 left-0 w-full h-full z-20 bg-black/60'}></div>
-          {isFilled.linkToMedia(data.video) ?(
+          {isFilled.linkToMedia(data.video) && (
               <DynamicReactPlayer
                   ref={videoRef}
                 url={data.video.url}
@@ -247,6 +252,7 @@ const StepMedia = ({data, index, totalItems}: StepMediaProps) => {
                 loop={true}
                 autoPlay={true}
                 playsinline={true}
+                loading={'eager'}
                 poster={data.image.url}
                   width="100%"
                   height="100%"
@@ -275,7 +281,8 @@ const StepMedia = ({data, index, totalItems}: StepMediaProps) => {
               />
 
 
-          ) : (<PrismicNextImage field={data.image} className={cn('w-full h-full object-center object-cover')}/>)}
+          )}
+          <PrismicNextImage loading={'eager'} field={data.image} className={cn('w-full h-full object-center object-cover')}/>
 
         </div>
 
