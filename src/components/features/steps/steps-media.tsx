@@ -15,7 +15,13 @@ import {isFilled} from '@prismicio/client';
 import {Body, Heading} from '@/components/ui/text';
 import {PrismicRichText} from '@prismicio/react';
 import ButtonRow from '@/components/ui/button-row';
-import ReactPlayer, {type Config, ReactPlayerProps} from 'react-player/lazy';
+import type ReactPlayer from 'react-player';
+
+import dynamic from 'next/dynamic';
+
+const DynamicReactPlayer = dynamic(() => import('react-player/lazy'), {
+    ssr: false
+});
 
 if (typeof window !== 'undefined') {
     gsap.registerPlugin(ScrollTrigger);
@@ -116,6 +122,8 @@ interface StepMediaProps {
   index: number;
   totalItems: number;
 }
+
+
 
 const StepMedia = ({data, index, totalItems}: StepMediaProps) => {
   const cardRef = React.useRef<HTMLLIElement>(null);
@@ -219,7 +227,9 @@ const StepMedia = ({data, index, totalItems}: StepMediaProps) => {
 
     }, { scope: cardRef, dependencies: [index, totalItems] });
 
-
+    useEffect(() => {
+        ScrollTrigger.refresh();
+    }, [data]);
 
 
   return (
@@ -228,8 +238,8 @@ const StepMedia = ({data, index, totalItems}: StepMediaProps) => {
 
         <div ref={imageRef} className={'absolute w-full h-screen flex -z-0 justify-center'} style={{zIndex: index + 1}}>
           <div className={'absolute top-0 left-0 w-full h-full z-20 bg-black/60'}></div>
-          {isFilled.linkToMedia(data.video) ?(<Suspense fallback={null}>
-              <ReactPlayer
+          {isFilled.linkToMedia(data.video) ?(
+              <DynamicReactPlayer
                   ref={videoRef}
                 url={data.video.url}
                 controls={false}
@@ -262,7 +272,7 @@ const StepMedia = ({data, index, totalItems}: StepMediaProps) => {
                       }
                     }
                   }}
-              /></Suspense>
+              />
 
 
           ) : (<PrismicNextImage field={data.image} className={cn('w-full h-full object-center object-cover')}/>)}
