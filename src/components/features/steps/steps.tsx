@@ -26,32 +26,27 @@ export const Steps = ({data, sectionPadding}: StepsProps) => {
   const [currentStep, setCurrentStep] = useState(1);
 
   useGSAP(() => {
-
     if (!contentRef.current || !listRef.current) return;
 
-    // use gsap media query to online the scroll trigger on desktop
     const mediaQuery = gsap.matchMedia();
+
     mediaQuery.add('(min-width: 768px)', () => {
-    // Overall progress based on scroll through entire steps section
-    gsap.to({}, {
-      ease: 'none',
-      scrollTrigger: {
+      const progressTrigger = ScrollTrigger.create({
         trigger: contentRef.current,
         start: 'top bottom',
         end: 'bottom bottom',
         scrub: 0.3,
+        invalidateOnRefresh: true,
         onUpdate: (self) => {
           const progress = Math.round(self.progress * 100);
           setCurrentProgress(progress);
         },
         onRefresh: () => {
           setCurrentProgress(0);
-        }
-      }
-    });
+        },
+      });
 
-    gsap.to({}, {
-      scrollTrigger: {
+      const pinTrigger = ScrollTrigger.create({
         trigger: '#progress',
         start: 'center center',
         end: 'bottom bottom+=100vh',
@@ -59,22 +54,24 @@ export const Steps = ({data, sectionPadding}: StepsProps) => {
         scrub: 0.3,
         pin: true,
         pinSpacing: false,
-        //markers: true,
-      }
+        invalidateOnRefresh: true,
+      });
+
+      ScrollTrigger.refresh();
+
+      return () => {
+        progressTrigger.kill();
+        pinTrigger.kill();
+      };
     });
 
-    // Force a refesh of ScrollTrigger to ensure it picks up the correct heights
-    setTimeout(() => {
-      ScrollTrigger.refresh();
-    }, 1000)
-
-      //cleanup code
-      return () => {
-        ScrollTrigger.getAll().forEach(trigger => trigger.kill());
-      };
-    })
-
-  }, {scope: contentRef, dependencies: [data]});
+    return () => {
+      mediaQuery.kill(); // Clean up matchMedia
+    };
+  }, {
+    scope: contentRef,
+    dependencies: [data],
+  });
 
   const updateStep = React.useCallback((stepNumber: number) => {
     setCurrentStep(stepNumber);

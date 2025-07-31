@@ -1,5 +1,5 @@
 'use client';
-import React from 'react';
+import React, {Suspense, useEffect} from 'react';
 import gsap from 'gsap';
 import ScrollTrigger from 'gsap/ScrollTrigger';
 import {useGSAP} from '@gsap/react';
@@ -44,7 +44,7 @@ export const StepsMedia = ({data}: StepsMediaProps) => {
                 pin: true,
                 pinSpacing: false,
                 anticipatePin: 1,
-                markers: false
+                invalidateOnRefresh: true,
             }
         });
 
@@ -52,14 +52,28 @@ export const StepsMedia = ({data}: StepsMediaProps) => {
           opacity: 1,
           scrollTrigger: {
             trigger: '.intro-text',
-            start: 'top center',
-            end: 'bottom center+=20%',
-            scrub: 0.5,
+              start: 'top center',
+              end: 'bottom center+=20%',
+              scrub: 0.5,
+              invalidateOnRefresh: true,
             //markers: true,
           }
         })
 
     }, {scope: contentRef, dependencies: [data]});
+
+    useEffect(() => {
+        ScrollTrigger.refresh();
+    }, [data]);
+
+    useEffect(() => {
+        const handleResize = () => {
+            ScrollTrigger.refresh();
+        };
+
+        window.addEventListener('resize', handleResize);
+        return () => window.removeEventListener('resize', handleResize);
+    }, []);
 
   return (
 
@@ -89,7 +103,7 @@ export const StepsMedia = ({data}: StepsMediaProps) => {
                       </div>
                   </div>
                 </div>
-                <ul className={'relative w-full'}>
+                <ul className={'relative w-full z-0'}>
                 {data.steps.map((step, idx) => (<StepMedia key={'video_stepper'+idx} index={idx} totalItems={data.steps.length} data={step}/>))}
                 <li className={'relative h-svh'}></li>
                 </ul>
@@ -109,90 +123,103 @@ const StepMedia = ({data, index, totalItems}: StepMediaProps) => {
   const imageRef = React.useRef<HTMLDivElement>(null);
   const videoRef = React.useRef<ReactPlayer>(null);
 
-  useGSAP(() => {
-    if (!cardRef.current) return;
+    useGSAP(({ context }) => {
+        if (!cardRef.current) return;
 
-    if (videoRef.current) {
-      // Play video when item becomes visible
-      ScrollTrigger.create({
-        trigger: cardRef.current,
-        start: 'top bottom',
-        end: 'bottom top',
-        onEnter: () => videoRef.current?.getInternalPlayer()?.play(),
-        //onLeave: () => videoRef.current?.getInternalPlayer()?.pause(),
-      });
-    }
 
-    if (index === 0) {
-      // First item: pin for longer duration to accommodate all subsequent items
-      ScrollTrigger.create({
-        trigger: cardRef.current,
-        start: 'top top',
-        end: `+=${200 * totalItems}%`, // Extend pin duration based on total items
-        pin: true,
-        pinSpacing: false,
-        anticipatePin: 1,
-      });
-    } else {
-      // Subsequent items: pin on top without spacing
-      ScrollTrigger.create({
-        trigger: cardRef.current,
-        start: 'top top',
-        end:  `+=${100 * totalItems}%`,
-        pin: true,
-        pinSpacing: false,
-        anticipatePin: 1,
-      });
+        const card = cardRef.current;
+        const image = imageRef.current;
+        const content = contentRef.current;
+        const video = videoRef.current;
 
-      // Image fade-in for subsequent items
-      gsap.fromTo(imageRef.current, {
-        opacity: 0,
-      }, {
-        opacity: 1,
-        duration: 2,
-        ease: 'power2.out',
-        scrollTrigger: {
-          trigger: cardRef.current,
-          start: 'top top',
-          end:  `+=${100}%`,
-         // markers: true,
-          scrub: 0.3,
+        if (video) {
+
+                ScrollTrigger.create({
+                    trigger: card,
+                    start: 'top bottom',
+                    end: 'bottom top',
+                    onEnter: () => videoRef.current?.getInternalPlayer()?.play(),
+                    // onLeave: () => video.pause(),
+                })
+
         }
-      });
-    }
 
-    // Original text animation for ALL items
-    const tl = gsap.timeline({
-      scrollTrigger: {
-        trigger: contentRef.current,
-        start: 'top top',
-        end: '+=100%',
-        scrub: 0.5,
-        pin: true,
-        pinSpacing: false,
-        //markers: true,
-      }
-    });
+        if (index === 0) {
 
-    tl.fromTo(contentRef.current, {
-      opacity: 0,
-     //y: '100%'
-    }, {
-      opacity: 1,
-      y: 0,
-      duration: 0.5,
-      ease: 'power2.out',
+                ScrollTrigger.create({
+                    trigger: card,
+                    start: 'top top',
+                    end: `+=${200 * totalItems}%`,
+                    pin: true,
+                    pinSpacing: false,
+                    anticipatePin: 1,
+                })
 
-    })
+        } else {
 
-        .to(contentRef.current, {
-          opacity: 0,
-         y: '-100%',
-          duration: 1,
-          ease: 'power2.in',
-        });
+                ScrollTrigger.create({
+                    trigger: card,
+                    start: 'top top',
+                    end: `+=${100 * totalItems}%`,
+                    pin: true,
+                    pinSpacing: false,
+                    anticipatePin: 1,
+                })
 
-  }, {scope: cardRef});
+
+
+                gsap.fromTo(
+                    image,
+                    { opacity: 0 },
+                    {
+                        opacity: 1,
+                        duration: 2,
+                        ease: 'power2.out',
+                        scrollTrigger: {
+                            trigger: card,
+                            start: 'top top',
+                            end: `+=100%`,
+                            scrub: 0.3,
+                            invalidateOnRefresh: true,
+                        },
+                    }
+                )
+
+        }
+
+
+            gsap
+                .timeline({
+                    scrollTrigger: {
+                        trigger: content,
+                        start: 'top top',
+                        end: '+=100%',
+                        scrub: 0.5,
+                        pin: true,
+                        pinSpacing: false,
+                        invalidateOnRefresh: true,
+                    },
+                })
+                .fromTo(
+                    content,
+                    { opacity: 0 },
+                    {
+                        opacity: 1,
+                        y: 0,
+                        duration: 0.5,
+                        ease: 'power2.out',
+                    }
+                )
+                .to(content, {
+                    opacity: 0,
+                    y: '-100%',
+                    duration: 1,
+                    ease: 'power2.in',
+                })
+
+    }, { scope: cardRef, dependencies: [index, totalItems] });
+
+
 
 
   return (
@@ -201,14 +228,14 @@ const StepMedia = ({data, index, totalItems}: StepMediaProps) => {
 
         <div ref={imageRef} className={'absolute w-full h-screen flex -z-0 justify-center'} style={{zIndex: index + 1}}>
           <div className={'absolute top-0 left-0 w-full h-full z-20 bg-black/60'}></div>
-          {isFilled.linkToMedia(data.video) ?(
+          {isFilled.linkToMedia(data.video) ?(<Suspense fallback={null}>
               <ReactPlayer
                   ref={videoRef}
                 url={data.video.url}
                 controls={false}
                 muted={true}
                 loop={true}
-                autoplay={true}
+                autoPlay={true}
                 playsinline={true}
                 poster={data.image.url}
                   width="100%"
@@ -235,7 +262,7 @@ const StepMedia = ({data, index, totalItems}: StepMediaProps) => {
                       }
                     }
                   }}
-              />
+              /></Suspense>
 
 
           ) : (<PrismicNextImage field={data.image} className={cn('w-full h-full object-center object-cover')}/>)}

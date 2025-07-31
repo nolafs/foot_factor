@@ -16,7 +16,7 @@ export type ReviewsProps = SliceComponentProps<Content.ReviewsSlice>;
  */
 const Reviews: FC<ReviewsProps> = ({ slice }) => {
   return (
-      <Container as={'section'} padding={'lg'} data-slice-type={slice.slice_type}
+      <Container as={'section'} padding={'lg'}   data-slice-type={slice.slice_type}
                  data-slice-variation={slice.variation} color={'default'}>
         <SectionColumns heading={slice.primary.heading} columnSize={'small'} classNames="">
           <ReviewSliderElfsight share_link={slice.primary.share_link} />
