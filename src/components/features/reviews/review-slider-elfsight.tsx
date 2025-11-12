@@ -14,7 +14,10 @@ export const ReviewSliderElfsight = ({share_link, width = '100%'}: ReviewSliderE
 
           isFilled.keyText(share_link) && (
               <>
-                  <Script src="https://cdnjs.cloudflare.com/ajax/libs/iframe-resizer/4.2.10/iframeResizer.min.js"/>
+                  <Script
+                      src="https://cdnjs.cloudflare.com/ajax/libs/iframe-resizer/4.2.10/iframeResizer.min.js"
+                      strategy="lazyOnload"
+                  />
                   <iframe
                       src={share_link}
                       style={{border: 'none', background: 'transparent', width: width ?? '100%'}}

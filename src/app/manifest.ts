@@ -6,6 +6,7 @@ export default function manifest(): MetadataRoute.Manifest {
     short_name: 'FF',
     description: 'Foot Factor - Bespoke Orthotics London. Expert biomechanical analysis and custom orthotics created while you wait. Resolve pain and improve performance',
     start_url: '/',
+    scope: '/',
     display: 'standalone',
     orientation: 'portrait',
     background_color: '#FFFFFF',
