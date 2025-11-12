@@ -96,11 +96,13 @@ const Megamenu: FC<MegaMenuProps> = ({slice, context}) => {
   const chunkedArray = splitArray(context?.subs || [], numberOfColumns);
   const largestChunkSize = Math.max(...chunkedArray.map(chunk => chunk.length));
 
+  console.log('[MEGA]',largestChunkSize);
+
   return (context?.subs && context?.subs.length > 0) ? (
 
         chunkedArray.map((item, idx) => (
               <div id={'nav-content'} key={'nav-content-sub' + idx} className={cn('flex w-full min-w-[460px] xl:max-w-[512px]')}>
-              <div className={cn("flex flex-col  w-full h-full gap-y-2", (largestChunkSize === item.length) ? 'justify-between' : 'justify-start')}>
+              <div className={cn("flex flex-col  w-full h-full gap-y-2", (largestChunkSize === item.length) ? 'justify-start' : 'justify-start')}>
                 {item.map((item, idx) => (
                     <div
                         key={`main-nav-item-${idx}`}
