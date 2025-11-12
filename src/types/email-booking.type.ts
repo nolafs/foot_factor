@@ -6,10 +6,10 @@ const MAX_DOB = startOfDay(new Date());
 
 // UK phone number validation regex
 // Matches various UK formats: +44, 0044, 07xxx, 01xxx, 02xxx, 03xxx, etc.
-const ukPhoneRegex = /^(?:(?:\+44|0044)\s?|0)(?:[1-9]\d{8,9}|[1-9]\d{9})$/;
+//const ukPhoneRegex = /^(?:(?:\+44|0044)\s?|0)(?:[1-9]\d{8,9}|[1-9]\d{9})$/;
 
 // Alternative more comprehensive UK phone regex
-const ukPhoneRegexDetailed = /^(?:(?:\+44\s?|0044\s?|0)(?:[1-9]\d{8,9}|[1-9]\d{9})|(?:\+44\s?|0044\s?)?(?:7[0-9]{9}|1[0-9]{9}|2[0-9]{9}|3[0-9]{9}|5[0-9]{9}|8[0-9]{9}|9[0-9]{9}))$/;
+//const ukPhoneRegexDetailed = /^(?:(?:\+44\s?|0044\s?|0)(?:[1-9]\d{8,9}|[1-9]\d{9})|(?:\+44\s?|0044\s?)?(?:7[0-9]{9}|1[0-9]{9}|2[0-9]{9}|3[0-9]{9}|5[0-9]{9}|8[0-9]{9}|9[0-9]{9}))$/;
 
 // Custom UK phone validation function
 const validateUKPhone = (phone: string) => {

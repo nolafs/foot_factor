@@ -3,11 +3,12 @@ import React, {useEffect} from 'react';
 import {filter} from '@prismicio/client';
 import {createClient} from '@/prismicio';
 import PostFeatureCard from '@/components/features/blog/postFeatureCard';
+import {type PostsDocument} from "@/prismic-types";
 
 
 export const BlogArticle = ({size = 2, tags}: {size: number, tags?: string[]} ) => {
 
-    const [resentPosts, setResentPosts] = React.useState<any[]>([]);
+    const [resentPosts, setResentPosts] = React.useState< PostsDocument<string>[]>([]);
 
     useEffect(() => {
       const fetchPosts = async () => {
@@ -39,7 +40,7 @@ export const BlogArticle = ({size = 2, tags}: {size: number, tags?: string[]} ) 
       }
 
       void fetchPosts();
-    }, []);
+    }, [size, tags]);
 
   if (!resentPosts.length) {
     return null;

@@ -1,5 +1,5 @@
 'use client';
-import {isFilled, KeyTextField} from '@prismicio/client';
+import {isFilled, type KeyTextField} from '@prismicio/client';
 import React from 'react';
 import Script from 'next/script';
 

@@ -1,5 +1,5 @@
 'use client';
-import {GuideDocumentData, type PostsDocumentData} from '../../../../prismicio-types';
+import {type GuideDocumentData, type PostsDocumentData} from '../../../../prismicio-types';
 import { type Author } from '@/types';
 import cn from 'clsx';
 import AuthorLink from '@/components/features/author/author-link';

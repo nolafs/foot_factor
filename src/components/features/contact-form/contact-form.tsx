@@ -9,7 +9,7 @@ import { z } from 'zod';
 import cn from 'clsx';
 import { sendMail, VerifyCaptcha } from '@/action';
 import ReCAPTCHA from 'react-google-recaptcha';
-import {ContactFormSectionSliceDefaultPrimaryItemsItem} from '@/prismic-types';
+import {type ContactFormSectionSliceDefaultPrimaryItemsItem} from '@/prismic-types';
 import {createClient} from "@/prismicio";
 
 const RECAPTCHA_ACTIVE = process.env.NEXT_PUBLIC_RECAPTCHA_ACTIVE === 'true';

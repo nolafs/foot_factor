@@ -1,6 +1,6 @@
 'use client';
 import React, {useRef} from 'react';
-import {ListSliceBentoPrimaryItemsItem} from '@/prismic-types';
+import {type ListSliceBentoPrimaryItemsItem} from '@/prismic-types';
 import {PrismicNextImage, PrismicNextLink} from '@prismicio/next';
 import cn from 'clsx';
 import {Heading, Lead} from '@/components/ui/text';

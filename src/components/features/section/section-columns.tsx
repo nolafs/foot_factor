@@ -1,5 +1,5 @@
-import React, {RefObject} from 'react';
-import {isFilled, KeyTextField, RichTextField} from '@prismicio/client';
+import React, {type RefObject} from 'react';
+import {isFilled, type KeyTextField, type RichTextField} from '@prismicio/client';
 import {Heading} from '@/components/ui/text';
 import cn from 'clsx';
 import {PrismicRichText} from '@prismicio/react';

@@ -3,7 +3,7 @@ import {PrismicImage, PrismicRichText} from '@prismicio/react';
 import {PrismicNextLink} from '@prismicio/next';
 import React, {useEffect, useState} from 'react';
 import { motion } from 'framer-motion';
-import {NavigationElementDocumentData} from '@/prismic-types';
+import {type NavigationElementDocumentData} from '@/prismic-types';
 
 export const NavigationMenuSubItem = ({item}: { item: NavigationElementDocumentData}) => {
 

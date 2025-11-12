@@ -3,7 +3,7 @@
 
 import {usePathname, useSearchParams} from 'next/navigation'
 import Script from 'next/script'
-import {FC, useEffect} from 'react'
+import {type FC, useEffect} from 'react'
 import {markFeatureUsage, pageview} from '@/lib/tracking/utils.tracking';
 
 type Props = {

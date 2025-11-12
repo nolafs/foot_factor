@@ -7,9 +7,7 @@ import {
   type Blog,
   type BlogPosting,
   type MedicalProcedure,
-  type MedicalCondition,
-  type TherapeuticProcedure,
-  WebPage
+  type WebPage
 } from 'schema-dts';
 import {type PostsDocument} from '@/prismic-types';
 

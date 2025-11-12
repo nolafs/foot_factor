@@ -4,7 +4,7 @@ import {PrismicNextImage} from '@prismicio/next';
 import {ArrowRight} from 'lucide-react';
 import {cn} from '@/lib/utils';
 import {buttonVariants} from '@/components/ui/button';
-import {ImageField} from '@prismicio/client';
+import {type ImageField} from '@prismicio/client';
 import {Badge} from '@/components/ui/badge';
 
 interface SliderCardProps<T> {

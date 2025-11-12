@@ -1,6 +1,6 @@
-import React, { FC } from 'react';
-import {Content} from '@prismicio/client';
-import {SliceComponentProps} from '@prismicio/react';
+import React, { type FC } from 'react';
+import {type Content} from '@prismicio/client';
+import {type SliceComponentProps} from '@prismicio/react';
 import {Container} from '@/components/ui/container';
 import SectionColumns from '@/components/features/section/section-columns';
 

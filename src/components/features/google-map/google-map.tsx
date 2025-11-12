@@ -1,8 +1,8 @@
 'use client';
 import React, {useEffect, useRef} from 'react';
-import {GeoPointField} from '@prismicio/client';
+import {type GeoPointField} from '@prismicio/client';
 import {addSingleMarkers} from '@/components/features/google-map/addSingleMaker';
-import {LocationMapCalloutSliceMapWithCalloutRightPrimaryMapMarkersItem} from '@/prismic-types';
+import {type LocationMapCalloutSliceMapWithCalloutRightPrimaryMapMarkersItem} from '@/prismic-types';
 import {useMediaQuery} from '@/lib/hooks/useMediaQuery';
 
 

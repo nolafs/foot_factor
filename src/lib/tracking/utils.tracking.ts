@@ -2,7 +2,7 @@
 'use client'
 
 import {IS_GTM_ENABLED, trackingConfig} from './config.tracking'
-import {Gtag, GtagEvent} from '@/types/tracking.types';
+import {type Gtag, type GtagEvent} from '@/types/tracking.types';
 
 
 const logGAWarning = (message: string) => {

@@ -13,7 +13,7 @@ import {Heading} from '@/components/ui/text';
  */
 export type TestimonialsProps = SliceComponentProps<Content.TestimonialsSlice>;
 
-function createTestimonialGrid(testimonials: any[], columns = 4, groupsPerColumn = 2) {
+function createTestimonialGrid(testimonials:  Content.TestimonialDocument[], columns = 4, groupsPerColumn = 2) {
   // Early return if testimonials is empty
   if (!testimonials || testimonials.length === 0) {
     return {featured: null, grid: []};
@@ -44,8 +44,7 @@ function createTestimonialGrid(testimonials: any[], columns = 4, groupsPerColumn
 
     return Array.from({length: groupsPerColumn}, (_, groupIndex) => {
       const groupStart = groupIndex * groupSize;
-      const group = columnItems.slice(groupStart, groupStart + groupSize);
-      return group;
+        return columnItems.slice(groupStart, groupStart + groupSize);
     }).filter(group => group.length > 0);
   }).filter(columnGroup => columnGroup.length > 0);
 

@@ -1,7 +1,6 @@
-import { FC } from 'react';
-import { Content } from '@prismicio/client';
-import { SliceComponentProps } from '@prismicio/react';
-import {Container} from '@/components/ui/container';
+import { type FC } from 'react';
+import { type Content } from '@prismicio/client';
+import { type SliceComponentProps } from '@prismicio/react';
 import SoleDeconstructor from '@/components/features/sole-deconstruct/sole-decontruct';
 
 /**

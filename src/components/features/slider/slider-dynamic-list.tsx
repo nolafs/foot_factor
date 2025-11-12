@@ -2,7 +2,7 @@
 import React, {useEffect, useState} from 'react';
 import {type AllDocumentTypes} from '@/prismic-types';
 import {createClient} from '@/prismicio';
-import {asText, filter, type ImageField, KeyTextField, RichTextField} from '@prismicio/client';
+import {asText, filter, type ImageField, type KeyTextField, type RichTextField} from '@prismicio/client';
 import Slider from '@/components/features/slider/slider';
 import {SliderCard} from '@/components/features/slider/slider-card';
 

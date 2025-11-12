@@ -13,7 +13,7 @@ import {
 import {wrap} from '@motionone/utils';
 import {
   type IconNavListSliceDefaultPrimaryItemsItem,
-  IconNavListSliceLogoTickerPrimaryItemsItem
+  type IconNavListSliceLogoTickerPrimaryItemsItem
 } from '@/prismic-types';
 import cn from 'clsx';
 import {PrismicNextImage, PrismicNextLink} from '@prismicio/next';

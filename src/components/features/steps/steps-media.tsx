@@ -5,8 +5,8 @@ import ScrollTrigger from 'gsap/ScrollTrigger';
 import {useGSAP} from '@gsap/react';
 
 import {
- VerticalStepsWithImagesSliceVideoVerticalStepperPrimary,
-    VerticalStepsWithImagesSliceVideoVerticalStepperPrimaryStepsItem
+ type VerticalStepsWithImagesSliceVideoVerticalStepperPrimary,
+    type VerticalStepsWithImagesSliceVideoVerticalStepperPrimaryStepsItem
 
 } from '@/prismic-types';
 import {PrismicNextImage} from '@prismicio/next';

@@ -12,7 +12,7 @@ import {Button} from "@/components/ui/button"
 import {Switch} from "@/components/ui/switch"
 import { format, parse, isValid } from "date-fns";
 import { enGB } from "date-fns/locale";
-import {z} from 'zod';
+import {type z} from 'zod';
 import { useForm, type Resolver } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import {Input} from '@/components/ui/input';

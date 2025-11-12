@@ -1,12 +1,12 @@
 'use client';
 import {type FC, useEffect, useState} from 'react';
-import {type Content, isFilled} from '@prismicio/client';
+import {type Content} from '@prismicio/client';
 import {PrismicRichText, type SliceComponentProps} from '@prismicio/react';
 import {Container} from '@/components/ui/container';
 import {Heading} from '@/components/ui/text';
 import {createClient} from '@/prismicio';
 import Slider from '@/components/features/slider/slider';
-import {PrismicNextImage, PrismicNextLink} from '@prismicio/next';
+import {PrismicNextImage} from '@prismicio/next';
 import cn from 'clsx';
 import {buttonVariants} from '@/components/ui/button';
 import {ArrowRight} from 'lucide-react';
@@ -24,7 +24,7 @@ export type CaseStudiesProps = SliceComponentProps<Content.CaseStudiesSlice>;
  * Component for "CaseStudies" Slices.
  */
 const CaseStudies: FC<CaseStudiesProps> = ({slice}) => {
-  const [caseStudies, setCaseStudies] = useState<any[]>([]);
+  const [caseStudies, setCaseStudies] = useState<Content.CaseStudiesDocument<string>[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 

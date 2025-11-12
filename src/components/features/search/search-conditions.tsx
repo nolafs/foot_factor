@@ -4,7 +4,7 @@ import BentoCard from '@/components/features/bento/bento-card';
 import Link from 'next/link';
 import {PrismicNextImage} from '@prismicio/next';
 import {Container} from '@/components/ui/container';
-import {ConditionCategoryDocument} from '@/prismic-types';
+import {type ConditionCategoryDocument} from '@/prismic-types';
 import {buttonVariants} from '@/components/ui/button';
 import {AutoComplete} from '@/components/features/search/autocomplete';
 

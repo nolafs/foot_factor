@@ -1,11 +1,11 @@
 import { type SliceComponentProps } from '@prismicio/react';
 import { SectionFaqs } from '@/components/features/faqs/section-faqs/section-faqs';
 import { Container } from '@/components/ui/container';
-import {type Content, KeyTextField, RichTextField} from '@prismicio/client';
+import {type Content} from '@prismicio/client';
 import {CallToAction as CallToActionComponent} from '@/components/features/cta/callToAction';
 import React from 'react';
 import SectionFaqsByCategory from '@/components/features/faqs/section-faqs-by-category/section-faqs-by-category';
-import {FaqDocument} from '@/prismic-types';
+import {type FaqDocument} from '@/prismic-types';
 
 
 /**

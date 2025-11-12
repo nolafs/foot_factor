@@ -1,6 +1,6 @@
-import { FC } from 'react';
-import { Content } from '@prismicio/client';
-import {PrismicRichText, SliceComponentProps} from '@prismicio/react';
+import { type FC } from 'react';
+import { type Content } from '@prismicio/client';
+import {PrismicRichText, type SliceComponentProps} from '@prismicio/react';
 import {Container} from '@/components/ui/container';
 import GoogleMapWrapper from '@/components/features/google-map/google-map-wrapper';
 import GoogleMap from '@/components/features/google-map/google-map';

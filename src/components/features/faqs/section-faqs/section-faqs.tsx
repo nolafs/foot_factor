@@ -2,7 +2,7 @@ import {type KeyTextField, type RichTextField, isFilled} from '@prismicio/client
 import FaqItem from './faq-item';
 import {Heading} from '@/components/ui/text';
 import {PrismicRichText} from '@prismicio/react';
-import {FaqDocument} from '@/prismic-types';
+import {type FaqDocument} from '@/prismic-types';
 
 
 

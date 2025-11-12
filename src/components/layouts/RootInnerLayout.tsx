@@ -1,7 +1,7 @@
 'use client'
 
 
-import {ReactNode} from 'react'
+import {type ReactNode} from 'react'
 import CookieConsent from 'react-cookie-consent'
 import {motion} from 'framer-motion'
 import {trackingConfig} from '@/lib/tracking/config.tracking';
