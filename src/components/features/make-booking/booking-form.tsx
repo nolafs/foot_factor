@@ -53,7 +53,7 @@ interface BookingFormProps {
 type FormValues = z.infer<typeof emailBookingSchema>;
 
 export const BookingForm = ({booking}: BookingFormProps) => {
-
+  const [text, setText] = useState("");
   const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
   const [submissionSuccess, setSubmissionSuccess] = useState<boolean>(false);
   const [submitErrors, setSubmitErrors] = useState<{path: string, message: string}[] | null>(null);
@@ -187,13 +187,8 @@ export const BookingForm = ({booking}: BookingFormProps) => {
                 control={form.control}
                 name="dateOfBirth"
                 render={({ field }) => {
-                    const [text, setText] = useState(
-                        field.value ? format(field.value as Date, "dd/MM/yyyy") : ""
-                    );
 
-                    useEffect(() => {
-                        setText(field.value ? format(field.value as Date, "dd/MM/yyyy") : "");
-                    }, [field.value]);
+                    setText(field.value ? format(field.value, "dd/MM/yyyy") : "");
 
                     const tryCommit = (raw: string) => {
                         const parsed = parse(raw, "dd/MM/yyyy", new Date());
