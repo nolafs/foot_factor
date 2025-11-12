@@ -1,6 +1,6 @@
 'use client';
 
-import { useRef, useState, useMemo } from 'react';
+import { useState, useMemo } from 'react';
 import { useMotionValue, useScroll, useSpring, useTransform, type MotionValue } from 'framer-motion';
 
 type Opts = {
@@ -35,10 +35,12 @@ export default function useParallax<T extends HTMLElement = HTMLDivElement>(p0: 
     const sign = Math.sign(speed || 1);
 
     const yRaw = useTransform(progress, [0, 1], [-distance * sign, distance * sign]);
-    const y = smooth ? useSpring(yRaw, { stiffness: 100, damping: 30, restDelta: 0.001 }) : yRaw;
+    const y = useSpring(yRaw, { stiffness: 100, damping: 30, restDelta: 0.001 });
 
     const finalScale = useMemo(() => (scale ?? 1 + Math.abs(speed) * 0.5), [scale, speed]);
 
-    return { ref: setEl, y, scale: finalScale, scrollProgress: progress };
+    const smoothY = smooth ? y : yRaw;
+
+    return { ref: setEl, y:smoothY, scale: finalScale, scrollProgress: progress };
 }
 
