@@ -19,6 +19,7 @@ export const ReviewSliderElfsight = ({share_link, width = '100%'}: ReviewSliderE
                       strategy="lazyOnload"
                   />
                   <iframe
+                      title={'Google Review'}
                       src={share_link}
                       style={{border: 'none', background: 'transparent', width: width ?? '100%'}}
                       ref={(el) => {
