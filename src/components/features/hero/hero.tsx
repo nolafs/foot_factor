@@ -2,12 +2,12 @@
 import { Container } from '@/components/ui/container';
 import {type ImageField, isFilled, type KeyTextField, type LinkField, type RichTextField} from '@prismicio/client';
 import { PrismicNextImage } from '@prismicio/next';
-import React, {useRef} from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import cn from 'clsx';
 import {PrismicRichText} from '@prismicio/react';
 import {Badge} from '@/components/ui/badge';
 import ButtonRow from '@/components/ui/button-row';
-import {motion, useScroll, useSpring, useTransform} from 'framer-motion';
+import {motion, useMotionValue, useScroll, useSpring, useTransform} from 'framer-motion';
 import ReviewSliderElfsight from "@/components/features/reviews/review-slider-elfsight";
 
 export interface HeroProps {
@@ -27,37 +27,48 @@ export interface HeroProps {
 export  function Hero({ heading, subheading, lead,  links, image, hasBooking, rating, widget, imagePosition = 'center', vAlign = 'center', children }: HeroProps) {
   const heroRef = useRef<HTMLDivElement | null>(null);
   const imageRef = useRef<HTMLDivElement | null>(null);
-  const speed = 0.8;
-  // Track scroll progress relative to the hero section
-  const {scrollYProgress} = useScroll({
+  const [isMounted, setIsMounted] = useState(false);
+
+    useEffect(() => {
+        setIsMounted(true);
+    }, []);
+
+    const defaultScrollProgress = useMotionValue(0);
+
+    // Track scroll progress relative to the hero section
+
+    const {scrollYProgress} = useScroll({
     target: heroRef,
     offset: ["start start", "end start"]
   });
 
-
+    const progress = isMounted ? scrollYProgress : defaultScrollProgress;
   // Transform values for different elements
-  const textY = useTransform(scrollYProgress, [0, 1], ["0vh", "-200vh"]);
-  const imageY = useTransform(scrollYProgress, [0, 1], [`0vh`, `${200 * speed}vh`]);
-  const imageScale = useTransform(scrollYProgress, [0, 1], [1.2, 2]);
+  const textY = useTransform(progress, [0, 1], ["0%", "-100%"]);
+  const imageY = useTransform(progress, [0, 1], [`0%`, `50%`]);
+  const imageScale = useTransform(progress, [0, 1], [1.2, 1.2]);
 
-  const smoothY = useSpring(imageY, {
-    stiffness: 100,
-    damping: 30,
-    restDelta: 0.001
-  });
+
+    const smoothY = useSpring(textY, {
+        stiffness: 100,     // lower = gentler
+        damping: 30,       // higher = less wobble
+        mass: 1,
+        restSpeed: 0.01,   // stop micro jiggle
+        restDelta: 0.001,
+    });
 
 
 
   return (
       <div className="relative isolate overflow-hidden h-svh max-h-[1080px]">
           <>
-            <div
+            <div ref={heroRef}
                 className="absolute top-0 z-10 h-full w-full bg-primary opacity-40"/>
             {image && (
                 <motion.div
                     ref={imageRef}
                     className="z-1 absolute inset-0 overflow-hidden w-full h-full"
-                    style={{y: smoothY, scale: imageScale, transform: 'translateZ(0)'}}
+                    style={{y: imageY, scale: imageScale, transform: 'translateZ(0)'}}
                 >
                   <PrismicNextImage
                       loading={'lazy'}
@@ -77,7 +88,7 @@ export  function Hero({ heading, subheading, lead,  links, image, hasBooking, ra
 
         <motion.div
             className="absolute top-0 sm:bottom-0 sm:top-auto w-full z-20"
-            style={{y: textY}}
+            style={{y: smoothY}}
         >
         <Container className="relative z-20 flex flex-col justify-end h-svh">
           <div className={cn("flex flex-col justify-stretch pb-5 pt-20 sm:pb-16 sm:pt-32 md:pb-32 md:pt-64 w-full h-svh sm:w-full lg:max-w-3xl"

@@ -1,5 +1,4 @@
 import React, {useEffect, useRef, useState} from 'react';
-
 import {
   Form,
   FormControl,
@@ -8,12 +7,14 @@ import {
   FormItem,
   FormLabel, FormMessage,
 } from '@/components/ui/form'
-import {format} from "date-fns"
+
 import {Button} from "@/components/ui/button"
 import {Switch} from "@/components/ui/switch"
-import {useForm} from 'react-hook-form';
+import { format, parse, isValid } from "date-fns";
+import { enGB } from "date-fns/locale";
 import {z} from 'zod';
-import {zodResolver} from '@hookform/resolvers/zod';
+import { useForm, type Resolver } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
 import {Input} from '@/components/ui/input';
 import {Calendar} from "@/components/ui/calendar"
 import {
@@ -28,7 +29,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select"
-import {CalendarIcon} from 'lucide-react';
+import {AlertCircleIcon, CalendarIcon} from 'lucide-react';
 import cn from 'clsx';
 import {type MakeBookingDocumentData} from '@/prismic-types';
 import {Textarea} from '@/components/ui/textarea';
@@ -37,51 +38,59 @@ import Link from 'next/link';
 import {emailBookingSchema} from '@/types/email-booking.type';
 import ReCAPTCHA from 'react-google-recaptcha';
 import toast from 'react-hot-toast';
-import {sendMail} from '@/action';
 import {sendBookingMail} from '@/action/send-booking-request';
+import {Alert, AlertDescription, AlertTitle} from "@/components/ui/alert";
 
 const RECAPTCHA_ACTIVE = process.env.NEXT_PUBLIC_RECAPTCHA_ACTIVE === 'true';
+
+const MIN_DOB = new Date("1900-01-01");
+const MAX_DOB = new Date(); // today
 
 interface BookingFormProps {
   booking: MakeBookingDocumentData;
 }
 
+type FormValues = z.infer<typeof emailBookingSchema>;
+
 export const BookingForm = ({booking}: BookingFormProps) => {
 
   const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
   const [submissionSuccess, setSubmissionSuccess] = useState<boolean>(false);
+  const [submitErrors, setSubmitErrors] = useState<{path: string, message: string}[] | null>(null);
+  const [open, setOpen] = React.useState(false)
   //const recaptchaRef = useRef<ReCAPTCHA | null>(null);
   const [isVerified, setIsVerified] = useState(true);
 
-  const form = useForm<z.infer<typeof emailBookingSchema>>({
-    resolver: zodResolver(emailBookingSchema),
-    defaultValues: {
-      existingPatient: false,
-      referralPatient: false,
-      name: '',
-      surname: '',
-      email: '',
-      telephone: '',
-      appointmentType: '',
-      message: '',
-      referralName: '',
-      referralSurname: '',
-      referralEmail: '',
-      referralTelephone: '',
-      //terms: false,
-      //privacy: false,
-    },
-  })
+    const form = useForm<FormValues>({
+        resolver: zodResolver(emailBookingSchema) as Resolver<FormValues>, // keeps TS happy with ZodEffects
+        defaultValues: {
+            existingPatient: false,
+            referralPatient: false,
+            name: "",
+            surname: "",
+            email: "",
+            telephone: "",
+            appointmentType: "",
+            message: "",
+            referralName: "",
+            referralSurname: "",
+            referralEmail: "",
+            referralTelephone: "",
+            // Start empty (user types dd/mm/yyyy, you commit to Date on blur/enter)
+            // it's okay to omit it entirely or set to undefined in Partial defaults:
+            // dateOfBirth: undefined as unknown as Date,
+            terms: false,
+            privacy: false,
+        } satisfies Partial<FormValues>,
+    });
 
   // Watch form values for conditional rendering
   const isReferralPatient = form.watch('referralPatient');
 
   const onSubmit = async (data: z.infer<typeof emailBookingSchema>) => {
     setIsSubmitting(true);
+    setSubmitErrors(null);
     try {
-
-      console.log('Form data:', data);
-
       const {data: success, errors} = await sendBookingMail(data);
 
       if (success) {
@@ -92,13 +101,13 @@ export const BookingForm = ({booking}: BookingFormProps) => {
       }
 
       if (errors) {
-        console.error('Booking form errors:', errors);
         setIsSubmitting(false);
+        console.log(errors);
+        setSubmitErrors(errors);
         toast.error('There was an error sending your message. Please try again later.');
       }
     } catch (error) {
       setIsSubmitting(false);
-      console.error(error);
       toast.error('There was an error sending your message. Please try again later.');
       setSubmissionSuccess(false);
     }
@@ -125,7 +134,7 @@ export const BookingForm = ({booking}: BookingFormProps) => {
 
   return (
       <Form {...form}>
-        <form onSubmit={form.handleSubmit(onSubmit)} className="mt-5 space-y-3">
+        <form onSubmit={form.handleSubmit(onSubmit)} className="mt-5 px-2 space-y-3">
           <div className="flex flex-col space-y-2">
             <FormField
                 control={form.control}
@@ -174,46 +183,91 @@ export const BookingForm = ({booking}: BookingFormProps) => {
                     </FormItem>
                 )}/>
           </div>
-          <FormField
-              control={form.control}
-              name="dateOfBirth"
-              render={({field}) => (
-                  <FormItem className="flex flex-col w-full">
-                    <FormLabel>Date of birth</FormLabel>
-                    <Popover modal={true}>
-                      <PopoverTrigger asChild className={'w-full'}>
-                        <FormControl>
-                          <Button
-                              variant={"outline"}
-                              className={cn(
-                                  " pl-3 text-left font-normal w-full rounded-sm",
-                                  !field.value && "text-muted-foreground"
-                              )}
-                          >
-                            {field.value ? (
-                                format(field.value, "PPP")
-                            ) : (
-                                <span>Pick a date</span>
-                            )}
-                            <CalendarIcon className="ml-auto h-4 w-4 opacity-50"/>
-                          </Button>
-                        </FormControl>
-                      </PopoverTrigger>
-                      <PopoverContent className="w-auto p-0" align="start">
-                        <Calendar
-                            mode="single"
-                            selected={field.value}
-                            onSelect={field.onChange}
-                            disabled={(date) =>
-                                date > new Date() || date < new Date("1900-01-01")
-                            }
-                            initialFocus
-                        />
-                      </PopoverContent>
-                    </Popover>
-                    <FormMessage/>
-                  </FormItem>
-              )}/>
+            <FormField
+                control={form.control}
+                name="dateOfBirth"
+                render={({ field }) => {
+                    const [text, setText] = useState(
+                        field.value ? format(field.value as Date, "dd/MM/yyyy") : ""
+                    );
+
+                    useEffect(() => {
+                        setText(field.value ? format(field.value as Date, "dd/MM/yyyy") : "");
+                    }, [field.value]);
+
+                    const tryCommit = (raw: string) => {
+                        const parsed = parse(raw, "dd/MM/yyyy", new Date());
+                        if (isValid(parsed) && parsed >= MIN_DOB && parsed <= MAX_DOB) {
+                            field.onChange(parsed);
+                            setText(format(parsed, "dd/MM/yyyy"));
+                        } else {
+                            // keep text as-is but don't update RHF value
+                            // optionally: form.setError("dateOfBirth", { type: "manual", message: "Use dd/mm/yyyy" })
+                        }
+                    };
+
+                    return (
+                        <FormItem className="flex flex-col w-full relative">
+                            <FormLabel>Date of birth</FormLabel>
+                            <FormControl>
+                                <Input
+                                    id="date"
+                                    placeholder="dd/mm/yyyy"
+                                    className="bg-background pr-10"
+                                    inputMode="numeric"
+                                    autoComplete="bday"
+                                    value={text}
+                                    onChange={(e) => setText(e.target.value)}
+                                    onBlur={(e) => tryCommit(e.target.value)}
+                                    onKeyDown={(e) => {
+                                        if (e.key === "Enter") tryCommit(text);
+                                        if (e.key === "ArrowDown") {
+                                            e.preventDefault();
+                                            setOpen(true);
+                                        }
+                                    }}
+                                />
+                            </FormControl>
+
+                            <Popover modal open={open} onOpenChange={setOpen}>
+                                <PopoverTrigger asChild className="w-full">
+                                    <Button
+                                        type="button"
+                                        variant="ghost"
+                                        className="absolute !bg-transparent top-1/2 right-2 size-6 -translate-y-1/2 hover:text-gray-900"
+                                        aria-label="Open date picker"
+                                    >
+                                        <CalendarIcon className="ml-auto h-4 w-4 opacity-50" />
+                                    </Button>
+                                </PopoverTrigger>
+                                <PopoverContent className="w-auto p-0" align="end"
+                                                alignOffset={-8}
+                                                sideOffset={10}>
+                                    <Calendar
+                                        mode="single"
+                                        locale={enGB}
+                                        selected={field.value as Date | undefined}
+                                        onSelect={(d) => {
+                                            if (!d) return;
+                                            const clamped = d < MIN_DOB ? MIN_DOB : d > MAX_DOB ? MAX_DOB : d;
+                                            field.onChange(clamped);
+                                            setText(format(clamped, "dd/MM/yyyy"));
+                                            setOpen(false);
+                                        }}
+                                        captionLayout="dropdown"
+                                        fromYear={1900}
+                                        toYear={new Date().getFullYear()}
+                                        disabled={(d) => d > MAX_DOB || d < MIN_DOB}
+                                        initialFocus
+                                    />
+                                </PopoverContent>
+                            </Popover>
+
+                            <FormMessage />
+                        </FormItem>
+                    );
+                }}
+            />
 
           <FormField
               control={form.control}
@@ -432,6 +486,25 @@ export const BookingForm = ({booking}: BookingFormProps) => {
                   </FormItem>
               )}
           />
+            <div className={'flex mt-8'}>
+                {(!submissionSuccess && submitErrors !== null) &&
+                    <Alert variant="destructive">
+                        <AlertCircleIcon />
+                        <AlertTitle>There was an error sending your message. Please try again later.</AlertTitle>
+
+                        {submitErrors?.length &&
+                        <AlertDescription>
+                            <ul className="list-inside list-disc text-sm">
+                                {submitErrors.map((error, idx) => (
+                                    <li key={'error'+idx}>{error.message}</li>
+                                ))}
+                            </ul>
+
+                        </AlertDescription> }
+                    </Alert>
+
+                }
+            </div>
           <div className={'flex justify-end mt-8'}>
             <Button
                 type="submit"
@@ -441,7 +514,10 @@ export const BookingForm = ({booking}: BookingFormProps) => {
                 disabled={!isVerified || isSubmitting}>
               {isSubmitting ? 'Submitting' : 'Submit'}
             </Button>
+
+
           </div>
+
         </form>
       </Form>
   )

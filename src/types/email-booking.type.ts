@@ -1,4 +1,8 @@
 import {z} from 'zod';
+import { parse, isValid, differenceInYears, startOfDay } from "date-fns";
+
+const MIN_DOB = new Date("1900-01-01");
+const MAX_DOB = startOfDay(new Date());
 
 // UK phone number validation regex
 // Matches various UK formats: +44, 0044, 07xxx, 01xxx, 02xxx, 03xxx, etc.
@@ -31,7 +35,7 @@ export const emailBookingSchema = z.object({
   referralPatient: z.boolean(),
 
   // Core patient information - required fields
-  name: z.string()
+    name: z.string()
       .min(1, 'Name is required')
       .max(100, 'Name must be less than 100 characters')
       .regex(/^[a-zA-Z\s\-']+$/, 'Name can only contain letters, spaces, hyphens, and apostrophes'),
@@ -41,18 +45,29 @@ export const emailBookingSchema = z.object({
       .max(100, 'Surname must be less than 100 characters')
       .regex(/^[a-zA-Z\s\-']+$/, 'Surname can only contain letters, spaces, hyphens, and apostrophes'),
 
-  dateOfBirth: z.date({
-    required_error: "Date of birth is required",
-    invalid_type_error: "Please enter a valid date",
-  }).refine((date) => {
-    const today = new Date();
-    const age = today.getFullYear() - date.getFullYear();
-    return age >= 0 && age <= 150;
-  }, {
-    message: "Please enter a valid date of birth",
-  }),
+    dateOfBirth: z.preprocess((v) => {
+            if (v instanceof Date) return v;
+            if (typeof v === "string") {
+                const d = parse(v.trim(), "dd/MM/yyyy", new Date());
+                return isValid(d) ? d : v;
+            }
+            return v;
+        }, z.date({
+            required_error: "Date of birth is required",
+            invalid_type_error: "Please enter a valid date (dd/mm/yyyy)",
+        })
+            .refine((d) => d >= MIN_DOB && d <= MAX_DOB, {
+                message: "Please enter a valid date of birth",
+            })
+            .refine((d) => {
+                const age = differenceInYears(MAX_DOB, d);
+                return age >= 0 && age <= 150;
+            }, { message: "Please enter a valid date of birth" })
+    ),
 
-  email: z.string()
+
+
+    email: z.string()
       .min(1, 'Email is required')
       .email('Please enter a valid email address')
       .max(255, 'Email must be less than 255 characters'),
@@ -96,17 +111,8 @@ export const emailBookingSchema = z.object({
       .optional(),
 
   // Required consent checkboxes
-  terms: z.literal(true, {
-    errorMap: () => ({
-      message: 'You must accept the terms and conditions to proceed'
-    })
-  }),
-
-  privacy: z.literal(true, {
-    errorMap: () => ({
-      message: 'You must accept the privacy policy to proceed'
-    })
-  }),
+    terms: z.boolean().refine((v) => v, "You must accept the terms"),
+    privacy: z.boolean().refine((v) => v, "You must accept the privacy policy"),
 }).superRefine((data, ctx) => {
   // Conditional validation: if referralPatient is true, referral fields become required
   if (data.referralPatient) {

@@ -79,7 +79,7 @@ export function VideoControl({ poster, handlePlayAction, width, height, title, l
           loading={loading}
           className={'h-full w-full object-center object-cover'}
           imgixParams={{ fit: 'fill', fm: 'webp' }}
-          quality={80}
+          quality={55}
         />
           </motion.div>
       ) }

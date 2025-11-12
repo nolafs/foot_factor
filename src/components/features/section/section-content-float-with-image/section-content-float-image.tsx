@@ -24,7 +24,8 @@ interface SectionDefaultProps {
 }
 
 export const SectionContentImageFloatText = ({as = 'section',heading, body, float = 'left', image, links, hasBooking, bookingLabel, variation, slice_type}: SectionDefaultProps) => {
-  const parallax = useParallax(0.8, true);
+
+    //const parallax = useParallax(0.8, true);
 
 
   return (

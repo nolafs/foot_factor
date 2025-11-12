@@ -100,7 +100,7 @@ export const TeamCard = ({id,data, bounds, scrollX, onExpand,  currentExpanded}:
             <div className={'flex flex-col space-y-5 rounded-2xl overflow-hidden'}>
               <div className={'aspect-h-16 aspect-w-9 relative w-full'}>
               {isFilled.embed(data.video) ? <TeamVideo id={id} title={data.title ?? ''} video={data.video} image={data.photo} loading={'lazy'}/> :
-              <PrismicNextImage field={data.photo} className={'inset-x-0 h-full w-full object-center object-cover'}/>}
+              <PrismicNextImage quality={55} field={data.photo} className={'inset-x-0 h-full w-full object-center object-cover'}/>}
               </div>
             </div>
             <div className={'flex flex-col items-start mt-5 space-y-1'}>

@@ -1,14 +1,12 @@
 'use client';
-import React from 'react';
+import React, {useRef} from 'react';
 import {ListSliceBentoPrimaryItemsItem} from '@/prismic-types';
 import {PrismicNextImage, PrismicNextLink} from '@prismicio/next';
 import cn from 'clsx';
 import {Heading, Lead} from '@/components/ui/text';
 import {isFilled} from '@prismicio/client';
-import {buttonVariants} from '@/components/ui/button';
 import {ArrowRight} from 'lucide-react';
-import useParallax from '@/lib/hooks/use-parallax';
-import { motion } from 'framer-motion';
+
 
 interface BentoTypeCardProps {
     item:ListSliceBentoPrimaryItemsItem
@@ -16,22 +14,20 @@ interface BentoTypeCardProps {
 
 export const BentoTypeCard = ({item}: BentoTypeCardProps) => {
 
-    const parallax = useParallax(0.2, true);
-
-
     if(item.card_type === '1') {
         return (isFilled.link(item.link) && <div className={'group/item'}>
             <PrismicNextLink field={item.link} >
-                <motion.div
-                    ref={parallax.ref}
-                    style={{
-                        y: parallax.y,
-                        scale: parallax.scale
-                    }}
-                    className="absolute inset-0 z-10"
-                >
-                    <PrismicNextImage field={item.image} className={cn('absolute md:relative w-full h-full object-cover transition delay-150 duration-300 ease-in-out group-hover/item:scale-105')}/>
-                </motion.div>
+
+                    <div
+                        className="absolute inset-0 z-10"
+                    >
+                        <PrismicNextImage
+                            field={item.image}
+                            className={cn(
+                                'absolute md:relative w-full h-full object-cover transition delay-150 duration-300 ease-in-out group-hover/item:scale-105'
+                            )}
+                        />
+                    </div>
                 <div
                     className="absolute inset-0 rounded-lg bg-gradient-to-t from-primary-950/70 to-transparent max-lg:rounded-4xl lg:rounded-4xl overflow-hidden"/>
                 <div className="relative mt-32 md:mt-0 md:absolute  z-5 bottom-0 p-7 md:p-10 lg:p-16  z-10 w-full">
