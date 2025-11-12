@@ -4,72 +4,76 @@ import { useEffect, useState } from 'react';
 import Script from 'next/script';
 import { getCookieConsentValue } from 'react-cookie-consent';
 import { trackingConfig } from '@/lib/tracking/config.tracking';
-// optional: keep if you want your helper to run too
 import { grantConsentForEverything } from '@/lib/tracking/utils.tracking';
+
+
+
+// Small helper with proper types (no `any`, no implied eval)
+type IdleHandle = number;
+const scheduleIdle = (cb: () => void): IdleHandle => {
+    if (typeof window !== 'undefined' && typeof window.requestIdleCallback === 'function') {
+        // Wrap to give us a () => void signature
+        return window.requestIdleCallback(() => cb());
+    }
+    return window.setTimeout(cb, 500);
+};
+
+const cancelIdle = (h: IdleHandle) => {
+    if (typeof window !== 'undefined' && typeof window.cancelIdleCallback === 'function') {
+        window.cancelIdleCallback(h);
+    } else {
+        clearTimeout(h);
+    }
+};
+
+// Local, typed gtag wrapper to avoid ts-ignore
+const gtag = (...args: unknown[]) => {
+    window.dataLayer = window.dataLayer ?? [];
+    window.dataLayer.push(args);
+};
 
 export function GoogleTagManager() {
     const [consented, setConsented] = useState(false);
     const [readyToLoad, setReadyToLoad] = useState(false);
 
-    // 1) Read stored consent once client mounts
+    // Read stored consent on mount
     useEffect(() => {
-        const consent =
-            getCookieConsentValue(trackingConfig.cookieBannerCookieName) === 'true';
-        if (consent) setConsented(true);
+        const val = getCookieConsentValue(trackingConfig.cookieBannerCookieName);
+        setConsented(val === 'true');
     }, []);
 
-    // 2) After consent, delay load to avoid competing with LCP
+    // After consent, schedule loading during idle (keeps LCP clean)
     useEffect(() => {
         if (!consented) return;
-        const idle =
-            ('requestIdleCallback' in window
-                ? (window as any).requestIdleCallback
-                : (cb: Function) => setTimeout(cb as any, 500)) as (cb: Function) => any;
-
-        const id = idle(() => setReadyToLoad(true));
-        return () => {
-            if (typeof id === 'number') clearTimeout(id);
-        };
+        const handle = scheduleIdle(() => setReadyToLoad(true));
+        return () => cancelIdle(handle);
     }, [consented]);
 
     return (
         <>
-            {/* Consent Mode defaults BEFORE anything else */}
-            <Script id="gtm-consent-defaults" strategy="beforeInteractive">
-                {`
-          window.dataLayer = window.dataLayer || [];
-          function gtag(){dataLayer.push(arguments);}
-          gtag('consent', 'default', {
-            ad_storage: 'denied',
-            ad_user_data: 'denied',
-            ad_personalization: 'denied',
-            analytics_storage: 'denied',
-            functionality_storage: 'granted',
-            security_storage: 'granted'
-          });
-        `}
-            </Script>
-
             {readyToLoad && (
                 <>
-                    {/* Load GTM lazily after we have consent */}
                     <Script
                         id="gtm"
                         strategy="lazyOnload"
                         src={`https://www.googletagmanager.com/gtm.js?id=${trackingConfig.gtmId}`}
                         onLoad={() => {
-                            // Flip consent to granted after GTM is ready
-                            // @ts-ignore
+                            // Flip consent to granted once GTM is ready
                             gtag('consent', 'update', {
                                 ad_storage: 'granted',
                                 ad_user_data: 'granted',
                                 ad_personalization: 'granted',
-                                analytics_storage: 'granted'
+                                analytics_storage: 'granted',
                             });
-                            try { grantConsentForEverything(); } catch {}
+                            // If you also track custom consent, keep this:
+                            try {
+                                grantConsentForEverything();
+                            } catch {
+                                // noop
+                            }
                         }}
                     />
-                    {/* Only render noscript iframe when consented */}
+                    {/* Only render noscript when consented */}
                     <noscript>
                         <iframe
                             src={`https://www.googletagmanager.com/ns.html?id=${trackingConfig.gtmId}`}
