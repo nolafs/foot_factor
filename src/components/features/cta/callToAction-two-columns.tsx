@@ -1,6 +1,5 @@
 import React from 'react';
 import CallToActionWaveWrapper from '@/components/features/cta/cta-wave-wrapper';
-import SectionContent from '@/components/features/section/section-content';
 import {
     type ImageFieldImage,
     isFilled,

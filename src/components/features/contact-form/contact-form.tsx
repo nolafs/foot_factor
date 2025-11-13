@@ -1,18 +1,18 @@
 'use client';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { type ContactFormInput } from '@/types';
-import React, {forwardRef, useEffect, useRef, useState} from 'react';
+import React, { useEffect, useState} from 'react';
 import { useForm, type SubmitHandler } from 'react-hook-form';
-import toast, { Toaster } from 'react-hot-toast';
+import toast from 'react-hot-toast';
 import { Button } from '@/components/ui/button';
 import { z } from 'zod';
 import cn from 'clsx';
-import { sendMail, VerifyCaptcha } from '@/action';
-import ReCAPTCHA from 'react-google-recaptcha';
+import { sendMail} from '@/action';
+//import ReCAPTCHA from 'react-google-recaptcha';
 import {type ContactFormSectionSliceDefaultPrimaryItemsItem} from '@/prismic-types';
 import {createClient} from "@/prismicio";
 
-const RECAPTCHA_ACTIVE = process.env.NEXT_PUBLIC_RECAPTCHA_ACTIVE === 'true';
+//const RECAPTCHA_ACTIVE = process.env.NEXT_PUBLIC_RECAPTCHA_ACTIVE === 'true';
 
 const emailSchema = z.object({
   name: z.string().min(1, 'Please enter your name'),
@@ -43,8 +43,8 @@ export function ContactForm({ items }: ContactFormInputProps) {
   //const captchaRef: any = useRef(null)
   const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
   const [submissionSuccess, setSubmissionSuccess] = useState<boolean>(false);
-  const recaptchaRef = useRef<ReCAPTCHA | null>(null);
-  const [isVerified, setIsVerified] = useState(!RECAPTCHA_ACTIVE);
+  //const recaptchaRef = useRef<ReCAPTCHA | null>(null);
+  const [isVerified, setIsVerified] = useState(true);
   const [enquiryTypeOptions, setEnquiryTypeOptions] = useState<ContactFormSectionSliceDefaultPrimaryItemsItem[]>(items ??[]);
 
   useEffect(() => {
@@ -107,28 +107,31 @@ export function ContactForm({ items }: ContactFormInputProps) {
     setIsSubmitting(false);
     setIsVerified(false);
   };
-
-  async function handleCaptchaSubmission(token: string | null) {
-    try {
-      if (token) {
-        await VerifyCaptcha(token);
-        setIsVerified(true);
+    /*
+      async function handleCaptchaSubmission(token: string | null) {
+        try {
+          if (token) {
+            await VerifyCaptcha(token);
+            setIsVerified(true);
+          }
+        } catch (e) {
+          setIsVerified(false);
+          console.error(e);
+        }
       }
-    } catch (e) {
-      setIsVerified(false);
-      console.error(e);
-    }
-  }
 
-  const handleChange = (token: string | null) => {
-    if (token) {
-      void handleCaptchaSubmission(token);
-    }
-  };
 
-  function handleExpired() {
-    setIsVerified(false);
-  }
+      const handleChange = (token: string | null) => {
+        if (token) {
+          void handleCaptchaSubmission(token);
+        }
+      };
+
+      function handleExpired() {
+        setIsVerified(false);
+      }
+
+       */
 
   if (submissionSuccess) {
     return (
@@ -158,7 +161,7 @@ export function ContactForm({ items }: ContactFormInputProps) {
           {...register('name')}
           disabled={isSubmitting}
         />
-        {errors.name && <p className="text-error">{errors.name.message}</p>}
+        {errors.name && <p className="text-sm font-medium text-destructive">{errors.name.message}</p>}
 
         <input
           type="email"
@@ -170,7 +173,7 @@ export function ContactForm({ items }: ContactFormInputProps) {
           {...register('email')}
           disabled={isSubmitting}
         />
-        {errors.email && <p className="text-error">{errors.email.message}</p>}
+        {errors.email && <p className="text-sm font-medium text-destructive">{errors.email.message}</p>}
 
         <select
           aria-label={'Nature of Enquiry'}
@@ -179,8 +182,10 @@ export function ContactForm({ items }: ContactFormInputProps) {
             'rounded-md border-gray-200',
           )}
           {...register('enquiryType')}
-          disabled={isSubmitting}>
-          <option  disabled  selected={true}>
+          disabled={isSubmitting}
+          defaultValue=""
+        >
+          <option value=""  disabled>
             Nature of Enquiry
           </option>
           {enquiryTypeOptions.length ? (
@@ -203,7 +208,7 @@ export function ContactForm({ items }: ContactFormInputProps) {
             </>
           )}
         </select>
-        {errors.enquiryType && <p className="text-error">{errors.enquiryType.message}</p>}
+        {errors.enquiryType && <p className="text-sm font-medium text-destructive">{errors.enquiryType.message}</p>}
 
         <textarea
           placeholder="Message"
@@ -215,7 +220,7 @@ export function ContactForm({ items }: ContactFormInputProps) {
           rows={4}
           disabled={isSubmitting}
         />
-        {errors.message && <p className="text-error">{errors.message.message}</p>}
+        {errors.message && <p className="text-sm font-medium text-destructive">{errors.message.message}</p>}
 
         <div className="flex flex-col items-center">
           <div className="w-full">
@@ -230,17 +235,8 @@ export function ContactForm({ items }: ContactFormInputProps) {
                 I agree to the Terms & Conditions
               </label>
             </div>
-            {errors.agreeToTerms && <p className="text-error">{errors.agreeToTerms.message}</p>}
+            {errors.agreeToTerms && <p className="text-sm font-medium text-destructive">{errors.agreeToTerms.message}</p>}
           </div>
-
-          {RECAPTCHA_ACTIVE && (
-              React.createElement(ReCAPTCHA as any, {
-                sitekey: process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY ?? '',
-                ref: recaptchaRef,
-                onChange: handleChange,
-                onExpired: handleExpired,
-              })
-          )}
 
           <div className="flex w-full justify-end pt-6">
             {/* Submit Button */}
@@ -256,7 +252,6 @@ export function ContactForm({ items }: ContactFormInputProps) {
           </div>
         </div>
       </form>
-      <Toaster />
     </div>
   );
 }

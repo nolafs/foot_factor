@@ -1,15 +1,20 @@
 import cn from 'clsx';
+import {type WaveType} from "@/components/features/hero/hero-simple";
 
 interface WaveProps {
-    waveType?: 'default' | 'type_1' | 'type_2' | 'type_3' | 'type_4' | 'type_5' | 'type_6' | 'type_7' | 'type_8' | undefined;
+    waveType?: WaveType;
     className?: string;
 }
 
-export const Wave = ({waveType, className = ''}: WaveProps) => {
+export const Wave = ({waveType = 'default', className = ''}: WaveProps) => {
 
     const baseCss = 'w-full h-full object-cover object-center min-w-max opacity-30';
 
-    if(waveType === 'type_1') {
+    if(!waveType) {
+        return;
+    }
+
+    if(waveType === '1') {
         return (
             <svg width="1920" height="554" className={cn(baseCss, className)} viewBox="0 0 1920 554" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <g clipPath="url(#clip0_9507_11323)">
@@ -113,7 +118,7 @@ export const Wave = ({waveType, className = ''}: WaveProps) => {
 
     }
 
-    if(waveType === 'type_2') {
+    if(waveType === '2') {
         return (
             <svg width="1920" height="592" className={cn(baseCss, className)}  viewBox="0 0 1920 592" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <g clipPath="url(#clip0_9507_11263)">
@@ -247,7 +252,7 @@ export const Wave = ({waveType, className = ''}: WaveProps) => {
         )
     }
 
-    if(waveType === 'type_3') {
+    if(waveType === '3') {
         return (
             <svg width="1920" height="592" className={cn(baseCss, className)} viewBox="0 0 1920 592" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <g clipPath="url(#clip0_9507_11203)">
@@ -372,7 +377,7 @@ export const Wave = ({waveType, className = ''}: WaveProps) => {
         )
     }
 
-    if(waveType === 'type_4') {
+    if(waveType === '4') {
         return (
             <svg width="1920" height="554" className={cn(baseCss, className)} viewBox="0 0 1920 554" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <g clipPath="url(#clip0_9507_11081)">
@@ -504,7 +509,7 @@ export const Wave = ({waveType, className = ''}: WaveProps) => {
         )
     }
 
-    if(waveType === 'type_5') {
+    if(waveType === '5') {
         return (
             <svg width="1920" height="554" className={cn(baseCss, className)} viewBox="0 0 1920 554" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <g clipPath="url(#clip0_9579_5028)">
@@ -627,7 +632,7 @@ export const Wave = ({waveType, className = ''}: WaveProps) => {
         )
     }
 
-    if(waveType === 'type_6') {
+    if(waveType === '6') {
         return (<svg width="1920" height="554" className={cn(baseCss, className)} viewBox="0 0 1920 554" fill="none" xmlns="http://www.w3.org/2000/svg">
             <g clipPath="url(#clip0_9639_5641)">
                 <path
@@ -747,8 +752,7 @@ export const Wave = ({waveType, className = ''}: WaveProps) => {
         </svg>)
     }
 
-
-    if(waveType === 'type_7') {
+    if(waveType === '7') {
         return (
             <svg width="1920" height="554" className={cn(baseCss, className)} viewBox="0 0 1920 554" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <g clipPath="url(#clip0_9670_5840)">
@@ -870,7 +874,7 @@ export const Wave = ({waveType, className = ''}: WaveProps) => {
         )
     }
 
-    if(waveType === 'type_8'){
+    if(waveType === '8'){
         return (<svg width="1920" height="554" className={cn(baseCss, className)} viewBox="0 0 1920 554" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <g clipPath="url(#clip0_9671_7017)">
                     <path

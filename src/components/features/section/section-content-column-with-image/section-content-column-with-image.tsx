@@ -4,7 +4,6 @@ import React from 'react';
 import {Container} from '@/components/ui/container';
 import {PrismicNextImage} from '@prismicio/next';
 import cn from 'clsx';
-import SectionContent from '@/components/features/section/section-content';
 import SectionColumns from '@/components/features/section/section-columns';
 import SectionBody from '@/components/features/section/section-body';
 

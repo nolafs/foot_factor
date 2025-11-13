@@ -4,8 +4,10 @@ import {type KeyTextField} from '@prismicio/client';
 import {Heading, Lead, Subheading} from '@/components/ui/text';
 import { Container } from '@/components/ui/container';
 
+export type WaveType = 'default' | '1'  | '2' | '3' | '4' | '5' | '6' | '7' | '8'  | undefined ;
+
 interface HeroSimpleProps {
-    wave_type:  'default' | '1' | '2' | '3' | '4' | '5' | '6' | '7' | '8';
+    wave_type:  WaveType;
     label?: KeyTextField | string;
     heading?: KeyTextField | string;
     subheading?: KeyTextField | string;
@@ -20,10 +22,8 @@ export const HeroSimple = ({wave_type, subheading, heading, label}: HeroSimplePr
                 <Wave
                     waveType={
                         wave_type === 'default'
-                            ? 'type_1'
-                            : (['1', '2', '3', '4', '5', '6', '7', '8'] as const).includes(wave_type)
-                                ? `type_${wave_type}`
-                                : undefined
+                            ? '1'
+                            : wave_type
                     }
                 />
             </div>

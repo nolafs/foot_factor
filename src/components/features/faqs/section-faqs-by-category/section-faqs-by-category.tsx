@@ -19,8 +19,6 @@ interface SectionFaqsByCategoryProps {
 const getFaqsByCategory = async (category:string) => {
   const client = createClient();
 
-  console.log('category', category)
-
   return await client.getByType('faq', {
     pageSize: 20,
     fetchLinks: ['faq_category.name'],
@@ -52,7 +50,7 @@ export const SectionFaqsByCategory = ({heading, subtitle, category}: SectionFaqs
     };
 
     void fetchFaqs();
-  }, []);
+  }, [category]);
 
 
   if (loading) {

@@ -58,7 +58,7 @@ export const GoogleMap = ({data, markers, zoom = 7 }: GoogleMapProps) => {
 
         }
 
-    }, [ref, isMobile]);
+    }, [ref, isMobile, markers, zoom, data]);
 
   return (
       <div

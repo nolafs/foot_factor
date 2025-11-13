@@ -1,15 +1,11 @@
 
 import { Container } from '@/components/ui/container';
-import { Heading, Subheading } from '@/components/ui/text';
 import { createClient } from '@/prismicio';
 import { ChevronLeftIcon } from '@heroicons/react/16/solid';
-import { PrismicNextImage } from '@prismicio/next';
 import dayjs from 'dayjs';
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
-import {PrismicRichText, SliceZone} from '@prismicio/react';
-
-import { GradientBackground } from '@/components/ui/gradient';
+import { SliceZone} from '@prismicio/react';
 import React from 'react';
 import {asText, type ImageFieldImage, isFilled, type LinkField, type RichTextField} from '@prismicio/client';
 import {type Author, type CustomLinkToMediaField} from '@/types';

@@ -1,12 +1,9 @@
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import { PrismicRichText, SliceZone } from '@prismicio/react';
-
 import { createClient } from '@/prismicio';
 import { components } from '@/slices';
-import { Heading } from '@/components/ui/text';
 import { Container } from '@/components/ui/container';
-import { GradientBackground } from '@/components/ui/gradient';
 import React from 'react';
 import HeroSimple from "@/components/features/hero/hero-simple";
 

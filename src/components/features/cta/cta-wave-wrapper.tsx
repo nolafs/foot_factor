@@ -20,7 +20,7 @@ export const CallToActionWaveWrapper = ({children,framed=false, textAlign = 'cen
             framed && 'border border-primary-600 rounded-2xl mx-auto max-w-2xl lg:max-w-8xl',
             className )}>
             <div className={'absolute inset-0 w-full h-full overflow-hidden'}>
-                <Wave/>
+                <Wave />
             </div>
 
             <Container className={'relative z-2'}>

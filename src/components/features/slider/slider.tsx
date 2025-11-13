@@ -1,26 +1,22 @@
 'use client';
 import React, {useEffect, useRef, useState} from 'react';
 import useMeasure from 'react-use-measure';
-import {clsx} from 'clsx';
 import {useMotionValueEvent, useScroll} from 'framer-motion';
-import {Container} from '@/components/ui/container';
-import {Tooltip, TooltipContent, TooltipProvider, TooltipTrigger} from '@/components/ui/tooltip';
-import {Button} from '@/components/ui/button';
 import { cn } from '@/lib/utils';
 
-export type sliderControlItem = {
+export type SliderControlItem = {
     title: string;
 }
 
 interface SliderProps {
-    data?: sliderControlItem[];
+    data?: SliderControlItem[];
     children?: React.ReactNode;
     size?: 'default' | 'large';
 }
 
-export const Slider = ({children, data, size}: SliderProps) => {
+export const Slider = ({children, data}: SliderProps) => {
     const scrollRef = useRef<HTMLDivElement | null>(null);
-    const [setReferenceWindowRef, bounds] = useMeasure();
+    const [setReferenceWindowRef] = useMeasure();
     const {scrollX} = useScroll({container: scrollRef});
     const [activeIndex, setActiveIndex] = useState(0);
 
@@ -58,7 +54,7 @@ export const Slider = ({children, data, size}: SliderProps) => {
 
 
     return (
-      <div ref={setReferenceWindowRef} className={cn('relative' )}>
+      <div ref={setReferenceWindowRef} className={cn('relative' )} data-active={activeIndex}>
           <div
               ref={scrollRef}
               className={cn([

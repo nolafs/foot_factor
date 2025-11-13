@@ -29,7 +29,7 @@ export function SearchOverlay() {
     return () => {
       window.removeEventListener('keydown', handleKeyDown);
     };
-  }, [openSearchDialog, handleClose]);
+  }, [openSearchDialog, handleClose, setSearchDialog]);
 
   return (
     <div

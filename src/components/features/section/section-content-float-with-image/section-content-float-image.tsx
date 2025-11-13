@@ -7,8 +7,9 @@ import ButtonRow from '@/components/ui/button-row';
 import {PrismicNextImage} from '@prismicio/next';
 import cn from 'clsx';
 import {Body, Heading} from '@/components/ui/text';
-import useParallax from '@/lib/hooks/use-parallax';
+//import useParallax from '@/lib/hooks/use-parallax';
 
+//TODO: ADD PARALLAX BACK
 
 interface SectionDefaultProps {
   as?: 'section' | 'div';

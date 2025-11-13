@@ -2,7 +2,7 @@
 import React, {useEffect, useState} from 'react';
 import {type AllDocumentTypes} from '@/prismic-types';
 import {createClient} from '@/prismicio';
-import {asText, filter, type ImageField, type KeyTextField, type RichTextField} from '@prismicio/client';
+import {asText,  type ImageField, type KeyTextField, type RichTextField} from '@prismicio/client';
 import Slider from '@/components/features/slider/slider';
 import {SliderCard} from '@/components/features/slider/slider-card';
 
@@ -20,18 +20,14 @@ const getTypeByCategoryTags = async (contentType: 'orthotics' | 'guide' | 'condi
 }> => {
     const client = createClient();
 
-    console.log('category', category)
+    console.info('category', category, tags)
 
     if (!contentType) {
         throw new Error('Content type is required');
     }
 
     return await client.getByType(contentType, {
-        pageSize: 20,
-        filters: [
-            //filter.at('my.faq.show_on_faqs', true),
-            //filter.at('my.faq.category', category)
-        ]
+        pageSize: 20
     });
 }
 
@@ -81,7 +77,7 @@ export const SliderDynamicList = ({contentType,category, tags, baseUrl, aspectRa
         };
 
         void fetchItems();
-    }, []);
+    }, [contentType, category, tags]);
 
 
     if (loading) {
@@ -105,12 +101,21 @@ export const SliderDynamicList = ({contentType,category, tags, baseUrl, aspectRa
     }
 
 
-    const controlsData = items.map((item: any) => ({
-        title: item.data.heading ?? item.data.title ?? item.data.name,
-    }));
+    const controlsData = items.map((item) => {
+        const { heading, title, name } = item.data as {
+            title?: string;
+            name?: string;
+            heading?: string;
+        };
 
+        const resolvedTitle =
+            heading ??
+            title ??
+            name ??
+            ""; // fallback so TypeScript is happy
 
-    console.log('controlsData', items)
+        return { title: resolvedTitle };
+    });
 
 
     return (

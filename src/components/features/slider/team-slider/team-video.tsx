@@ -16,7 +16,7 @@ interface TeamVideoProps {
 export const TeamVideo = ({id, title, video, image, loading , autoplay = false}: TeamVideoProps) => {
 
     const [showPlayer, setShowPlayer] = useState<boolean>(false);
-    const ref = useRef<any>(null);
+    const ref = useRef<ReactPlayer | null>(null);
 
     if (!video) {
         return <Notification body={'No video source found'} type={'error'}/>;

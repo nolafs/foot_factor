@@ -1,4 +1,4 @@
-import React, {useEffect, useRef, useState} from 'react';
+import React, { useState} from 'react';
 import {
   Form,
   FormControl,
@@ -36,12 +36,12 @@ import {Textarea} from '@/components/ui/textarea';
 import {Checkbox} from '@/components/ui/checkbox';
 import Link from 'next/link';
 import {emailBookingSchema} from '@/types/email-booking.type';
-import ReCAPTCHA from 'react-google-recaptcha';
+//import ReCAPTCHA from 'react-google-recaptcha';
 import toast from 'react-hot-toast';
 import {sendBookingMail} from '@/action/send-booking-request';
 import {Alert, AlertDescription, AlertTitle} from "@/components/ui/alert";
 
-const RECAPTCHA_ACTIVE = process.env.NEXT_PUBLIC_RECAPTCHA_ACTIVE === 'true';
+//const RECAPTCHA_ACTIVE = process.env.NEXT_PUBLIC_RECAPTCHA_ACTIVE === 'true';
 
 const MIN_DOB = new Date("1900-01-01");
 const MAX_DOB = new Date(); // today
@@ -59,7 +59,7 @@ export const BookingForm = ({booking}: BookingFormProps) => {
   const [submitErrors, setSubmitErrors] = useState<{path: string, message: string}[] | null>(null);
   const [open, setOpen] = React.useState(false)
   //const recaptchaRef = useRef<ReCAPTCHA | null>(null);
-  const [isVerified, setIsVerified] = useState(true);
+  //const [isVerified, setIsVerified] = useState(true);
 
     const form = useForm<FormValues>({
         resolver: zodResolver(emailBookingSchema) as Resolver<FormValues>, // keeps TS happy with ZodEffects
@@ -76,9 +76,6 @@ export const BookingForm = ({booking}: BookingFormProps) => {
             referralSurname: "",
             referralEmail: "",
             referralTelephone: "",
-            // Start empty (user types dd/mm/yyyy, you commit to Date on blur/enter)
-            // it's okay to omit it entirely or set to undefined in Partial defaults:
-            // dateOfBirth: undefined as unknown as Date,
             terms: false,
             privacy: false,
         } satisfies Partial<FormValues>,
@@ -106,7 +103,7 @@ export const BookingForm = ({booking}: BookingFormProps) => {
         setSubmitErrors(errors);
         toast.error('There was an error sending your message. Please try again later.');
       }
-    } catch (error) {
+    } catch {
       setIsSubmitting(false);
       toast.error('There was an error sending your message. Please try again later.');
       setSubmissionSuccess(false);
@@ -506,7 +503,7 @@ export const BookingForm = ({booking}: BookingFormProps) => {
                 variant={'default'}
                 size={'lg'}
                 className={cn(`${isSubmitting ? 'loading' : ''}`, 'bg-accent')}
-                disabled={!isVerified || isSubmitting}>
+                disabled={!form.formState.isValid || isSubmitting}>
               {isSubmitting ? 'Submitting' : 'Submit'}
             </Button>
 

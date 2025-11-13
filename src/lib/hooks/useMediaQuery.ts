@@ -1,4 +1,5 @@
-import { useEffect, useState } from 'react';
+'use client'
+import {useCallback, useEffect, useState} from 'react';
 
 export function useMediaQuery(query: string): boolean {
   const getMatches = (query: string): boolean => {
@@ -11,23 +12,23 @@ export function useMediaQuery(query: string): boolean {
 
   const [matches, setMatches] = useState<boolean>(getMatches(query));
 
-  function handleChange() {
-    setMatches(getMatches(query));
-  }
+    const handleChange = useCallback(() => {
+        setMatches(getMatches(query));
+    }, [query]);
 
-  useEffect(() => {
-    const matchMedia = window.matchMedia(query);
+    useEffect(() => {
+        const matchMedia = window.matchMedia(query);
 
-    // Triggered at the first client-side load and if query changes
-    handleChange();
+        // Trigger initial check
+        handleChange();
 
-    // Listen matchMedia
-    matchMedia.addEventListener('change', handleChange);
+        // Listen to media query changes
+        matchMedia.addEventListener("change", handleChange);
 
-    return () => {
-      matchMedia.removeEventListener('change', handleChange);
-    };
-  }, [query]);
+        return () => {
+            matchMedia.removeEventListener("change", handleChange);
+        };
+    }, [query, handleChange]);
 
   return matches;
 }

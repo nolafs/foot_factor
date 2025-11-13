@@ -22,8 +22,8 @@ interface FeatureTickerListProps {
 }
 
 export const FeatureTickerList = ({data, baseVelocity = 10}: FeatureTickerListProps) => {
-  const containerRef = useRef<HTMLDivElement>(null);
-  const contentRef = useRef<HTMLDivElement>(null);
+  const containerRef = useRef<HTMLDivElement | null>(null);
+  const contentRef = useRef<HTMLDivElement | null>(null);
   const [contentWidth, setContentWidth] = useState<number>(0);
 
   const baseX = useMotionValue(0);

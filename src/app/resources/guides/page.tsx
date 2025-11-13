@@ -1,4 +1,4 @@
-import { Container } from '@/components/ui/container';import { Heading, Lead, Subheading } from '@/components/ui/text';
+import { Container } from '@/components/ui/container';
 import dayjs from 'dayjs';
 import type { Metadata, ResolvingMetadata } from 'next';
 import { createClient } from '@/prismicio';

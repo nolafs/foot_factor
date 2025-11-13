@@ -13,7 +13,7 @@ export function capitalize(value: string) {
 
 export function getFirstChildPropValue(
   children: ReactNode,
-  propNameCb: (props: any) => string,
+  propNameCb: (props: string) => string,
 ): string | string[] | undefined {
   let propValue = undefined;
 

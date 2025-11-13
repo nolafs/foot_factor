@@ -3,7 +3,6 @@ import React, {useState} from 'react';
 import type {TeamCarouselSliceDefaultPrimaryMembersItem} from '@/prismic-types';
 import {AnimatePresence, motion} from 'framer-motion';
 import {PrismicRichText} from '@prismicio/react';
-import {User} from 'lucide-react';
 import {ScrollArea} from '@/components/ui/scroll-area';
 import {PrismicNextImage} from '@prismicio/next';
 import {isFilled} from '@prismicio/client';

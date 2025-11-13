@@ -1,6 +1,6 @@
 'use client';
 import {type KeyTextField, type RichTextField} from '@prismicio/client';
-import React ,{useRef} from 'react';
+import React  from 'react';
 import {Container} from '@/components/ui/container';
 import {PrismicRichText} from '@prismicio/react';
 import {useTextAnimation} from '@/lib/hooks/use-text-animation';

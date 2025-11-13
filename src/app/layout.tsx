@@ -3,8 +3,6 @@ import { Poppins, Exo_2, PT_Serif } from 'next/font/google';
 import { type Metadata, type ResolvingMetadata } from 'next';
 import { PrismicPreview } from '@prismicio/next';
 import { repositoryName } from '@/prismicio';
-
-import { GoogleAnalytics } from '@next/third-parties/google';
 import Footer from '@/components/layouts/footer';
 import { createClient } from '@/prismicio';
 import NextTopLoader from 'nextjs-toploader';
@@ -17,6 +15,7 @@ import { BookingProvider } from '@/lib/context/booking.context';
 import {RootInnerLayout} from '@/components/layouts/RootInnerLayout';
 import {IS_GTM_ENABLED} from '@/lib/tracking/config.tracking';
 import {GoogleTagManager} from '@/components/features/tracking/GoogleTagManager';
+import {Toaster} from "react-hot-toast";
 
 const poppins = Poppins({
   subsets: ['latin'],
@@ -145,6 +144,7 @@ export default async function RootLayout({ children }: Readonly<{ children: Reac
             <PrismicPreview repositoryName={repositoryName} />
             </BookingProvider>
             <SearchOverlay />
+              <Toaster position={'bottom-right'} />
           </SearchProvider>
         </RootInnerLayout>
       </body>

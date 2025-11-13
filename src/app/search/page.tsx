@@ -4,7 +4,6 @@ import type { Metadata, ResolvingMetadata } from 'next';
 import { type ResolvedOpenGraph } from 'next/dist/lib/metadata/types/opengraph-types';
 import { SearchInput } from '@/components/features/search/search-input';
 import HeroSimple from '@/components/features/hero/hero-simple';
-import JSONLD from '@/types/schema';
 import SchemaInjector from '@/utils/schema-injection';
 
 type Params = { uid: string };
@@ -36,7 +35,7 @@ export default async function Page() {
   return (
     <main className={'w-full overflow-hidden'}>
       <HeroSimple
-          wave_type={'default'}
+        wave_type={'default'}
         heading={'Search Foot Factor'}
         subheading={'Explore expert advice, treatment insights, and recovery tips through our curated articles, video and other\n' +
             '          resources. Stay informed and take charge of your ankle health journey.'}

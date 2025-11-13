@@ -12,10 +12,8 @@ import {
 } from 'framer-motion';
 import {wrap} from '@motionone/utils';
 import {
-  type IconNavListSliceDefaultPrimaryItemsItem,
   type IconNavListSliceLogoTickerPrimaryItemsItem
 } from '@/prismic-types';
-import cn from 'clsx';
 import {PrismicNextImage, PrismicNextLink} from '@prismicio/next';
 import {isFilled} from '@prismicio/client';
 
@@ -25,8 +23,8 @@ interface LogoTickerListProps {
 }
 
 export const LogoTickerList = ({data, baseVelocity = 10}: LogoTickerListProps) => {
-  const containerRef = useRef<HTMLDivElement>(null);
-  const contentRef = useRef<HTMLDivElement>(null);
+  const containerRef = useRef<HTMLDivElement | null>(null);
+  const contentRef = useRef<HTMLDivElement | null>(null);
   const [contentWidth, setContentWidth] = useState<number>(0);
 
   const baseX = useMotionValue(0);

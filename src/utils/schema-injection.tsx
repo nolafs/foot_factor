@@ -14,7 +14,7 @@ const schemaMap: Record<string, object> = {
   'contact-us': CONTACTJSONLD,
   'about-us': ABOUTUSJSONLD,
   'faqs': FAQJSONLD,
-  'orthotics-sports': ORTHOTICSJSONLD,
+  'orthotics-insoles': ORTHOTICSJSONLD,
   'podiatry': PODIATRYJSONLD,
   'foot-care': FOOTCAREJSONLD,
   'case-studies--testimonials' : TESTIMONIALJSONLD,

@@ -52,7 +52,7 @@ export const PostFeatureCard = ({post, showExcerpt = true, showAuthor = true}: P
                   <PrismicRichText field={post.data.excerpt}/>
               </div>
             )}
-            {showExcerpt && (
+            {showAuthor && (
               post.data.author && 'data' in post.data.author && (
                   <div className="mt-6 flex items-center gap-3">
                       {post.data.author && (

@@ -3,11 +3,10 @@ import Link from 'next/link';
 import {PrismicNextImage} from '@prismicio/next';
 import {ArrowRight} from 'lucide-react';
 import {cn} from '@/lib/utils';
-import {buttonVariants} from '@/components/ui/button';
 import {type ImageField} from '@prismicio/client';
 import {Badge} from '@/components/ui/badge';
 
-interface SliderCardProps<T> {
+interface SliderCardProps {
   index: number;
   keyPrefix?: string;
   className?: string;
@@ -23,7 +22,7 @@ interface SliderCardProps<T> {
   children?: React.ReactNode;
 }
 
-export function SliderCard<T>({
+export function SliderCard({
                                 index,
                                 keyPrefix = 'slider_card',
                                 className,
@@ -37,7 +36,7 @@ export function SliderCard<T>({
                                 size = 'default',
                                 showArrow = true,
                                 children
-                              }: SliderCardProps<T>) {
+                              }: SliderCardProps) {
   const aspectClasses = aspectRatio === 'portrait'
       ? 'aspect-w-3 aspect-h-4'
       : 'aspect-w-9 aspect-h-10';

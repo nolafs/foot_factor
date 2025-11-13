@@ -1,4 +1,5 @@
-import React from 'react';
+'use client'
+import React, {useEffect} from 'react';
 import Link from 'next/link';
 import {
   Activity,
@@ -20,6 +21,10 @@ import { useSearch } from '@/components/features/search/search-context';
 export const SearchHitItem = ({ hit }: HitProps) => {
   const { openSearchDialog, setSearchDialog } = useSearch();
   const imageUrl: string | null = hit.image?.url as string | null;
+
+    useEffect(() => {
+        console.log(openSearchDialog);
+    }, [openSearchDialog]);
 
   return (
     <div

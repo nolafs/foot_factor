@@ -5,7 +5,7 @@ import {PrismicRichText, type SliceComponentProps} from '@prismicio/react';
 import {Container} from '@/components/ui/container';
 import {Heading} from '@/components/ui/text';
 import {createClient} from '@/prismicio';
-import Slider from '@/components/features/slider/slider';
+import Slider, {type SliderControlItem} from '@/components/features/slider/slider';
 import {PrismicNextImage} from '@prismicio/next';
 import cn from 'clsx';
 import {buttonVariants} from '@/components/ui/button';
@@ -14,6 +14,13 @@ import Link from 'next/link';
 import BentoWrapper from '@/components/features/bento/bento-wrapper';
 import BentoCard from '@/components/features/bento/bento-card';
 import {SliderCard} from '@/components/features/slider/slider-card';
+
+type CaseStudy = Content.CaseStudiesDocument & {
+    data: Content.CaseStudiesDocument["data"] & {
+        condition: Content.ConditionDocument; // the linked document
+        "condition.title"?: Content.ConditionDocument["data"]["title"]; // fetchLinks field
+    };
+};
 
 /**
  * Props for `CaseStudies`.
@@ -24,7 +31,7 @@ export type CaseStudiesProps = SliceComponentProps<Content.CaseStudiesSlice>;
  * Component for "CaseStudies" Slices.
  */
 const CaseStudies: FC<CaseStudiesProps> = ({slice}) => {
-  const [caseStudies, setCaseStudies] = useState<Content.CaseStudiesDocument<string>[]>([]);
+  const [caseStudies, setCaseStudies] = useState<CaseStudy[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
@@ -36,7 +43,7 @@ const CaseStudies: FC<CaseStudiesProps> = ({slice}) => {
           pageSize: 50,
           fetchLinks: ['condition.title']
         });
-        setCaseStudies(data);
+        setCaseStudies(data as CaseStudy[]);
       } catch (err) {
         setError('Failed to fetch case studies');
         console.error('Error fetching case studies:', err);
@@ -48,9 +55,9 @@ const CaseStudies: FC<CaseStudiesProps> = ({slice}) => {
     void fetchCaseStudies();
   }, []);
 
-  const controlsData = caseStudies.map((caseStudy: any) => ({
-    title: caseStudy.data.client_name,
-  }));
+  const controlsData: SliderControlItem[] = caseStudies.map((caseStudy: CaseStudy) => ({
+    title: caseStudy.data.client_name
+  })) as SliderControlItem[] ;
 
   if (loading) {
     return (
@@ -83,7 +90,7 @@ const CaseStudies: FC<CaseStudiesProps> = ({slice}) => {
 
             <BentoWrapper>
             {caseStudies && caseStudies.length > 0 ? (
-                caseStudies.map((caseStudy: any, idx: number) => (
+                caseStudies.map((caseStudy: CaseStudy, idx: number) => (
                     <BentoCard key={'case_studies_' + idx} columns={Math.floor(idx / 2) % 2 === 0 ? (idx % 2 === 0 ? 4 : 2) : (idx % 2 === 0 ? 2 : 4)}>
                       <div
                           key={'case_studies_' + idx}
@@ -101,7 +108,7 @@ const CaseStudies: FC<CaseStudiesProps> = ({slice}) => {
                               {caseStudy.data.activity}{' '}
                               {caseStudy.data?.client_age && <span>({caseStudy.data.client_age})</span>}
                             </div>
-                            <div className={'text-white text-xl'}>{caseStudy.data.condition.data?.title}</div>
+                           <div className={'text-white text-xl'}>{caseStudy.data.condition?.data?.title}</div>
                            <div className={'flex justify-end'}>
                                   <Link href={'/resources/case-studies/' + caseStudy.uid}
                                         className={cn(buttonVariants({variant: 'default', size: 'icon'}))}>
@@ -132,9 +139,9 @@ const CaseStudies: FC<CaseStudiesProps> = ({slice}) => {
           </Container>
 
           <div className={'w-full'}>
-            <Slider data={controlsData} size={'large'}>
+            <Slider data={controlsData } size={'large'}>
               {caseStudies && caseStudies.length > 0 ? (
-                  caseStudies.map((caseStudy: any, idx: number) => (
+                  caseStudies.map((caseStudy: CaseStudy, idx: number) => (
                       <SliderCard
                           index={idx}
                           key={`${caseStudy.uid}_${idx}`}
@@ -143,11 +150,11 @@ const CaseStudies: FC<CaseStudiesProps> = ({slice}) => {
                           size={'large'}
                           imageField={caseStudy.data.feature_image}
                           href={`/resources/case-studies/${caseStudy.uid}`}
-                          title={caseStudy.data.client_name}
+                          title={caseStudy.data.client_name ?? ''}
                           subtitle={`${caseStudy.data.activity}${
                               caseStudy.data?.client_age ? ` (${caseStudy.data.client_age})` : ''
                           }`}
-                          description={caseStudy.data.condition.data?.title}
+                          description={caseStudy.data.condition.data?.title ?? ''}
                       />
                   ))
               ) : (

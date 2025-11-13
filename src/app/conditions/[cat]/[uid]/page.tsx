@@ -12,6 +12,7 @@ import {CircleArrowRight} from 'lucide-react';
 import BlogArticle from '@/slices/Megamenu/component/blog-article';
 import {Container} from '@/components/ui/container';
 import Link from 'next/link';
+
 type Params = { uid: string, cat: string };
 
 export async function generateMetadata({params}: { params: Promise<Params> }): Promise<Metadata> {

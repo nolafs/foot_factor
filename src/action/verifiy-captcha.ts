@@ -7,5 +7,5 @@ export async function VerifyCaptcha(token: string): Promise<JSON> {
       method: 'POST',
     },
   );
-  return await response.json();
+  return await response.json() as JSON;
 }

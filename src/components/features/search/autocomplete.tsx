@@ -6,7 +6,6 @@ import {
   InstantSearch,
   useSearchBox,
   useHits,
-  useStats,
   useRefinementList,
   useClearRefinements,
   Configure,
@@ -14,7 +13,7 @@ import {
 } from 'react-instantsearch';
 import type {HitBaseItem} from '@/types/hit.type';
 import Link from 'next/link';
-import {Activity, SquareArrowOutUpRight, Search, X, Filter, ChevronDown} from 'lucide-react';
+import {Activity, SquareArrowOutUpRight, Search, X, Filter} from 'lucide-react';
 import {Heading} from '@/components/ui/text';
 import {Badge} from '@/components/ui/badge';
 import Image from 'next/image';

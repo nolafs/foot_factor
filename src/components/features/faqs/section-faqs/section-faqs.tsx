@@ -1,10 +1,8 @@
-import {type KeyTextField, type RichTextField, isFilled} from '@prismicio/client';
+import {type RichTextField, isFilled} from '@prismicio/client';
 import FaqItem from './faq-item';
 import {Heading} from '@/components/ui/text';
 import {PrismicRichText} from '@prismicio/react';
 import {type FaqDocument} from '@/prismic-types';
-
-
 
 
 interface SectionFagsProps {
@@ -12,11 +10,9 @@ interface SectionFagsProps {
     headings: RichTextField | null | undefined;
     faqs: FaqDocument[];
   };
-
-  color?: 'A' | 'B' | 'C';
 }
 
-export function SectionFaqs({ data: { headings, faqs }, color = 'C' }: SectionFagsProps) {
+export function SectionFaqs({ data: { headings, faqs } }: SectionFagsProps) {
 
   if(faqs.length === 0) {
     return null;

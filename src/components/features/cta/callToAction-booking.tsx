@@ -7,7 +7,7 @@ import MakeBookingDialog from "@/components/features/make-booking/make-booking-d
 import {Phone} from 'lucide-react'
 import CallToActionWaveWrapper from '@/components/features/cta/cta-wave-wrapper';
 
-export function CallToActionBooking({ label, heading, body, telephone }: Cta) {
+export function CallToActionBooking({ heading, body, telephone }: Cta) {
   return (
     <CallToActionWaveWrapper>
           <h2

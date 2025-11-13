@@ -5,11 +5,11 @@ import gsap from 'gsap';
 import ScrollTrigger from 'gsap/ScrollTrigger';
 import {useGSAP} from '@gsap/react';
 import {Body} from '@/components/ui/text';
-import {PrismicRichText} from '@prismicio/react';
+
 import {Container} from '@/components/ui/container';
 import {PrismicNextImage} from '@prismicio/next';
 import {cn} from '@/lib/utils';
-import {Wave} from '@/components/wave';
+
 
 if (typeof window !== 'undefined') {
     gsap.registerPlugin(ScrollTrigger);
