@@ -45,9 +45,6 @@ export const SoleDeconstructor = ({data}: SoleDeconstructProps) => {
         const contentItems = gsap.utils.toArray('.item-content');
         const bodyText = gsap.utils.toArray('.body-text');
 
-        console.log('Content Items:', contentItems);
-
-
         contentItems.forEach((item, index) => {
             const itemTl = gsap.timeline({
                 scrollTrigger: {

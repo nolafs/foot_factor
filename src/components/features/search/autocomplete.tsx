@@ -74,8 +74,6 @@ const CategoryRefinement = () => {
     sortBy: ['count:desc', 'name:asc'],
   });
 
-  console.log('CategoryRefinement items', items);
-
   // Close dropdown when clicking outside
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {

@@ -47,10 +47,10 @@ export default function NavigationMenuSub({ navigation, settings }: NavigationSu
   function update(latest: number, prev: number): void {
     if (latest < prev) {
       setHidden(false);
-      console.log("visible");
+
     } else if (latest > 100 && latest > prev) {
       setHidden(true);
-      console.log("hidden");
+
     }
   }
 

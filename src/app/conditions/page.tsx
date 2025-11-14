@@ -54,9 +54,6 @@ export default async function Page() {
     },
   }).catch(() => notFound());
 
-
-  console.log('conditions', conditions)
-
   return (
     <main className={'w-full overflow-hidden'}>
       <HeroSimple wave_type={'2'} heading={page.data.title} subheading={page.data.lead}  />

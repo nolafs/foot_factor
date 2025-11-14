@@ -15,7 +15,7 @@ export const transformZodErrors = async (error: z.ZodError) => {
 
 export async function sendBookingMail(formData: z.infer<typeof emailBookingSchema>) {
 
-  console.log('Sending booking request email with data:', formData);
+  console.log('Sending booking request email with data');
 
   const mailerSend = new MailerSend({
     apiKey: process.env.MAILERSEND_API_KEY ?? '',
@@ -161,7 +161,7 @@ Sent from Foot Factor Website
     // Send the email
     const result = await mailerSend.email.send(emailParams);
 
-    console.log('Email sent successfully:', result);
+    console.log('Email sent successfully');
 
     if(result) {
         const recipients = [

@@ -28,8 +28,6 @@ export type SectionProps = SliceComponentProps<Content.SectionSlice>;
  */
 const Section: FC<SectionProps> = ({ slice }) => {
 
-  console.log('slice', slice.variation)
-
   if(slice.variation === 'contentWithImageLeftRight') {
     return (
         <Container as={'section'} data-slice-type={slice.slice_type} data-slice-variation={slice.variation} padding={'lg'}

@@ -74,7 +74,7 @@ export async function Pagination({
       ],
     })
     .then(response => {
-      console.log('response', response);
+
       return {
         page: response.page,
         resultsPerPage: response.results_per_page,
@@ -91,7 +91,6 @@ export async function Pagination({
       };
     });
 
-  console.log('data', data);
 
   const hasPreviousPage = data.page - 1;
   const previousPageUrl = hasPreviousPage ? url(data.page - 1) : undefined;

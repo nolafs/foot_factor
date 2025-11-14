@@ -118,8 +118,6 @@ const Testimonials: FC<TestimonialsProps> = ({slice}) => {
 
   const {featured, grid} = createTestimonialGrid(testimonials, 2, 2);
 
-  console.log('Testimonials grid:', grid);
-
   return (
         <Container as={'section'} padding={"lg"} data-slice-type={slice.slice_type}
                    data-slice-variation={slice.variation} color={'accent'}>

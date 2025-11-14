@@ -101,8 +101,6 @@ export const LogoTickerList = ({data, baseVelocity = 10}: LogoTickerListProps) =
 
 const LogoTickerListItem = ({item}: { item: IconNavListSliceLogoTickerPrimaryItemsItem }) => {
 
-  console.log('LogoTickerListItem', item, isFilled.link(item.link));
-
 
   return (<div className={'flex justify-center min-w-[331px] min-h-[331px]'}> {isFilled.link(item.link) ? <PrismicNextLink field={item.link}>
         <PrismicNextImage field={item.icon} width={331} height={331} className={'w-full h-auto '} />

@@ -99,7 +99,6 @@ export const BookingForm = ({booking}: BookingFormProps) => {
 
       if (errors) {
         setIsSubmitting(false);
-        console.log(errors);
         setSubmitErrors(errors);
         toast.error('There was an error sending your message. Please try again later.');
       }

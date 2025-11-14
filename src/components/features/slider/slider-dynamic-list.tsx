@@ -20,8 +20,6 @@ const getTypeByCategoryTags = async (contentType: 'orthotics' | 'guide' | 'condi
 }> => {
     const client = createClient();
 
-    console.info('category', category, tags)
-
     if (!contentType) {
         throw new Error('Content type is required');
     }

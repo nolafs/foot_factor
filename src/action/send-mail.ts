@@ -58,8 +58,6 @@ export async function sendMail(formData: FormData) {
     const typeofEnquiry = settings.data.contact_form_enquiries?.find(
       (item) => item.value === formData.get('enquiryType'));
 
-    console.log('enquiryType', typeofEnquiry);
-
     const templateId = typeofEnquiry?.email_template_id ?? null;
 
     const personalization = [
@@ -89,8 +87,6 @@ export async function sendMail(formData: FormData) {
       data: 'data received and mutated',
     };
   } catch (error) {
-
-    console.error('Error sending email:', error);
 
     if (error instanceof z.ZodError) {
       return {

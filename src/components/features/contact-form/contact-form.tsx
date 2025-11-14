@@ -29,8 +29,6 @@ const getEnquireTypeOptions = async () => {
   const client = createClient();
   const settings = await client.getSingle('settings');
 
-  console.log(settings.data.contact_form_enquiries);
-
   return settings.data.contact_form_enquiries ?? [];
 
 }
@@ -78,8 +76,6 @@ export function ContactForm({ items }: ContactFormInputProps) {
       formData.append('agreeToTerms', data.agreeToTerms ? 'true' : 'false');
 
       const { success, errors } = await sendMail(formData);
-
-      console.log('Form submission result:', success);
 
       if (success) {
         setIsSubmitting(false);

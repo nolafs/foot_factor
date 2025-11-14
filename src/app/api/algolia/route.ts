@@ -277,7 +277,6 @@ export async function POST() {
     });
   } catch (error) {
     // Log the error and return error response if any error occurs
-    console.error(error);
     return new Response('An error occurred while synchronizing content', {
       status: 500,
     });
