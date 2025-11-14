@@ -82,11 +82,21 @@ export function FacetDropdown({ children, buttonText, closeOnChange, classNames 
   useLockedBody(isOpened && isMobile);
 
   // Get the attribute(s) of the first child widget
-  const attributeProp = getFirstChildPropValue(children, props => ('attributes' in props ? 'attributes' : 'attribute'));
-  if (!attributeProp) {
-    throw new Error('<Dropdown> widget only supports InstantSearch widgets with an `attribute` or `attributes` prop.');
-  }
+    const attributeProp = getFirstChildPropValue(
+        children,
+        (props: unknown) => {
+            if (props && typeof props === 'object' && 'attributes' in props) {
+                return 'attributes';
+            }
+            return 'attribute';
+        }
+    );
 
+    if (!attributeProp) {
+        throw new Error(
+            '<Dropdown> widget only supports InstantSearch widgets with an `attribute` or `attributes` prop.'
+        );
+    }
   // Get the refinements for the attribute
   const attribute = typeof attributeProp === 'string' ? attributeProp : attributeProp[0];
   const refinements = getAttributeRefinements(attribute ?? '', items);

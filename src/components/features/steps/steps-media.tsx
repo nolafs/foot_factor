@@ -1,5 +1,5 @@
 'use client';
-import React, {Suspense, useEffect} from 'react';
+import React, { useEffect} from 'react';
 import gsap from 'gsap';
 import ScrollTrigger from 'gsap/ScrollTrigger';
 import {useGSAP} from '@gsap/react';
@@ -126,10 +126,10 @@ interface StepMediaProps {
 
 
 const StepMedia = ({data, index, totalItems}: StepMediaProps) => {
-  const cardRef = React.useRef<HTMLLIElement>(null);
-  const contentRef = React.useRef<HTMLDivElement>(null);
-  const imageRef = React.useRef<HTMLDivElement>(null);
-  const videoRef = React.useRef<ReactPlayer>(null);
+  const cardRef = React.useRef<HTMLLIElement | null>(null);
+  const contentRef = React.useRef<HTMLDivElement | null>(null);
+  const imageRef = React.useRef<HTMLDivElement | null>(null);
+  const videoRef = React.useRef<ReactPlayer | null>(null);
 
     useGSAP(({ context }) => {
         if (!cardRef.current) return;
@@ -139,6 +139,22 @@ const StepMedia = ({data, index, totalItems}: StepMediaProps) => {
         const image = imageRef.current;
         const content = contentRef.current;
 
+        const safePlay = () => {
+            const player = videoRef.current?.getInternalPlayer?.();
+
+            if (player && typeof (player as any).play === 'function') {
+                (player as any).play();
+            }
+        };
+
+        const safePause = () => {
+            const player = videoRef.current?.getInternalPlayer?.();
+
+            if (player && typeof (player as any).pause === 'function') {
+                (player as any).pause();
+            }
+        };
+
 
         if (isFilled.linkToMedia(data.video) ) {
 
@@ -147,10 +163,10 @@ const StepMedia = ({data, index, totalItems}: StepMediaProps) => {
                     start: 'top bottom',
                     end: 'bottom+=100% top',
                     markers: false,
-                    onEnter: () => videoRef.current?.getInternalPlayer()?.play(),
-                    onLeave: () => videoRef.current?.getInternalPlayer()?.pause(),
-                    onEnterBack: () => videoRef.current?.getInternalPlayer()?.play(),
-                    onLeaveBack: () => videoRef.current?.getInternalPlayer()?.pause(),
+                    onEnter: safePlay,
+                    onLeave: safePause,
+                    onEnterBack: safePlay,
+                    onLeaveBack: safePause,
                 })
 
         }

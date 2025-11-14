@@ -66,7 +66,7 @@ export const TeamCard = ({id,data, bounds, scrollX, onExpand,  currentExpanded}:
       }
     }
 
-  }, [currentExpanded, isExpanded, onExpand]);
+  }, [currentExpanded, isExpanded, onExpand, id]);
 
   const toggleExpanded = () => {
     setIsExpanded(!isExpanded);

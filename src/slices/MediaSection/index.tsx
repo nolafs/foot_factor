@@ -32,7 +32,7 @@ const MediaSection: FC<MediaSectionProps> = ({ slice }) => {
           {slice.primary.image && (
               <div className={'w-full flex justify-center aspect-w-16 aspect-h-9 '}>
                 <PrismicNextImage field={slice.primary.image}
-                                  className={cn('w-full h-full object-center object-cover rounded-4xl overflow-hidden')}/>
+                                  className={cn('w-full h-full object-center object-cover overflow-hidden')}/>
               </div>
           )}
 
