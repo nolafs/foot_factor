@@ -28,7 +28,6 @@ const StepsProgress = ({
 
   useGSAP(() => {
     const circle = circleRef.current;
-    const text = textRef.current;
     const container = containerRef.current;
 
     if (!circle) return;

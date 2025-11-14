@@ -8,12 +8,13 @@ import VideoControl from './video-control';
 
 import VideoPlayerWrapper from '../video-player-wrapper';
 import cn from 'clsx';
+import {ImageFieldImage} from "@prismicio/client";
 
 export interface YoutubeProps {
   id: string;
   src?: string;
   title: string;
-  poster?: string;
+  poster?: ImageFieldImage;
   width?: number;
   height?: number;
   autoplay?: boolean;

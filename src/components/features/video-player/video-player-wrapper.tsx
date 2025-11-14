@@ -18,7 +18,7 @@ export interface VideoProps {
 
 export function VideoPlayerWrapper({ children, handlePlay, handlePause, handleReplay }: VideoProps) {
   const ref = useRef<HTMLDivElement | null>(null);
-  const [ready, setReady] = useState(false);
+  //const [ready, setReady] = useState(false);
 
   useGSAP(
     () => {
@@ -42,7 +42,7 @@ export function VideoPlayerWrapper({ children, handlePlay, handlePause, handleRe
             end: 'bottom 30%',
             markers: false,
             onEnter: () => {
-              setReady(true);
+              //setReady(true);
               handlePlay();
             },
             onEnterBack: () => {

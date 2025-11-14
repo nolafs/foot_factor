@@ -1,9 +1,9 @@
 import * as React from 'react';
-import {SocialName} from "@/types/socialLinkItem.type";
+import {type SocialName} from "@/types/socialLinkItem.type";
 
 
 interface SocialIconsProps {
-    type?: SocialName | null;
+    type?: SocialName;
     iconProps?: React.SVGProps<SVGSVGElement>;
 }
 

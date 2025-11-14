@@ -7,9 +7,10 @@ import { Container } from '@/components/ui/container';
 import { type
   NavigationBarDocumentData,
   type NavigationElementDocument, type NavigationMegaMenuItemDocument, type SettingsDocumentData,
-} from '../../../prismicio-types';
+} from '@/prismic-types';
 import {CallToActionBooking} from "@/components/features/cta/callToAction-booking";
 import ReviewSliderElfsight from "@/components/features/reviews/review-slider-elfsight";
+import {SocialName} from "@/types/socialLinkItem.type";
 
 
 
@@ -29,7 +30,7 @@ export function Footer({ navigation, settings }: FooterProps) {
   };
 
   const social: SocialLinkItemType[] | undefined = settings?.social_media?.map(item => ({
-    type: item.type,
+    type: item.type as SocialName,
     name: item.name,
     url: item.url as LinkPrismicType,
   }));

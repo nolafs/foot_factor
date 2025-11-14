@@ -4,11 +4,10 @@ import {motion, useMotionValueEvent, useScroll} from "framer-motion";
 import React, {useState} from 'react';
 import Link from 'next/link';
 import {
-  type MakeBookingDocumentData,
   type NavigationBarDocumentData,
   type NavigationBarDocumentDataNavigationItemsItem,
   type NavigationElementDocument, type NavigationMegaMenuItemDocument, type SettingsDocumentData,
-} from '../../../../prismicio-types';
+} from '@/prismic-types';
 import { PrismicNextLink } from '@prismicio/next';
 import {PrismicImage, SliceZone} from '@prismicio/react';
 import {

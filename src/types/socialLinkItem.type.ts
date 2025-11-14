@@ -12,7 +12,7 @@ export type SocialName =
 
 
 export type SocialLinkItemType = {
-  type?: SocialName | undefined | null;
+  type?: SocialName | undefined ;
   name?: string | undefined | null;
   url?: LinkPrismicType | undefined | null;
 };

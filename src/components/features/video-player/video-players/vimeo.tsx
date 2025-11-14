@@ -5,12 +5,13 @@ import { useRef, useState } from 'react';
 import ReactPlayer, { type Config, ReactPlayerProps } from 'react-player/lazy';
 import VideoControl from './video-control';
 import VideoPlayerWrapper from '../video-player-wrapper';
+import {ImageFieldImage} from "@prismicio/client";
 
 export interface VimeoProps {
   id: string;
   src?: string;
   title: string;
-  poster?: string;
+  poster?: ImageFieldImage;
   width?: number;
   height?: number;
   autoplay?: boolean;
@@ -100,7 +101,7 @@ export function Vimeo({
                 handlePlayAction={play}
               title={title}
               loading={loading}
-              poster={poster && `${poster}?fm=webp&w=${width}&h=${height}&fit=fill`}
+              poster={poster}
               width={width}
               height={height}
             />

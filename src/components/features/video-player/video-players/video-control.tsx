@@ -5,10 +5,11 @@ import cn from 'clsx';
 import { PrismicNextImage } from '@prismicio/next';
 import useParallax from '@/lib/hooks/use-parallax';
 import { motion } from 'framer-motion';
+import {type ImageFieldImage} from "@prismicio/client";
 
 export interface VideoControlProps {
   handlePlayAction: () => void;
-  poster?: any;
+  poster?: ImageFieldImage;
   width?: number;
   height?: number;
   title: string;
