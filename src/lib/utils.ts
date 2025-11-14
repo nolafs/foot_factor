@@ -15,7 +15,7 @@ export function getFirstChildPropValue(
   children: ReactNode,
   propNameCb: (props: string) => string,
 ): string | string[] | undefined {
-  let propValue = undefined;
+  let propValue: string | string [] | undefined = undefined;
 
   Children.forEach(children, element => {
     if (!isValidElement(element)) return;

@@ -1,14 +1,6 @@
 import * as React from 'react';
+import {SocialName} from "@/types/socialLinkItem.type";
 
-type SocialName =
-    | 'facebook'
-    | 'instagram'
-    | 'twitter'
-    | 'github'
-    | 'youtube'
-    | 'tiktok'
-    | 'linkedin'
-    | 'discord';
 
 interface SocialIconsProps {
     type?: SocialName | null;

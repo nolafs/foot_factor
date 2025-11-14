@@ -4,11 +4,12 @@ import cn from 'clsx';
 
 import { type LinkPrismicType, type SocialLinkItemType } from '@/types';
 import ButtonSimple from '@/components/ui/button-simple';
+import * as React from "react";
 
 interface SocialLinkProps {
   item: SocialLinkItemType;
   className?: string;
-  iconsClass?: string;
+  iconsClass?: React.SVGProps<SVGSVGElement> | undefined;
   icons?: boolean;
 }
 
@@ -80,7 +81,7 @@ export const SocialLink = ({ item, className, icons, iconsClass }: SocialLinkPro
           }
         }}
         rel="noopener noreferrer">
-        {item?.url && <SocialIcons type={item?.type} props={iconsClass} />}
+        {item?.url && <SocialIcons type={item?.type} iconProps={iconsClass} />}
       </button>
     );
   } else {
