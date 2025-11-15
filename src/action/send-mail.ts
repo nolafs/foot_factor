@@ -84,7 +84,7 @@ export async function sendMail(formData: FormData) {
     return {
       success: true,
       errors: null,
-      data: 'data received and mutated',
+      msg: 'Mail send successfully',
     };
   } catch (error) {
 
@@ -92,14 +92,14 @@ export async function sendMail(formData: FormData) {
       return {
         success: false,
         errors: transformZodErrors(error),
-        data: null,
+          msg: null,
       };
     }
 
     return {
       success: false,
       errors: error,
-      data: 'data received and mutated',
+      msg: 'Error occurred, please try again',
     };
   }
 }

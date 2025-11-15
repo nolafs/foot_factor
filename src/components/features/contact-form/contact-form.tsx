@@ -75,18 +75,19 @@ export function ContactForm({ items }: ContactFormInputProps) {
       formData.append('enquiryType', data.enquiryType || '');
       formData.append('agreeToTerms', data.agreeToTerms ? 'true' : 'false');
 
-      const { success, errors } = await sendMail(formData);
+      const { success, errors, msg } = await sendMail(formData);
 
       if (success) {
         setIsSubmitting(false);
         setSubmissionSuccess(true);
-        toast.success('Your message has been sent!');
+        toast.success(msg);
         reset(); // Optionally reset form fields
         return;
       }
 
       if (errors) {
         setIsSubmitting(false);
+        console.error(errors);
         toast.error('There was an error sending your message. Please try again later.');
         return;
       }
@@ -103,31 +104,31 @@ export function ContactForm({ items }: ContactFormInputProps) {
     setIsSubmitting(false);
     setIsVerified(false);
   };
-    /*
-      async function handleCaptchaSubmission(token: string | null) {
-        try {
-          if (token) {
-            await VerifyCaptcha(token);
-            setIsVerified(true);
-          }
-        } catch (e) {
-          setIsVerified(false);
-          console.error(e);
-        }
+/*
+  async function handleCaptchaSubmission(token: string | null) {
+    try {
+      if (token) {
+        await VerifyCaptcha(token);
+        setIsVerified(true);
       }
+    } catch (e) {
+      setIsVerified(false);
+      console.error(e);
+    }
+  }
 
 
-      const handleChange = (token: string | null) => {
-        if (token) {
-          void handleCaptchaSubmission(token);
-        }
-      };
+  const handleChange = (token: string | null) => {
+    if (token) {
+      void handleCaptchaSubmission(token);
+    }
+  };
 
-      function handleExpired() {
-        setIsVerified(false);
-      }
+  function handleExpired() {
+    setIsVerified(false);
+  }
 
-       */
+   */
 
   if (submissionSuccess) {
     return (
