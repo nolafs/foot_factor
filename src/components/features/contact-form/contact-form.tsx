@@ -87,13 +87,13 @@ export function ContactForm({ items }: ContactFormInputProps) {
 
       if (errors) {
         setIsSubmitting(false);
-        console.error(errors);
+        console.error('[ContactForm]', errors);
         toast.error('There was an error sending your message. Please try again later.');
         return;
       }
     } catch (error) {
       setIsSubmitting(false);
-      console.error(error);
+      console.error('[ContactForm]',error);
       toast.error('There was an error sending your message. Please try again later.');
       return;
     }

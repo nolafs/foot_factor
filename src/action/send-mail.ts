@@ -49,7 +49,7 @@ export async function sendMail(formData: FormData) {
 
       const mailer = await mailerSend.email.send(emailParams);
 
-      console.log('email sent', mailer);
+      console.log('[EMAIL SEND] Info', mailer.body);
     }
 
     //Response email
@@ -60,26 +60,37 @@ export async function sendMail(formData: FormData) {
 
     const templateId = typeofEnquiry?.email_template_id ?? null;
 
-    const personalization = [
-      {
-        email: validatedFields.email,
-        data: {
-          name: validatedFields.name
+    const userEmail = validatedFields.email?.trim();
+
+    if (!userEmail) {
+      console.log('[EMAIL SEND] No user email – skipping response template');
+    } else if (templateId) {
+      const personalization = [
+        {
+          email: userEmail,
+          data: {
+            name: validatedFields.name,
+          },
         },
-      }
-    ];
+      ];
 
-    if (templateId) {
+      console.log('[EMAIL SEND] personalization', personalization);
+
+      const userRecipients: Recipient[] = [new Recipient(userEmail, validatedFields.name)];
+
       const emailParams = new EmailParams()
-          .setFrom(sentFrom)
-          .setTo(recipients)
-          .setReplyTo(sentFrom)
-          .setSubject("Thanks for contacting Foot Factor")
-          .setTemplateId(templateId)
-          .setPersonalization(personalization);
+        .setFrom(sentFrom)
+        .setTo(userRecipients)
+        .setReplyTo(sentFrom)
+        .setSubject('Thanks for contacting Foot Factor')
+        .setTemplateId(templateId)
+        .setPersonalization(personalization);
 
-      await mailerSend.email.send(emailParams);
+      const responseEmail = await mailerSend.email.send(emailParams);
+      console.log('[EMAIL SEND] TEMPLATE SUCCESS', responseEmail);
     }
+
+    console.log('[EMAIL SEND] SUCCESS')
 
     return {
       success: true,
@@ -87,6 +98,9 @@ export async function sendMail(formData: FormData) {
       msg: 'Mail send successfully',
     };
   } catch (error) {
+
+
+    console.log('[EMAIL SEND] ERROR', error);
 
     if (error instanceof z.ZodError) {
       return {
