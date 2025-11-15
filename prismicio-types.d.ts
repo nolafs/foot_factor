@@ -3903,6 +3903,21 @@ export interface ListSliceBentoPrimaryItemsItem {
 }
 
 /**
+ * Item in *List → Conditions → Primary → Tags*
+ */
+export interface ListSliceConditionsPrimaryTagsItem {
+  /**
+   * Tag field in *List → Conditions → Primary → Tags*
+   *
+   * - **Field Type**: Content Relationship
+   * - **Placeholder**: *None*
+   * - **API ID Path**: list.conditions.primary.tags[].tag
+   * - **Documentation**: https://prismic.io/docs/fields/content-relationship
+   */
+  tag: ContentRelationshipFieldWithData<[{ id: 'post_tags'; fields: ['name'] }]>;
+}
+
+/**
  * Primary content in *List → Blog → Primary*
  */
 export interface ListSliceDefaultPrimary {
@@ -4159,6 +4174,26 @@ export interface ListSliceConditionsPrimary {
    * - **Documentation**: https://prismic.io/docs/fields/text
    */
   lead: prismic.KeyTextField;
+
+  /**
+   * Category field in *List → Conditions → Primary*
+   *
+   * - **Field Type**: Content Relationship
+   * - **Placeholder**: *None*
+   * - **API ID Path**: list.conditions.primary.category
+   * - **Documentation**: https://prismic.io/docs/fields/content-relationship
+   */
+  category: ContentRelationshipFieldWithData<[{ id: 'condition_category'; fields: ['name'] }]>;
+
+  /**
+   * Tags field in *List → Conditions → Primary*
+   *
+   * - **Field Type**: Group
+   * - **Placeholder**: *None*
+   * - **API ID Path**: list.conditions.primary.tags[]
+   * - **Documentation**: https://prismic.io/docs/fields/repeatable-group
+   */
+  tags: prismic.GroupField<Simplify<ListSliceConditionsPrimaryTagsItem>>;
 
   /**
    * Footer Header field in *List → Conditions → Primary*
@@ -6467,6 +6502,7 @@ declare module '@prismicio/client' {
       ListSliceBentoPrimary,
       ListSliceGuidesPrimary,
       ListSliceOrthoticsPrimary,
+      ListSliceConditionsPrimaryTagsItem,
       ListSliceConditionsPrimary,
       ListSliceVariation,
       ListSliceDefault,

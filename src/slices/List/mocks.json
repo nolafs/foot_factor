@@ -570,14 +570,43 @@
 				"type": "Link",
 				"value": [
 					{
-						"__TYPE__": "LinkContent",
 						"key": "9867e983-6530-4630-b8b0-dc0099ea66ef",
+						"__TYPE__": "LinkContent",
 						"value": {
 							"__TYPE__": "ExternalLink",
 							"url": "https://slicemachine.dev",
 							"text": "forgotten",
 							"variant": "Link"
 						}
+					}
+				]
+			},
+			"category": {
+				"key": "b3fdf187-89e7-4193-a64b-73b29ad1e22b",
+				"__TYPE__": "LinkContent",
+				"value": {
+					"__TYPE__": "DocumentLink",
+					"id": "mock_document_id"
+				}
+			},
+			"tags": {
+				"__TYPE__": "GroupContentType",
+				"value": [
+					{
+						"__TYPE__": "GroupItemContent",
+						"value": [
+							[
+								"tag",
+								{
+									"key": "92b7800d-016b-41d5-97d4-733fb54615ce",
+									"__TYPE__": "LinkContent",
+									"value": {
+										"__TYPE__": "DocumentLink",
+										"id": "mock_document_id"
+									}
+								}
+							]
+						]
 					}
 				]
 			}

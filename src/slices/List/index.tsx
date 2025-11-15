@@ -24,8 +24,16 @@ export type ListProps = SliceComponentProps<Content.ListSlice>;
  */
 const List: FC<ListProps> = ({ slice }) => {
 
+
+
+
   if (slice.variation === 'conditions') {
+
+      console.log('conditions', slice.primary.tags)
+
     return (<Container as={'section'} padding={'lg'} fullWidth={true} color={'accent'} data-slice-type={slice.slice_type} data-slice-variation={slice.variation}>
+
+
 
         <div className={'max-w-3xl mx-auto text-center'}>
         <Heading as="h2" className={'mb-8 text-center'}>
@@ -38,7 +46,21 @@ const List: FC<ListProps> = ({ slice }) => {
         </div>
 
       <div className={'w-full pt-5 md:pt-8 lg:pt-16 pb-16 md:pb-24 lg:pb-28'}>
-        <SliderDynamicList contentType={'condition'} size={'default'} baseUrl={'/conditions'}/>
+        <SliderDynamicList contentType={'condition'}
+
+                           category={
+                              slice.primary.category.link_type !== 'Any' && slice.primary.category.id  || undefined
+                           }
+
+                           tags={
+                             slice.primary.tags
+                               // eslint-disable-next-line @typescript-eslint/no-unsafe-return
+                               ?.map(item => item.tag.link_type !== 'Any' && item.tag?.id)
+                               .filter((id): id is string => typeof id === "string")
+                             || undefined
+                           }
+
+                           size={'default'} baseUrl={'/conditions'}/>
       </div>
 
       <div className={'max-w-3xl mx-auto text-center'}>

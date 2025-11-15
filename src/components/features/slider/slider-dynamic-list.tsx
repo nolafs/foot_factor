@@ -2,7 +2,7 @@
 import React, {useEffect, useState} from 'react';
 import {type AllDocumentTypes} from '@/prismic-types';
 import {createClient} from '@/prismicio';
-import {asText,  type ImageField, type KeyTextField, type RichTextField} from '@prismicio/client';
+import {asText,  type ImageField, type KeyTextField, type RichTextField, filter} from '@prismicio/client';
 import Slider from '@/components/features/slider/slider';
 import {SliderCard} from '@/components/features/slider/slider-card';
 
@@ -15,19 +15,39 @@ interface SliderDynamicListProps {
     size?: 'large' | 'default';
 }
 
-const getTypeByCategoryTags = async (contentType: 'orthotics' | 'guide' | 'condition' ,category?: string, tags?: string[]): Promise<{
-    results: AllDocumentTypes[];
-}> => {
-    const client = createClient();
+const getTypeByCategoryTags = async (
+  contentType: "orthotics" | "guide" | "condition",
+  category?: string,
+  tags?: string[]
+): Promise<{ results: AllDocumentTypes[] }> => {
+  const client = createClient();
 
-    if (!contentType) {
-        throw new Error('Content type is required');
-    }
+  if (!contentType) {
+    throw new Error("Content type is required");
+  }
 
-    return await client.getByType(contentType, {
-        pageSize: 20
-    });
-}
+  const filters: any[] = [];
+
+  // Optional: filter by category if you have a category field
+  if (category) {
+    filters.push(
+      filter.at(`my.${contentType}.category`, category)
+    );
+  }
+
+  // Optional: filter by tags (relationship IDs)
+  if (tags && tags.length > 0) {
+    filters.push(
+      filter.any(`my.${contentType}.tags.tag`, tags)
+      // or: `my.${contentType}.post_tags.tag` if post_tags is a Group with a "tag" link field
+    );
+  }
+
+  return await client.getByType(contentType, {
+    filters: filters.length ? filters : undefined,
+    pageSize: 20,
+  });
+};
 
 type ImageData = {
     data: {

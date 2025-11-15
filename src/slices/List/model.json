@@ -313,6 +313,47 @@
             "placeholder": ""
           }
         },
+        "category": {
+          "type": "Link",
+          "config": {
+            "label": "Category",
+            "select": "document",
+            "repeat": false,
+            "customtypes": [
+              {
+                "id": "condition_category",
+                "fields": [
+                  "name"
+                ]
+              }
+            ]
+          }
+        },
+        "tags": {
+          "type": "Group",
+          "config": {
+            "label": "Tags",
+            "repeat": true,
+            "fields": {
+              "tag": {
+                "type": "Link",
+                "config": {
+                  "label": "Tag",
+                  "select": "document",
+                  "repeat": false,
+                  "customtypes": [
+                    {
+                      "id": "post_tags",
+                      "fields": [
+                        "name"
+                      ]
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        },
         "footer_header": {
           "type": "Text",
           "config": {
