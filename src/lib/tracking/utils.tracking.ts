@@ -1,70 +1,91 @@
-// src/libs/tracking/utils.tracking.ts
-'use client'
+/// src/libs/tracking/utils.tracking.ts
+'use client';
 
-import {IS_GTM_ENABLED, trackingConfig} from './config.tracking'
-import {type Gtag, type GtagEvent} from '@/types/tracking.types';
-
+import { IS_GTM_ENABLED, trackingConfig } from './config.tracking';
+import { type Gtag, type GtagEvent } from '@/types/tracking.types';
 
 const logGAWarning = (message: string) => {
-  console.warn(`[Tracking] Warning: ${message}`)
-}
+  console.warn(`[Tracking] Warning: ${message}`);
+};
 
-const getGtag = () => {
+// Always returns a callable gtag function.
+// - If GTM is disabled → no-op function.
+// - If real window.gtag exists → use it.
+// - Otherwise → shim that pushes into dataLayer (safe before GTM loads).
+const getGtag = (): Gtag.Gtag => {
+  if (typeof window === 'undefined') {
+    logGAWarning('Window is undefined – returning noop gtag');
+    // SSR / non-browser: no-op
+    // eslint-disable-next-line @typescript-eslint/no-empty-function
+    return ((..._args: unknown[]) => {}) as Gtag.Gtag;
+  }
+
   if (!IS_GTM_ENABLED) {
-    logGAWarning('Google Analytics is not enabled')
-    return null
+    logGAWarning('Google Analytics is not enabled – returning noop gtag');
+    // eslint-disable-next-line @typescript-eslint/no-empty-function
+    return ((..._args: unknown[]) => {}) as Gtag.Gtag;
   }
-  if (!window.gtag) {
-    logGAWarning('GTag does not exist')
-    throw new Error('GTag does not exist')
+
+  const w = window as any;
+
+  if (typeof w.gtag === 'function') {
+    return w.gtag as Gtag.Gtag;
   }
-  return window.gtag
-}
+
+  // Fallback: create / reuse dataLayer and return shim
+  logGAWarning('GTag does not exist yet – using dataLayer shim');
+
+  w.dataLayer = w.dataLayer ?? [];
+
+  const shim: Gtag.Gtag = ((...args: unknown[]) => {
+    w.dataLayer.push(args);
+  }) as Gtag.Gtag;
+
+  return shim;
+};
 
 const withGtag = (callback: (gtag: Gtag.Gtag) => void) => {
-  const gtag = getGtag()
-  if (!gtag) return
-  callback(gtag)
-}
+  const gtag = getGtag();
+  callback(gtag);
+};
 
 export const sendGAEvent = (event: GtagEvent) =>
-    withGtag((gtag) => {
-      gtag('event', event.action, {
-        event_category: event.category,
-        event_label: event.label,
-        value: event.value,
-      })
-    })
+  withGtag((gtag) => {
+    gtag('event', event.action, {
+      event_category: event.category,
+      event_label: event.label,
+      value: event.value,
+    });
+  });
 
 export const grantConsentForEverything = () =>
-    withGtag((gtag) => {
-      gtag('consent', 'update', {
-        ad_user_data: 'granted',
-        ad_personalization: 'granted',
-        ad_storage: 'granted',
-        analytics_storage: 'granted',
-      })
-    })
+  withGtag((gtag) => {
+    gtag('consent', 'update', {
+      ad_user_data: 'granted',
+      ad_personalization: 'granted',
+      ad_storage: 'granted',
+      analytics_storage: 'granted',
+    });
+  });
 
-export const revokeConsentForEverything = () => {
+export const revokeConsentForEverything = () =>
   withGtag((gtag) => {
     gtag('consent', 'update', {
       ad_user_data: 'denied',
       ad_personalization: 'denied',
       ad_storage: 'denied',
       analytics_storage: 'denied',
-    })
-  })
-}
+    });
+  });
 
 export const markFeatureUsage = (feature: string) =>
-    performance.mark('mark_feature_usage', {
-      detail: {feature},
-    })
+  performance.mark('mark_feature_usage', {
+    detail: { feature },
+  });
 
 export const pageview = (url: string) =>
-    withGtag((gtag) => {
-      gtag('config', trackingConfig.gtmId, {
-        page_path: url,
-      })
-    })
+  withGtag((gtag) => {
+    gtag('config', trackingConfig.gtmId, {
+      page_path: url,
+    });
+  });

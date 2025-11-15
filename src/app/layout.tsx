@@ -13,8 +13,7 @@ import { SearchProvider } from '@/components/features/search/search-context';
 import { SearchOverlay } from '@/components/features/search/search-overlay';
 import { BookingProvider } from '@/lib/context/booking.context';
 import {RootInnerLayout} from '@/components/layouts/RootInnerLayout';
-import {IS_GTM_ENABLED} from '@/lib/tracking/config.tracking';
-import {GoogleTagManager} from '@/components/features/tracking/GoogleTagManager';
+
 import {Toaster} from "react-hot-toast";
 
 const poppins = Poppins({
@@ -112,12 +111,12 @@ export default async function RootLayout({ children }: Readonly<{ children: Reac
   const makeBooking = await client.getSingle('make_booking');
 
 
-
   return (
     <html lang="en" className={`${poppins.variable} ${exo2.variable} ${ptSerif.variable}`}>
       <body className={'min-h-screen text-gray-950 antialiased'}>
 
-      {IS_GTM_ENABLED && <GoogleTagManager/>}
+
+
       <RootInnerLayout>
           {/* Loading-bar */}
           <NextTopLoader color={'hsl(var(--accent))'} height={5} showSpinner={false} shadow={false} zIndex={99999} />
