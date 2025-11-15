@@ -56,9 +56,6 @@ export function GoogleTagManager({ consented }: { consented: boolean }) {
     return () => cancelIdle(handle);
   }, [consented]);
 
-  useEffect(() => {
-    console.log('Ready to load GTM', { readyToLoad, consented });
-  }, [readyToLoad, consented]);
 
   if (!readyToLoad) return null;
 
