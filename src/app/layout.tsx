@@ -76,6 +76,7 @@ export async function generateMetadata({}: Props, parent: ResolvingMetadata): Pr
     },
     verification: {
       other: {
+        'google-site-verification': 'gRDwZ-Sqgn85j_W4GYVmCfCwoS3ScXUAxbZE0V4rCQg',
         'algolia-site-verification': '3032BA6863E51546',
       }
     },
