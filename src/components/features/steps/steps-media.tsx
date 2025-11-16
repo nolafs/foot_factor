@@ -252,7 +252,7 @@ const StepMedia = ({data, index, totalItems}: StepMediaProps) => {
 
 
   return (
-      <li ref={cardRef} className={'relative isolate'} >
+      <li ref={cardRef} className={cn('relative  isolate')} style={{zIndex: index}} >
 
 
         <div ref={imageRef} className={'absolute w-full h-screen flex -z-0 justify-center'} style={{zIndex: index + 1}}>

@@ -252,10 +252,10 @@ const Step = ({title, description, step_label, image, stepNum, onStepActive}: St
   }, {scope: cardRef});
 
   return (
-      <li ref={cardRef} className={cn("perspective-dramatic w-full md:h-svh grid grid-cols-1 gap-20 py-5 md:py-10 md:grid-cols-2 gap-x-10 md:gap-x-48 justify-start items-center",
+      <li ref={cardRef} className={cn("perspective-dramatic relative w-full md:h-svh grid grid-cols-1 gap-20 py-5 md:py-10 md:grid-cols-2 gap-x-10 md:gap-x-48 justify-start items-center",
       //stepNum % 2 === 0 ? 'bg-accent' : 'bg-primary-300'
       )
-      }>
+      } style={{zIndex: 10 + stepNum}}>
         <div className={'content flex flex-col'}>
           <sub className={'text-primary-500 font-semibold mb-3 text-2xl'}>
             <span>{step_label}</span> <span>{stepNum ?? stepNum < 10 ? '0' + stepNum : stepNum}</span>
