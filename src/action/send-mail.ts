@@ -128,7 +128,6 @@ Sent from Foot Factor Website
 
       const mailer = await mailerSend.email.send(emailParams);
 
-      console.log('[EMAIL SEND] Info', mailer.body);
     }
 
     //Response email
