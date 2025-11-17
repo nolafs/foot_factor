@@ -33,19 +33,99 @@ export async function sendMail(formData: FormData) {
     });
 
     const sentFrom = new Sender(`webmaster@${process.env.MAILERSEND_DOMAIN}`, 'Foot Factor');
-    const recipients: Recipient[] = [new Recipient(`info@${process.env.MAILERSEND_DOMAIN}`, 'Contact Form Website')];
+    const recipients: Recipient[] = [new Recipient(`info@${process.env.MAILERSEND_DOMAIN}`, 'Contact Form Website'),
+      new Recipient(`webmaster@${process.env.MAILERSEND_DOMAIN}`, 'Contact Form Website')
+    ];
+
+    const textContent = `
+BOOKING REQUEST DETAILS
+=======================
+
+CONTACT INFORMATION:
+--------------------
+Name: ${validatedFields.name}
+Email: ${validatedFields.email}
+Enquiry: ${validatedFields.enquiryType}
+
+
+${validatedFields.message ? `
+MESSAGE:
+------------------
+${validatedFields.message}
+` : ''}
+
+CONSENT:
+--------
+Terms & Conditions: Accepted
+Privacy Policy: Accepted
+
+=======================
+Sent from Foot Factor Website
+    `.trim();
+
+
+    const htmlContent = `
+      <!DOCTYPE html>
+      <html>
+      <head>
+        <meta charset="utf-8">
+        <style>
+          body { font-family: Arial, sans-serif; line-height: 1.6; color: #333; }
+          .header { background: #f4f4f4; padding: 20px; border-radius: 5px; margin-bottom: 20px; }
+          .section { margin-bottom: 20px; }
+          .section h3 { color: #2c5aa0; border-bottom: 2px solid #2c5aa0; padding-bottom: 5px; }
+          .field { margin: 8px 0; }
+          .field strong { display: inline-block; width: 150px; }
+          .footer { background: #f4f4f4; padding: 15px; border-radius: 5px; margin-top: 20px; font-size: 12px; color: #666; }
+        </style>
+      </head>
+      <body>
+        <div class="header">
+          <h2>Contact Website</h2>
+        </div>
+
+        <div class="section">
+          <h3>Contact Information</h3>
+          <div class="field"><strong>Name:</strong> ${validatedFields.name} </div>
+          <div class="field"><strong>Email:</strong> ${validatedFields.email}</div>
+          <div class="field"><strong>Enquiry:</strong> ${validatedFields.enquiryType}</div>
+        </div>
+
+   
+        ${validatedFields.message ? `
+        <div class="section">
+          <h3>Message</h3>
+          <div style="background: #f9f9f9; padding: 15px; border-left: 4px solid #2c5aa0;">
+            ${validatedFields.message.replace(/\n/g, '<br>')}
+          </div>
+        </div>
+        ` : ''}
+
+        <div class="section">
+          <h3>Consent</h3>
+          <div class="field"><strong>Terms & Conditions:</strong> Accepted</div>
+          <div class="field"><strong>Privacy Policy:</strong> Accepted</div>
+        </div>
+
+        <div class="footer">
+          Sent from Foot Factor Website<br>
+          Received on: ${new Date().toLocaleString('en-GB')}
+        </div>
+      </body>
+      </html>
+    `;
 
     if (validatedFields) {
       const emailParams = new EmailParams()
         .setFrom(sentFrom)
         .setTo(recipients)
-        .setReplyTo(sentFrom)
+        .setReplyTo(new Sender(validatedFields.email, `${validatedFields.name}`))
         .setSubject(`Contact submission: ${formData.get('enquiryType') as string}`)
         .setText(`Name: ${formData.get('name') as string}`)
         .setText(`Email: ${formData.get('email') as string}`)
         .setText(`Enquiry Type: ${formData.get('enquiryType') as string}`)
-        .setText('Message:')
-        .setHtml(`${(formData.get('message') as string) ?? ''}`);
+        .setText(textContent)
+        .setHtml(htmlContent);
 
       const mailer = await mailerSend.email.send(emailParams);
 

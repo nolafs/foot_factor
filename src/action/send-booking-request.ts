@@ -149,6 +149,9 @@ Sent from Foot Factor Website
       </html>
     `;
 
+    console.log('EMAIL html',htmlContent);
+    console.log('EMAIL text',textContent);
+
     // Create and send the email
     const emailParams = new EmailParams()
         .setFrom(sentFrom)
