@@ -33,8 +33,7 @@ export async function sendMail(formData: FormData) {
     });
 
     const sentFrom = new Sender(`webmaster@${process.env.MAILERSEND_DOMAIN}`, 'Foot Factor');
-    const recipients: Recipient[] = [new Recipient(`info@${process.env.MAILERSEND_DOMAIN}`, 'Contact Form Website'),
-      new Recipient(`webmaster@${process.env.MAILERSEND_DOMAIN}`, 'Contact Form Website')
+    const recipients: Recipient[] = [new Recipient(`info@${process.env.MAILERSEND_DOMAIN}`, 'Contact Form Website')
     ];
 
     const textContent = `
