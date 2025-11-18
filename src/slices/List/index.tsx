@@ -29,8 +29,6 @@ const List: FC<ListProps> = ({ slice }) => {
 
   if (slice.variation === 'conditions') {
 
-      console.log('conditions', slice.primary.tags)
-
     return (<Container as={'section'} padding={'lg'} fullWidth={true} color={'accent'} data-slice-type={slice.slice_type} data-slice-variation={slice.variation}>
 
 

@@ -3199,6 +3199,31 @@ export interface ContactFormSectionSliceDefaultPrimaryItemsItem {
 }
 
 /**
+ * Item in *ContactFormSection → Booking Form → Primary → Items*
+ */
+export interface ContactFormSectionSliceBookingFormPrimaryItemsItem {
+  /**
+   * Label field in *ContactFormSection → Booking Form → Primary → Items*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: contact_form_section.bookingForm.primary.items[].label
+   * - **Documentation**: https://prismic.io/docs/fields/text
+   */
+  label: prismic.KeyTextField;
+
+  /**
+   * Value field in *ContactFormSection → Booking Form → Primary → Items*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: contact_form_section.bookingForm.primary.items[].value
+   * - **Documentation**: https://prismic.io/docs/fields/text
+   */
+  value: prismic.KeyTextField;
+}
+
+/**
  * Primary content in *ContactFormSection → Default → Primary*
  */
 export interface ContactFormSectionSliceDefaultPrimary {
@@ -3237,9 +3262,47 @@ export type ContactFormSectionSliceDefault = prismic.SharedSliceVariation<
 >;
 
 /**
+ * Primary content in *ContactFormSection → Booking Form → Primary*
+ */
+export interface ContactFormSectionSliceBookingFormPrimary {
+  /**
+   * Heading field in *ContactFormSection → Booking Form → Primary*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: contact_form_section.bookingForm.primary.heading
+   * - **Documentation**: https://prismic.io/docs/fields/text
+   */
+  heading: prismic.KeyTextField;
+
+  /**
+   * Items field in *ContactFormSection → Booking Form → Primary*
+   *
+   * - **Field Type**: Group
+   * - **Placeholder**: *None*
+   * - **API ID Path**: contact_form_section.bookingForm.primary.items[]
+   * - **Documentation**: https://prismic.io/docs/fields/repeatable-group
+   */
+  items: prismic.GroupField<Simplify<ContactFormSectionSliceBookingFormPrimaryItemsItem>>;
+}
+
+/**
+ * Booking Form variation for ContactFormSection Slice
+ *
+ * - **API ID**: `bookingForm`
+ * - **Description**: Default
+ * - **Documentation**: https://prismic.io/docs/slices
+ */
+export type ContactFormSectionSliceBookingForm = prismic.SharedSliceVariation<
+  'bookingForm',
+  Simplify<ContactFormSectionSliceBookingFormPrimary>,
+  never
+>;
+
+/**
  * Slice variation for *ContactFormSection*
  */
-type ContactFormSectionSliceVariation = ContactFormSectionSliceDefault;
+type ContactFormSectionSliceVariation = ContactFormSectionSliceDefault | ContactFormSectionSliceBookingForm;
 
 /**
  * ContactFormSection Shared Slice
@@ -6469,8 +6532,11 @@ declare module '@prismicio/client' {
       ContactFormSectionSlice,
       ContactFormSectionSliceDefaultPrimaryItemsItem,
       ContactFormSectionSliceDefaultPrimary,
+      ContactFormSectionSliceBookingFormPrimaryItemsItem,
+      ContactFormSectionSliceBookingFormPrimary,
       ContactFormSectionSliceVariation,
       ContactFormSectionSliceDefault,
+      ContactFormSectionSliceBookingForm,
       FaqsSlice,
       FaqsSliceDefaultPrimaryFaqsItem,
       FaqsSliceDefaultPrimary,

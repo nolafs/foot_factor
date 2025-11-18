@@ -18,6 +18,11 @@
     w = ":width"
     q = ":quality"
 [[redirects]]
+    from = "/contact/appointments"
+    to = "/appointments"
+    status = 301
+    force = true
+[[redirects]]
     from = "/the-difference-between-our-bespoke-orthotics-and-our-custom-insoles/"
     to = "/resources/blog/the-difference-between-our-bespoke-orthotics-and-our-custom-insoles/"
     status = 301
