@@ -452,8 +452,46 @@ force = true
   to = "/conditions/foot/plantar-fasciitis"
   status = 301
   force = true
-
-
+[[redirects]]
+  from = "/contact/testimonials"
+  to = "/resources/case-studies--testimonials"
+  status = 301
+  force = true
+[[redirects]]
+  from = "/case-studies-knee-pain-"
+  to = "/resources/case-studies--testimonials"
+  status = 301
+  force = true
+[[redirects]]
+  from = "/the-team-x/reviews"
+  to = "/resources/case-studies--testimonials"
+  status = 301
+  force = true
+[[redirects]]
+  from = "/orthotics/golf"
+  to = "/services/orthotics/golf"
+  status = 301
+  force = true
+[[redirects]]
+  from = "/golf"
+  to = "/services/orthotics/golf"
+  status = 301
+  force = true
+[[redirects]]
+  from = "/benefits-of-"
+  to = "/"
+  status = 301
+  force = true
+[[redirects]]
+  from = "/orthotics-for-pregnant-women/*"
+  to = "/"
+  status = 301
+  force = true
+[[redirects]]
+  from = "/contact/testimonials"
+  to = "/resources/case-studies--testimonials"
+  status = 301
+  force = true
 
 
 [[headers]]
