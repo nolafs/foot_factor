@@ -552,6 +552,11 @@ force = true
   to = "/resources/case-studies--testimonials"
   status = 301
   force = true
+[[redirects]]
+  from = "/5-star-treatment"
+  to = "/about-us"
+  status = 301
+  force = true
 
 
 [[headers]]
