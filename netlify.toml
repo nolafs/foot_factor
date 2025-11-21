@@ -557,7 +557,11 @@ force = true
   to = "/about-us"
   status = 301
   force = true
-
+[[redirects]]
+  from = "/run-better"
+  to = "/services/orthotics/running--trail-orthotics"
+  status = 301
+  force = true
 
 [[headers]]
 for = "/*"
