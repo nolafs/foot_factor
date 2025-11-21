@@ -430,7 +430,7 @@ force = true
   from = "/blog"
   to = "/resources/blog"
   status = 301
-  query = { tags = ":category" }
+  query = { category = ":category" }
   force = true
 [[redirects]]
   from = "/blog?category=news"
@@ -502,6 +502,22 @@ force = true
   to = "/resources/case-studies--testimonials"
   status = 301
   force = true
+[[redirects]]
+  from = "/terms-and-conditions"
+  to = "/legal/terms-and-conditions"
+  status = 301
+  force = true
+[[redirects]]
+  from = "/privacy-policy-for-foot-factor"
+  to = "/legal/privacy-policy-for-foot-factor"
+  status = 301
+  force = true
+[[redirects]]
+  from = "/privacy-notice-for-foot-factor"
+  to = "/legal/privacy-policy-for-foot-factor"
+  status = 301
+  force = true
+
 
 
 [[headers]]
