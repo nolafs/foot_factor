@@ -517,6 +517,16 @@ force = true
   to = "/legal/privacy-policy-for-foot-factor"
   status = 301
   force = true
+[[redirects]]
+  from = "/contact/useful-links"
+  to = "/resources/new-patient"
+  status = 301
+  force = true
+[[redirects]]
+  from = "/the-team/reviews"
+  to = "/resources/case-studies--testimonials"
+  status = 301
+  force = true
 
 
 
