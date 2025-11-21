@@ -433,7 +433,7 @@ force = true
   query = { tags = ":category" }
   force = true
 [[redirects]]
-  from = "/profile/*"
+  from = "/portfolio/*"
   to = "/resources/case-studies--testimonials"
   status = 301
   force = true
