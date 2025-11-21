@@ -443,6 +443,11 @@ force = true
    status = 301
    force = true
 [[redirects]]
+  from = "/category/*"
+  to = "/resources/blog"
+  status = 301
+  force = true
+[[redirects]]
   from = "/portfolio/*"
   to = "/resources/case-studies--testimonials"
   status = 301
