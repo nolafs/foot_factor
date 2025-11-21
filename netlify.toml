@@ -478,6 +478,11 @@ force = true
   status = 301
   force = true
 [[redirects]]
+  from = "/golf.html"
+  to = "/services/orthotics/golf"
+  status = 301
+  force = true
+[[redirects]]
   from = "/benefits-of-"
   to = "/"
   status = 301
