@@ -449,7 +449,7 @@ force = true
   force = true
 [[redirects]]
   from = "/understanding-plantar-"
-  to = "//conditions/foot/plantar-fasciitis"
+  to = "/conditions/foot/plantar-fasciitis"
   status = 301
   force = true
 
