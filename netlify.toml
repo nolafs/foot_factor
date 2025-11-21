@@ -414,6 +414,18 @@ force = true
   to = "/resources/blog"
   status = 301
   force = true
+[[redirects]]
+  from = "/blog"
+  to = "/resources/blog"
+  status = 301
+  query = { tags = ":tags" }
+  force = true
+[[redirects]]
+  from = "/blog"
+  to = "/resources/blog"
+  status = 301
+  query = { tags = ":category" }
+  force = true
 
 [[headers]]
 for = "/*"
