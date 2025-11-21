@@ -74,12 +74,21 @@ export async function generateMetadata({}: Props, parent: ResolvingMetadata): Pr
     openGraph: {
       images: [...defaultImages],
     },
+    icons: {
+      icon: [
+        { url: "/favicon.png?v=2", type: "image/png", sizes: "32x32" },
+        { url: "/favicon.png?v=2", type: "image/png", sizes: "16x16" },
+      ],
+      shortcut: "/favicon.png",
+      apple: "/apple-icon.png",
+    },
     verification: {
       other: {
         'google-site-verification': 'gRDwZ-Sqgn85j_W4GYVmCfCwoS3ScXUAxbZE0V4rCQg',
         'algolia-site-verification': '3032BA6863E51546',
       }
     },
+
     robots: {
       index: true,
       follow: true,
