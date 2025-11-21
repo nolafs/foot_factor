@@ -437,6 +437,11 @@ force = true
   to = "/resources/blog?category=news"
   status = 301
   force = true
+ [[redirects]]
+   from = "/tag/*"
+   to = "/resources/blog"
+   status = 301
+   force = true
 [[redirects]]
   from = "/portfolio/*"
   to = "/resources/case-studies--testimonials"
@@ -527,7 +532,6 @@ force = true
   to = "/resources/case-studies--testimonials"
   status = 301
   force = true
-
 
 
 [[headers]]
