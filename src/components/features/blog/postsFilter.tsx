@@ -6,6 +6,7 @@ import { Categories } from './postsCategories';
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
 
+
 interface PostsFilterProps {
   categorySelected?: string;
   tagSelected?: string;
@@ -13,7 +14,7 @@ interface PostsFilterProps {
   url?: string;
 }
 
-export const Filter = ({ tagSelected, categorySelected, url = 'blog', hasRss = true }: PostsFilterProps) => {
+export const Filter = ({ tagSelected, categorySelected, url = '/resources/blog', hasRss = true }: PostsFilterProps) => {
   return (
     <div className="relative flex flex-wrap items-center justify-between gap-2 z-20">
       <div className={'flex flex-wrap items-center gap-5'}>

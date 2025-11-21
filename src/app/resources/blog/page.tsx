@@ -203,7 +203,7 @@ export default async function Blog({ searchParams }: Props) {
       />
       {page === 1 && !categories && !tags && <FeaturedPosts />}
       <Container className="mt-16 pb-24">
-        <Filter categorySelected={categories ? categories[0] : undefined} tagSelected={tags ? tags[0] : undefined} />
+        <Filter categorySelected={categories ? categories[0] : undefined} url={`${process.env.NEXT_PUBLIC_BASE_URL}/resources/blog`} tagSelected={tags ? tags[0] : undefined} />
         <Posts page={page} category={categories} tags={tags} />
         <Pagination contentType={'posts'} slug={'resources/blog'} page={page} category={categories} tags={tags} />
       </Container>

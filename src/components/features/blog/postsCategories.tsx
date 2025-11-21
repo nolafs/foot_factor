@@ -6,7 +6,7 @@ import Link from 'next/link';
 
 import React from 'react';
 
-export async function Categories({ selected, url = 'blog' }: { selected?: string; url?: string }) {
+export async function Categories({ selected, url = '/resources/blog' }: { selected?: string; url?: string }) {
   const client = createClient();
   const categories = await client
     .getByType('post_category', {
@@ -46,7 +46,7 @@ export async function Categories({ selected, url = 'blog' }: { selected?: string
         {categories.map(category => (
           <MenuItem key={category.uid}>
             <Link
-              href={`/${url}?category=${category.uid}`}
+              href={`${url}?category=${category.uid}`}
               data-selected={category.uid === selected ? true : undefined}
               className="group grid grid-cols-[16px,1fr] items-center gap-2 rounded-md px-2 py-1 data-[focus]:bg-gray-950/5">
               <CheckIcon className="hidden size-4 group-data-[selected]:block" />

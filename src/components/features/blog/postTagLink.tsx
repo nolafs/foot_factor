@@ -22,7 +22,7 @@ export const PostTagLink = ({
   const currentUrl = new URL(window.location.href);
   const categoryQuery = currentUrl.searchParams.get('category');
 
-  const newUrl = categoryQuery ? `/${url}?category=${categoryQuery}&tags=` : `/${url}?tags=`;
+  const newUrl = categoryQuery ? `${url}?category=${categoryQuery}&tags=` : `${url}?tags=`;
 
   return (
     <Link
