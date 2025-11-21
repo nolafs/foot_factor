@@ -442,6 +442,19 @@ force = true
   to = "/resources/case-studies--testimonials"
   status = 301
   force = true
+[[redirects]]
+  from = "/running-orthotics"
+  to = "/services/orthotics/running--trail-orthotics"
+  status = 301
+  force = true
+[[redirects]]
+  from = "/understanding-plantar-"
+  to = "//conditions/foot/plantar-fasciitis"
+  status = 301
+  force = true
+
+
+
 
 [[headers]]
 for = "/*"
