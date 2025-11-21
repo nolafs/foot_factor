@@ -562,6 +562,11 @@ force = true
   to = "/services/orthotics/running--trail-orthotics"
   status = 301
   force = true
+[[redirects]]
+  from = "/testimonials"
+  to = "/resources/case-studies--testimonials"
+  status = 301
+  force = true
 
 [[headers]]
 for = "/*"
