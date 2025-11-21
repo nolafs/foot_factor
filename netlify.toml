@@ -567,6 +567,12 @@ force = true
   to = "/resources/case-studies--testimonials"
   status = 301
   force = true
+[[redirects]]
+  from = "/author/clinic"
+  to = "/about-us"
+  status = 301
+  force = true
+
 
 [[headers]]
 for = "/*"
