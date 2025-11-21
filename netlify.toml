@@ -432,6 +432,11 @@ force = true
   status = 301
   query = { tags = ":category" }
   force = true
+[[redirects]]
+  from = "/profile/*"
+  to = "/resources/case-studies--testimonials"
+  status = 301
+  force = true
 
 [[headers]]
 for = "/*"
