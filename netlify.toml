@@ -443,8 +443,23 @@ force = true
    status = 301
    force = true
 [[redirects]]
-  from = "/category/*"
-  to = "/resources/blog"
+  from = "/tag/:tag/page/:page"
+  to = "/resources/blog?tags=:tag"
+  status = 301
+  force = true
+[[redirects]]
+  from = "/tag/:tag"
+  to = "/resources/blog?tags=:tag"
+  status = 301
+  force = true
+[[redirects]]
+  from = "/category/:cat/page/:page"
+  to = "/resources/blog?category=:cat"
+  status = 301
+  force = true
+[[redirects]]
+  from = "/category/:cat"
+  to = "/resources/blog?catgory=:cat"
   status = 301
   force = true
 [[redirects]]
