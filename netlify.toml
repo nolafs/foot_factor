@@ -374,6 +374,12 @@ force = true
   force = true
 
 [[redirects]]
+  from = "/new-semicustom-insoles-for-all/"
+  to = "/services/orthotics/street"
+  status = 301
+  force = true
+
+[[redirects]]
   from = "/orthotics/running-orthotics/"
   to = "/services/orthotics/running--trail-orthotics"
   status = 301
