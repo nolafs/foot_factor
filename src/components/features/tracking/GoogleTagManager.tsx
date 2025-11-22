@@ -10,34 +10,27 @@ type IdleHandle = number;
 export const scheduleIdle = (cb: () => void): IdleHandle => {
   if (typeof window !== 'undefined') {
     const w = window as any;
-
     if (typeof w.requestIdleCallback === 'function') {
       return w.requestIdleCallback(cb);
     }
-
     return window.setTimeout(cb, 500);
   }
-
-  // SSR fallback – never used in browser
   return 0 as IdleHandle;
 };
 
 export const cancelIdle = (h: IdleHandle) => {
   if (typeof window !== 'undefined') {
     const w = window as any;
-
     if (typeof w.cancelIdleCallback === 'function') {
       w.cancelIdleCallback(h);
       return;
     }
-
     clearTimeout(h);
   }
 };
 
-// Local safe gtag wrapper (no direct dependency on gtag existing)
-const gtag = (...args: unknown[]) => {
-  if (typeof window === 'undefined') return;
+// Safe wrapper
+const gtag = (...args: any[]) => {
   (window as any).dataLayer = (window as any).dataLayer ?? [];
   (window as any).dataLayer.push(args);
 };
@@ -45,28 +38,39 @@ const gtag = (...args: unknown[]) => {
 export function GoogleTagManager({ consented }: { consented: boolean }) {
   const [readyToLoad, setReadyToLoad] = useState(false);
 
-  // When consent changes to true, schedule loading
   useEffect(() => {
     if (!consented) {
       setReadyToLoad(false);
       return;
     }
-
-    const handle = scheduleIdle(() => setReadyToLoad(true));
-    return () => cancelIdle(handle);
+    const h = scheduleIdle(() => setReadyToLoad(true));
+    return () => cancelIdle(h);
   }, [consented]);
-
 
   if (!readyToLoad) return null;
 
   return (
     <>
+      {/* Required GTM bootstrap — this MUST run BEFORE we load gtm.js */}
       <Script
-        id="gtm"
+        id="gtm-bootstrap"
+        strategy="afterInteractive"
+      >
+        {`
+          window.dataLayer = window.dataLayer || [];
+          window.dataLayer.push({
+            'gtm.start': new Date().getTime(),
+            event: 'gtm.js'
+          });
+        `}
+      </Script>
+
+      {/* Load GTM AFTER layer is initialized */}
+      <Script
+        id="gtm-script"
         strategy="afterInteractive"
         src={`https://www.googletagmanager.com/gtm.js?id=${trackingConfig.gtmId}`}
         onLoad={() => {
-          // Send consent mode info via dataLayer (safe even if GTM just booted)
           gtag('consent', 'update', {
             ad_storage: 'granted',
             ad_user_data: 'granted',
@@ -75,6 +79,8 @@ export function GoogleTagManager({ consented }: { consented: boolean }) {
           });
         }}
       />
+
+      {/* NoScript fallback */}
       <noscript>
         <iframe
           src={`https://www.googletagmanager.com/ns.html?id=${trackingConfig.gtmId}`}
