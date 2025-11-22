@@ -7,7 +7,8 @@ import {motion} from 'framer-motion'
 import {trackingConfig} from '@/lib/tracking/config.tracking';
 import {grantConsentForEverything, revokeConsentForEverything} from '@/lib/tracking/utils.tracking';
 import Link from 'next/link';
-import { GoogleTagManager } from '@/components/features/tracking/GoogleTagManager';
+
+import { GoogleAnalytics } from '@/components/features/tracking/GoogleAnalytics';
 
 export const RootInnerLayout = ({children}: { children: ReactNode }) => {
 
@@ -29,7 +30,7 @@ export const RootInnerLayout = ({children}: { children: ReactNode }) => {
 
       {children}
       {IS_GTM_ENABLED && <>
-      <GoogleTagManager consented={consent} />
+      <GoogleAnalytics consented={consent} />
       <motion.div
         initial={{ y: '100vh', opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
