@@ -572,6 +572,11 @@ force = true
   to = "/about-us"
   status = 301
   force = true
+[[redirects]]
+  from = "/the-team-x/testimonials"
+  to = "/resources/case-studies--testimonials"
+  status = 301
+  force = true
 
 
 [[headers]]
