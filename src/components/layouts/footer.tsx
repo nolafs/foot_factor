@@ -36,9 +36,10 @@ export function Footer({ navigation, settings }: FooterProps) {
   }));
 
 
-  return (
-    <footer>
+  return (<>
+
       <CallToActionBooking {...footerCta}  />
+  <footer>
       <div className="relative bg-primary pt-16 sm:pt-24 md:pt-24">
         <Container className={'relative z-10 block pb-10'}>
               <div className="mt-10 grid grid-cols-2 gap-y-10 pb-10 lg:grid-cols-6 lg:gap-8">
@@ -166,6 +167,7 @@ export function Footer({ navigation, settings }: FooterProps) {
         </Container>
       </div>
     </footer>
+    </>
   );
 }
 
