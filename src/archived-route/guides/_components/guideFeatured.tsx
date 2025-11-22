@@ -66,7 +66,7 @@ export async function FeaturedPosts() {
                   {dayjs(post.data.publishing_date).format('dddd, MMMM D, YYYY')}
                 </div>
                 <div className="mt-2 text-base/7 font-medium">
-                  <Link href={`/resources/guides/${post.uid}`}>
+                  <Link href={`/src/archived-route/guides/${post.uid}`}>
                     <span className="absolute inset-0" />
                     {post.data.name}
                   </Link>
@@ -77,7 +77,7 @@ export async function FeaturedPosts() {
                 </div>
 
                 <div className="mt-4 flex space-x-4">
-                  <Link href={`/resources/guides/${post.uid}`} className={cn(buttonVariants(), 'w-full')}>
+                  <Link href={`/src/archived-route/guides/${post.uid}`} className={cn(buttonVariants(), 'w-full')}>
                     Read more
                   </Link>
                   {isFilled.linkToMedia(post.data.file) && (

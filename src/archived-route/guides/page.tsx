@@ -166,7 +166,7 @@ async function Posts({ page, category, tags : Tags }: { page: number; category?:
           </div>
           <div className="sm:col-span-2 sm:max-w-2xl">
             <h2 className="text-sm/5 font-medium">
-              <Link href={`/resources/guides/${post.uid}`}>
+              <Link href={`/src/archived-route/guides/${post.uid}`}>
                 {post.data.name}
               </Link>
             </h2>
