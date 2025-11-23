@@ -52,7 +52,7 @@ const List: FC<ListProps> = ({ slice }) => {
 
                            tags={
                              slice.primary.tags
-                               // eslint-disable-next-line @typescript-eslint/no-unsafe-return
+                                
                                ?.map(item => item.tag.link_type !== 'Any' && item.tag?.id)
                                .filter((id): id is string => typeof id === "string")
                              || undefined

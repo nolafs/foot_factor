@@ -1,153 +1,164 @@
-'use client'
-import React, {useCallback, useEffect, useLayoutEffect, useRef, useState} from 'react';
-import {type TeamCarouselSliceDefaultPrimaryMembersItem} from '@/prismic-types';
-import {PrismicNextImage} from '@prismicio/next';
-import {Button} from '@/components/ui/button';
-import {ArrowRight} from 'lucide-react';
-import {PrismicRichText} from '@prismicio/react';
-import {type HTMLMotionProps, motion, type MotionValue, useMotionValueEvent, useSpring} from 'framer-motion';
-import {ScrollArea} from '@/components/ui/scroll-area';
-import {isFilled} from '@prismicio/client';
+'use client';
+import React, { useCallback, useEffect, useLayoutEffect, useRef, useState } from 'react';
+import { type TeamCarouselSliceDefaultPrimaryMembersItem } from '@/prismic-types';
+import { PrismicNextImage } from '@prismicio/next';
+import { Button } from '@/components/ui/button';
+import { ArrowRight } from 'lucide-react';
+import { PrismicRichText } from '@prismicio/react';
+import { type HTMLMotionProps, motion, type MotionValue, useMotionValueEvent, useSpring } from 'framer-motion';
+import { ScrollArea } from '@/components/ui/scroll-area';
+import { isFilled } from '@prismicio/client';
 import TeamVideo from '@/components/features/slider/team-slider/team-video';
-import type {RectReadOnly} from 'react-use-measure';
-
-
+import type { RectReadOnly } from 'react-use-measure';
 
 interface TeamCardProps {
-    id: string
-    data: TeamCarouselSliceDefaultPrimaryMembersItem,
-    bounds: RectReadOnly,
-    scrollX: MotionValue<number>
-    onExpand?: (id: string, isExpanded: boolean) => void;
-    currentExpanded?: string | null;
+  id: string;
+  data: TeamCarouselSliceDefaultPrimaryMembersItem;
+  bounds: RectReadOnly;
+  scrollX: MotionValue<number>;
+  onExpand?: (id: string, isExpanded: boolean) => void;
+  currentExpanded?: string | null;
 }
 
-export const TeamCard = ({id,data, bounds, scrollX, onExpand,  currentExpanded}: TeamCardProps & HTMLMotionProps<'div'>) => {
+// Helper: pure(ish) function that *still* reads DOM, but only used in effects
+function computeOpacityFor(element: HTMLElement, bounds: RectReadOnly): number {
+  if (!element || bounds.width === 0) return 1;
+
+  const rect = element.getBoundingClientRect();
+
+  if (rect.left < bounds.left) {
+    const diff = bounds.left - rect.left;
+    const percent = diff / rect.width;
+    return Math.max(0.5, 1 - percent);
+  } else if (rect.right > bounds.right) {
+    const diff = rect.right - bounds.right;
+    const percent = diff / rect.width;
+    return Math.max(0.5, 1 - percent);
+  } else {
+    return 1;
+  }
+}
+
+export const TeamCard = ({
+  id,
+  data,
+  bounds,
+  scrollX,
+  onExpand,
+  currentExpanded,
+}: TeamCardProps & HTMLMotionProps<'div'>) => {
   const ref = useRef<HTMLDivElement | null>(null);
-  const [isExpanded, setIsExpanded] = useState(false);
 
-  const computeOpacity = useCallback(() => {
-    const element = ref.current;
-    if (!element || bounds.width === 0) return 1;
+  // 🔹 1. Derive expansion from parent-controlled state
+  const isExpanded = currentExpanded === id;
 
-    const rect = element.getBoundingClientRect();
-
-    if (rect.left < bounds.left) {
-      const diff = bounds.left - rect.left;
-      const percent = diff / rect.width;
-      return Math.max(0.5, 1 - percent);
-    } else if (rect.right > bounds.right) {
-      const diff = rect.right - bounds.right;
-      const percent = diff / rect.width;
-      return Math.max(0.5, 1 - percent);
-    } else {
-      return 1;
-    }
-  }, [ref, bounds.width, bounds.left, bounds.right]);
-
-  const opacity = useSpring(computeOpacity(), {
+  // 🔹 2. Spring with static initial value
+  const opacity = useSpring(1, {
     stiffness: 154,
     damping: 23,
   });
 
+  // 🔹 3. Update opacity based on DOM + bounds in effects only
   useLayoutEffect(() => {
-    opacity.set(computeOpacity());
-  }, [computeOpacity, opacity]);
+    const element = ref.current;
+    if (!element) return;
+
+    const value = computeOpacityFor(element, bounds);
+    opacity.set(value);
+  }, [bounds.left, bounds.right, bounds.width, opacity]);
 
   useMotionValueEvent(scrollX, 'change', () => {
-    opacity.set(computeOpacity());
+    const element = ref.current;
+    if (!element) return;
+
+    const value = computeOpacityFor(element, bounds);
+    opacity.set(value);
   });
 
-  useEffect(() => {
-    if( isExpanded) {
-      if(id !== currentExpanded) {
-        setIsExpanded(false);
-        onExpand?.(id, false);
-      }
-    }
-
-  }, [currentExpanded, isExpanded, onExpand, id]);
-
+  // 🔹 4. Toggle just notifies parent
   const toggleExpanded = () => {
-    setIsExpanded(!isExpanded);
-    onExpand?.(id, !isExpanded);
+    const next = !isExpanded;
+    onExpand?.(id, next);
   };
 
-
   return (
-	  <motion.div
-		  ref={ref}
-		  style={{opacity}}>
-      <div className={'relative flex flex-col rounded-3xl bg-white p-5 transition-shadow duration-700 ease-in-out group hover:z-20 hover:shadow-[0px_4px_25px_0px_rgba(0,0,0,0.10)]'}>
+    <motion.div ref={ref} style={{ opacity }}>
+      <div
+        className={
+          'group relative flex flex-col rounded-3xl bg-white p-5 transition-shadow duration-700 ease-in-out hover:z-20 hover:shadow-[0px_4px_25px_0px_rgba(0,0,0,0.10)]'
+        }>
         <motion.div
-            layout
-            initial={{
-              width: '420px',
-              maxWidth: '420px',
-            }}
-            className={'flex flex-col max-h-[940px]'}
-            animate={{
-              width: isExpanded ? '904px' : '420px',
-              maxWidth: isExpanded ? '904px' : '420px'
-            }}
-            transition={{
-              duration: 0.5,
-              ease: "easeInOut"
-            }}
-        >
-        <div className={'flex gap-5 items-start justify-between'}>
-          <div className={'flex flex-col max-w-md lg:max-w-[420px] lg:max-h-[743px] w-full flex-shrink-0'}>
-            <div className={'flex flex-col space-y-5 rounded-2xl overflow-hidden'}>
-              <div className={'aspect-h-16 aspect-w-9 relative w-full'}>
-              {isFilled.embed(data.video) ? <TeamVideo id={id} title={data.title ?? ''} video={data.video} image={data.photo} loading={'lazy'}/> :
-              <PrismicNextImage quality={55} field={data.photo} className={'inset-x-0 h-full w-full object-center object-cover'}/>}
+          layout
+          initial={{
+            width: '420px',
+            maxWidth: '420px',
+          }}
+          className={'flex max-h-[940px] flex-col'}
+          animate={{
+            width: isExpanded ? '904px' : '420px',
+            maxWidth: isExpanded ? '904px' : '420px',
+          }}
+          transition={{
+            duration: 0.5,
+            ease: 'easeInOut',
+          }}>
+          <div className={'flex items-start justify-between gap-5'}>
+            <div className={'flex w-full max-w-md flex-shrink-0 flex-col lg:max-h-[743px] lg:max-w-[420px]'}>
+              <div className={'flex flex-col space-y-5 overflow-hidden rounded-2xl'}>
+                <div className={'aspect-h-16 aspect-w-9 relative w-full'}>
+                  {isFilled.embed(data.video) ? (
+                    <TeamVideo
+                      id={id}
+                      title={data.title ?? ''}
+                      video={data.video}
+                      image={data.photo}
+                      loading={'lazy'}
+                    />
+                  ) : (
+                    <PrismicNextImage
+                      quality={55}
+                      field={data.photo}
+                      className={'inset-x-0 h-full w-full object-cover object-center'}
+                    />
+                  )}
+                </div>
+              </div>
+              <div className={'mt-5 flex flex-col items-start space-y-1'}>
+                <h3 className={'text-3xl font-semibold transition ease-in-out group-hover:text-accent'}>{data.name}</h3>
+                <p className={'text-xl text-gray-300'}>{data.title}</p>
               </div>
             </div>
-            <div className={'flex flex-col items-start mt-5 space-y-1'}>
-              <h3 className={'text-3xl font-semibold transition ease-in-out group-hover:text-accent'}>{data.name}</h3>
-              <p className={'text-xl text-gray-300'}>{data.title}</p>
-            </div>
-          </div>
-          <div className={'relative overflow-hidden'}>
-            <motion.div
-                className={'prose prose-lg max-w-none  min-w-[400px] overflow-hidden'}
+            <div className={'relative overflow-hidden'}>
+              <motion.div
+                className={'prose prose-lg min-w-[400px] max-w-none overflow-hidden'}
                 initial={{
-                  opacity: 0
+                  opacity: 0,
                 }}
                 animate={{
-                  opacity: isExpanded ? 100: 0
+                  opacity: isExpanded ? 100 : 0,
                 }}
                 transition={{
                   duration: 0.6,
-                  ease: "easeInOut"
-                }}
-            >
-              <ScrollArea className="h-[743px] w-[452px] px-4">
-              <PrismicRichText field={data.bio}/>
-              </ScrollArea>
-            </motion.div>
+                  ease: 'easeInOut',
+                }}>
+                <ScrollArea className="h-[743px] w-[452px] px-4">
+                  <PrismicRichText field={data.bio} />
+                </ScrollArea>
+              </motion.div>
+            </div>
           </div>
-        </div>
 
-        <div className={'relative flex items-end justify-end mt-5'}>
-          <Button
-              onClick={toggleExpanded}
-              size={'icon'}
-              variant={'secondary'}
-              className={'w-12 h-12 bg-accent'}
-          >
-            <motion.div
-                animate={{rotate: isExpanded ? 180 : 0}}
-                transition={{duration: 0.3}}
-            >
-              <ArrowRight size={32} strokeWidth={3} className={'text-white'}/>
-            </motion.div>
-          </Button>
-        </div>
-      </motion.div>
+          <div className={'relative mt-5 flex items-end justify-end'}>
+            <Button onClick={toggleExpanded} size={'icon'} variant={'secondary'} className={'h-12 w-12 bg-accent'}>
+              <motion.div animate={{ rotate: isExpanded ? 180 : 0 }} transition={{ duration: 0.3 }}>
+                <ArrowRight size={32} strokeWidth={3} className={'text-white'} />
+              </motion.div>
+            </Button>
+          </div>
+        </motion.div>
       </div>
     </motion.div>
-  )
-}
+  );
+};
 
 export default TeamCard;

@@ -89,7 +89,9 @@ function BentoHeading({
         </Heading>
       </div>
       <div className="mt-5 flex items-center md:mt-0">
-        {links?.map(link => <ButtonSliceVariation key={link.text} link={link} />)}
+        {links?.map(link => (
+          <ButtonSliceVariation key={link.text} link={link} />
+        ))}
       </div>
     </div>
   );
@@ -146,13 +148,9 @@ export function BentoSection({ dark, heading, subheading, listings, links, body 
               <PrismicRichText field={body} />
             </div>
             <div className="mt-5">
-              {links?.map(link => (
+              {links?.map((link, index) => (
                 <ButtonSliceVariation
-                  key={
-                    link.text
-                      ? link?.text.toLowerCase().replace(/ /g, '-')
-                      : Math.random().toString(36).substring(2, 15)
-                  }
+                  key={link.text ? `${link?.text.toLowerCase().replace(/ /g, '-')}` : 'bento' + index}
                   link={link}
                 />
               ))}
@@ -174,11 +172,9 @@ export function BentoSection({ dark, heading, subheading, listings, links, body 
             <PrismicRichText field={body} />
           </div>
           <div className="mt-5">
-            {links?.map(link => (
+            {links?.map((link, index) => (
               <ButtonSliceVariation
-                key={
-                  link.text ? link?.text.toLowerCase().replace(/ /g, '-') : Math.random().toString(36).substring(2, 15)
-                }
+                key={link.text ? `${link?.text.toLowerCase().replace(/ /g, '-')}` : 'bento' + index}
                 link={link}
               />
             ))}

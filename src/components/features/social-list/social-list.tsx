@@ -3,7 +3,7 @@ import cn from 'clsx';
 
 import { type SocialLinkItemType } from '@/types';
 
-/* eslint-disable-next-line */
+ 
 export interface SocialListProps {
   items?: SocialLinkItemType[];
   className?: string;

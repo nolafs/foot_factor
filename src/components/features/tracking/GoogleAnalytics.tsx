@@ -45,18 +45,21 @@ export function GoogleAnalytics({ consented }: { consented: boolean }) {
   const [readyToLoad, setReadyToLoad] = useState(false);
 
   useEffect(() => {
-    if (!consented) {
-      setReadyToLoad(false);
-      return;
-    }
+    // Only schedule once we actually have consent
+    if (!consented) return;
 
-    const handle = scheduleIdle(() => setReadyToLoad(true));
+    const handle = scheduleIdle(() => {
+      setReadyToLoad(true); // allowed: async callback
+    });
+
     return () => cancelIdle(handle);
   }, [consented]);
 
-  if (!readyToLoad) return null;
+  const shouldLoad = consented && readyToLoad;
 
-  const measurementId = trackingConfig.gtmId; // e.g. "G-B5P25Q0X3Y"
+  if (!shouldLoad) return null;
+
+  const measurementId = trackingConfig.gtmId;
 
   return (
     <>

@@ -40,22 +40,20 @@ export function GoogleTagManager({ consented }: { consented: boolean }) {
 
   useEffect(() => {
     if (!consented) {
-      setReadyToLoad(false);
       return;
     }
     const h = scheduleIdle(() => setReadyToLoad(true));
     return () => cancelIdle(h);
   }, [consented]);
 
-  if (!readyToLoad) return null;
+  const shouldLoad = consented && readyToLoad;
+
+  if (!shouldLoad) return null;
 
   return (
     <>
       {/* Required GTM bootstrap — this MUST run BEFORE we load gtm.js */}
-      <Script
-        id="gtm-bootstrap"
-        strategy="afterInteractive"
-      >
+      <Script id="gtm-bootstrap" strategy="afterInteractive">
         {`
           window.dataLayer = window.dataLayer || [];
           window.dataLayer.push({
