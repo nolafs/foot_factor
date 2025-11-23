@@ -65,7 +65,7 @@ export const TeamCard = ({
 
     const value = computeOpacityFor(element, bounds);
     opacity.set(value);
-  }, [bounds.left, bounds.right, bounds.width, opacity]);
+  }, [bounds.left, bounds.right, bounds.width, opacity, bounds]);
 
   useMotionValueEvent(scrollX, 'change', () => {
     const element = ref.current;

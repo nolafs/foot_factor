@@ -12,6 +12,8 @@ const eslintConfig = defineConfig([
     'next-env.d.ts',
     'migration/**',
     'customtypes/**',
+    'postcss.config.js',
+    'prettier.config.js',
   ]),
 ]);
 

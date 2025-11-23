@@ -27,7 +27,7 @@ export function VideoControl({
   mode,
 }: VideoControlProps) {
   const [showPlayer, setShowPlayer] = useState<boolean>(false);
-  const parallax = useParallax(0.8, true);
+  const { ref, y, scale } = useParallax(0.8, true);
 
   const play = () => {
     setShowPlayer(true);
@@ -88,8 +88,11 @@ export function VideoControl({
       </div>
       {poster && (
         <motion.div
-          ref={parallax.ref}
-          style={{ y: parallax.y, scale: parallax.scale }}
+          ref={ref}
+          style={{
+            y,
+            scale,
+          }}
           className="absolute inset-0 z-10">
           <PrismicNextImage
             field={poster}
