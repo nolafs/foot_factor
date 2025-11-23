@@ -118,7 +118,6 @@ export function Footer({ navigation, settings }: FooterProps) {
                                     ) : (
                                         <span className={'className="text-base font-medium text-white transition-all hover:text-white/80"'}>{navigationItem.data.label}</span>
                                     )}
-
                                   </div>
                                   <ul role="list" className="flex flex-col gap-2">
                                     {navigationItem.data.subs.map(subItem => (
