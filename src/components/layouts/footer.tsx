@@ -10,7 +10,9 @@ import { type
 } from '@/prismic-types';
 import {CallToActionBooking} from "@/components/features/cta/callToAction-booking";
 import ReviewSliderElfsight from "@/components/features/reviews/review-slider-elfsight";
-import {SocialName} from "@/types/socialLinkItem.type";
+import {type SocialName} from "@/types/socialLinkItem.type";
+import { PrismicRichText } from '@prismicio/react';
+import { buttonVariants } from '@/components/ui/button';
 
 
 
@@ -43,10 +45,19 @@ export function Footer({ navigation, settings }: FooterProps) {
       <div className="relative bg-primary pt-16 sm:pt-24 md:pt-24">
         <Container className={'relative z-10 block pb-10'}>
               <div className="mt-10 grid grid-cols-2 gap-y-10 pb-10 lg:grid-cols-6 lg:gap-8">
-                <div className="col-span-2 flex flex-col justify-between">
-                  <Link href="/" className={'grow'} >
+                <div className="col-span-2 flex flex-col space-y-10">
+                  <Link href="/" >
                     <PrismicNextImage field={settings.footer_logo} className="inline !max-w-[250px]" />
                   </Link>
+                  <div className={'text-secondary space-y-5 pl-3'}>
+                    <div>
+                      <PrismicRichText field={settings.address}/>
+                    </div>
+                    <div className={'flex flex-col space-y-1'}>
+                      <a className={'underline'} href={`tel:${settings.telephone}`}>{settings.telephone}</a>
+                      <a className={'underline'} href={`mail:${settings.email}`}>{settings.email}</a>
+                    </div>
+                  </div>
                 </div>
                 <div className={"col-span-2 grid grid-cols-2 gap-x-5 gap-y-12 lg:col-span-4  lg:grid-cols-3"}>
                   {navigation?.navigation_items.map(item => {
@@ -136,9 +147,9 @@ export function Footer({ navigation, settings }: FooterProps) {
                   })}
                 </div>
               </div>
-          <div className={'flex flex-col md:flex-row md:justify-between  md:space-x-5 pb-10 md:py-10'}>
-            <div>{!settings.google_widget && settings.google_rating && <PrismicNextImage field={settings.google_rating}/>}
-              {settings.google_widget && ( <ReviewSliderElfsight share_link={settings.google_widget} width={'auto'} />)}
+          <div className={'flex flex-col md:flex-row justify-center items-center md:justify-between  md:space-x-5 pb-10 md:py-10'}>
+            <div className={'mx-auto md:mx-0'}>{!settings.google_widget && settings.google_rating && <PrismicNextImage field={settings.google_rating}/>}
+              {settings.google_widget && ( <ReviewSliderElfsight share_link={settings.google_widget} width={'155px'} />)}
             </div>
             <div> {social && <SocialList items={social} icons={true} variantList={1} variantButton={3}/>}</div>
           </div>
