@@ -45,9 +45,6 @@ export function Footer({ navigation, settings }: FooterProps) {
               <div className="mt-10 grid grid-cols-2 gap-y-10 pb-10 lg:grid-cols-6 lg:gap-8">
                 <div className="col-span-2 flex flex-col justify-between">
                   <Link href="/" className={'grow'} >
-                    <span id="footer-heading" className="sr-only">
-                      Foot Factor
-                    </span>
                     <PrismicNextImage field={settings.footer_logo} className="inline !max-w-[250px]" />
                   </Link>
                 </div>
