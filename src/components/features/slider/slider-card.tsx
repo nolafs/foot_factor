@@ -39,7 +39,8 @@ export function SliderCard({
 }: SliderCardProps) {
   const aspectClasses = aspectRatio === 'portrait' ? 'aspect-w-3 aspect-h-4' : 'aspect-w-9 aspect-h-10';
 
-  const sizeClasses = size === 'large' ? 'w-full  max-h-[600px] max-w-[540px]' : 'w-full  max-w-[380px] max-h-[420px]';
+  const sizeClasses =
+    size === 'large' ? 'w-80 md:w-full  max-h-[600px] max-w-[540px]' : 'w-full  max-w-[380px] max-h-[420px]';
 
   return (
     <div
@@ -53,8 +54,8 @@ export function SliderCard({
       <Link href={href} className={'group'}>
         <div
           className={cn(
-            'bg-secondary-100 relative flex-shrink-0 flex-col justify-end overflow-hidden rounded-3xl max-lg:rounded-4xl lg:rounded-4xl',
-            sizeClasses,
+            'bg-secondary-100 relative w-full flex-col justify-end overflow-hidden rounded-xl md:flex-shrink-0 md:rounded-3xl lg:rounded-4xl',
+            //sizeClasses,
           )}>
           <div className={aspectClasses}>
             {imageField && (
@@ -69,7 +70,7 @@ export function SliderCard({
             )}
           </div>
 
-          <div className="absolute inset-0 overflow-hidden rounded-lg bg-gradient-to-t from-primary-950/90 to-transparent max-lg:rounded-4xl lg:rounded-4xl" />
+          <div className="absolute inset-0 overflow-hidden bg-gradient-to-t from-primary-950/90 to-transparent" />
 
           <div
             className={cn(
@@ -84,12 +85,12 @@ export function SliderCard({
             <h3
               className={cn(
                 'font-semibold group-hover:text-accent',
-                size === 'large' ? 'text-4xl text-white' : 'text-3xl text-white',
+                size === 'large' ? 'text-2xl text-white md:text-4xl' : 'text-3xl text-white',
               )}>
               {title}
             </h3>
-            {subtitle && <div className={'text-2xl text-primary-300'}>{subtitle}</div>}
-            {description && <div className="text-xl text-white">{description}</div>}
+            {subtitle && <div className={'text-xl text-primary-300 md:text-2xl'}>{subtitle}</div>}
+            {description && <div className="text-white md:text-xl">{description}</div>}
             {children}
             {showArrow && (
               <div className="mt-2 flex justify-end">
