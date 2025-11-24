@@ -51,10 +51,14 @@ export function Footer({ navigation, settings }: FooterProps) {
                     <PrismicRichText field={settings.address} />
                   </div>
                   <div className={'flex flex-col space-y-1'}>
-                    <a className={'underline'} href={`tel:${settings.telephone}`}>
+                    <a
+                      className={'w-fit rounded-full bg-white/80 px-6 py-2 font-extrabold text-primary underline'}
+                      href={`tel:${settings.telephone}`}>
                       {settings.telephone}
                     </a>
-                    <a className={'underline'} href={`mail:${settings.email}`}>
+                    <a
+                      className={'w-fit rounded-full bg-white/80 px-6 py-2 font-extrabold text-primary underline'}
+                      href={`mail:${settings.email}`}>
                       {settings.email}
                     </a>
                   </div>

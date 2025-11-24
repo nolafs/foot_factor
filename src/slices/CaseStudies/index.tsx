@@ -1,25 +1,25 @@
 'use client';
-import {type FC, useEffect, useState} from 'react';
-import {type Content} from '@prismicio/client';
-import {PrismicRichText, type SliceComponentProps} from '@prismicio/react';
-import {Container} from '@/components/ui/container';
-import {Heading} from '@/components/ui/text';
-import {createClient} from '@/prismicio';
-import Slider, {type SliderControlItem} from '@/components/features/slider/slider';
-import {PrismicNextImage} from '@prismicio/next';
+import { type FC, useEffect, useState } from 'react';
+import { type Content } from '@prismicio/client';
+import { PrismicRichText, type SliceComponentProps } from '@prismicio/react';
+import { Container } from '@/components/ui/container';
+import { Heading } from '@/components/ui/text';
+import { createClient } from '@/prismicio';
+import Slider, { type SliderControlItem } from '@/components/features/slider/slider';
+import { PrismicNextImage } from '@prismicio/next';
 import cn from 'clsx';
-import {buttonVariants} from '@/components/ui/button';
-import {ArrowRight} from 'lucide-react';
+import { buttonVariants } from '@/components/ui/button';
+import { ArrowRight } from 'lucide-react';
 import Link from 'next/link';
 import BentoWrapper from '@/components/features/bento/bento-wrapper';
 import BentoCard from '@/components/features/bento/bento-card';
-import {SliderCard} from '@/components/features/slider/slider-card';
+import { SliderCard } from '@/components/features/slider/slider-card';
 
 type CaseStudy = Content.CaseStudiesDocument & {
-    data: Content.CaseStudiesDocument["data"] & {
-        condition: Content.ConditionDocument; // the linked document
-        "condition.title"?: Content.ConditionDocument["data"]["title"]; // fetchLinks field
-    };
+  data: Content.CaseStudiesDocument['data'] & {
+    condition: Content.ConditionDocument; // the linked document
+    'condition.title'?: Content.ConditionDocument['data']['title']; // fetchLinks field
+  };
 };
 
 /**
@@ -30,7 +30,7 @@ export type CaseStudiesProps = SliceComponentProps<Content.CaseStudiesSlice>;
 /**
  * Component for "CaseStudies" Slices.
  */
-const CaseStudies: FC<CaseStudiesProps> = ({slice}) => {
+const CaseStudies: FC<CaseStudiesProps> = ({ slice }) => {
   const [caseStudies, setCaseStudies] = useState<CaseStudy[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -41,7 +41,7 @@ const CaseStudies: FC<CaseStudiesProps> = ({slice}) => {
         const client = createClient();
         const data = await client.getAllByType('case_studies', {
           pageSize: 50,
-          fetchLinks: ['condition.title']
+          fetchLinks: ['condition.title'],
         });
         setCaseStudies(data as CaseStudy[]);
       } catch (err) {
@@ -56,113 +56,114 @@ const CaseStudies: FC<CaseStudiesProps> = ({slice}) => {
   }, []);
 
   const controlsData: SliderControlItem[] = caseStudies.map((caseStudy: CaseStudy) => ({
-    title: caseStudy.data.client_name
-  })) as SliderControlItem[] ;
+    title: caseStudy.data.client_name,
+  })) as SliderControlItem[];
 
   if (loading) {
     return (
-        <section data-slice-type={slice.slice_type} data-slice-variation={slice.variation}>
-          <Container className={'lg:py-28 py-16 md:py-24'}>
-            <div className="text-center">Loading case studies...</div>
-          </Container>
-        </section>
+      <section data-slice-type={slice.slice_type} data-slice-variation={slice.variation}>
+        <Container className={'py-8 md:py-24 lg:py-28'}>
+          <div className="text-center">Loading case studies...</div>
+        </Container>
+      </section>
     );
   }
 
   if (error) {
     return (
-        <section data-slice-type={slice.slice_type} data-slice-variation={slice.variation}>
-          <Container className={'lg:py-28 py-16 md:py-24'}>
-            <div className="text-center text-red-500">{error}</div>
-          </Container>
-        </section>
+      <section data-slice-type={slice.slice_type} data-slice-variation={slice.variation}>
+        <Container className={'py-8 md:py-24 lg:py-28'}>
+          <div className="text-center text-red-500">{error}</div>
+        </Container>
+      </section>
     );
   }
 
   if (slice.variation === 'bento') {
     return (
-        <section data-slice-type={slice.slice_type} data-slice-variation={slice.variation}>
-          <Container className={'lg:py-28 py-16 md:py-24'}>
-            <Heading as={'h2'}>
-              <PrismicRichText field={slice.primary.heading}/>
-            </Heading>
+      <section data-slice-type={slice.slice_type} data-slice-variation={slice.variation}>
+        <Container className={'py-8 md:py-24 lg:py-28'}>
+          <Heading as={'h2'}>
+            <PrismicRichText field={slice.primary.heading} />
+          </Heading>
 
-
-            <BentoWrapper>
+          <BentoWrapper>
             {caseStudies && caseStudies.length > 0 ? (
-                caseStudies.map((caseStudy: CaseStudy, idx: number) => (
-                    <BentoCard key={'case_studies_' + idx} columns={Math.floor(idx / 2) % 2 === 0 ? (idx % 2 === 0 ? 4 : 2) : (idx % 2 === 0 ? 2 : 4)}>
-                      <div
-                          key={'case_studies_' + idx}
-                          className="relative bg-secondary w-full h-full flex overflow-hidden rounded-3xl max-lg:rounded-4xl lg:rounded-4xl"
-                      >
-                        <PrismicNextImage
-                            field={caseStudy.data.feature_image}
-                            className="h-full w-full object-cover"
-                        />
-                        <div
-                            className="absolute inset-0 rounded-lg bg-gradient-to-t from-primary-950/90 to-transparent max-lg:rounded-4xl lg:rounded-4xl overflow-hidden"/>
-                          <div className={'absolute bottom-0 w-full p-7 md:p-10 lg:p-10 flex flex-col z-10'}>
-                            <div className={'text-white text-3xl'}>{caseStudy.data.client_name}</div>
-                            <div className={'text-primary-300 text-2xl'}>
-                              {caseStudy.data.activity}{' '}
-                              {caseStudy.data?.client_age && <span>({caseStudy.data.client_age})</span>}
-                            </div>
-                           <div className={'text-white text-xl'}>{caseStudy.data.condition?.data?.title}</div>
-                           <div className={'flex justify-end'}>
-                                  <Link href={'/resources/case-studies/' + caseStudy.uid}
-                                        className={cn(buttonVariants({variant: 'default', size: 'icon'}))}>
-                                    <ArrowRight className={'h-4 w-4'} strokeWidth={4}/>
-                                  </Link>
-                                </div>
-                          </div>
+              caseStudies.map((caseStudy: CaseStudy, idx: number) => (
+                <BentoCard
+                  key={'case_studies_' + idx}
+                  columns={Math.floor(idx / 2) % 2 === 0 ? (idx % 2 === 0 ? 4 : 2) : idx % 2 === 0 ? 2 : 4}>
+                  <div
+                    key={'case_studies_' + idx}
+                    className="relative flex h-full w-full overflow-hidden rounded-3xl bg-secondary max-lg:rounded-4xl lg:rounded-4xl">
+                    <PrismicNextImage field={caseStudy.data.feature_image} className="h-full w-full object-cover" />
+                    <div className="absolute inset-0 overflow-hidden rounded-lg bg-gradient-to-t from-primary-950/90 to-transparent max-lg:rounded-4xl lg:rounded-4xl" />
+                    <div className={'absolute bottom-0 z-10 flex w-full flex-col p-7 md:p-10 lg:p-10'}>
+                      <div className={'text-3xl text-white'}>{caseStudy.data.client_name}</div>
+                      <div className={'text-2xl text-primary-300'}>
+                        {caseStudy.data.activity}{' '}
+                        {caseStudy.data?.client_age && <span>({caseStudy.data.client_age})</span>}
                       </div>
-                    </BentoCard>
-                ))
+                      <div className={'text-xl text-white'}>{caseStudy.data.condition?.data?.title}</div>
+                      <div className={'flex justify-end'}>
+                        <Link
+                          href={'/resources/case-studies/' + caseStudy.uid}
+                          className={cn(buttonVariants({ variant: 'default', size: 'icon' }))}>
+                          <ArrowRight className={'h-4 w-4'} strokeWidth={4} />
+                        </Link>
+                      </div>
+                    </div>
+                  </div>
+                </BentoCard>
+              ))
             ) : (
-                <div className="text-center mt-10">No Case Studies found</div>
+              <div className="mt-10 text-center">No Case Studies found</div>
             )}
-            </BentoWrapper>
-          </Container>
-        </section>
+          </BentoWrapper>
+        </Container>
+      </section>
     );
   }
 
   if (slice.variation === 'default') {
-
     return (
-        <Container as={'section'} padding={'lg'} fullWidth={true} data-slice-type={slice.slice_type} data-slice-variation={slice.variation}>
-          <Container  className={'max-w-3xl mx-auto'}>
-            <Heading as={'h2'} size={'xl'} className={'text-center content-master'}>
-              <PrismicRichText field={slice.primary.heading}/>
-            </Heading>
-          </Container>
-
-          <div className={'w-full'}>
-            <Slider data={controlsData } size={'large'}>
-              {caseStudies && caseStudies.length > 0 ? (
-                  caseStudies.map((caseStudy: CaseStudy, idx: number) => (
-                      <SliderCard
-                          index={idx}
-                          key={`${caseStudy.uid}_${idx}`}
-                          keyPrefix="case_studies"
-                          aspectRatio={'portrait'}
-                          size={'large'}
-                          imageField={caseStudy.data.feature_image}
-                          href={`/resources/case-studies/${caseStudy.uid}`}
-                          title={caseStudy.data.client_name ?? ''}
-                          subtitle={`${caseStudy.data.activity}${
-                              caseStudy.data?.client_age ? ` (${caseStudy.data.client_age})` : ''
-                          }`}
-                          description={caseStudy.data.condition.data?.title ?? ''}
-                      />
-                  ))
-              ) : (
-                  <div className="text-center mt-10">No Case Studies found</div>
-              )}
-            </Slider>
-          </div>
+      <Container
+        as={'section'}
+        padding={'lg'}
+        fullWidth={true}
+        data-slice-type={slice.slice_type}
+        data-slice-variation={slice.variation}>
+        <Container className={'mx-auto max-w-3xl'}>
+          <Heading as={'h2'} size={'xl'} className={'content-master text-center'}>
+            <PrismicRichText field={slice.primary.heading} />
+          </Heading>
         </Container>
+
+        <div className={'w-full'}>
+          <Slider data={controlsData} size={'large'}>
+            {caseStudies && caseStudies.length > 0 ? (
+              caseStudies.map((caseStudy: CaseStudy, idx: number) => (
+                <SliderCard
+                  index={idx}
+                  key={`${caseStudy.uid}_${idx}`}
+                  keyPrefix="case_studies"
+                  aspectRatio={'portrait'}
+                  size={'large'}
+                  imageField={caseStudy.data.feature_image}
+                  href={`/resources/case-studies/${caseStudy.uid}`}
+                  title={caseStudy.data.client_name ?? ''}
+                  subtitle={`${caseStudy.data.activity}${
+                    caseStudy.data?.client_age ? ` (${caseStudy.data.client_age})` : ''
+                  }`}
+                  description={caseStudy.data.condition.data?.title ?? ''}
+                />
+              ))
+            ) : (
+              <div className="mt-10 text-center">No Case Studies found</div>
+            )}
+          </Slider>
+        </div>
+      </Container>
     );
   }
 

@@ -9,6 +9,7 @@ import { grantConsentForEverything, revokeConsentForEverything } from '@/lib/tra
 import Link from 'next/link';
 
 import { GoogleAnalytics } from '@/components/features/tracking/GoogleAnalytics';
+import { TooltipProvider } from '@/components/ui/tooltip';
 
 export const RootInnerLayout = ({ children }: { children: ReactNode }) => {
   const [consent, setConsent] = useState<boolean>(() => {
@@ -21,8 +22,7 @@ export const RootInnerLayout = ({ children }: { children: ReactNode }) => {
   return (
     <>
       {/* GTM only cares whether consent is granted */}
-
-      {children}
+      <TooltipProvider>{children}</TooltipProvider>
       {IS_GTM_ENABLED && (
         <>
           <GoogleAnalytics consented={consent} />

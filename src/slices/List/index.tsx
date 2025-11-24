@@ -171,7 +171,7 @@ const List: FC<ListProps> = ({ slice }) => {
               <Lead size={'md'}>{slice.primary.lead}</Lead>
             </div>
           </hgroup>
-          <div className={'mt-16'}>
+          <div className={'mt-8 md:mt-16'}>
             <div
               className={cn(
                 `grid grid-cols-1 lg:grid-cols-${slice.primary.services.length} justify-stretch gap-5 md:gap-8 lg:gap-10`,
@@ -188,7 +188,7 @@ const List: FC<ListProps> = ({ slice }) => {
           </div>
 
           {isFilled.link(slice.primary.link) && (
-            <div className={'mt-16 flex w-full justify-center'}>
+            <div className={'mt-8 flex w-full justify-center md:mt-16'}>
               <PrismicNextLink field={slice.primary.link} className={buttonVariants({ variant: 'outline' })}>
                 {slice.primary.link.text} <CircleArrowRight className={'ml-2 h-4 w-4'} />
               </PrismicNextLink>

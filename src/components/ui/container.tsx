@@ -65,8 +65,8 @@ const ContainerComponent = forwardRef(function Container<T extends ElementType =
         className,
         backgroundColorClass,
         padding === 'base' && !fullWidth && 'px-6 lg:px-8',
-        padding === 'md' && (!fullWidth ? 'px-6 py-10 md:py-16 lg:px-8 lg:py-20' : 'py-10 md:py-16 lg:py-20'),
-        padding === 'lg' && (!fullWidth ? 'px-6 py-16 md:py-24 lg:px-8 lg:py-28' : 'py-16 md:py-24 lg:py-28'),
+        padding === 'md' && (!fullWidth ? 'px-6 py-10 md:py-16 lg:px-8 lg:py-20' : 'py-8 md:py-16 lg:py-20'),
+        padding === 'lg' && (!fullWidth ? 'px-6 py-16 md:py-24 lg:px-8 lg:py-28' : 'py-8 md:py-24 lg:py-28'),
       )}
       {...rest}>
       {wave && (
