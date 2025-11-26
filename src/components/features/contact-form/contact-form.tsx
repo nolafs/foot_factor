@@ -44,10 +44,8 @@ export function ContactForm({ items }: ContactFormInputProps) {
 
   useEffect(() => {
     (window as any).onTurnstileSuccess = (token: string) => {
-      const input = document.getElementById('turnstileToken') as HTMLInputElement;
-      input.value = token;
-      setTurnstileToken(token);
-      setIsVerified(true);
+      const input = document.getElementById('turnstileToken') as HTMLInputElement | null;
+      if (input) input.value = token;
     };
   }, []);
 
