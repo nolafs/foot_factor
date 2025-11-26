@@ -41,18 +41,33 @@ export const BookingForm = ({ booking }: BookingFormProps) => {
   const [open, setOpen] = React.useState(false);
   const [turnstileToken, setTurnstileToken] = useState<string | null>(null);
   const [isVerified, setIsVerified] = useState(false);
+  const widgetRef = React.useRef<HTMLDivElement | null>(null);
+  const tokenRef = React.useRef<HTMLInputElement | null>(null);
 
   useEffect(() => {
-    console.log('[BOOKING FORM] Setting up Turnstile callback function.');
+    if (!widgetRef.current) return;
+    const t = (window as any).turnstile;
+    if (!t) return;
 
-    (window as any).onTurnstileSuccess = (token: string) => {
-      const input = document.getElementById('turnstileToken') as HTMLInputElement | null;
-      if (input) input.value = token;
+    let widgetId: string | undefined;
 
-      setTurnstileToken(token);
-      setIsVerified(true);
+    t.ready(() => {
+      widgetId = t.render(widgetRef.current!, {
+        sitekey: process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY!,
+        size: 'invisible',
+        callback: (token: string) => {
+          if (tokenRef.current) tokenRef.current.value = token;
+          setTurnstileToken(token);
+          setIsVerified(true);
+          console.log('[BOOKING FORM] Turnstile ok:', token);
+        },
+      });
+    });
 
-      console.log('[BOOKING FORM] Turnstile verification successful, token set.', token);
+    return () => {
+      if (widgetId) {
+        t.remove(widgetId);
+      }
     };
   }, []);
 
@@ -479,8 +494,9 @@ export const BookingForm = ({ booking }: BookingFormProps) => {
         </div>
         <div className={'mt-8 flex justify-end'}>
           {/* Turnstile widget – uses global callback we defined in useEffect */}
-          <input type="hidden" name="cf-turnstile-response" id="turnstileToken" />
+          <input type="hidden" ref={tokenRef} name="cf-turnstile-response" id="turnstileToken" />
           <div
+            ref={widgetRef}
             id="turnstile-widget"
             className="cf-turnstile"
             data-sitekey={process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY}
