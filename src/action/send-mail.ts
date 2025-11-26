@@ -20,7 +20,7 @@ const emailSchema = z.object({
   message: z.string().min(1, 'Please enter your message'),
   agreeToTerms: z.boolean().refine(val => val, 'You must agree to the Terms & Conditions'),
 
-  turnstileToken: z.string().min(5, 'Verification failed'),
+  turnstileToken: z.string().optional(),
 
   // Honeypot
   contact_time: z.string().optional(),
@@ -49,10 +49,11 @@ export async function sendMail(formData: FormData) {
       message: formData.get('message'),
       agreeToTerms: formData.get('agreeToTerms') === 'true',
 
-      // Turnstile sends this field name by default
-      turnstileToken: formData.get('cf-turnstile-response'),
-      contact_time: formData.get('contact_time') || '',
+      turnstileToken: formData.get('cf-turnstile-response') ?? undefined,
+      contact_time: (formData.get('contact_time') as string | null) ?? '',
     });
+
+    const token = validatedFields.turnstileToken;
 
     // 3) TURNSTILE VERIFICATION (server side)
     if (!TURNSTILE_SECRET) {
@@ -64,11 +65,20 @@ export async function sendMail(formData: FormData) {
       };
     }
 
+    if (!token) {
+      console.log('[TURNSTILE] No token received from formData');
+      return {
+        success: false,
+        errors: null,
+        msg: 'Verification failed. Please try again.',
+      };
+    }
+
     const verifyRes = await fetch('https://challenges.cloudflare.com/turnstile/v0/siteverify', {
       method: 'POST',
       body: new URLSearchParams({
         secret: TURNSTILE_SECRET,
-        response: validatedFields.turnstileToken,
+        response: token,
         // optional: remoteip: ip
       }),
     });

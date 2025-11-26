@@ -72,22 +72,26 @@ export function ContactForm({ items }: ContactFormInputProps) {
   const onSubmit: SubmitHandler<ContactFormInput> = async data => {
     setIsSubmitting(true);
 
+    const widget = document.getElementById('turnstile-widget');
+    if (widget && (window as any).turnstile?.execute) {
+      (window as any).turnstile.execute(widget);
+    }
+
+    // wait a tick so onTurnstileSuccess can run and fill the hidden input
+    await new Promise(resolve => setTimeout(resolve, 250));
+
+    const tokenInput = document.getElementById('turnstileToken') as HTMLInputElement | null;
+    const token = tokenInput?.value || '';
+
+    console.log('', token, turnstileToken);
+
+    if (!token) {
+      toast.error('Verification failed. Please try again.');
+      setIsSubmitting(false);
+      return;
+    }
+
     try {
-      // Extra guard: make sure Turnstile ran
-      const widget = document.getElementById('turnstile-widget');
-      if (widget) {
-        (window as any).turnstile.execute(widget);
-      }
-
-      // Allow Turnstile to call onTurnstileSuccess first
-      await new Promise(resolve => setTimeout(resolve, 250));
-
-      if (!turnstileToken) {
-        toast.error('Verification failed. Please try again.');
-        setIsSubmitting(false);
-        return;
-      }
-
       const formData = new FormData();
       formData.append('name', data.name);
       formData.append('email', data.email || '');
@@ -96,7 +100,7 @@ export function ContactForm({ items }: ContactFormInputProps) {
       formData.append('agreeToTerms', data.agreeToTerms ? 'true' : 'false');
 
       // Turnstile token – this is what the server will verify
-      formData.append('cf-turnstile-response', turnstileToken);
+      formData.append('cf-turnstile-response', token);
 
       // Honeypot: read the hidden field value (bots may fill this)
       const honeypotInput = document.querySelector('input[name="contact_time"]') as HTMLInputElement | null;
