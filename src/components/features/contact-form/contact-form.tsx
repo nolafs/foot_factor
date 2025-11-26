@@ -44,6 +44,8 @@ export function ContactForm({ items }: ContactFormInputProps) {
 
   useEffect(() => {
     (window as any).onTurnstileSuccess = (token: string) => {
+      const input = document.getElementById('turnstileToken') as HTMLInputElement;
+      input.value = token;
       setTurnstileToken(token);
       setIsVerified(true);
     };
@@ -234,10 +236,13 @@ export function ContactForm({ items }: ContactFormInputProps) {
             {/* Submit Button */}
 
             {/* Turnstile widget – uses global callback we defined in useEffect */}
+            <input type="hidden" name="cf-turnstile-response" id="turnstileToken" />
             <div
+              id="turnstile-widget"
               className="cf-turnstile"
               data-sitekey={process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY}
               data-callback="onTurnstileSuccess"
+              data-size="invisible"
             />
 
             <Button
