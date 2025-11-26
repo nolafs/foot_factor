@@ -199,8 +199,6 @@ export const BookingForm = ({ booking }: BookingFormProps) => {
           control={form.control}
           name="dateOfBirth"
           render={({ field }) => {
-            setText(field.value ? format(field.value, 'dd/MM/yyyy') : '');
-
             const tryCommit = (raw: string) => {
               const parsed = parse(raw, 'dd/MM/yyyy', new Date());
               if (isValid(parsed) && parsed >= MIN_DOB && parsed <= MAX_DOB) {
