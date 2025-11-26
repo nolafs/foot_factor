@@ -45,28 +45,38 @@ export const BookingForm = ({ booking }: BookingFormProps) => {
   const tokenRef = React.useRef<HTMLInputElement | null>(null);
 
   useEffect(() => {
-    if (!widgetRef.current) return;
-    const t = (window as any).turnstile;
-    if (!t) return;
-
     let widgetId: string | undefined;
+    let cancelled = false;
 
-    t.ready(() => {
-      widgetId = t.render(widgetRef.current!, {
+    const init = () => {
+      const t = (window as any).turnstile;
+      if (!t || !widgetRef.current) return;
+
+      widgetId = t.render(widgetRef.current, {
         sitekey: process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY!,
         size: 'invisible',
         callback: (token: string) => {
           if (tokenRef.current) tokenRef.current.value = token;
           setTurnstileToken(token);
           setIsVerified(true);
-          console.log('[BOOKING FORM] Turnstile ok:', token);
+          console.log('[BOOKING FORM] Turnstile verification successful, token set.', token);
         },
       });
-    });
+    };
+
+    // Poll until Turnstile is available
+    const interval = setInterval(() => {
+      if ((window as any).turnstile && (window as any).turnstile.render) {
+        clearInterval(interval);
+        if (!cancelled) init();
+      }
+    }, 100);
 
     return () => {
-      if (widgetId) {
-        t.remove(widgetId);
+      cancelled = true;
+      clearInterval(interval);
+      if (widgetId && (window as any).turnstile?.remove) {
+        (window as any).turnstile.remove(widgetId);
       }
     };
   }, []);
@@ -495,14 +505,7 @@ export const BookingForm = ({ booking }: BookingFormProps) => {
         <div className={'mt-8 flex justify-end'}>
           {/* Turnstile widget – uses global callback we defined in useEffect */}
           <input type="hidden" ref={tokenRef} name="cf-turnstile-response" id="turnstileToken" />
-          <div
-            ref={widgetRef}
-            id="turnstile-widget"
-            className="cf-turnstile"
-            data-sitekey={process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY}
-            data-callback="onTurnstileSuccess"
-            data-size="invisible"
-          />
+          <div ref={widgetRef} className="turnstile-widget" />
 
           <Button
             type="submit"
