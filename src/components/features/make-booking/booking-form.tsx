@@ -110,6 +110,8 @@ export const BookingForm = ({ booking }: BookingFormProps) => {
         setIsSubmitting(false);
         setSubmissionSuccess(true);
         toast.success('Your message has been sent!');
+        setTurnstileToken(null);
+        setIsVerified(false);
         form.reset(); // Optionally reset form fields
       }
 
