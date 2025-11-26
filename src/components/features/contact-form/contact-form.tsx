@@ -18,6 +18,8 @@ const emailSchema = z.object({
   enquiryType: z.string().min(1, 'Please select the nature of your enquiry'),
   message: z.string().min(1, 'Please enter your message'),
   agreeToTerms: z.boolean().refine(val => val, 'You must agree to the Terms & Conditions'),
+  turnstileToken: z.string().optional(),
+  contact_time: z.string().optional(),
 });
 
 export type EmailSchema = z.infer<typeof emailSchema>;
@@ -37,7 +39,7 @@ export function ContactForm({ items }: ContactFormInputProps) {
   const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
   const [submissionSuccess, setSubmissionSuccess] = useState<boolean>(false);
   const [turnstileToken, setTurnstileToken] = useState<string | null>(null);
-  const [isVerified, setIsVerified] = useState(true);
+  const [isVerified, setIsVerified] = useState(false);
   const [enquiryTypeOptions, setEnquiryTypeOptions] = useState<ContactFormSectionSliceDefaultPrimaryItemsItem[]>(
     items ?? [],
   );
@@ -46,6 +48,10 @@ export function ContactForm({ items }: ContactFormInputProps) {
     (window as any).onTurnstileSuccess = (token: string) => {
       const input = document.getElementById('turnstileToken') as HTMLInputElement | null;
       if (input) input.value = token;
+
+      setTurnstileToken(token);
+      setIsVerified(true);
+      console.log('[TURNSTILE] onTurnstileSuccess token:', token);
     };
   }, []);
 
@@ -67,21 +73,22 @@ export function ContactForm({ items }: ContactFormInputProps) {
     resolver: zodResolver(emailSchema),
   });
 
-  const onSubmit: SubmitHandler<ContactFormInput> = async data => {
+  const onSubmit: SubmitHandler<EmailSchema> = async data => {
     setIsSubmitting(true);
 
+    // 1) Run invisible Turnstile
     const widget = document.getElementById('turnstile-widget');
     if (widget && (window as any).turnstile?.execute) {
       (window as any).turnstile.execute(widget);
     }
 
-    // wait a tick so onTurnstileSuccess can run and fill the hidden input
+    // Wait so onTurnstileSuccess can set the hidden field
     await new Promise(resolve => setTimeout(resolve, 250));
 
     const tokenInput = document.getElementById('turnstileToken') as HTMLInputElement | null;
     const token = tokenInput?.value || '';
 
-    console.log('', token, turnstileToken);
+    console.log('[TURNSTILE] client token:', token, turnstileToken);
 
     if (!token) {
       toast.error('Verification failed. Please try again.');
@@ -100,7 +107,7 @@ export function ContactForm({ items }: ContactFormInputProps) {
       // Turnstile token – this is what the server will verify
       formData.append('cf-turnstile-response', token);
 
-      // Honeypot: read the hidden field value (bots may fill this)
+      // Honeypot
       const honeypotInput = document.querySelector('input[name="contact_time"]') as HTMLInputElement | null;
       const honeypotValue = honeypotInput?.value ?? '';
       formData.append('contact_time', honeypotValue);
@@ -257,8 +264,8 @@ export function ContactForm({ items }: ContactFormInputProps) {
 
             <Button
               type="submit"
-              variant={'default'}
-              size={'lg'}
+              variant="default"
+              size="lg"
               className={cn(`${isSubmitting ? 'loading' : ''}`, 'bg-accent')}
               disabled={!isVerified || isSubmitting}>
               {isSubmitting ? 'Submitting' : 'Submit'}
