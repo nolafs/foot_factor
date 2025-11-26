@@ -51,7 +51,6 @@ export function ContactForm({ items }: ContactFormInputProps) {
 
       setTurnstileToken(token);
       setIsVerified(true);
-      console.log('[TURNSTILE] onTurnstileSuccess token:', token);
     };
   }, []);
 
@@ -87,8 +86,6 @@ export function ContactForm({ items }: ContactFormInputProps) {
 
     const tokenInput = document.getElementById('turnstileToken') as HTMLInputElement | null;
     const token = tokenInput?.value || '';
-
-    console.log('[TURNSTILE] client token:', token, turnstileToken);
 
     if (!token) {
       toast.error('Verification failed. Please try again.');
