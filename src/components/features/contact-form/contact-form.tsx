@@ -74,8 +74,16 @@ export function ContactForm({ items }: ContactFormInputProps) {
 
     try {
       // Extra guard: make sure Turnstile ran
+      const widget = document.getElementById('turnstile-widget');
+      if (widget) {
+        (window as any).turnstile.execute(widget);
+      }
+
+      // Allow Turnstile to call onTurnstileSuccess first
+      await new Promise(resolve => setTimeout(resolve, 250));
+
       if (!turnstileToken) {
-        toast.error("Please confirm you're not a robot.");
+        toast.error('Verification failed. Please try again.');
         setIsSubmitting(false);
         return;
       }
