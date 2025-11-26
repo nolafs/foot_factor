@@ -43,6 +43,8 @@ export const BookingForm = ({ booking }: BookingFormProps) => {
   const [isVerified, setIsVerified] = useState(false);
 
   useEffect(() => {
+    console.log('[BOOKING FORM] Setting up Turnstile callback function.');
+
     (window as any).onTurnstileSuccess = (token: string) => {
       const input = document.getElementById('turnstileToken') as HTMLInputElement | null;
       if (input) input.value = token;
@@ -493,7 +495,7 @@ export const BookingForm = ({ booking }: BookingFormProps) => {
             variant="default"
             size="lg"
             className={cn(`${isSubmitting ? 'loading' : ''}`, 'bg-accent')}
-            disabled={!isVerified || isSubmitting}>
+            disabled={isSubmitting}>
             {isSubmitting ? 'Submitting' : 'Submit'}
           </Button>
         </div>
