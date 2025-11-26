@@ -2,7 +2,9 @@
 
 import { EmailParams, MailerSend, Recipient, Sender } from 'mailersend';
 import { z } from 'zod';
-import {createClient} from "@/prismicio";
+import { createClient } from '@/prismicio';
+
+const TURNSTILE_SECRET = process.env.TURNSTILE_SECRET_KEY ?? '';
 
 export const transformZodErrors = async (error: z.ZodError) => {
   return error.issues.map(issue => ({
@@ -17,6 +19,11 @@ const emailSchema = z.object({
   enquiryType: z.string().min(1, 'Please select the nature of your enquiry'),
   message: z.string().min(1, 'Please enter your message'),
   agreeToTerms: z.boolean().refine(val => val, 'You must agree to the Terms & Conditions'),
+
+  turnstileToken: z.string().min(5, 'Verification failed'),
+
+  // Honeypot
+  contact_time: z.string().optional(),
 });
 export async function sendMail(formData: FormData) {
   const mailerSend = new MailerSend({
@@ -24,17 +31,61 @@ export async function sendMail(formData: FormData) {
   });
 
   try {
+    // 1) HONEYPOT CHECK – if filled, silently treat as success and bail
+    const honey = formData.get('contact_time');
+    if (honey && String(honey).trim() !== '') {
+      console.log('[SPAM] Honeypot filled — bot blocked.');
+      return {
+        success: true,
+        errors: null,
+        msg: 'Mail sent successfully',
+      };
+    }
+
     const validatedFields = emailSchema.parse({
       name: formData.get('name'),
       email: formData.get('email'),
       enquiryType: formData.get('enquiryType'),
       message: formData.get('message'),
       agreeToTerms: formData.get('agreeToTerms') === 'true',
+
+      // Turnstile sends this field name by default
+      turnstileToken: formData.get('cf-turnstile-response'),
+      contact_time: formData.get('contact_time') || '',
     });
 
+    // 3) TURNSTILE VERIFICATION (server side)
+    if (!TURNSTILE_SECRET) {
+      console.error('[TURNSTILE] Missing TURNSTILE_SECRET_KEY env var');
+      return {
+        success: false,
+        errors: null,
+        msg: 'Verification error. Please try again later.',
+      };
+    }
+
+    const verifyRes = await fetch('https://challenges.cloudflare.com/turnstile/v0/siteverify', {
+      method: 'POST',
+      body: new URLSearchParams({
+        secret: TURNSTILE_SECRET,
+        response: validatedFields.turnstileToken,
+        // optional: remoteip: ip
+      }),
+    });
+
+    const verifyData = (await verifyRes.json()) as { success: boolean; 'error-codes'?: string[] };
+
+    if (!verifyData.success) {
+      console.log('[TURNSTILE] Verification failed', verifyData);
+      return {
+        success: false,
+        errors: null,
+        msg: 'Verification failed. Please try again.',
+      };
+    }
+
     const sentFrom = new Sender(`webmaster@${process.env.MAILERSEND_DOMAIN}`, 'Foot Factor');
-    const recipients: Recipient[] = [new Recipient(`info@${process.env.MAILERSEND_DOMAIN}`, 'Contact Form Website')
-    ];
+    const recipients: Recipient[] = [new Recipient(`info@${process.env.MAILERSEND_DOMAIN}`, 'Contact Form Website')];
 
     const textContent = `
 BOOKING REQUEST DETAILS
@@ -47,11 +98,15 @@ Email: ${validatedFields.email}
 Enquiry: ${validatedFields.enquiryType}
 
 
-${validatedFields.message ? `
+${
+  validatedFields.message
+    ? `
 MESSAGE:
 ------------------
 ${validatedFields.message}
-` : ''}
+`
+    : ''
+}
 
 CONSENT:
 --------
@@ -61,7 +116,6 @@ Privacy Policy: Accepted
 =======================
 Sent from Foot Factor Website
     `.trim();
-
 
     const htmlContent = `
       <!DOCTYPE html>
@@ -91,14 +145,18 @@ Sent from Foot Factor Website
         </div>
 
    
-        ${validatedFields.message ? `
+        ${
+          validatedFields.message
+            ? `
         <div class="section">
           <h3>Message</h3>
           <div style="background: #f9f9f9; padding: 15px; border-left: 4px solid #2c5aa0;">
             ${validatedFields.message.replace(/\n/g, '<br>')}
           </div>
         </div>
-        ` : ''}
+        `
+            : ''
+        }
 
         <div class="section">
           <h3>Consent</h3>
@@ -127,14 +185,14 @@ Sent from Foot Factor Website
         .setHtml(htmlContent);
 
       const mailer = await mailerSend.email.send(emailParams);
-
     }
 
     //Response email
     const client = createClient();
     const settings = await client.getSingle('settings');
     const typeofEnquiry = settings.data.contact_form_enquiries?.find(
-      (item) => item.value === formData.get('enquiryType'));
+      item => item.value === formData.get('enquiryType'),
+    );
 
     const templateId = typeofEnquiry?.email_template_id ?? null;
 
@@ -168,7 +226,7 @@ Sent from Foot Factor Website
       console.log('[EMAIL SEND] TEMPLATE SUCCESS', responseEmail);
     }
 
-    console.log('[EMAIL SEND] SUCCESS')
+    console.log('[EMAIL SEND] SUCCESS');
 
     return {
       success: true,
@@ -176,15 +234,13 @@ Sent from Foot Factor Website
       msg: 'Mail send successfully',
     };
   } catch (error) {
-
-
     console.log('[EMAIL SEND] ERROR', error);
 
     if (error instanceof z.ZodError) {
       return {
         success: false,
         errors: transformZodErrors(error),
-          msg: null,
+        msg: null,
       };
     }
 

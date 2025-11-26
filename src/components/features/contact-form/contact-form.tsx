@@ -1,18 +1,16 @@
 'use client';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { type ContactFormInput } from '@/types';
-import React, { useEffect, useState} from 'react';
+import React, { useEffect, useState } from 'react';
 import { useForm, type SubmitHandler } from 'react-hook-form';
 import toast from 'react-hot-toast';
 import { Button } from '@/components/ui/button';
 import { z } from 'zod';
 import cn from 'clsx';
-import { sendMail} from '@/action';
-//import ReCAPTCHA from 'react-google-recaptcha';
-import {type ContactFormSectionSliceDefaultPrimaryItemsItem} from '@/prismic-types';
-import {createClient} from "@/prismicio";
+import { sendMail } from '@/action';
 
-//const RECAPTCHA_ACTIVE = process.env.NEXT_PUBLIC_RECAPTCHA_ACTIVE === 'true';
+import { type ContactFormSectionSliceDefaultPrimaryItemsItem } from '@/prismic-types';
+import { createClient } from '@/prismicio';
 
 const emailSchema = z.object({
   name: z.string().min(1, 'Please enter your name'),
@@ -25,36 +23,40 @@ const emailSchema = z.object({
 export type EmailSchema = z.infer<typeof emailSchema>;
 
 const getEnquireTypeOptions = async () => {
-
   const client = createClient();
   const settings = await client.getSingle('settings');
 
   return settings.data.contact_form_enquiries ?? [];
-
-}
+};
 
 interface ContactFormInputProps {
   items: ContactFormSectionSliceDefaultPrimaryItemsItem[];
 }
 
 export function ContactForm({ items }: ContactFormInputProps) {
-  //const captchaRef: any = useRef(null)
   const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
   const [submissionSuccess, setSubmissionSuccess] = useState<boolean>(false);
-  //const recaptchaRef = useRef<ReCAPTCHA | null>(null);
+  const [turnstileToken, setTurnstileToken] = useState<string | null>(null);
   const [isVerified, setIsVerified] = useState(true);
-  const [enquiryTypeOptions, setEnquiryTypeOptions] = useState<ContactFormSectionSliceDefaultPrimaryItemsItem[]>(items ??[]);
+  const [enquiryTypeOptions, setEnquiryTypeOptions] = useState<ContactFormSectionSliceDefaultPrimaryItemsItem[]>(
+    items ?? [],
+  );
 
   useEffect(() => {
+    (window as any).onTurnstileSuccess = (token: string) => {
+      setTurnstileToken(token);
+      setIsVerified(true);
+    };
+  }, []);
 
+  useEffect(() => {
     const fetchEnquiryTypes = async () => {
-        const options = await getEnquireTypeOptions();
-        setEnquiryTypeOptions(options);
-    }
+      const options = await getEnquireTypeOptions();
+      setEnquiryTypeOptions(options);
+    };
 
     void fetchEnquiryTypes();
-
-  }, [])
+  }, []);
 
   const {
     register,
@@ -65,9 +67,17 @@ export function ContactForm({ items }: ContactFormInputProps) {
     resolver: zodResolver(emailSchema),
   });
 
-  const onSubmit: SubmitHandler<EmailSchema> = async data => {
+  const onSubmit: SubmitHandler<ContactFormInput> = async data => {
     setIsSubmitting(true);
+
     try {
+      // Extra guard: make sure Turnstile ran
+      if (!turnstileToken) {
+        toast.error("Please confirm you're not a robot.");
+        setIsSubmitting(false);
+        return;
+      }
+
       const formData = new FormData();
       formData.append('name', data.name);
       formData.append('email', data.email || '');
@@ -75,27 +85,36 @@ export function ContactForm({ items }: ContactFormInputProps) {
       formData.append('enquiryType', data.enquiryType || '');
       formData.append('agreeToTerms', data.agreeToTerms ? 'true' : 'false');
 
+      // Turnstile token – this is what the server will verify
+      formData.append('cf-turnstile-response', turnstileToken);
+
+      // Honeypot: read the hidden field value (bots may fill this)
+      const honeypotInput = document.querySelector('input[name="contact_time"]') as HTMLInputElement | null;
+      const honeypotValue = honeypotInput?.value ?? '';
+      formData.append('contact_time', honeypotValue);
+
       const { success, errors, msg } = await sendMail(formData);
 
       if (success) {
         setIsSubmitting(false);
         setSubmissionSuccess(true);
         toast.success(msg);
-        reset(); // Optionally reset form fields
+        reset();
+        setTurnstileToken(null);
+        setIsVerified(false);
         return;
       }
 
       if (errors) {
-        setIsSubmitting(false);
         console.error('[ContactForm]', errors);
         toast.error('There was an error sending your message. Please try again later.');
-        return;
       }
+
+      setIsSubmitting(false);
     } catch (error) {
       setIsSubmitting(false);
-      console.error('[ContactForm]',error);
+      console.error('[ContactForm]', error);
       toast.error('There was an error sending your message. Please try again later.');
-      return;
     }
   };
 
@@ -104,38 +123,11 @@ export function ContactForm({ items }: ContactFormInputProps) {
     setIsSubmitting(false);
     setIsVerified(false);
   };
-/*
-  async function handleCaptchaSubmission(token: string | null) {
-    try {
-      if (token) {
-        await VerifyCaptcha(token);
-        setIsVerified(true);
-      }
-    } catch (e) {
-      setIsVerified(false);
-      console.error(e);
-    }
-  }
-
-
-  const handleChange = (token: string | null) => {
-    if (token) {
-      void handleCaptchaSubmission(token);
-    }
-  };
-
-  function handleExpired() {
-    setIsVerified(false);
-  }
-
-   */
 
   if (submissionSuccess) {
     return (
       <div className={'container mx-auto flex flex-col'}>
-        <div className="mb-10 font-bold">
-          Your message has been sent successfully! We will get back to you soon.
-        </div>
+        <div className="mb-10 font-bold">Your message has been sent successfully! We will get back to you soon.</div>
         <div className="flex w-full justify-end">
           <Button variant={'default'} size={'lg'} onClick={handleContinue}>
             Back
@@ -146,8 +138,10 @@ export function ContactForm({ items }: ContactFormInputProps) {
   }
 
   return (
-    <div className="form-control w-full  text-primary">
+    <div className="form-control w-full text-primary">
       <form onSubmit={handleSubmit(onSubmit)} noValidate method="post" className="space-y-4">
+        {/* Honeypot – hidden field for bots */}
+        <input type="text" name="contact_time" autoComplete="off" tabIndex={-1} style={{ display: 'none' }} />
         <input
           type="text"
           placeholder="Name"
@@ -180,21 +174,20 @@ export function ContactForm({ items }: ContactFormInputProps) {
           )}
           {...register('enquiryType')}
           disabled={isSubmitting}
-          defaultValue=""
-        >
-          <option value=""  disabled>
+          defaultValue="">
+          <option value="" disabled>
             Nature of Enquiry
           </option>
           {enquiryTypeOptions.length ? (
-              enquiryTypeOptions.map((item, index) => {
-                if (item.value == null) return null; // skip items with undefined or null value
+            enquiryTypeOptions.map((item, index) => {
+              if (item.value == null) return null; // skip items with undefined or null value
 
-                return (
-                    <option key={`${item.value}-${index}`} value={item.value}>
-                      {item.label}
-                    </option>
-                );
-              })
+              return (
+                <option key={`${item.value}-${index}`} value={item.value}>
+                  {item.label}
+                </option>
+              );
+            })
           ) : (
             <>
               <option value="general">General Inquiry</option>
@@ -232,12 +225,21 @@ export function ContactForm({ items }: ContactFormInputProps) {
                 I agree to the Terms & Conditions
               </label>
             </div>
-            {errors.agreeToTerms && <p className="text-sm font-medium text-destructive">{errors.agreeToTerms.message}</p>}
+            {errors.agreeToTerms && (
+              <p className="text-sm font-medium text-destructive">{errors.agreeToTerms.message}</p>
+            )}
           </div>
 
           <div className="flex w-full justify-end pt-6">
             {/* Submit Button */}
-            {isVerified}
+
+            {/* Turnstile widget – uses global callback we defined in useEffect */}
+            <div
+              className="cf-turnstile"
+              data-sitekey={process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY}
+              data-callback="onTurnstileSuccess"
+            />
+
             <Button
               type="submit"
               variant={'default'}

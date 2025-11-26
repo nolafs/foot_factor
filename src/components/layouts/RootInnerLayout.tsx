@@ -10,6 +10,7 @@ import Link from 'next/link';
 
 import { GoogleAnalytics } from '@/components/features/tracking/GoogleAnalytics';
 import { TooltipProvider } from '@/components/ui/tooltip';
+import Script from 'next/script';
 
 export const RootInnerLayout = ({ children }: { children: ReactNode }) => {
   const [consent, setConsent] = useState<boolean>(() => {
@@ -61,6 +62,9 @@ export const RootInnerLayout = ({ children }: { children: ReactNode }) => {
               </p>
             </CookieConsent>
           </motion.div>
+
+          {/* Turnstile script */}
+          <Script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer />
         </>
       )}
     </>

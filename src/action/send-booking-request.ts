@@ -1,10 +1,10 @@
 'use server';
 
-import {EmailParams, MailerSend, Recipient, Sender} from 'mailersend';
-import {z} from 'zod';
-import {emailBookingSchema} from '@/types/email-booking.type';
-import {format} from 'date-fns';
-import {createClient} from "@/prismicio";
+import { EmailParams, MailerSend, Recipient, Sender } from 'mailersend';
+import { z } from 'zod';
+import { emailBookingSchema } from '@/types/email-booking.type';
+import { format } from 'date-fns';
+import { createClient } from '@/prismicio';
 
 export const transformZodErrors = async (error: z.ZodError) => {
   return error.issues.map(issue => ({
@@ -14,14 +14,11 @@ export const transformZodErrors = async (error: z.ZodError) => {
 };
 
 export async function sendBookingMail(formData: z.infer<typeof emailBookingSchema>) {
-
   console.log('Sending booking request email with data');
 
   const mailerSend = new MailerSend({
     apiKey: process.env.MAILERSEND_API_KEY ?? '',
   });
-
-
 
   try {
     // Validate the form data
@@ -54,7 +51,9 @@ Telephone: ${validatedFields.telephone}
 Appointment Type: ${validatedFields.appointmentType}
 Existing Patient: ${validatedFields.existingPatient ? 'Yes' : 'No'}
 
-${validatedFields.referralPatient ? `
+${
+  validatedFields.referralPatient
+    ? `
 REFERRAL INFORMATION:
 --------------------
 Referral Patient: Yes
@@ -62,13 +61,19 @@ Referrer's Name: ${validatedFields.referralName ?? 'Not provided'}
 Referrer's Surname: ${validatedFields.referralSurname ?? 'Not provided'}
 Referrer's Email: ${validatedFields.referralEmail ?? 'Not provided'}
 Referrer's Telephone: ${validatedFields.referralTelephone ?? 'Not provided'}
-` : 'Referral Patient: No'}
+`
+    : 'Referral Patient: No'
+}
 
-${validatedFields.message ? `
+${
+  validatedFields.message
+    ? `
 ADDITIONAL MESSAGE:
 ------------------
 ${validatedFields.message}
-` : ''}
+`
+    : ''
+}
 
 CONSENT:
 --------
@@ -110,7 +115,9 @@ Sent from Foot Factor Website
           <div class="field"><strong>Existing Patient:</strong> ${validatedFields.existingPatient ? 'Yes' : 'No'}</div>
         </div>
 
-        ${validatedFields.referralPatient ? `
+        ${
+          validatedFields.referralPatient
+            ? `
         <div class="section">
           <h3>Referral Information</h3>
           <div class="field"><strong>Referral Patient:</strong> Yes</div>
@@ -119,21 +126,27 @@ Sent from Foot Factor Website
           <div class="field"><strong>Referrer's Email:</strong> ${validatedFields.referralEmail ?? 'Not provided'}</div>
           <div class="field"><strong>Referrer's Telephone:</strong> ${validatedFields.referralTelephone ?? 'Not provided'}</div>
         </div>
-        ` : `
+        `
+            : `
         <div class="section">
           <h3>Referral Information</h3>
           <div class="field"><strong>Referral Patient:</strong> No</div>
         </div>
-        `}
+        `
+        }
 
-        ${validatedFields.message ? `
+        ${
+          validatedFields.message
+            ? `
         <div class="section">
           <h3>Additional Message</h3>
           <div style="background: #f9f9f9; padding: 15px; border-left: 4px solid #2c5aa0;">
             ${validatedFields.message.replace(/\n/g, '<br>')}
           </div>
         </div>
-        ` : ''}
+        `
+            : ''
+        }
 
         <div class="section">
           <h3>Consent</h3>
@@ -149,88 +162,85 @@ Sent from Foot Factor Website
       </html>
     `;
 
-    console.log('EMAIL html',htmlContent);
-    console.log('EMAIL text',textContent);
+    //console.log('EMAIL html',htmlContent);
+    //console.log('EMAIL text',textContent);
 
     // Create and send the email
     const emailParams = new EmailParams()
-        .setFrom(sentFrom)
-        .setTo(recipients)
-        .setReplyTo(new Sender(validatedFields.email, `${validatedFields.name} ${validatedFields.surname}`))
-        .setSubject(`Booking Request: ${validatedFields.name} ${validatedFields.surname} ${getPatientType()}`)
-        .setText(textContent)
-        .setHtml(htmlContent);
+      .setFrom(sentFrom)
+      .setTo(recipients)
+      .setReplyTo(new Sender(validatedFields.email, `${validatedFields.name} ${validatedFields.surname}`))
+      .setSubject(`Booking Request: ${validatedFields.name} ${validatedFields.surname} ${getPatientType()}`)
+      .setText(textContent)
+      .setHtml(htmlContent);
 
     // Send the email
     const result = await mailerSend.email.send(emailParams);
 
     console.log('Email sent successfully');
 
-    if(result) {
-        const recipients = [
-            new Recipient(validatedFields.email, "Your Client")
-        ];
+    if (result) {
+      const recipients = [new Recipient(validatedFields.email, 'Your Client')];
 
-        const personalization = [
-            {
-                email: validatedFields.email,
-                data: {
-                    name: validatedFields.name
-                },
-            }
-        ];
+      const personalization = [
+        {
+          email: validatedFields.email,
+          data: {
+            name: validatedFields.name,
+          },
+        },
+      ];
 
-        const client = createClient();
-        const settings = await client.getSingle('settings');
-        let templateId: string | null = null;
+      const client = createClient();
+      const settings = await client.getSingle('settings');
+      let templateId: string | null = null;
 
-        if (formData.existingPatient) {
-            templateId = settings.data.booking_existing_patient ?? null;
+      if (formData.existingPatient) {
+        templateId = settings.data.booking_existing_patient ?? null;
+      }
+
+      if (!formData.existingPatient) {
+        templateId = settings.data.booking_new_patient ?? null;
+      }
+
+      if (formData.referralPatient) {
+        templateId = settings.data.booking_referral_patient ?? null;
+
+        if (settings.data.booking_referral_professional) {
+          const emailParams = new EmailParams()
+            .setFrom(sentFrom)
+            .setTo(recipients)
+            .setReplyTo(sentFrom)
+            .setSubject('Referral Request Received')
+            .setTemplateId(settings.data.booking_referral_professional ?? '')
+            .setPersonalization(personalization);
+
+          await mailerSend.email.send(emailParams);
         }
+      }
 
-        if(!formData.existingPatient) {
-            templateId = settings.data.booking_new_patient ?? null;
-        }
+      if (templateId) {
+        const emailParams = new EmailParams()
+          .setFrom(sentFrom)
+          .setTo(recipients)
+          .setReplyTo(sentFrom)
+          .setSubject('Booking Request Received')
+          .setTemplateId(templateId)
+          .setPersonalization(personalization);
 
-        if(formData.referralPatient) {
-            templateId = settings.data.booking_referral_patient ?? null;
+        await mailerSend.email.send(emailParams);
+      }
 
-            if(settings.data.booking_referral_professional) {
-                const emailParams = new EmailParams()
-                    .setFrom(sentFrom)
-                    .setTo(recipients)
-                    .setReplyTo(sentFrom)
-                    .setSubject("Referral Request Received")
-                    .setTemplateId(settings.data.booking_referral_professional ?? '')
-                    .setPersonalization(personalization);
-
-                await mailerSend.email.send(emailParams);
-            }
-        }
-
-        if (templateId) {
-            const emailParams = new EmailParams()
-                .setFrom(sentFrom)
-                .setTo(recipients)
-                .setReplyTo(sentFrom)
-                .setSubject("Booking Request Received")
-                .setTemplateId(templateId)
-                .setPersonalization(personalization);
-
-            await mailerSend.email.send(emailParams);
-        }
-
-        return {
-            errors: null,
-            data: 'Booking request sent successfully',
-        };
-    } else{
-        return {
-            errors: [{path: 'email', message: 'Failed to send booking request email'}],
-            data: null,
-        };
+      return {
+        errors: null,
+        data: 'Booking request sent successfully',
+      };
+    } else {
+      return {
+        errors: [{ path: 'email', message: 'Failed to send booking request email' }],
+        data: null,
+      };
     }
-
   } catch (error) {
     console.error('Error in sendBookingMail:', error);
 
@@ -246,14 +256,14 @@ Sent from Foot Factor Website
     if (error && typeof error === 'object' && 'message' in error) {
       const message = typeof error.message === 'string' ? error.message : 'Unknown error';
       return {
-        errors: [{path: 'email', message: `Email service error: ${message}`}],
+        errors: [{ path: 'email', message: `Email service error: ${message}` }],
         data: null,
       };
     }
 
     // Handle unknown errors
     return {
-      errors: [{path: 'general', message: 'An unexpected error occurred while sending the email'}],
+      errors: [{ path: 'general', message: 'An unexpected error occurred while sending the email' }],
       data: null,
     };
   }
