@@ -48,6 +48,8 @@ export const BookingForm = ({ booking }: BookingFormProps) => {
 
       setTurnstileToken(token);
       setIsVerified(true);
+
+      console.log('[BOOKING FORM] Turnstile verification successful, token set.', token);
     };
   }, []);
 
