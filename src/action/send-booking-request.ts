@@ -13,6 +13,8 @@ export const transformZodErrors = async (error: z.ZodError) => {
   }));
 };
 
+const TURNSTILE_SECRET = process.env.TURNSTILE_SECRET_KEY ?? '';
+
 export async function sendBookingMail(formData: z.infer<typeof emailBookingSchema>) {
   console.log('Sending booking request email with data');
 
@@ -21,8 +23,60 @@ export async function sendBookingMail(formData: z.infer<typeof emailBookingSchem
   });
 
   try {
+    // 1) HONEYPOT CHECK – if filled, silently treat as success and bail
+    const honey = formData.booking_time;
+    if (honey && String(honey).trim() !== '') {
+      console.log('[SPAM] Honeypot filled — bot blocked.');
+      return {
+        success: true,
+        errors: null,
+        msg: 'Mail sent successfully',
+      };
+    }
+
     // Validate the form data
     const validatedFields = emailBookingSchema.parse(formData);
+
+    const token = validatedFields.turnstileToken;
+
+    // 3) TURNSTILE VERIFICATION (server side)
+    if (!TURNSTILE_SECRET) {
+      console.error('[TURNSTILE] Missing TURNSTILE_SECRET_KEY env var');
+      return {
+        success: false,
+        errors: null,
+        msg: 'Verification error. Please try again later.',
+      };
+    }
+
+    if (!token) {
+      console.log('[TURNSTILE] No token received from formData');
+      return {
+        success: false,
+        errors: null,
+        msg: 'Verification failed. Please try again.',
+      };
+    }
+
+    const verifyRes = await fetch('https://challenges.cloudflare.com/turnstile/v0/siteverify', {
+      method: 'POST',
+      body: new URLSearchParams({
+        secret: TURNSTILE_SECRET,
+        response: token,
+        // optional: remoteip: ip
+      }),
+    });
+
+    const verifyData = (await verifyRes.json()) as { success: boolean; 'error-codes'?: string[] };
+
+    if (!verifyData.success) {
+      console.log('[TURNSTILE] Verification failed', verifyData);
+      return {
+        success: false,
+        errors: null,
+        msg: 'Verification failed. Please try again.',
+      };
+    }
 
     const sentFrom = new Sender(`webmaster@${process.env.MAILERSEND_DOMAIN}`, 'Foot Factor');
     const recipients: Recipient[] = [new Recipient(`info@${process.env.MAILERSEND_DOMAIN}`, 'Booking Form Website')];

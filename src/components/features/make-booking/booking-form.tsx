@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
 
 import { Button } from '@/components/ui/button';
@@ -19,12 +19,9 @@ import { Textarea } from '@/components/ui/textarea';
 import { Checkbox } from '@/components/ui/checkbox';
 import Link from 'next/link';
 import { emailBookingSchema } from '@/types/email-booking.type';
-//import ReCAPTCHA from 'react-google-recaptcha';
 import toast from 'react-hot-toast';
 import { sendBookingMail } from '@/action/send-booking-request';
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
-
-//const RECAPTCHA_ACTIVE = process.env.NEXT_PUBLIC_RECAPTCHA_ACTIVE === 'true';
 
 const MIN_DOB = new Date('1900-01-01');
 const MAX_DOB = new Date(); // today
@@ -41,8 +38,18 @@ export const BookingForm = ({ booking }: BookingFormProps) => {
   const [submissionSuccess, setSubmissionSuccess] = useState<boolean>(false);
   const [submitErrors, setSubmitErrors] = useState<{ path: string; message: string }[] | null>(null);
   const [open, setOpen] = React.useState(false);
-  //const recaptchaRef = useRef<ReCAPTCHA | null>(null);
-  //const [isVerified, setIsVerified] = useState(true);
+  const [turnstileToken, setTurnstileToken] = useState<string | null>(null);
+  const [isVerified, setIsVerified] = useState(false);
+
+  useEffect(() => {
+    (window as any).onTurnstileSuccess = (token: string) => {
+      const input = document.getElementById('turnstileToken') as HTMLInputElement | null;
+      if (input) input.value = token;
+
+      setTurnstileToken(token);
+      setIsVerified(true);
+    };
+  }, []);
 
   const form = useForm<FormValues>({
     resolver: zodResolver(emailBookingSchema) as Resolver<FormValues>, // keeps TS happy with ZodEffects
@@ -73,7 +80,28 @@ export const BookingForm = ({ booking }: BookingFormProps) => {
   const onSubmit = async (data: z.infer<typeof emailBookingSchema>) => {
     setIsSubmitting(true);
     setSubmitErrors(null);
+
+    // 1) Run invisible Turnstile
+    const widget = document.getElementById('turnstile-widget');
+    if (widget && (window as any).turnstile?.execute) {
+      (window as any).turnstile.execute(widget);
+    }
+
+    // Wait so onTurnstileSuccess can set the hidden field
+    await new Promise(resolve => setTimeout(resolve, 250));
+
+    const tokenInput = document.getElementById('turnstileToken') as HTMLInputElement | null;
+    const token = tokenInput?.value || '';
+
+    if (!token) {
+      toast.error('Verification failed. Please try again.');
+      setIsSubmitting(false);
+      return;
+    }
+
     try {
+      data.turnstileToken = token;
+
       const { data: success, errors } = await sendBookingMail(data);
 
       if (success) {
@@ -117,6 +145,7 @@ export const BookingForm = ({ booking }: BookingFormProps) => {
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="mt-5 space-y-3 px-2">
+        <input type="text" name="booking_time" autoComplete="off" tabIndex={-1} style={{ display: 'none' }} />
         <div className="flex flex-col space-y-2">
           <FormField
             control={form.control}
@@ -444,12 +473,22 @@ export const BookingForm = ({ booking }: BookingFormProps) => {
           )}
         </div>
         <div className={'mt-8 flex justify-end'}>
+          {/* Turnstile widget – uses global callback we defined in useEffect */}
+          <input type="hidden" name="cf-turnstile-response" id="turnstileToken" />
+          <div
+            id="turnstile-widget"
+            className="cf-turnstile"
+            data-sitekey={process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY}
+            data-callback="onTurnstileSuccess"
+            data-size="invisible"
+          />
+
           <Button
             type="submit"
-            variant={'default'}
-            size={'lg'}
+            variant="default"
+            size="lg"
             className={cn(`${isSubmitting ? 'loading' : ''}`, 'bg-accent')}
-            disabled={!form.formState.isValid || isSubmitting}>
+            disabled={!isVerified || isSubmitting}>
             {isSubmitting ? 'Submitting' : 'Submit'}
           </Button>
         </div>
