@@ -5,6 +5,11 @@ import React, { useEffect, useState } from 'react';
 import { useForm, type SubmitHandler } from 'react-hook-form';
 import toast from 'react-hot-toast';
 import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import { Textarea } from '@/components/ui/textarea';
+import { Checkbox } from '@/components/ui/checkbox';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
+import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
 import { z } from 'zod';
 import cn from 'clsx';
 import { sendMail } from '@/action';
@@ -38,103 +43,18 @@ interface ContactFormInputProps {
 export function ContactForm({ items }: ContactFormInputProps) {
   const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
   const [submissionSuccess, setSubmissionSuccess] = useState<boolean>(false);
-  const [isVerified, setIsVerified] = useState<boolean>(false);
   const [enquiryTypeOptions, setEnquiryTypeOptions] = useState<ContactFormSectionSliceDefaultPrimaryItemsItem[]>(
     items ?? [],
   );
 
   useEffect(() => {
-    console.log('[Turnstile] Setting up callbacks and initialization');
-
-    // Manually render Turnstile widget to avoid auto-render issues
-    console.log('[Turnstile] Checking if Turnstile script is loaded...');
-    console.log('[Turnstile] Site key:', process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY);
-
-    let widgetId: string | null = null;
-    let cleanupAttempted = false;
-
-    const initTurnstile = () => {
-      if (cleanupAttempted) return;
-
-      const widget = document.getElementById('turnstile-widget');
-      console.log('[Turnstile] Widget element found:', !!widget);
-      console.log('[Turnstile] Turnstile API available:', !!(window as any).turnstile);
-
-      if (widget && (window as any).turnstile && !widgetId) {
-        try {
-          console.log('[Turnstile] Manually rendering widget...');
-          widgetId = (window as any).turnstile.render('#turnstile-widget', {
-            sitekey: process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY,
-            callback: (token: string) => {
-              console.log(
-                '[Turnstile] ✅ Callback: Verification successful, token received:',
-                token?.substring(0, 20) + '...',
-              );
-              const input = document.getElementById('turnstileToken') as HTMLInputElement | null;
-              if (input) {
-                input.value = token;
-                console.log('[Turnstile] Token set in hidden input');
-              }
-              setIsVerified(true);
-              console.log('[Turnstile] Submit button should now be enabled');
-            },
-            'error-callback': (errorCode: string) => {
-              console.error('[Turnstile] ❌ Error callback:', errorCode);
-              setIsVerified(false);
-              toast.error('Verification failed. Please refresh the page and try again.');
-            },
-            'expired-callback': () => {
-              console.warn('[Turnstile] ⚠️ Expired callback: Token expired');
-              setIsVerified(false);
-            },
-            theme: 'light',
-            size: 'invisible',
-          });
-          console.log('[Turnstile] ✅ Widget rendered with ID:', widgetId);
-        } catch (error) {
-          console.error('[Turnstile] ❌ Error rendering widget:', error);
-        }
+    // Set up Turnstile callback to store token when verification completes
+    (window as any).onTurnstileSuccess = (token: string) => {
+      const input = document.getElementById('turnstileToken') as HTMLInputElement | null;
+      if (input) {
+        input.value = token;
       }
     };
-
-    const waitForTurnstile = () => {
-      if ((window as any).turnstile) {
-        console.log('[Turnstile] Script already loaded, initializing immediately');
-        initTurnstile();
-      } else {
-        console.log('[Turnstile] Waiting for script to load...');
-        const interval = setInterval(() => {
-          if ((window as any).turnstile) {
-            console.log('[Turnstile] Script loaded, initializing now');
-            initTurnstile();
-            clearInterval(interval);
-          }
-        }, 100);
-
-        // Timeout after 10 seconds
-        setTimeout(() => {
-          if (!(window as any).turnstile) {
-            console.error('[Turnstile] ❌ Script failed to load after 10 seconds');
-            clearInterval(interval);
-            toast.error('Security verification failed to load. Please refresh the page.');
-          }
-        }, 10000);
-
-        return () => {
-          clearInterval(interval);
-          cleanupAttempted = true;
-          if (widgetId && (window as any).turnstile?.remove) {
-            try {
-              (window as any).turnstile.remove(widgetId);
-            } catch (e) {
-              console.log('[Turnstile] Widget already removed or does not exist');
-            }
-          }
-        };
-      }
-    };
-
-    return waitForTurnstile();
   }, []);
 
   useEffect(() => {
@@ -146,65 +66,19 @@ export function ContactForm({ items }: ContactFormInputProps) {
     void fetchEnquiryTypes();
   }, []);
 
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-    reset,
-  } = useForm<ContactFormInput>({
+  const form = useForm<ContactFormInput>({
     resolver: zodResolver(emailSchema),
+    defaultValues: {
+      name: '',
+      email: '',
+      enquiryType: '',
+      message: '',
+      agreeToTerms: false,
+    },
   });
 
   const onSubmit: SubmitHandler<EmailSchema> = async data => {
-    console.log('[Form] Submit initiated');
-    console.log('[Form] isVerified state:', isVerified);
     setIsSubmitting(true);
-
-    const tokenInput = document.getElementById('turnstileToken') as HTMLInputElement | null;
-    let token = tokenInput?.value || '';
-    console.log('[Form] Token from input:', token ? token.substring(0, 20) + '...' : 'EMPTY');
-
-    // If token is not present, the invisible widget should have already run
-    // We'll give it a moment and check again
-    if (!token) {
-      console.log('[Form] No token found, waiting for Turnstile to complete...');
-
-      // Wait a bit longer for the invisible widget to complete
-      await new Promise(resolve => setTimeout(resolve, 2000));
-      token = tokenInput?.value || '';
-      console.log('[Form] Token after waiting:', token ? token.substring(0, 20) + '...' : 'STILL EMPTY');
-
-      // If still no token, try to reset and re-verify
-      if (!token) {
-        console.log('[Form] Attempting to reset Turnstile widget...');
-        const widget = document.getElementById('turnstile-widget');
-
-        if (widget && (window as any).turnstile?.reset) {
-          try {
-            console.log('[Form] Resetting Turnstile...');
-            (window as any).turnstile.reset(widget);
-            // Wait for verification after reset
-            await new Promise(resolve => setTimeout(resolve, 2000));
-            token = tokenInput?.value || '';
-            console.log('[Form] Token after reset:', token ? token.substring(0, 20) + '...' : 'STILL EMPTY');
-          } catch (error) {
-            console.error('[Form] ❌ Error resetting Turnstile:', error);
-          }
-        } else {
-          console.error('[Form] ❌ Cannot reset Turnstile - widget or API not available');
-        }
-      }
-    }
-
-    if (!token) {
-      console.error('[Form] ❌ No token available, aborting submission');
-      toast.error('Verification failed. Please try again.');
-      setIsSubmitting(false);
-      setIsVerified(false);
-      return;
-    }
-
-    console.log('[Form] ✅ Token validated, proceeding with submission');
 
     try {
       const formData = new FormData();
@@ -214,7 +88,9 @@ export function ContactForm({ items }: ContactFormInputProps) {
       formData.append('enquiryType', data.enquiryType || '');
       formData.append('agreeToTerms', data.agreeToTerms ? 'true' : 'false');
 
-      // Turnstile token – this is what the server will verify
+      // Get Turnstile token if available (will be verified server-side)
+      const tokenInput = document.getElementById('turnstileToken') as HTMLInputElement | null;
+      const token = tokenInput?.value || '';
       formData.append('cf-turnstile-response', token);
 
       // Honeypot
@@ -228,8 +104,7 @@ export function ContactForm({ items }: ContactFormInputProps) {
         setIsSubmitting(false);
         setSubmissionSuccess(true);
         toast.success(msg);
-        reset();
-        setIsVerified(false);
+        form.reset();
         // Clear the token so it needs to be re-verified
         if (tokenInput) tokenInput.value = '';
         return;
@@ -251,16 +126,6 @@ export function ContactForm({ items }: ContactFormInputProps) {
   const handleContinue = () => {
     setSubmissionSuccess(false);
     setIsSubmitting(false);
-    setIsVerified(false);
-
-    // Reset Turnstile widget to get a new token
-    setTimeout(() => {
-      const widget = document.getElementById('turnstile-widget');
-      if (widget && (window as any).turnstile?.reset) {
-        console.log('[Turnstile] Resetting widget for new submission');
-        (window as any).turnstile.reset(widget);
-      }
-    }, 100);
   };
 
   if (submissionSuccess) {
@@ -277,119 +142,129 @@ export function ContactForm({ items }: ContactFormInputProps) {
   }
 
   return (
-    <div className="form-control w-full text-primary">
-      <form onSubmit={handleSubmit(onSubmit)} noValidate method="post" className="space-y-4">
-        {/* Honeypot – hidden field for bots */}
-        <input type="text" name="contact_time" autoComplete="off" tabIndex={-1} style={{ display: 'none' }} />
-        <input
-          type="text"
-          placeholder="Name"
-          className={cn(
-            `input input-bordered w-full ${errors.name ? 'input-error' : ''}`,
-            'rounded-md border-gray-200',
-          )}
-          {...register('name')}
-          disabled={isSubmitting}
-        />
-        {errors.name && <p className="text-sm font-medium text-destructive">{errors.name.message}</p>}
+    <div className="w-full text-primary">
+      <Form {...form}>
+        <form onSubmit={form.handleSubmit(onSubmit)} method="post" className="space-y-6">
+          {/* Honeypot – hidden field for bots */}
+          <input type="text" name="contact_time" autoComplete="off" tabIndex={-1} style={{ display: 'none' }} />
 
-        <input
-          type="email"
-          placeholder="Email"
-          className={cn(
-            `input input-bordered w-full ${errors.email ? 'input-error' : ''}`,
-            'rounded-md border-gray-200',
-          )}
-          {...register('email')}
-          disabled={isSubmitting}
-        />
-        {errors.email && <p className="text-sm font-medium text-destructive">{errors.email.message}</p>}
-
-        <select
-          aria-label={'Nature of Enquiry'}
-          className={cn(
-            `select select-bordered w-full ${errors.enquiryType ? 'select-error' : ''}`,
-            'rounded-md border-gray-200',
-          )}
-          {...register('enquiryType')}
-          disabled={isSubmitting}
-          defaultValue="">
-          <option value="" disabled>
-            Nature of Enquiry
-          </option>
-          {enquiryTypeOptions.length ? (
-            enquiryTypeOptions.map((item, index) => {
-              if (item.value == null) return null; // skip items with undefined or null value
-
-              return (
-                <option key={`${item.value}-${index}`} value={item.value}>
-                  {item.label}
-                </option>
-              );
-            })
-          ) : (
-            <>
-              <option value="general">General Inquiry</option>
-              <option value="billing">Can we chat!</option>
-              <option value="support">Pricing and Quoting</option>
-              <option value="feedback">Collaboration</option>
-              <option value="other">Other</option>
-            </>
-          )}
-        </select>
-        {errors.enquiryType && <p className="text-sm font-medium text-destructive">{errors.enquiryType.message}</p>}
-
-        <textarea
-          placeholder="Message"
-          className={cn(
-            `textarea textarea-bordered w-full ${errors.message ? 'textarea-error' : ''}`,
-            'rounded-md border-gray-200',
-          )}
-          {...register('message')}
-          rows={4}
-          disabled={isSubmitting}
-        />
-        {errors.message && <p className="text-sm font-medium text-destructive">{errors.message.message}</p>}
-
-        <div className="flex flex-col items-center">
-          <div className="w-full">
-            <div className="flex items-center gap-2">
-              <input
-                type="checkbox"
-                className={cn(`checkbox ${errors.agreeToTerms ? 'checkbox-error' : ''}`, 'rounded-md')}
-                {...register('agreeToTerms')}
-                id="agreeToTerms"
-              />
-              <label htmlFor="agreeToTerms" className="text-base">
-                I agree to the Terms & Conditions
-              </label>
-            </div>
-            {errors.agreeToTerms && (
-              <p className="text-sm font-medium text-destructive">{errors.agreeToTerms.message}</p>
+          <FormField
+            control={form.control}
+            name="name"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Name</FormLabel>
+                <FormControl>
+                  <Input placeholder="Your name" {...field} disabled={isSubmitting} />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
             )}
-          </div>
+          />
+
+          <FormField
+            control={form.control}
+            name="email"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Email</FormLabel>
+                <FormControl>
+                  <Input type="email" placeholder="your@email.com" {...field} disabled={isSubmitting} />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+
+          <FormField
+            control={form.control}
+            name="enquiryType"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Nature of Enquiry</FormLabel>
+                <Select onValueChange={field.onChange} defaultValue={field.value} disabled={isSubmitting}>
+                  <FormControl>
+                    <SelectTrigger>
+                      <SelectValue placeholder="Select enquiry type" />
+                    </SelectTrigger>
+                  </FormControl>
+                  <SelectContent>
+                    {enquiryTypeOptions.length ? (
+                      enquiryTypeOptions.map((item, index) => {
+                        if (item.value == null) return null;
+                        return (
+                          <SelectItem key={`${item.value}-${index}`} value={item.value}>
+                            {item.label}
+                          </SelectItem>
+                        );
+                      })
+                    ) : (
+                      <>
+                        <SelectItem value="general">General Inquiry</SelectItem>
+                        <SelectItem value="billing">Can we chat!</SelectItem>
+                        <SelectItem value="support">Pricing and Quoting</SelectItem>
+                        <SelectItem value="feedback">Collaboration</SelectItem>
+                        <SelectItem value="other">Other</SelectItem>
+                      </>
+                    )}
+                  </SelectContent>
+                </Select>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+
+          <FormField
+            control={form.control}
+            name="message"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Message</FormLabel>
+                <FormControl>
+                  <Textarea placeholder="Your message..." rows={4} {...field} disabled={isSubmitting} />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+
+          <FormField
+            control={form.control}
+            name="agreeToTerms"
+            render={({ field }) => (
+              <FormItem className="flex flex-row items-start space-x-3 space-y-0">
+                <FormControl>
+                  <Checkbox checked={field.value} onCheckedChange={field.onChange} disabled={isSubmitting} />
+                </FormControl>
+                <div className="space-y-1 leading-none">
+                  <FormLabel>I agree to the Terms & Conditions</FormLabel>
+                </div>
+              </FormItem>
+            )}
+          />
 
           <div className="flex w-full justify-end pt-6">
-            {/* Submit Button */}
-
-            {/* Turnstile widget – manually rendered in useEffect to avoid auto-render issues */}
+            {/* Turnstile widget - invisible, runs in background */}
             <input type="hidden" name="cf-turnstile-response" id="turnstileToken" />
-            <div id="turnstile-widget" className="cf-turnstile" />
+            <div
+              id="turnstile-widget"
+              className="cf-turnstile"
+              data-sitekey={process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY}
+              data-callback="onTurnstileSuccess"
+              data-size="invisible"
+            />
 
             <Button
               type="submit"
               variant="default"
               size="lg"
               className={cn(`${isSubmitting ? 'loading' : ''}`, 'bg-accent')}
-              disabled={!isVerified || isSubmitting}>
-              {isSubmitting ? 'Submitting...' : isVerified ? 'Submit' : 'Verifying security...'}
+              disabled={isSubmitting}>
+              {isSubmitting ? 'Submitting...' : 'Submit'}
             </Button>
-            {!isVerified && !isSubmitting && (
-              <p className="mt-2 text-xs text-muted-foreground">Checking security verification...</p>
-            )}
           </div>
-        </div>
-      </form>
+        </form>
+      </Form>
     </div>
   );
 }
