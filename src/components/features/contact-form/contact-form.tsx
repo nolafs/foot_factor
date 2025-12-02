@@ -38,20 +38,103 @@ interface ContactFormInputProps {
 export function ContactForm({ items }: ContactFormInputProps) {
   const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
   const [submissionSuccess, setSubmissionSuccess] = useState<boolean>(false);
-  const [turnstileToken, setTurnstileToken] = useState<string | null>(null);
-  const [isVerified, setIsVerified] = useState(false);
+  const [isVerified, setIsVerified] = useState<boolean>(false);
   const [enquiryTypeOptions, setEnquiryTypeOptions] = useState<ContactFormSectionSliceDefaultPrimaryItemsItem[]>(
     items ?? [],
   );
 
   useEffect(() => {
-    (window as any).onTurnstileSuccess = (token: string) => {
-      const input = document.getElementById('turnstileToken') as HTMLInputElement | null;
-      if (input) input.value = token;
+    console.log('[Turnstile] Setting up callbacks and initialization');
 
-      setTurnstileToken(token);
-      setIsVerified(true);
+    // Manually render Turnstile widget to avoid auto-render issues
+    console.log('[Turnstile] Checking if Turnstile script is loaded...');
+    console.log('[Turnstile] Site key:', process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY);
+
+    let widgetId: string | null = null;
+    let cleanupAttempted = false;
+
+    const initTurnstile = () => {
+      if (cleanupAttempted) return;
+
+      const widget = document.getElementById('turnstile-widget');
+      console.log('[Turnstile] Widget element found:', !!widget);
+      console.log('[Turnstile] Turnstile API available:', !!(window as any).turnstile);
+
+      if (widget && (window as any).turnstile && !widgetId) {
+        try {
+          console.log('[Turnstile] Manually rendering widget...');
+          widgetId = (window as any).turnstile.render('#turnstile-widget', {
+            sitekey: process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY,
+            callback: (token: string) => {
+              console.log(
+                '[Turnstile] ✅ Callback: Verification successful, token received:',
+                token?.substring(0, 20) + '...',
+              );
+              const input = document.getElementById('turnstileToken') as HTMLInputElement | null;
+              if (input) {
+                input.value = token;
+                console.log('[Turnstile] Token set in hidden input');
+              }
+              setIsVerified(true);
+              console.log('[Turnstile] Submit button should now be enabled');
+            },
+            'error-callback': (errorCode: string) => {
+              console.error('[Turnstile] ❌ Error callback:', errorCode);
+              setIsVerified(false);
+              toast.error('Verification failed. Please refresh the page and try again.');
+            },
+            'expired-callback': () => {
+              console.warn('[Turnstile] ⚠️ Expired callback: Token expired');
+              setIsVerified(false);
+            },
+            theme: 'light',
+            size: 'invisible',
+          });
+          console.log('[Turnstile] ✅ Widget rendered with ID:', widgetId);
+        } catch (error) {
+          console.error('[Turnstile] ❌ Error rendering widget:', error);
+        }
+      }
     };
+
+    const waitForTurnstile = () => {
+      if ((window as any).turnstile) {
+        console.log('[Turnstile] Script already loaded, initializing immediately');
+        initTurnstile();
+      } else {
+        console.log('[Turnstile] Waiting for script to load...');
+        const interval = setInterval(() => {
+          if ((window as any).turnstile) {
+            console.log('[Turnstile] Script loaded, initializing now');
+            initTurnstile();
+            clearInterval(interval);
+          }
+        }, 100);
+
+        // Timeout after 10 seconds
+        setTimeout(() => {
+          if (!(window as any).turnstile) {
+            console.error('[Turnstile] ❌ Script failed to load after 10 seconds');
+            clearInterval(interval);
+            toast.error('Security verification failed to load. Please refresh the page.');
+          }
+        }, 10000);
+
+        return () => {
+          clearInterval(interval);
+          cleanupAttempted = true;
+          if (widgetId && (window as any).turnstile?.remove) {
+            try {
+              (window as any).turnstile.remove(widgetId);
+            } catch (e) {
+              console.log('[Turnstile] Widget already removed or does not exist');
+            }
+          }
+        };
+      }
+    };
+
+    return waitForTurnstile();
   }, []);
 
   useEffect(() => {
@@ -73,25 +156,55 @@ export function ContactForm({ items }: ContactFormInputProps) {
   });
 
   const onSubmit: SubmitHandler<EmailSchema> = async data => {
+    console.log('[Form] Submit initiated');
+    console.log('[Form] isVerified state:', isVerified);
     setIsSubmitting(true);
 
-    // 1) Run invisible Turnstile
-    const widget = document.getElementById('turnstile-widget');
-    if (widget && (window as any).turnstile?.execute) {
-      (window as any).turnstile.execute(widget);
-    }
-
-    // Wait so onTurnstileSuccess can set the hidden field
-    await new Promise(resolve => setTimeout(resolve, 250));
-
     const tokenInput = document.getElementById('turnstileToken') as HTMLInputElement | null;
-    const token = tokenInput?.value || '';
+    let token = tokenInput?.value || '';
+    console.log('[Form] Token from input:', token ? token.substring(0, 20) + '...' : 'EMPTY');
+
+    // If token is not present, the invisible widget should have already run
+    // We'll give it a moment and check again
+    if (!token) {
+      console.log('[Form] No token found, waiting for Turnstile to complete...');
+
+      // Wait a bit longer for the invisible widget to complete
+      await new Promise(resolve => setTimeout(resolve, 2000));
+      token = tokenInput?.value || '';
+      console.log('[Form] Token after waiting:', token ? token.substring(0, 20) + '...' : 'STILL EMPTY');
+
+      // If still no token, try to reset and re-verify
+      if (!token) {
+        console.log('[Form] Attempting to reset Turnstile widget...');
+        const widget = document.getElementById('turnstile-widget');
+
+        if (widget && (window as any).turnstile?.reset) {
+          try {
+            console.log('[Form] Resetting Turnstile...');
+            (window as any).turnstile.reset(widget);
+            // Wait for verification after reset
+            await new Promise(resolve => setTimeout(resolve, 2000));
+            token = tokenInput?.value || '';
+            console.log('[Form] Token after reset:', token ? token.substring(0, 20) + '...' : 'STILL EMPTY');
+          } catch (error) {
+            console.error('[Form] ❌ Error resetting Turnstile:', error);
+          }
+        } else {
+          console.error('[Form] ❌ Cannot reset Turnstile - widget or API not available');
+        }
+      }
+    }
 
     if (!token) {
+      console.error('[Form] ❌ No token available, aborting submission');
       toast.error('Verification failed. Please try again.');
       setIsSubmitting(false);
+      setIsVerified(false);
       return;
     }
+
+    console.log('[Form] ✅ Token validated, proceeding with submission');
 
     try {
       const formData = new FormData();
@@ -116,8 +229,9 @@ export function ContactForm({ items }: ContactFormInputProps) {
         setSubmissionSuccess(true);
         toast.success(msg);
         reset();
-        setTurnstileToken(null);
         setIsVerified(false);
+        // Clear the token so it needs to be re-verified
+        if (tokenInput) tokenInput.value = '';
         return;
       }
 
@@ -138,6 +252,15 @@ export function ContactForm({ items }: ContactFormInputProps) {
     setSubmissionSuccess(false);
     setIsSubmitting(false);
     setIsVerified(false);
+
+    // Reset Turnstile widget to get a new token
+    setTimeout(() => {
+      const widget = document.getElementById('turnstile-widget');
+      if (widget && (window as any).turnstile?.reset) {
+        console.log('[Turnstile] Resetting widget for new submission');
+        (window as any).turnstile.reset(widget);
+      }
+    }, 100);
   };
 
   if (submissionSuccess) {
@@ -249,15 +372,9 @@ export function ContactForm({ items }: ContactFormInputProps) {
           <div className="flex w-full justify-end pt-6">
             {/* Submit Button */}
 
-            {/* Turnstile widget – uses global callback we defined in useEffect */}
+            {/* Turnstile widget – manually rendered in useEffect to avoid auto-render issues */}
             <input type="hidden" name="cf-turnstile-response" id="turnstileToken" />
-            <div
-              id="turnstile-widget"
-              className="cf-turnstile"
-              data-sitekey={process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY}
-              data-callback="onTurnstileSuccess"
-              data-size="invisible"
-            />
+            <div id="turnstile-widget" className="cf-turnstile" />
 
             <Button
               type="submit"
@@ -265,8 +382,11 @@ export function ContactForm({ items }: ContactFormInputProps) {
               size="lg"
               className={cn(`${isSubmitting ? 'loading' : ''}`, 'bg-accent')}
               disabled={!isVerified || isSubmitting}>
-              {isSubmitting ? 'Submitting' : 'Submit'}
+              {isSubmitting ? 'Submitting...' : isVerified ? 'Submit' : 'Verifying security...'}
             </Button>
+            {!isVerified && !isSubmitting && (
+              <p className="mt-2 text-xs text-muted-foreground">Checking security verification...</p>
+            )}
           </div>
         </div>
       </form>
