@@ -1,10 +1,13 @@
 'use server';
 
 import { EmailParams, MailerSend, Recipient, Sender } from 'mailersend';
+import { SendSmtpEmail, TransactionalEmailsApi } from '@getbrevo/brevo';
 import { z } from 'zod';
 import { createClient } from '@/prismicio';
 
 const TURNSTILE_SECRET = process.env.TURNSTILE_SECRET_KEY ?? '';
+
+const MAILER: 'MAILERSEND' | 'BREVO' = 'MAILERSEND';
 
 export const transformZodErrors = async (error: z.ZodError) => {
   return error.issues.map(issue => ({
@@ -26,9 +29,17 @@ const emailSchema = z.object({
   contact_time: z.string().optional(),
 });
 export async function sendMail(formData: FormData) {
-  const mailerSend = new MailerSend({
-    apiKey: process.env.MAILERSEND_API_KEY ?? '',
-  });
+  // Initialize email API based on MAILER constant
+  let emailAPI: MailerSend | TransactionalEmailsApi;
+
+  if (MAILER === 'BREVO') {
+    emailAPI = new TransactionalEmailsApi();
+    (emailAPI as any).authentications.apiKey.apiKey = process.env.BREVO_API_KEY ?? '';
+  } else {
+    emailAPI = new MailerSend({
+      apiKey: process.env.MAILERSEND_API_KEY ?? '',
+    });
+  }
 
   try {
     // 1) HONEYPOT CHECK – if filled, silently treat as success and bail
@@ -94,8 +105,9 @@ export async function sendMail(formData: FormData) {
       };
     }
 
-    const sentFrom = new Sender(`webmaster@${process.env.MAILERSEND_DOMAIN}`, 'Foot Factor');
-    const recipients: Recipient[] = [new Recipient(`info@${process.env.MAILERSEND_DOMAIN}`, 'Contact Form Website')];
+    // Determine domain based on mailer
+    const domain = MAILER === 'BREVO' ? process.env.BREVO_DOMAIN : process.env.MAILERSEND_DOMAIN;
+    const infoEmail = `info@${domain}`;
 
     const textContent = `
 BOOKING REQUEST DETAILS
@@ -129,7 +141,7 @@ Sent from Foot Factor Website
 
     const htmlContent = `
       <!DOCTYPE html>
-      <html>
+      <html lang="en">
       <head>
         <meta charset="utf-8">
         <style>
@@ -182,19 +194,33 @@ Sent from Foot Factor Website
       </html>
     `;
 
+    // Send main contact form email to info address
     if (validatedFields) {
-      const emailParams = new EmailParams()
-        .setFrom(sentFrom)
-        .setTo(recipients)
-        .setReplyTo(new Sender(validatedFields.email, `${validatedFields.name}`))
-        .setSubject(`Contact submission: ${formData.get('enquiryType') as string}`)
-        .setText(`Name: ${formData.get('name') as string}`)
-        .setText(`Email: ${formData.get('email') as string}`)
-        .setText(`Enquiry Type: ${formData.get('enquiryType') as string}`)
-        .setText(textContent)
-        .setHtml(htmlContent);
+      if (MAILER === 'BREVO') {
+        const message: SendSmtpEmail = {
+          sender: { email: `webmaster@${domain}`, name: 'Foot Factor' },
+          to: [{ email: infoEmail, name: 'Contact Form Website' }],
+          replyTo: { email: validatedFields.email, name: validatedFields.name },
+          subject: `Contact submission: ${validatedFields.enquiryType}`,
+          textContent: textContent,
+          htmlContent: htmlContent,
+        };
 
-      const mailer = await mailerSend.email.send(emailParams);
+        await (emailAPI as TransactionalEmailsApi).sendTransacEmail(message);
+      } else {
+        const sentFrom = new Sender(`webmaster@${domain}`, 'Foot Factor');
+        const recipients: Recipient[] = [new Recipient(infoEmail, 'Contact Form Website')];
+
+        const emailParams = new EmailParams()
+          .setFrom(sentFrom)
+          .setTo(recipients)
+          .setReplyTo(new Sender(validatedFields.email, validatedFields.name))
+          .setSubject(`Contact submission: ${validatedFields.enquiryType}`)
+          .setText(textContent)
+          .setHtml(htmlContent);
+
+        await (emailAPI as MailerSend).email.send(emailParams);
+      }
     }
 
     //Response email
@@ -211,29 +237,44 @@ Sent from Foot Factor Website
     if (!userEmail) {
       console.log('[EMAIL SEND] No user email – skipping response template');
     } else if (templateId) {
-      const personalization = [
-        {
-          email: userEmail,
-          data: {
-            name: validatedFields.name,
+      if (MAILER === 'BREVO') {
+        const responseMessage = new SendSmtpEmail();
+        responseMessage.sender = { email: `webmaster@${domain}`, name: 'Foot Factor' };
+        responseMessage.to = [{ email: userEmail, name: validatedFields.name }];
+        responseMessage.subject = 'Thanks for contacting Foot Factor';
+        responseMessage.templateId = parseInt(templateId);
+        responseMessage.params = {
+          name: validatedFields.name,
+        };
+
+        const responseEmail = await (emailAPI as TransactionalEmailsApi).sendTransacEmail(responseMessage);
+        console.log('[EMAIL SEND] TEMPLATE SUCCESS', responseEmail);
+      } else {
+        const personalization = [
+          {
+            email: userEmail,
+            data: {
+              name: validatedFields.name,
+            },
           },
-        },
-      ];
+        ];
 
-      console.log('[EMAIL SEND] personalization', personalization);
+        console.log('[EMAIL SEND] personalization', personalization);
 
-      const userRecipients: Recipient[] = [new Recipient(userEmail, validatedFields.name)];
+        const sentFrom = new Sender(`webmaster@${domain}`, 'Foot Factor');
+        const userRecipients: Recipient[] = [new Recipient(userEmail, validatedFields.name)];
 
-      const emailParams = new EmailParams()
-        .setFrom(sentFrom)
-        .setTo(userRecipients)
-        .setReplyTo(sentFrom)
-        .setSubject('Thanks for contacting Foot Factor')
-        .setTemplateId(templateId)
-        .setPersonalization(personalization);
+        const emailParams = new EmailParams()
+          .setFrom(sentFrom)
+          .setTo(userRecipients)
+          .setReplyTo(sentFrom)
+          .setSubject('Thanks for contacting Foot Factor')
+          .setTemplateId(templateId)
+          .setPersonalization(personalization);
 
-      const responseEmail = await mailerSend.email.send(emailParams);
-      console.log('[EMAIL SEND] TEMPLATE SUCCESS', responseEmail);
+        const responseEmail = await (emailAPI as MailerSend).email.send(emailParams);
+        console.log('[EMAIL SEND] TEMPLATE SUCCESS', responseEmail);
+      }
     }
 
     console.log('[EMAIL SEND] SUCCESS');

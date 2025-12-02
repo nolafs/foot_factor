@@ -21,6 +21,7 @@
   "dependencies": {
     "@algolia/autocomplete-js": "^1.18.0",
     "@algolia/autocomplete-theme-classic": "^1.18.0",
+    "@getbrevo/brevo": "^3.0.1",
     "@googlemaps/react-wrapper": "^1.2.0",
     "@gsap/react": "^2.1.2",
     "@headlessui/react": "^2.2.0",

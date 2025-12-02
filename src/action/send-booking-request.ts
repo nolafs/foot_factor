@@ -1,10 +1,13 @@
 'use server';
 
 import { EmailParams, MailerSend, Recipient, Sender } from 'mailersend';
+import { TransactionalEmailsApi, SendSmtpEmail, CreateSmtpEmail } from '@getbrevo/brevo';
 import { z } from 'zod';
 import { emailBookingSchema } from '@/types/email-booking.type';
 import { format } from 'date-fns';
 import { createClient } from '@/prismicio';
+import { APIResponse } from 'mailersend/lib/services/request.service';
+import { IncomingMessage } from 'node:http';
 
 export const transformZodErrors = async (error: z.ZodError) => {
   return error.issues.map(issue => ({
@@ -15,12 +18,10 @@ export const transformZodErrors = async (error: z.ZodError) => {
 
 const TURNSTILE_SECRET = process.env.TURNSTILE_SECRET_KEY ?? '';
 
+const MAILER: 'MALERSEMD' | 'BREVO' = 'MALERSEMD';
+
 export async function sendBookingMail(formData: z.infer<typeof emailBookingSchema>) {
   console.log('Sending booking request email with data');
-
-  const mailerSend = new MailerSend({
-    apiKey: process.env.MAILERSEND_API_KEY ?? '',
-  });
 
   try {
     // 1) HONEYPOT CHECK – if filled, silently treat as success and bail
@@ -77,9 +78,6 @@ export async function sendBookingMail(formData: z.infer<typeof emailBookingSchem
         msg: 'Verification failed. Please try again.',
       };
     }
-
-    const sentFrom = new Sender(`webmaster@${process.env.MAILERSEND_DOMAIN}`, 'Foot Factor');
-    const recipients: Recipient[] = [new Recipient(`info@${process.env.MAILERSEND_DOMAIN}`, 'Booking Form Website')];
 
     // Determine patient type for subject
     const getPatientType = () => {
@@ -141,7 +139,7 @@ Sent from Foot Factor Website
     // Build HTML content for better formatting
     const htmlContent = `
       <!DOCTYPE html>
-      <html>
+      <html lang="en">
       <head>
         <meta charset="utf-8">
         <style>
@@ -219,70 +217,153 @@ Sent from Foot Factor Website
     //console.log('EMAIL html',htmlContent);
     //console.log('EMAIL text',textContent);
 
-    // Create and send the email
-    const emailParams = new EmailParams()
-      .setFrom(sentFrom)
-      .setTo(recipients)
-      .setReplyTo(new Sender(validatedFields.email, `${validatedFields.name} ${validatedFields.surname}`))
-      .setSubject(`Booking Request: ${validatedFields.name} ${validatedFields.surname} ${getPatientType()}`)
-      .setText(textContent)
-      .setHtml(htmlContent);
+    let emailAPI: MailerSend | TransactionalEmailsApi;
+    let result: APIResponse | { response: IncomingMessage; body: CreateSmtpEmail };
 
-    // Send the email
-    const result = await mailerSend.email.send(emailParams);
+    if (MAILER === 'BREVO') {
+      emailAPI = new TransactionalEmailsApi();
+      (emailAPI as any).authentications.apiKey.apiKey = `xkeysib-${process.env.BREVO_API_KEY ?? ''}`;
+
+      const message: SendSmtpEmail = {
+        sender: { email: `webmaster@${process.env.BREVO_DOMAIN}`, name: 'Foot Factor' },
+        to: [{ email: `info@${process.env.BREVO_DOMAIN}`, name: 'Booking Form Website' }],
+        replyTo: { email: validatedFields.email, name: `${validatedFields.name} ${validatedFields.surname}` },
+        subject: `Booking Request: ${validatedFields.name} ${validatedFields.surname} ${getPatientType()}`,
+        htmlContent: htmlContent,
+        textContent: textContent,
+      };
+
+      result = await emailAPI.sendTransacEmail(message);
+    } else {
+      emailAPI = new MailerSend({
+        apiKey: process.env.MAILERSEND_API_KEY ?? '',
+      });
+
+      const sentFrom = new Sender(`webmaster@${process.env.MAILERSEND_DOMAIN}`, 'Foot Factor');
+      const recipients: Recipient[] = [new Recipient(`info@${process.env.MAILERSEND_DOMAIN}`, 'Booking Form Website')];
+
+      // Create and send the email
+      const emailParams = new EmailParams()
+        .setFrom(sentFrom)
+        .setTo(recipients)
+        .setReplyTo(new Sender(validatedFields.email, `${validatedFields.name} ${validatedFields.surname}`))
+        .setSubject(`Booking Request: ${validatedFields.name} ${validatedFields.surname} ${getPatientType()}`)
+        .setText(textContent)
+        .setHtml(htmlContent);
+
+      // Send the email
+      result = await emailAPI.email.send(emailParams);
+    }
 
     console.log('Email sent successfully');
 
     if (result) {
-      const recipients = [new Recipient(validatedFields.email, 'Your Client')];
-
-      const personalization = [
-        {
-          email: validatedFields.email,
-          data: {
-            name: validatedFields.name,
-          },
-        },
-      ];
-
+      // Send confirmation email to the customer
       const client = createClient();
       const settings = await client.getSingle('settings');
-      let templateId: string | null = null;
+      let templateId: string | null;
 
-      if (formData.existingPatient) {
+      // Determine which template to use
+      if (formData.referralPatient) {
+        templateId = settings.data.booking_referral_patient ?? null;
+      } else if (formData.existingPatient) {
         templateId = settings.data.booking_existing_patient ?? null;
-      }
-
-      if (!formData.existingPatient) {
+      } else {
         templateId = settings.data.booking_new_patient ?? null;
       }
 
-      if (formData.referralPatient) {
-        templateId = settings.data.booking_referral_patient ?? null;
+      // Send confirmation email to customer based on mailer type
+      if (templateId) {
+        if (MAILER === 'BREVO') {
+          const confirmationMessage = new SendSmtpEmail();
+          confirmationMessage.sender = { email: `webmaster@${process.env.BREVO_DOMAIN}`, name: 'Foot Factor' };
+          confirmationMessage.to = [
+            { email: validatedFields.email, name: `${validatedFields.name} ${validatedFields.surname}` },
+          ];
+          confirmationMessage.subject = 'Booking Request Received';
+          confirmationMessage.templateId = parseInt(templateId);
+          confirmationMessage.params = {
+            name: validatedFields.name,
+          };
 
-        if (settings.data.booking_referral_professional) {
+          await (emailAPI as TransactionalEmailsApi).sendTransacEmail(confirmationMessage);
+        } else {
+          const recipients = [
+            new Recipient(validatedFields.email, `${validatedFields.name} ${validatedFields.surname}`),
+          ];
+          const personalization = [
+            {
+              email: validatedFields.email,
+              data: {
+                name: validatedFields.name,
+              },
+            },
+          ];
+
+          const sentFrom = new Sender(`webmaster@${process.env.MAILERSEND_DOMAIN}`, 'Foot Factor');
           const emailParams = new EmailParams()
             .setFrom(sentFrom)
             .setTo(recipients)
             .setReplyTo(sentFrom)
-            .setSubject('Referral Request Received')
-            .setTemplateId(settings.data.booking_referral_professional ?? '')
+            .setSubject('Booking Request Received')
+            .setTemplateId(templateId)
             .setPersonalization(personalization);
 
-          await mailerSend.email.send(emailParams);
+          await (emailAPI as MailerSend).email.send(emailParams);
         }
       }
 
-      if (templateId) {
-        const emailParams = new EmailParams()
-          .setFrom(sentFrom)
-          .setTo(recipients)
-          .setReplyTo(sentFrom)
-          .setSubject('Booking Request Received')
-          .setTemplateId(templateId)
-          .setPersonalization(personalization);
+      // Send referral professional notification if applicable
+      if (formData.referralPatient && validatedFields.referralEmail) {
+        const referralTemplateId = settings.data.booking_referral_professional ?? null;
 
-        await mailerSend.email.send(emailParams);
+        if (referralTemplateId) {
+          if (MAILER === 'BREVO') {
+            const referralMessage = new SendSmtpEmail();
+            referralMessage.sender = { email: `webmaster@${process.env.BREVO_DOMAIN}`, name: 'Foot Factor' };
+            referralMessage.to = [
+              {
+                email: validatedFields.referralEmail,
+                name: `${validatedFields.referralName ?? ''} ${validatedFields.referralSurname ?? ''}`.trim(),
+              },
+            ];
+            referralMessage.subject = 'Referral Request Received';
+            referralMessage.templateId = parseInt(referralTemplateId);
+            referralMessage.params = {
+              name: validatedFields.referralName ?? 'Professional',
+              patient_name: `${validatedFields.name} ${validatedFields.surname}`,
+            };
+
+            await (emailAPI as TransactionalEmailsApi).sendTransacEmail(referralMessage);
+          } else {
+            const referralRecipients = [
+              new Recipient(
+                validatedFields.referralEmail,
+                `${validatedFields.referralName ?? ''} ${validatedFields.referralSurname ?? ''}`.trim(),
+              ),
+            ];
+            const referralPersonalization = [
+              {
+                email: validatedFields.referralEmail,
+                data: {
+                  name: validatedFields.referralName ?? 'Professional',
+                  patient_name: `${validatedFields.name} ${validatedFields.surname}`,
+                },
+              },
+            ];
+
+            const sentFrom = new Sender(`webmaster@${process.env.MAILERSEND_DOMAIN}`, 'Foot Factor');
+            const emailParams = new EmailParams()
+              .setFrom(sentFrom)
+              .setTo(referralRecipients)
+              .setReplyTo(sentFrom)
+              .setSubject('Referral Request Received')
+              .setTemplateId(referralTemplateId)
+              .setPersonalization(referralPersonalization);
+
+            await (emailAPI as MailerSend).email.send(emailParams);
+          }
+        }
       }
 
       return {
