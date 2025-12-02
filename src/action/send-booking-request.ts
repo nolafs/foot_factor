@@ -221,8 +221,18 @@ Sent from Foot Factor Website
     let result: APIResponse | { response: IncomingMessage; body: CreateSmtpEmail };
 
     if (MAILER === 'BREVO') {
+      const apiKey = process.env.BREVO_API_KEY;
+
+      if (!apiKey) {
+        console.error('[BREVO] Missing BREVO_API_KEY environment variable');
+        return {
+          errors: [{ path: 'email', message: 'Email service configuration error. Please contact support.' }],
+          data: null,
+        };
+      }
+
       emailAPI = new TransactionalEmailsApi();
-      (emailAPI as any).authentications.apiKey.apiKey = `xkeysib-${process.env.BREVO_API_KEY ?? ''}`;
+      emailAPI.setApiKey(0, apiKey);
 
       const message: SendSmtpEmail = {
         sender: { email: `webmaster@${process.env.BREVO_DOMAIN}`, name: 'Foot Factor' },

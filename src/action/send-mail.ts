@@ -7,7 +7,7 @@ import { createClient } from '@/prismicio';
 
 const TURNSTILE_SECRET = process.env.TURNSTILE_SECRET_KEY ?? '';
 
-const MAILER: 'MAILERSEND' | 'BREVO' = 'MAILERSEND';
+const MAILER: string = process.env.MAILER ?? 'MAILERSEND';
 
 export const transformZodErrors = async (error: z.ZodError) => {
   return error.issues.map(issue => ({
@@ -33,8 +33,19 @@ export async function sendMail(formData: FormData) {
   let emailAPI: MailerSend | TransactionalEmailsApi;
 
   if (MAILER === 'BREVO') {
+    const apiKey = process.env.BREVO_API_KEY;
+
+    if (!apiKey) {
+      console.error('[BREVO] Missing BREVO_API_KEY environment variable');
+      return {
+        success: false,
+        errors: null,
+        msg: 'Email service configuration error. Please contact support.',
+      };
+    }
+
     emailAPI = new TransactionalEmailsApi();
-    (emailAPI as any).authentications.apiKey.apiKey = process.env.BREVO_API_KEY ?? '';
+    emailAPI.setApiKey(0, apiKey);
   } else {
     emailAPI = new MailerSend({
       apiKey: process.env.MAILERSEND_API_KEY ?? '',
@@ -106,7 +117,7 @@ export async function sendMail(formData: FormData) {
     }
 
     // Determine domain based on mailer
-    const domain = MAILER === 'BREVO' ? process.env.BREVO_DOMAIN : process.env.MAILERSEND_DOMAIN;
+    const domain = process.env.MAILERSEND_DOMAIN;
     const infoEmail = `info@${domain}`;
 
     const textContent = `
