@@ -39,8 +39,7 @@ export function SliderCard({
 }: SliderCardProps) {
   const aspectClasses = aspectRatio === 'portrait' ? 'aspect-w-3 aspect-h-4' : 'aspect-w-9 aspect-h-10';
 
-  const sizeClasses =
-    size === 'large' ? 'w-80 md:w-full  max-h-[600px] max-w-[540px]' : 'w-full  max-w-[380px] max-h-[420px]';
+  const sizeClasses = size === 'large' ? 'w-80 md:w-full   max-w-[540px]' : 'w-full  max-w-[380px]';
 
   return (
     <div
