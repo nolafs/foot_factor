@@ -18,7 +18,7 @@ export const transformZodErrors = async (error: z.ZodError) => {
 
 const TURNSTILE_SECRET = process.env.TURNSTILE_SECRET_KEY ?? '';
 
-const MAILER: 'MALERSEMD' | 'BREVO' = 'MALERSEMD';
+const MAILER: 'MAILERSEND' | 'BREVO' = 'MAILERSEND';
 
 export async function sendBookingMail(formData: z.infer<typeof emailBookingSchema>) {
   console.log('Sending booking request email with data');
