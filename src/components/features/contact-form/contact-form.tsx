@@ -1,7 +1,7 @@
 'use client';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { type ContactFormInput } from '@/types';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { useForm, type SubmitHandler } from 'react-hook-form';
 import toast from 'react-hot-toast';
 import { Button } from '@/components/ui/button';
@@ -46,6 +46,8 @@ export function ContactForm({ items }: ContactFormInputProps) {
   const [enquiryTypeOptions, setEnquiryTypeOptions] = useState<ContactFormSectionSliceDefaultPrimaryItemsItem[]>(
     items ?? [],
   );
+  const turnstileRef = useRef<HTMLDivElement>(null);
+  const [turnstileWidgetId, setTurnstileWidgetId] = useState<string | null>(null);
 
   useEffect(() => {
     // Set up Turnstile callback to store token when verification completes
@@ -55,6 +57,20 @@ export function ContactForm({ items }: ContactFormInputProps) {
         input.value = token;
       }
     };
+  }, []);
+
+  useEffect(() => {
+    if (typeof window !== 'undefined' && (window as any).turnstile && turnstileRef.current) {
+      const widgetId = (window as any).turnstile.render(turnstileRef.current, {
+        sitekey: process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY,
+        callback: (token: string) => {
+          const input = document.getElementById('turnstileToken') as HTMLInputElement | null;
+          if (input) input.value = token;
+        },
+        size: 'invisible',
+      });
+      setTurnstileWidgetId(widgetId);
+    }
   }, []);
 
   useEffect(() => {
@@ -79,43 +95,28 @@ export function ContactForm({ items }: ContactFormInputProps) {
 
   const onSubmit: SubmitHandler<EmailSchema> = async data => {
     setIsSubmitting(true);
-
     try {
-      // Execute Turnstile widget and wait for token
-      const widgetId = 'contact-form-turnstile';
-      const turnstileWidget = document.getElementById(widgetId);
-      const turnstileAPI = (window as any).turnstile;
-
-      // Get or execute the Turnstile token
       let token = '';
-      const tokenInput = document.getElementById('turnstileToken') as HTMLInputElement | null;
-
-      if (turnstileAPI && turnstileWidget) {
+      const turnstileAPI = (window as any).turnstile;
+      if (turnstileAPI && turnstileWidgetId) {
         try {
-          // Try to get the response directly
-          const response = turnstileAPI.getResponse(widgetId);
-
+          const response = turnstileAPI.getResponse(turnstileWidgetId);
           if (response) {
             token = response;
           } else if (turnstileAPI.execute) {
-            // If no response yet, try to execute
-            token = await new Promise(resolve => {
-              turnstileAPI.execute(widgetId);
-              // Wait a bit for the token to be set
-              setTimeout(() => {
-                const resp = turnstileAPI.getResponse(widgetId);
-                resolve(resp || '');
-              }, 1000);
-            });
+            await turnstileAPI.execute(turnstileWidgetId);
+            await new Promise(resolve => setTimeout(resolve, 1000));
+            const tokenInput = document.getElementById('turnstileToken') as HTMLInputElement | null;
+            token = tokenInput?.value || '';
           }
         } catch (err) {
           console.error('[ContactForm] Error with Turnstile:', err);
         }
       }
-
       // Fallback to hidden input value
-      if (!token && tokenInput) {
-        token = tokenInput.value || '';
+      if (!token) {
+        const tokenInput = document.getElementById('turnstileToken') as HTMLInputElement | null;
+        token = tokenInput?.value || '';
       }
 
       const formData = new FormData();
@@ -139,10 +140,11 @@ export function ContactForm({ items }: ContactFormInputProps) {
         toast.success(msg);
         form.reset();
         // Clear the token so it needs to be re-verified
+        const tokenInput = document.getElementById('turnstileToken') as HTMLInputElement | null;
         if (tokenInput) tokenInput.value = '';
         // Reset Turnstile widget
-        if (turnstileAPI && turnstileAPI.reset && widgetId) {
-          turnstileAPI.reset(widgetId);
+        if (turnstileAPI && turnstileAPI.reset && turnstileWidgetId) {
+          turnstileAPI.reset(turnstileWidgetId);
         }
         return;
       }
@@ -283,13 +285,7 @@ export function ContactForm({ items }: ContactFormInputProps) {
           <div className="flex w-full justify-end pt-6">
             {/* Turnstile widget - invisible, runs in background */}
             <input type="hidden" name="cf-turnstile-response" id="turnstileToken" />
-            <div
-              id="contact-form-turnstile"
-              className="cf-turnstile"
-              data-sitekey={process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY}
-              data-callback="onTurnstileSuccess"
-              data-size="invisible"
-            />
+            <div ref={turnstileRef} id="contact-form-turnstile" className="cf-turnstile" />
 
             <Button
               type="submit"

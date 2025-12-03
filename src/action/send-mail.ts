@@ -89,7 +89,6 @@ export async function sendMail(formData: FormData) {
     }
 
     if (!token) {
-      console.log('[TURNSTILE] No token received from formData');
       return {
         success: false,
         errors: null,
