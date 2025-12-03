@@ -84,42 +84,30 @@ export function ContactForm({ items }: ContactFormInputProps) {
       // Execute Turnstile widget and wait for token
       const widgetId = 'contact-form-turnstile';
       const turnstileWidget = document.getElementById(widgetId);
-
-      console.log('[ContactForm] Turnstile widget element:', turnstileWidget);
-      console.log('[ContactForm] Widget ID:', widgetId);
-
-      // Check if Turnstile API is available
       const turnstileAPI = (window as any).turnstile;
-      console.log('[ContactForm] Turnstile API available:', !!turnstileAPI);
-      console.log('[ContactForm] Turnstile API methods:', turnstileAPI ? Object.keys(turnstileAPI) : 'N/A');
 
       // Get or execute the Turnstile token
       let token = '';
       const tokenInput = document.getElementById('turnstileToken') as HTMLInputElement | null;
 
       if (turnstileAPI && turnstileWidget) {
-        console.log('[ContactForm] Attempting to get response from Turnstile...');
         try {
           // Try to get the response directly
           const response = turnstileAPI.getResponse(widgetId);
-          console.log('[ContactForm] Response from getResponse:', response);
 
           if (response) {
             token = response;
           } else if (turnstileAPI.execute) {
             // If no response yet, try to execute
-            console.log('[ContactForm] Executing Turnstile widget...');
-            token = await new Promise((resolve) => {
+            token = await new Promise(resolve => {
               turnstileAPI.execute(widgetId);
               // Wait a bit for the token to be set
               setTimeout(() => {
                 const resp = turnstileAPI.getResponse(widgetId);
-                console.log('[ContactForm] Response after execute:', resp);
                 resolve(resp || '');
               }, 1000);
             });
           }
-          console.log('[ContactForm] Token received:', token);
         } catch (err) {
           console.error('[ContactForm] Error with Turnstile:', err);
         }
@@ -128,11 +116,7 @@ export function ContactForm({ items }: ContactFormInputProps) {
       // Fallback to hidden input value
       if (!token && tokenInput) {
         token = tokenInput.value || '';
-        console.log('[ContactForm] Token from hidden input:', token);
       }
-
-      console.log('[ContactForm] Final token value:', token);
-      console.log('[ContactForm] Token length:', token.length);
 
       const formData = new FormData();
       formData.append('name', data.name);

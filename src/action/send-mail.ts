@@ -53,16 +53,9 @@ export async function sendMail(formData: FormData) {
   }
 
   try {
-    // Debug: Log all FormData entries
-    console.log('[EMAIL SEND] FormData entries:');
-    for (const [key, value] of formData.entries()) {
-      console.log(`  ${key}:`, value);
-    }
-
     // 1) HONEYPOT CHECK – if filled, silently treat as success and bail
     const honey = formData.get('contact_time');
     if (honey && String(honey).trim() !== '') {
-      console.log('[SPAM] Honeypot filled — bot blocked.');
       return {
         success: true,
         errors: null,
@@ -71,8 +64,6 @@ export async function sendMail(formData: FormData) {
     }
 
     const turnstileTokenRaw = formData.get('cf-turnstile-response');
-    console.log('[EMAIL SEND] Raw Turnstile token from formData:', turnstileTokenRaw);
-    console.log('[EMAIL SEND] Token type:', typeof turnstileTokenRaw);
 
     const validatedFields = emailSchema.parse({
       name: formData.get('name'),
@@ -86,7 +77,6 @@ export async function sendMail(formData: FormData) {
     });
 
     const token = validatedFields.turnstileToken;
-    console.log('[EMAIL SEND] Validated token:', token);
 
     // 3) TURNSTILE VERIFICATION (server side)
     if (!TURNSTILE_SECRET) {
@@ -119,7 +109,6 @@ export async function sendMail(formData: FormData) {
     const verifyData = (await verifyRes.json()) as { success: boolean; 'error-codes'?: string[] };
 
     if (!verifyData.success) {
-      console.log('[TURNSTILE] Verification failed', verifyData);
       return {
         success: false,
         errors: null,
@@ -256,9 +245,7 @@ Sent from Foot Factor Website
 
     const userEmail = validatedFields.email?.trim();
 
-    if (!userEmail) {
-      console.log('[EMAIL SEND] No user email – skipping response template');
-    } else if (templateId) {
+    if (userEmail && templateId) {
       if (MAILER === 'BREVO') {
         const responseMessage = new SendSmtpEmail();
         responseMessage.sender = { email: `webmaster@${domain}`, name: 'Foot Factor' };
@@ -269,8 +256,7 @@ Sent from Foot Factor Website
           name: validatedFields.name,
         };
 
-        const responseEmail = await (emailAPI as TransactionalEmailsApi).sendTransacEmail(responseMessage);
-        console.log('[EMAIL SEND] TEMPLATE SUCCESS', responseEmail);
+        await (emailAPI as TransactionalEmailsApi).sendTransacEmail(responseMessage);
       } else {
         const personalization = [
           {
@@ -280,8 +266,6 @@ Sent from Foot Factor Website
             },
           },
         ];
-
-        console.log('[EMAIL SEND] personalization', personalization);
 
         const sentFrom = new Sender(`webmaster@${domain}`, 'Foot Factor');
         const userRecipients: Recipient[] = [new Recipient(userEmail, validatedFields.name)];
@@ -294,12 +278,9 @@ Sent from Foot Factor Website
           .setTemplateId(templateId)
           .setPersonalization(personalization);
 
-        const responseEmail = await (emailAPI as MailerSend).email.send(emailParams);
-        console.log('[EMAIL SEND] TEMPLATE SUCCESS', responseEmail);
+        await (emailAPI as MailerSend).email.send(emailParams);
       }
     }
-
-    console.log('[EMAIL SEND] SUCCESS');
 
     return {
       success: true,
@@ -307,7 +288,7 @@ Sent from Foot Factor Website
       msg: 'Mail send successfully',
     };
   } catch (error) {
-    console.log('[EMAIL SEND] ERROR', error);
+    console.error('[EMAIL SEND] ERROR', error);
 
     if (error instanceof z.ZodError) {
       return {
