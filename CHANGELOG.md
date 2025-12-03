@@ -1,3 +1,10 @@
+## [1.0.5](https://github.com/nolafs/foot_factor/compare/v1.0.4...v1.0.5) (2025-12-03)
+
+
+### Bug Fixes
+
+* contact form ([84f2a5d](https://github.com/nolafs/foot_factor/commit/84f2a5d3ede99e5c8e3b76090674a7747958e910))
+
 ## [1.0.4](https://github.com/nolafs/foot_factor/compare/v1.0.3...v1.0.4) (2025-12-03)
 
 
