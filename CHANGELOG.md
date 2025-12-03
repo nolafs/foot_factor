@@ -1,3 +1,10 @@
+## [1.0.4](https://github.com/nolafs/foot_factor/compare/v1.0.3...v1.0.4) (2025-12-03)
+
+
+### Bug Fixes
+
+* slider updated ([0c53b5b](https://github.com/nolafs/foot_factor/commit/0c53b5be1f2fb0af320fc33b9435b3caa386d740))
+
 ## [1.0.3](https://github.com/nolafs/foot_factor/compare/v1.0.2...v1.0.3) (2025-12-03)
 
 
