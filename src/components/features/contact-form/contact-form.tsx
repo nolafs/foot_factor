@@ -66,7 +66,6 @@ export function ContactForm({ items }: ContactFormInputProps) {
           if (tokenRef.current) tokenRef.current.value = token;
           setTurnstileToken(token);
           setIsVerified(true);
-          console.log('[CONTACT FORM] Turnstile verification successful, token set.', token);
         },
       });
     };
