@@ -46,13 +46,44 @@ export function ContactForm({ items }: ContactFormInputProps) {
   const [enquiryTypeOptions, setEnquiryTypeOptions] = useState<ContactFormSectionSliceDefaultPrimaryItemsItem[]>(
     items ?? [],
   );
+  const [turnstileToken, setTurnstileToken] = useState<string | null>(null);
+  const [isVerified, setIsVerified] = useState(false);
+  const widgetRef = React.useRef<HTMLDivElement | null>(null);
+  const tokenRef = React.useRef<HTMLInputElement | null>(null);
 
   useEffect(() => {
-    // Set up Turnstile callback to store token when verification completes
-    (window as any).onTurnstileSuccess = (token: string) => {
-      const input = document.getElementById('turnstileToken') as HTMLInputElement | null;
-      if (input) {
-        input.value = token;
+    let widgetId: string | undefined;
+    let cancelled = false;
+
+    const init = () => {
+      const t = (window as any).turnstile;
+      if (!t || !widgetRef.current) return;
+
+      widgetId = t.render(widgetRef.current, {
+        sitekey: process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY!,
+        size: 'invisible',
+        callback: (token: string) => {
+          if (tokenRef.current) tokenRef.current.value = token;
+          setTurnstileToken(token);
+          setIsVerified(true);
+          console.log('[CONTACT FORM] Turnstile verification successful, token set.', token);
+        },
+      });
+    };
+
+    // Poll until Turnstile is available
+    const interval = setInterval(() => {
+      if ((window as any).turnstile && (window as any).turnstile.render) {
+        clearInterval(interval);
+        if (!cancelled) init();
+      }
+    }, 100);
+
+    return () => {
+      cancelled = true;
+      clearInterval(interval);
+      if (widgetId && (window as any).turnstile?.remove) {
+        (window as any).turnstile.remove(widgetId);
       }
     };
   }, []);
@@ -80,6 +111,24 @@ export function ContactForm({ items }: ContactFormInputProps) {
   const onSubmit: SubmitHandler<EmailSchema> = async data => {
     setIsSubmitting(true);
 
+    // 1) Run invisible Turnstile
+    const widget = document.getElementById('turnstile-widget');
+    if (widget && (window as any).turnstile?.execute) {
+      (window as any).turnstile.execute(widget);
+    }
+
+    // Wait so onTurnstileSuccess can set the hidden field
+    await new Promise(resolve => setTimeout(resolve, 250));
+
+    const tokenInput = document.getElementById('turnstileToken') as HTMLInputElement | null;
+    const token = tokenInput?.value || '';
+
+    if (!token) {
+      toast.error('Verification failed. Please try again.');
+      setIsSubmitting(false);
+      return;
+    }
+
     try {
       const formData = new FormData();
       formData.append('name', data.name);
@@ -87,10 +136,6 @@ export function ContactForm({ items }: ContactFormInputProps) {
       formData.append('message', data.message || '');
       formData.append('enquiryType', data.enquiryType || '');
       formData.append('agreeToTerms', data.agreeToTerms ? 'true' : 'false');
-
-      // Get Turnstile token if available (will be verified server-side)
-      const tokenInput = document.getElementById('turnstileToken') as HTMLInputElement | null;
-      const token = tokenInput?.value || '';
       formData.append('cf-turnstile-response', token);
 
       // Honeypot
@@ -244,15 +289,9 @@ export function ContactForm({ items }: ContactFormInputProps) {
           />
 
           <div className="flex w-full justify-end pt-6">
-            {/* Turnstile widget - invisible, runs in background */}
-            <input type="hidden" name="cf-turnstile-response" id="turnstileToken" />
-            <div
-              id="turnstile-widget"
-              className="cf-turnstile"
-              data-sitekey={process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY}
-              data-callback="onTurnstileSuccess"
-              data-size="invisible"
-            />
+            {/* Turnstile widget – uses global callback we defined in useEffect */}
+            <input type="hidden" ref={tokenRef} name="cf-turnstile-response" id="turnstileToken" />
+            <div ref={widgetRef} className="turnstile-widget" />
 
             <Button
               type="submit"
