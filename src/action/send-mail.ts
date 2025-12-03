@@ -53,6 +53,12 @@ export async function sendMail(formData: FormData) {
   }
 
   try {
+    // Debug: Log all FormData entries
+    console.log('[EMAIL SEND] FormData entries:');
+    for (const [key, value] of formData.entries()) {
+      console.log(`  ${key}:`, value);
+    }
+
     // 1) HONEYPOT CHECK – if filled, silently treat as success and bail
     const honey = formData.get('contact_time');
     if (honey && String(honey).trim() !== '') {
@@ -64,6 +70,10 @@ export async function sendMail(formData: FormData) {
       };
     }
 
+    const turnstileTokenRaw = formData.get('cf-turnstile-response');
+    console.log('[EMAIL SEND] Raw Turnstile token from formData:', turnstileTokenRaw);
+    console.log('[EMAIL SEND] Token type:', typeof turnstileTokenRaw);
+
     const validatedFields = emailSchema.parse({
       name: formData.get('name'),
       email: formData.get('email'),
@@ -71,11 +81,12 @@ export async function sendMail(formData: FormData) {
       message: formData.get('message'),
       agreeToTerms: formData.get('agreeToTerms') === 'true',
 
-      turnstileToken: formData.get('cf-turnstile-response') ?? undefined,
+      turnstileToken: turnstileTokenRaw ? String(turnstileTokenRaw) : undefined,
       contact_time: (formData.get('contact_time') as string | null) ?? '',
     });
 
     const token = validatedFields.turnstileToken;
+    console.log('[EMAIL SEND] Validated token:', token);
 
     // 3) TURNSTILE VERIFICATION (server side)
     if (!TURNSTILE_SECRET) {
@@ -121,7 +132,7 @@ export async function sendMail(formData: FormData) {
     const infoEmail = `info@${domain}`;
 
     const textContent = `
-BOOKING REQUEST DETAILS
+CONTACT FORM DETAILS
 =======================
 
 CONTACT INFORMATION:
