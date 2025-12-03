@@ -1,2 +1,2 @@
 export { sendMail } from './send-mail';
-export { VerifyCaptcha } from './verifiy-captcha';
+export { sendBookingMail } from './send-booking-request';

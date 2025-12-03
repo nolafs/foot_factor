@@ -1,6 +1,6 @@
 import { clsx, type ClassValue } from 'clsx';
 import { twMerge } from 'tailwind-merge';
-import { Children, isValidElement, type ReactNode } from 'react';
+import { Children, isValidElement, type ReactNode, type ReactElement } from 'react';
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
@@ -13,15 +13,16 @@ export function capitalize(value: string) {
 
 export function getFirstChildPropValue(
   children: ReactNode,
-  propNameCb: (props: string) => string,
+  propNameCb: (props: Record<string, any>) => string,
 ): string | string[] | undefined {
-  let propValue: string | string [] | undefined = undefined;
+  let propValue: string | string[] | undefined = undefined;
 
   Children.forEach(children, element => {
     if (!isValidElement(element)) return;
-    const propName = propNameCb(element.props);
-    if (propName in element.props) {
-      propValue = element.props[propName];
+    const props = element.props as Record<string, any>;
+    const propName = propNameCb(props);
+    if (propName in props) {
+      propValue = props[propName];
       return;
     }
   });

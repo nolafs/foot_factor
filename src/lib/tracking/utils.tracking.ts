@@ -16,13 +16,13 @@ const getGtag = (): Gtag.Gtag => {
   if (typeof window === 'undefined') {
     logGAWarning('Window is undefined – returning noop gtag');
     // SSR / non-browser: no-op
-    // eslint-disable-next-line @typescript-eslint/no-empty-function
+     
     return ((..._args: unknown[]) => {}) as Gtag.Gtag;
   }
 
   if (!IS_GTM_ENABLED) {
     logGAWarning('Google Analytics is not enabled – returning noop gtag');
-    // eslint-disable-next-line @typescript-eslint/no-empty-function
+     
     return ((..._args: unknown[]) => {}) as Gtag.Gtag;
   }
 

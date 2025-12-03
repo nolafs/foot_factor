@@ -16,7 +16,6 @@ import cn from 'clsx';
 import { capitalize, getFirstChildPropValue } from '@/lib/utils';
 import { Button } from '@/components/ui/button';
 
-
 export type DropdownProps = PropsWithChildren<{
   buttonText?: string | ((options: DropdownButtonTextOptions) => string);
   classNames?: Partial<DropdownClassNames>;
@@ -74,29 +73,23 @@ export function FacetDropdown({ children, buttonText, closeOnChange, classNames 
   const panelRef = useRef(null);
 
   // Close the dropdown when click outside or press the Escape key
-  const close = useCallback(() => setIsOpened(false), []);
-  useCloseDropdown(panelRef, close, isOpened);
+  useCloseDropdown(panelRef, () => setIsOpened(false), isOpened);
 
   // Prevent scrolling on mobile when the dropdown is opened
   const isMobile = useMediaQuery('(max-width: 375px)');
   useLockedBody(isOpened && isMobile);
 
   // Get the attribute(s) of the first child widget
-    const attributeProp = getFirstChildPropValue(
-        children,
-        (props: unknown) => {
-            if (props && typeof props === 'object' && 'attributes' in props) {
-                return 'attributes';
-            }
-            return 'attribute';
-        }
-    );
-
-    if (!attributeProp) {
-        throw new Error(
-            '<Dropdown> widget only supports InstantSearch widgets with an `attribute` or `attributes` prop.'
-        );
+  const attributeProp = getFirstChildPropValue(children, (props: unknown) => {
+    if (props && typeof props === 'object' && 'attributes' in props) {
+      return 'attributes';
     }
+    return 'attribute';
+  });
+
+  if (!attributeProp) {
+    throw new Error('<Dropdown> widget only supports InstantSearch widgets with an `attribute` or `attributes` prop.');
+  }
   // Get the refinements for the attribute
   const attribute = typeof attributeProp === 'string' ? attributeProp : attributeProp[0];
   const refinements = getAttributeRefinements(attribute ?? '', items);

@@ -52,7 +52,7 @@ posts.forEach(async (post: any) => {
   const {title, content, excerpt, date, slug, _embedded} = post;
   const richText = htmlAsRichText(content.rendered, {
     serializer: {
-      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+       
       // @ts-expect-error
       img: ({node}) => {
 
@@ -78,7 +78,7 @@ posts.forEach(async (post: any) => {
           }
         }
       },
-      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+       
       // @ts-expect-error
       a: ({node}) => {
         const href = node.properties.href;
@@ -107,7 +107,7 @@ posts.forEach(async (post: any) => {
         // Serializes other links as external links
         return "hyperlink";
       },
-      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+       
       // @ts-expect-error
       iframe: ({node}) => {
         const src = node.properties.src;
@@ -200,7 +200,7 @@ posts.forEach(async (post: any) => {
     uid: slug,
     tags: tagsSlug,
     alternate_language_id: "en-gb",
-    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+     
     // @ts-expect-error
     data: data,
   }, title.rendered);

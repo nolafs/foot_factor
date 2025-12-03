@@ -1,5 +1,5 @@
 'use client';
-import {type GuideDocumentData, type PostsDocumentData} from '../../../../prismicio-types';
+import { type GuideDocumentData, type PostsDocumentData } from '@/prismic-types';
 import { type Author } from '@/types';
 import cn from 'clsx';
 import AuthorLink from '@/components/features/author/author-link';
@@ -8,7 +8,7 @@ import React from 'react';
 import Link from 'next/link';
 
 type PostAsideProps = {
-  as?: keyof JSX.IntrinsicElements;
+  as?: React.ElementType;
   uid?: string;
   post: Partial<PostsDocumentData> | Partial<GuideDocumentData>;
   author?: Author;
@@ -29,7 +29,7 @@ const hasTitle = (post: Partial<PostsDocumentData> | Partial<GuideDocumentData>)
 };
 
 export const PostAside = ({
-  as: Component = 'div',
+  as = 'div',
   uid,
   post,
   author,
@@ -38,8 +38,11 @@ export const PostAside = ({
   onNavigate,
   shareRoute = 'resources/blog',
 }: PostAsideProps) => {
+  const Component = as;
+
   return (
-    <Component className={cn('flex flex-wrap items-start justify-between gap-10 md:divide-x divide-primary-200', classNames)}>
+    <Component
+      className={cn('flex flex-wrap items-start justify-between gap-10 divide-primary-200 md:divide-x', classNames)}>
       {post.category && (
         <div className="flex flex-col flex-wrap gap-2 px-5">
           <span className="text-sm font-medium text-gray-500">Category:</span>
@@ -70,7 +73,7 @@ export const PostAside = ({
       )}
 
       {post.tags && (
-        <div className="flex flex-wrap gap-2 md:flex-col px-5">
+        <div className="flex flex-wrap gap-2 px-5 md:flex-col">
           <span className="text-sm font-medium text-gray-500">Tags:</span>
           <div className="flex flex-wrap gap-2">
             {post.tags.map((item, idx) => (
@@ -88,13 +91,7 @@ export const PostAside = ({
       {uid && (
         <div className="flex flex-col flex-wrap gap-2 px-5">
           <div className="mb-2 text-sm font-medium text-gray-500">Share:</div>
-          {post && hasTitle(post) &&
-		        <SharePage
-			        slug={uid}
-			        title={getPostTitle(post)}
-			        route={shareRoute}
-		        />
-          }
+          {post && hasTitle(post) && <SharePage slug={uid} title={getPostTitle(post)} route={shareRoute} />}
         </div>
       )}
     </Component>

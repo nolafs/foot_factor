@@ -1,46 +1,62 @@
+// src/lib/hooks/use-parallax.ts
 'use client';
 
-import { useState, useMemo } from 'react';
-import { useMotionValue, useScroll, useSpring, useTransform, type MotionValue } from 'framer-motion';
+import { useEffect, useRef } from 'react';
+import { useSpring, type MotionValue } from 'framer-motion';
 
-type Opts = {
-    speed?: number;
-    smooth?: boolean;
-    scale?: number | null;
-    offset?: NonNullable<Parameters<typeof useScroll>[0]>['offset'];
+type UseParallaxReturn = {
+  ref: React.RefObject<HTMLDivElement | null>;
+  y: MotionValue<number>;
+  scale: MotionValue<number>;
 };
 
-type Ret<T extends HTMLElement> = {
-    ref: (el: T | null) => void;        // callback ref
-    y: MotionValue<number>;
-    scale: number;
-    scrollProgress: MotionValue<number>;
-};
+/**
+ * Simple parallax hook:
+ * - `strength`: how strong the movement is (0–1 good range)
+ * - `invert`: reverse direction
+ */
+export default function useParallax(strength: number = 0.5, invert: boolean = false): UseParallaxReturn {
+  const ref = useRef<HTMLDivElement | null>(null);
 
-export default function useParallax<T extends HTMLElement = HTMLDivElement>(p0: number, p1: boolean, {
-    speed = 0.5, smooth = true, scale = null, offset = ['start end', 'end start'] as const,
-}: Opts = {}): Ret<T> {
-    const [el, setEl] = useState<T | null>(null);          // ← element exists only after mount
-    const fallback = useMotionValue(0);
+  // Motion values are created in render but updated in effects only
+  const y = useSpring(0);
+  const scale = useSpring(1);
 
-    // Pass target **only** when we have the element
-    const { scrollYProgress } = useScroll({
-        target: el ? { current: el } : undefined,
-        offset,
-    });
+  useEffect(() => {
+    const handleScroll = () => {
+      const el = ref.current;
+      if (!el) return;
 
-    const progress = el ? scrollYProgress : fallback;
+      const rect = el.getBoundingClientRect();
+      const viewportHeight = window.innerHeight || document.documentElement.clientHeight;
 
-    const distance = 100 * Math.abs(speed);
-    const sign = Math.sign(speed || 1);
+      // Compute how far from viewport center the element is (-1 to 1)
+      const center = rect.top + rect.height / 2;
+      const progress = (center - viewportHeight / 2) / viewportHeight;
+      const clamped = Math.max(-1, Math.min(1, progress));
 
-    const yRaw = useTransform(progress, [0, 1], [-distance * sign, distance * sign]);
-    const y = useSpring(yRaw, { stiffness: 100, damping: 30, restDelta: 0.001 });
+      const distance = strength * 100;
+      const direction = invert ? -1 : 1;
+      const offset = direction * clamped * distance;
 
-    const finalScale = useMemo(() => (scale ?? 1 + Math.abs(speed) * 0.5), [scale, speed]);
+      y.set(offset);
 
-    const smoothY = smooth ? y : yRaw;
+      // Slight scale effect, strongest when centered
+      const s = 1 + 0.05 * strength * (1 - Math.abs(clamped));
+      scale.set(s);
+    };
 
-    return { ref: setEl, y:smoothY, scale: finalScale, scrollProgress: progress };
+    // Initial calculation
+    handleScroll();
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    window.addEventListener('resize', handleScroll);
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+      window.removeEventListener('resize', handleScroll);
+    };
+  }, [strength, invert, y, scale]);
+
+  return { ref, y, scale };
 }
-

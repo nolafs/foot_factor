@@ -1,34 +1,36 @@
-'use client'
-import {useCallback, useEffect, useState} from 'react';
+'use client';
+
+import { useEffect, useState } from 'react';
 
 export function useMediaQuery(query: string): boolean {
-  const getMatches = (query: string): boolean => {
+  const getMatches = (q: string): boolean => {
     // Prevents SSR issues
     if (typeof window !== 'undefined') {
-      return window.matchMedia(query).matches;
+      return window.matchMedia(q).matches;
     }
     return false;
   };
 
-  const [matches, setMatches] = useState<boolean>(getMatches(query));
+  // Initial value – runs once on mount (client) and is SSR safe
+  const [matches, setMatches] = useState<boolean>(() => getMatches(query));
 
-    const handleChange = useCallback(() => {
-        setMatches(getMatches(query));
-    }, [query]);
+  useEffect(() => {
+    // Guard again for safety (in case this ever runs in a non-browser env)
+    if (typeof window === 'undefined') return;
 
-    useEffect(() => {
-        const matchMedia = window.matchMedia(query);
+    const media = window.matchMedia(query);
 
-        // Trigger initial check
-        handleChange();
+    // Only update state in response to external changes
+    const listener = (event: MediaQueryListEvent) => {
+      setMatches(event.matches);
+    };
 
-        // Listen to media query changes
-        matchMedia.addEventListener("change", handleChange);
+    media.addEventListener('change', listener);
 
-        return () => {
-            matchMedia.removeEventListener("change", handleChange);
-        };
-    }, [query, handleChange]);
+    return () => {
+      media.removeEventListener('change', listener);
+    };
+  }, [query]);
 
   return matches;
 }

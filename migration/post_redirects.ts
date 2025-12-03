@@ -24,7 +24,7 @@ posts.forEach(async (post: any) => {
   const redirect = `/${slug}/ /blog/${slug} \n`;
 
   // Append redirect to file
-  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+   
   // @ts-expect-error
   fs.appendFileSync('./migration/_redirects', redirect, (err: any) => {
     if (err) {
@@ -41,7 +41,7 @@ posts.forEach(async (post: any) => {
  `;
 
   // Append redirect to file
-  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+   
   // @ts-expect-error
   fs.appendFileSync('./migration/_redirects.toml', toml, (err: any) => {
     if (err) {

@@ -2,7 +2,7 @@
 import { type RefObject, useEffect } from 'react';
 
 export function useCloseDropdown<T extends HTMLElement = HTMLElement>(
-  ref: RefObject<T>,
+  ref: RefObject<T | null> | null,
   handler: () => void,
   enabled = true,
 ) {
@@ -10,7 +10,7 @@ export function useCloseDropdown<T extends HTMLElement = HTMLElement>(
     if (!enabled) return;
 
     const handleMouseDown = (event: MouseEvent | TouchEvent) => {
-      if (!ref.current?.contains(event.target as Node)) {
+      if (!ref?.current?.contains(event.target as Node)) {
         handler();
       }
     };

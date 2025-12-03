@@ -2,7 +2,7 @@ import cn from 'clsx';
 import Label from './label/label';
 import { type ButtonHTMLAttributes, forwardRef, type Ref } from 'react';
 
-/* eslint-disable-next-line */
+ 
 export interface ButtonPrimaryProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   label?: string | undefined | null;
   size?: 'sm' | 'md' | 'lg';
