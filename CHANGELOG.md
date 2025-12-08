@@ -1,3 +1,10 @@
+## [1.0.8](https://github.com/nolafs/foot_factor/compare/v1.0.7...v1.0.8) (2025-12-08)
+
+
+### Bug Fixes
+
+* remove blog menu from small devices ([1d667a0](https://github.com/nolafs/foot_factor/commit/1d667a065990dccb143707a8791ba15d48b69062))
+
 ## [1.0.7](https://github.com/nolafs/foot_factor/compare/v1.0.6...v1.0.7) (2025-12-08)
 
 
