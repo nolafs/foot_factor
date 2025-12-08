@@ -97,7 +97,7 @@ const Megamenu: FC<MegaMenuProps> = ({ slice, context }) => {
                     {item.description && (
                       <div
                         className={
-                          'max-h-0 text-sm opacity-0 transition-all duration-300 ease-in-out group-hover:max-h-[300px] group-hover:opacity-100'
+                          'max-h-0 text-xs opacity-0 transition-all duration-300 ease-in-out group-hover:max-h-[300px] group-hover:opacity-100 xl:text-sm'
                         }>
                         {item.description}
                       </div>
