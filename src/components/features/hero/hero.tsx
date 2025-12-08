@@ -93,7 +93,7 @@ export function Hero({
         <Container className="relative z-20 flex h-svh flex-col justify-end">
           <div
             className={cn(
-              'flex h-svh w-full flex-col justify-stretch pb-5 pt-20 sm:w-full sm:pb-16 sm:pt-32 md:pb-32 md:pt-64 lg:max-w-3xl',
+              'flex h-svh w-full flex-col justify-stretch pb-5 pt-20 sm:w-full sm:pt-32 md:pt-64 lg:max-w-3xl',
             )}>
             <div
               className={cn(
