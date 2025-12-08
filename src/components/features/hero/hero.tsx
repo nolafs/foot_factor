@@ -120,13 +120,17 @@ export function Hero({
                 <ButtonRow hasBooking={hasBooking} links={links} />
               </div>
             </div>
-            <div className={'shrink pt-5'}>
+            <div className={'shrink'}>
               {!widget && rating && (
                 <div>
                   <PrismicNextImage field={rating} />
                 </div>
               )}
-              {widget && <ReviewSliderElfsight share_link={widget} width={'auto'} />}
+              {widget && (
+                <div className={'py-5'}>
+                  <ReviewSliderElfsight share_link={widget} width={'auto'} />
+                </div>
+              )}
               {children && (
                 <div className={'relative z-20 mt-2 flex md:absolute md:bottom-10 md:left-0 md:right-0'}>
                   {children}
