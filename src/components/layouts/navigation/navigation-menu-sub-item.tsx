@@ -21,7 +21,7 @@ export const NavigationMenuSubItem = ({ item }: { item: NavigationElementDocumen
   const activeIndex = hoveredIndex ?? defaultActiveIndex;
 
   return (
-    <div id="nav-content" className={cn('relative block w-full')}>
+    <div className={cn('relative block w-full')}>
       <div className="p-10">
         <div className="grid w-full grid-cols-8 gap-5">
           <div className="col-span-5">
