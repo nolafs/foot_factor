@@ -120,7 +120,7 @@ export function Hero({
                 <ButtonRow hasBooking={hasBooking} links={links} />
               </div>
             </div>
-            <div className={'shrink'}>
+            <div className={'shrink pt-5'}>
               {!widget && rating && (
                 <div>
                   <PrismicNextImage field={rating} />
