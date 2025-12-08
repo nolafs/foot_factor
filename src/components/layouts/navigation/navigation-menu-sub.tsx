@@ -79,7 +79,7 @@ export default function NavigationMenuSub({ navigation, settings }: NavigationSu
                   <span className="sr-only">{settings.site_name}</span>
                   <PrismicImage
                     field={settings.logo}
-                    className={cn('hidden w-full !max-w-[250px] origin-left sm:inline')}
+                    className={cn('hidden w-full origin-left sm:inline lg:max-w-[200px] xl:max-w-[250px]')}
                   />
                   <PrismicImage
                     field={settings.logo_alt}
@@ -105,7 +105,10 @@ export default function NavigationMenuSub({ navigation, settings }: NavigationSu
                 <div className="flex flex-1">
                   <Link href="/" className={'w-full'}>
                     <span className="sr-only">{settings.site_name}</span>
-                    <PrismicImage field={settings.logo} className={cn('inline w-full !max-w-[310px] origin-left')} />
+                    <PrismicImage
+                      field={settings.logo}
+                      className={cn('inline w-full max-w-[180px] origin-left lg:max-w-[200px] xl:!max-w-[250px]')}
+                    />
                   </Link>
                 </div>
 
