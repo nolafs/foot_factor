@@ -130,7 +130,7 @@ const Megamenu: FC<MegaMenuProps> = ({ slice, context }) => {
             {item.map((item, idx) => (
               <div
                 key={`main-nav-item-${idx}`}
-                className="item-center group relative flex justify-center gap-x-5 rounded-lg p-5 transition-all duration-500 ease-in-out hover:bg-primary">
+                className="item-center group relative flex justify-center gap-x-2 rounded-lg p-2 transition-all duration-500 ease-in-out hover:bg-primary lg:gap-x-3 lg:p-4 2xl:gap-x-5 2xl:p-5">
                 <div className={'flex h-full w-2/12 items-center justify-center'}>
                   <PrismicImage
                     field={item.icon}
@@ -140,7 +140,7 @@ const Megamenu: FC<MegaMenuProps> = ({ slice, context }) => {
                 <PrismicNextLink field={item.link} className={'flex w-10/12 flex-col space-y-1'}>
                   <div
                     className={
-                      'text-xl font-medium leading-9 text-primary transition-all group-hover:text-accent lg:text-2xl xl:text-3xl'
+                      'font-medium leading-9 text-primary transition-all group-hover:text-accent lg:text-xl xl:text-2xl'
                     }>
                     {item.label}
                   </div>
