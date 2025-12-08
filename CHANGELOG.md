@@ -1,3 +1,10 @@
+## [1.0.16](https://github.com/nolafs/foot_factor/compare/v1.0.15...v1.0.16) (2025-12-08)
+
+
+### Bug Fixes
+
+* hero header rating not looking good on small desktop ([7db8dd0](https://github.com/nolafs/foot_factor/commit/7db8dd0d23b7bbb3514ac3c8161466103e8b755a))
+
 ## [1.0.15](https://github.com/nolafs/foot_factor/compare/v1.0.14...v1.0.15) (2025-12-08)
 
 
