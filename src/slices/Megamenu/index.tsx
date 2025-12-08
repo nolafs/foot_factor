@@ -72,7 +72,14 @@ const Megamenu: FC<MegaMenuProps> = ({ slice, context }) => {
     return (
       <div>
         <div className={'flex h-full w-full flex-1 flex-col justify-items-stretch'}>
-          <div className={`grid grid-cols-1 lg:grid-cols-${slice.primary.links.length} h-full gap-x-2`}>
+          <div
+            className={cn(
+              'grid h-full gap-x-2',
+              slice.primary.links.length === 1 && 'grid-cols-1',
+              slice.primary.links.length === 2 && 'grid-cols-1 lg:grid-cols-2',
+              slice.primary.links.length === 3 && 'grid-cols-1 lg:grid-cols-3',
+              slice.primary.links.length >= 4 && 'grid-cols-1 lg:grid-cols-4',
+            )}>
             {slice.primary.links.map((item, idx) => (
               <div key={`main-nav-item-${idx}`} className={'group h-full'}>
                 <PrismicNextLink
@@ -118,10 +125,7 @@ const Megamenu: FC<MegaMenuProps> = ({ slice, context }) => {
 
   return context?.subs && context?.subs.length > 0
     ? chunkedArray.map((item, idx) => (
-        <div
-          id={'nav-content'}
-          key={'nav-content-sub' + idx}
-          className={cn('flex w-full min-w-[460px] xl:max-w-[512px]')}>
+        <div key={'nav-content-sub' + idx} className={cn('flex w-full min-w-[460px] xl:max-w-[512px]')}>
           <div
             className={cn(
               'flex h-full w-full flex-col gap-y-2',

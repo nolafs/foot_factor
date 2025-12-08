@@ -52,57 +52,85 @@ export const useTextAnimation = (options: UseTextAnimationOptions = {}) => {
   const timelineRef = useRef<gsap.core.Timeline | null>(null);
   const splitsRef = useRef<SplitText | null>(null);
   const isResizing = useRef<boolean>(false);
+  const isMounted = useRef<boolean>(false);
   const currentWidth = useRef<number>(0);
   const debouncedRefresh = useRef<NodeJS.Timeout | undefined>(undefined);
   const debouncedRecreate = useRef<NodeJS.Timeout | undefined>(undefined);
 
   // Function to completely recreate the animation
   const recreateAnimation = useCallback(() => {
-    if (!enabled || !containerRef.current || !triggerRef.current) return;
+    if (!enabled || !containerRef.current || !triggerRef.current || !isMounted.current) return;
 
-    gsap.set(containerRef.current, { opacity: 0 });
+    // Store original content before splitting
+    const originalContent = containerRef.current.innerHTML;
 
+    // Clean up existing animation
     if (timelineRef.current) {
       timelineRef.current.kill();
+      timelineRef.current = null;
     }
     if (splitsRef.current) {
-      splitsRef.current.revert();
+      try {
+        splitsRef.current.revert();
+      } catch (e) {
+        // If revert fails, restore from backup
+        if (containerRef.current) {
+          containerRef.current.innerHTML = originalContent;
+        }
+      }
+      splitsRef.current = null;
     }
 
-    setTimeout(() => {
-      if (!containerRef.current || !triggerRef.current) return;
+    // Set opacity to 0 before creating new split
+    if (containerRef.current) {
+      gsap.set(containerRef.current, { opacity: 0 });
+    }
 
-      const splits = new SplitText(containerRef.current, { type: splitType, aria: 'hidden' });
-      splitsRef.current = splits;
+    // Use requestAnimationFrame instead of setTimeout for better timing
+    requestAnimationFrame(() => {
+      if (!containerRef.current || !triggerRef.current || !isMounted.current) return;
 
-      timelineRef.current = gsap
-        .timeline({
-          scrollTrigger: {
-            trigger: triggerRef.current,
-            start: trigger.start,
-            end: trigger.end,
-            scrub: trigger.scrub,
-            markers: trigger.markers,
-            onRefresh: () => {
-              if (trigger.markers) {
-                console.log('ScrollTrigger refreshed for text animation');
-              }
+      try {
+        const splits = new SplitText(containerRef.current, { type: splitType, aria: 'hidden' });
+        splitsRef.current = splits;
+
+        timelineRef.current = gsap
+          .timeline({
+            scrollTrigger: {
+              trigger: triggerRef.current,
+              start: trigger.start,
+              end: trigger.end,
+              scrub: trigger.scrub,
+              markers: trigger.markers,
+              onRefresh: () => {
+                if (trigger.markers) {
+                  console.log('ScrollTrigger refreshed for text animation');
+                }
+              },
             },
-          },
-        })
-        .fromTo(
-          splits.chars,
-          { opacity: animation.fromOpacity },
-          {
-            opacity: animation.toOpacity,
-            stagger: animation.stagger,
-            ease: animation.ease,
-          },
-          0,
-        );
-      isResizing.current = false;
-      gsap.set(containerRef.current, { opacity: 1 });
-    }, 50);
+          })
+          .fromTo(
+            splits.chars,
+            { opacity: animation.fromOpacity },
+            {
+              opacity: animation.toOpacity,
+              stagger: animation.stagger,
+              ease: animation.ease,
+            },
+            0,
+          );
+        isResizing.current = false;
+        if (containerRef.current && isMounted.current) {
+          gsap.set(containerRef.current, { opacity: 1 });
+        }
+      } catch (error) {
+        console.error('Error creating SplitText animation:', error);
+        // Restore opacity on error
+        if (containerRef.current && isMounted.current) {
+          gsap.set(containerRef.current, { opacity: 1 });
+        }
+      }
+    });
   }, [
     enabled,
     splitType,
@@ -142,25 +170,40 @@ export const useTextAnimation = (options: UseTextAnimationOptions = {}) => {
 
   useGSAP(
     () => {
+      isMounted.current = true;
       currentWidth.current = containerRef.current?.offsetWidth ?? 0;
 
       recreateAnimation();
 
       return () => {
+        // Mark as unmounted FIRST to prevent any new animations
+        isMounted.current = false;
+
+        // Clear all timeouts
         if (debouncedRefresh.current) {
           clearTimeout(debouncedRefresh.current);
+          debouncedRefresh.current = undefined;
         }
         if (debouncedRecreate.current) {
           clearTimeout(debouncedRecreate.current);
+          debouncedRecreate.current = undefined;
         }
+
+        // Kill timeline before reverting splits
         if (timelineRef.current) {
           timelineRef.current.kill();
+          timelineRef.current = null;
         }
+
+        // Revert SplitText to restore original DOM
         if (splitsRef.current) {
-          splitsRef.current.revert();
+          try {
+            splitsRef.current.revert();
+          } catch (error) {
+            console.warn('SplitText revert failed during cleanup:', error);
+          }
+          splitsRef.current = null;
         }
-        timelineRef.current = null;
-        splitsRef.current = null;
       };
     },
     { scope: triggerRef, dependencies: [recreateAnimation] },
@@ -170,6 +213,7 @@ export const useTextAnimation = (options: UseTextAnimationOptions = {}) => {
     if (!refreshOnResize) return;
 
     const handleResize = () => {
+      if (!isMounted.current) return;
       if (!containerRef.current || containerRef.current.offsetWidth !== currentWidth.current) {
         currentWidth.current = containerRef.current?.offsetWidth ?? 0;
         scheduleRecreate();
@@ -177,6 +221,7 @@ export const useTextAnimation = (options: UseTextAnimationOptions = {}) => {
     };
 
     const handleOrientationChange = () => {
+      if (!isMounted.current) return;
       setTimeout(scheduleRecreate, 200);
     };
 
@@ -188,9 +233,11 @@ export const useTextAnimation = (options: UseTextAnimationOptions = {}) => {
       window.removeEventListener('orientationchange', handleOrientationChange);
       if (debouncedRefresh.current) {
         clearTimeout(debouncedRefresh.current);
+        debouncedRefresh.current = undefined;
       }
       if (debouncedRecreate.current) {
         clearTimeout(debouncedRecreate.current);
+        debouncedRecreate.current = undefined;
       }
     };
   }, [refreshOnResize, scheduleRecreate]);
