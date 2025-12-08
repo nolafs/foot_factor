@@ -72,15 +72,7 @@ const Megamenu: FC<MegaMenuProps> = ({ slice, context }) => {
     return (
       <div>
         <div className={'flex h-full w-full flex-1 flex-col justify-items-stretch'}>
-          <div
-            className={cn(
-              'grid h-full gap-x-2',
-              slice.primary.links.length === 1 && 'grid-cols-1',
-              slice.primary.links.length === 2 && 'grid-cols-1 lg:grid-cols-2',
-              slice.primary.links.length === 3 && 'grid-cols-1 lg:grid-cols-3',
-              slice.primary.links.length === 4 && 'grid-cols-1 lg:grid-cols-4',
-              slice.primary.links.length >= 5 && 'grid-cols-1 lg:grid-cols-5',
-            )}>
+          <div className={cn('grid h-full auto-cols-fr grid-flow-col gap-x-2')}>
             {slice.primary.links.map((item, idx) => (
               <div key={`main-nav-item-${idx}`} className={'group h-full'}>
                 <PrismicNextLink
