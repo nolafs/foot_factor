@@ -1,3 +1,11 @@
+## [1.0.10](https://github.com/nolafs/foot_factor/compare/v1.0.9...v1.0.10) (2025-12-08)
+
+
+### Bug Fixes
+
+* nextjs update ([1cf891f](https://github.com/nolafs/foot_factor/commit/1cf891fb73a5b887f77085838c97349c22e6caa2))
+* nextjs update ([18e3741](https://github.com/nolafs/foot_factor/commit/18e374182db88d70735b9b3f5c43e80a2f0b878c))
+
 ## [1.0.9](https://github.com/nolafs/foot_factor/compare/v1.0.8...v1.0.9) (2025-12-08)
 
 
