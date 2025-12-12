@@ -1,3 +1,10 @@
+## [1.0.19](https://github.com/nolafs/foot_factor/compare/v1.0.18...v1.0.19) (2025-12-12)
+
+
+### Bug Fixes
+
+* team video ([6462935](https://github.com/nolafs/foot_factor/commit/64629359d8bc464f5a3a23846284a41d2bf28019))
+
 ## [1.0.18](https://github.com/nolafs/foot_factor/compare/v1.0.17...v1.0.18) (2025-12-12)
 
 
