@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef } from 'react';
 import Notification from '@/components/ui/notification';
 import type { EmbedField, ImageField } from '@prismicio/client';
 import ReactPlayer, { type Config } from 'react-player/lazy';
@@ -15,8 +15,16 @@ interface TeamVideoProps {
   active?: boolean;
 }
 
-export const TeamVideo = ({ id, title, video, image, loading, autoplay = false, onPlay, active }: TeamVideoProps) => {
-  const [showPlayer, setShowPlayer] = useState<boolean>(false);
+export const TeamVideo = ({
+  id,
+  title,
+  video,
+  image,
+  loading,
+  autoplay = false,
+  onPlay,
+  active = false,
+}: TeamVideoProps) => {
   const ref = useRef<ReactPlayer | null>(null);
   const isMounted = useRef(true);
 
@@ -60,25 +68,30 @@ export const TeamVideo = ({ id, title, video, image, loading, autoplay = false, 
   };
 
   const handlePlay = () => {
-    if (autoplay) {
-      if (isMounted.current) setShowPlayer(true);
-      onPlay && onPlay();
-    }
+    // Video started playing - this is fired by ReactPlayer when playback starts
+    // We don't call onPlay here to avoid toggling the state
   };
 
   const handlePause = () => {
-    if (isMounted.current) setShowPlayer(false);
+    // Video paused - could notify parent if needed
   };
 
   const handleEnded = () => {
     if (isMounted.current) {
-      setShowPlayer(false);
+      // Video ended - reset to beginning and stop
       ref.current?.seekTo(0);
+      // Notify parent to stop playing
+      if (onPlay) {
+        onPlay();
+      }
     }
   };
 
   const play = () => {
-    if (isMounted.current) setShowPlayer(true);
+    if (isMounted.current && onPlay) {
+      // User clicked play - notify parent
+      onPlay();
+    }
   };
 
   return (
@@ -86,7 +99,7 @@ export const TeamVideo = ({ id, title, video, image, loading, autoplay = false, 
       <ReactPlayer
         width="100%"
         height="100%"
-        playing={showPlayer}
+        playing={active}
         ref={ref}
         id={id}
         url={video.embed_url}
@@ -96,7 +109,7 @@ export const TeamVideo = ({ id, title, video, image, loading, autoplay = false, 
         onPause={handlePause}
         className={'absolute min-h-full w-auto min-w-full max-w-none'}
       />
-      {!autoplay && (
+      {!autoplay && !active && (
         <VideoControl
           handlePlayAction={play}
           title={title ?? ''}
@@ -105,7 +118,7 @@ export const TeamVideo = ({ id, title, video, image, loading, autoplay = false, 
           width={1200}
           height={1920}
         />
-      )}{' '}
+      )}
     </div>
   );
 };

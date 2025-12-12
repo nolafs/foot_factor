@@ -19,6 +19,7 @@ export const TeamSlider = ({ data }: TeamSliderProps) => {
   const [setReferenceWindowRef, bounds] = useMeasure();
   const [activeIndex, setActiveIndex] = useState(0);
   const [expandedId, setExpandedId] = useState<string | null>(null);
+  const [currentVideoId, setCurrentVideoId] = useState<string | null>(null);
 
   useMotionValueEvent(scrollX, 'change', x => {
     if (scrollRef.current?.children[0]) {
@@ -47,18 +48,27 @@ export const TeamSlider = ({ data }: TeamSliderProps) => {
           'snap-x snap-mandatory overflow-x-auto overscroll-x-contain scroll-smooth',
           '[--scroll-padding:max(theme(spacing.6),calc((100vw-theme(maxWidth.2xl))/2))] lg:[--scroll-padding:max(theme(spacing.8),calc((100vw-theme(maxWidth.7xl))/2))]',
         ])}>
-        {data.map((member, idx) => (
-          <TeamCard
-            data={member}
-            id={'member_' + idx}
-            key={'member_' + idx}
-            scrollX={scrollX}
-            bounds={bounds}
-            currentExpanded={expandedId}
-            onExpand={onExpand}
-            onClick={() => scrollTo(idx)}
-          />
-        ))}
+        {data.map((member, idx) => {
+          const videoId = 'member_' + idx;
+          return (
+            <TeamCard
+              data={member}
+              id={videoId}
+              key={videoId}
+              scrollX={scrollX}
+              bounds={bounds}
+              currentExpanded={expandedId}
+              onExpand={onExpand}
+              onClick={() => scrollTo(idx)}
+              isActive={currentVideoId === videoId}
+              onPlay={() => {
+                // Toggle video: if it's already playing, stop it (e.g., when video ends)
+                // Otherwise, start playing this video and stop any other
+                setCurrentVideoId(currentVideoId === videoId ? null : videoId);
+              }}
+            />
+          );
+        })}
       </div>
       <Container className="mt-1">
         <div className="hidden justify-center sm:flex sm:gap-2">
