@@ -1,14 +1,13 @@
- 
 'use client';
 
-import { useReducer, useRef, useState } from 'react';
+import { useRef, useState } from 'react';
 import ReactPlayer, { type Config } from 'react-player/lazy';
 
 import VideoControl from './video-control';
 
 import VideoPlayerWrapper from '../video-player-wrapper';
 import cn from 'clsx';
-import {ImageFieldImage} from "@prismicio/client";
+import { ImageFieldImage } from '@prismicio/client';
 
 export interface YoutubeProps {
   id: string;
@@ -36,9 +35,7 @@ export function Youtube({
   width = 1920,
   height = 1200,
 }: YoutubeProps) {
-
   const [showPlayer, setShowPlayer] = useState<boolean>(false);
-  const [playPlayer, setPlayPlayer] = useState<boolean>(false);
   const ref = useRef<any>(null);
 
   if (!width) {
@@ -52,7 +49,7 @@ export function Youtube({
   const opts: Config = {
     youtube: {
       playerVars: {
-        mute: !autoplay ,
+        mute: autoplay,
         autoplay: autoplay,
         controls: controls,
         loop: loop,
@@ -71,6 +68,11 @@ export function Youtube({
     setShowPlayer(false);
   };
 
+  const handleEnded = () => {
+    setShowPlayer(false);
+    ref.current?.seekTo(0);
+  };
+
   const handleReplay = () => {
     if (autoplay) {
       setShowPlayer(true);
@@ -83,31 +85,33 @@ export function Youtube({
 
   return (
     <VideoPlayerWrapper handlePlay={handlePlay} handlePause={handlePause} handleReplay={handleReplay}>
-      <div className={cn('aspect-w-16 aspect-h-9 w-full h-full relative z-20 overflow-hidden')}>
+      <div className={cn('aspect-h-9 aspect-w-16 relative z-20 h-full w-full overflow-hidden')}>
         {showPlayer && (
-        <ReactPlayer
-              width="100%"
-              height="100%"
-              playing={showPlayer}
-              ref={ref}
-              id={id}
-              url={src}
-              config={opts}
-              onPlay={handlePlay}
-              className={'absolute  min-h-full w-auto min-w-full max-w-none'}
-            />
+          <ReactPlayer
+            width="100%"
+            height="100%"
+            playing={showPlayer}
+            ref={ref}
+            id={id}
+            url={src}
+            config={opts}
+            onPlay={handlePlay}
+            onEnded={handleEnded}
+            className={'absolute min-h-full w-auto min-w-full max-w-none'}
+          />
         )}
 
-          {!autoplay && (
-            <VideoControl
-              handlePlayAction={play}
-              title={title}
-              poster={poster}
-              loading={loading}
-              width={width}
-              height={height}
-            />
-          )}
+        {!autoplay && (
+          <VideoControl
+            handlePlayAction={play}
+            title={title}
+            poster={poster}
+            loading={loading}
+            width={width}
+            height={height}
+            visible={!showPlayer}
+          />
+        )}
       </div>
     </VideoPlayerWrapper>
   );
