@@ -35,6 +35,18 @@ export const TeamVideo = ({
     };
   }, []);
 
+  // Reset video to beginning when it becomes active (user clicked play)
+  useEffect(() => {
+    if (active && ref.current) {
+      const currentTime = ref.current.getCurrentTime();
+      const duration = ref.current.getDuration();
+      // If video is at or near the end, reset to beginning
+      if (duration && currentTime >= duration - 1) {
+        ref.current.seekTo(0);
+      }
+    }
+  }, [active]);
+
   if (!video) {
     return <Notification body={'No video source found'} type={'error'} />;
   }
@@ -78,9 +90,7 @@ export const TeamVideo = ({
 
   const handleEnded = () => {
     if (isMounted.current) {
-      // Video ended - reset to beginning and stop
-      ref.current?.seekTo(0);
-      // Notify parent to stop playing
+      // Video ended - notify parent to stop playing
       if (onPlay) {
         onPlay();
       }
@@ -109,7 +119,7 @@ export const TeamVideo = ({
         onPause={handlePause}
         className={'absolute min-h-full w-auto min-w-full max-w-none'}
       />
-      {!autoplay && !active && (
+      {!autoplay && (
         <VideoControl
           handlePlayAction={play}
           title={title ?? ''}
@@ -117,6 +127,7 @@ export const TeamVideo = ({
           loading={loading}
           width={1200}
           height={1920}
+          visible={!active}
         />
       )}
     </div>
