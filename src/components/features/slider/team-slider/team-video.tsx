@@ -128,6 +128,7 @@ export const TeamVideo = ({
           width={1200}
           height={1920}
           visible={!active}
+          animation={false}
         />
       )}
     </div>

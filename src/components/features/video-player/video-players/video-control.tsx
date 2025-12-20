@@ -14,6 +14,7 @@ export interface VideoControlProps {
   loading?: 'lazy' | 'eager';
   mode?: 'light' | 'dark';
   visible?: boolean; // Optional prop to control visibility from parent
+  animation?: boolean;
 }
 
 export function VideoControl({
@@ -25,8 +26,9 @@ export function VideoControl({
   loading = 'lazy',
   mode: _mode,
   visible = true,
+  animation = true,
 }: VideoControlProps) {
-  const { ref, y, scale } = useParallax(0.8, true);
+  const { ref, y, scale } = useParallax(2, true, false);
 
   const play = () => {
     handlePlayAction();
@@ -50,9 +52,9 @@ export function VideoControl({
           <div className={'sr-only'}>Play {title}</div>
           <div
             className={
-              'absolute left-0 top-0 z-20 flex h-full w-full flex-col items-center justify-center fill-secondary'
+              'absolute left-0 top-0 z-20 flex h-full w-full flex-col items-end justify-end fill-secondary md:items-center md:justify-center'
             }>
-            <div className={'flex h-24 w-24 items-center justify-center rounded-full md:h-32 md:w-32'}>
+            <div className={'flex h-16 w-16 items-center justify-center rounded-full md:h-32 md:w-32'}>
               <svg width="179" height="178" viewBox="0 0 179 178" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <g filter="url(#filter0_dd_8928_4595)">
                   <circle cx="89.5" cy="85" r="64" fill="white" />
@@ -99,26 +101,34 @@ export function VideoControl({
               </svg>
             </div>
           </div>
-          {poster && (
-            <motion.div
-              ref={ref}
-              style={{
-                y,
-                scale,
-              }}
-              className="absolute inset-0 z-10">
-              <PrismicNextImage
-                field={poster}
-                width={width}
-                height={height}
-                fallbackAlt=""
-                loading={loading}
-                className={'h-full w-full object-cover object-center'}
-                imgixParams={{ fit: 'fill', fm: 'webp' }}
-                quality={55}
-              />
-            </motion.div>
-          )}
+          {poster &&
+            (animation ? (
+              <motion.div ref={ref} style={{ y, scale }} className="absolute inset-0 z-10">
+                <PrismicNextImage
+                  field={poster}
+                  width={width}
+                  height={height}
+                  fallbackAlt=""
+                  loading={loading}
+                  className="my-0 h-full w-full object-cover object-center"
+                  imgixParams={{ fit: 'fill', fm: 'webp' }}
+                  quality={55}
+                />
+              </motion.div>
+            ) : (
+              <div ref={ref} className="absolute inset-0 z-10">
+                <PrismicNextImage
+                  field={poster}
+                  width={width}
+                  height={height}
+                  fallbackAlt=""
+                  loading={loading}
+                  className="my-0 h-full w-full object-cover object-center"
+                  imgixParams={{ fit: 'fill', fm: 'webp' }}
+                  quality={55}
+                />
+              </div>
+            ))}
         </motion.button>
       )}
     </AnimatePresence>

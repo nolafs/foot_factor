@@ -5,7 +5,7 @@ import useParallax from '@/lib/hooks/use-parallax';
 import { motion } from 'framer-motion';
 
 export default function ParallaxAnim({ children }: { children?: React.ReactNode }) {
-  const { ref, y, scale } = useParallax(1.2, true);
+  const { ref, y, scale } = useParallax(2, true, false);
 
   return (
     <div className={'relative isolate h-screen w-full overflow-hidden'}>

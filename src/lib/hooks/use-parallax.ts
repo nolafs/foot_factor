@@ -2,7 +2,7 @@
 'use client';
 
 import { useEffect, useRef } from 'react';
-import { useSpring, type MotionValue } from 'framer-motion';
+import { useSpring, useMotionValue, type MotionValue } from 'framer-motion';
 
 type UseParallaxReturn = {
   ref: React.RefObject<HTMLDivElement | null>;
@@ -14,13 +14,24 @@ type UseParallaxReturn = {
  * Simple parallax hook:
  * - `strength`: how strong the movement is (0–1 good range)
  * - `invert`: reverse direction
+ * - `spring`: whether to use spring animation (default: true). Set to false for linear motion without bounce.
  */
-export default function useParallax(strength: number = 0.5, invert: boolean = false): UseParallaxReturn {
+export default function useParallax(
+  strength: number = 0.5,
+  invert: boolean = false,
+  spring: boolean = true,
+): UseParallaxReturn {
   const ref = useRef<HTMLDivElement | null>(null);
 
-  // Motion values are created in render but updated in effects only
-  const y = useSpring(0);
-  const scale = useSpring(1);
+  // Always call hooks unconditionally (React rules)
+  const ySpring = useSpring(0);
+  const scaleSpring = useSpring(1);
+  const yMotion = useMotionValue(0);
+  const scaleMotion = useMotionValue(1);
+
+  // Select which motion values to use based on parameter
+  const y = spring ? ySpring : yMotion;
+  const scale = spring ? scaleSpring : scaleMotion;
 
   useEffect(() => {
     const handleScroll = () => {
@@ -56,7 +67,7 @@ export default function useParallax(strength: number = 0.5, invert: boolean = fa
       window.removeEventListener('scroll', handleScroll);
       window.removeEventListener('resize', handleScroll);
     };
-  }, [strength, invert, y, scale]);
+  }, [strength, invert, spring, y, scale]);
 
   return { ref, y, scale };
 }
