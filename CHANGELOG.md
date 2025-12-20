@@ -1,3 +1,10 @@
+## [1.0.22](https://github.com/nolafs/foot_factor/compare/v1.0.21...v1.0.22) (2025-12-20)
+
+
+### Bug Fixes
+
+* animation fixes ([ac0dd36](https://github.com/nolafs/foot_factor/commit/ac0dd369da18f444286a9a6c6db01682f7e4633a))
+
 ## [1.0.21](https://github.com/nolafs/foot_factor/compare/v1.0.20...v1.0.21) (2025-12-12)
 
 
