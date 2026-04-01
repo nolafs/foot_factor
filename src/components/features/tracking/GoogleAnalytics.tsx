@@ -49,9 +49,6 @@ export function GoogleTagManager({ consented }: { consented: boolean }) {
   const shouldLoad = consented && readyToLoad;
   const gtmId = trackingConfig.gtmId;
 
-  // Debug logging
-  //console.log('[GTM Debug]', { consented, readyToLoad, shouldLoad, gtmId });
-
   if (!shouldLoad) return null;
 
   return (
