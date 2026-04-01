@@ -27,7 +27,7 @@ type Props = {
 type Params = { uid: string };
 
 export async function generateMetadata(
-  { params }: { params: Promise<Params> },
+  { params, searchParams }: { params: Promise<Params>; searchParams: Promise<Record<string, string | string[] | undefined>> },
   parent: ResolvingMetadata,
 ): Promise<Metadata> {
   const client = createClient();
@@ -62,6 +62,12 @@ export async function generateMetadata(
   return {
     title: 'Foot Factor - Articles',
     description: asText(page?.data.excerpt)! ?? "Looking for resources on foot health? You're in the right place.",
+    alternates: {
+      canonical: `${process.env.NEXT_PUBLIC_BASE_URL}/resources/blog`,
+      types: {
+        'application/rss+xml': `${process.env.NEXT_PUBLIC_BASE_URL}/feed.xml`,
+      },
+    },
     openGraph: {
       title: 'Foot Factor',
       images: [
