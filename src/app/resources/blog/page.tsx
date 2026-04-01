@@ -32,6 +32,18 @@ export async function generateMetadata(
 ): Promise<Metadata> {
   const client = createClient();
 
+  const resolvedParams = await searchParams;
+  const queryString = new URLSearchParams(
+    Object.entries(resolvedParams).reduce<Record<string, string>>((acc, [key, val]) => {
+      if (typeof val === 'string' && val) acc[key] = val;
+      else if (Array.isArray(val) && val[0]) acc[key] = val[0];
+      return acc;
+    }, {}),
+  ).toString();
+  const canonicalUrl = queryString
+    ? `${process.env.NEXT_PUBLIC_BASE_URL}/resources/blog?${queryString}`
+    : `${process.env.NEXT_PUBLIC_BASE_URL}/resources/blog`;
+
   const posts = await client
     .getByType('posts', {
       pageSize: 1,
@@ -63,7 +75,7 @@ export async function generateMetadata(
     title: 'Foot Factor - Articles',
     description: asText(page?.data.excerpt)! ?? "Looking for resources on foot health? You're in the right place.",
     alternates: {
-      canonical: `${process.env.NEXT_PUBLIC_BASE_URL}/resources/blog`,
+      canonical: canonicalUrl,
       types: {
         'application/rss+xml': `${process.env.NEXT_PUBLIC_BASE_URL}/feed.xml`,
       },
