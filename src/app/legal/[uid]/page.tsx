@@ -5,7 +5,7 @@ import { createClient } from '@/prismicio';
 import { components } from '@/slices';
 import { Container } from '@/components/ui/container';
 import React from 'react';
-import HeroSimple from "@/components/features/hero/hero-simple";
+import HeroSimple from '@/components/features/hero/hero-simple';
 
 type Params = { uid: string };
 
@@ -15,11 +15,9 @@ export async function generateMetadata({ params }: { params: Promise<Params> }):
   const page = await client.getByUID('legal', uid).catch(() => notFound());
 
   return {
-    metadataBase: new URL(
-        `${process.env.NEXT_PUBLIC_BASE_URL}/${page.uid}`
-    ),
+    metadataBase: new URL(`${process.env.NEXT_PUBLIC_BASE_URL}/legal/${page.uid}`),
     alternates: {
-      canonical: `${process.env.NEXT_PUBLIC_BASE_URL}/${page.uid}`,
+      canonical: `${process.env.NEXT_PUBLIC_BASE_URL}/legal/${page.uid}`,
       types: {
         'application/rss+xml': `${process.env.NEXT_PUBLIC_BASE_URL}/feed.xml`,
       },
@@ -40,7 +38,7 @@ export default async function Page({ params }: { params: Promise<Params> }) {
 
   return (
     <main className={'min-h-svh w-full overflow-hidden'}>
-      <HeroSimple wave_type={'2'} heading={page.data.title}   />
+      <HeroSimple wave_type={'2'} heading={page.data.title} />
       <Container>
         <article>
           {/* Content */}
