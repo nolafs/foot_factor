@@ -6,7 +6,7 @@ import { components } from '@/slices';
 import type { OGImage } from '@/types';
 import type { ResolvedOpenGraph } from 'next/dist/lib/metadata/types/opengraph-types';
 import React from 'react';
-import {isFilled} from '@prismicio/client';
+import { isFilled } from '@prismicio/client';
 import SchemaInjector from '@/utils/schema-injection';
 
 type Params = { uid: string };
@@ -25,7 +25,6 @@ export async function generateMetadata(
   const parentOpenGraph: ResolvedOpenGraph | null = parentMeta.openGraph ?? null;
 
   if (page.data.meta_image) {
-
     image = `${page.data.meta_image.url}?w=1200&h=630&fit=crop&fm=webp&q=80`;
   }
 
@@ -33,13 +32,10 @@ export async function generateMetadata(
     pageTitle = parentMeta.title.absolute;
   }
 
-
   return {
-    metadataBase: new URL(
-        `${process.env.NEXT_PUBLIC_BASE_URL}/${page.uid}`
-    ),
+    metadataBase: new URL(`${process.env.NEXT_PUBLIC_BASE_URL}/resources/${page.uid}`),
     alternates: {
-      canonical: `${process.env.NEXT_PUBLIC_BASE_URL}/${page.uid}`,
+      canonical: `${process.env.NEXT_PUBLIC_BASE_URL}/resources/${page.uid}`,
       types: {
         'application/rss+xml': `${process.env.NEXT_PUBLIC_BASE_URL}/feed.xml`,
       },
@@ -64,8 +60,8 @@ export default async function Page({ params }: { params: Promise<Params> }) {
 
   return (
     <main className={'w-full overflow-hidden'}>
-        <SliceZone slices={page.data.slices} components={components} />
-        <SchemaInjector uid={uid}/>
+      <SliceZone slices={page.data.slices} components={components} />
+      <SchemaInjector uid={uid} />
     </main>
   );
 }
