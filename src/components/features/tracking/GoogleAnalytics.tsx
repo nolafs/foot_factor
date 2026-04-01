@@ -47,10 +47,12 @@ export function GoogleTagManager({ consented }: { consented: boolean }) {
   }, [consented]);
 
   const shouldLoad = consented && readyToLoad;
+  const gtmId = trackingConfig.gtmId;
+
+  // Debug logging
+  console.log('[GTM Debug]', { consented, readyToLoad, shouldLoad, gtmId });
 
   if (!shouldLoad) return null;
-
-  const gtmId = trackingConfig.gtmId;
 
   return (
     <>
