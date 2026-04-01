@@ -1,3 +1,10 @@
+## [1.0.29](https://github.com/nolafs/foot_factor/compare/v1.0.28...v1.0.29) (2026-04-01)
+
+
+### Bug Fixes
+
+* conditions ([3de2247](https://github.com/nolafs/foot_factor/commit/3de2247302f87128551c443fc05a38db87c146be))
+
 ## [1.0.28](https://github.com/nolafs/foot_factor/compare/v1.0.27...v1.0.28) (2026-04-01)
 
 
