@@ -8,7 +8,7 @@ import { trackingConfig } from '@/lib/tracking/config.tracking';
 import { grantConsentForEverything, revokeConsentForEverything } from '@/lib/tracking/utils.tracking';
 import Link from 'next/link';
 
-import { GoogleAnalytics } from '@/components/features/tracking/GoogleAnalytics';
+import { GoogleTagManager } from '@/components/features/tracking/GoogleAnalytics';
 import { TooltipProvider } from '@/components/ui/tooltip';
 import Script from 'next/script';
 
@@ -26,7 +26,7 @@ export const RootInnerLayout = ({ children }: { children: ReactNode }) => {
       <TooltipProvider>{children}</TooltipProvider>
       {IS_GTM_ENABLED && (
         <>
-          <GoogleAnalytics consented={consent} />
+          <GoogleTagManager consented={consent} />
           <motion.div
             initial={{ y: '100vh', opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}

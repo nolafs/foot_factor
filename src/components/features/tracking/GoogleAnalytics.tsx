@@ -4,7 +4,6 @@ import { useEffect, useState } from 'react';
 import Script from 'next/script';
 import { trackingConfig } from '@/lib/tracking/config.tracking';
 
-// Idle helper
 type IdleHandle = number;
 
 export const scheduleIdle = (cb: () => void): IdleHandle => {
@@ -34,22 +33,14 @@ export const cancelIdle = (h: IdleHandle) => {
   }
 };
 
-// local helper (mainly useful if you want to use it later)
-const gtag = (...args: any[]) => {
-  if (typeof window === 'undefined') return;
-  (window as any).dataLayer = (window as any).dataLayer ?? [];
-  (window as any).dataLayer.push(args);
-};
-
-export function GoogleAnalytics({ consented }: { consented: boolean }) {
+export function GoogleTagManager({ consented }: { consented: boolean }) {
   const [readyToLoad, setReadyToLoad] = useState(false);
 
   useEffect(() => {
-    // Only schedule once we actually have consent
     if (!consented) return;
 
     const handle = scheduleIdle(() => {
-      setReadyToLoad(true); // allowed: async callback
+      setReadyToLoad(true);
     });
 
     return () => cancelIdle(handle);
@@ -59,35 +50,25 @@ export function GoogleAnalytics({ consented }: { consented: boolean }) {
 
   if (!shouldLoad) return null;
 
-  const measurementId = trackingConfig.gtmId;
+  const gtmId = trackingConfig.gtmId;
 
   return (
     <>
-      {/* Load GA4 library */}
-      <Script
-        id="ga4-src"
-        strategy="afterInteractive"
-        src={`https://www.googletagmanager.com/gtag/js?id=${measurementId}`}
-      />
-
-      {/* Init GA4 + consent */}
-      <Script id="ga4-init" strategy="afterInteractive">
+      <Script id="gtm-init" strategy="afterInteractive">
         {`
-          window.dataLayer = window.dataLayer || [];
-          function gtag(){dataLayer.push(arguments);}
-          gtag('js', new Date());
-
-          // Consent mode (all granted since user consented before we load this)
-          gtag('consent', 'update', {
-            ad_storage: 'granted',
-            ad_user_data: 'granted',
-            ad_personalization: 'granted',
-            analytics_storage: 'granted',
-          });
-
-          gtag('config', '${measurementId}', {
-            page_path: window.location.pathname,
-          });
+          (function(w,d,s,l,i){
+            w[l]=w[l]||[];
+            w[l].push({
+              'gtm.start': new Date().getTime(),
+              event:'gtm.js'
+            });
+            var f=d.getElementsByTagName(s)[0],
+                j=d.createElement(s),
+                dl=l!='dataLayer'?'&l='+l:'';
+            j.async=true;
+            j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;
+            f.parentNode.insertBefore(j,f);
+          })(window,document,'script','dataLayer','${gtmId}');
         `}
       </Script>
     </>
