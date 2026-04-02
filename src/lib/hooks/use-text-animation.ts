@@ -1,12 +1,15 @@
 // hooks/useTextAnimation.ts
-import { useRef, useEffect, useCallback } from 'react';
+import { useRef, useEffect, useLayoutEffect, useCallback } from 'react';
 import { useGSAP } from '@gsap/react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { SplitText } from 'gsap/SplitText';
 
-// Register the plugin
-gsap.registerPlugin(ScrollTrigger);
+// Register the plugins
+gsap.registerPlugin(ScrollTrigger, SplitText);
+
+// Use useLayoutEffect on client, useEffect on server (for SSR safety)
+const useIsomorphicLayoutEffect = typeof window !== 'undefined' ? useLayoutEffect : useEffect;
 
 interface UseTextAnimationOptions {
   enabled?: boolean;
@@ -56,13 +59,17 @@ export const useTextAnimation = (options: UseTextAnimationOptions = {}) => {
   const currentWidth = useRef<number>(0);
   const debouncedRefresh = useRef<NodeJS.Timeout | undefined>(undefined);
   const debouncedRecreate = useRef<NodeJS.Timeout | undefined>(undefined);
+  const originalHTMLRef = useRef<string | null>(null);
 
   // Function to completely recreate the animation
   const recreateAnimation = useCallback(() => {
     if (!enabled || !containerRef.current || !triggerRef.current || !isMounted.current) return;
 
-    // Store original content before splitting
-    const originalContent = containerRef.current.innerHTML;
+    // Store original content ONCE before first split (for restoration on unmount)
+    if (originalHTMLRef.current === null) {
+      originalHTMLRef.current = containerRef.current.innerHTML;
+    }
+    const originalContent = originalHTMLRef.current;
 
     // Clean up existing animation
     if (timelineRef.current) {
@@ -208,6 +215,34 @@ export const useTextAnimation = (options: UseTextAnimationOptions = {}) => {
     },
     { scope: triggerRef, dependencies: [recreateAnimation] },
   );
+
+  // CRITICAL: Synchronous cleanup with useLayoutEffect to restore DOM BEFORE React unmounts
+  // This prevents "removeChild" errors where React tries to remove nodes that SplitText modified
+  useIsomorphicLayoutEffect(() => {
+    return () => {
+      // Kill timeline first to stop any animations
+      if (timelineRef.current) {
+        timelineRef.current.kill();
+        timelineRef.current = null;
+      }
+
+      // Try to revert SplitText, fallback to restoring original HTML
+      if (splitsRef.current) {
+        try {
+          splitsRef.current.revert();
+        } catch {
+          // If revert fails, restore original HTML directly
+          if (containerRef.current && originalHTMLRef.current !== null) {
+            containerRef.current.innerHTML = originalHTMLRef.current;
+          }
+        }
+        splitsRef.current = null;
+      } else if (containerRef.current && originalHTMLRef.current !== null) {
+        // No split ref but we have original HTML - restore it
+        containerRef.current.innerHTML = originalHTMLRef.current;
+      }
+    };
+  }, []);
 
   useEffect(() => {
     if (!refreshOnResize) return;
