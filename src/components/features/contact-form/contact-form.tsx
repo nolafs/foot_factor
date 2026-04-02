@@ -16,6 +16,7 @@ import { sendMail } from '@/action';
 
 import { type ContactFormSectionSliceDefaultPrimaryItemsItem } from '@/prismic-types';
 import { createClient } from '@/prismicio';
+import { pushDataLayerEvent } from '@/lib/tracking/pushDataEventLayer';
 
 const emailSchema = z.object({
   name: z.string().min(1, 'Please enter your name'),
@@ -90,7 +91,7 @@ export function ContactForm({ items }: ContactFormInputProps) {
   useEffect(() => {
     const fetchEnquiryTypes = async () => {
       const options = await getEnquireTypeOptions();
-      setEnquiryTypeOptions(options);
+      setEnquiryTypeOptions([...options, ...items]);
     };
 
     void fetchEnquiryTypes();
@@ -151,10 +152,25 @@ export function ContactForm({ items }: ContactFormInputProps) {
         form.reset();
         // Clear the token so it needs to be re-verified
         if (tokenInput) tokenInput.value = '';
+
+        pushDataLayerEvent({
+          event: 'contact_form_success',
+          form_name: 'contact',
+          enquiry_type: data.enquiryType ?? '',
+          submission_status: 'success',
+        });
+
         return;
       }
 
       if (errors) {
+        pushDataLayerEvent({
+          event: 'contact_form_error',
+          form_name: 'contact',
+          enquiry_type: data.enquiryType ?? '',
+          submission_status: 'error',
+        });
+
         console.error('[ContactForm]', errors);
         toast.error('There was an error sending your message. Please try again later.');
       }
@@ -162,6 +178,14 @@ export function ContactForm({ items }: ContactFormInputProps) {
       setIsSubmitting(false);
     } catch (error) {
       setIsSubmitting(false);
+
+      pushDataLayerEvent({
+        event: 'contact_form_error',
+        form_name: 'contact',
+        enquiry_type: data.enquiryType ?? '',
+        submission_status: 'error',
+      });
+
       console.error('[ContactForm]', error);
       toast.error('There was an error sending your message. Please try again later.');
     }
@@ -184,6 +208,8 @@ export function ContactForm({ items }: ContactFormInputProps) {
       </div>
     );
   }
+
+  console.log('TEST FORM', enquiryTypeOptions, items);
 
   return (
     <div className="w-full text-primary">

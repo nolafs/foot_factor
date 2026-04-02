@@ -23,6 +23,7 @@ import { emailBookingSchema } from '@/types/email-booking.type';
 import toast from 'react-hot-toast';
 import { sendBookingMail } from '@/action/send-booking-request';
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
+import { pushDataLayerEvent } from '@/lib/tracking/pushDataEventLayer';
 
 const MIN_DOB = new Date('1900-01-01');
 const MAX_DOB = new Date(); // today
@@ -140,6 +141,14 @@ export const BookingForm = ({ booking }: BookingFormProps) => {
         setTurnstileToken(null);
         setIsVerified(false);
         form.reset(); // Optionally reset form fields
+
+        pushDataLayerEvent({
+          event: 'booking_form_success',
+          form_name: 'booking',
+          booking_type: data.existingPatient ? 'existing' : 'new',
+          referral_type: data.referralPatient ? 'referral' : 'direct',
+          submission_status: 'success',
+        });
       }
 
       if (errors) {
