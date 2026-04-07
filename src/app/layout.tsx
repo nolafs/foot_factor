@@ -65,7 +65,7 @@ export async function generateMetadata({}: Props, parent: ResolvingMetadata): Pr
     alternates: {
       canonical: settings.data?.canonical_url ?? process.env.NEXT_PUBLIC_BASE_URL ?? 'https://footfactor.com',
       types: {
-        'application/rss+xml': `${process.env.NEXT_PUBLIC_BASE_URL}feed.xml`,
+        'application/rss+xml': `${process.env.NEXT_PUBLIC_BASE_URL}/feed.xml`,
       },
     },
     title: settings?.data.meta_title ?? (await parent).title ?? 'Foot Factor UK',
