@@ -12,15 +12,15 @@ import React, { Suspense } from 'react';
 import { SearchProvider } from '@/components/features/search/search-context';
 import { SearchOverlay } from '@/components/features/search/search-overlay';
 import { BookingProvider } from '@/lib/context/booking.context';
-import {RootInnerLayout} from '@/components/layouts/RootInnerLayout';
+import { RootInnerLayout } from '@/components/layouts/RootInnerLayout';
 
-import {Toaster} from "react-hot-toast";
+import { Toaster } from 'react-hot-toast';
 
 const poppins = Poppins({
   subsets: ['latin'],
   variable: '--font-poppins',
   weight: ['400', '500', '600', '700'],
-})
+});
 
 const exo2 = Exo_2({
   subsets: ['latin'],
@@ -76,17 +76,17 @@ export async function generateMetadata({}: Props, parent: ResolvingMetadata): Pr
     },
     icons: {
       icon: [
-        { url: "/favicon.png?v=2", type: "image/png", sizes: "32x32" },
-        { url: "/favicon.png?v=2", type: "image/png", sizes: "16x16" },
+        { url: '/favicon.png?v=2', type: 'image/png', sizes: '32x32' },
+        { url: '/favicon.png?v=2', type: 'image/png', sizes: '16x16' },
       ],
-      shortcut: "/favicon.png",
-      apple: "/apple-icon.png",
+      shortcut: '/favicon.png',
+      apple: '/apple-icon.png',
     },
     verification: {
       other: {
-        'google-site-verification': 'gRDwZ-Sqgn85j_W4GYVmCfCwoS3ScXUAxbZE0V4rCQg',
+        'google-site-verification': 'yyNxK6lvF1hg3VLlQl_6YlVD6Icb3wDp4HyptR-4F8I', //'gRDwZ-Sqgn85j_W4GYVmCfCwoS3ScXUAxbZE0V4rCQg',
         'algolia-site-verification': '3032BA6863E51546',
-      }
+      },
     },
 
     robots: {
@@ -114,46 +114,39 @@ export default async function RootLayout({ children }: Readonly<{ children: Reac
       'navigation_mega_menu_item.label',
       'navigation_mega_menu_item.link',
       'navigation_mega_menu_item.icon',
-      'navigation_mega_menu_item.slices'
+      'navigation_mega_menu_item.slices',
     ],
   });
   const settings = await client.getSingle('settings');
   const makeBooking = await client.getSingle('make_booking');
 
-
   return (
     <html lang="en" className={`${poppins.variable} ${exo2.variable} ${ptSerif.variable}`}>
       <body className={'min-h-screen text-gray-950 antialiased'}>
-
-
-
-      <RootInnerLayout>
+        <RootInnerLayout>
           {/* Loading-bar */}
           <NextTopLoader color={'hsl(var(--accent))'} height={5} showSpinner={false} shadow={false} zIndex={99999} />
 
           <SearchProvider>
             <BookingProvider initialData={makeBooking.data}>
-            <NavigationMenuSub navigation={navigation.data} settings={settings.data}  />
+              <NavigationMenuSub navigation={navigation.data} settings={settings.data} />
 
-            {/* Content */}
-            {children}
+              {/* Content */}
+              {children}
 
-            {/* Footer consent */}
-            <Footer
-              navigation={navigation.data}
-              settings={settings.data }
-            />
+              {/* Footer consent */}
+              <Footer navigation={navigation.data} settings={settings.data} />
 
-            {/* Cookie consent */}
-            <Suspense>
-              <BackToTop />
-            </Suspense>
+              {/* Cookie consent */}
+              <Suspense>
+                <BackToTop />
+              </Suspense>
 
-            {/* Prismic preview */}
-            <PrismicPreview repositoryName={repositoryName} />
+              {/* Prismic preview */}
+              <PrismicPreview repositoryName={repositoryName} />
             </BookingProvider>
             <SearchOverlay />
-              <Toaster position={'bottom-right'} />
+            <Toaster position={'bottom-right'} />
           </SearchProvider>
         </RootInnerLayout>
       </body>
