@@ -1,3 +1,10 @@
+# [1.4.0](https://github.com/nolafs/foot_factor/compare/v1.3.0...v1.4.0) (2026-04-22)
+
+
+### Features
+
+* booking and contact form update ([d4d85f1](https://github.com/nolafs/foot_factor/commit/d4d85f1e22a6be4781029fb972e4f98e074ad017))
+
 # [1.3.0](https://github.com/nolafs/foot_factor/compare/v1.2.0...v1.3.0) (2026-04-07)
 
 
