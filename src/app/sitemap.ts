@@ -21,7 +21,6 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     })
     .catch(() => []);
 
-
   const blogPosts = posts.map(post => {
     return {
       url: `${process.env.NEXT_PUBLIC_BASE_URL}/resources/blog/${post.uid}`,
@@ -32,26 +31,25 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   });
 
   const conditions = await client
-      .getByType('condition', {
-        pageSize: 100,
-        page: 0,
-        fetchLinks: ['author.name', 'author.profile_image', 'condition_category.name', 'condition_category.uid'],
-        orderings: [
-          {
-            field: 'my.condition.last_publication_date',
-            direction: 'desc',
-          },
-        ],
-      })
-      .then(response => {
-        return response.results;
-      })
-      .catch(() => []);
-
+    .getByType('condition', {
+      pageSize: 100,
+      page: 0,
+      fetchLinks: ['author.name', 'author.profile_image', 'condition_category.name', 'condition_category.uid'],
+      orderings: [
+        {
+          field: 'my.condition.last_publication_date',
+          direction: 'desc',
+        },
+      ],
+    })
+    .then(response => {
+      return response.results;
+    })
+    .catch(() => []);
 
   const conditionsPosts = conditions.map(post => {
     return {
-      url: `${process.env.NEXT_PUBLIC_BASE_URL}/conditions/${(post.data.category as {uid:string}).uid}/${post.uid}`,
+      url: `${process.env.NEXT_PUBLIC_BASE_URL}/conditions/${(post.data.category as { uid: string }).uid}/${post.uid}`,
       lastModified: new Date(post.last_publication_date ?? Date.now()),
       changeFrequency: 'monthly',
       priority: 0.8,
@@ -59,22 +57,21 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   });
 
   const caseStudies = await client
-      .getByType('case_studies', {
-        pageSize: 100,
-        page: 0,
-        fetchLinks: ['author.name', 'author.profile_image'],
-        orderings: [
-          {
-            field: 'my.case_studies.last_publication_date',
-            direction: 'desc',
-          },
-        ],
-      })
-      .then(response => {
-        return response.results;
-      })
-      .catch(() => []);
-
+    .getByType('case_studies', {
+      pageSize: 100,
+      page: 0,
+      fetchLinks: ['author.name', 'author.profile_image'],
+      orderings: [
+        {
+          field: 'my.case_studies.last_publication_date',
+          direction: 'desc',
+        },
+      ],
+    })
+    .then(response => {
+      return response.results;
+    })
+    .catch(() => []);
 
   const caseStudiesPosts = caseStudies.map(post => {
     return {
@@ -85,24 +82,22 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     };
   });
 
-
   const guides = await client
-      .getByType('guide', {
-        pageSize: 100,
-        page: 0,
-        fetchLinks: ['author.name', 'author.profile_image'],
-        orderings: [
-          {
-            field: 'my.case_studies.last_publication_date',
-            direction: 'desc',
-          },
-        ],
-      })
-      .then(response => {
-        return response.results;
-      })
-      .catch(() => []);
-
+    .getByType('guide', {
+      pageSize: 100,
+      page: 0,
+      fetchLinks: ['author.name', 'author.profile_image'],
+      orderings: [
+        {
+          field: 'my.case_studies.last_publication_date',
+          direction: 'desc',
+        },
+      ],
+    })
+    .then(response => {
+      return response.results;
+    })
+    .catch(() => []);
 
   const guidePosts = guides.map(post => {
     return {
@@ -114,18 +109,18 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   });
 
   const services = await client
-      .getByType('services', {
-        pageSize: 100,
-        page: 0,
-        orderings: [
-          {
-            field: 'document.last_publication_date',
-            direction: 'desc',
-          },
-        ],
-      })
-      .then(response => response.results)
-      .catch(() => []);
+    .getByType('services', {
+      pageSize: 100,
+      page: 0,
+      orderings: [
+        {
+          field: 'document.last_publication_date',
+          direction: 'desc',
+        },
+      ],
+    })
+    .then(response => response.results)
+    .catch(() => []);
 
   const servicePages = services.map(page => {
     return {
@@ -137,18 +132,18 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   });
 
   const orthotics = await client
-      .getByType('orthotics', {
-        pageSize: 100,
-        page: 0,
-        orderings: [
-          {
-            field: 'document.last_publication_date',
-            direction: 'desc',
-          },
-        ],
-      })
-      .then(response => response.results)
-      .catch(() => []);
+    .getByType('orthotics', {
+      pageSize: 100,
+      page: 0,
+      orderings: [
+        {
+          field: 'document.last_publication_date',
+          direction: 'desc',
+        },
+      ],
+    })
+    .then(response => response.results)
+    .catch(() => []);
 
   const orthoticsPages = orthotics.map(page => {
     return {
@@ -184,12 +179,17 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       changeFrequency: 'yearly' as const,
       priority: 0.8,
     },
-    {
-      url: `${process.env.NEXT_PUBLIC_BASE_URL}/resources/guides`,
-      lastModified: new Date(),
-      changeFrequency: 'yearly' as const,
-      priority: 0.8,
-    },
+
+    ...(guides.length > 0
+      ? [
+          {
+            url: `${process.env.NEXT_PUBLIC_BASE_URL}/resources/guides`,
+            lastModified: new Date(),
+            changeFrequency: 'yearly' as const,
+            priority: 0.8,
+          },
+        ]
+      : []),
     {
       url: `${process.env.NEXT_PUBLIC_BASE_URL}/resources/new-patient`,
       lastModified: new Date(),
@@ -210,5 +210,13 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     },
   ];
 
-  return [...main, ...servicePages, ...orthoticsPages, ...blogPosts, ...conditionsPosts, ...caseStudiesPosts, ...guidePosts] as MetadataRoute.Sitemap;
+  return [
+    ...main,
+    ...servicePages,
+    ...orthoticsPages,
+    ...blogPosts,
+    ...conditionsPosts,
+    ...caseStudiesPosts,
+    ...guidePosts,
+  ] as MetadataRoute.Sitemap;
 }
