@@ -73,23 +73,23 @@ export default function NavigationMenuSub({ navigation, settings }: NavigationSu
       <div className={'mx-auto flex w-full max-w-[1792px] justify-center px-0 md:px-5'}>
         <div className="relative w-full border border-gray-200 border-opacity-40 bg-white px-3 py-2 sm:px-6 sm:py-4 md:rounded-lg">
           <div className="flex w-full items-center justify-between">
-            <div className="flex grow-0 lg:hidden">
+            <div className="flex grow-0 xl:hidden">
               <div className="relative z-40">
                 <Link href="/">
                   <span className="sr-only">{settings.site_name}</span>
                   <PrismicImage
                     field={settings.logo}
-                    className={cn('hidden w-full origin-left sm:inline lg:max-w-[200px] xl:max-w-[250px]')}
+                    className={cn('hidden w-full origin-left lg:inline lg:max-w-[250px] xl:max-w-[250px]')}
                   />
                   <PrismicImage
                     field={settings.logo_alt}
-                    className={cn('inline !max-h-[40px] w-full origin-left sm:hidden')}
+                    className={cn('inline !max-h-[40px] w-full origin-left lg:hidden')}
                   />
                 </Link>
               </div>
             </div>
 
-            <div className="flex shrink justify-end lg:hidden">
+            <div className="flex shrink justify-end xl:hidden">
               <div className="flex items-center gap-x-1">
                 <MakeBookingDialog />
                 <NavigationMobileMenu
@@ -100,7 +100,7 @@ export default function NavigationMenuSub({ navigation, settings }: NavigationSu
               </div>
             </div>
 
-            <div className={'hidden w-full lg:flex'}>
+            <div className={'hidden w-full xl:flex'}>
               <NavigationMenu>
                 <div className="flex flex-1">
                   <Link href="/" className={'w-full'}>
