@@ -74,15 +74,15 @@ export default function NavigationMenuSub({ navigation, settings }: NavigationSu
         <div className="relative w-full border border-gray-200 border-opacity-40 bg-white px-3 py-2 sm:px-6 sm:py-4 md:rounded-lg">
           <div className="flex w-full items-center justify-between">
             <div className="flex grow justify-self-start xl:hidden xl:grow-0">
-              <Link href="/" className={'lg:w-full'}>
+              <Link href="/" className={'md:w-full'}>
                 <span className="sr-only">{settings.site_name}</span>
                 <PrismicImage
                   field={settings.logo}
-                  className={cn('hidden w-full origin-left lg:inline lg:max-w-[250px] xl:max-w-[250px]')}
+                  className={cn('hidden w-full max-w-[230px] origin-left md:inline xl:max-w-[250px]')}
                 />
                 <PrismicImage
                   field={settings.logo_alt}
-                  className={cn('inline !max-h-[40px] w-full origin-left lg:hidden')}
+                  className={cn('inline !max-h-[40px] w-full origin-left md:hidden')}
                 />
               </Link>
             </div>
