@@ -73,20 +73,18 @@ export default function NavigationMenuSub({ navigation, settings }: NavigationSu
       <div className={'mx-auto flex w-full max-w-[1792px] justify-center px-0 md:px-5'}>
         <div className="relative w-full border border-gray-200 border-opacity-40 bg-white px-3 py-2 sm:px-6 sm:py-4 md:rounded-lg">
           <div className="flex w-full items-center justify-between">
-            <div className="flex grow-0 xl:hidden">
-              <div className="relative z-40">
-                <Link href="/">
-                  <span className="sr-only">{settings.site_name}</span>
-                  <PrismicImage
-                    field={settings.logo}
-                    className={cn('hidden w-full origin-left lg:inline lg:max-w-[250px] xl:max-w-[250px]')}
-                  />
-                  <PrismicImage
-                    field={settings.logo_alt}
-                    className={cn('inline !max-h-[40px] w-full origin-left lg:hidden')}
-                  />
-                </Link>
-              </div>
+            <div className="flex grow justify-self-start xl:hidden xl:grow-0">
+              <Link href="/" className={'lg:w-full'}>
+                <span className="sr-only">{settings.site_name}</span>
+                <PrismicImage
+                  field={settings.logo}
+                  className={cn('hidden w-full origin-left lg:inline lg:max-w-[250px] xl:max-w-[250px]')}
+                />
+                <PrismicImage
+                  field={settings.logo_alt}
+                  className={cn('inline !max-h-[40px] w-full origin-left lg:hidden')}
+                />
+              </Link>
             </div>
 
             <div className="flex shrink justify-end xl:hidden">
