@@ -3070,28 +3070,6 @@ interface TreatmentsDocumentData {
   number_of_featured: prismic.NumberField;
 
   /**
-   * All Treatment header field in *Treatments*
-   *
-   * - **Field Type**: Text
-   * - **Placeholder**: *None*
-   * - **API ID Path**: treatments.all_treatment_header
-   * - **Tab**: Main
-   * - **Documentation**: https://prismic.io/docs/fields/text
-   */
-  all_treatment_header: prismic.KeyTextField;
-
-  /**
-   * All Treatment body field in *Treatments*
-   *
-   * - **Field Type**: Text
-   * - **Placeholder**: *None*
-   * - **API ID Path**: treatments.all_treatment_body
-   * - **Tab**: Main
-   * - **Documentation**: https://prismic.io/docs/fields/text
-   */
-  all_treatment_body: prismic.KeyTextField;
-
-  /**
    * Slice Zone field in *Treatments*
    *
    * - **Field Type**: Slice Zone
