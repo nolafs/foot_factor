@@ -1,7 +1,7 @@
 {
   "format": "page",
-  "id": "services",
-  "label": "Services",
+  "id": "treatment",
+  "label": "Treatment",
   "repeatable": true,
   "status": true,
   "json": {
@@ -16,8 +16,7 @@
         "type": "Text",
         "config": {
           "label": "Heading",
-          "placeholder": "",
-          "useAsTitle": true
+          "placeholder": ""
         }
       },
       "lead": {
@@ -27,12 +26,36 @@
           "placeholder": ""
         }
       },
-      "wave": {
-        "type": "Select",
+      "description": {
+        "type": "Text",
         "config": {
-          "label": "Wave",
-          "placeholder": "",
-          "options": ["default", "1", "2", "3", "4", "5", "6", "7", "8"]
+          "label": "Description",
+          "placeholder": ""
+        }
+      },
+      "service": {
+        "type": "Link",
+        "config": {
+          "label": "Service",
+          "select": "document",
+          "repeat": false,
+          "customtypes": [
+            {
+              "id": "services",
+              "fields": [
+                "heading",
+                {
+                  "id": "category",
+                  "customtypes": [
+                    {
+                      "id": "post_category",
+                      "fields": ["name"]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
         }
       },
       "category": {
@@ -49,10 +72,35 @@
           ]
         }
       },
-      "description": {
-        "type": "Text",
+      "wave": {
+        "type": "Select",
         "config": {
-          "label": "Description",
+          "label": "Wave",
+          "placeholder": "",
+          "options": ["default", "1", "2", "3", "4", "5", "6", "7", "8"]
+        }
+      },
+      "feature_image": {
+        "type": "Image",
+        "config": {
+          "label": "Feature Image",
+          "constraint": {},
+          "thumbnails": []
+        }
+      },
+      "featured": {
+        "type": "Boolean",
+        "config": {
+          "label": "Featured",
+          "placeholder_false": "false",
+          "placeholder_true": "true",
+          "default_value": false
+        }
+      },
+      "weight": {
+        "type": "Number",
+        "config": {
+          "label": "Weight",
           "placeholder": ""
         }
       },
@@ -61,34 +109,43 @@
         "fieldset": "Slice Zone",
         "config": {
           "choices": {
-            "sole_deconstruct": {
-              "type": "SharedSlice"
-            },
-            "reviews": {
-              "type": "SharedSlice"
-            },
-            "case_studies": {
-              "type": "SharedSlice"
-            },
-            "icon_nav_list": {
-              "type": "SharedSlice"
-            },
-            "media_section": {
-              "type": "SharedSlice"
-            },
             "list": {
               "type": "SharedSlice"
             },
-            "call_to_action": {
+            "section": {
               "type": "SharedSlice"
             },
             "vertical_steps_with_images": {
               "type": "SharedSlice"
             },
+            "media_section": {
+              "type": "SharedSlice"
+            },
+            "sole_deconstruct": {
+              "type": "SharedSlice"
+            },
+            "testimonial": {
+              "type": "SharedSlice"
+            },
+            "timeline": {
+              "type": "SharedSlice"
+            },
+            "testimonials": {
+              "type": "SharedSlice"
+            },
+            "reviews": {
+              "type": "SharedSlice"
+            },
+            "icon_nav_list": {
+              "type": "SharedSlice"
+            },
             "faqs": {
               "type": "SharedSlice"
             },
-            "section": {
+            "case_studies": {
+              "type": "SharedSlice"
+            },
+            "call_to_action": {
               "type": "SharedSlice"
             }
           }
@@ -122,21 +179,7 @@
         "type": "Image"
       }
     },
-    "Pricing Table": {
-      "price_heading": {
-        "type": "Text",
-        "config": {
-          "label": "Heading",
-          "placeholder": ""
-        }
-      },
-      "price_lead": {
-        "type": "Text",
-        "config": {
-          "label": "Lead",
-          "placeholder": ""
-        }
-      },
+    "Pricing": {
       "price": {
         "type": "Number",
         "config": {
@@ -144,13 +187,13 @@
           "placeholder": ""
         }
       },
-      "price_features": {
+      "features": {
         "type": "StructuredText",
         "config": {
           "label": "Features",
           "placeholder": "",
           "allowTargetBlank": true,
-          "multi": "paragraph,strong,list-item,o-list-item"
+          "multi": "list-item,paragraph,strong"
         }
       },
       "has_booking": {
@@ -162,15 +205,13 @@
           "default_value": false
         }
       },
-      "telephone": {
-        "type": "Link",
+      "has_telephone": {
+        "type": "Boolean",
         "config": {
-          "label": "Telephone",
-          "placeholder": "",
-          "select": null,
-          "allowTargetBlank": true,
-          "allowText": true,
-          "repeat": false
+          "label": "Has Telephone",
+          "placeholder_false": "false",
+          "placeholder_true": "true",
+          "default_value": false
         }
       }
     }
