@@ -15,6 +15,7 @@ import Link from 'next/link';
 import { PrismicNextImage } from '@prismicio/next';
 import { buttonVariants } from '@/components/ui/button';
 import BentoWrapper from '@/components/features/bento/bento-wrapper';
+import { Heading, Lead } from '@/components/ui/text';
 
 type Params = { uid: string };
 
@@ -57,7 +58,7 @@ export default async function Page() {
   const page = await client.getSingle('treatments').catch(() => notFound());
   const treatments = await client
     .getAllByType('treatment', {
-      orderings: { field: 'my.treatment.weight', direction: 'asc' },
+      orderings: { field: 'my.treatment.heading', direction: 'asc' },
     })
     .catch(() => notFound());
 
@@ -168,6 +169,15 @@ export default async function Page() {
       </Container>
 
       <Container as={'section'}>
+        <Container className={'mb-20 pt-16 text-center md:pt-24 lg:pt-28'}>
+          <Heading as="h2" size={'xl'}>
+            {page.data.all_treatment_header}
+          </Heading>
+          <Lead size={'md'} className="mx-auto mt-5 max-w-3xl sm:mt-6 md:mt-8 lg:mt-10">
+            {page.data.all_treatment_body}
+          </Lead>
+        </Container>
+
         <div className={'mb-20 grid grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-4'}>
           {treatments?.map(treatment => (
             <Link

@@ -27,6 +27,20 @@
           "placeholder": ""
         }
       },
+      "all_treatment_header": {
+        "type": "Text",
+        "config": {
+          "label": "All Treatment header",
+          "placeholder": ""
+        }
+      },
+      "all_treatment_body": {
+        "type": "Text",
+        "config": {
+          "label": "All Treatment body",
+          "placeholder": ""
+        }
+      },
       "slices": {
         "type": "Slices",
         "fieldset": "Slice Zone",
