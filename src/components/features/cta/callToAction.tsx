@@ -26,7 +26,7 @@ export function CallToAction({
           {typeof heading === 'string' ? <h2>{heading}</h2> : <PrismicRichText field={heading} />}
         </Heading>
 
-        <Body>
+        <Body className={''}>
           <PrismicRichText field={body} />
         </Body>
         {links && (
