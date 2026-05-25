@@ -1,3 +1,10 @@
+# [1.10.0](https://github.com/nolafs/foot_factor/compare/v1.9.0...v1.10.0) (2026-05-25)
+
+
+### Features
+
+* treatment page ([2939320](https://github.com/nolafs/foot_factor/commit/2939320361fea1d2c9f07e97c4bfa73b50b699bc))
+
 # [1.9.0](https://github.com/nolafs/foot_factor/compare/v1.8.0...v1.9.0) (2026-05-22)
 
 
