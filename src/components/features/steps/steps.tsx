@@ -286,7 +286,7 @@ const Step = ({ title, description, step_label, image, stepNum, onStepActive }: 
         <sub className={'mb-3 text-2xl font-semibold text-primary-500'}>
           <span>{step_label}</span> <span>{(stepNum ?? stepNum < 10) ? '0' + stepNum : stepNum}</span>
         </sub>
-        <SectionContent heading={title} body={description} className={'w-full'} />
+        <SectionContent heading={title} body={description} className={'w-full'} color={'Dark'} />
       </div>
       <div className="image flex items-center justify-center">
         {image && (

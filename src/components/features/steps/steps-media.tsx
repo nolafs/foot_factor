@@ -133,7 +133,7 @@ const StepMedia = ({ data, index, totalItems }: StepMediaProps) => {
   const videoRef = React.useRef<ReactPlayer | null>(null);
 
   useGSAP(
-    ({ context }) => {
+    () => {
       if (!cardRef.current) return;
 
       const card = cardRef.current;
@@ -142,7 +142,6 @@ const StepMedia = ({ data, index, totalItems }: StepMediaProps) => {
 
       const safePlay = () => {
         const player = videoRef.current?.getInternalPlayer?.();
-
         if (player && typeof (player as any).play === 'function') {
           (player as any).play();
         }
@@ -150,7 +149,6 @@ const StepMedia = ({ data, index, totalItems }: StepMediaProps) => {
 
       const safePause = () => {
         const player = videoRef.current?.getInternalPlayer?.();
-
         if (player && typeof (player as any).pause === 'function') {
           (player as any).pause();
         }
@@ -161,7 +159,6 @@ const StepMedia = ({ data, index, totalItems }: StepMediaProps) => {
           trigger: card,
           start: 'top bottom',
           end: 'bottom+=100% top',
-          markers: false,
           onEnter: safePlay,
           onLeave: safePause,
           onEnterBack: safePlay,
@@ -169,73 +166,65 @@ const StepMedia = ({ data, index, totalItems }: StepMediaProps) => {
         });
       }
 
-      if (index === 0) {
-        ScrollTrigger.create({
-          trigger: card,
-          start: 'top top',
-          end: `+=${200 * totalItems}%`,
-          pin: true,
-          pinSpacing: false,
-          anticipatePin: 1,
-        });
-      } else {
-        ScrollTrigger.create({
-          trigger: card,
-          start: 'top top',
-          end: `+=${100 * totalItems}%`,
-          pin: true,
-          pinSpacing: false,
-          anticipatePin: 1,
-        });
+      // Each card stays pinned long enough for all subsequent cards to scroll in.
+      // Formula: (totalItems - index) × 100vh gives card 0 the most scroll budget,
+      // each later card progressively less. The trailing spacer <li> provides the
+      // last card its own 100vh dwell window.
+      ScrollTrigger.create({
+        trigger: card,
+        start: 'top top',
+        end: `+=${(totalItems - index) * 100}%`,
+        pin: true,
+        pinSpacing: false,
+        anticipatePin: 1,
+        invalidateOnRefresh: true,
+      });
 
+      // Non-first cards: fade image in while the card is still approaching the
+      // viewport (before it pins), so it's fully visible the moment it locks.
+      if (index > 0 && image) {
         gsap.fromTo(
           image,
           { opacity: 0 },
           {
             opacity: 1,
-            duration: 2,
-            ease: 'power2.out',
+            ease: 'power1.out',
             scrollTrigger: {
               trigger: card,
-              start: 'top top',
-              end: `+=100%`,
-              scrub: 0.3,
+              start: 'top bottom',
+              end: 'top top',
+              scrub: 1,
               invalidateOnRefresh: true,
             },
           },
         );
       }
 
-      gsap
-        .timeline({
-          scrollTrigger: {
-            trigger: content,
-            start: 'top top',
-            end: '+=100%',
-            scrub: 0.5,
-            pin: true,
-            pinSpacing: false,
-            invalidateOnRefresh: true,
-          },
-        })
-        .fromTo(
-          content,
-          { opacity: 0 },
-          {
-            opacity: 1,
-            y: 0,
-            duration: 0.5,
-            ease: 'power2.out',
-          },
-        )
-        .to(content, {
-          opacity: 0,
-          y: '-100%',
-          duration: 1,
-          ease: 'power2.in',
-        });
+      // Content animation: fade in → dwell → fade out, all within the card's
+      // own 100vh scroll window. No separate pin needed — the card is already
+      // pinned so the content rides with it.
+      if (content) {
+        gsap
+          .timeline({
+            scrollTrigger: {
+              trigger: card,
+              start: 'top top',
+              end: '+=100%',
+              scrub: 1.5,
+              invalidateOnRefresh: true,
+            },
+          })
+          .fromTo(
+            content,
+            { opacity: 0, y: 40 },
+            { opacity: 1, y: 0, duration: 0.25, ease: 'power2.out' },
+          )
+          // DWELL — content holds at full opacity
+          .to(content, { opacity: 1, y: 0, duration: 0.5 })
+          .to(content, { opacity: 0, y: -30, duration: 0.25, ease: 'power2.in' });
+      }
     },
-    { scope: cardRef, dependencies: [index, totalItems, videoRef] },
+    { scope: cardRef, dependencies: [index, totalItems] },
   );
 
   useEffect(() => {
