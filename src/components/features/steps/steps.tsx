@@ -49,7 +49,7 @@ export const Steps = ({ data, sectionPadding }: StepsProps) => {
         const pinTrigger = ScrollTrigger.create({
           trigger: '#progress',
           start: 'center center',
-          end: 'bottom bottom+=100vh',
+          end: 'bottom bottom',
           endTrigger: contentRef.current,
           scrub: 0.3,
           pin: true,
