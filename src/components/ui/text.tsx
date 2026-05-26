@@ -93,13 +93,17 @@ export function Body({ className, color, ...props }: React.ComponentPropsWithout
         'prose prose-sm max-w-none !leading-tight md:prose-base lg:prose-lg md:!leading-normal',
         'prose-headings:font-heading prose-a:text-accent prose-a:no-underline hover:prose-a:underline',
         color !== 'Primary' &&
-          'text-slate-300 prose-headings:mt-0 prose-headings:!text-primary-950 prose-strong:text-primary-950',
+          'text-primary-400 prose-headings:mt-0 prose-headings:!text-primary-950 prose-strong:text-primary-950',
         color === 'Primary' &&
           'text-primary-500 prose-headings:mt-0 prose-headings:!text-white prose-p:!text-primary-300 prose-strong:!text-primary-400 prose-ul:!text-primary-400',
         color === 'Light' &&
           'text-slate-200 prose-headings:mt-0 prose-headings:!text-primary-950 prose-strong:text-primary-950',
         color === 'Dark' &&
           'text-primary-600 prose-headings:mt-0 prose-headings:!text-primary-950 prose-strong:text-primary-950',
+        color === 'Accent' &&
+          'text-primary-800 prose-headings:mt-0 prose-headings:!text-primary-950 prose-strong:text-primary-950',
+        color === 'default' &&
+          'text-primary-800 prose-headings:mt-0 prose-headings:!text-primary-950 prose-strong:text-primary-950',
       )}
       {...props}
     />
