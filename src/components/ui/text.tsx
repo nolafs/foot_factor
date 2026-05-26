@@ -102,6 +102,8 @@ export function Body({ className, color, ...props }: React.ComponentPropsWithout
           'text-primary-600 prose-headings:mt-0 prose-headings:!text-primary-950 prose-strong:text-primary-950',
         color === 'Accent' &&
           'text-primary-800 prose-headings:mt-0 prose-headings:!text-primary-950 prose-strong:text-primary-950',
+        color === 'default' &&
+          'text-primary-800 prose-headings:mt-0 prose-headings:!text-primary-950 prose-strong:text-primary-950',
       )}
       {...props}
     />
