@@ -1406,6 +1406,55 @@ interface NavigationElementDocumentData {
 export type NavigationElementDocument<Lang extends string = string> = prismic.PrismicDocumentWithUID<Simplify<NavigationElementDocumentData>, "navigation_element", Lang>;
 
 /**
+ * Content for Navigation Element Simple documents
+ */
+interface NavigationElementSimpleDocumentData {
+	/**
+	 * Image field in *Navigation Element Simple*
+	 *
+	 * - **Field Type**: Image
+	 * - **Placeholder**: *None*
+	 * - **API ID Path**: navigation_element_simple.image
+	 * - **Tab**: Main
+	 * - **Documentation**: https://prismic.io/docs/fields/image
+	 */
+	image: prismic.ImageField<never>;
+	
+	/**
+	 * Icon field in *Navigation Element Simple*
+	 *
+	 * - **Field Type**: Image
+	 * - **Placeholder**: *None*
+	 * - **API ID Path**: navigation_element_simple.icon
+	 * - **Tab**: Main
+	 * - **Documentation**: https://prismic.io/docs/fields/image
+	 */
+	icon: prismic.ImageField<never>;
+	
+	/**
+	 * Link field in *Navigation Element Simple*
+	 *
+	 * - **Field Type**: Link
+	 * - **Placeholder**: *None*
+	 * - **API ID Path**: navigation_element_simple.link
+	 * - **Tab**: Main
+	 * - **Documentation**: https://prismic.io/docs/fields/link
+	 */
+	link: prismic.LinkField<string, string, unknown, prismic.FieldState, never>;
+}
+
+/**
+ * Navigation Element Simple document from Prismic
+ *
+ * - **API ID**: `navigation_element_simple`
+ * - **Repeatable**: `true`
+ * - **Documentation**: https://prismic.io/docs/content-modeling
+ *
+ * @typeParam Lang - Language API ID of the document.
+ */
+export type NavigationElementSimpleDocument<Lang extends string = string> = prismic.PrismicDocumentWithUID<Simplify<NavigationElementSimpleDocumentData>, "navigation_element_simple", Lang>;
+
+/**
  * Item in *Navigation Item → Links*
  */
 export interface NavigationItemDocumentDataLinksItem {
@@ -3060,7 +3109,7 @@ interface TreatmentsDocumentData {
  */
 export type TreatmentsDocument<Lang extends string = string> = prismic.PrismicDocumentWithoutUID<Simplify<TreatmentsDocumentData>, "treatments", Lang>;
 
-export type AllDocumentTypes = AuthorDocument | CaseStudiesDocument | ConditionDocument | ConditionCategoryDocument | ConditionsDocument | FaqDocument | FaqCategoryDocument | GuideDocument | HomeDocument | LegalDocument | MakeBookingDocument | NavigationBarDocument | NavigationElementDocument | NavigationItemDocument | NavigationMegaMenuItemDocument | OrthoticsDocument | PageDocument | PostCategoryDocument | PostTagsDocument | PostsDocument | ServicesDocument | SettingsDocument | TestimonialDocument | TreatmentDocument | TreatmentsDocument;
+export type AllDocumentTypes = AuthorDocument | CaseStudiesDocument | ConditionDocument | ConditionCategoryDocument | ConditionsDocument | FaqDocument | FaqCategoryDocument | GuideDocument | HomeDocument | LegalDocument | MakeBookingDocument | NavigationBarDocument | NavigationElementDocument | NavigationElementSimpleDocument | NavigationItemDocument | NavigationMegaMenuItemDocument | OrthoticsDocument | PageDocument | PostCategoryDocument | PostTagsDocument | PostsDocument | ServicesDocument | SettingsDocument | TestimonialDocument | TreatmentDocument | TreatmentsDocument;
 
 /**
  * Primary content in *CallToAction → Default → Primary*
@@ -4769,7 +4818,7 @@ export interface MegamenuSliceMegaContextPrimaryContextItem {
 	 * - **API ID Path**: megamenu.megaContext.primary.context[].item
 	 * - **Documentation**: https://prismic.io/docs/fields/content-relationship
 	 */
-	item: prismic.ContentRelationshipField<"navigation_item">;
+	item: ContentRelationshipFieldWithData<[{"id":"navigation_item","fields":[{"id":"links","fields":[{"id":"service","customtypes":[{"id":"services","fields":["heading","lead","thumb"]}]},{"id":"treatment","customtypes":[{"id":"treatment","fields":["heading","lead","thumb"]}]},{"id":"othotic","customtypes":[{"id":"orthotics","fields":["heading","lead","thumb"]}]}]}]}]>;
 }
 
 /**
@@ -6546,6 +6595,8 @@ declare module "@prismicio/client" {
 			NavigationElementDocument,
 			NavigationElementDocumentData,
 			NavigationElementDocumentDataSubsItem,
+			NavigationElementSimpleDocument,
+			NavigationElementSimpleDocumentData,
 			NavigationItemDocument,
 			NavigationItemDocumentData,
 			NavigationItemDocumentDataLinksItem,

@@ -159,7 +159,55 @@
                   "label": "Item",
                   "select": "document",
                   "customtypes": [
-                    "navigation_item"
+                    {
+                      "id": "navigation_item",
+                      "fields": [
+                        {
+                          "id": "links",
+                          "fields": [
+                            {
+                              "id": "service",
+                              "customtypes": [
+                                {
+                                  "id": "services",
+                                  "fields": [
+                                    "heading",
+                                    "lead",
+                                    "thumb"
+                                  ]
+                                }
+                              ]
+                            },
+                            {
+                              "id": "treatment",
+                              "customtypes": [
+                                {
+                                  "id": "treatment",
+                                  "fields": [
+                                    "heading",
+                                    "lead",
+                                    "thumb"
+                                  ]
+                                }
+                              ]
+                            },
+                            {
+                              "id": "othotic",
+                              "customtypes": [
+                                {
+                                  "id": "orthotics",
+                                  "fields": [
+                                    "heading",
+                                    "lead",
+                                    "thumb"
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    }
                   ],
                   "repeat": false
                 }
