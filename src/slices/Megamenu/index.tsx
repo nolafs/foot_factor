@@ -1,18 +1,23 @@
 import React, { type FC } from 'react';
-import { type Content } from '@prismicio/client';
+import { type Content, isFilled } from '@prismicio/client';
 import { PrismicImage, PrismicRichText, type SliceComponentProps } from '@prismicio/react';
 import cn from 'clsx';
 import { PrismicNextLink } from '@prismicio/next';
-import { type NavigationElementDocumentDataSubsItem } from '@/prismic-types';
+import {
+  type NavigationElementDocumentDataSubsItem,
+  type NavigationItemDocument,
+  type NavigationItemDocumentDataLinksItem,
+} from '@/prismic-types';
 import ButtonSliceVariation from '@/components/ui/button-slice-variation';
 import BlogArticle from '@/slices/Megamenu/component/blog-article';
+import MegaContext, { type ResolvedLink, type ResolvedPanel } from '@/slices/Megamenu/component/mega-context';
 
 /**
  * Props for `Megamenu`.
  */
 export type MegaMenuProps = SliceComponentProps<
   Content.MegamenuSlice,
-  { subs: NavigationElementDocumentDataSubsItem[] } // Typing the context
+  { subs: NavigationElementDocumentDataSubsItem[]; navigationItems: NavigationItemDocument[] }
 >;
 
 const splitArray = (array: NavigationElementDocumentDataSubsItem[], chunkSize: number) => {
@@ -28,8 +33,56 @@ const splitArray = (array: NavigationElementDocumentDataSubsItem[], chunkSize: n
 /**
  * Component for "Megamenu" Slices.
  */
+function resolveLink(link: NavigationItemDocumentDataLinksItem): ResolvedLink | null {
+  if (isFilled.contentRelationship(link.service) && link.service.data) {
+    return {
+      linkField: link.service,
+      heading: link.service.data.heading,
+      lead: link.service.data.lead,
+      thumb: link.service.data.thumb,
+    };
+  }
+  if (isFilled.contentRelationship(link.treatment) && link.treatment.data) {
+    return {
+      linkField: link.treatment,
+      heading: link.treatment.data.heading,
+      lead: link.treatment.data.lead,
+      thumb: link.treatment.data.thumb,
+    };
+  }
+  if (isFilled.contentRelationship(link.othotic) && link.othotic.data) {
+    return {
+      linkField: link.othotic,
+      heading: link.othotic.data.heading,
+      lead: link.othotic.data.lead,
+      thumb: link.othotic.data.thumb,
+    };
+  }
+  if (isFilled.contentRelationship(link.navigation_item) && link.navigation_item.data) {
+    return {
+      linkField: link.navigation_item.data.link as any,
+      heading: link.navigation_item.data.link.text as string,
+      lead: '',
+      thumb: link.navigation_item.data.icon || link.navigation_item.data.image,
+    };
+  }
+  return null;
+}
+
 const Megamenu: FC<MegaMenuProps> = ({ slice, context }) => {
   if (slice.variation === 'megaContext') {
+    const navigationItems = context?.navigationItems ?? [];
+    const panels: ResolvedPanel[] = slice.primary.context.map(contextItem => {
+      const item = contextItem.item;
+      if (!isFilled.contentRelationship(item)) return [];
+      const navItem = navigationItems.find((n: NavigationItemDocument) => n.id === item.id);
+      if (!navItem) return [];
+      return navItem.data.links.map(resolveLink).filter((l): l is ResolvedLink => l !== null);
+    });
+
+    console.log('PANEL', panels);
+
+    return <MegaContext subs={context?.subs ?? []} panels={panels} />;
   }
 
   if (slice.variation === 'megaVideo') {
