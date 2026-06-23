@@ -4664,6 +4664,21 @@ export interface MegamenuSliceImageButtonRowPrimaryLinksItem {
 }
 
 /**
+ * Item in *Megamenu → Mega Context → Primary → Sections*
+ */
+export interface MegamenuSliceMegaContextPrimarySectionsItem {
+	/**
+	 * Item field in *Megamenu → Mega Context → Primary → Sections*
+	 *
+	 * - **Field Type**: Content Relationship
+	 * - **Placeholder**: *None*
+	 * - **API ID Path**: megamenu.megaContext.primary.sections[].item
+	 * - **Documentation**: https://prismic.io/docs/fields/content-relationship
+	 */
+	item: prismic.ContentRelationshipField<"navigation_mega_menu_item">;
+}
+
+/**
  * Primary content in *Megamenu → Default → Primary*
  */
 export interface MegamenuSliceDefaultPrimary {
@@ -4790,9 +4805,33 @@ export interface MegamenuSliceBlogPrimary {
 export type MegamenuSliceBlog = prismic.SharedSliceVariation<"blog", Simplify<MegamenuSliceBlogPrimary>, never>;
 
 /**
+ * Primary content in *Megamenu → Mega Context → Primary*
+ */
+export interface MegamenuSliceMegaContextPrimary {
+	/**
+	 * Sections field in *Megamenu → Mega Context → Primary*
+	 *
+	 * - **Field Type**: Group
+	 * - **Placeholder**: *None*
+	 * - **API ID Path**: megamenu.megaContext.primary.sections[]
+	 * - **Documentation**: https://prismic.io/docs/fields/repeatable-group
+	 */
+	sections: prismic.GroupField<Simplify<MegamenuSliceMegaContextPrimarySectionsItem>>;
+}
+
+/**
+ * Mega Context variation for Megamenu Slice
+ *
+ * - **API ID**: `megaContext`
+ * - **Description**: Default
+ * - **Documentation**: https://prismic.io/docs/slices
+ */
+export type MegamenuSliceMegaContext = prismic.SharedSliceVariation<"megaContext", Simplify<MegamenuSliceMegaContextPrimary>, never>;
+
+/**
  * Slice variation for *Megamenu*
  */
-type MegamenuSliceVariation = MegamenuSliceDefault | MegamenuSliceMegaVideo | MegamenuSliceImageButtonRow | MegamenuSliceBlog
+type MegamenuSliceVariation = MegamenuSliceDefault | MegamenuSliceMegaVideo | MegamenuSliceImageButtonRow | MegamenuSliceBlog | MegamenuSliceMegaContext
 
 /**
  * Megamenu Shared Slice
@@ -6532,11 +6571,14 @@ declare module "@prismicio/client" {
 			MegamenuSliceImageButtonRowPrimaryLinksItem,
 			MegamenuSliceImageButtonRowPrimary,
 			MegamenuSliceBlogPrimary,
+			MegamenuSliceMegaContextPrimarySectionsItem,
+			MegamenuSliceMegaContextPrimary,
 			MegamenuSliceVariation,
 			MegamenuSliceDefault,
 			MegamenuSliceMegaVideo,
 			MegamenuSliceImageButtonRow,
 			MegamenuSliceBlog,
+			MegamenuSliceMegaContext,
 			ReviewsSlice,
 			ReviewsSliceDefaultPrimary,
 			ReviewsSliceVariation,

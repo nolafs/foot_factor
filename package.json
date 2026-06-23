@@ -16,7 +16,7 @@
     "format:write": "prettier --write \"**/*.{ts,tsx,js,jsx,mdx}\" --cache",
     "format:check": "prettier --check \"**/*.{ts,tsx,js,jsx,mdx}\" --cache",
     "release": "dotenv -e .env npx semantic-release",
-    "slicemachine": "start-slicemachine --port 9998"
+    "prismic:pull": "npx prismic pull"
   },
   "dependencies": {
     "@algolia/autocomplete-js": "^1.18.0",
