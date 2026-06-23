@@ -147,19 +147,33 @@
       "docURL": "...",
       "version": "initial",
       "primary": {
-        "sections": {
+        "context": {
           "type": "Group",
           "config": {
-            "label": "Sections",
+            "label": "Context",
             "repeat": true,
             "fields": {
+              "id": {
+                "type": "Text",
+                "config": {
+                  "label": "Id",
+                  "placeholder": ""
+                }
+              },
               "item": {
                 "type": "Link",
                 "config": {
                   "label": "Item",
                   "select": "document",
                   "customtypes": [
-                    "navigation_mega_menu_item"
+                    {
+                      "id": "navigation_item",
+                      "fields": [
+                        "image",
+                        "link",
+                        "description"
+                      ]
+                    }
                   ],
                   "repeat": false
                 }

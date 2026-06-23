@@ -1275,6 +1275,16 @@ export interface NavigationElementDocumentDataSubsItem {
 	default: prismic.BooleanField;
 	
 	/**
+	 * id field in *Navigation Element → Subs*
+	 *
+	 * - **Field Type**: Text
+	 * - **Placeholder**: *None*
+	 * - **API ID Path**: navigation_element.subs[].id
+	 * - **Documentation**: https://prismic.io/docs/fields/text
+	 */
+	id: prismic.KeyTextField;
+	
+	/**
 	 * Icon field in *Navigation Element → Subs*
 	 *
 	 * - **Field Type**: Image
@@ -1394,6 +1404,55 @@ interface NavigationElementDocumentData {
  * @typeParam Lang - Language API ID of the document.
  */
 export type NavigationElementDocument<Lang extends string = string> = prismic.PrismicDocumentWithUID<Simplify<NavigationElementDocumentData>, "navigation_element", Lang>;
+
+/**
+ * Content for Navigation Item documents
+ */
+interface NavigationItemDocumentData {
+	/**
+	 * Image field in *Navigation Item*
+	 *
+	 * - **Field Type**: Image
+	 * - **Placeholder**: *None*
+	 * - **API ID Path**: navigation_item.image
+	 * - **Tab**: Main
+	 * - **Documentation**: https://prismic.io/docs/fields/image
+	 */
+	image: prismic.ImageField<never>;
+	
+	/**
+	 * Link field in *Navigation Item*
+	 *
+	 * - **Field Type**: Link
+	 * - **Placeholder**: *None*
+	 * - **API ID Path**: navigation_item.link
+	 * - **Tab**: Main
+	 * - **Documentation**: https://prismic.io/docs/fields/link
+	 */
+	link: prismic.LinkField<string, string, unknown, prismic.FieldState, never>;
+	
+	/**
+	 * Description field in *Navigation Item*
+	 *
+	 * - **Field Type**: Text
+	 * - **Placeholder**: *None*
+	 * - **API ID Path**: navigation_item.description
+	 * - **Tab**: Main
+	 * - **Documentation**: https://prismic.io/docs/fields/text
+	 */
+	description: prismic.KeyTextField;
+}
+
+/**
+ * Navigation Item document from Prismic
+ *
+ * - **API ID**: `navigation_item`
+ * - **Repeatable**: `true`
+ * - **Documentation**: https://prismic.io/docs/content-modeling
+ *
+ * @typeParam Lang - Language API ID of the document.
+ */
+export type NavigationItemDocument<Lang extends string = string> = prismic.PrismicDocumentWithUID<Simplify<NavigationItemDocumentData>, "navigation_item", Lang>;
 
 /**
  * Item in *Navigation Mega Menu Item → Subs*
@@ -2966,7 +3025,7 @@ interface TreatmentsDocumentData {
  */
 export type TreatmentsDocument<Lang extends string = string> = prismic.PrismicDocumentWithoutUID<Simplify<TreatmentsDocumentData>, "treatments", Lang>;
 
-export type AllDocumentTypes = AuthorDocument | CaseStudiesDocument | ConditionDocument | ConditionCategoryDocument | ConditionsDocument | FaqDocument | FaqCategoryDocument | GuideDocument | HomeDocument | LegalDocument | MakeBookingDocument | NavigationBarDocument | NavigationElementDocument | NavigationMegaMenuItemDocument | OrthoticsDocument | PageDocument | PostCategoryDocument | PostTagsDocument | PostsDocument | ServicesDocument | SettingsDocument | TestimonialDocument | TreatmentDocument | TreatmentsDocument;
+export type AllDocumentTypes = AuthorDocument | CaseStudiesDocument | ConditionDocument | ConditionCategoryDocument | ConditionsDocument | FaqDocument | FaqCategoryDocument | GuideDocument | HomeDocument | LegalDocument | MakeBookingDocument | NavigationBarDocument | NavigationElementDocument | NavigationItemDocument | NavigationMegaMenuItemDocument | OrthoticsDocument | PageDocument | PostCategoryDocument | PostTagsDocument | PostsDocument | ServicesDocument | SettingsDocument | TestimonialDocument | TreatmentDocument | TreatmentsDocument;
 
 /**
  * Primary content in *CallToAction → Default → Primary*
@@ -4664,18 +4723,28 @@ export interface MegamenuSliceImageButtonRowPrimaryLinksItem {
 }
 
 /**
- * Item in *Megamenu → Mega Context → Primary → Sections*
+ * Item in *Megamenu → Mega Context → Primary → Context*
  */
-export interface MegamenuSliceMegaContextPrimarySectionsItem {
+export interface MegamenuSliceMegaContextPrimaryContextItem {
 	/**
-	 * Item field in *Megamenu → Mega Context → Primary → Sections*
+	 * Id field in *Megamenu → Mega Context → Primary → Context*
+	 *
+	 * - **Field Type**: Text
+	 * - **Placeholder**: *None*
+	 * - **API ID Path**: megamenu.megaContext.primary.context[].id
+	 * - **Documentation**: https://prismic.io/docs/fields/text
+	 */
+	id: prismic.KeyTextField;
+	
+	/**
+	 * Item field in *Megamenu → Mega Context → Primary → Context*
 	 *
 	 * - **Field Type**: Content Relationship
 	 * - **Placeholder**: *None*
-	 * - **API ID Path**: megamenu.megaContext.primary.sections[].item
+	 * - **API ID Path**: megamenu.megaContext.primary.context[].item
 	 * - **Documentation**: https://prismic.io/docs/fields/content-relationship
 	 */
-	item: prismic.ContentRelationshipField<"navigation_mega_menu_item">;
+	item: ContentRelationshipFieldWithData<[{"id":"navigation_item","fields":["image","link","description"]}]>;
 }
 
 /**
@@ -4809,14 +4878,14 @@ export type MegamenuSliceBlog = prismic.SharedSliceVariation<"blog", Simplify<Me
  */
 export interface MegamenuSliceMegaContextPrimary {
 	/**
-	 * Sections field in *Megamenu → Mega Context → Primary*
+	 * Context field in *Megamenu → Mega Context → Primary*
 	 *
 	 * - **Field Type**: Group
 	 * - **Placeholder**: *None*
-	 * - **API ID Path**: megamenu.megaContext.primary.sections[]
+	 * - **API ID Path**: megamenu.megaContext.primary.context[]
 	 * - **Documentation**: https://prismic.io/docs/fields/repeatable-group
 	 */
-	sections: prismic.GroupField<Simplify<MegamenuSliceMegaContextPrimarySectionsItem>>;
+	context: prismic.GroupField<Simplify<MegamenuSliceMegaContextPrimaryContextItem>>;
 }
 
 /**
@@ -6452,6 +6521,8 @@ declare module "@prismicio/client" {
 			NavigationElementDocument,
 			NavigationElementDocumentData,
 			NavigationElementDocumentDataSubsItem,
+			NavigationItemDocument,
+			NavigationItemDocumentData,
 			NavigationMegaMenuItemDocument,
 			NavigationMegaMenuItemDocumentData,
 			NavigationMegaMenuItemDocumentDataSubsItem,
@@ -6571,7 +6642,7 @@ declare module "@prismicio/client" {
 			MegamenuSliceImageButtonRowPrimaryLinksItem,
 			MegamenuSliceImageButtonRowPrimary,
 			MegamenuSliceBlogPrimary,
-			MegamenuSliceMegaContextPrimarySectionsItem,
+			MegamenuSliceMegaContextPrimaryContextItem,
 			MegamenuSliceMegaContextPrimary,
 			MegamenuSliceVariation,
 			MegamenuSliceDefault,

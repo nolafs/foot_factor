@@ -54,6 +54,13 @@
                 "placeholder_false": "Off"
               }
             },
+            "id": {
+              "type": "Text",
+              "config": {
+                "label": "id",
+                "placeholder": ""
+              }
+            },
             "icon": {
               "type": "Image",
               "config": {
