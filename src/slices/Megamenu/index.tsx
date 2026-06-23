@@ -1,18 +1,23 @@
 import React, { type FC } from 'react';
-import { type Content } from '@prismicio/client';
+import { type Content, isFilled } from '@prismicio/client';
 import { PrismicImage, PrismicRichText, type SliceComponentProps } from '@prismicio/react';
 import cn from 'clsx';
 import { PrismicNextLink } from '@prismicio/next';
-import { type NavigationElementDocumentDataSubsItem } from '@/prismic-types';
+import {
+  type NavigationElementDocumentDataSubsItem,
+  type NavigationItemDocument,
+  type NavigationItemDocumentDataLinksItem,
+} from '@/prismic-types';
 import ButtonSliceVariation from '@/components/ui/button-slice-variation';
 import BlogArticle from '@/slices/Megamenu/component/blog-article';
+import MegaContext, { type ResolvedLink, type ResolvedPanel } from '@/slices/Megamenu/component/mega-context';
 
 /**
  * Props for `Megamenu`.
  */
 export type MegaMenuProps = SliceComponentProps<
   Content.MegamenuSlice,
-  { subs: NavigationElementDocumentDataSubsItem[] } // Typing the context
+  { subs: NavigationElementDocumentDataSubsItem[]; navigationItems: NavigationItemDocument[] }
 >;
 
 const splitArray = (array: NavigationElementDocumentDataSubsItem[], chunkSize: number) => {
@@ -28,12 +33,61 @@ const splitArray = (array: NavigationElementDocumentDataSubsItem[], chunkSize: n
 /**
  * Component for "Megamenu" Slices.
  */
+function resolveLink(link: NavigationItemDocumentDataLinksItem): ResolvedLink | null {
+  if (isFilled.contentRelationship(link.service) && link.service.data) {
+    return {
+      linkField: link.service,
+      heading: link.service.data.heading,
+      lead: link.service.data.lead,
+      thumb: link.service.data.thumb,
+    };
+  }
+  if (isFilled.contentRelationship(link.treatment) && link.treatment.data) {
+    return {
+      linkField: link.treatment,
+      heading: link.treatment.data.heading,
+      lead: link.treatment.data.lead,
+      thumb: link.treatment.data.thumb,
+    };
+  }
+  if (isFilled.contentRelationship(link.othotic) && link.othotic.data) {
+    return {
+      linkField: link.othotic,
+      heading: link.othotic.data.heading,
+      lead: link.othotic.data.lead,
+      thumb: link.othotic.data.thumb,
+    };
+  }
+  if (isFilled.contentRelationship(link.navigation_item) && link.navigation_item.data) {
+    return {
+      linkField: link.navigation_item.data.link as any,
+      heading: link.navigation_item.data.link.text as string,
+      lead: '',
+      thumb: link.navigation_item.data.icon || link.navigation_item.data.image,
+    };
+  }
+  return null;
+}
+
 const Megamenu: FC<MegaMenuProps> = ({ slice, context }) => {
-  // Access the context here.
+  if (slice.variation === 'megaContext') {
+    const navigationItems = context?.navigationItems ?? [];
+    const panels: ResolvedPanel[] = slice.primary.context.map(contextItem => {
+      const item = contextItem.item;
+      if (!isFilled.contentRelationship(item)) return [];
+      const navItem = navigationItems.find((n: NavigationItemDocument) => n.id === item.id);
+      if (!navItem) return [];
+      return navItem.data.links.map(resolveLink).filter((l): l is ResolvedLink => l !== null);
+    });
+
+    console.log('PANEL', panels);
+
+    return <MegaContext subs={context?.subs ?? []} panels={panels} />;
+  }
 
   if (slice.variation === 'megaVideo') {
     return (
-      <div className={cn('relative shrink')}>
+      <div className={cn('relative shrink')} data-slice-type={slice.slice_type} data-slice-variation={slice.variation}>
         <div className={'flex flex-col space-y-3'}>
           <h2 className={'font-bold'}>{slice.primary.header}</h2>
           <div>
@@ -61,7 +115,10 @@ const Megamenu: FC<MegaMenuProps> = ({ slice, context }) => {
 
   if (slice.variation === 'blog') {
     return (
-      <div className={'hidden h-full w-full 2xl:block'}>
+      <div
+        className={'hidden h-full w-full 2xl:block'}
+        data-slice-type={slice.slice_type}
+        data-slice-variation={slice.variation}>
         <h2 className="text-3xl font-medium tracking-tight">Featured Article</h2>
         <BlogArticle size={2} />
       </div>
@@ -70,7 +127,7 @@ const Megamenu: FC<MegaMenuProps> = ({ slice, context }) => {
 
   if (slice.variation === 'imageButtonRow') {
     return (
-      <div>
+      <div data-slice-type={slice.slice_type} data-slice-variation={slice.variation}>
         <div className={'flex h-full w-full flex-1 flex-col justify-items-stretch'}>
           <div className={cn('grid h-full auto-cols-fr grid-flow-col gap-x-2')}>
             {slice.primary.links.map((item, idx) => (
@@ -112,45 +169,51 @@ const Megamenu: FC<MegaMenuProps> = ({ slice, context }) => {
     );
   }
 
-  const numberOfColumns = slice.primary.columns ?? 1;
-  const chunkedArray = splitArray(context?.subs || [], numberOfColumns);
-  const largestChunkSize = Math.max(...chunkedArray.map(chunk => chunk.length));
+  if (slice.variation === 'default') {
+    const numberOfColumns = slice.primary.columns ?? 1;
+    const chunkedArray = splitArray(context?.subs || [], numberOfColumns);
+    const largestChunkSize = Math.max(...chunkedArray.map(chunk => chunk.length));
 
-  return context?.subs && context?.subs.length > 0
-    ? chunkedArray.map((item, idx) => (
-        <div key={'nav-content-sub' + idx} className={cn('flex w-full min-w-[460px] xl:max-w-[512px]')}>
+    return context?.subs && context?.subs.length > 0
+      ? chunkedArray.map((item, idx) => (
           <div
-            className={cn(
-              'flex h-full w-full flex-col gap-y-2',
-              largestChunkSize === item.length ? 'justify-start' : 'justify-start',
-            )}>
-            {item.map((item, idx) => (
-              <div
-                key={`main-nav-item-${idx}`}
-                className="item-center group relative flex justify-center gap-x-2 rounded-lg p-2 transition-all duration-500 ease-in-out hover:bg-primary lg:gap-x-3 lg:p-4 2xl:gap-x-5 2xl:p-5">
-                <div className={'flex h-full w-2/12 items-center justify-center'}>
-                  <PrismicImage
-                    field={item.icon}
-                    className="size-10 invert-0 transition-all duration-300 ease-in-out group-hover:invert"
-                  />
+            key={'nav-content-sub' + idx}
+            data-slice-type={slice.slice_type}
+            data-slice-variation={slice.variation}
+            className={cn('flex w-full min-w-[460px] xl:max-w-[512px]')}>
+            <div
+              className={cn(
+                'flex h-full w-full flex-col gap-y-2',
+                largestChunkSize === item.length ? 'justify-start' : 'justify-start',
+              )}>
+              {item.map((item, idx) => (
+                <div
+                  key={`main-nav-item-${idx}`}
+                  className="item-center group relative flex justify-center gap-x-2 rounded-lg p-2 transition-all duration-500 ease-in-out hover:bg-primary lg:gap-x-3 lg:p-4 2xl:gap-x-5 2xl:p-5">
+                  <div className={'flex h-full w-2/12 items-center justify-center'}>
+                    <PrismicImage
+                      field={item.icon}
+                      className="size-10 invert-0 transition-all duration-300 ease-in-out group-hover:invert"
+                    />
+                  </div>
+                  <PrismicNextLink field={item.link} className={'flex w-10/12 flex-col space-y-1'}>
+                    <div
+                      className={
+                        'font-medium leading-9 text-primary transition-all group-hover:text-accent lg:text-xl xl:text-2xl'
+                      }>
+                      {item.label}
+                    </div>
+                    <div className={'text-sm/6 text-secondary transition-all group-hover:text-white'}>
+                      {item.subtitle}
+                    </div>
+                  </PrismicNextLink>
                 </div>
-                <PrismicNextLink field={item.link} className={'flex w-10/12 flex-col space-y-1'}>
-                  <div
-                    className={
-                      'font-medium leading-9 text-primary transition-all group-hover:text-accent lg:text-xl xl:text-2xl'
-                    }>
-                    {item.label}
-                  </div>
-                  <div className={'text-sm/6 text-secondary transition-all group-hover:text-white'}>
-                    {item.subtitle}
-                  </div>
-                </PrismicNextLink>
-              </div>
-            ))}
+              ))}
+            </div>
           </div>
-        </div>
-      ))
-    : null;
+        ))
+      : null;
+  }
 };
 
 export default Megamenu;

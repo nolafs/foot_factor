@@ -13,18 +13,19 @@ import { TooltipProvider } from '@/components/ui/tooltip';
 import Script from 'next/script';
 
 export const RootInnerLayout = ({ children }: { children: ReactNode }) => {
-  const [consent, setConsent] = useState<boolean>(() => {
-    // Guard in case this ever gets rendered in a non-browser environment
-    if (typeof document === 'undefined') return false;
+  const [consent, setConsent] = useState<boolean>(false);
+  const [isMounted, setIsMounted] = useState(false);
 
-    return getCookieConsentValue(trackingConfig.cookieBannerCookieName) === 'true';
-  });
+  useEffect(() => {
+    setConsent(getCookieConsentValue(trackingConfig.cookieBannerCookieName) === 'true');
+    setIsMounted(true);
+  }, []);
 
   return (
     <>
       {/* GTM only cares whether consent is granted */}
       <TooltipProvider>{children}</TooltipProvider>
-      {IS_GTM_ENABLED && (
+      {isMounted && IS_GTM_ENABLED && (
         <>
           <GoogleTagManager consented={consent} />
           <motion.div

@@ -1,0 +1,98 @@
+{
+  "id": "navigation_item",
+  "label": "Navigation Item",
+  "repeatable": true,
+  "json": {
+    "Main": {
+      "uid": {
+        "type": "UID",
+        "config": {
+          "label": "UID"
+        }
+      },
+      "links": {
+        "type": "Group",
+        "config": {
+          "label": "Links",
+          "repeat": true,
+          "fields": {
+            "service": {
+              "type": "Link",
+              "config": {
+                "label": "Service",
+                "select": "document",
+                "customtypes": [
+                  {
+                    "id": "services",
+                    "fields": [
+                      "heading",
+                      "lead",
+                      "thumb"
+                    ]
+                  }
+                ],
+                "repeat": false
+              }
+            },
+            "treatment": {
+              "type": "Link",
+              "config": {
+                "label": "Treatment",
+                "select": "document",
+                "customtypes": [
+                  {
+                    "id": "treatment",
+                    "fields": [
+                      "heading",
+                      "lead",
+                      "thumb"
+                    ]
+                  }
+                ],
+                "repeat": false
+              }
+            },
+            "othotic": {
+              "type": "Link",
+              "config": {
+                "label": "Orthotic",
+                "select": "document",
+                "customtypes": [
+                  {
+                    "id": "orthotics",
+                    "fields": [
+                      "heading",
+                      "lead",
+                      "thumb"
+                    ]
+                  }
+                ],
+                "repeat": false
+              }
+            },
+            "navigation_item": {
+              "type": "Link",
+              "config": {
+                "label": "Navigation item",
+                "select": "document",
+                "customtypes": [
+                  {
+                    "id": "navigation_element_simple",
+                    "fields": [
+                      "image",
+                      "icon",
+                      "link"
+                    ]
+                  }
+                ],
+                "repeat": false
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "status": true,
+  "format": "custom"
+}

@@ -60,6 +60,7 @@ export const useTextAnimation = (options: UseTextAnimationOptions = {}) => {
   const debouncedRefresh = useRef<NodeJS.Timeout | undefined>(undefined);
   const debouncedRecreate = useRef<NodeJS.Timeout | undefined>(undefined);
   const originalHTMLRef = useRef<string | null>(null);
+  const rafRef = useRef<number | null>(null);
 
   // Function to completely recreate the animation
   const recreateAnimation = useCallback(() => {
@@ -94,7 +95,12 @@ export const useTextAnimation = (options: UseTextAnimationOptions = {}) => {
     }
 
     // Use requestAnimationFrame instead of setTimeout for better timing
-    requestAnimationFrame(() => {
+    // Store handle so it can be cancelled on unmount before it fires
+    if (rafRef.current !== null) {
+      cancelAnimationFrame(rafRef.current);
+    }
+    rafRef.current = requestAnimationFrame(() => {
+      rafRef.current = null;
       if (!containerRef.current || !triggerRef.current || !isMounted.current) return;
 
       try {
@@ -220,26 +226,31 @@ export const useTextAnimation = (options: UseTextAnimationOptions = {}) => {
   // This prevents "removeChild" errors where React tries to remove nodes that SplitText modified
   useIsomorphicLayoutEffect(() => {
     return () => {
+      // Mark unmounted so any rAF that still fires (race) exits early
+      isMounted.current = false;
+
+      // Cancel any pending rAF first — this is the primary fix for the removeChild crash.
+      // Without this, the rAF can fire after React has started unmounting and create a
+      // SplitText against a detaching DOM, causing React's fiber tree to desync.
+      if (rafRef.current !== null) {
+        cancelAnimationFrame(rafRef.current);
+        rafRef.current = null;
+      }
+
       // Kill timeline first to stop any animations
       if (timelineRef.current) {
         timelineRef.current.kill();
         timelineRef.current = null;
       }
 
-      // Try to revert SplitText, fallback to restoring original HTML
+      // Revert SplitText to restore original DOM nodes before React removes them
       if (splitsRef.current) {
         try {
           splitsRef.current.revert();
         } catch {
-          // If revert fails, restore original HTML directly
-          if (containerRef.current && originalHTMLRef.current !== null) {
-            containerRef.current.innerHTML = originalHTMLRef.current;
-          }
+          // revert() failed — DOM may already be detaching; don't touch innerHTML
         }
         splitsRef.current = null;
-      } else if (containerRef.current && originalHTMLRef.current !== null) {
-        // No split ref but we have original HTML - restore it
-        containerRef.current.innerHTML = originalHTMLRef.current;
       }
     };
   }, []);

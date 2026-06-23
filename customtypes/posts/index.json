@@ -1,9 +1,7 @@
 {
-  "format": "page",
   "id": "posts",
   "label": "Posts",
   "repeatable": true,
-  "status": true,
   "json": {
     "Main": {
       "uid": {
@@ -24,9 +22,9 @@
         "type": "Boolean",
         "config": {
           "label": "Featured",
-          "placeholder_false": "Off",
+          "default_value": true,
           "placeholder_true": "On",
-          "default_value": true
+          "placeholder_false": "Off"
         }
       },
       "author": {
@@ -34,8 +32,10 @@
         "config": {
           "label": "Author",
           "select": "document",
-          "repeat": false,
-          "customtypes": ["author"]
+          "customtypes": [
+            "author"
+          ],
+          "repeat": false
         }
       },
       "category": {
@@ -43,8 +43,10 @@
         "config": {
           "label": "Category",
           "select": "document",
-          "repeat": false,
-          "customtypes": ["post_category"]
+          "customtypes": [
+            "post_category"
+          ],
+          "repeat": false
         }
       },
       "publishing_date": {
@@ -58,8 +60,8 @@
         "type": "Text",
         "config": {
           "label": "Title",
-          "placeholder": "Title",
-          "useAsTitle": true
+          "useAsTitle": true,
+          "placeholder": "Title"
         }
       },
       "excerpt": {
@@ -67,8 +69,8 @@
         "config": {
           "label": "Excerpt",
           "placeholder": "Excerpt",
-          "allowTargetBlank": true,
-          "multi": "paragraph,strong,em"
+          "multi": "paragraph,strong,em",
+          "allowTargetBlank": true
         }
       },
       "content": {
@@ -76,8 +78,8 @@
         "config": {
           "label": "Content",
           "placeholder": "Post body content",
-          "allowTargetBlank": true,
-          "multi": "paragraph,preformatted,heading1,heading2,heading3,heading4,heading5,heading6,strong,em,hyperlink,image,embed,list-item,o-list-item,rtl"
+          "multi": "paragraph,preformatted,heading1,heading2,heading3,heading4,heading5,heading6,strong,em,hyperlink,image,embed,list-item,o-list-item,rtl",
+          "allowTargetBlank": true
         }
       },
       "tags": {
@@ -91,8 +93,10 @@
               "config": {
                 "label": "Tag",
                 "select": "document",
-                "repeat": false,
-                "customtypes": ["post_tags"]
+                "customtypes": [
+                  "post_tags"
+                ],
+                "repeat": false
               }
             }
           }
@@ -146,5 +150,7 @@
         }
       }
     }
-  }
+  },
+  "status": true,
+  "format": "page"
 }

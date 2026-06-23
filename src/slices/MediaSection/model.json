@@ -2,15 +2,14 @@
   "id": "media_section",
   "type": "SharedSlice",
   "name": "MediaSection",
-  "description": "MediaSection",
   "variations": [
     {
       "id": "default",
       "name": "Default",
+      "description": "Default",
+      "imageUrl": "https://images.prismic.io/foot-factor-uk/shared-slices/media_section/default/ef7cee86bb08a40cd8a9eb70a6d1a26a77b0af95.png?auto=compress%2Cformat",
       "docURL": "...",
       "version": "initial",
-      "description": "Default",
-      "imageUrl": "",
       "primary": {
         "image": {
           "type": "Image",
@@ -25,12 +24,12 @@
           "config": {
             "label": "Color",
             "placeholder": "",
+            "default_value": "default",
             "options": [
               "default",
               "Primary",
               "Accent"
-            ],
-            "default_value": "default"
+            ]
           }
         }
       },
@@ -39,10 +38,10 @@
     {
       "id": "fullWidthImage",
       "name": "Full Width Image",
+      "description": "Default",
+      "imageUrl": "https://images.prismic.io/foot-factor-uk/shared-slices/media_section/fullWidthImage/802e567a31a37524bcba621d95e11e133b741396.png?auto=compress%2Cformat",
       "docURL": "...",
       "version": "initial",
-      "description": "Default",
-      "imageUrl": "",
       "primary": {
         "image": {
           "type": "Image",
@@ -58,10 +57,10 @@
     {
       "id": "sectionVideo",
       "name": "Section Video",
+      "description": "Default",
+      "imageUrl": "https://images.prismic.io/foot-factor-uk/shared-slices/media_section/sectionVideo/56bd023509c53e41e2618924d8c22a1f8775f2e8.png?auto=compress%2Cformat",
       "docURL": "...",
       "version": "initial",
-      "description": "Default",
-      "imageUrl": "",
       "primary": {
         "poster": {
           "type": "Image",
@@ -81,5 +80,6 @@
       },
       "items": {}
     }
-  ]
+  ],
+  "description": "MediaSection"
 }

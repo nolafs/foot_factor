@@ -7,6 +7,7 @@ import {
   type NavigationBarDocumentData,
   type NavigationBarDocumentDataNavigationItemsItem,
   type NavigationElementDocument,
+  type NavigationItemDocument,
   type NavigationMegaMenuItemDocument,
   type SettingsDocumentData,
 } from '@/prismic-types';
@@ -39,9 +40,10 @@ const parentVariants = {
 interface NavigationSubProps {
   navigation: NavigationBarDocumentData;
   settings: SettingsDocumentData;
+  navigationItems: NavigationItemDocument[];
 }
 
-export default function NavigationMenuSub({ navigation, settings }: NavigationSubProps) {
+export default function NavigationMenuSub({ navigation, settings, navigationItems }: NavigationSubProps) {
   const { scrollY } = useScroll();
   const [hidden, setHidden] = useState(false);
   const [prevScroll, setPrevScroll] = useState(0);
@@ -153,7 +155,7 @@ export default function NavigationMenuSub({ navigation, settings }: NavigationSu
                               <SliceZone
                                 slices={navigationItem.data.slices}
                                 components={components}
-                                context={{ subs: navigationItem.data.subs }}
+                                context={{ subs: navigationItem.data.subs, navigationItems }}
                               />
                             </div>
                           </NavigationMenuContent>

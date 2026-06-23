@@ -1,9 +1,7 @@
 {
-  "format": "custom",
   "id": "post_tags",
   "label": "Post Tags",
   "repeatable": true,
-  "status": true,
   "json": {
     "Main": {
       "uid": {
@@ -20,5 +18,7 @@
         }
       }
     }
-  }
+  },
+  "status": true,
+  "format": "custom"
 }

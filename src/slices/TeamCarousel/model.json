@@ -1,15 +1,15 @@
 {
-  "type": "SharedSlice",
   "id": "team_carousel",
+  "type": "SharedSlice",
   "name": "TeamCarousel",
   "variations": [
     {
       "id": "default",
       "name": "Default",
       "description": "Displays a carousel with each slide featuring a team member's photo, name, title, description, and an optional play button for media.",
-      "version": "initial",
-      "imageUrl": "",
+      "imageUrl": "https://images.prismic.io/foot-factor-uk/shared-slices/team_carousel/default/893a24054a8ea037e31d8044a4b6541035ac02ee.png?auto=compress%2Cformat",
       "docURL": "...",
+      "version": "initial",
       "primary": {
         "heading": {
           "type": "Text",
@@ -46,8 +46,8 @@
               "bio": {
                 "type": "StructuredText",
                 "config": {
-                  "multi": "paragraph,strong,em,hyperlink",
-                  "label": "Bio"
+                  "label": "Bio",
+                  "multi": "paragraph,strong,em,hyperlink"
                 }
               },
               "name": {

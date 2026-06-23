@@ -1,0 +1,60 @@
+{
+  "repositoryName": "foot-factor-uk",
+  "libraries": [
+    "./src/slices"
+  ],
+  "routes": [
+    {
+      "type": "case_studies",
+      "path": "/case-studies/:uid"
+    },
+    {
+      "type": "condition",
+      "path": "/condition/:uid"
+    },
+    {
+      "type": "conditions",
+      "path": "/conditions"
+    },
+    {
+      "type": "guide",
+      "path": "/guide/:uid"
+    },
+    {
+      "type": "home",
+      "path": "/home"
+    },
+    {
+      "type": "legal",
+      "path": "/legal/:uid"
+    },
+    {
+      "type": "orthotics",
+      "path": "/orthotics/:uid"
+    },
+    {
+      "type": "page",
+      "path": "/:uid"
+    },
+    {
+      "type": "posts",
+      "path": "/posts/:uid"
+    },
+    {
+      "type": "services",
+      "path": "/services/:uid"
+    },
+    {
+      "type": "testimonial",
+      "path": "/testimonial/:uid"
+    },
+    {
+      "type": "treatment",
+      "path": "/treatment/:uid"
+    },
+    {
+      "type": "treatments",
+      "path": "/treatments"
+    }
+  ]
+}

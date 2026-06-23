@@ -2,23 +2,22 @@
   "id": "case_studies",
   "type": "SharedSlice",
   "name": "CaseStudies",
-  "description": "CaseStudies",
   "variations": [
     {
       "id": "default",
       "name": "Default",
+      "description": "Default",
+      "imageUrl": "https://images.prismic.io/foot-factor-uk/shared-slices/case_studies/default/fee1f98292b4c8ec0b770ec215893f47067ff78f.png?auto=compress%2Cformat",
       "docURL": "...",
       "version": "initial",
-      "description": "Default",
-      "imageUrl": "",
       "primary": {
         "heading": {
           "type": "StructuredText",
           "config": {
             "label": "Heading",
             "placeholder": "",
-            "allowTargetBlank": true,
-            "multi": "strong,em"
+            "multi": "strong,em",
+            "allowTargetBlank": true
           }
         },
         "link": {
@@ -45,18 +44,18 @@
     {
       "id": "bento",
       "name": "Bento",
+      "description": "Default",
+      "imageUrl": "https://images.prismic.io/foot-factor-uk/shared-slices/case_studies/bento/3418810b212bc7c9269f90478b2002f22f1b5cdc.png?auto=compress%2Cformat",
       "docURL": "...",
       "version": "initial",
-      "description": "Default",
-      "imageUrl": "",
       "primary": {
         "heading": {
           "type": "StructuredText",
           "config": {
             "label": "Heading",
             "placeholder": "",
-            "allowTargetBlank": true,
-            "multi": "strong,em"
+            "multi": "strong,em",
+            "allowTargetBlank": true
           }
         },
         "link": {
@@ -73,5 +72,6 @@
       },
       "items": {}
     }
-  ]
+  ],
+  "description": "CaseStudies"
 }

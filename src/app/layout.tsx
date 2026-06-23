@@ -103,22 +103,40 @@ export async function generateMetadata({}: Props, parent: ResolvingMetadata): Pr
 
 export default async function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   const client = createClient();
-  const navigation = await client.getSingle('navigation_bar', {
-    fetchLinks: [
-      'navigation_element.label',
-      'navigation_element.link',
-      'navigation_element.subs',
-      'navigation_element.cta',
-      'navigation_element.icon',
-      'navigation_mega_menu_item.subs',
-      'navigation_mega_menu_item.label',
-      'navigation_mega_menu_item.link',
-      'navigation_mega_menu_item.icon',
-      'navigation_mega_menu_item.slices',
-    ],
-  });
-  const settings = await client.getSingle('settings');
-  const makeBooking = await client.getSingle('make_booking');
+  const [navigation, navigationItems, settings, makeBooking] = await Promise.all([
+    client.getSingle('navigation_bar', {
+      fetchLinks: [
+        'navigation_element.label',
+        'navigation_element.link',
+        'navigation_element.subs',
+        'navigation_element.cta',
+        'navigation_element.icon',
+        'navigation_mega_menu_item.subs',
+        'navigation_mega_menu_item.label',
+        'navigation_mega_menu_item.link',
+        'navigation_mega_menu_item.icon',
+        'navigation_mega_menu_item.slices',
+      ],
+    }),
+    client.getAllByType('navigation_item', {
+      fetchLinks: [
+        'services.heading',
+        'services.lead',
+        'services.thumb',
+        'treatment.heading',
+        'treatment.lead',
+        'treatment.thumb',
+        'orthotics.heading',
+        'orthotics.lead',
+        'orthotics.thumb',
+        'navigation_element_simple.image',
+        'navigation_element_simple.icon',
+        'navigation_element_simple.link',
+      ],
+    }),
+    client.getSingle('settings'),
+    client.getSingle('make_booking'),
+  ]);
 
   return (
     <html lang="en" className={`${poppins.variable} ${exo2.variable} ${ptSerif.variable}`}>
@@ -129,7 +147,7 @@ export default async function RootLayout({ children }: Readonly<{ children: Reac
 
           <SearchProvider>
             <BookingProvider initialData={makeBooking.data}>
-              <NavigationMenuSub navigation={navigation.data} settings={settings.data} />
+              <NavigationMenuSub navigation={navigation.data} settings={settings.data} navigationItems={navigationItems} />
 
               {/* Content */}
               {children}

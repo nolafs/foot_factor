@@ -2,23 +2,22 @@
   "id": "call_to_action",
   "type": "SharedSlice",
   "name": "CallToAction",
-  "description": "CallToAction",
   "variations": [
     {
       "id": "default",
       "name": "Default",
+      "description": "Default",
+      "imageUrl": "https://images.prismic.io/foot-factor-uk/shared-slices/call_to_action/default/c59d61af897bd641f7a54c8acc0226575d221d40.png?auto=compress%2Cformat",
       "docURL": "...",
       "version": "initial",
-      "description": "Default",
-      "imageUrl": "",
       "primary": {
         "heading": {
           "type": "StructuredText",
           "config": {
             "label": "Heading",
             "placeholder": "",
-            "allowTargetBlank": true,
-            "multi": "strong,em,heading2,heading3,heading4,heading5,heading6"
+            "multi": "strong,em,heading2,heading3,heading4,heading5,heading6",
+            "allowTargetBlank": true
           }
         },
         "body": {
@@ -26,8 +25,8 @@
           "config": {
             "label": "Body",
             "placeholder": "",
-            "allowTargetBlank": true,
-            "multi": "paragraph,preformatted,heading1,heading2,heading3,heading4,heading5,heading6,strong,em,hyperlink,image,embed,list-item,o-list-item,rtl"
+            "multi": "paragraph,preformatted,heading1,heading2,heading3,heading4,heading5,heading6,strong,em,hyperlink,image,embed,list-item,o-list-item,rtl",
+            "allowTargetBlank": true
           }
         },
         "links": {
@@ -58,9 +57,9 @@
           "type": "Boolean",
           "config": {
             "label": "Has Booking",
-            "placeholder_false": "false",
+            "default_value": false,
             "placeholder_true": "true",
-            "default_value": false
+            "placeholder_false": "false"
           }
         },
         "booking_label": {
@@ -76,10 +75,10 @@
     {
       "id": "embedVideo",
       "name": "Embed Video",
+      "description": "Default",
+      "imageUrl": "https://images.prismic.io/slice-machine/621a5ec4-0387-4bc5-9860-2dd46cbc07cd_default_ss.png?auto=compress,format",
       "docURL": "...",
       "version": "initial",
-      "description": "Default",
-      "imageUrl": "",
       "primary": {
         "heading": {
           "type": "Text",
@@ -93,8 +92,8 @@
           "config": {
             "label": "Body",
             "placeholder": "",
-            "allowTargetBlank": true,
-            "multi": "paragraph,preformatted,heading1,heading2,heading3,heading4,heading5,heading6,strong,em,hyperlink,image,embed,list-item,o-list-item,rtl"
+            "multi": "paragraph,preformatted,heading1,heading2,heading3,heading4,heading5,heading6,strong,em,hyperlink,image,embed,list-item,o-list-item,rtl",
+            "allowTargetBlank": true
           }
         },
         "links": {
@@ -128,18 +127,18 @@
     {
       "id": "ctaTwoColumns",
       "name": "cta-two-columns",
+      "description": "Default",
+      "imageUrl": "https://images.prismic.io/foot-factor-uk/shared-slices/call_to_action/ctaTwoColumns/61edffc41cddc28b29a6e76b464e8d60bceaecfc.png?auto=compress%2Cformat",
       "docURL": "...",
       "version": "initial",
-      "description": "Default",
-      "imageUrl": "",
       "primary": {
         "heading": {
           "type": "StructuredText",
           "config": {
             "label": "Heading",
             "placeholder": "",
-            "allowTargetBlank": true,
-            "multi": "strong,em,heading2,heading3,heading4,heading5,heading6"
+            "multi": "strong,em,heading2,heading3,heading4,heading5,heading6",
+            "allowTargetBlank": true
           }
         },
         "body": {
@@ -147,8 +146,8 @@
           "config": {
             "label": "Body",
             "placeholder": "",
-            "allowTargetBlank": true,
-            "multi": "paragraph,preformatted,heading1,heading2,heading3,heading4,heading5,heading6,strong,em,hyperlink,image,embed,list-item,o-list-item,rtl"
+            "multi": "paragraph,preformatted,heading1,heading2,heading3,heading4,heading5,heading6,strong,em,hyperlink,image,embed,list-item,o-list-item,rtl",
+            "allowTargetBlank": true
           }
         },
         "links": {
@@ -179,9 +178,9 @@
           "type": "Boolean",
           "config": {
             "label": "Has Booking",
-            "placeholder_false": "false",
+            "default_value": false,
             "placeholder_true": "true",
-            "default_value": false
+            "placeholder_false": "false"
           }
         },
         "booking_label": {
@@ -194,5 +193,6 @@
       },
       "items": {}
     }
-  ]
+  ],
+  "description": "CallToAction"
 }

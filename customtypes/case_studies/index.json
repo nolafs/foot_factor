@@ -1,9 +1,7 @@
 {
-  "format": "page",
   "id": "case_studies",
   "label": "Case Studies",
   "repeatable": true,
-  "status": true,
   "json": {
     "Main": {
       "uid": {
@@ -24,9 +22,9 @@
         "type": "Boolean",
         "config": {
           "label": "Featured",
-          "placeholder_false": "false",
+          "default_value": false,
           "placeholder_true": "true",
-          "default_value": false
+          "placeholder_false": "false"
         }
       },
       "publishing_date": {
@@ -41,21 +39,25 @@
         "config": {
           "label": "Author",
           "select": "document",
-          "repeat": false,
           "customtypes": [
             {
               "id": "author",
-              "fields": ["profile_image", "name", "link"]
+              "fields": [
+                "profile_image",
+                "name",
+                "link"
+              ]
             }
-          ]
+          ],
+          "repeat": false
         }
       },
       "client_name": {
         "type": "Text",
         "config": {
           "label": "Client Name",
-          "placeholder": "",
-          "useAsTitle": true
+          "useAsTitle": true,
+          "placeholder": ""
         }
       },
       "client_age": {
@@ -77,13 +79,15 @@
         "config": {
           "label": "Condition",
           "select": "document",
-          "repeat": false,
           "customtypes": [
             {
               "id": "condition",
-              "fields": ["title"]
+              "fields": [
+                "title"
+              ]
             }
-          ]
+          ],
+          "repeat": false
         }
       },
       "category": {
@@ -91,13 +95,15 @@
         "config": {
           "label": "Category",
           "select": "document",
-          "repeat": false,
           "customtypes": [
             {
               "id": "condition_category",
-              "fields": ["name"]
+              "fields": [
+                "name"
+              ]
             }
-          ]
+          ],
+          "repeat": false
         }
       },
       "excerpt": {
@@ -118,13 +124,15 @@
               "config": {
                 "label": "Tag",
                 "select": "document",
-                "repeat": false,
                 "customtypes": [
                   {
                     "id": "post_tags",
-                    "fields": ["name"]
+                    "fields": [
+                      "name"
+                    ]
                   }
-                ]
+                ],
+                "repeat": false
               }
             }
           }
@@ -153,30 +161,32 @@
     },
     "SEO & Metadata": {
       "meta_title": {
+        "type": "Text",
         "config": {
           "label": "Meta Title",
           "placeholder": "A title of the page used for social media and search engines"
-        },
-        "type": "Text"
+        }
       },
       "meta_description": {
+        "type": "Text",
         "config": {
           "label": "Meta Description",
           "placeholder": "A brief summary of the page"
-        },
-        "type": "Text"
+        }
       },
       "meta_image": {
+        "type": "Image",
         "config": {
-          "constraint": {
-            "height": 1260,
-            "width": 2400
-          },
           "label": "Meta Image",
+          "constraint": {
+            "width": 2400,
+            "height": 1260
+          },
           "thumbnails": []
-        },
-        "type": "Image"
+        }
       }
     }
-  }
+  },
+  "status": true,
+  "format": "page"
 }

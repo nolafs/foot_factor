@@ -1,9 +1,7 @@
 {
-  "format": "custom",
   "id": "faq_category",
   "label": "Faq Category",
   "repeatable": true,
-  "status": true,
   "json": {
     "Main": {
       "uid": {
@@ -20,5 +18,7 @@
         }
       }
     }
-  }
+  },
+  "status": true,
+  "format": "custom"
 }

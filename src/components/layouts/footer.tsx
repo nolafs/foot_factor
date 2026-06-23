@@ -72,7 +72,7 @@ export function Footer({ navigation, settings }: FooterProps) {
 
                   if (navigationItem.type === 'navigation_element') {
                     return (
-                      <div key={navigationItem.data.label}>
+                      <div key={navigationItem.id}>
                         {navigationItem.data.subs[0]?.label ? (
                           <>
                             <div className={'mb-10 mt-3'}>
@@ -117,7 +117,7 @@ export function Footer({ navigation, settings }: FooterProps) {
                     }
 
                     return (
-                      <div key={navigationItem.data.label}>
+                      <div key={navigationItem.id}>
                         {navigationItem.data.subs[0]?.label ? (
                           <>
                             <div className={'mb-10 mt-3'}>
