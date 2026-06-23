@@ -69,6 +69,24 @@
                 ],
                 "repeat": false
               }
+            },
+            "navigation_item": {
+              "type": "Link",
+              "config": {
+                "label": "Navigation item",
+                "select": "document",
+                "customtypes": [
+                  {
+                    "id": "navigation_element_simple",
+                    "fields": [
+                      "image",
+                      "icon",
+                      "link"
+                    ]
+                  }
+                ],
+                "repeat": false
+              }
             }
           }
         }

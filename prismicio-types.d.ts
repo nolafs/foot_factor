@@ -1487,6 +1487,16 @@ export interface NavigationItemDocumentDataLinksItem {
 	 * - **Documentation**: https://prismic.io/docs/fields/content-relationship
 	 */
 	othotic: ContentRelationshipFieldWithData<[{"id":"orthotics","fields":["heading","lead","thumb"]}]>;
+	
+	/**
+	 * Navigation item field in *Navigation Item → Links*
+	 *
+	 * - **Field Type**: Content Relationship
+	 * - **Placeholder**: *None*
+	 * - **API ID Path**: navigation_item.links[].navigation_item
+	 * - **Documentation**: https://prismic.io/docs/fields/content-relationship
+	 */
+	navigation_item: ContentRelationshipFieldWithData<[{"id":"navigation_element_simple","fields":["image","icon","link"]}]>;
 }
 
 /**
