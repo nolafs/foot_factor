@@ -1,8 +1,8 @@
 import * as prismic from '@prismicio/client';
 import { algoliasearch } from 'algoliasearch';
-import config from '../../../../slicemachine.config.json';
+import config from '../../../../prismic.config.json';
 import { type PostsDocument } from '@/prismic-types';
-import {asText} from '@prismicio/client';
+import { asText } from '@prismicio/client';
 
 const repositoryName = process.env.NEXT_PUBLIC_PRISMIC_ENVIRONMENT ?? config.repositoryName;
 
@@ -89,7 +89,7 @@ export async function POST() {
         };
       }),
       image: post.data.feature_image, // Post featured image
-      text: post.data?.excerpt?.slice(0, 5000) ?? post.data?.title ?? '' , // Post content transformed to search text
+      text: post.data?.excerpt?.slice(0, 5000) ?? post.data?.title ?? '', // Post content transformed to search text
     }));
 
     // Index records to Algolia
@@ -109,16 +109,16 @@ export async function POST() {
       slug: `/resources/guides/${post.uid}`, // Post URL slug
       featured: post.data.featured,
       author:
-          (post.data.author &&
-              'data' in post.data.author &&
-              (
-                  post.data.author.data as {
-                    name: string;
-                  }
-              ).name) ||
-          'Foot Factor',
+        (post.data.author &&
+          'data' in post.data.author &&
+          (
+            post.data.author.data as {
+              name: string;
+            }
+          ).name) ||
+        'Foot Factor',
       category:
-          post.data.category && 'data' in post.data.category && (post.data.category.data as { name: string }).name,
+        post.data.category && 'data' in post.data.category && (post.data.category.data as { name: string }).name,
       tags: post.data.tags.map(item => {
         const slug = item && 'tag' in item && (item.tag as { uid: string }).uid;
         const name = item && 'tag' in item && (item.tag as { data: { name: string } }).data?.name;
@@ -133,7 +133,7 @@ export async function POST() {
     }));
 
     // Index records to Algolia
-    await algoliaClient.saveObjects({indexName: 'global', objects: guideRecords});
+    await algoliaClient.saveObjects({ indexName: 'global', objects: guideRecords });
 
     // Get all articles from Prismic
     const orthotics = await client.getAllByType('orthotics', {
@@ -149,14 +149,14 @@ export async function POST() {
       featured: true,
       author: 'Foot Factor',
       category:
-          post.data.category && 'data' in post.data.category && (post.data.category.data as { name: string }).name,
+        post.data.category && 'data' in post.data.category && (post.data.category.data as { name: string }).name,
       tags: ['service', post.data?.subheading?.toLowerCase() ?? 'orthotics'],
       image: post.data.image, // Post featured image
       text: post.data?.description?.slice(0, 5000) ?? post.data?.meta_description ?? '', // Post content transformed to search text
     }));
 
     // Index records to Algolia
-    await algoliaClient.saveObjects({indexName: 'global', objects: orthoticRecords});
+    await algoliaClient.saveObjects({ indexName: 'global', objects: orthoticRecords });
 
     // Get all articles from Prismic
     const services = await client.getAllByType('services', {
@@ -166,20 +166,20 @@ export async function POST() {
     // Map articles to Algolia records
     const serviceRecords = services.map(post => ({
       objectID: post.id, // Unique identifier in algolia
-      title: post.data.meta_title ?? post.data.heading , // Post title
+      title: post.data.meta_title ?? post.data.heading, // Post title
       type: 'service', // Post type
       slug: `/services/${post.uid}`, // Post URL slug
       featured: true,
       author: 'Foot Factor',
       category:
-          post.data.category && 'data' in post.data.category && (post.data.category.data as { name: string }).name,
+        post.data.category && 'data' in post.data.category && (post.data.category.data as { name: string }).name,
       tags: 'service',
       image: post.data.meta_image, // Post featured image
       text: post.data?.description?.slice(0, 5000) ?? post.data?.meta_description ?? '', // Post content transformed to search text
     }));
 
     // Index records to Algolia
-    await algoliaClient.saveObjects({indexName: 'global', objects: serviceRecords});
+    await algoliaClient.saveObjects({ indexName: 'global', objects: serviceRecords });
 
     // Get all articles from Prismic
     const faqs = await client.getAllByType('faq', {
@@ -195,21 +195,25 @@ export async function POST() {
       featured: true,
       author: 'Foot Factor',
       category:
-          post.data.category && 'data' in post.data.category && (post.data.category.data as { name: string }).name,
+        post.data.category && 'data' in post.data.category && (post.data.category.data as { name: string }).name,
       tags: 'faq',
-      text: post.data?.body?.slice(0, 5000) ??  '', // Post content transformed to search text
+      text: post.data?.body?.slice(0, 5000) ?? '', // Post content transformed to search text
     }));
 
     // Index records to Algolia
-    await algoliaClient.saveObjects({indexName: 'global', objects: faqRecords});
-
+    await algoliaClient.saveObjects({ indexName: 'global', objects: faqRecords });
 
     // Get all articles from Prismic
     const caseStudies = await client.getAllByType('case_studies', {
-      fetchLinks: ['condition.title', 'condition_category.name', 'condition_category', 'author.name', 'author.profile_image', 'post_tags, post_tags.name'],
+      fetchLinks: [
+        'condition.title',
+        'condition_category.name',
+        'condition_category',
+        'author.name',
+        'author.profile_image',
+        'post_tags, post_tags.name',
+      ],
     });
-
-
 
     // Map articles to Algolia records
     const caseStudiesRecords = caseStudies.map(post => ({
@@ -219,19 +223,24 @@ export async function POST() {
       slug: `resources/case-studies/${post.uid}`, // Post URL slug
       featured: true,
       author:
-          (post.data.author &&
-              'data' in post.data.author &&
-              (
-                  post.data.author.data as {
-                    name: string;
-                  }
-              ).name) ||
-          'Foot Factor',
-      condition: post.data.condition && 'data' in post.data.condition && (post.data.condition.data as {
-        title: string
-      }).title,
+        (post.data.author &&
+          'data' in post.data.author &&
+          (
+            post.data.author.data as {
+              name: string;
+            }
+          ).name) ||
+        'Foot Factor',
+      condition:
+        post.data.condition &&
+        'data' in post.data.condition &&
+        (
+          post.data.condition.data as {
+            title: string;
+          }
+        ).title,
       category:
-          post.data.category && 'data' in post.data.category && (post.data.category.data as { name: string }).name,
+        post.data.category && 'data' in post.data.category && (post.data.category.data as { name: string }).name,
       tags: post.data.tags.map(item => {
         const slug = item && 'tag' in item && (item.tag as { uid: string }).uid;
         const name = item && 'tag' in item && (item.tag as { data: { name: string } }).data?.name;
@@ -241,12 +250,11 @@ export async function POST() {
           name,
         };
       }),
-      text: post.data?.excerpt?.slice(0, 5000) ?? post.data?.meta_description ??   '', // Post content transformed to search text
+      text: post.data?.excerpt?.slice(0, 5000) ?? post.data?.meta_description ?? '', // Post content transformed to search text
     }));
 
     // Index records to Algolia
-    await algoliaClient.saveObjects({indexName: 'global', objects: caseStudiesRecords});
-
+    await algoliaClient.saveObjects({ indexName: 'global', objects: caseStudiesRecords });
 
     // Get all articles from Prismic
     const pages = await client.getAllByType('page', {
@@ -264,12 +272,11 @@ export async function POST() {
       category: 'all',
       tags: 'service',
       image: post.data.meta_image, // Post featured image
-      text:  post.data?.meta_description ?? '', // Post content transformed to search text
+      text: post.data?.meta_description ?? '', // Post content transformed to search text
     }));
 
     // Index records to Algolia
-    await algoliaClient.saveObjects({indexName: 'global', objects: pageRecords});
-
+    await algoliaClient.saveObjects({ indexName: 'global', objects: pageRecords });
 
     // Return success response if the process completes without any issue
     return new Response('Content successfully synchronized with Algolia search', {
