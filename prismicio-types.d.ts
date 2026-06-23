@@ -1417,7 +1417,7 @@ export interface NavigationItemDocumentDataLinksItem {
 	 * - **API ID Path**: navigation_item.links[].service
 	 * - **Documentation**: https://prismic.io/docs/fields/content-relationship
 	 */
-	service: ContentRelationshipFieldWithData<[{"id":"services","fields":["heading","lead"]}]>;
+	service: ContentRelationshipFieldWithData<[{"id":"services","fields":["heading","lead","thumb"]}]>;
 	
 	/**
 	 * Treatment field in *Navigation Item → Links*
@@ -1427,7 +1427,7 @@ export interface NavigationItemDocumentDataLinksItem {
 	 * - **API ID Path**: navigation_item.links[].treatment
 	 * - **Documentation**: https://prismic.io/docs/fields/content-relationship
 	 */
-	treatment: ContentRelationshipFieldWithData<[{"id":"treatment","fields":["heading","lead","feature_image","featured"]}]>;
+	treatment: ContentRelationshipFieldWithData<[{"id":"treatment","fields":["heading","lead","thumb"]}]>;
 	
 	/**
 	 * Orthotic field in *Navigation Item → Links*
@@ -2086,6 +2086,17 @@ interface ServicesDocumentData {
 	lead: prismic.KeyTextField;
 	
 	/**
+	 * Thumb field in *Services*
+	 *
+	 * - **Field Type**: Image
+	 * - **Placeholder**: *None*
+	 * - **API ID Path**: services.thumb
+	 * - **Tab**: Main
+	 * - **Documentation**: https://prismic.io/docs/fields/image
+	 */
+	thumb: prismic.ImageField<never>;
+	
+	/**
 	 * Wave field in *Services*
 	 *
 	 * - **Field Type**: Select
@@ -2235,7 +2246,7 @@ interface ServicesDocumentData {
  *
  * @typeParam Lang - Language API ID of the document.
  */
-export type ServicesDocument<Lang extends string = string> = prismic.PrismicDocumentWithUID<Simplify<ServicesDocumentData>, "services", Lang>;
+export type ServicesDocument<Lang extends string = string> = prismic.PrismicDocumentWithoutUID<Simplify<ServicesDocumentData>, "services", Lang>;
 
 /**
  * Item in *Settings → Secondary Navigation*
@@ -2803,6 +2814,17 @@ interface TreatmentDocumentData {
 	feature_image: prismic.ImageField<never>;
 	
 	/**
+	 * Thumb field in *Treatment*
+	 *
+	 * - **Field Type**: Image
+	 * - **Placeholder**: *None*
+	 * - **API ID Path**: treatment.thumb
+	 * - **Tab**: Main
+	 * - **Documentation**: https://prismic.io/docs/fields/image
+	 */
+	thumb: prismic.ImageField<never>;
+	
+	/**
 	 * Featured field in *Treatment*
 	 *
 	 * - **Field Type**: Boolean
@@ -2921,7 +2943,7 @@ interface TreatmentDocumentData {
  *
  * @typeParam Lang - Language API ID of the document.
  */
-export type TreatmentDocument<Lang extends string = string> = prismic.PrismicDocumentWithUID<Simplify<TreatmentDocumentData>, "treatment", Lang>;
+export type TreatmentDocument<Lang extends string = string> = prismic.PrismicDocumentWithoutUID<Simplify<TreatmentDocumentData>, "treatment", Lang>;
 
 type TreatmentsDocumentDataSlicesSlice = never
 

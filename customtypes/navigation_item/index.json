@@ -26,7 +26,8 @@
                     "id": "services",
                     "fields": [
                       "heading",
-                      "lead"
+                      "lead",
+                      "thumb"
                     ]
                   }
                 ],
@@ -44,8 +45,7 @@
                     "fields": [
                       "heading",
                       "lead",
-                      "feature_image",
-                      "featured"
+                      "thumb"
                     ]
                   }
                 ],
