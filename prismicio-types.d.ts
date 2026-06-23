@@ -3002,7 +3002,7 @@ interface TreatmentDocumentData {
  *
  * @typeParam Lang - Language API ID of the document.
  */
-export type TreatmentDocument<Lang extends string = string> = prismic.PrismicDocumentWithoutUID<Simplify<TreatmentDocumentData>, "treatment", Lang>;
+export type TreatmentDocument<Lang extends string = string> = prismic.PrismicDocumentWithUID<Simplify<TreatmentDocumentData>, "treatment", Lang>;
 
 type TreatmentsDocumentDataSlicesSlice = never
 
