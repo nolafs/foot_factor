@@ -153,13 +153,6 @@
             "label": "Context",
             "repeat": true,
             "fields": {
-              "id": {
-                "type": "Text",
-                "config": {
-                  "label": "Id",
-                  "placeholder": ""
-                }
-              },
               "item": {
                 "type": "Link",
                 "config": {
@@ -172,6 +165,47 @@
                         "image",
                         "link",
                         "description"
+                      ]
+                    }
+                  ],
+                  "repeat": false
+                }
+              },
+              "treatment": {
+                "type": "Link",
+                "config": {
+                  "label": "Treatment",
+                  "select": "document",
+                  "customtypes": [
+                    {
+                      "id": "treatment",
+                      "fields": [
+                        "heading",
+                        "lead",
+                        "feature_image",
+                        {
+                          "id": "service",
+                          "customtypes": [
+                            {
+                              "id": "services",
+                              "fields": [
+                                "heading"
+                              ]
+                            }
+                          ]
+                        },
+                        {
+                          "id": "category",
+                          "customtypes": [
+                            {
+                              "id": "post_category",
+                              "fields": [
+                                "name"
+                              ]
+                            }
+                          ]
+                        },
+                        "featured"
                       ]
                     }
                   ],

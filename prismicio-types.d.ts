@@ -4727,16 +4727,6 @@ export interface MegamenuSliceImageButtonRowPrimaryLinksItem {
  */
 export interface MegamenuSliceMegaContextPrimaryContextItem {
 	/**
-	 * Id field in *Megamenu → Mega Context → Primary → Context*
-	 *
-	 * - **Field Type**: Text
-	 * - **Placeholder**: *None*
-	 * - **API ID Path**: megamenu.megaContext.primary.context[].id
-	 * - **Documentation**: https://prismic.io/docs/fields/text
-	 */
-	id: prismic.KeyTextField;
-	
-	/**
 	 * Item field in *Megamenu → Mega Context → Primary → Context*
 	 *
 	 * - **Field Type**: Content Relationship
@@ -4745,6 +4735,16 @@ export interface MegamenuSliceMegaContextPrimaryContextItem {
 	 * - **Documentation**: https://prismic.io/docs/fields/content-relationship
 	 */
 	item: ContentRelationshipFieldWithData<[{"id":"navigation_item","fields":["image","link","description"]}]>;
+	
+	/**
+	 * Treatment field in *Megamenu → Mega Context → Primary → Context*
+	 *
+	 * - **Field Type**: Content Relationship
+	 * - **Placeholder**: *None*
+	 * - **API ID Path**: megamenu.megaContext.primary.context[].treatment
+	 * - **Documentation**: https://prismic.io/docs/fields/content-relationship
+	 */
+	treatment: ContentRelationshipFieldWithData<[{"id":"treatment","fields":["heading","lead","feature_image",{"id":"service","customtypes":[{"id":"services","fields":["heading"]}]},{"id":"category","customtypes":[{"id":"post_category","fields":["name"]}]},"featured"]}]>;
 }
 
 /**
