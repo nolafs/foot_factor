@@ -10,30 +10,67 @@
           "label": "UID"
         }
       },
-      "image": {
-        "type": "Image",
+      "links": {
+        "type": "Group",
         "config": {
-          "label": "Image",
-          "constraint": {},
-          "thumbnails": []
-        }
-      },
-      "link": {
-        "type": "Link",
-        "config": {
-          "label": "Link",
-          "placeholder": "",
-          "select": null,
-          "allowTargetBlank": true,
-          "allowText": true,
-          "repeat": false
-        }
-      },
-      "description": {
-        "type": "Text",
-        "config": {
-          "label": "Description",
-          "placeholder": ""
+          "label": "Links",
+          "repeat": true,
+          "fields": {
+            "service": {
+              "type": "Link",
+              "config": {
+                "label": "Service",
+                "select": "document",
+                "customtypes": [
+                  {
+                    "id": "services",
+                    "fields": [
+                      "heading",
+                      "lead"
+                    ]
+                  }
+                ],
+                "repeat": false
+              }
+            },
+            "treatment": {
+              "type": "Link",
+              "config": {
+                "label": "Treatment",
+                "select": "document",
+                "customtypes": [
+                  {
+                    "id": "treatment",
+                    "fields": [
+                      "heading",
+                      "lead",
+                      "feature_image",
+                      "featured"
+                    ]
+                  }
+                ],
+                "repeat": false
+              }
+            },
+            "othotic": {
+              "type": "Link",
+              "config": {
+                "label": "Orthotic",
+                "select": "document",
+                "customtypes": [
+                  {
+                    "id": "orthotics",
+                    "fields": [
+                      "heading",
+                      "lead",
+                      "thumb"
+                    ]
+                  }
+                ],
+                "repeat": false
+              }
+            }
+          }
         }
       }
     }

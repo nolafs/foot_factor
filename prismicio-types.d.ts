@@ -1406,41 +1406,54 @@ interface NavigationElementDocumentData {
 export type NavigationElementDocument<Lang extends string = string> = prismic.PrismicDocumentWithUID<Simplify<NavigationElementDocumentData>, "navigation_element", Lang>;
 
 /**
+ * Item in *Navigation Item → Links*
+ */
+export interface NavigationItemDocumentDataLinksItem {
+	/**
+	 * Service field in *Navigation Item → Links*
+	 *
+	 * - **Field Type**: Content Relationship
+	 * - **Placeholder**: *None*
+	 * - **API ID Path**: navigation_item.links[].service
+	 * - **Documentation**: https://prismic.io/docs/fields/content-relationship
+	 */
+	service: ContentRelationshipFieldWithData<[{"id":"services","fields":["heading","lead"]}]>;
+	
+	/**
+	 * Treatment field in *Navigation Item → Links*
+	 *
+	 * - **Field Type**: Content Relationship
+	 * - **Placeholder**: *None*
+	 * - **API ID Path**: navigation_item.links[].treatment
+	 * - **Documentation**: https://prismic.io/docs/fields/content-relationship
+	 */
+	treatment: ContentRelationshipFieldWithData<[{"id":"treatment","fields":["heading","lead","feature_image","featured"]}]>;
+	
+	/**
+	 * Orthotic field in *Navigation Item → Links*
+	 *
+	 * - **Field Type**: Content Relationship
+	 * - **Placeholder**: *None*
+	 * - **API ID Path**: navigation_item.links[].othotic
+	 * - **Documentation**: https://prismic.io/docs/fields/content-relationship
+	 */
+	othotic: ContentRelationshipFieldWithData<[{"id":"orthotics","fields":["heading","lead","thumb"]}]>;
+}
+
+/**
  * Content for Navigation Item documents
  */
 interface NavigationItemDocumentData {
 	/**
-	 * Image field in *Navigation Item*
+	 * Links field in *Navigation Item*
 	 *
-	 * - **Field Type**: Image
+	 * - **Field Type**: Group
 	 * - **Placeholder**: *None*
-	 * - **API ID Path**: navigation_item.image
+	 * - **API ID Path**: navigation_item.links[]
 	 * - **Tab**: Main
-	 * - **Documentation**: https://prismic.io/docs/fields/image
+	 * - **Documentation**: https://prismic.io/docs/fields/repeatable-group
 	 */
-	image: prismic.ImageField<never>;
-	
-	/**
-	 * Link field in *Navigation Item*
-	 *
-	 * - **Field Type**: Link
-	 * - **Placeholder**: *None*
-	 * - **API ID Path**: navigation_item.link
-	 * - **Tab**: Main
-	 * - **Documentation**: https://prismic.io/docs/fields/link
-	 */
-	link: prismic.LinkField<string, string, unknown, prismic.FieldState, never>;
-	
-	/**
-	 * Description field in *Navigation Item*
-	 *
-	 * - **Field Type**: Text
-	 * - **Placeholder**: *None*
-	 * - **API ID Path**: navigation_item.description
-	 * - **Tab**: Main
-	 * - **Documentation**: https://prismic.io/docs/fields/text
-	 */
-	description: prismic.KeyTextField;
+	links: prismic.GroupField<Simplify<NavigationItemDocumentDataLinksItem>>;
 }
 
 /**
@@ -4734,17 +4747,7 @@ export interface MegamenuSliceMegaContextPrimaryContextItem {
 	 * - **API ID Path**: megamenu.megaContext.primary.context[].item
 	 * - **Documentation**: https://prismic.io/docs/fields/content-relationship
 	 */
-	item: ContentRelationshipFieldWithData<[{"id":"navigation_item","fields":["image","link","description"]}]>;
-	
-	/**
-	 * Treatment field in *Megamenu → Mega Context → Primary → Context*
-	 *
-	 * - **Field Type**: Content Relationship
-	 * - **Placeholder**: *None*
-	 * - **API ID Path**: megamenu.megaContext.primary.context[].treatment
-	 * - **Documentation**: https://prismic.io/docs/fields/content-relationship
-	 */
-	treatment: ContentRelationshipFieldWithData<[{"id":"treatment","fields":["heading","lead","feature_image",{"id":"service","customtypes":[{"id":"services","fields":["heading"]}]},{"id":"category","customtypes":[{"id":"post_category","fields":["name"]}]},"featured"]}]>;
+	item: prismic.ContentRelationshipField<"navigation_item">;
 }
 
 /**
@@ -6523,6 +6526,7 @@ declare module "@prismicio/client" {
 			NavigationElementDocumentDataSubsItem,
 			NavigationItemDocument,
 			NavigationItemDocumentData,
+			NavigationItemDocumentDataLinksItem,
 			NavigationMegaMenuItemDocument,
 			NavigationMegaMenuItemDocumentData,
 			NavigationMegaMenuItemDocumentDataSubsItem,
