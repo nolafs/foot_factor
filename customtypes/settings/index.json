@@ -1,9 +1,7 @@
 {
-  "format": "custom",
   "id": "settings",
   "label": "Settings",
   "repeatable": false,
-  "status": true,
   "json": {
     "Main": {
       "logo": {
@@ -133,8 +131,8 @@
         "config": {
           "label": "Footer Cta Body",
           "placeholder": "",
-          "allowTargetBlank": true,
-          "multi": "paragraph,preformatted,heading1,heading2,heading3,heading4,heading5,heading6,strong,em,hyperlink,image,embed,list-item,o-list-item,rtl"
+          "multi": "paragraph,preformatted,heading1,heading2,heading3,heading4,heading5,heading6,strong,em,hyperlink,image,embed,list-item,o-list-item,rtl",
+          "allowTargetBlank": true
         }
       },
       "google_rating": {
@@ -165,7 +163,15 @@
               "config": {
                 "label": "Type",
                 "placeholder": "",
-                "options": ["facebook", "instagram", "twitter", "gitHub", "youtube", "tiktok", "linkedin"]
+                "options": [
+                  "facebook",
+                  "instagram",
+                  "twitter",
+                  "gitHub",
+                  "youtube",
+                  "tiktok",
+                  "linkedin"
+                ]
               }
             },
             "name": {
@@ -226,8 +232,8 @@
         "config": {
           "label": "Address",
           "placeholder": "",
-          "allowTargetBlank": true,
-          "multi": "paragraph,preformatted,heading1,heading2,heading3,heading4,heading5,heading6,strong,em,hyperlink,image,embed,list-item,o-list-item,rtl"
+          "multi": "paragraph,preformatted,heading1,heading2,heading3,heading4,heading5,heading6,strong,em,hyperlink,image,embed,list-item,o-list-item,rtl",
+          "allowTargetBlank": true
         }
       },
       "telephone": {
@@ -275,5 +281,7 @@
         }
       }
     }
-  }
+  },
+  "status": true,
+  "format": "custom"
 }

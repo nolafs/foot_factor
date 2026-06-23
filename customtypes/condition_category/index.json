@@ -1,9 +1,7 @@
 {
-  "format": "custom",
   "id": "condition_category",
   "label": "Condition Category",
   "repeatable": true,
-  "status": true,
   "json": {
     "Main": {
       "uid": {
@@ -46,9 +44,15 @@
         "config": {
           "label": "Card Style",
           "placeholder": "",
-          "options": ["default", "center", "left"]
+          "options": [
+            "default",
+            "center",
+            "left"
+          ]
         }
       }
     }
-  }
+  },
+  "status": true,
+  "format": "custom"
 }

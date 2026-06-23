@@ -2,23 +2,22 @@
   "id": "reviews",
   "type": "SharedSlice",
   "name": "Reviews",
-  "description": "Reviews",
   "variations": [
     {
       "id": "default",
       "name": "Default",
+      "description": "Default",
+      "imageUrl": "https://images.prismic.io/foot-factor-uk/shared-slices/reviews/default/c81b7c77576b4696a42f9eeb200a345df5f5c8b9.png?auto=compress%2Cformat",
       "docURL": "...",
       "version": "initial",
-      "description": "Default",
-      "imageUrl": "",
       "primary": {
         "heading": {
           "type": "StructuredText",
           "config": {
             "label": "Heading",
             "placeholder": "",
-            "allowTargetBlank": true,
-            "multi": "heading3,heading4,heading5,heading6,strong,em"
+            "multi": "heading3,heading4,heading5,heading6,strong,em",
+            "allowTargetBlank": true
           }
         },
         "share_link": {
@@ -31,5 +30,6 @@
       },
       "items": {}
     }
-  ]
+  ],
+  "description": "Reviews"
 }

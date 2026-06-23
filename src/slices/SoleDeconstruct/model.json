@@ -2,15 +2,14 @@
   "id": "sole_deconstruct",
   "type": "SharedSlice",
   "name": "SoleDeconstruct",
-  "description": "SoleDeconstruct",
   "variations": [
     {
       "id": "default",
       "name": "Default",
+      "description": "Default",
+      "imageUrl": "https://images.prismic.io/foot-factor-uk/shared-slices/sole_deconstruct/default/5e6c65f574b6932c844a09d854edc2b08ad70016.png?auto=compress%2Cformat",
       "docURL": "...",
       "version": "initial",
-      "description": "Default",
-      "imageUrl": "",
       "primary": {
         "items": {
           "type": "Group",
@@ -53,8 +52,8 @@
                 "config": {
                   "label": "Body",
                   "placeholder": "",
-                  "allowTargetBlank": true,
-                  "multi": "paragraph,preformatted,heading1,heading2,heading3,heading4,heading5,heading6,strong,em,hyperlink,image,embed,list-item,o-list-item,rtl"
+                  "multi": "paragraph,preformatted,heading1,heading2,heading3,heading4,heading5,heading6,strong,em,hyperlink,image,embed,list-item,o-list-item,rtl",
+                  "allowTargetBlank": true
                 }
               }
             }
@@ -63,5 +62,6 @@
       },
       "items": {}
     }
-  ]
+  ],
+  "description": "SoleDeconstruct"
 }

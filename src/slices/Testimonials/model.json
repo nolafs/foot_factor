@@ -2,23 +2,22 @@
   "id": "testimonials",
   "type": "SharedSlice",
   "name": "Testimonials",
-  "description": "Testimonials",
   "variations": [
     {
       "id": "default",
       "name": "Default",
+      "description": "Default",
+      "imageUrl": "https://images.prismic.io/foot-factor-uk/shared-slices/testimonials/default/76ed9c9c07865939a4dcb6be9ebbfbde6e0f8eaf.png?auto=compress%2Cformat",
       "docURL": "...",
       "version": "initial",
-      "description": "Default",
-      "imageUrl": "",
       "primary": {
         "heading": {
           "type": "StructuredText",
           "config": {
             "label": "Heading",
             "placeholder": "",
-            "allowTargetBlank": true,
-            "multi": "strong,em"
+            "multi": "strong,em",
+            "allowTargetBlank": true
           }
         },
         "length": {
@@ -31,5 +30,6 @@
       },
       "items": {}
     }
-  ]
+  ],
+  "description": "Testimonials"
 }

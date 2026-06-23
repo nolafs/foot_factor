@@ -2,23 +2,22 @@
   "id": "faqs",
   "type": "SharedSlice",
   "name": "Faqs",
-  "description": "Faqs",
   "variations": [
     {
       "id": "default",
       "name": "Default",
+      "description": "Default",
+      "imageUrl": "https://images.prismic.io/foot-factor-uk/shared-slices/faqs/default/300622263abbb6453ce9c8a1154db7b79f49cd27.png?auto=compress%2Cformat",
       "docURL": "...",
       "version": "initial",
-      "description": "Default",
-      "imageUrl": "",
       "primary": {
         "heading": {
           "type": "StructuredText",
           "config": {
             "label": "Heading",
             "placeholder": "",
-            "allowTargetBlank": true,
-            "multi": "paragraph,preformatted,heading1,heading2,heading3,heading4,heading5,heading6,strong,em,hyperlink,image,embed,list-item,o-list-item,rtl"
+            "multi": "paragraph,preformatted,heading1,heading2,heading3,heading4,heading5,heading6,strong,em,hyperlink,image,embed,list-item,o-list-item,rtl",
+            "allowTargetBlank": true
           }
         },
         "faqs": {
@@ -50,9 +49,9 @@
           "type": "Boolean",
           "config": {
             "label": "Has Call to Action",
-            "placeholder_false": "false",
+            "default_value": false,
             "placeholder_true": "true",
-            "default_value": false
+            "placeholder_false": "false"
           }
         },
         "cta_heading": {
@@ -67,8 +66,8 @@
           "config": {
             "label": "Cta Body",
             "placeholder": "",
-            "allowTargetBlank": true,
-            "multi": "strong,em"
+            "multi": "strong,em",
+            "allowTargetBlank": true
           }
         },
         "cta_links": {
@@ -93,18 +92,18 @@
     {
       "id": "columnCollapsible",
       "name": "Column Collapsible ",
+      "description": "Default",
+      "imageUrl": "https://images.prismic.io/foot-factor-uk/shared-slices/faqs/columnCollapsible/9c3c070a441cac44502607468bb4816deba75072.png?auto=compress%2Cformat",
       "docURL": "...",
       "version": "initial",
-      "description": "Default",
-      "imageUrl": "",
       "primary": {
         "heading": {
           "type": "StructuredText",
           "config": {
             "label": "Heading",
             "placeholder": "",
-            "allowTargetBlank": true,
-            "multi": "paragraph,preformatted,heading1,heading2,heading3,heading4,heading5,heading6,strong,em,hyperlink,image,embed,list-item,o-list-item,rtl"
+            "multi": "paragraph,preformatted,heading1,heading2,heading3,heading4,heading5,heading6,strong,em,hyperlink,image,embed,list-item,o-list-item,rtl",
+            "allowTargetBlank": true
           }
         },
         "subtitle": {
@@ -119,7 +118,6 @@
           "config": {
             "label": "Category",
             "select": "document",
-            "repeat": false,
             "customtypes": [
               {
                 "id": "faq_category",
@@ -127,7 +125,8 @@
                   "name"
                 ]
               }
-            ]
+            ],
+            "repeat": false
           }
         },
         "color": {
@@ -135,17 +134,18 @@
           "config": {
             "label": "Color",
             "placeholder": "",
+            "default_value": "default",
             "options": [
               "default",
               "Primary",
               "Secondary",
               "Accent"
-            ],
-            "default_value": "default"
+            ]
           }
         }
       },
       "items": {}
     }
-  ]
+  ],
+  "description": "Faqs"
 }

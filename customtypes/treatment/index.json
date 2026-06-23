@@ -1,9 +1,7 @@
 {
-  "format": "page",
   "id": "treatment",
   "label": "Treatment",
   "repeatable": true,
-  "status": true,
   "json": {
     "Main": {
       "uid": {
@@ -38,7 +36,6 @@
         "config": {
           "label": "Service",
           "select": "document",
-          "repeat": false,
           "customtypes": [
             {
               "id": "services",
@@ -49,13 +46,16 @@
                   "customtypes": [
                     {
                       "id": "post_category",
-                      "fields": ["name"]
+                      "fields": [
+                        "name"
+                      ]
                     }
                   ]
                 }
               ]
             }
-          ]
+          ],
+          "repeat": false
         }
       },
       "category": {
@@ -63,13 +63,15 @@
         "config": {
           "label": "Category",
           "select": "document",
-          "repeat": false,
           "customtypes": [
             {
               "id": "post_category",
-              "fields": ["name"]
+              "fields": [
+                "name"
+              ]
             }
-          ]
+          ],
+          "repeat": false
         }
       },
       "wave": {
@@ -77,7 +79,17 @@
         "config": {
           "label": "Wave",
           "placeholder": "",
-          "options": ["default", "1", "2", "3", "4", "5", "6", "7", "8"]
+          "options": [
+            "default",
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8"
+          ]
         }
       },
       "feature_image": {
@@ -92,9 +104,9 @@
         "type": "Boolean",
         "config": {
           "label": "Featured",
-          "placeholder_false": "false",
+          "default_value": false,
           "placeholder_true": "true",
-          "default_value": false
+          "placeholder_false": "false"
         }
       },
       "weight": {
@@ -154,29 +166,29 @@
     },
     "SEO & Metadata": {
       "meta_title": {
+        "type": "Text",
         "config": {
           "label": "Meta Title",
           "placeholder": "A title of the page used for social media and search engines"
-        },
-        "type": "Text"
+        }
       },
       "meta_description": {
+        "type": "Text",
         "config": {
           "label": "Meta Description",
           "placeholder": "A brief summary of the page"
-        },
-        "type": "Text"
+        }
       },
       "meta_image": {
+        "type": "Image",
         "config": {
-          "constraint": {
-            "height": 1260,
-            "width": 2400
-          },
           "label": "Meta Image",
+          "constraint": {
+            "width": 2400,
+            "height": 1260
+          },
           "thumbnails": []
-        },
-        "type": "Image"
+        }
       }
     },
     "Pricing": {
@@ -192,28 +204,30 @@
         "config": {
           "label": "Features",
           "placeholder": "",
-          "allowTargetBlank": true,
-          "multi": "list-item,paragraph,strong"
+          "multi": "list-item,paragraph,strong",
+          "allowTargetBlank": true
         }
       },
       "has_booking": {
         "type": "Boolean",
         "config": {
           "label": "Has Booking",
-          "placeholder_false": "false",
+          "default_value": false,
           "placeholder_true": "true",
-          "default_value": false
+          "placeholder_false": "false"
         }
       },
       "has_telephone": {
         "type": "Boolean",
         "config": {
           "label": "Has Telephone",
-          "placeholder_false": "false",
+          "default_value": false,
           "placeholder_true": "true",
-          "default_value": false
+          "placeholder_false": "false"
         }
       }
     }
-  }
+  },
+  "status": true,
+  "format": "page"
 }

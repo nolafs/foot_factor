@@ -1,15 +1,15 @@
 {
-  "type": "SharedSlice",
   "id": "icon_nav_list",
+  "type": "SharedSlice",
   "name": "FeatureTickerList",
   "variations": [
     {
       "id": "default",
       "name": "Default",
       "description": "Default horizontal icon navigation list.",
-      "version": "initial",
-      "imageUrl": "",
+      "imageUrl": "https://images.prismic.io/foot-factor-uk/shared-slices/icon_nav_list/default/116ce8d888352c57628ca571b364d524559116b7.png?auto=compress%2Cformat",
       "docURL": "...",
+      "version": "initial",
       "primary": {
         "items": {
           "type": "Group",
@@ -32,9 +32,9 @@
                 "type": "Link",
                 "config": {
                   "label": "Link",
+                  "select": null,
                   "allowText": false,
-                  "repeat": false,
-                  "select": null
+                  "repeat": false
                 }
               }
             }
@@ -47,9 +47,9 @@
       "id": "logoTicker",
       "name": "Logo ticker",
       "description": "Default horizontal icon navigation list.",
-      "version": "initial",
-      "imageUrl": "",
+      "imageUrl": "https://images.prismic.io/foot-factor-uk/shared-slices/icon_nav_list/logoTicker/9504b0774ffad4d08ae0e51ebe4273e261daf7d7.png?auto=compress%2Cformat",
       "docURL": "...",
+      "version": "initial",
       "primary": {
         "items": {
           "type": "Group",
@@ -59,11 +59,11 @@
               "icon": {
                 "type": "Image",
                 "config": {
+                  "label": "Icon",
                   "constraint": {
-                    "height": 331,
-                    "width": 331
-                  },
-                  "label": "Icon"
+                    "width": 331,
+                    "height": 331
+                  }
                 }
               },
               "label": {
@@ -76,9 +76,9 @@
                 "type": "Link",
                 "config": {
                   "label": "Link",
+                  "select": null,
                   "allowText": false,
-                  "repeat": false,
-                  "select": null
+                  "repeat": false
                 }
               }
             }

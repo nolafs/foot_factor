@@ -1,9 +1,7 @@
 {
-  "format": "custom",
   "id": "navigation_bar",
   "label": "Navigation Bar",
   "repeatable": false,
-  "status": true,
   "json": {
     "Main": {
       "navigation_items": {
@@ -17,13 +15,18 @@
               "config": {
                 "label": "Navigation Item",
                 "select": "document",
-                "repeat": false,
-                "customtypes": ["navigation_element", "navigation_mega_menu_item"]
+                "customtypes": [
+                  "navigation_element",
+                  "navigation_mega_menu_item"
+                ],
+                "repeat": false
               }
             }
           }
         }
       }
     }
-  }
+  },
+  "status": true,
+  "format": "custom"
 }

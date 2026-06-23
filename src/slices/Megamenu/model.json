@@ -2,15 +2,14 @@
   "id": "megamenu",
   "type": "SharedSlice",
   "name": "Megamenu",
-  "description": "Megamenu",
   "variations": [
     {
       "id": "default",
       "name": "Default",
+      "description": "Default",
+      "imageUrl": "https://images.prismic.io/foot-factor-uk/shared-slices/megamenu/default/f3bb3d29e80d262b84023ce32129405a69a1e3c3.png?auto=compress%2Cformat",
       "docURL": "...",
       "version": "initial",
-      "description": "Default",
-      "imageUrl": "",
       "primary": {
         "columns": {
           "type": "Number",
@@ -25,10 +24,10 @@
     {
       "id": "megaVideo",
       "name": "Mega video",
+      "description": "Default",
+      "imageUrl": "https://images.prismic.io/foot-factor-uk/shared-slices/megamenu/megaVideo/8465e7f6f16995128603c4caf3584fd6147fbde6.png?auto=compress%2Cformat",
       "docURL": "...",
       "version": "initial",
-      "description": "Default",
-      "imageUrl": "",
       "primary": {
         "header": {
           "type": "Text",
@@ -49,8 +48,8 @@
           "config": {
             "label": "Description",
             "placeholder": "",
-            "allowTargetBlank": true,
-            "multi": "paragraph,preformatted,heading1,heading2,heading3,heading4,heading5,heading6,strong,em,hyperlink,image,embed,list-item,o-list-item,rtl"
+            "multi": "paragraph,preformatted,heading1,heading2,heading3,heading4,heading5,heading6,strong,em,hyperlink,image,embed,list-item,o-list-item,rtl",
+            "allowTargetBlank": true
           }
         },
         "link": {
@@ -76,10 +75,10 @@
     {
       "id": "imageButtonRow",
       "name": "Image Button Row",
+      "description": "Default",
+      "imageUrl": "https://images.prismic.io/foot-factor-uk/shared-slices/megamenu/imageButtonRow/65b5aa4aa0093dae0f522c7689904abee78c8e4c.png?auto=compress%2Cformat",
       "docURL": "...",
       "version": "initial",
-      "description": "Default",
-      "imageUrl": "",
       "primary": {
         "links": {
           "type": "Group",
@@ -125,10 +124,10 @@
     {
       "id": "blog",
       "name": "Blog",
+      "description": "Default",
+      "imageUrl": "https://images.prismic.io/foot-factor-uk/shared-slices/megamenu/blog/023d63001cb087a8a899cc615e4f5753722b450b.png?auto=compress%2Cformat",
       "docURL": "...",
       "version": "initial",
-      "description": "Default",
-      "imageUrl": "",
       "primary": {
         "columns": {
           "type": "Number",
@@ -140,5 +139,6 @@
       },
       "items": {}
     }
-  ]
+  ],
+  "description": "Megamenu"
 }

@@ -1,15 +1,15 @@
 {
-  "type": "SharedSlice",
   "id": "vertical_steps_with_images",
+  "type": "SharedSlice",
   "name": "VerticalStepsWithImages",
   "variations": [
     {
       "id": "default",
       "name": "Default",
       "description": "Standard vertical process flow with steps, descriptions, and images placed beside each step.",
-      "version": "initial",
-      "imageUrl": "",
+      "imageUrl": "https://images.prismic.io/foot-factor-uk/shared-slices/vertical_steps_with_images/default/adb826ba695fbad7e639996dbe0a8647bf142a7e.png?auto=compress%2Cformat",
       "docURL": "...",
+      "version": "initial",
       "primary": {
         "steps": {
           "type": "Group",
@@ -32,8 +32,8 @@
               "description": {
                 "type": "StructuredText",
                 "config": {
-                  "multi": "paragraph,strong,em,hyperlink,list-item,o-list-item",
-                  "label": "Description"
+                  "label": "Description",
+                  "multi": "paragraph,strong,em,hyperlink,list-item,o-list-item"
                 }
               },
               "image": {
@@ -49,9 +49,9 @@
           "type": "Boolean",
           "config": {
             "label": "Section Padding",
-            "placeholder_false": "false",
+            "default_value": false,
             "placeholder_true": "true",
-            "default_value": false
+            "placeholder_false": "false"
           }
         }
       },
@@ -61,17 +61,17 @@
       "id": "videoVerticalStepper",
       "name": "Video Vertical Stepper",
       "description": "Standard vertical process flow with steps, descriptions, and images placed beside each step.",
-      "version": "initial",
-      "imageUrl": "",
+      "imageUrl": "https://images.prismic.io/foot-factor-uk/shared-slices/vertical_steps_with_images/videoVerticalStepper/ba23e7f9ddbeb63c19f3475d45d3cf3150c8c16f.png?auto=compress%2Cformat",
       "docURL": "...",
+      "version": "initial",
       "primary": {
         "intro_body": {
           "type": "StructuredText",
           "config": {
             "label": "Intro Body",
             "placeholder": "",
-            "allowTargetBlank": true,
-            "multi": "strong,em"
+            "multi": "strong,em",
+            "allowTargetBlank": true
           }
         },
         "intro_image": {
@@ -97,8 +97,8 @@
               "description": {
                 "type": "StructuredText",
                 "config": {
-                  "multi": "paragraph,strong,em,hyperlink,list-item,o-list-item",
-                  "label": "Description"
+                  "label": "Description",
+                  "multi": "paragraph,strong,em,hyperlink,list-item,o-list-item"
                 }
               },
               "image": {

@@ -1,21 +1,21 @@
 {
-  "type": "SharedSlice",
   "id": "location_map_callout",
+  "type": "SharedSlice",
   "name": "LocationMapCallout",
   "variations": [
     {
       "id": "map_with_callout_right",
       "name": "Map with Callout Right",
       "description": "Map background with a right-aligned callout showing heading, address, and a button.",
-      "version": "initial",
-      "imageUrl": "",
+      "imageUrl": "https://images.prismic.io/foot-factor-uk/shared-slices/location_map_callout/map_with_callout_right/74260322c56a837cff46976e38fad630c4b5c4c5.png?auto=compress%2Cformat",
       "docURL": "...",
+      "version": "initial",
       "primary": {
         "heading": {
           "type": "StructuredText",
           "config": {
-            "multi": "heading2,strong,em",
-            "label": "Heading"
+            "label": "Heading",
+            "multi": "heading2,strong,em"
           }
         },
         "address_lines": {
@@ -36,9 +36,9 @@
           "type": "Link",
           "config": {
             "label": "Button Link",
+            "select": null,
             "allowText": true,
-            "repeat": false,
-            "select": null
+            "repeat": false
           }
         },
         "map_center": {

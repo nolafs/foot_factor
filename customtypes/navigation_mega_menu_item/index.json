@@ -1,9 +1,7 @@
 {
-  "format": "custom",
   "id": "navigation_mega_menu_item",
   "label": "Navigation Mega Menu Item",
   "repeatable": true,
-  "status": true,
   "json": {
     "Main": {
       "uid": {
@@ -85,8 +83,8 @@
               "config": {
                 "label": "Description",
                 "placeholder": "",
-                "allowTargetBlank": true,
-                "multi": "paragraph,preformatted,heading1,heading2,heading3,heading4,heading5,heading6,strong,em,hyperlink,image,embed,list-item,o-list-item,rtl"
+                "multi": "paragraph,preformatted,heading1,heading2,heading3,heading4,heading5,heading6,strong,em,hyperlink,image,embed,list-item,o-list-item,rtl",
+                "allowTargetBlank": true
               }
             },
             "link": {
@@ -115,5 +113,7 @@
         }
       }
     }
-  }
+  },
+  "status": true,
+  "format": "custom"
 }

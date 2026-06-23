@@ -2555,10 +2555,17 @@
   dependencies:
     imgix-url-builder "^0.0.5"
 
-"@prismicio/client@^7.1.0", "@prismicio/client@^7.16.0":
+"@prismicio/client@^7.1.0":
   version "7.21.0"
   resolved "https://registry.yarnpkg.com/@prismicio/client/-/client-7.21.0.tgz#8b09dbabd596443b27c5cbaeb0eff0090eb86819"
   integrity sha512-9FWmywGC4nAsgrVk6khRJQ6Qvzb/KwbwsVqfHIM+N/Hxxn+V34u+L/X1XzCxwMdGWF5lvH8lLmmrOLowpO4KVA==
+  dependencies:
+    imgix-url-builder "^0.0.6"
+
+"@prismicio/client@^7.21.8":
+  version "7.21.8"
+  resolved "https://registry.yarnpkg.com/@prismicio/client/-/client-7.21.8.tgz#d20ab0ed92e59361fa4716d0457f32cce78ac616"
+  integrity sha512-HFXrV/XdbVy/AL7V5K/976gr4SEa7WA7xuZuSNuseLK5VSl0DlMSgy7GTUk+ngjz9QvN0Xu3nxWzUGFxnD8RIA==
   dependencies:
     imgix-url-builder "^0.0.6"
 
@@ -2604,17 +2611,19 @@
     tslib "^2.3.1"
     uuid "^9.0.1"
 
-"@prismicio/next@^2.0.1":
-  version "2.0.2"
-  resolved "https://registry.yarnpkg.com/@prismicio/next/-/next-2.0.2.tgz#091d4f9f639cea642520e56734b0f370eee3e5a2"
-  integrity sha512-e5Cxnl0Vdoqh8mZevJg6DDLbNBb6ta6VNvA9bmI0dNxWMvizkZm61xZWpjYpC1j73gXFYrJXWqdcyDc5au83xw==
+"@prismicio/next@^2.2.4":
+  version "2.2.4"
+  resolved "https://registry.yarnpkg.com/@prismicio/next/-/next-2.2.4.tgz#927977bdb0ff9b2c6a22855441c400c677bbae65"
+  integrity sha512-xeICqjZkTTVJ3xBObG0eh/D7IOa9Pfog4yQ9Qs+wgLr8GyO6B2wo8oBMJFd1k3g6fFJNL5Oij6j9B/81h/xwWA==
   dependencies:
-    imgix-url-builder "^0.0.5"
+    "@prismicio/simulator" "^0.2.2"
+    imgix-url-builder "^0.0.6"
+    lz-string "^1.5.0"
 
-"@prismicio/react@^3.0.0":
-  version "3.2.2"
-  resolved "https://registry.yarnpkg.com/@prismicio/react/-/react-3.2.2.tgz#4016e2f464e30e7e9ef5ce438622020be39f6027"
-  integrity sha512-YtApQ2wDrSN5F0IR6Wua9i48uWKHZmlhrOENIC8E9TOqzntqzcXUQrctanAkngbLdVwA+y3yrKyaE6nW155FfA==
+"@prismicio/react@^3.4.1":
+  version "3.4.1"
+  resolved "https://registry.yarnpkg.com/@prismicio/react/-/react-3.4.1.tgz#5bd50b0bf6b4fcf223c92312b10e784ed974e724"
+  integrity sha512-OR/F1+B6tlPMGm5YCE7Ir0FXXfobyQDQvNGl22TUYVbyCMc7qyY4VtPIxyEbKJBQNRRM22UYc8a4THS49Fwetg==
   dependencies:
     esm-env "^1.2.2"
 
@@ -2626,6 +2635,11 @@
     "@prismicio/client" "^7.1.0"
     "@types/statuses" "^2.0.1"
     statuses "^2.0.1"
+
+"@prismicio/simulator@^0.2.2":
+  version "0.2.4"
+  resolved "https://registry.yarnpkg.com/@prismicio/simulator/-/simulator-0.2.4.tgz#6b7185b102edd8c8aab1634764364452cea440bb"
+  integrity sha512-dmxqaihyUkuUbbJwe/AJuE40c6jH233plJiGza8sTGmzNKd/V8tsP11+NuBN0vuFSpZ1zBEWYsZFbsCwHuJZyA==
 
 "@prismicio/types-internal@3.11.2":
   version "3.11.2"
@@ -8226,7 +8240,7 @@ lucide-react@^0.474.0:
   resolved "https://registry.npmjs.org/lucide-react/-/lucide-react-0.474.0.tgz"
   integrity sha512-CmghgHkh0OJNmxGKWc0qfPJCYHASPMVSyGY8fj3xgk4v84ItqDg64JNKFZn5hC6E0vHi6gxnbCgwhyVB09wQtA==
 
-lz-string@1.5.0:
+lz-string@1.5.0, lz-string@^1.5.0:
   version "1.5.0"
   resolved "https://registry.yarnpkg.com/lz-string/-/lz-string-1.5.0.tgz#c1ab50f77887b712621201ba9fd4e3a6ed099941"
   integrity sha512-h5bgJWpxJNswbU7qCrV0tIKQCaS3blPDrqKWx+QxzuzL1zGUzij9XCWLrSLsJPu5t+eWA/ycetzYAO5IOMcWAQ==

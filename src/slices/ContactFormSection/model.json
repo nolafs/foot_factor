@@ -2,15 +2,14 @@
   "id": "contact_form_section",
   "type": "SharedSlice",
   "name": "ContactFormSection",
-  "description": "ContactFormSection",
   "variations": [
     {
       "id": "default",
       "name": "Default",
+      "description": "Default",
+      "imageUrl": "https://images.prismic.io/foot-factor-uk/shared-slices/contact_form_section/default/e710b5a1d3077a38f856d994629f47f748f48a22.png?auto=compress%2Cformat",
       "docURL": "...",
       "version": "initial",
-      "description": "Default",
-      "imageUrl": "",
       "primary": {
         "heading": {
           "type": "Text",
@@ -48,10 +47,10 @@
     {
       "id": "bookingForm",
       "name": "Booking Form",
+      "description": "Default",
+      "imageUrl": "https://images.prismic.io/slice-machine/621a5ec4-0387-4bc5-9860-2dd46cbc07cd_default_ss.png?auto=compress,format",
       "docURL": "...",
       "version": "initial",
-      "description": "Default",
-      "imageUrl": "",
       "primary": {
         "heading": {
           "type": "Text",
@@ -86,5 +85,6 @@
       },
       "items": {}
     }
-  ]
+  ],
+  "description": "ContactFormSection"
 }

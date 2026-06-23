@@ -1,9 +1,7 @@
 {
-  "format": "custom",
   "id": "navigation_element",
   "label": "Navigation Element",
   "repeatable": true,
-  "status": true,
   "json": {
     "Main": {
       "uid": {
@@ -51,9 +49,9 @@
               "type": "Boolean",
               "config": {
                 "label": "Default",
-                "placeholder_false": "Off",
+                "default_value": false,
                 "placeholder_true": "On",
-                "default_value": false
+                "placeholder_false": "Off"
               }
             },
             "icon": {
@@ -91,8 +89,8 @@
               "config": {
                 "label": "Description",
                 "placeholder": "",
-                "allowTargetBlank": true,
-                "multi": "paragraph,preformatted,heading1,heading2,heading3,heading4,heading5,heading6,strong,em,hyperlink,image,embed,list-item,o-list-item,rtl"
+                "multi": "paragraph,preformatted,heading1,heading2,heading3,heading4,heading5,heading6,strong,em,hyperlink,image,embed,list-item,o-list-item,rtl",
+                "allowTargetBlank": true
               }
             },
             "link": {
@@ -110,5 +108,7 @@
         }
       }
     }
-  }
+  },
+  "status": true,
+  "format": "custom"
 }

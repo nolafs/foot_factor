@@ -2,15 +2,14 @@
   "id": "section",
   "type": "SharedSlice",
   "name": "Section",
-  "description": "Section",
   "variations": [
     {
       "id": "default",
       "name": "Default",
+      "description": "Default",
+      "imageUrl": "https://images.prismic.io/foot-factor-uk/shared-slices/section/default/112324550612deb766817eb03a99249209324e86.png?auto=compress%2Cformat",
       "docURL": "...",
       "version": "initial",
-      "description": "Default",
-      "imageUrl": "",
       "primary": {
         "heading": {
           "type": "Text",
@@ -24,17 +23,17 @@
           "config": {
             "label": "Body",
             "placeholder": "",
-            "allowTargetBlank": true,
-            "multi": "paragraph,preformatted,heading1,heading2,heading3,heading4,heading5,heading6,strong,em,hyperlink,image,embed,list-item,o-list-item,rtl"
+            "multi": "paragraph,preformatted,heading1,heading2,heading3,heading4,heading5,heading6,strong,em,hyperlink,image,embed,list-item,o-list-item,rtl",
+            "allowTargetBlank": true
           }
         },
         "animated": {
           "type": "Boolean",
           "config": {
             "label": "Animated",
-            "placeholder_false": "false",
+            "default_value": true,
             "placeholder_true": "true",
-            "default_value": true
+            "placeholder_false": "false"
           }
         }
       },
@@ -43,10 +42,10 @@
     {
       "id": "contentWithLeadButtons",
       "name": "Content with Lead & Buttons",
+      "description": "Default",
+      "imageUrl": "https://images.prismic.io/foot-factor-uk/shared-slices/section/contentWithLeadButtons/1a4a3ccde57e3f0ba993d65b62d6574835945722.png?auto=compress%2Cformat",
       "docURL": "...",
       "version": "initial",
-      "description": "Default",
-      "imageUrl": "",
       "primary": {
         "heading": {
           "type": "Text",
@@ -60,8 +59,8 @@
           "config": {
             "label": "Subheading",
             "placeholder": "",
-            "allowTargetBlank": true,
-            "multi": "paragraph,preformatted,heading1,heading2,heading3,heading4,heading5,heading6,strong,em,hyperlink,image,embed,list-item,o-list-item,rtl"
+            "multi": "paragraph,preformatted,heading1,heading2,heading3,heading4,heading5,heading6,strong,em,hyperlink,image,embed,list-item,o-list-item,rtl",
+            "allowTargetBlank": true
           }
         },
         "body": {
@@ -69,8 +68,8 @@
           "config": {
             "label": "Body",
             "placeholder": "",
-            "allowTargetBlank": true,
-            "multi": "paragraph,preformatted,heading1,heading2,heading3,heading4,heading5,heading6,strong,em,hyperlink,image,embed,list-item,o-list-item,rtl"
+            "multi": "paragraph,preformatted,heading1,heading2,heading3,heading4,heading5,heading6,strong,em,hyperlink,image,embed,list-item,o-list-item,rtl",
+            "allowTargetBlank": true
           }
         },
         "links": {
@@ -93,9 +92,9 @@
           "type": "Boolean",
           "config": {
             "label": "Has Booking",
-            "placeholder_false": "false",
+            "default_value": false,
             "placeholder_true": "true",
-            "default_value": false
+            "placeholder_false": "false"
           }
         },
         "booking_label": {
@@ -111,10 +110,10 @@
     {
       "id": "contentWithImageColumn",
       "name": "Content with Image Column",
+      "description": "Default",
+      "imageUrl": "https://images.prismic.io/foot-factor-uk/shared-slices/section/contentWithImageColumn/1ca0bb0360b1965b10b6de2e28fc771d0c6cbf8b.png?auto=compress%2Cformat",
       "docURL": "...",
       "version": "initial",
-      "description": "Default",
-      "imageUrl": "",
       "primary": {
         "heading": {
           "type": "Text",
@@ -128,17 +127,17 @@
           "config": {
             "label": "Body",
             "placeholder": "",
-            "allowTargetBlank": true,
-            "multi": "paragraph,preformatted,heading1,heading2,heading3,heading4,heading5,heading6,strong,em,hyperlink,image,embed,list-item,o-list-item,rtl"
+            "multi": "paragraph,preformatted,heading1,heading2,heading3,heading4,heading5,heading6,strong,em,hyperlink,image,embed,list-item,o-list-item,rtl",
+            "allowTargetBlank": true
           }
         },
         "animated": {
           "type": "Boolean",
           "config": {
             "label": "Animated",
-            "placeholder_false": "false",
+            "default_value": true,
             "placeholder_true": "true",
-            "default_value": true
+            "placeholder_false": "false"
           }
         },
         "image": {
@@ -167,10 +166,10 @@
     {
       "id": "contentWithImageColumnList",
       "name": "Content with Image column list",
+      "description": "Default",
+      "imageUrl": "https://images.prismic.io/foot-factor-uk/shared-slices/section/contentWithImageColumnList/18dc5b0991ad451ef59f551b0f7c6e0865cb7781.png?auto=compress%2Cformat",
       "docURL": "...",
       "version": "initial",
-      "description": "Default",
-      "imageUrl": "",
       "primary": {
         "heading": {
           "type": "Text",
@@ -197,8 +196,8 @@
                 "config": {
                   "label": "Body",
                   "placeholder": "",
-                  "allowTargetBlank": true,
-                  "multi": "paragraph,preformatted,heading1,heading2,heading3,heading4,heading5,heading6,strong,em,hyperlink,image,embed,list-item,o-list-item,rtl"
+                  "multi": "paragraph,preformatted,heading1,heading2,heading3,heading4,heading5,heading6,strong,em,hyperlink,image,embed,list-item,o-list-item,rtl",
+                  "allowTargetBlank": true
                 }
               },
               "image": {
@@ -230,10 +229,10 @@
     {
       "id": "contentWithImageFull",
       "name": "Content with Image Full ",
+      "description": "Default",
+      "imageUrl": "https://images.prismic.io/foot-factor-uk/shared-slices/section/contentWithImageFull/4cf8d97af7ebf3dec0c019816e19d52ab8eec19a.png?auto=compress%2Cformat",
       "docURL": "...",
       "version": "initial",
-      "description": "Default",
-      "imageUrl": "",
       "primary": {
         "heading": {
           "type": "Text",
@@ -247,8 +246,8 @@
           "config": {
             "label": "Body",
             "placeholder": "",
-            "allowTargetBlank": true,
-            "multi": "paragraph,preformatted,heading1,heading2,heading3,heading4,heading5,heading6,strong,em,hyperlink,image,embed,list-item,o-list-item,rtl"
+            "multi": "paragraph,preformatted,heading1,heading2,heading3,heading4,heading5,heading6,strong,em,hyperlink,image,embed,list-item,o-list-item,rtl",
+            "allowTargetBlank": true
           }
         },
         "image": {
@@ -277,10 +276,10 @@
     {
       "id": "contentImageFloatText",
       "name": "Content image float text",
+      "description": "Default",
+      "imageUrl": "https://images.prismic.io/foot-factor-uk/shared-slices/section/contentImageFloatText/658cf0d4accb1ca603db2e5aaf4f1d3c0682edb7.png?auto=compress%2Cformat",
       "docURL": "...",
       "version": "initial",
-      "description": "Default",
-      "imageUrl": "",
       "primary": {
         "image": {
           "type": "Image",
@@ -298,8 +297,8 @@
           "config": {
             "label": "Heading",
             "placeholder": "",
-            "allowTargetBlank": true,
-            "multi": "strong,em"
+            "multi": "strong,em",
+            "allowTargetBlank": true
           }
         },
         "body": {
@@ -307,8 +306,8 @@
           "config": {
             "label": "Body",
             "placeholder": "",
-            "allowTargetBlank": true,
-            "multi": "paragraph,preformatted,heading1,heading2,heading3,heading4,heading5,heading6,strong,em,hyperlink,image,embed,list-item,o-list-item,rtl"
+            "multi": "paragraph,preformatted,heading1,heading2,heading3,heading4,heading5,heading6,strong,em,hyperlink,image,embed,list-item,o-list-item,rtl",
+            "allowTargetBlank": true
           }
         },
         "links": {
@@ -331,9 +330,9 @@
           "type": "Boolean",
           "config": {
             "label": "Has Booking",
-            "placeholder_false": "false",
+            "default_value": false,
             "placeholder_true": "true",
-            "default_value": false
+            "placeholder_false": "false"
           }
         },
         "booking_label": {
@@ -347,9 +346,9 @@
           "type": "Boolean",
           "config": {
             "label": "Animated",
-            "placeholder_false": "false",
+            "default_value": true,
             "placeholder_true": "true",
-            "default_value": true
+            "placeholder_false": "false"
           }
         }
       },
@@ -358,10 +357,10 @@
     {
       "id": "contentImageFloatRight",
       "name": "Content image float right",
+      "description": "Default",
+      "imageUrl": "https://images.prismic.io/foot-factor-uk/shared-slices/section/contentImageFloatRight/78b43f7ba0ad6d104ac8addf32df04208a334844.png?auto=compress%2Cformat",
       "docURL": "...",
       "version": "initial",
-      "description": "Default",
-      "imageUrl": "",
       "primary": {
         "image": {
           "type": "Image",
@@ -379,8 +378,8 @@
           "config": {
             "label": "Heading",
             "placeholder": "",
-            "allowTargetBlank": true,
-            "multi": "strong,em"
+            "multi": "strong,em",
+            "allowTargetBlank": true
           }
         },
         "body": {
@@ -388,8 +387,8 @@
           "config": {
             "label": "Body",
             "placeholder": "",
-            "allowTargetBlank": true,
-            "multi": "paragraph,preformatted,heading1,heading2,heading3,heading4,heading5,heading6,strong,em,hyperlink,image,embed,list-item,o-list-item,rtl"
+            "multi": "paragraph,preformatted,heading1,heading2,heading3,heading4,heading5,heading6,strong,em,hyperlink,image,embed,list-item,o-list-item,rtl",
+            "allowTargetBlank": true
           }
         },
         "links": {
@@ -412,9 +411,9 @@
           "type": "Boolean",
           "config": {
             "label": "Has Booking",
-            "placeholder_false": "false",
+            "default_value": false,
             "placeholder_true": "true",
-            "default_value": false
+            "placeholder_false": "false"
           }
         },
         "booking_label": {
@@ -428,9 +427,9 @@
           "type": "Boolean",
           "config": {
             "label": "Animated",
-            "placeholder_false": "false",
+            "default_value": true,
             "placeholder_true": "true",
-            "default_value": true
+            "placeholder_false": "false"
           }
         }
       },
@@ -439,10 +438,10 @@
     {
       "id": "contentImageTwoColumns",
       "name": "Content-Image-two-columns",
+      "description": "Default",
+      "imageUrl": "https://images.prismic.io/foot-factor-uk/shared-slices/section/contentImageTwoColumns/fb178e52522688fc94c8a70eaaf5563d1c5c6160.png?auto=compress%2Cformat",
       "docURL": "...",
       "version": "initial",
-      "description": "Default",
-      "imageUrl": "",
       "primary": {
         "heading": {
           "type": "Text",
@@ -456,8 +455,8 @@
           "config": {
             "label": "Body",
             "placeholder": "",
-            "allowTargetBlank": true,
-            "multi": "paragraph,preformatted,heading1,heading2,heading3,heading4,heading5,heading6,strong,em,hyperlink,image,embed,list-item,o-list-item,rtl"
+            "multi": "paragraph,preformatted,heading1,heading2,heading3,heading4,heading5,heading6,strong,em,hyperlink,image,embed,list-item,o-list-item,rtl",
+            "allowTargetBlank": true
           }
         },
         "image": {
@@ -486,10 +485,10 @@
     {
       "id": "contentTwoColumnIconList",
       "name": "Content two column Icon list",
+      "description": "Default",
+      "imageUrl": "https://images.prismic.io/foot-factor-uk/shared-slices/section/contentTwoColumnIconList/cc7dfa000b8b2070782398f0738d2da224645553.png?auto=compress%2Cformat",
       "docURL": "...",
       "version": "initial",
-      "description": "Default",
-      "imageUrl": "",
       "primary": {
         "heading": {
           "type": "Text",
@@ -502,9 +501,9 @@
           "type": "Boolean",
           "config": {
             "label": "Animated",
-            "placeholder_false": "false",
+            "default_value": true,
             "placeholder_true": "true",
-            "default_value": true
+            "placeholder_false": "false"
           }
         },
         "image": {
@@ -553,8 +552,8 @@
                 "config": {
                   "label": "Body",
                   "placeholder": "",
-                  "allowTargetBlank": true,
-                  "multi": "strong,em,embed"
+                  "multi": "strong,em,embed",
+                  "allowTargetBlank": true
                 }
               }
             }
@@ -566,10 +565,10 @@
     {
       "id": "contentNoImageColumn",
       "name": "Content no image column",
+      "description": "Default",
+      "imageUrl": "https://images.prismic.io/foot-factor-uk/shared-slices/section/contentNoImageColumn/d581e51164d219a4d86ae9c6ece63a35a5a8442d.png?auto=compress%2Cformat",
       "docURL": "...",
       "version": "initial",
-      "description": "Default",
-      "imageUrl": "",
       "primary": {
         "heading": {
           "type": "Text",
@@ -583,17 +582,17 @@
           "config": {
             "label": "Body",
             "placeholder": "",
-            "allowTargetBlank": true,
-            "multi": "paragraph,preformatted,heading1,heading2,heading3,heading4,heading5,heading6,strong,em,hyperlink,image,embed,list-item,o-list-item,rtl"
+            "multi": "paragraph,preformatted,heading1,heading2,heading3,heading4,heading5,heading6,strong,em,hyperlink,image,embed,list-item,o-list-item,rtl",
+            "allowTargetBlank": true
           }
         },
         "animated": {
           "type": "Boolean",
           "config": {
             "label": "Animated",
-            "placeholder_false": "false",
+            "default_value": true,
             "placeholder_true": "true",
-            "default_value": true
+            "placeholder_false": "false"
           }
         },
         "color": {
@@ -614,10 +613,10 @@
     {
       "id": "contentWithImageLeftRight",
       "name": "Content With Image left right",
+      "description": "Default",
+      "imageUrl": "https://images.prismic.io/foot-factor-uk/shared-slices/section/contentWithImageLeftRight/a2378b579a177b2974a280c346ce1633f02fedfc.png?auto=compress%2Cformat",
       "docURL": "...",
       "version": "initial",
-      "description": "Default",
-      "imageUrl": "",
       "primary": {
         "heading": {
           "type": "Text",
@@ -631,17 +630,17 @@
           "config": {
             "label": "Body",
             "placeholder": "",
-            "allowTargetBlank": true,
-            "multi": "paragraph,preformatted,heading1,heading2,heading3,heading4,heading5,heading6,strong,em,hyperlink,image,embed,list-item,o-list-item,rtl"
+            "multi": "paragraph,preformatted,heading1,heading2,heading3,heading4,heading5,heading6,strong,em,hyperlink,image,embed,list-item,o-list-item,rtl",
+            "allowTargetBlank": true
           }
         },
         "animated": {
           "type": "Boolean",
           "config": {
             "label": "Animated",
-            "placeholder_false": "false",
+            "default_value": true,
             "placeholder_true": "true",
-            "default_value": true
+            "placeholder_false": "false"
           }
         },
         "image": {
@@ -679,9 +678,9 @@
           "type": "Boolean",
           "config": {
             "label": "Has Booking",
-            "placeholder_false": "false",
+            "default_value": false,
             "placeholder_true": "true",
-            "default_value": false
+            "placeholder_false": "false"
           }
         },
         "booking_label": {
@@ -715,10 +714,10 @@
     {
       "id": "contentColumnList",
       "name": "Content Column list",
+      "description": "Default",
+      "imageUrl": "https://images.prismic.io/foot-factor-uk/shared-slices/section/contentColumnList/f07d58b02080bad1cc6fd5ef76469f1734f7844f.png?auto=compress%2Cformat",
       "docURL": "...",
       "version": "initial",
-      "description": "Default",
-      "imageUrl": "",
       "primary": {
         "heading": {
           "type": "Text",
@@ -745,8 +744,8 @@
                 "config": {
                   "label": "Body",
                   "placeholder": "",
-                  "allowTargetBlank": true,
-                  "multi": "paragraph,preformatted,heading1,heading2,heading3,heading4,heading5,heading6,strong,em,hyperlink,image,embed,list-item,o-list-item,rtl"
+                  "multi": "paragraph,preformatted,heading1,heading2,heading3,heading4,heading5,heading6,strong,em,hyperlink,image,embed,list-item,o-list-item,rtl",
+                  "allowTargetBlank": true
                 }
               },
               "color": {
@@ -767,5 +766,6 @@
       },
       "items": {}
     }
-  ]
+  ],
+  "description": "Section"
 }
