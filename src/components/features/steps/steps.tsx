@@ -1,5 +1,5 @@
 'use client';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { type VerticalStepsWithImagesSliceDefaultPrimaryStepsItem } from '@/prismic-types';
 import SectionContent from '@/components/features/section/section-content';
 import gsap from 'gsap';
@@ -57,8 +57,6 @@ export const Steps = ({ data, sectionPadding }: StepsProps) => {
           invalidateOnRefresh: true,
         });
 
-        ScrollTrigger.refresh();
-
         return () => {
           progressTrigger.kill();
           pinTrigger.kill();
@@ -74,6 +72,13 @@ export const Steps = ({ data, sectionPadding }: StepsProps) => {
       dependencies: [data],
     },
   );
+
+  useEffect(() => {
+    const id = requestAnimationFrame(() => {
+      requestAnimationFrame(() => window.dispatchEvent(new Event('resize')));
+    });
+    return () => cancelAnimationFrame(id);
+  }, [data]);
 
   const updateStep = React.useCallback((stepNumber: number) => {
     setCurrentStep(stepNumber);
