@@ -2305,7 +2305,7 @@ interface ServicesDocumentData {
  *
  * @typeParam Lang - Language API ID of the document.
  */
-export type ServicesDocument<Lang extends string = string> = prismic.PrismicDocumentWithoutUID<Simplify<ServicesDocumentData>, "services", Lang>;
+export type ServicesDocument<Lang extends string = string> = prismic.PrismicDocumentWithUID<Simplify<ServicesDocumentData>, "services", Lang>;
 
 /**
  * Item in *Settings → Secondary Navigation*
