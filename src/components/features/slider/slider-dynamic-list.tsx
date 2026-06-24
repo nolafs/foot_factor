@@ -16,7 +16,7 @@ interface SliderDynamicListProps {
 }
 
 const getTypeByCategoryTags = async (
-  contentType: 'orthotics' | 'guide' | 'condition',
+  contentType: 'orthotics' | 'guide' | 'condition' | 'treatment',
   category?: string,
   tags?: string[],
 ): Promise<{ results: AllDocumentTypes[] }> => {

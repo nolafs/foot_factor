@@ -68,6 +68,12 @@
           "placeholder": ""
         }
       },
+      "uid": {
+        "type": "UID",
+        "config": {
+          "label": "uid"
+        }
+      },
       "slices": {
         "type": "Slices",
         "fieldset": "Slice Zone",
