@@ -23,6 +23,52 @@ export type ListProps = SliceComponentProps<Content.ListSlice>;
  * Component for "List" Slices.
  */
 const List: FC<ListProps> = ({ slice }) => {
+  if (slice.variation === 'treatmentsSelect') {
+    return (
+      <Container
+        as={'section'}
+        padding={'lg'}
+        fullWidth={true}
+        color={'secondary'}
+        data-slice-type={slice.slice_type}
+        data-slice-variation={slice.variation}>
+        <div className={'mx-auto max-w-3xl text-center'}>
+          <Heading as="h2" className={'mb-8 text-center'}>
+            {slice.primary.heading}
+          </Heading>
+
+          <Lead className={'mb-8 text-center opacity-60'}>{slice.primary.lead}</Lead>
+        </div>
+
+        <div className={'w-full pb-16 pt-5 md:pb-24 md:pt-8 lg:pb-28 lg:pt-16'}>
+          <SliderDynamicList
+            contentType={'treatment'}
+            category={(slice.primary.category.link_type !== 'Any' && slice.primary.category.id) || undefined}
+            tags={
+              slice.primary.tags
+
+                ?.map(item => item.tag.link_type !== 'Any' && item.tag?.id)
+                .filter((id): id is string => typeof id === 'string') || undefined
+            }
+            size={'default'}
+            baseUrl={'/conditions'}
+          />
+        </div>
+
+        <div className={'mx-auto max-w-3xl text-center'}>
+          <Heading as="h3" className={'mb-8 text-center text-4xl lg:text-5xl'}>
+            {slice.primary.footer_header}
+          </Heading>
+
+          <Lead className={'mb-8 text-center opacity-60'}>{slice.primary.footer_body}</Lead>
+          <div className={'flex w-full justify-center'}>
+            <ButtonRow hasBooking={false} hasArrow={true} links={slice.primary.links} />
+          </div>
+        </div>
+      </Container>
+    );
+  }
+
   if (slice.variation === 'conditions') {
     return (
       <Container
