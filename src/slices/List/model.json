@@ -386,6 +386,103 @@
         }
       },
       "items": {}
+    },
+    {
+      "id": "treatmentsSelect",
+      "name": "Treatments - Select",
+      "description": "Default",
+      "imageUrl": "https://images.prismic.io/foot-factor-uk/shared-slices/list/conditions/a112e39dd279048ffc91c67383ac720358da7cd3.png?auto=compress%2Cformat",
+      "docURL": "...",
+      "version": "initial",
+      "primary": {
+        "heading": {
+          "type": "Text",
+          "config": {
+            "label": "Heading",
+            "placeholder": ""
+          }
+        },
+        "lead": {
+          "type": "Text",
+          "config": {
+            "label": "Lead",
+            "placeholder": ""
+          }
+        },
+        "category": {
+          "type": "Link",
+          "config": {
+            "label": "Category",
+            "select": "document",
+            "customtypes": [
+              {
+                "id": "condition_category",
+                "fields": [
+                  "name"
+                ]
+              }
+            ],
+            "repeat": false
+          }
+        },
+        "tags": {
+          "type": "Group",
+          "config": {
+            "label": "Tags",
+            "repeat": true,
+            "fields": {
+              "tag": {
+                "type": "Link",
+                "config": {
+                  "label": "Tag",
+                  "select": "document",
+                  "customtypes": [
+                    {
+                      "id": "post_tags",
+                      "fields": [
+                        "name"
+                      ]
+                    }
+                  ],
+                  "repeat": false
+                }
+              }
+            }
+          }
+        },
+        "footer_header": {
+          "type": "Text",
+          "config": {
+            "label": "Footer Header",
+            "placeholder": ""
+          }
+        },
+        "footer_body": {
+          "type": "Text",
+          "config": {
+            "label": "Footer body",
+            "placeholder": ""
+          }
+        },
+        "links": {
+          "type": "Link",
+          "config": {
+            "label": "Links",
+            "placeholder": "",
+            "select": null,
+            "allowTargetBlank": true,
+            "allowText": true,
+            "repeat": true,
+            "variants": [
+              "Primary",
+              "Secondary",
+              "Accent",
+              "Link"
+            ]
+          }
+        }
+      },
+      "items": {}
     }
   ],
   "description": "List"

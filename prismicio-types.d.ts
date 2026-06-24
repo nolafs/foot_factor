@@ -4219,6 +4219,21 @@ export interface ListSliceConditionsPrimaryTagsItem {
 }
 
 /**
+ * Item in *List → Treatments - Select → Primary → Tags*
+ */
+export interface ListSliceTreatmentsSelectPrimaryTagsItem {
+	/**
+	 * Tag field in *List → Treatments - Select → Primary → Tags*
+	 *
+	 * - **Field Type**: Content Relationship
+	 * - **Placeholder**: *None*
+	 * - **API ID Path**: list.treatmentsSelect.primary.tags[].tag
+	 * - **Documentation**: https://prismic.io/docs/fields/content-relationship
+	 */
+	tag: ContentRelationshipFieldWithData<[{"id":"post_tags","fields":["name"]}]>;
+}
+
+/**
  * Primary content in *List → Blog → Primary*
  */
 export interface ListSliceDefaultPrimary {
@@ -4533,9 +4548,93 @@ export interface ListSliceConditionsPrimary {
 export type ListSliceConditions = prismic.SharedSliceVariation<"conditions", Simplify<ListSliceConditionsPrimary>, never>;
 
 /**
+ * Primary content in *List → Treatments - Select → Primary*
+ */
+export interface ListSliceTreatmentsSelectPrimary {
+	/**
+	 * Heading field in *List → Treatments - Select → Primary*
+	 *
+	 * - **Field Type**: Text
+	 * - **Placeholder**: *None*
+	 * - **API ID Path**: list.treatmentsSelect.primary.heading
+	 * - **Documentation**: https://prismic.io/docs/fields/text
+	 */
+	heading: prismic.KeyTextField;
+	
+	/**
+	 * Lead field in *List → Treatments - Select → Primary*
+	 *
+	 * - **Field Type**: Text
+	 * - **Placeholder**: *None*
+	 * - **API ID Path**: list.treatmentsSelect.primary.lead
+	 * - **Documentation**: https://prismic.io/docs/fields/text
+	 */
+	lead: prismic.KeyTextField;
+	
+	/**
+	 * Category field in *List → Treatments - Select → Primary*
+	 *
+	 * - **Field Type**: Content Relationship
+	 * - **Placeholder**: *None*
+	 * - **API ID Path**: list.treatmentsSelect.primary.category
+	 * - **Documentation**: https://prismic.io/docs/fields/content-relationship
+	 */
+	category: ContentRelationshipFieldWithData<[{"id":"condition_category","fields":["name"]}]>;
+	
+	/**
+	 * Tags field in *List → Treatments - Select → Primary*
+	 *
+	 * - **Field Type**: Group
+	 * - **Placeholder**: *None*
+	 * - **API ID Path**: list.treatmentsSelect.primary.tags[]
+	 * - **Documentation**: https://prismic.io/docs/fields/repeatable-group
+	 */
+	tags: prismic.GroupField<Simplify<ListSliceTreatmentsSelectPrimaryTagsItem>>;
+	
+	/**
+	 * Footer Header field in *List → Treatments - Select → Primary*
+	 *
+	 * - **Field Type**: Text
+	 * - **Placeholder**: *None*
+	 * - **API ID Path**: list.treatmentsSelect.primary.footer_header
+	 * - **Documentation**: https://prismic.io/docs/fields/text
+	 */
+	footer_header: prismic.KeyTextField;
+	
+	/**
+	 * Footer body field in *List → Treatments - Select → Primary*
+	 *
+	 * - **Field Type**: Text
+	 * - **Placeholder**: *None*
+	 * - **API ID Path**: list.treatmentsSelect.primary.footer_body
+	 * - **Documentation**: https://prismic.io/docs/fields/text
+	 */
+	footer_body: prismic.KeyTextField;
+	
+	/**
+	 * Links field in *List → Treatments - Select → Primary*
+	 *
+	 * - **Field Type**: Link
+	 * - **Placeholder**: *None*
+	 * - **API ID Path**: list.treatmentsSelect.primary.links
+	 * - **Documentation**: https://prismic.io/docs/fields/link
+	 */
+	links: prismic.Repeatable<prismic.LinkField<string, string, unknown, prismic.FieldState, "Primary" | "Secondary" | "Accent" | "Link">>;
+}
+
+/**
+ * Treatments - Select variation for List Slice
+ *
+ * - **API ID**: `treatmentsSelect`
+ * - **Description**: Default
+ * - **Documentation**: https://prismic.io/docs/slices
+ */
+export type ListSliceTreatmentsSelect = prismic.SharedSliceVariation<"treatmentsSelect", Simplify<ListSliceTreatmentsSelectPrimary>, never>;
+
+/**
  * Slice variation for *List*
  */
-type ListSliceVariation = ListSliceDefault | ListSlicePricingTable | ListSliceBento | ListSliceGuides | ListSliceOrthotics | ListSliceConditions
+type ListSliceVariation = ListSliceDefault | ListSlicePricingTable | ListSliceBento | ListSliceGuides | ListSliceOrthotics | ListSliceConditions | ListSliceTreatmentsSelect
 
 /**
  * List Shared Slice
@@ -6702,6 +6801,8 @@ declare module "@prismicio/client" {
 			ListSliceOrthoticsPrimary,
 			ListSliceConditionsPrimaryTagsItem,
 			ListSliceConditionsPrimary,
+			ListSliceTreatmentsSelectPrimaryTagsItem,
+			ListSliceTreatmentsSelectPrimary,
 			ListSliceVariation,
 			ListSliceDefault,
 			ListSlicePricingTable,
@@ -6709,6 +6810,7 @@ declare module "@prismicio/client" {
 			ListSliceGuides,
 			ListSliceOrthotics,
 			ListSliceConditions,
+			ListSliceTreatmentsSelect,
 			LocationMapCalloutSlice,
 			LocationMapCalloutSliceMapWithCalloutRightPrimaryAddressLinesItem,
 			LocationMapCalloutSliceMapWithCalloutRightPrimaryMapMarkersItem,
