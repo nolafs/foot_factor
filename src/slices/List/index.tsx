@@ -51,7 +51,7 @@ const List: FC<ListProps> = ({ slice }) => {
                 .filter((id): id is string => typeof id === 'string') || undefined
             }
             size={'default'}
-            baseUrl={'/conditions'}
+            baseUrl={'/treatments'}
           />
         </div>
 
