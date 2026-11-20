@@ -21,6 +21,7 @@ interface StepsProps {
 export const Steps = ({ data, sectionPadding }: StepsProps) => {
   const contentRef = React.useRef<HTMLDivElement>(null);
   const listRef = React.useRef<HTMLUListElement>(null);
+  const progressRef = React.useRef<HTMLDivElement>(null);
   const [currentProgress, setCurrentProgress] = useState(0);
   const [currentStep, setCurrentStep] = useState(1);
 
@@ -41,13 +42,13 @@ export const Steps = ({ data, sectionPadding }: StepsProps) => {
             const progress = Math.round(self.progress * 100);
             setCurrentProgress(progress);
           },
-          onRefresh: () => {
-            setCurrentProgress(0);
+          onRefresh: self => {
+            setCurrentProgress(Math.round(self.progress * 100));
           },
         });
 
         const pinTrigger = ScrollTrigger.create({
-          trigger: '#progress',
+          trigger: progressRef.current,
           start: 'center center',
           end: 'bottom bottom',
           endTrigger: contentRef.current,
@@ -73,12 +74,33 @@ export const Steps = ({ data, sectionPadding }: StepsProps) => {
     },
   );
 
+  // Pin start/end positions are measured once. Content above this section that changes height
+  // after init (lazy images, fonts, client-rendered sections) makes them stale, so the cards pin
+  // too early and jump up over the previous section. Re-measure whenever the page height changes.
   useEffect(() => {
-    const id = requestAnimationFrame(() => {
-      requestAnimationFrame(() => window.dispatchEvent(new Event('resize')));
+    let lastHeight = document.documentElement.scrollHeight;
+    let timeout: ReturnType<typeof setTimeout>;
+
+    const recordHeight = () => {
+      lastHeight = document.documentElement.scrollHeight;
+    };
+    ScrollTrigger.addEventListener('refresh', recordHeight);
+
+    const observer = new ResizeObserver(() => {
+      clearTimeout(timeout);
+      timeout = setTimeout(() => {
+        if (document.documentElement.scrollHeight !== lastHeight) ScrollTrigger.refresh();
+      }, 150);
     });
-    return () => cancelAnimationFrame(id);
-  }, [data]);
+    observer.observe(document.body);
+    void document.fonts.ready.then(() => ScrollTrigger.refresh());
+
+    return () => {
+      clearTimeout(timeout);
+      observer.disconnect();
+      ScrollTrigger.removeEventListener('refresh', recordHeight);
+    };
+  }, []);
 
   const updateStep = React.useCallback((stepNumber: number) => {
     setCurrentStep(stepNumber);
@@ -87,6 +109,7 @@ export const Steps = ({ data, sectionPadding }: StepsProps) => {
   return (
     <div ref={contentRef} className={cn('relative isolate w-full', sectionPadding && 'mt-10')}>
       <div
+        ref={progressRef}
         id={'progress'}
         className={
           'pointer-events-none absolute left-0 top-0 z-10 hidden h-svh w-full items-center justify-center md:flex'
@@ -269,11 +292,6 @@ const Step = ({ title, description, step_label, image, stepNum, onStepActive }: 
           duration: 1,
           ease: 'power2.out',
         });
-
-        //cleanup code
-        return () => {
-          ScrollTrigger.getAll().forEach(trigger => trigger.kill());
-        };
       });
     },
     { scope: cardRef },
@@ -296,7 +314,7 @@ const Step = ({ title, description, step_label, image, stepNum, onStepActive }: 
       <div className="image flex items-center justify-center">
         {image && (
           <div className="aspect-h-1 aspect-w-1 max-h-[700px] w-full max-w-[700px] md:h-full">
-            <PrismicNextImage field={image} className="h-full w-full rounded-4xl object-cover" />
+            <PrismicNextImage field={image} loading="eager" className="h-full w-full rounded-4xl object-cover" />
           </div>
         )}
       </div>

@@ -150,7 +150,7 @@ export default async function Page({ params }: Props) {
     '@type': 'Article',
     mainEntityOfPage: {
       '@type': 'WebPage',
-      '@id': `${process.env.NEXT_PUBLIC_BASE_UR}/resources/guides/${id}` || '', // Ensure this links to the actual article URL
+      '@id': `${process.env.NEXT_PUBLIC_BASE_URL}/resources/guides/${id}` || '', // Ensure this links to the actual article URL
     },
     headline: post.name ?? '',
     image: post.feature_image?.url ? [post.feature_image.url] : [], // Make image an array
