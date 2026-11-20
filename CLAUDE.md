@@ -110,7 +110,7 @@ Reusable content blocks are managed as "slices" via Prismic Slice Machine. The 1
 
 ### Environment Variables
 
-Validated at build time via `t3-oss/env-nextjs` + Zod. Check `src/env.mjs` for the full schema. Key vars:
+Validated at build time via `t3-oss/env-nextjs` + Zod. Check `src/env.js` for the full schema. Key vars:
 - `NEXT_PUBLIC_PRISMIC_ENVIRONMENT` — Prismic repo name
 - `NEXT_PUBLIC_BASE_URL` — defaults to `https://footfactor.com`
 - `ALGOLIA_ADMIN_KEY`, `MAILERSEND_API_KEY`, `NEXT_PUBLIC_RECAPTCHA_SITE_KEY`
